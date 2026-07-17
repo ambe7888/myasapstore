@@ -50,8 +50,8 @@ export function formatStoreCurrency(
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
   if (isNaN(numAmount)) return `${currency.symbol}0${currency.decimal_separator}${'0'.repeat(currency.decimals)}`;
 
-  // Format with specified decimal places
-  const formattedNumber = numAmount.toFixed(currency.decimals);
+  // Format with 0 decimal places as requested
+  const formattedNumber = numAmount.toFixed(0);
   
   // Split into integer and decimal parts
   const parts = formattedNumber.split('.');
@@ -101,8 +101,8 @@ export function formatCurrency(
     ? Math.floor(numAmount) 
     : numAmount;
 
-  // Format decimal places
-  const decimalPlaces = parseInt(decimalFormat) || 2;
+  // Format decimal places (forced to 0)
+  const decimalPlaces = 0;
   const formattedNumber = finalAmount.toFixed(decimalPlaces);
 
   // Split into integer and decimal parts

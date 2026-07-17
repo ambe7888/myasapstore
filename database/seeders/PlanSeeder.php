@@ -49,7 +49,7 @@ class PlanSeeder extends Seeder
                 'max_users_per_store' => 100,
                 'max_products_per_store' => 5000,
                 'themes' => ['home-accessories', 'beauty-cosmetics', 'furniture-interior', 'fashion', 'jewelry', 'electronics', 'watches'],
-                'enable_custdomain' => 'off',
+                'enable_custdomain' => 'on',
                 'enable_custsubdomain' => 'on',
                 'enable_branding' => 'off',
                 'pwa_business' => 'on',

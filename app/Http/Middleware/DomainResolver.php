@@ -27,41 +27,27 @@ class DomainResolver
         $host = $request->getHost();
         $store = null;
         
-        // Check for custom domain first (remove protocol if present)
-        $cleanHost = str_replace(['http://', 'https://'], '', $host);
-        $cleanHost = rtrim($cleanHost, '/');
+        // Clean incoming host (remove protocol, www, ports, slashes)
+        $cleanHost = Store::sanitizeDomain($host);
         
-        $store = Store::where('custom_domain', $cleanHost)
-                    ->where('enable_custom_domain', true)
-                    ->first();
-        
-        // Also check without www prefix
-        if (!$store && str_starts_with($cleanHost, 'www.')) {
-            $withoutWww = substr($cleanHost, 4);
-            $store = Store::where('custom_domain', $withoutWww)
+        if ($cleanHost) {
+            $store = Store::where('custom_domain', $cleanHost)
                         ->where('enable_custom_domain', true)
                         ->first();
+            
+            // Also check for subdomain match if no custom domain matched
+            if (!$store) {
+                $store = Store::where('custom_subdomain', $cleanHost)
+                            ->where('enable_custom_subdomain', true)
+                            ->first();
+            }
         }
+        
         // Check store status via configuration
         if ($store) {
             $config = \App\Models\StoreConfiguration::getConfiguration($store->id);
             if (!($config['store_status'] ?? true)) {
                 $store = null;
-            }
-        }
-        
-        // Check for custom subdomain if no custom domain found
-        if (!$store && str_contains($cleanHost, '.')) {
-            $store = Store::where('custom_subdomain', $cleanHost)
-                        ->where('enable_custom_subdomain', true)
-                        ->first();
-
-            // Check store status via configuration
-            if ($store) {
-                $config = \App\Models\StoreConfiguration::getConfiguration($store->id);
-                if (!($config['store_status'] ?? true)) {
-                    $store = null;
-                }
             }
         }
         

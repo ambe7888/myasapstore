@@ -39,6 +39,44 @@ class Store extends BaseModel
     ];
 
     /**
+     * Sanitize domain or subdomain string (removes http://, https://, www., trailing slashes, ports).
+     */
+    public static function sanitizeDomain(?string $domain): ?string
+    {
+        if (empty($domain)) {
+            return null;
+        }
+
+        $clean = strtolower(trim($domain));
+        $clean = preg_replace('#^https?://#i', '', $clean);
+        if (str_starts_with($clean, 'www.')) {
+            $clean = substr($clean, 4);
+        }
+        $clean = explode(':', $clean)[0];
+        $clean = explode('/', $clean)[0];
+        $clean = explode('?', $clean)[0];
+        $clean = rtrim($clean, '/.');
+
+        return $clean ?: null;
+    }
+
+    /**
+     * Mutator to automatically sanitize custom_domain attribute on set.
+     */
+    public function setCustomDomainAttribute($value)
+    {
+        $this->attributes['custom_domain'] = static::sanitizeDomain($value);
+    }
+
+    /**
+     * Mutator to automatically sanitize custom_subdomain attribute on set.
+     */
+    public function setCustomSubdomainAttribute($value)
+    {
+        $this->attributes['custom_subdomain'] = static::sanitizeDomain($value);
+    }
+
+    /**
      * Get the user that owns the store.
      */
     public function user()

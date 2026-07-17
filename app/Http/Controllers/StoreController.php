@@ -355,8 +355,8 @@ class StoreController extends BaseController
             'theme' => $themeValidation,
             'enable_custom_domain' => 'boolean',
             'enable_custom_subdomain' => 'boolean',
-            'custom_domain' => 'nullable|string|max:255',
-            'custom_subdomain' => 'nullable|string|max:255',
+            'custom_domain' => 'nullable|string|max:255|unique:stores,custom_domain,' . $store->id,
+            'custom_subdomain' => 'nullable|string|max:255|unique:stores,custom_subdomain,' . $store->id,
             // PWA validation
             'enable_pwa' => 'boolean',
             'pwa_name' => 'nullable|string|max:255',

@@ -23,9 +23,9 @@ return new class extends Migration
         DB::table('currencies')->insert($currencies);
 
         // 2. Update defaultCurrency in settings table if it exists
-        DB::table('settings')->where('name', 'defaultCurrency')->update(['value' => 'XOF']);
-        DB::table('settings')->where('name', 'currencySymbolPosition')->update(['value' => 'after']);
-        DB::table('settings')->where('name', 'decimalFormat')->update(['value' => '0']);
+        DB::table('settings')->where('key', 'defaultCurrency')->update(['value' => 'XOF']);
+        DB::table('settings')->where('key', 'currencySymbolPosition')->update(['value' => 'after']);
+        DB::table('settings')->where('key', 'decimalFormat')->update(['value' => '0']);
     }
 
     /**

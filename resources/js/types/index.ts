@@ -6,6 +6,7 @@ export interface SharedData {
             id: number;
             name: string;
             email: string;
+            phone?: string;
         } | null;
     };
     stores?: {

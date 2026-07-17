@@ -48,6 +48,7 @@ export default function ProfileSettings({ mustVerifyEmail, status }: { mustVerif
   const { data: profileData, setData: setProfileData, post: profilePost, errors: profileErrors, processing: profileProcessing, recentlySuccessful: profileRecentlySuccessful } = useForm({
     name: auth?.user?.name || '',
     email: auth?.user?.email || '',
+    phone: (auth?.user as any)?.phone || '',
     avatar: null as File | null,
     _method: 'PATCH',
   });
@@ -248,6 +249,19 @@ export default function ProfileSettings({ mustVerifyEmail, status }: { mustVerif
                       placeholder={t("Email address")}
                     />
                     <InputError className="mt-2" message={profileErrors.email} />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="phone">{t("Phone Number")}</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      className="mt-1 block w-full"
+                      value={profileData.phone}
+                      onChange={(e) => setProfileData('phone', e.target.value)}
+                      placeholder={t("Phone Number (e.g. +225 0700000000)")}
+                    />
+                    <InputError className="mt-2" message={profileErrors.phone} />
                   </div>
 
                   {mustVerifyEmail && auth?.user?.email_verified_at === null && (

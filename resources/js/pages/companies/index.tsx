@@ -352,16 +352,21 @@ export default function Companies() {
       render: (value: any, row: any) => {
         return (
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white font-bold">
               {getInitials(row.name)}
             </div>
             <div>
-              <div className="font-medium">{row.name}</div>
-              <div className="text-sm text-muted-foreground">{row.email}</div>
+              <div className="font-medium text-gray-900">{row.name}</div>
+              <div className="text-xs text-muted-foreground">{row.email}</div>
             </div>
           </div>
         );
       }
+    },
+    { 
+      key: 'phone', 
+      label: t('Phone'),
+      render: (value: string) => value ? <span className="font-mono text-sm text-gray-700">{value}</span> : <span className="text-gray-400 text-xs">-</span>
     },
     { 
       key: 'plan_name', 
@@ -746,8 +751,9 @@ export default function Companies() {
                         {getInitials(company.name)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">{company.name}</h3>
-                        <p className="text-sm text-gray-600 mb-3">{company.email}</p>
+                        <h3 className="text-lg font-bold text-gray-900 mb-1">{company.name}</h3>
+                        <p className="text-xs text-gray-600 mb-1">{company.email}</p>
+                        {company.phone && <p className="text-xs font-mono text-gray-500 mb-2">📞 {company.phone}</p>}
                         <div className="flex items-center">
                           <div className={`h-2 w-2 rounded-full mr-2 ${
                             company.status === 'active' ? 'bg-gray-800' : 'bg-gray-400'
@@ -915,6 +921,7 @@ export default function Companies() {
           fields: [
             { name: 'name', label: t('Company Name'), type: 'text', required: true },
             { name: 'email', label: t('Email'), type: 'email', required: true },
+            { name: 'phone', label: t('Phone Number'), type: 'text', required: false },
             { 
               name: 'login_enabled', 
               label: t('Enable Login'),

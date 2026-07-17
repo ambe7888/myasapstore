@@ -22,7 +22,8 @@ class CompanyController extends Controller
         if ($request->has('search') && !empty($request->search)) {
             $query->where(function($q) use ($request) {
                 $q->where('name', 'like', "%{$request->search}%")
-                  ->orWhere('email', 'like', "%{$request->search}%");
+                  ->orWhere('email', 'like', "%{$request->search}%")
+                  ->orWhere('phone', 'like', "%{$request->search}%");
             });
         }
         
@@ -62,6 +63,7 @@ class CompanyController extends Controller
                 'id' => $company->id,
                 'name' => $company->name,
                 'email' => $company->email,
+                'phone' => $company->phone,
                 'status' => $company->status,
                 'created_at' => $company->created_at,
                 'plan_name' => $company->plan ? $company->plan->name : __('No Plan'),
@@ -84,6 +86,7 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'nullable|string|max:30',
             'password' => 'nullable|string|min:8',
             'status' => 'required|in:active,inactive',
         ]);
@@ -92,6 +95,7 @@ class CompanyController extends Controller
             $company = new User();
             $company->name = $validated['name'];
             $company->email = $validated['email'];
+            $company->phone = $validated['phone'] ?? null;
             
             // Only set password if provided
             if (isset($validated['password'])) {
@@ -183,12 +187,14 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $company->id,
+            'phone' => 'nullable|string|max:30',
             'status' => 'required|in:active,inactive',
         ]);
         
         try {
             $company->name = $validated['name'];
             $company->email = $validated['email'];
+            $company->phone = $validated['phone'] ?? null;
             $company->status = $validated['status'];
             
             $company->save();

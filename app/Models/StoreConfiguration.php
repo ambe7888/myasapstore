@@ -43,7 +43,11 @@ class StoreConfiguration extends Model
             'logo' => '/storage/media/logo.png',
             'favicon' => '',
             'custom_css' => '',
-            'custom_javascript' => ''
+            'custom_javascript' => '',
+            'facebook_pixel' => '',
+            'google_analytics' => '',
+            'tiktok_pixel' => '',
+            'snapchat_pixel' => ''
         ];
         
         // Convert string boolean values to actual booleans

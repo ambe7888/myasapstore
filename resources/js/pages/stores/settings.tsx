@@ -57,8 +57,9 @@ export default function StoreSettings({ store, settings }: Props) {
       ]}
     >
       <Tabs defaultValue="general" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="general">{t('General')}</TabsTrigger>
+          <TabsTrigger value="tracking">{t('Tracking & Analytics')}</TabsTrigger>
           <TabsTrigger value="advanced">{t('Advanced')}</TabsTrigger>
         </TabsList>
         
@@ -118,6 +119,56 @@ export default function StoreSettings({ store, settings }: Props) {
           </Card>
         </TabsContent>
         
+        <TabsContent value="tracking" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('Tracking & Analytics')}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="google_analytics">{t('Google Analytics Measurement ID')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Example: G-XXXXXXX')}</p>
+                <Input
+                  id="google_analytics"
+                  placeholder="G-XXXXXXX"
+                  value={formData.google_analytics || ''}
+                  onChange={(e) => updateSetting('google_analytics', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="facebook_pixel">{t('Facebook Pixel ID')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Example: 123456789012345')}</p>
+                <Input
+                  id="facebook_pixel"
+                  placeholder="123456789012345"
+                  value={formData.facebook_pixel || ''}
+                  onChange={(e) => updateSetting('facebook_pixel', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="tiktok_pixel">{t('TikTok Pixel ID')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Example: CXXXXXXXXXXXXXXX')}</p>
+                <Input
+                  id="tiktok_pixel"
+                  placeholder="CXXXXXXXXXXXXXXX"
+                  value={formData.tiktok_pixel || ''}
+                  onChange={(e) => updateSetting('tiktok_pixel', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="snapchat_pixel">{t('Snapchat Pixel ID')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')}</p>
+                <Input
+                  id="snapchat_pixel"
+                  placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                  value={formData.snapchat_pixel || ''}
+                  onChange={(e) => updateSetting('snapchat_pixel', e.target.value)}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="advanced" className="space-y-6">
           <Card>
             <CardHeader>

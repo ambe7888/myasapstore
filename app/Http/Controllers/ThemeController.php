@@ -45,6 +45,10 @@ class ThemeController extends Controller
                 'slug' => $store->slug,
                 'custom_css' => $configuration['custom_css'] ?: '',
                 'custom_javascript' => $configuration['custom_javascript'] ?: '',
+                'facebook_pixel' => $configuration['facebook_pixel'] ?: '',
+                'google_analytics' => $configuration['google_analytics'] ?: '',
+                'tiktok_pixel' => $configuration['tiktok_pixel'] ?: '',
+                'snapchat_pixel' => $configuration['snapchat_pixel'] ?: '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -89,6 +93,10 @@ class ThemeController extends Controller
                 'slug' => $store->slug,
                 'custom_css' => $configuration['custom_css'] ?: '',
                 'custom_javascript' => $configuration['custom_javascript'] ?: '',
+                'facebook_pixel' => $configuration['facebook_pixel'] ?: '',
+                'google_analytics' => $configuration['google_analytics'] ?: '',
+                'tiktok_pixel' => $configuration['tiktok_pixel'] ?: '',
+                'snapchat_pixel' => $configuration['snapchat_pixel'] ?: '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

@@ -60,13 +60,18 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'store_name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'phone' => 'required|string|max:30',
+            'country_code' => 'required|string|max:10',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => trim($request->country_code . ' ' . $request->phone),
+            'country_code' => $request->country_code,
             'password' => Hash::make($request->password),
             'type' => 'company',
             'is_active' => 1,

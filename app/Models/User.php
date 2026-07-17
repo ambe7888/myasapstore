@@ -414,13 +414,17 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
             
             // Create default store for company users (except during seeding)
             if ($user->type === 'company' && !getCurrentStoreId($user) && !static::$skipStoreCreation) {
+                $storeName = request('store_name') ? trim(request('store_name')) : ($user->name . "'s Store");
+                $storePhone = $user->phone ?? (request('phone') ? trim(request('country_code') . ' ' . request('phone')) : null);
+
                 $store = Store::create([
-                    'name' => $user->name . "'s Store",
-                    'slug' => Store::generateUniqueSlug($user->name . "'s Store"),
-                    'description' => 'Welcome to ' . $user->name . "'s store",
+                    'name' => $storeName,
+                    'slug' => Store::generateUniqueSlug($storeName),
+                    'description' => 'Bienvenue dans la boutique ' . $storeName,
                     'theme' => 'home-accessories',
                     'user_id' => $user->id,
                     'email' => $user->email,
+                    'phone' => $storePhone,
                 ]);
                 
                 $user->update(['current_store' => $store->id]);

@@ -9,6 +9,8 @@ import { usePage } from '@inertiajs/react';
 import { hasPermission } from '@/utils/authorization';
 import { getImageUrl } from '@/utils/image-helper';
 
+import { getCsrfToken } from '@/utils/csrf';
+
 interface MediaItem {
   id: number;
   name: string;
@@ -115,7 +117,7 @@ export default function MediaLibraryModal({
         body: formData,
         credentials: 'same-origin',
         headers: {
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+          'X-CSRF-TOKEN': getCsrfToken() || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
           'X-Requested-With': 'XMLHttpRequest',
         },
       });

@@ -1110,13 +1110,13 @@ if (! function_exists('defaultSettings')) {
             'wasabi_root' => '',
             
             // Currency Settings
-            'decimalFormat' => '2',
-            'defaultCurrency' => 'USD',
+            'decimalFormat' => '0',
+            'defaultCurrency' => 'XOF',
             'decimalSeparator' => '.',
-            'thousandsSeparator' => ',',
-            'floatNumber' => true,
-            'currencySymbolSpace' => false,
-            'currencySymbolPosition' => 'before',
+            'thousandsSeparator' => ' ',
+            'floatNumber' => false,
+            'currencySymbolSpace' => true,
+            'currencySymbolPosition' => 'after',
             
             // SEO Settings
             'metaKeywords' => 'ecommerce, online store, shopping, multi-store, saas platform, storego',
@@ -1330,7 +1330,7 @@ if (! function_exists('getSuperadminSettings')) {
                     
                 // Add currencySymbol from Currency model if not already set
                 if (!isset($superadminSettings['currencySymbol'])) {
-                    $currencyCode = $superadminSettings['defaultCurrency'] ?? 'USD';
+                    $currencyCode = $superadminSettings['defaultCurrency'] ?? 'XOF';
                     $currency = Currency::where('code', $currencyCode)->first();
                     if ($currency) {
                         $superadminSettings['currencySymbol'] = $currency->symbol;
@@ -1376,17 +1376,17 @@ if (! function_exists('formatStoreCurrency')) {
             $storeSettings = $storeId ? Setting::getUserSettings($userId, $storeId) : [];
             
             // Get currency code from store settings or fall back to global settings
-            $currencyCode = $storeSettings['defaultCurrency'] ?? settings($userId)['defaultCurrency'] ?? 'USD';
+            $currencyCode = $storeSettings['defaultCurrency'] ?? settings($userId)['defaultCurrency'] ?? 'XOF';
             
             // Get currency details
             $currency = \App\Models\Currency::where('code', $currencyCode)->first();
             
             // Currency formatting settings
-            $symbol = $currency ? $currency->symbol : '$';
-            $position = $storeSettings['currencySymbolPosition'] ?? 'before';
-            $decimals = (int)($storeSettings['decimalFormat'] ?? 2);
+            $symbol = $currency ? $currency->symbol : 'FCFA';
+            $position = $storeSettings['currencySymbolPosition'] ?? 'after';
+            $decimals = (int)($storeSettings['decimalFormat'] ?? 0);
             $decimalSeparator = $storeSettings['decimalSeparator'] ?? '.';
-            $thousandsSeparator = $storeSettings['thousandsSeparator'] ?? ',';
+            $thousandsSeparator = $storeSettings['thousandsSeparator'] ?? ' ';
             
             // Format the number
             $formattedNumber = number_format($numAmount, $decimals, $decimalSeparator, $thousandsSeparator);

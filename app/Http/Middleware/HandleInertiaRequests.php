@@ -48,19 +48,19 @@ class HandleInertiaRequests extends Middleware
                 'base_url' => config('app.url')
             ];
             $storeCurrency = [
-                'code' => 'USD',
-                'symbol' => '$',
-                'name' => 'US Dollar',
-                'position' => 'before',
-                'decimals' => 2,
+                'code' => 'XOF',
+                'symbol' => 'FCFA',
+                'name' => 'Franc CFA (XOF)',
+                'position' => 'after',
+                'decimals' => 0,
                 'decimal_separator' => '.',
-                'thousands_separator' => ','
+                'thousands_separator' => ' '
             ];
         } else {
             // Get system settings
             $settings = settings();
             // Get currency symbol
-            $currencyCode = $settings['defaultCurrency'] ?? 'USD';
+            $currencyCode = $settings['defaultCurrency'] ?? 'XOF';
             $currency = Currency::where('code', $currencyCode)->first();
             $currencySettings = [];
             if ($currency) {
@@ -70,8 +70,8 @@ class HandleInertiaRequests extends Middleware
                 ];
             } else {
                 $currencySettings = [
-                    'currencySymbol' =>  '$', 
-                    'currencyNname' =>'US Dollar'
+                    'currencySymbol' =>  'FCFA', 
+                    'currencyNname' =>'Franc CFA (XOF)'
                 ];
             }
             
@@ -234,13 +234,13 @@ class HandleInertiaRequests extends Middleware
         
         // Default currency settings
         $defaultCurrency = [
-            'code' => 'USD',
-            'symbol' => '$',
-            'name' => 'US Dollar',
-            'position' => 'before',
-            'decimals' => 2,
+            'code' => 'XOF',
+            'symbol' => 'FCFA',
+            'name' => 'Franc CFA (XOF)',
+            'position' => 'after',
+            'decimals' => 0,
             'decimal_separator' => '.',
-            'thousands_separator' => ','
+            'thousands_separator' => ' '
         ];
         
         // Return default if no user
@@ -253,7 +253,7 @@ class HandleInertiaRequests extends Middleware
             $companySettings = settings($user->id);
             
             // Get currency code from company settings
-            $currencyCode = $companySettings['defaultCurrency'] ?? 'USD';
+            $currencyCode = $companySettings['defaultCurrency'] ?? 'XOF';
             
             // Get currency details from currencies table
             $currency = Currency::where('code', $currencyCode)->first();

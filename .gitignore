@@ -27,3 +27,4 @@ yarn-error.log
 /storage/uploads
 /storage/framework
 /vcardv5-refer
+.env

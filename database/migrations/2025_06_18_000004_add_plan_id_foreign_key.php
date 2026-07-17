@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            // Add foreign key constraint for plan_id after plans table exists
-            $table->foreign('plan_id')->references('id')->on('plans')->nullOnDelete();
-        });
+        if (Schema::hasTable('users') && Schema::hasTable('plans')) {
+            if (!Schema::hasColumn('users', 'plan_id')) {
+                Schema::table('users', function (Blueprint $table) {
+                    $table->unsignedBigInteger('plan_id')->nullable()->after('type');
+                });
+            }
+
+            Schema::table('users', function (Blueprint $table) {
+                $table->foreign('plan_id')->references('id')->on('plans')->nullOnDelete();
+            });
+        }
     }
 
     /**
@@ -22,8 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['plan_id']);
-        });
+        if (Schema::hasTable('users')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropForeign(['plan_id']);
+            });
+        }
     }
 };

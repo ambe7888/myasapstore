@@ -353,7 +353,7 @@ function ElectronicsCheckoutContent({
                       }}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Nom complet *</label>
                             <input
                               type="text"
                               value={shippingData.firstName}
@@ -409,7 +409,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
                           <div className="md:col-span-2">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Street Address *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Address *</label>
                             <input
                               type="text"
                               value={shippingData.street}

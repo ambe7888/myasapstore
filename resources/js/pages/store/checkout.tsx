@@ -373,34 +373,12 @@ export default function Checkout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -810,10 +788,10 @@ export default function Checkout({
                     
                     <form onSubmit={handleShippingSubmit} className="p-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* First Name */}
+                        {/* Nom complet */}
                         <div>
                           <label htmlFor="shipping-first-name" className="block text-sm font-medium text-gray-700 mb-1">
-                            First Name *
+                            Nom complet *
                           </label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -835,7 +813,7 @@ export default function Checkout({
                         </div>
                         
                         {/* Last Name */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-1">
                             Last Name *
                           </label>
@@ -856,7 +834,7 @@ export default function Checkout({
                         {/* Email */}
                         <div>
                           <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-1">
-                            Email Address *
+                            Email Address (Optional)
                           </label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -901,10 +879,10 @@ export default function Checkout({
                           )}
                         </div>
                         
-                        {/* Street Address */}
+                        {/* Address */}
                         <div className="md:col-span-2">
                           <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-1">
-                            Street Address *
+                            Address *
                           </label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -926,7 +904,7 @@ export default function Checkout({
                         </div>
                         
                         {/* Country */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-medium text-gray-700 mb-1">
                             Country *
                           </label>
@@ -946,7 +924,7 @@ export default function Checkout({
                         </div>
                         
                         {/* State/Province */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-medium text-gray-700 mb-1">
                             State / Province *
                           </label>
@@ -972,7 +950,7 @@ export default function Checkout({
                         </div>
                         
                         {/* City */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-city" className="block text-sm font-medium text-gray-700 mb-1">
                             City *
                           </label>
@@ -1129,10 +1107,10 @@ export default function Checkout({
                         
                         {!sameAsShipping && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* First Name */}
+                            {/* Nom complet */}
                             <div>
                               <label htmlFor="billing-first-name" className="block text-sm font-medium text-gray-700 mb-1">
-                                First Name *
+                                Nom complet *
                               </label>
                               <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -1149,7 +1127,7 @@ export default function Checkout({
                             </div>
                             
                             {/* Last Name */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-last-name" className="block text-sm font-medium text-gray-700 mb-1">
                                 Last Name *
                               </label>
@@ -1165,7 +1143,7 @@ export default function Checkout({
                             {/* Email */}
                             <div>
                               <label htmlFor="billing-email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Email Address *
+                                Email Address (Optional)
                               </label>
                               <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -1200,10 +1178,10 @@ export default function Checkout({
                               </div>
                             </div>
                             
-                            {/* Street Address */}
+                            {/* Address */}
                             <div className="md:col-span-2">
                               <label htmlFor="billing-street" className="block text-sm font-medium text-gray-700 mb-1">
-                                Street Address *
+                                Address *
                               </label>
                               <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -1220,7 +1198,7 @@ export default function Checkout({
                             </div>
                             
                             {/* Country */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-country" className="block text-sm font-medium text-gray-700 mb-1">
                                 Country *
                               </label>
@@ -1240,7 +1218,7 @@ export default function Checkout({
                             </div>
                             
                             {/* State/Province */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-state" className="block text-sm font-medium text-gray-700 mb-1">
                                 State / Province *
                               </label>
@@ -1261,7 +1239,7 @@ export default function Checkout({
                             </div>
                             
                             {/* City */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-city" className="block text-sm font-medium text-gray-700 mb-1">
                                 City *
                               </label>

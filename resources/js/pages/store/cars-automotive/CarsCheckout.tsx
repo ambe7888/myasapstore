@@ -315,34 +315,12 @@ function CarsCheckout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -602,10 +580,10 @@ function CarsCheckout({
                     
                     <form onSubmit={handleShippingSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* First Name */}
+                        {/* Nom complet */}
                         <div>
                           <label htmlFor="shipping-first-name" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            First Name *
+                            Nom complet *
                           </label>
                           <input
                             id="shipping-first-name"
@@ -622,7 +600,7 @@ function CarsCheckout({
                         </div>
                         
                         {/* Last Name */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-last-name" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
                             Last Name *
                           </label>
@@ -643,7 +621,7 @@ function CarsCheckout({
                         {/* Email */}
                         <div>
                           <label htmlFor="shipping-email" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            Email Address *
+                            Email Address (Optional)
                           </label>
                           <input
                             id="shipping-email"
@@ -678,10 +656,10 @@ function CarsCheckout({
                           )}
                         </div>
                         
-                        {/* Street Address */}
+                        {/* Address */}
                         <div className="md:col-span-2">
                           <label htmlFor="shipping-street" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            Street Address *
+                            Address *
                           </label>
                           <input
                             id="shipping-street"
@@ -698,7 +676,7 @@ function CarsCheckout({
                         </div>
                         
                         {/* Country */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
                             Country *
                           </label>
@@ -718,7 +696,7 @@ function CarsCheckout({
                         </div>
                         
                         {/* State/Province */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
                             State / Province *
                           </label>
@@ -744,7 +722,7 @@ function CarsCheckout({
                         </div>
                         
                         {/* City */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-city" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
                             City *
                           </label>

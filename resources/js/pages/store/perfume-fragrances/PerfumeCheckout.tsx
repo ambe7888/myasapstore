@@ -308,34 +308,12 @@ function PerfumeCheckout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -593,10 +571,10 @@ function PerfumeCheckout({
                     
                     <form onSubmit={handleShippingSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* First Name */}
+                        {/* Nom complet */}
                         <div>
                           <label htmlFor="shipping-first-name" className="block text-sm font-medium text-gray-700 mb-2">
-                            First Name *
+                            Nom complet *
                           </label>
                           <input
                             id="shipping-first-name"
@@ -613,7 +591,7 @@ function PerfumeCheckout({
                         </div>
                         
                         {/* Last Name */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-2">
                             Last Name *
                           </label>
@@ -634,7 +612,7 @@ function PerfumeCheckout({
                         {/* Email */}
                         <div>
                           <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-2">
-                            Email Address *
+                            Email Address (Optional)
                           </label>
                           <input
                             id="shipping-email"
@@ -669,10 +647,10 @@ function PerfumeCheckout({
                           )}
                         </div>
                         
-                        {/* Street Address */}
+                        {/* Address */}
                         <div className="md:col-span-2">
                           <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-2">
-                            Street Address *
+                            Address *
                           </label>
                           <input
                             id="shipping-street"
@@ -689,7 +667,7 @@ function PerfumeCheckout({
                         </div>
                         
                         {/* Country */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-medium text-gray-700 mb-2">
                             Country *
                           </label>
@@ -709,7 +687,7 @@ function PerfumeCheckout({
                         </div>
                         
                         {/* State/Province */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-medium text-gray-700 mb-2">
                             State / Province *
                           </label>
@@ -735,7 +713,7 @@ function PerfumeCheckout({
                         </div>
                         
                         {/* City */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-city" className="block text-sm font-medium text-gray-700 mb-2">
                             City *
                           </label>

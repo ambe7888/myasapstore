@@ -280,34 +280,12 @@ export default function FashionCheckout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -557,10 +535,10 @@ export default function FashionCheckout({
                     
                     <form onSubmit={handleShippingSubmit} className="space-y-8">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* First Name */}
+                        {/* Nom complet */}
                         <div>
                           <label htmlFor="shipping-first-name" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            First Name *
+                            Nom complet *
                           </label>
                           <input
                             id="shipping-first-name"
@@ -577,7 +555,7 @@ export default function FashionCheckout({
                         </div>
                         
                         {/* Last Name */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">
                             Last Name *
                           </label>
@@ -598,7 +576,7 @@ export default function FashionCheckout({
                         {/* Email */}
                         <div>
                           <label htmlFor="shipping-email" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            Email Address *
+                            Email Address (Optional)
                           </label>
                           <input
                             id="shipping-email"
@@ -633,10 +611,10 @@ export default function FashionCheckout({
                           )}
                         </div>
                         
-                        {/* Street Address */}
+                        {/* Address */}
                         <div className="md:col-span-2">
                           <label htmlFor="shipping-street" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            Street Address *
+                            Address *
                           </label>
                           <input
                             id="shipping-street"
@@ -653,7 +631,7 @@ export default function FashionCheckout({
                         </div>
                         
                         {/* Country */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-light tracking-wide uppercase mb-3">
                             Country *
                           </label>
@@ -673,7 +651,7 @@ export default function FashionCheckout({
                         </div>
                         
                         {/* State/Province */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-light tracking-wide uppercase mb-3">
                             State / Province *
                           </label>
@@ -699,7 +677,7 @@ export default function FashionCheckout({
                         </div>
                         
                         {/* City */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-city" className="block text-sm font-light tracking-wide uppercase mb-3">
                             City *
                           </label>
@@ -960,10 +938,10 @@ export default function FashionCheckout({
                         
                         {!sameAsShipping && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* First Name */}
+                            {/* Nom complet */}
                             <div>
                               <label htmlFor="billing-first-name" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                First Name *
+                                Nom complet *
                               </label>
                               <input
                                 id="billing-first-name"
@@ -975,7 +953,7 @@ export default function FashionCheckout({
                             </div>
                             
                             {/* Last Name */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">
                                 Last Name *
                               </label>
@@ -991,7 +969,7 @@ export default function FashionCheckout({
                             {/* Email */}
                             <div>
                               <label htmlFor="billing-email" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                Email Address *
+                                Email Address (Optional)
                               </label>
                               <input
                                 id="billing-email"
@@ -1016,10 +994,10 @@ export default function FashionCheckout({
                               />
                             </div>
                             
-                            {/* Street Address */}
+                            {/* Address */}
                             <div className="md:col-span-2">
                               <label htmlFor="billing-street" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                Street Address *
+                                Address *
                               </label>
                               <input
                                 id="billing-street"
@@ -1031,7 +1009,7 @@ export default function FashionCheckout({
                             </div>
                             
                             {/* Country */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-country" className="block text-sm font-light tracking-wide uppercase mb-3">
                                 Country *
                               </label>
@@ -1051,7 +1029,7 @@ export default function FashionCheckout({
                             </div>
                             
                             {/* State/Province */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-state" className="block text-sm font-light tracking-wide uppercase mb-3">
                                 State / Province *
                               </label>
@@ -1072,7 +1050,7 @@ export default function FashionCheckout({
                             </div>
                             
                             {/* City */}
-                            <div>
+                        <div className="hidden">
                               <label htmlFor="billing-city" className="block text-sm font-light tracking-wide uppercase mb-3">
                                 City *
                               </label>

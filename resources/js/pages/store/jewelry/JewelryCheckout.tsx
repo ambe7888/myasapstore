@@ -507,7 +507,7 @@ function JewelryCheckout({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              First Name *
+                              Nom complet *
                             </label>
                             <input
                               type="text"
@@ -543,7 +543,7 @@ function JewelryCheckout({
                           
                           <div>
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Email Address *
+                              Email Address (Optional)
                             </label>
                             <input
                               type="email"
@@ -579,7 +579,7 @@ function JewelryCheckout({
                           
                           <div className="md:col-span-2">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Street Address *
+                              Address *
                             </label>
                             <input
                               type="text"

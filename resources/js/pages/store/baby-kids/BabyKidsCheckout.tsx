@@ -212,34 +212,12 @@ export default function BabyKidsCheckout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -482,7 +460,7 @@ export default function BabyKidsCheckout({
                       <form onSubmit={handleShippingSubmit} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">First Name *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Nom complet *</label>
                             <input
                               type="text"
                               value={shippingFirstName}
@@ -543,7 +521,7 @@ export default function BabyKidsCheckout({
                         </div>
 
                         <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">Street Address *</label>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">Address *</label>
                           <input
                             type="text"
                             value={shippingStreet}

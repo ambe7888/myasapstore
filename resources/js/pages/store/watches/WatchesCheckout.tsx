@@ -232,34 +232,12 @@ export default function WatchesCheckout({
       newErrors.shippingFirstName = 'First name is required';
     }
     
-    if (!shippingLastName) {
-      newErrors.shippingLastName = 'Last name is required';
-    }
-    
-    if (!shippingEmail) {
-      newErrors.shippingEmail = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(shippingEmail)) {
-      newErrors.shippingEmail = 'Email is invalid';
-    }
-    
     if (!shippingPhone) {
       newErrors.shippingPhone = 'Phone number is required';
     }
     
     if (!shippingStreet) {
       newErrors.shippingStreet = 'Street address is required';
-    }
-    
-    if (!shippingCity) {
-      newErrors.shippingCity = 'City is required';
-    }
-    
-    if (!shippingState) {
-      newErrors.shippingState = 'State is required';
-    }
-    
-    if (!shippingZip) {
-      newErrors.shippingZip = 'ZIP code is required';
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -499,10 +477,10 @@ export default function WatchesCheckout({
 
                       <form onSubmit={handleShippingSubmit} className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {/* First Name */}
+                          {/* Nom complet */}
                           <div>
                             <label htmlFor="shipping-first-name" className="block text-sm font-medium text-slate-700 mb-2">
-                              First Name *
+                              Nom complet *
                             </label>
                             <input
                               id="shipping-first-name"
@@ -519,7 +497,7 @@ export default function WatchesCheckout({
                           </div>
                           
                           {/* Last Name */}
-                          <div>
+                        <div className="hidden">
                             <label htmlFor="shipping-last-name" className="block text-sm font-medium text-slate-700 mb-2">
                               Last Name *
                             </label>
@@ -540,7 +518,7 @@ export default function WatchesCheckout({
                           {/* Email */}
                           <div>
                             <label htmlFor="shipping-email" className="block text-sm font-medium text-slate-700 mb-2">
-                              Email Address *
+                              Email Address (Optional)
                             </label>
                             <input
                               id="shipping-email"
@@ -575,10 +553,10 @@ export default function WatchesCheckout({
                             )}
                           </div>
                           
-                          {/* Street Address */}
+                          {/* Address */}
                           <div className="md:col-span-2">
                             <label htmlFor="shipping-street" className="block text-sm font-medium text-slate-700 mb-2">
-                              Street Address *
+                              Address *
                             </label>
                             <input
                               id="shipping-street"
@@ -595,7 +573,7 @@ export default function WatchesCheckout({
                           </div>
                           
                           {/* Country */}
-                          <div>
+                        <div className="hidden">
                             <label htmlFor="shipping-country" className="block text-sm font-medium text-slate-700 mb-2">
                               Country *
                             </label>
@@ -615,7 +593,7 @@ export default function WatchesCheckout({
                           </div>
                           
                           {/* State/Province */}
-                          <div>
+                        <div className="hidden">
                             <label htmlFor="shipping-state" className="block text-sm font-medium text-slate-700 mb-2">
                               State / Province *
                             </label>
@@ -641,7 +619,7 @@ export default function WatchesCheckout({
                           </div>
                           
                           {/* City */}
-                          <div>
+                        <div className="hidden">
                             <label htmlFor="shipping-city" className="block text-sm font-medium text-slate-700 mb-2">
                               City *
                             </label>

@@ -472,10 +472,17 @@ class ProductController extends BaseController
         
         if ($action === 'delete') {
             foreach ($products as $product) {
-                if ($product->image) {
-                    \Storage::disk('public')->delete($product->image);
+                if ($product->cover_image) {
+                    \Storage::disk('public')->delete($product->cover_image);
                 }
-                $product->clearMediaCollection('products');
+                if ($product->images) {
+                    $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                    if (is_array($images)) {
+                        foreach ($images as $img) {
+                            \Storage::disk('public')->delete($img);
+                        }
+                    }
+                }
                 $product->delete();
             }
             return redirect()->back()->with('success', __(':count products deleted successfully.', ['count' => $count]));

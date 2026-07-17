@@ -1071,7 +1071,7 @@ if (! function_exists('defaultSettings')) {
         return [
             // System Settings
             'base_url' => config('app.url', request()->getSchemeAndHttpHost()),
-            'defaultLanguage' => 'en',
+            'defaultLanguage' => 'fr',
             'dateFormat' => 'Y-m-d',
             'timeFormat' => 'H:i',
             'calendarStartDay' => 'sunday',

@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'type' => 'superadmin',
-                'lang' => 'en'
+                'lang' => 'fr'
             ]
         );
 
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'type' => 'company',
-                'lang' => 'en',
+                'lang' => 'fr',
                 'mode' => 'light',
                 'plan_id' => $defaultPlan ? $defaultPlan->id : null,
                 'referral_code' => rand(100000, 999999),
@@ -225,7 +225,7 @@ class UserSeeder extends Seeder
                     'name' => $companyData['name'],
                     'email_verified_at' => $createdAt,
                     'password' => Hash::make('password'),
-                    'lang' => 'en',
+                    'lang' => 'fr',
                     'current_store' => rand(1, 8),
                     'avatar' => null,
                     'type' => 'company',

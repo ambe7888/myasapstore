@@ -222,7 +222,7 @@ class HandleInertiaRequests extends Middleware
             $query->whereIn('name', ['superadmin', 'super admin']);
         })->first();
         
-        return $superAdmin ? $superAdmin->lang ?? 'en' : 'en';
+        return $superAdmin ? $superAdmin->lang ?? 'fr' : 'fr';
     }
     
     /**

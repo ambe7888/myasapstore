@@ -12,7 +12,8 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: 'en',
+        lng: 'fr',
+        fallbackLng: 'fr',
         load: 'currentOnly',
         debug: process.env.NODE_ENV === 'development',
         

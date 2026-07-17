@@ -183,7 +183,7 @@ export default function BabyKidsOrderConfirmation({
 
                     {/* Delivery Information */}
                     <div className="mb-8">
-                      <h3 className="text-lg font-bold text-gray-800 mb-4">Delivery Information</h3>
+                      <h3 className="text-lg font-bold text-gray-800 mb-4">Informations de livraison</h3>
                       
                       <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -214,7 +214,7 @@ export default function BabyKidsOrderConfirmation({
                       <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Payment Method</p>
+                            <p className="text-sm font-bold text-pink-600 mb-2">Moyen de paiement</p>
                             <p className="text-gray-800 capitalize">{order.payment_method || ''}</p>
                           </div>
                           <div>
@@ -231,17 +231,17 @@ export default function BabyKidsOrderConfirmation({
                     <div className="border-t-2 border-pink-200 pt-6">
                       <div className="space-y-3">
                         <div className="flex justify-between text-gray-600">
-                          <span>Subtotal</span>
+                          <span>Sous-total</span>
                           <span>{formatCurrency(parseFloat(order.subtotal || 0), storeSettings, currencies)}</span>
                         </div>
                         {order.discount > 0 && (
                           <div className="flex justify-between text-green-600">
-                            <span>Discount</span>
+                            <span>Réduction</span>
                             <span>-{formatCurrency(parseFloat(order.discount || 0), storeSettings, currencies)}</span>
                           </div>
                         )}
                         <div className="flex justify-between text-gray-600">
-                          <span>Shipping</span>
+                          <span>Livraison</span>
                           <span>{formatCurrency(parseFloat(order.shipping || 0), storeSettings, currencies)}</span>
                         </div>
                         <div className="flex justify-between text-gray-600">
@@ -264,7 +264,7 @@ export default function BabyKidsOrderConfirmation({
                   <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-blue-200 rounded-3xl opacity-30 -z-10"></div>
                   <div className="flex items-center mb-6">
                     <Heart className="h-6 w-6 text-blue-500 mr-3" />
-                    <h2 className="text-2xl font-bold text-gray-800">Order Summary</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">Résumé de la commande</h2>
                   </div>
                   
                   {/* Status */}
@@ -288,7 +288,7 @@ export default function BabyKidsOrderConfirmation({
                     </div>
                     {order.shipping_method && (
                       <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                        <p className="font-bold">Shipping</p>
+                        <p className="font-bold">Livraison</p>
                         <p className="font-bold">{order.shipping_method}</p>
                       </div>
                     )}
@@ -299,9 +299,7 @@ export default function BabyKidsOrderConfirmation({
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold text-center hover:bg-pink-600 transition-colors block"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
 
                   {/* Secure Checkout */}

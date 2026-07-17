@@ -82,9 +82,7 @@ export default function FurnitureForgotPassword({
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Email Address
-                    </label>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         type="email"

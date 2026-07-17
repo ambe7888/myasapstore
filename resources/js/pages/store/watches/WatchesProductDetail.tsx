@@ -300,7 +300,7 @@ function WatchesProductDetail({
                       ) : (
                         <div className="flex items-center text-red-600 bg-red-50 px-3 py-2 text-sm">
                           <Info className="h-4 w-4 mr-2" />
-                          <span>Out of Stock</span>
+                          <span>Rupture de stock</span>
                         </div>
                       )}
                     </div>
@@ -352,7 +352,7 @@ function WatchesProductDetail({
 
                     {/* Quantity */}
                     <div>
-                      <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">Quantity</h3>
+                      <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">Quantité</h3>
                       <div className="flex items-center border border-slate-300 w-fit">
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}

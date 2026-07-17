@@ -131,7 +131,7 @@ function FashionWishlistContent({
                           className={`flex items-center space-x-2 bg-black text-white px-4 py-2 text-sm font-light tracking-wide uppercase hover:bg-gray-800 transition-colors ${cartLoading || item.stock <= 0 ? 'cursor-not-allowed opacity-50' : ''}`}
                         >
                           <ShoppingCart className="h-4 w-4" />
-                          <span>Add to Cart</span>
+                          <span>Ajouter au panier</span>
                         </button>
                       </div>
                     </div>
@@ -148,9 +148,7 @@ function FashionWishlistContent({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="inline-block bg-black text-white px-8 py-3 font-light tracking-wide uppercase hover:bg-gray-800 transition-colors"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             )}
           </div>

@@ -387,7 +387,7 @@ export default function WatchesProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-amber-500 focus:ring-amber-500"
                       />
-                      <span className="text-sm text-slate-700">Out of Stock</span>
+                      <span className="text-sm text-slate-700">Rupture de stock</span>
                     </label>
                   </div>
                 </div>

@@ -134,7 +134,7 @@ function ElectronicsCartContent({
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <ShoppingCart className="w-8 h-8" />
               </div>
-              <h1 className="text-5xl font-bold mb-6">Shopping Cart</h1>
+              <h1 className="text-5xl font-bold mb-6">Panier d'achat</h1>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
                 Review your selected electronics and proceed to checkout
               </p>
@@ -258,24 +258,24 @@ function ElectronicsCartContent({
                   {/* Order Summary */}
                   <div className="lg:col-span-1">
                     <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-6">Résumé de la commande</h3>
                       
                       {/* Summary Details */}
                       <div className="space-y-4 mb-6">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Subtotal</span>
+                          <span className="text-gray-600">Sous-total</span>
                           <span className="font-semibold">{formatCurrency(dynamicSummary.subtotal || 0, storeSettings, currencies)}</span>
                         </div>
                         
                         {(dynamicSummary.discount || 0) > 0 && (
                           <div className="flex justify-between text-green-600">
-                            <span className="text-gray-600">Discount</span>
+                            <span className="text-gray-600">Réduction</span>
                             <span className="font-semibold">-{formatCurrency(dynamicSummary.discount || 0, storeSettings, currencies)}</span>
                           </div>
                         )}
                         
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Shipping</span>
+                          <span className="text-gray-600">Livraison</span>
                           <span className="font-semibold">
                             {(dynamicSummary.shipping || 0) === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping || 0, storeSettings, currencies)}
                           </span>
@@ -297,7 +297,7 @@ function ElectronicsCartContent({
                         href={generateStoreUrl('store.checkout', store)}
                         className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 mb-4"
                       >
-                        <span>Proceed to Checkout</span>
+                        <span>Passer à la caisse</span>
                         <ArrowRight className="w-5 h-5" />
                       </a>
 
@@ -329,7 +329,7 @@ function ElectronicsCartContent({
                     href={generateStoreUrl('store.products', store)}
                     className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
-                    <span>Continue Shopping</span>
+                    <span>Continuer vos achats</span>
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Link>
                 </div>

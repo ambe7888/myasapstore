@@ -118,9 +118,7 @@ export default function WatchesLogin({
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Email */}
                   <div className="group">
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         id="email"

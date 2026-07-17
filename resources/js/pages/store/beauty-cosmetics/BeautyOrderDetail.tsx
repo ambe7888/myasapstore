@@ -210,7 +210,7 @@ export default function BeautyOrderDetail({
                     <div>
                       <div className="flex items-center mb-6">
                         <CreditCard className="h-6 w-6 text-rose-500 mr-3" />
-                        <h3 className="text-2xl font-light text-gray-900">Order Summary</h3>
+                        <h3 className="text-2xl font-light text-gray-900">Résumé de la commande</h3>
                       </div>
                       <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6">
                         <div className="space-y-4">
@@ -249,14 +249,14 @@ export default function BeautyOrderDetail({
                       <div className="bg-rose-50 rounded-2xl p-6">
                         <div className="flex items-center mb-4">
                           <CreditCard className="h-5 w-5 text-rose-500 mr-2" />
-                          <h4 className="font-semibold text-gray-900">Payment Method</h4>
+                          <h4 className="font-semibold text-gray-900">Moyen de paiement</h4>
                         </div>
                         <p className="text-gray-700">{order.payment_method}</p>
                       </div>
                       <div className="bg-rose-50 rounded-2xl p-6">
                         <div className="flex items-center mb-4">
                           <Package className="h-5 w-5 text-rose-500 mr-2" />
-                          <h4 className="font-semibold text-gray-900">Shipping Method</h4>
+                          <h4 className="font-semibold text-gray-900">Méthode de livraison</h4>
                         </div>
                         <p className="text-gray-700">{order.shipping_method}</p>
                       </div>
@@ -276,9 +276,7 @@ export default function BeautyOrderDetail({
                       href={generateStoreUrl('store.products', store)}
                       className="px-8 py-4 border-2 border-rose-200 text-rose-600 rounded-full font-semibold hover:border-rose-300 hover:bg-rose-50 transition-colors flex items-center gap-2"
                     >
-                      <Heart className="h-5 w-5" />
-                      Continue Shopping
-                    </Link>
+                      <Heart className="h-5 w-5" />Continuer vos achats</Link>
                   </div>
                 </div>
               </div>

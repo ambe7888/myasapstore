@@ -155,7 +155,7 @@ export default function BabyKidsOrderDetail({
                         <tr className="border-b-2 border-gray-200">
                           <th className="text-left py-3 px-2 font-semibold text-gray-700">Product</th>
                           <th className="text-center py-3 px-2 font-semibold text-gray-700">Qty</th>
-                          <th className="text-right py-3 px-2 font-semibold text-gray-700">Price</th>
+                          <th className="text-right py-3 px-2 font-semibold text-gray-700">Prix</th>
                           <th className="text-right py-3 px-2 font-semibold text-gray-700">Total</th>
                         </tr>
                       </thead>

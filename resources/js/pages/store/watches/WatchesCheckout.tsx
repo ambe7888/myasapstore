@@ -230,11 +230,11 @@ export default function WatchesCheckout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -416,7 +416,7 @@ export default function WatchesCheckout({
               <ChevronRight className="h-4 w-4 mx-2" />
               <Link href={generateStoreUrl('store.cart', store)} className="hover:text-amber-600 transition-colors">Cart</Link>
               <ChevronRight className="h-4 w-4 mx-2" />
-              <span className="text-slate-900 font-medium">Checkout</span>
+              <span className="text-slate-900 font-medium">Passer à la caisse</span>
             </div>
           </div>
         </div>
@@ -499,9 +499,7 @@ export default function WatchesCheckout({
                           
                           {/* Last Name */}
                         <div className="hidden">
-                            <label htmlFor="shipping-last-name" className="block text-sm font-medium text-slate-700 mb-2">
-                              Last Name *
-                            </label>
+                            <label htmlFor="shipping-last-name" className="block text-sm font-medium text-slate-700 mb-2">Nom *</label>
                             <input
                               id="shipping-last-name"
                               type="text"
@@ -518,9 +516,7 @@ export default function WatchesCheckout({
                           
                           {/* Email */}
                           <div>
-                            <label htmlFor="shipping-email" className="block text-sm font-medium text-slate-700 mb-2">
-                              Email Address (Optional)
-                            </label>
+                            <label htmlFor="shipping-email" className="block text-sm font-medium text-slate-700 mb-2">Adresse e-mail (Optionnel)</label>
                             <input
                               id="shipping-email"
                               type="email"
@@ -537,9 +533,7 @@ export default function WatchesCheckout({
                           
                           {/* Phone */}
                           <div>
-                            <label htmlFor="shipping-phone" className="block text-sm font-medium text-slate-700 mb-2">
-                              Phone Number *
-                            </label>
+                            <label htmlFor="shipping-phone" className="block text-sm font-medium text-slate-700 mb-2">Téléphone *</label>
                             <input
                               id="shipping-phone"
                               type="tel"
@@ -565,7 +559,7 @@ export default function WatchesCheckout({
                               onChange={(e) => handleCountryChange(e.target.value)}
                               className="w-full px-3 py-3 border border-slate-300 rounded-md focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors"
                             >
-                              <option value="">Select Country</option>
+                              <option value="">Sélectionner le pays</option>
                               {countries?.map((country: any) => (
                                 <option key={country.id} value={country.id}>
                                   {country.name}
@@ -693,9 +687,7 @@ export default function WatchesCheckout({
                                 );
                               })
                             ) : (
-                              <div className="text-center py-8 text-slate-500">
-                                No shipping methods available
-                              </div>
+                              <div className="text-center py-8 text-slate-500">Aucune zone de livraison disponible</div>
                             )}
                           </div>
                         </div>
@@ -735,9 +727,7 @@ export default function WatchesCheckout({
                           )}
 {/* Order Notes */}
                         <div>
-                          <label htmlFor="order-notes" className="block text-sm font-medium text-slate-700 mb-2">
-                            Special Instructions (Optional)
-                          </label>
+                          <label htmlFor="order-notes" className="block text-sm font-medium text-slate-700 mb-2">Instructions spéciales (Optionnel)</label>
                           <textarea
                             id="order-notes"
                             rows={3}
@@ -809,7 +799,7 @@ export default function WatchesCheckout({
                         
                         {/* Shipping Information */}
                         <div>
-                          <h3 className="text-lg font-medium text-slate-900 mb-6">Delivery Information</h3>
+                          <h3 className="text-lg font-medium text-slate-900 mb-6">Informations de livraison</h3>
                           
                           <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -874,7 +864,7 @@ export default function WatchesCheckout({
                         <div className="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                           <CreditCard className="w-8 h-8 text-slate-900" />
                         </div>
-                        <h2 className="text-2xl font-light text-slate-900 mb-2">Payment Details</h2>
+                        <h2 className="text-2xl font-light text-slate-900 mb-2">Détails de paiement</h2>
                         <p className="text-slate-600">Secure payment for your luxury timepieces</p>
                       </div>
                       
@@ -899,7 +889,7 @@ export default function WatchesCheckout({
                         
                         {/* Payment Methods */}
                         <div>
-                          <h3 className="text-lg font-medium text-slate-900 mb-6">Payment Method</h3>
+                          <h3 className="text-lg font-medium text-slate-900 mb-6">Moyen de paiement</h3>
                           
                           <div className="space-y-3">
                             {/* Cash on Delivery - Only show if enabled */}
@@ -1082,9 +1072,7 @@ export default function WatchesCheckout({
                             onClick={handlePlaceOrder}
                             className="bg-amber-500 text-slate-900 px-8 py-3 rounded-md font-medium hover:bg-amber-600 transition-colors flex items-center"
                           >
-                            <Shield className="mr-2 h-5 w-5" />
-                            Complete Order
-                          </button>
+                            <Shield className="mr-2 h-5 w-5" />Valider la commande</button>
                         </div>
                       </div>
                     </div>
@@ -1095,9 +1083,7 @@ export default function WatchesCheckout({
                 <div className="lg:col-span-2">
                   <div className="bg-white border border-slate-200 rounded-lg p-6 sticky top-6">
                     <h2 className="text-lg font-medium text-slate-900 mb-6 flex items-center">
-                      <Clock className="w-5 h-5 text-amber-500 mr-2" />
-                      Order Summary
-                    </h2>
+                      <Clock className="w-5 h-5 text-amber-500 mr-2" />Résumé de la commande</h2>
                     
                     {/* Order Items */}
                     <div className="space-y-4 mb-6">
@@ -1139,7 +1125,7 @@ export default function WatchesCheckout({
                     
                     {/* Coupon Code */}
                     <div className="mb-6 border-t border-slate-200 pt-6">
-                      <label htmlFor="coupon" className="block text-sm font-medium text-slate-700 mb-2">Coupon Code</label>
+                      <label htmlFor="coupon" className="block text-sm font-medium text-slate-700 mb-2">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1204,19 +1190,19 @@ export default function WatchesCheckout({
                     {/* Price Summary */}
                     <div className="space-y-3">
                       <div className="flex justify-between text-sm text-slate-600">
-                        <span>Subtotal</span>
+                        <span>Sous-total</span>
                         <span>{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       
                       {updatedCartSummary.discount > 0 && (
                         <div className="flex justify-between text-sm text-green-600">
-                          <span>Discount</span>
+                          <span>Réduction</span>
                           <span>-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       
                       <div className="flex justify-between text-sm text-slate-600">
-                        <span>Shipping</span>
+                        <span>Livraison</span>
                         <span>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</span>
                       </div>
                       

@@ -153,7 +153,7 @@ function BeautyCartContent({
                             </div>
                             
                             <div className="text-right">
-                              <p className="text-sm text-gray-500">Subtotal</p>
+                              <p className="text-sm text-gray-500">Sous-total</p>
                               <p className="text-xl font-bold text-gray-900">
                                 {formatCurrency((item.sale_price || item.price) * item.quantity, storeSettings, currencies)}
                               </p>
@@ -169,23 +169,23 @@ function BeautyCartContent({
               {/* Order Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-8 shadow-lg sticky top-8">
-                  <h2 className="text-2xl font-light mb-8 text-gray-900">Order Summary</h2>
+                  <h2 className="text-2xl font-light mb-8 text-gray-900">Résumé de la commande</h2>
                   
                   <div className="space-y-4 mb-8">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Subtotal</span>
+                      <span className="text-gray-600">Sous-total</span>
                       <span className="font-semibold text-gray-900">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                     </div>
                     
                     {dynamicSummary.discount > 0 && (
                       <div className="flex justify-between items-center text-green-600">
-                        <span>Discount</span>
+                        <span>Réduction</span>
                         <span className="font-semibold">-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                       </div>
                     )}
                     
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Shipping</span>
+                      <span className="text-gray-600">Livraison</span>
                       <span className="font-semibold text-gray-900">
                         {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                       </span>
@@ -209,16 +209,12 @@ function BeautyCartContent({
                       href={generateStoreUrl('store.checkout', store)}
                       className="block w-full bg-rose-600 text-white text-center py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                     >
-                      <CreditCard className="h-5 w-5" />
-                      Proceed to Checkout
-                    </Link>
+                      <CreditCard className="h-5 w-5" />Passer à la caisse</Link>
                     
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="block w-full border-2 border-rose-200 text-rose-600 text-center py-4 rounded-full font-semibold hover:border-rose-300 hover:bg-rose-50 transition-colors"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
                   
                   {/* Benefits */}

@@ -78,7 +78,7 @@ function FashionCartContent({
         <div className="bg-black text-white py-20">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-thin tracking-wide mb-6">Shopping Cart</h1>
+              <h1 className="text-5xl font-thin tracking-wide mb-6">Panier d'achat</h1>
               <p className="text-white/70 font-light text-lg">
                 Review your selected items
               </p>
@@ -153,23 +153,23 @@ function FashionCartContent({
                 {/* Order Summary */}
                 <div className="lg:col-span-1">
                   <div className="bg-gray-50 p-8">
-                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Order Summary</h2>
+                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Résumé de la commande</h2>
                     
                     <div className="space-y-4 mb-6">
                       <div className="flex justify-between">
-                        <span className="font-light">Subtotal</span>
+                        <span className="font-light">Sous-total</span>
                         <span className="font-medium">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       
                       {dynamicSummary.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span className="font-light">Discount</span>
+                          <span className="font-light">Réduction</span>
                           <span className="font-medium">-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       
                       <div className="flex justify-between">
-                        <span className="font-light">Shipping</span>
+                        <span className="font-light">Livraison</span>
                         <span className="font-medium">
                           {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                         </span>
@@ -191,23 +191,19 @@ function FashionCartContent({
                     <Link
                       href={generateStoreUrl('store.checkout', store)}
                       className="block w-full bg-black text-white text-center py-4 font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors mb-4"
-                    >
-                      Proceed to Checkout
-                    </Link>
+                    >Passer à la caisse</Link>
                     
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="block w-full border border-gray-300 text-center py-4 font-light tracking-widest uppercase text-sm hover:border-black transition-colors"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
                 </div>
               </div>
             ) : (
               <div className="text-center py-20">
                 <ShoppingBag className="h-16 w-16 text-gray-300 mx-auto mb-6" />
-                <h2 className="text-2xl font-thin text-gray-900 mb-4">Your cart is empty</h2>
+                <h2 className="text-2xl font-thin text-gray-900 mb-4">Votre panier est vide</h2>
                 <p className="text-gray-600 font-light mb-8">
                   Discover our latest collections and add items to your cart
                 </p>

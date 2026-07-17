@@ -218,7 +218,7 @@ function CarsWishlistInner() {
                           className={`flex items-center justify-center space-x-2 border-2 border-gray-300 hover:border-red-600 text-gray-600 hover:text-red-600 py-3 px-4 font-bold text-sm uppercase tracking-widest transition-all ${loading ? 'cursor-not-allowed opacity-50' : 'hover:shadow-md'}`}
                         >
                           <Trash2 className="h-4 w-4" />
-                          <span>Remove</span>
+                          <span>Retirer</span>
                         </button>
                       </div>
                     </div>

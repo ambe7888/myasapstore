@@ -90,9 +90,7 @@ export default function JewelryForgotPassword({
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="space-y-3">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">Adresse e-mail</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <Mail className="h-5 w-5 text-yellow-600 group-focus-within:text-yellow-700 transition-colors" />

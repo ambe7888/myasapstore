@@ -239,9 +239,7 @@ function CarsCartContent({
                                 disabled={loading}
                                 className={`flex items-center gap-2 text-red-600 hover:text-red-700 font-medium text-sm transition-colors ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
                               >
-                                <Trash2 className="h-4 w-4" />
-                                Remove
-                              </button>
+                                <Trash2 className="h-4 w-4" />Retirer</button>
                             </div>
                           </div>
                         </div>
@@ -260,13 +258,13 @@ function CarsCartContent({
 
                     <div className="space-y-4 mb-8">
                       <div className="flex justify-between border-b border-gray-700 pb-2">
-                        <span className="font-bold tracking-wider uppercase text-gray-300">Subtotal</span>
+                        <span className="font-bold tracking-wider uppercase text-gray-300">Sous-total</span>
                         <span className="font-black text-white">
                           {formatCurrency(summary.subtotal, storeSettings, currencies)}
                         </span>
                       </div>
                       <div className="flex justify-between border-b border-gray-700 pb-2">
-                        <span className="font-bold tracking-wider uppercase text-gray-300">Shipping</span>
+                        <span className="font-bold tracking-wider uppercase text-gray-300">Livraison</span>
                         <span className="font-black text-green-400">
                           {summary.shipping === 0 ? 'FREE' : formatCurrency(summary.shipping, storeSettings, currencies)}
                         </span>
@@ -292,7 +290,7 @@ function CarsCartContent({
                       className="w-full bg-red-600 hover:bg-red-700 text-white py-4 font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 mb-4 hover:shadow-lg transform hover:-translate-y-1"
                     >
                       <ArrowRight className="h-5 w-5" />
-                      <span>Proceed to Checkout</span>
+                      <span>Passer à la caisse</span>
                     </Link>
 
                     <Link

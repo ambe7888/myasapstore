@@ -160,15 +160,9 @@ export default function JewelryOrderDetail({
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Product
                           </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Price
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Quantity
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Total
-                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -250,7 +244,7 @@ export default function JewelryOrderDetail({
               {/* Order Summary */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden mt-6">
                 <div className="p-6">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h3>
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">Résumé de la commande</h3>
                   <div className="bg-gray-50 p-4 rounded-md">
                     <div className="flex justify-between py-2">
                       <span>Subtotal:</span>

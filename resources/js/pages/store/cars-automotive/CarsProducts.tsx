@@ -251,7 +251,7 @@ export default function CarsProducts({
 
                   {/* Categories */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Categories</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Catégories</label>
                     <div className="space-y-2 max-h-40 overflow-y-auto">
                       {categories.map((category) => (
                         <label key={category.id} className="flex items-center">
@@ -386,7 +386,7 @@ export default function CarsProducts({
                           onChange={() => setAvailability('out_of_stock')}
                           className="mr-2 text-red-600 focus:ring-red-500"
                         />
-                        <span className="text-sm text-gray-700 font-medium">Out of Stock</span>
+                        <span className="text-sm text-gray-700 font-medium">Rupture de stock</span>
                       </label>
                     </div>
                   </div>

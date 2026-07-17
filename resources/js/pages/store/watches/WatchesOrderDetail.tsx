@@ -156,8 +156,8 @@ export default function WatchesOrderDetail({
                     <thead className="bg-slate-50">
                       <tr>
                         <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Product</th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Price</th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Quantity</th>
+                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Prix</th>
+                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Quantité</th>
                         <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Total</th>
                       </tr>
                     </thead>
@@ -238,7 +238,7 @@ export default function WatchesOrderDetail({
               {/* Order Summary */}
               <div className="bg-white border border-slate-200 mt-8">
                 <div className="p-6">
-                  <h3 className="text-lg font-light text-slate-900 mb-4">Order Summary</h3>
+                  <h3 className="text-lg font-light text-slate-900 mb-4">Résumé de la commande</h3>
                   <div className="bg-slate-50 p-4">
                     <div className="flex justify-between py-2 text-slate-600">
                       <span>Subtotal:</span>

@@ -390,7 +390,7 @@ export default function BabyKidsProducts({
                             onChange={() => setAvailability('out_of_stock')}
                             className="mr-2 text-pink-500 focus:ring-pink-400"
                           />
-                          <span className="text-sm text-gray-700">Out of Stock</span>
+                          <span className="text-sm text-gray-700">Rupture de stock</span>
                         </label>
                       </div>
                     </div>

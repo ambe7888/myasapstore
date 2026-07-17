@@ -367,7 +367,7 @@ function JewelryOrderConfirmation({
                         <div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 rounded-full mb-3">
                           <Star className="w-7 h-7 text-yellow-200" />
                         </div>
-                        <h2 className="text-xl font-serif tracking-wide">Order Summary</h2>
+                        <h2 className="text-xl font-serif tracking-wide">Résumé de la commande</h2>
                         <p className="text-yellow-200 text-sm mt-1">#{order.order_number || order.id || 'N/A'}</p>
                       </div>
 
@@ -387,7 +387,7 @@ function JewelryOrderConfirmation({
                           )}
                           
                           <div className="flex justify-between text-sm text-yellow-100">
-                            <span>Shipping</span>
+                            <span>Livraison</span>
                             <span className="font-semibold">{formatCurrency(order.shipping || 0, storeSettings, currencies)}</span>
                           </div>
                           

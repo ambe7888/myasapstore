@@ -149,9 +149,7 @@ export default function ElectronicsProfile({
                           <form onSubmit={handleProfileSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                               <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                  First Name
-                                </label>
+                                <label className="block text-sm font-semibold text-gray-700 mb-2">Prénom</label>
                                 <input
                                   type="text"
                                   value={profileForm.data.first_name}
@@ -165,9 +163,7 @@ export default function ElectronicsProfile({
                               </div>
                               
                               <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                  Last Name
-                                </label>
+                                <label className="block text-sm font-semibold text-gray-700 mb-2">Nom</label>
                                 <input
                                   type="text"
                                   value={profileForm.data.last_name}
@@ -200,9 +196,7 @@ export default function ElectronicsProfile({
                         ) : (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                First Name
-                              </label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Prénom</label>
                               <div className="relative">
                                 <input
                                   type="text"
@@ -215,9 +209,7 @@ export default function ElectronicsProfile({
                             </div>
                             
                             <div>
-                              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                Last Name
-                              </label>
+                              <label className="block text-sm font-semibold text-gray-700 mb-2">Nom</label>
                               <div className="relative">
                                 <input
                                   type="text"
@@ -236,13 +228,11 @@ export default function ElectronicsProfile({
                     {/* Contact Information */}
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                       <div className="bg-slate-900 text-white p-6">
-                        <h3 className="text-xl font-bold">Contact Information</h3>
+                        <h3 className="text-xl font-bold">Informations de contact</h3>
                       </div>
                       <div className="p-6 space-y-6">
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Email Address
-                          </label>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Adresse e-mail</label>
                           <div className="relative">
                             {isEditing ? (
                               <input
@@ -268,9 +258,7 @@ export default function ElectronicsProfile({
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Phone Number
-                          </label>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Téléphone</label>
                           <div className="relative">
                             {isEditing ? (
                               <input

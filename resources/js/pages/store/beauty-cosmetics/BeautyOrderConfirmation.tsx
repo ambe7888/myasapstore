@@ -231,7 +231,7 @@ export default function BeautyOrderConfirmation({
                 
                 <div className="text-center bg-rose-50 rounded-2xl p-6">
                   <Truck className="h-8 w-8 text-rose-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-500 mb-2">Shipping</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">Livraison</p>
                   <p className="font-semibold text-gray-900">{orderData.shipping_method}</p>
                 </div>
                 
@@ -292,7 +292,7 @@ export default function BeautyOrderConfirmation({
                       <div className="space-y-3">
                         {orderData.subtotal && orderData.discount > 0 && (
                           <div className="flex justify-between text-gray-600">
-                            <span>Subtotal</span>
+                            <span>Sous-total</span>
                             <span>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -304,7 +304,7 @@ export default function BeautyOrderConfirmation({
                         )}
                         {orderData.shipping && orderData.shipping > 0 && (
                           <div className="flex justify-between text-gray-600">
-                            <span>Shipping</span>
+                            <span>Livraison</span>
                             <span>{formatCurrency(orderData.shipping, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -353,7 +353,7 @@ export default function BeautyOrderConfirmation({
                       <div className="flex items-start">
                         <CreditCard className="h-6 w-6 text-rose-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-gray-500 mb-3">Payment Method</p>
+                          <p className="text-sm font-medium text-gray-500 mb-3">Moyen de paiement</p>
                           <p className="text-gray-900">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -428,9 +428,7 @@ export default function BeautyOrderConfirmation({
                   href={generateStoreUrl('store.products', store)}
                   className="border-2 border-rose-200 text-rose-600 px-8 py-4 rounded-full font-semibold hover:border-rose-300 hover:bg-rose-50 transition-colors text-center flex items-center justify-center gap-2"
                 >
-                  <Heart className="h-5 w-5" />
-                  Continue Shopping
-                </Link>
+                  <Heart className="h-5 w-5" />Continuer vos achats</Link>
               </div>
             </div>
           </div>

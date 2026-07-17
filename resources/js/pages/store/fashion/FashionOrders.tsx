@@ -126,9 +126,7 @@ export default function FashionOrders({
                         <Link
                           href={generateStoreUrl('store.order-detail', store, { orderNumber: order.id })}
                           className="px-6 py-2 border border-gray-300 text-sm font-light tracking-wide uppercase hover:border-black transition-colors text-center"
-                        >
-                          View Details
-                        </Link>
+                        >Voir les détails</Link>
                         {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
                           <button className="px-6 py-2 bg-black text-white text-sm font-light tracking-wide uppercase hover:bg-gray-800 transition-colors">
                             Reorder

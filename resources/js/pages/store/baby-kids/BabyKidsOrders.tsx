@@ -139,7 +139,7 @@ export default function BabyKidsOrders({
                               className="bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 shadow-md"
                             >
                               <Eye className="h-4 w-4" />
-                              <span>View Details</span>
+                              <span>Voir les détails</span>
                             </Link>
                           </div>
                         </div>

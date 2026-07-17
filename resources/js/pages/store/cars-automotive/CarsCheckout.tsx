@@ -313,11 +313,11 @@ function CarsCheckout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -575,7 +575,7 @@ function CarsCheckout({
                     <div className="bg-black text-white px-6 py-4 -mx-8 -mt-8 mb-8">
                       <div className="flex items-center">
                         <Package className="h-6 w-6 text-red-600 mr-3" />
-                        <h2 className="text-2xl font-black tracking-wider uppercase">Delivery Information</h2>
+                        <h2 className="text-2xl font-black tracking-wider uppercase">Informations de livraison</h2>
                       </div>
                     </div>
                     
@@ -602,9 +602,7 @@ function CarsCheckout({
                         
                         {/* Last Name */}
                         <div className="hidden">
-                          <label htmlFor="shipping-last-name" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            Last Name *
-                          </label>
+                          <label htmlFor="shipping-last-name" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">Nom *</label>
                           <input
                             id="shipping-last-name"
                             type="text"
@@ -621,9 +619,7 @@ function CarsCheckout({
                         
                         {/* Email */}
                         <div>
-                          <label htmlFor="shipping-email" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            Email Address (Optional)
-                          </label>
+                          <label htmlFor="shipping-email" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">Adresse e-mail (Optionnel)</label>
                           <input
                             id="shipping-email"
                             type="email"
@@ -640,9 +636,7 @@ function CarsCheckout({
                         
                         {/* Phone */}
                         <div>
-                          <label htmlFor="shipping-phone" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            Phone Number *
-                          </label>
+                          <label htmlFor="shipping-phone" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">Téléphone *</label>
                           <input
                             id="shipping-phone"
                             type="tel"
@@ -668,7 +662,7 @@ function CarsCheckout({
                             onChange={(e) => handleShippingCountryChange(e.target.value)}
                             className="block w-full px-4 py-3 border-2 border-gray-300 focus:border-red-600 focus:outline-none transition-colors"
                           >
-                            <option value="">Select Country</option>
+                            <option value="">Sélectionner le pays</option>
                             {countries?.map((country: any) => (
                               <option key={country.id} value={country.id}>
                                 {country.name}
@@ -795,9 +789,7 @@ function CarsCheckout({
                               );
                             })
                           ) : (
-                            <div className="text-center py-8 text-gray-500">
-                              No shipping methods available
-                            </div>
+                            <div className="text-center py-8 text-gray-500">Aucune zone de livraison disponible</div>
                           )}
                         </div>
                       </div>
@@ -907,7 +899,7 @@ function CarsCheckout({
                       
                       {/* Delivery Information */}
                       <div>
-                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Delivery Information</h3>
+                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Informations de livraison</h3>
                         
                         <div className="bg-gray-50 p-6 border-2 border-gray-200">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -970,7 +962,7 @@ function CarsCheckout({
                     <div className="bg-black text-white px-6 py-4 -mx-8 -mt-8 mb-8">
                       <div className="flex items-center">
                         <CreditCard className="h-6 w-6 text-red-600 mr-3" />
-                        <h2 className="text-2xl font-black tracking-wider uppercase">Payment Details</h2>
+                        <h2 className="text-2xl font-black tracking-wider uppercase">Détails de paiement</h2>
                       </div>
                     </div>
                     
@@ -1001,7 +993,7 @@ function CarsCheckout({
                       
                       {/* Payment Methods */}
                       <div>
-                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Payment Method</h3>
+                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Moyen de paiement</h3>
                         
                         <div className="space-y-3">
                           {/* Cash on Delivery - Only show if enabled */}
@@ -1182,9 +1174,7 @@ function CarsCheckout({
                           onClick={handlePlaceOrder}
                           className="bg-red-600 hover:bg-black text-white px-8 py-4 font-bold tracking-wider uppercase transition-colors flex items-center gap-3"
                         >
-                          <Lock className="w-5 h-5" />
-                          Complete Order
-                        </button>
+                          <Lock className="w-5 h-5" />Valider la commande</button>
                       </div>
                     </div>
                   </div>
@@ -1196,7 +1186,7 @@ function CarsCheckout({
                 <div className="bg-black text-white p-8 border-l-4 border-red-600 sticky top-8">
                   <div className="flex items-center mb-6">
                     <Settings className="h-6 w-6 text-red-600 mr-3" />
-                    <h2 className="text-2xl font-black tracking-wider uppercase">Order Summary</h2>
+                    <h2 className="text-2xl font-black tracking-wider uppercase">Résumé de la commande</h2>
                   </div>
                   
                   {/* Order Items */}
@@ -1237,7 +1227,7 @@ function CarsCheckout({
                   {/* Coupon Code */}
                   <div className="mb-6 pb-6 border-b border-gray-700">
                     <div className="flex flex-col space-y-3">
-                      <label htmlFor="coupon" className="text-sm font-black tracking-wider uppercase text-red-400">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-black tracking-wider uppercase text-red-400">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1305,19 +1295,19 @@ function CarsCheckout({
                   {/* Price Summary */}
                   <div className="space-y-3">
                     <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                      <p className="font-bold tracking-wider uppercase">Subtotal</p>
+                      <p className="font-bold tracking-wider uppercase">Sous-total</p>
                       <p className="font-black text-white">{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-green-400 border-b border-gray-700 pb-2">
-                        <p className="font-bold tracking-wider uppercase">Discount</p>
+                        <p className="font-bold tracking-wider uppercase">Réduction</p>
                         <p className="font-black">-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                      <p className="font-bold tracking-wider uppercase">Shipping</p>
+                      <p className="font-bold tracking-wider uppercase">Livraison</p>
                       <p className="font-black text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
                     </div>
                     

@@ -358,9 +358,7 @@ function FurnitureProductDetailContent({
                         ? 'bg-amber-100 text-amber-800 border-b-4 border-amber-600'
                         : 'text-slate-600 hover:text-amber-800 hover:bg-amber-50'
                     }`}
-                  >
-                    Description
-                  </button>
+                  >Description</button>
                   {product.specifications && (
                     <button
                       onClick={() => setActiveTab('specifications')}

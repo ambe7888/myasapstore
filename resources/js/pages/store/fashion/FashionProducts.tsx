@@ -380,7 +380,7 @@ export default function FashionProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-pink-600 focus:ring-pink-500"
                       />
-                      <span className="text-sm">Out of Stock</span>
+                      <span className="text-sm">Rupture de stock</span>
                     </label>
                   </div>
                 </div>
@@ -590,7 +590,7 @@ export default function FashionProducts({
                 <div className="text-center py-12">
                   <div className="text-gray-500 mb-4">
                     <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-medium mb-2">No products found</h3>
+                    <h3 className="text-lg font-medium mb-2">Aucun produit trouvé</h3>
                     <p>Try adjusting your filters or search terms</p>
                   </div>
                   <button

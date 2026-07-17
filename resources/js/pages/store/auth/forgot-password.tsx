@@ -161,9 +161,7 @@ export default function ForgotPassword({
               <div className="bg-white rounded-lg shadow-md p-8">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-6">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Mail className="h-5 w-5 text-gray-400" />

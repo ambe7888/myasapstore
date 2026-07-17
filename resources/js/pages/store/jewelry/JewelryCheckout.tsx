@@ -220,11 +220,11 @@ function JewelryCheckout({
     setShippingErrors({});
     const newErrors: Record<string, string> = {};
     
-    if (!shippingFirstName) newErrors.shippingFirstName = 'First name is required';
-    if (!shippingLastName) newErrors.shippingLastName = 'Last name is required';
-    if (!shippingEmail) newErrors.shippingEmail = 'Email is required';
+    if (!shippingFirstName) newErrors.shippingFirstName = "Le prénom est requis";
+    if (!shippingLastName) newErrors.shippingLastName = "Le nom est requis";
+    if (!shippingEmail) newErrors.shippingEmail = "L'adresse e-mail est requise";
     else if (!/\S+@\S+\.\S+/.test(shippingEmail)) newErrors.shippingEmail = 'Email is invalid';
-    if (!shippingPhone) newErrors.shippingPhone = 'Phone number is required';
+    if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
     if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
     if (!shippingCity) newErrors.shippingCity = 'City is required';
     if (!shippingState) newErrors.shippingState = 'State is required';
@@ -488,7 +488,7 @@ function JewelryCheckout({
                             <MapPin className="w-5 h-5 text-yellow-600" />
                           </div>
                           <div>
-                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Delivery Information</h2>
+                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Informations de livraison</h2>
                             <p className="text-gray-600 font-light text-sm mt-1">
                               Where shall we deliver your exquisite pieces?
                             </p>
@@ -525,9 +525,7 @@ function JewelryCheckout({
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Last Name *
-                            </label>
+                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">Nom *</label>
                             <input
                               type="text"
                               value={shippingLastName}
@@ -543,9 +541,7 @@ function JewelryCheckout({
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Email Address (Optional)
-                            </label>
+                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">Adresse e-mail (Optionnel)</label>
                             <input
                               type="email"
                               value={shippingEmail}
@@ -561,9 +557,7 @@ function JewelryCheckout({
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Phone Number *
-                            </label>
+                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">Téléphone *</label>
                             <input
                               type="tel"
                               value={shippingPhone}
@@ -589,7 +583,7 @@ function JewelryCheckout({
                               onChange={(e) => handleCountryChange(e.target.value)}
                               className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-yellow-500 focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300"
                             >
-                              <option value="">Select Country</option>
+                              <option value="">Sélectionner le pays</option>
                               {countries?.map((country: any) => (
                                 <option key={country.id} value={country.id}>
                                   {country.name}
@@ -773,9 +767,7 @@ function JewelryCheckout({
                         </div>
 {/* Order Notes */}
                         <div className="pt-8 border-t border-gray-200">
-                          <label className="block text-sm font-medium text-gray-700 mb-3">
-                            Special Instructions (Optional)
-                          </label>
+                          <label className="block text-sm font-medium text-gray-700 mb-3">Instructions spéciales (Optionnel)</label>
                           <textarea
                             rows={3}
                             value={orderNotes}
@@ -791,9 +783,7 @@ function JewelryCheckout({
                             href={generateStoreUrl('store.cart', store)}
                             className="text-gray-600 hover:text-gray-800 font-medium flex items-center transition-colors"
                           >
-                            <ArrowLeft className="w-4 h-4 mr-2" />
-                            Back to Cart
-                          </Link>
+                            <ArrowLeft className="w-4 h-4 mr-2" />Retour au panier</Link>
                           <button
                             type="submit"
                             disabled={!selectedShippingId}
@@ -978,7 +968,7 @@ function JewelryCheckout({
                         
                         {/* Payment Methods */}
                         <div className="pt-8 border-t border-yellow-200">
-                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Payment Method</h3>
+                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Moyen de paiement</h3>
                           
                           <div className="space-y-4">
                             {/* Cash on Delivery - Only show if enabled */}
@@ -1158,9 +1148,7 @@ function JewelryCheckout({
                             onClick={handlePlaceOrder}
                             className="bg-yellow-600 text-white px-10 py-4 rounded-xl font-medium hover:bg-yellow-700 transition-colors shadow-lg flex items-center"
                           >
-                            <Shield className="w-5 h-5 mr-2" />
-                            Complete Order
-                          </button>
+                            <Shield className="w-5 h-5 mr-2" />Valider la commande</button>
                         </div>
                       </div>
                     </div>
@@ -1177,7 +1165,7 @@ function JewelryCheckout({
                     <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-3">
                       <Star className="w-6 h-6 text-yellow-200" />
                     </div>
-                    <h2 className="text-xl font-medium tracking-wide">Order Summary</h2>
+                    <h2 className="text-xl font-medium tracking-wide">Résumé de la commande</h2>
                     <p className="text-yellow-200 text-sm mt-1">{cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart</p>
                   </div>
                   
@@ -1289,19 +1277,19 @@ function JewelryCheckout({
                   {/* Price Summary */}
                   <div className="space-y-3 border-t border-yellow-500 pt-6">
                     <div className="flex justify-between text-sm text-yellow-100">
-                      <span>Subtotal</span>
+                      <span>Sous-total</span>
                       <span className="font-medium">{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</span>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-sm text-green-200">
-                        <span>Discount</span>
+                        <span>Réduction</span>
                         <span className="font-medium">-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</span>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-sm text-yellow-100">
-                      <span>Shipping</span>
+                      <span>Livraison</span>
                       <span className="font-medium">
                         {selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}
                       </span>

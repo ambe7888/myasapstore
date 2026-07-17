@@ -180,7 +180,7 @@ export default function WatchesProfile({
                     <div className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-2">First Name</label>
+                          <label className="block text-sm font-medium text-slate-700 mb-2">Prénom</label>
                           <input
                             type="text"
                             value={isEditing ? profileForm.data.first_name : user.first_name}
@@ -194,7 +194,7 @@ export default function WatchesProfile({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-2">Last Name</label>
+                          <label className="block text-sm font-medium text-slate-700 mb-2">Nom</label>
                           <input
                             type="text"
                             value={isEditing ? profileForm.data.last_name : user.last_name}
@@ -251,12 +251,12 @@ export default function WatchesProfile({
                       <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                         <Mail className="w-5 h-5 text-amber-600" />
                       </div>
-                      <h3 className="text-xl font-medium text-slate-900">Contact Information</h3>
+                      <h3 className="text-xl font-medium text-slate-900">Informations de contact</h3>
                     </div>
                     
                     <div className="space-y-6">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Adresse e-mail</label>
                         <input
                           type="email"
                           value={isEditing ? profileForm.data.email : user.email}
@@ -271,7 +271,7 @@ export default function WatchesProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Téléphone</label>
                         <input
                           type="tel"
                           value={isEditing ? profileForm.data.phone : user.phone || ''}

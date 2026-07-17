@@ -290,7 +290,7 @@ function FashionProductDetail({
                     ) : (
                       <div className="flex items-center text-red-500">
                         <Info className="h-4 w-4 mr-2" />
-                        <span className="font-light text-sm">Out of Stock</span>
+                        <span className="font-light text-sm">Rupture de stock</span>
                       </div>
                     )}
                   </div>
@@ -323,7 +323,7 @@ function FashionProductDetail({
 
                   {/* Quantity */}
                   <div>
-                    <h3 className="text-sm font-light tracking-widest uppercase mb-4">Quantity</h3>
+                    <h3 className="text-sm font-light tracking-widest uppercase mb-4">Quantité</h3>
                     <div className="flex items-center border border-gray-300 w-fit">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -376,9 +376,7 @@ function FashionProductDetail({
                             ? 'border-b-2 border-black text-black'
                             : 'text-gray-500 hover:text-gray-700'
                         }`}
-                      >
-                        Description
-                      </button>
+                      >Description</button>
                       {product.specifications && (
                         <button
                           onClick={() => setActiveTab('specifications')}

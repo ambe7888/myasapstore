@@ -230,7 +230,7 @@ export default function FashionOrderConfirmation({
                 
                 <div className="text-center">
                   <Truck className="h-8 w-8 text-gray-400 mx-auto mb-4" />
-                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Shipping</p>
+                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Livraison</p>
                   <p className="font-light">{orderData.shipping_method}</p>
                 </div>
                 
@@ -264,15 +264,9 @@ export default function FashionOrderConfirmation({
                             <th scope="col" className="px-6 py-3 text-left text-xs font-light tracking-widest uppercase text-gray-500">
                               Product
                             </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">
-                              Price
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">
-                              Quantity
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">
-                              Total
-                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">Prix</th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">Quantité</th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">Total</th>
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -312,9 +306,7 @@ export default function FashionOrderConfirmation({
                           })}
                           {orderData.subtotal && orderData.discount > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600 font-light">
-                                Subtotal
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600 font-light">Sous-total</td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600 font-light">
                                 {formatCurrency(orderData.subtotal, storeSettings, currencies)}
                               </td>
@@ -332,9 +324,7 @@ export default function FashionOrderConfirmation({
                           )}
                           {orderData.shipping && orderData.shipping > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600 font-light">
-                                Shipping
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600 font-light">Livraison</td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600 font-light">
                                 {formatCurrency(orderData.shipping, storeSettings, currencies)}
                               </td>
@@ -351,9 +341,7 @@ export default function FashionOrderConfirmation({
                             </tr>
                           )}
                           <tr className="bg-gray-50">
-                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-light text-black">
-                              Total
-                            </td>
+                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-light text-black">Total</td>
                             <td className="px-6 py-4 text-right text-sm font-light text-black">
                               {formatCurrency(orderData.total, storeSettings, currencies)}
                             </td>
@@ -392,7 +380,7 @@ export default function FashionOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <CreditCard className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                         <div>
-                          <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Payment Method</p>
+                          <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Moyen de paiement</p>
                           <p className="text-sm text-black font-light">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -430,7 +418,7 @@ export default function FashionOrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-light text-black">Shipping</h3>
+                        <h3 className="text-lg font-light text-black">Livraison</h3>
                         <p className="mt-2 text-base text-gray-500 font-light">
                           Your order will be shipped via {orderData.shipping_method}. You can track your order in your account.
                         </p>
@@ -451,9 +439,7 @@ export default function FashionOrderConfirmation({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="border border-gray-300 text-black px-8 py-3 font-light tracking-widest uppercase text-sm hover:border-black transition-colors text-center"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </div>

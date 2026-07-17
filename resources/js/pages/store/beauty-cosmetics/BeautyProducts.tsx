@@ -392,7 +392,7 @@ export default function BeautyProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-3 w-4 h-4 text-rose-600 focus:ring-rose-500"
                       />
-                      <span className="text-sm font-medium text-rose-700">Out of Stock</span>
+                      <span className="text-sm font-medium text-rose-700">Rupture de stock</span>
                     </label>
                   </div>
                 </div>
@@ -581,7 +581,7 @@ export default function BeautyProducts({
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm font-semibold">
                                       <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                                      <span>Out of Stock</span>
+                                      <span>Rupture de stock</span>
                                     </div>
                                   )}
                                 </div>

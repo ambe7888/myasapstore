@@ -93,9 +93,7 @@ function PerfumeCartContent({
         <section className="py-16 bg-stone-50">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Shopping Cart
-              </h1>
+              <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">Panier d'achat</h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
                 Your selected fragrances
               </p>
@@ -253,15 +251,15 @@ function PerfumeCartContent({
                 {/* Order Summary */}
                 <div className="lg:col-span-1">
                   <div className="bg-stone-50 rounded-2xl p-6 sticky top-8">
-                    <h3 className="text-xl font-medium text-gray-900 mb-6">Order Summary</h3>
+                    <h3 className="text-xl font-medium text-gray-900 mb-6">Résumé de la commande</h3>
                     
                     <div className="space-y-4 mb-6">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal</span>
+                        <span className="text-gray-600">Sous-total</span>
                         <span className="font-medium">{formatCurrency(summary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Shipping</span>
+                        <span className="text-gray-600">Livraison</span>
                         <span className="font-medium">{summary.shipping === 0 ? 'Free' : formatCurrency(summary.shipping, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
@@ -279,16 +277,12 @@ function PerfumeCartContent({
                     <Link
                       href={generateStoreUrl('store.checkout', store)}
                       className="w-full bg-purple-800 text-white py-3 rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 text-center block mb-4"
-                    >
-                      Proceed to Checkout
-                    </Link>
+                    >Passer à la caisse</Link>
                     
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="w-full bg-purple-100 text-purple-800 py-3 rounded-full font-medium hover:bg-purple-200 transition-colors duration-300 text-center block"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
                 </div>
               </div>

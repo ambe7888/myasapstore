@@ -106,7 +106,7 @@ export default function ElectronicsBlog({
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
-                    <option value="">All Categories</option>
+                    <option value="">Toutes les catégories</option>
                     {categories.map((category) => (
                       <option key={category.id} value={category.name}>
                         {category.name}

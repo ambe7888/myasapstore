@@ -264,7 +264,7 @@ export default function CarsOrderDetail({
                       <div className="bg-black text-white p-8">
                         <div className="flex items-center mb-6">
                           <Settings className="h-6 w-6 text-red-600 mr-3" />
-                          <h4 className="text-2xl font-black tracking-wider uppercase">Order Summary</h4>
+                          <h4 className="text-2xl font-black tracking-wider uppercase">Résumé de la commande</h4>
                         </div>
                         <div className="space-y-4">
                           <div className="flex justify-between py-2 border-b border-gray-700">

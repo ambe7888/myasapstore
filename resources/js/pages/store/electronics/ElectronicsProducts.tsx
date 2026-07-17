@@ -255,7 +255,7 @@ export default function ElectronicsProducts({
 
                 {/* Categories */}
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Categories</label>
+                  <label className="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Catégories</label>
                   <div className="space-y-3 max-h-48 overflow-y-auto">
                     {categories.map((category) => (
                       <label key={category.id} className="flex items-center p-2 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
@@ -392,7 +392,7 @@ export default function ElectronicsProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-blue-600 focus:ring-blue-500"
                       />
-                      <span className="text-sm">Out of Stock</span>
+                      <span className="text-sm">Rupture de stock</span>
                     </label>
                   </div>
                 </div>
@@ -581,7 +581,7 @@ export default function ElectronicsProducts({
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm font-semibold">
                                       <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                                      <span>Out of Stock</span>
+                                      <span>Rupture de stock</span>
                                     </div>
                                   )}
                                 </div>
@@ -612,7 +612,7 @@ export default function ElectronicsProducts({
                 <div className="text-center py-12">
                   <div className="text-gray-500 mb-4">
                     <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-medium mb-2">No products found</h3>
+                    <h3 className="text-lg font-medium mb-2">Aucun produit trouvé</h3>
                     <p>Try adjusting your filters or search terms</p>
                   </div>
                   <button

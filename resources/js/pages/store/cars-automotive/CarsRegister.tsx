@@ -131,9 +131,7 @@ export default function CarsRegister({
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="first_name" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">
-                        First Name
-                      </label>
+                      <label htmlFor="first_name" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">Prénom</label>
                       <div className="relative">
                         <input
                           id="first_name"
@@ -158,9 +156,7 @@ export default function CarsRegister({
                     </div>
 
                     <div>
-                      <label htmlFor="last_name" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">
-                        Last Name
-                      </label>
+                      <label htmlFor="last_name" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">Nom</label>
                       <div className="relative">
                         <input
                           id="last_name"
@@ -187,9 +183,7 @@ export default function CarsRegister({
 
                   {/* Email Field */}
                   <div>
-                    <label htmlFor="email" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         id="email"

@@ -371,11 +371,11 @@ export default function Checkout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -686,7 +686,7 @@ export default function Checkout({
         <div className="bg-primary text-white py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Checkout</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Passer à la caisse</h1>
               <p className="text-white/80">
                 Complete your purchase securely
               </p>
@@ -702,7 +702,7 @@ export default function Checkout({
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               <Link href={generateStoreUrl('store.cart', store)} className="text-gray-500 hover:text-primary">Cart</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Checkout</span>
+              <span className="text-gray-800 font-medium">Passer à la caisse</span>
             </div>
           </div>
         </div>
@@ -815,9 +815,7 @@ export default function Checkout({
                         
                         {/* Last Name */}
                         <div className="hidden">
-                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-1">
-                            Last Name *
-                          </label>
+                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
                           <input
                             id="shipping-last-name"
                             type="text"
@@ -834,9 +832,7 @@ export default function Checkout({
                         
                         {/* Email */}
                         <div>
-                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-1">
-                            Email Address (Optional)
-                          </label>
+                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail (Optionnel)</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                               <Mail className="h-5 w-5 text-gray-400" />
@@ -858,9 +854,7 @@ export default function Checkout({
                         
                         {/* Phone */}
                         <div>
-                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-700 mb-1">
-                            Phone Number *
-                          </label>
+                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                               <Phone className="h-5 w-5 text-gray-400" />
@@ -891,7 +885,7 @@ export default function Checkout({
                             onChange={(e) => handleShippingCountryChange(e.target.value)}
                             className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                           >
-                            <option value="">Select Country</option>
+                            <option value="">Sélectionner le pays</option>
                             {countries?.map((country: any) => (
                               <option key={country.id} value={country.id}>
                                 {country.name}
@@ -978,7 +972,7 @@ export default function Checkout({
                       
                       {/* Shipping Methods */}
                       <div className="mt-8">
-                        <h3 className="text-base font-medium text-gray-900 mb-4">Shipping Method</h3>
+                        <h3 className="text-base font-medium text-gray-900 mb-4">Méthode de livraison</h3>
                         
                         <div className="space-y-4">
                           {shippingMethods.length > 0 ? (
@@ -1019,9 +1013,7 @@ export default function Checkout({
                               );
                             })
                           ) : (
-                            <div className="text-center py-4 text-gray-500">
-                              No shipping methods available
-                            </div>
+                            <div className="text-center py-4 text-gray-500">Aucune zone de livraison disponible</div>
                           )}
                         </div>
                       </div>
@@ -1066,9 +1058,7 @@ export default function Checkout({
                           )}
 {/* Order Notes */}
                       <div className="mt-8">
-                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-1">
-                          Order Notes (Optional)
-                        </label>
+                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-1">Notes de commande (Optionnel)</label>
                         <textarea
                           id="order-notes"
                           rows={3}
@@ -1143,9 +1133,7 @@ export default function Checkout({
                             
                             {/* Last Name */}
                         <div className="hidden">
-                              <label htmlFor="billing-last-name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Last Name *
-                              </label>
+                              <label htmlFor="billing-last-name" className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
                               <input
                                 id="billing-last-name"
                                 type="text"
@@ -1157,9 +1145,7 @@ export default function Checkout({
                             
                             {/* Email */}
                             <div>
-                              <label htmlFor="billing-email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Email Address (Optional)
-                              </label>
+                              <label htmlFor="billing-email" className="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail (Optionnel)</label>
                               <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                   <Mail className="h-5 w-5 text-gray-400" />
@@ -1176,9 +1162,7 @@ export default function Checkout({
                             
                             {/* Phone */}
                             <div>
-                              <label htmlFor="billing-phone" className="block text-sm font-medium text-gray-700 mb-1">
-                                Phone Number *
-                              </label>
+                              <label htmlFor="billing-phone" className="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
                               <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                   <Phone className="h-5 w-5 text-gray-400" />
@@ -1223,7 +1207,7 @@ export default function Checkout({
                                 onChange={(e) => handleBillingCountryChange(e.target.value)}
                                 className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                               >
-                                <option value="">Select Country</option>
+                                <option value="">Sélectionner le pays</option>
                                 {countries?.map((country: any) => (
                                   <option key={country.id} value={country.id}>
                                     {country.name}
@@ -1293,7 +1277,7 @@ export default function Checkout({
                       
                       {/* Payment Methods */}
                       <div className="mb-8">
-                        <h3 className="text-base font-medium text-gray-900 mb-4">Payment Method</h3>
+                        <h3 className="text-base font-medium text-gray-900 mb-4">Moyen de paiement</h3>
                         
                         <div className="space-y-4">
                           {/* Cash on Delivery - Only show if enabled */}
@@ -1520,9 +1504,7 @@ export default function Checkout({
                             handlePlaceOrder();
                           }}
                           className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                        >
-                          Place Order
-                          <ChevronRight className="ml-2 h-5 w-5" />
+                        >Passer la commande<ChevronRight className="ml-2 h-5 w-5" />
                         </button>
                       </div>
                     </form>
@@ -1551,15 +1533,9 @@ export default function Checkout({
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                   Product
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  Price
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  Quantity
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  Total
-                                </th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -1610,7 +1586,7 @@ export default function Checkout({
                         <div className="bg-gray-50 rounded-md p-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm font-medium text-gray-500">Contact Information</p>
+                              <p className="text-sm font-medium text-gray-500">Informations de contact</p>
                               <p className="text-sm text-gray-900 mt-1">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-sm text-gray-900">{shippingEmail}</p>
                               <p className="text-sm text-gray-900">{shippingPhone}</p>
@@ -1623,7 +1599,7 @@ export default function Checkout({
                             </div>
                           </div>
                           <div className="mt-4 pt-4 border-t border-gray-200">
-                            <p className="text-sm font-medium text-gray-500">Shipping Method</p>
+                            <p className="text-sm font-medium text-gray-500">Méthode de livraison</p>
                             <p className="text-sm text-gray-900 mt-1">
                               {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
                             </p>
@@ -1638,7 +1614,7 @@ export default function Checkout({
                         <div className="bg-gray-50 rounded-md p-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm font-medium text-gray-500">Payment Method</p>
+                              <p className="text-sm font-medium text-gray-500">Moyen de paiement</p>
                               <p className="text-sm text-gray-900 mt-1">
                                 {paymentMethod === 'cod' && 'Cash on Delivery'}
                                 {paymentMethod === 'whatsapp' && `WhatsApp Payment (${whatsappNumber})`}
@@ -1672,7 +1648,7 @@ export default function Checkout({
                       {/* Order Notes */}
                       {orderNotes && (
                         <div className="mb-8">
-                          <h3 className="text-base font-medium text-gray-900 mb-4">Order Notes</h3>
+                          <h3 className="text-base font-medium text-gray-900 mb-4">Notes de commande</h3>
                           
                           <div className="bg-gray-50 rounded-md p-4">
                             <p className="text-sm text-gray-900">{orderNotes}</p>
@@ -1705,7 +1681,7 @@ export default function Checkout({
               {/* Order Summary */}
               <div>
                 <div className="bg-gray-50 rounded-lg shadow-md p-6 sticky top-6">
-                  <h2 className="text-lg font-medium text-gray-900 mb-6">Order Summary</h2>
+                  <h2 className="text-lg font-medium text-gray-900 mb-6">Résumé de la commande</h2>
                   
                   {/* Order Items */}
                   <div className="flow-root">
@@ -1743,7 +1719,7 @@ export default function Checkout({
                   {/* Coupon Code */}
                   <div className="mt-6 border-t border-gray-200 pt-6">
                     <div className="flex flex-col space-y-2">
-                      <label htmlFor="coupon" className="text-sm font-medium text-gray-700">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-medium text-gray-700">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1751,7 +1727,7 @@ export default function Checkout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter coupon code"
+                          placeholder="Entrez le code promo"
                           className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-sm"
                           disabled={couponApplied}
                         />
@@ -1809,19 +1785,19 @@ export default function Checkout({
                   {/* Price Summary */}
                   <div className="mt-6 space-y-4">
                     <div className="flex justify-between text-sm text-gray-600">
-                      <p>Subtotal</p>
+                      <p>Sous-total</p>
                       <p>{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-sm text-green-600">
-                        <p>Discount</p>
+                        <p>Réduction</p>
                         <p>-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-sm text-gray-600">
-                      <p>Shipping</p>
+                      <p>Livraison</p>
                       <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
                     </div>
                     

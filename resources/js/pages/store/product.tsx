@@ -415,7 +415,7 @@ export default function ProductDetail({
                   ) : (
                     <div className="flex items-center text-red-500">
                       <Info className="h-5 w-5 mr-2" />
-                      <span>Out of Stock</span>
+                      <span>Rupture de stock</span>
                     </div>
                   )}
                 </div>
@@ -454,7 +454,7 @@ export default function ProductDetail({
 
                 {/* Quantity */}
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium mb-2">Quantity</h3>
+                  <h3 className="text-sm font-medium mb-2">Quantité</h3>
                   <div className="flex items-center">
                     <button
                       onClick={() => handleQuantityChange(quantity - 1)}
@@ -532,9 +532,7 @@ export default function ProductDetail({
                           ? 'border-b-2 border-primary text-primary'
                           : 'text-gray-500 hover:text-gray-700'
                         }`}
-                    >
-                      Description
-                    </button>
+                    >Description</button>
                     {product.specifications && (
                       <button
                         onClick={() => setActiveTab('specifications')}

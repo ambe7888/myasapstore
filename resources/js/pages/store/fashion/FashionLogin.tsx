@@ -108,9 +108,7 @@ export default function FashionLogin({
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Email */}
                   <div className="group">
-                    <label htmlFor="email" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-4">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-4">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         id="email"

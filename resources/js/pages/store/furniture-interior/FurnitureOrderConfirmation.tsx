@@ -288,7 +288,7 @@ export default function FurnitureOrderConfirmation({
                       <div className="space-y-3">
                         {orderData.subtotal && (
                           <div className="flex justify-between text-slate-700">
-                            <span>Subtotal</span>
+                            <span>Sous-total</span>
                             <span>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -347,7 +347,7 @@ export default function FurnitureOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <CreditCard className="h-6 w-6 text-amber-800 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-bold text-amber-800 mb-3">Payment Method</p>
+                          <p className="text-sm font-bold text-amber-800 mb-3">Moyen de paiement</p>
                           <p className="text-slate-900">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -363,9 +363,7 @@ export default function FurnitureOrderConfirmation({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="bg-yellow-800 text-white px-8 py-4 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </div>

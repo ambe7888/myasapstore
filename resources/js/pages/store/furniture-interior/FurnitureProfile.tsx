@@ -149,7 +149,7 @@ export default function FurnitureProfile({
                   </h3>
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-bold text-amber-800 mb-2">First Name</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Prénom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -164,7 +164,7 @@ export default function FurnitureProfile({
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-amber-800 mb-2">Last Name</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Nom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -189,13 +189,13 @@ export default function FurnitureProfile({
                   </h3>
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-bold text-amber-800 mb-2">Email Address</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Adresse e-mail</label>
                       <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
                         <span className="text-lg text-slate-900">{user.email}</span>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-amber-800 mb-2">Phone Number</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Téléphone</label>
                       {isEditing ? (
                         <input
                           type="tel"

@@ -448,7 +448,7 @@ function CarsProductDetailInner({
                 {/* Quantity & Actions */}
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-sm font-black tracking-widest uppercase mb-4">Quantity</h3>
+                    <h3 className="text-sm font-black tracking-widest uppercase mb-4">Quantité</h3>
                     <div className="flex items-center border-2 border-gray-300 w-fit">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}

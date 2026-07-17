@@ -87,9 +87,7 @@ export default function JewelryRegister({
                   {/* Name Fields */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                        First Name
-                      </label>
+                      <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">Prénom</label>
                       <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                           <User className="h-5 w-5 text-yellow-600 group-focus-within:text-yellow-700 transition-colors" />
@@ -114,9 +112,7 @@ export default function JewelryRegister({
                     </div>
 
                     <div className="space-y-3">
-                      <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                        Last Name
-                      </label>
+                      <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">Nom</label>
                       <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                           <User className="h-5 w-5 text-yellow-600 group-focus-within:text-yellow-700 transition-colors" />
@@ -143,9 +139,7 @@ export default function JewelryRegister({
 
                   {/* Email Field */}
                   <div className="space-y-3">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">Adresse e-mail</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <Mail className="h-5 w-5 text-yellow-600 group-focus-within:text-yellow-700 transition-colors" />

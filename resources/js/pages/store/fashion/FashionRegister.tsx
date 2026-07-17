@@ -112,9 +112,7 @@ export default function FashionRegister({
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="group">
-                      <label htmlFor="first_name" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                        First Name
-                      </label>
+                      <label htmlFor="first_name" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Prénom</label>
                       <div className="relative">
                         <input
                           id="first_name"
@@ -137,9 +135,7 @@ export default function FashionRegister({
                     </div>
                     
                     <div className="group">
-                      <label htmlFor="last_name" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                        Last Name
-                      </label>
+                      <label htmlFor="last_name" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Nom</label>
                       <div className="relative">
                         <input
                           id="last_name"
@@ -164,9 +160,7 @@ export default function FashionRegister({
                   
                   {/* Email */}
                   <div className="group">
-                    <label htmlFor="email" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         id="email"

@@ -306,7 +306,7 @@ function ElectronicsProductDetail({
                     ) : (
                       <div className="flex items-center text-red-500 bg-red-50 px-4 py-2 rounded-lg">
                         <Info className="h-5 w-5 mr-2" />
-                        <span className="font-semibold">Out of Stock</span>
+                        <span className="font-semibold">Rupture de stock</span>
                       </div>
                     )}
                   </div>
@@ -339,7 +339,7 @@ function ElectronicsProductDetail({
 
                   {/* Quantity */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Quantity</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Quantité</h3>
                     <div className="flex items-center border-2 border-gray-300 rounded-lg w-fit">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -390,9 +390,7 @@ function ElectronicsProductDetail({
                             ? 'border-b-2 border-blue-500 text-blue-600'
                             : 'text-gray-500 hover:text-gray-700'
                         }`}
-                      >
-                        Description
-                      </button>
+                      >Description</button>
                       {product.specifications && (
                         <button
                           onClick={() => setActiveTab('specifications')}

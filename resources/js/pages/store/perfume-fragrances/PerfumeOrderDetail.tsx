@@ -197,7 +197,7 @@ export default function PerfumeOrderDetail({
                     </h4>
                     <div className="space-y-3">
                       <div>
-                        <p className="text-sm text-gray-600">Payment Method</p>
+                        <p className="text-sm text-gray-600">Moyen de paiement</p>
                         <p className="font-medium text-gray-900">{order.payment_method}</p>
                       </div>
                       <div>
@@ -212,22 +212,20 @@ export default function PerfumeOrderDetail({
               {/* Order Summary */}
               <div className="bg-gradient-to-br from-purple-800 to-purple-900 text-white p-8 rounded-b-3xl">
                 <h4 className="text-xl font-light mb-6 flex items-center">
-                  <Sparkles className="h-6 w-6 text-amber-400 mr-2" />
-                  Order Summary
-                </h4>
+                  <Sparkles className="h-6 w-6 text-amber-400 mr-2" />Résumé de la commande</h4>
                 <div className="space-y-3">
                   <div className="flex justify-between text-purple-200">
-                    <span>Subtotal</span>
+                    <span>Sous-total</span>
                     <span className="text-white">{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                   </div>
                   {order.discount > 0 && (
                     <div className="flex justify-between text-green-400">
-                      <span>Discount</span>
+                      <span>Réduction</span>
                       <span>-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-purple-200">
-                    <span>Shipping</span>
+                    <span>Livraison</span>
                     <span className="text-white">{order.shipping === 0 ? 'Free' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
                   </div>
                   <div className="flex justify-between text-purple-200">

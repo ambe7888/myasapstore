@@ -123,9 +123,7 @@ export default function WatchesRegister({
                 {/* Name Fields */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="group">
-                    <label htmlFor="first_name" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                      First Name
-                    </label>
+                    <label htmlFor="first_name" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">Prénom</label>
                     <input
                       id="first_name"
                       type="text"
@@ -139,9 +137,7 @@ export default function WatchesRegister({
                   </div>
                   
                   <div className="group">
-                    <label htmlFor="last_name" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                      Last Name
-                    </label>
+                    <label htmlFor="last_name" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">Nom</label>
                     <input
                       id="last_name"
                       type="text"
@@ -157,9 +153,7 @@ export default function WatchesRegister({
 
                 {/* Email */}
                 <div className="group">
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                    Email Address
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">Adresse e-mail</label>
                   <div className="relative">
                     <input
                       id="email"

@@ -95,9 +95,7 @@ export default function PerfumeRegister({
                 
                 {/* Email */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Adresse e-mail</label>
                   <input
                     id="email"
                     type="email"

@@ -131,7 +131,7 @@ function BabyKidsCartContent({
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Shopping Cart</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Panier d'achat</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
                 Review your items for your little ones
@@ -264,23 +264,23 @@ function BabyKidsCartContent({
                 <div className="relative">
                   <div className="relative bg-white rounded-3xl shadow-xl border-4 border-blue-400 p-8 sticky top-8">
                     <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-blue-200 rounded-3xl opacity-30 -z-10"></div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6">Order Summary</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">Résumé de la commande</h2>
                     
                     <div className="space-y-4">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal</span>
+                        <span className="text-gray-600">Sous-total</span>
                         <span className="font-bold">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       
                       {dynamicSummary.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span>Discount</span>
+                          <span>Réduction</span>
                           <span>-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Shipping</span>
+                        <span className="text-gray-600">Livraison</span>
                         <span className="font-bold">{formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}</span>
                       </div>
                       
@@ -301,7 +301,7 @@ function BabyKidsCartContent({
                         <form onSubmit={handleApplyCoupon} className="space-y-3">
                           <input
                             type="text"
-                            placeholder="Enter coupon code"
+                            placeholder="Entrez le code promo"
                             value={couponCode}
                             onChange={(e) => setCouponCode(e.target.value)}
                             className="w-full px-4 py-3 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500 transition-colors"
@@ -332,7 +332,7 @@ function BabyKidsCartContent({
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" />
                           </svg>
-                          <span>Proceed to Checkout</span>
+                          <span>Passer à la caisse</span>
                         </a>
                       </div>
                       
@@ -380,9 +380,7 @@ function BabyKidsCartContent({
                 >
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                  </svg>
-                  Continue Shopping
-                </a>
+                  </svg>Continuer vos achats</a>
               </div>
             </div>
           </div>

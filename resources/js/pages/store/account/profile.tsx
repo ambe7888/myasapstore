@@ -222,9 +222,7 @@ export default function Profile({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* First Name */}
                   <div>
-                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">
-                      First Name
-                    </label>
+                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <input
@@ -245,9 +243,7 @@ export default function Profile({
                   
                   {/* Last Name */}
                   <div>
-                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Last Name
-                    </label>
+                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <input
@@ -268,9 +264,7 @@ export default function Profile({
                   
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail</label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <input
@@ -291,9 +285,7 @@ export default function Profile({
                   
                   {/* Phone */}
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <input

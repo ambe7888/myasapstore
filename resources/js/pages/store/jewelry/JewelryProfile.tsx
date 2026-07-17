@@ -212,9 +212,7 @@ export default function JewelryProfile({
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
-                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                First Name
-                              </label>
+                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">Prénom</label>
                               <div className="relative">
                                 <input
                                   type="text"
@@ -231,9 +229,7 @@ export default function JewelryProfile({
                             </div>
                             
                             <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
-                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Last Name
-                              </label>
+                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">Nom</label>
                               <div className="relative">
                                 <input
                                   type="text"
@@ -299,9 +295,7 @@ export default function JewelryProfile({
                           
                           <div className="space-y-6">
                             <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Email Address
-                              </label>
+                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">Adresse e-mail</label>
                               <div className="relative">
                                 <input
                                   type="email"
@@ -318,9 +312,7 @@ export default function JewelryProfile({
                             </div>
                             
                             <div className="bg-green-50 rounded-xl p-6 border border-green-200">
-                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Phone Number
-                              </label>
+                              <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">Téléphone</label>
                               <div className="relative">
                                 <input
                                   type="tel"

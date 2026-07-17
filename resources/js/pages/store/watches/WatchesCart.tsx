@@ -148,7 +148,7 @@ function WatchesCartContent({
                           
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-slate-600 uppercase tracking-wide">Price</label>
+                              <label className="text-sm font-medium text-slate-600 uppercase tracking-wide">Prix</label>
                               <div className="flex items-center space-x-3">
                                 {item.sale_price ? (
                                   <>
@@ -163,7 +163,7 @@ function WatchesCartContent({
                             </div>
                             
                             <div className="space-y-2">
-                              <label className="text-sm font-medium text-slate-600 uppercase tracking-wide">Quantity</label>
+                              <label className="text-sm font-medium text-slate-600 uppercase tracking-wide">Quantité</label>
                               <div className="flex items-center space-x-1">
                                 <button 
                                   onClick={() => handleQuantityChange(item.id, item.quantity - 1, item.stock)}
@@ -207,26 +207,26 @@ function WatchesCartContent({
                       <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-500 rounded-full mb-3">
                         <ShoppingBag className="w-6 h-6 text-slate-900" />
                       </div>
-                      <h2 className="text-xl font-light tracking-wide">Order Summary</h2>
+                      <h2 className="text-xl font-light tracking-wide">Résumé de la commande</h2>
                       <p className="text-slate-300 text-sm mt-1">{dynamicCartItems.length} luxury timepiece{dynamicCartItems.length !== 1 ? 's' : ''}</p>
                     </div>
 
                     <div className="bg-white/10 rounded-xl p-4 mb-6">
                       <div className="space-y-3">
                         <div className="flex justify-between text-sm text-slate-200">
-                          <span>Subtotal</span>
+                          <span>Sous-total</span>
                           <span className="font-medium">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                         </div>
                         
                         {dynamicSummary.discount > 0 && (
                           <div className="flex justify-between text-sm text-green-300">
-                            <span>Discount</span>
+                            <span>Réduction</span>
                             <span className="font-medium">-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                           </div>
                         )}
                         
                         <div className="flex justify-between text-sm text-slate-200">
-                          <span>Shipping</span>
+                          <span>Livraison</span>
                           <span className="font-medium">
                             {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                           </span>
@@ -256,9 +256,7 @@ function WatchesCartContent({
                       <Link
                         href={generateStoreUrl('store.products', store)}
                         className="w-full bg-white/20 text-white px-6 py-4 rounded-xl font-medium hover:bg-white/30 transition-all duration-200 flex items-center justify-center backdrop-blur-sm"
-                      >
-                        Continue Shopping
-                      </Link>
+                      >Continuer vos achats</Link>
                     </div>
                   </div>
                 </div>

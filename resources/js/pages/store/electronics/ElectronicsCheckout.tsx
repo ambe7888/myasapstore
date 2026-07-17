@@ -331,14 +331,14 @@ function ElectronicsCheckoutContent({
                         
                         const newErrors: Record<string, string> = {};
                         
-                        if (!shippingData.firstName) newErrors.firstName = 'First name is required';
-                        if (!shippingData.lastName) newErrors.lastName = 'Last name is required';
+                        if (!shippingData.firstName) newErrors.firstName = "Le prénom est requis";
+                        if (!shippingData.lastName) newErrors.lastName = "Le nom est requis";
                         if (!shippingData.email) {
-                          newErrors.email = 'Email is required';
+                          newErrors.email = "L'adresse e-mail est requise";
                         } else if (!/\S+@\S+\.\S+/.test(shippingData.email)) {
                           newErrors.email = 'Email is invalid';
                         }
-                        if (!shippingData.phone) newErrors.phone = 'Phone number is required';
+                        if (!shippingData.phone) newErrors.phone = "Le numéro de téléphone est requis";
                         if (!shippingData.street) newErrors.street = 'Street address is required';
                         if (!shippingData.city) newErrors.city = 'City is required';
                         if (!shippingData.state) newErrors.state = 'State is required';
@@ -368,7 +368,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Nom *</label>
                             <input
                               type="text"
                               value={shippingData.lastName}
@@ -417,7 +417,7 @@ function ElectronicsCheckoutContent({
                               onChange={(e) => handleCountryChange(e.target.value)}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                              <option value="">Select Country</option>
+                              <option value="">Sélectionner le pays</option>
                               {countries?.map((country: any) => (
                                 <option key={country.id} value={country.id}>
                                   {country.name}
@@ -490,7 +490,7 @@ function ElectronicsCheckoutContent({
 
                         {/* Shipping Methods */}
                         <div className="mt-8">
-                          <h3 className="text-lg font-bold text-gray-900 mb-4">Shipping Method</h3>
+                          <h3 className="text-lg font-bold text-gray-900 mb-4">Méthode de livraison</h3>
                           {shippingErrors.shipping && (
                             <p className="mb-4 text-sm text-red-600">{shippingErrors.shipping}</p>
                           )}
@@ -543,7 +543,7 @@ function ElectronicsCheckoutContent({
 
                         {/* Order Notes */}
                         <div className="mt-8">
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Order Notes (Optional)</label>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Notes de commande (Optionnel)</label>
                           <textarea
                             value={orderNotes}
                             onChange={(e) => setOrderNotes(e.target.value)}
@@ -567,7 +567,7 @@ function ElectronicsCheckoutContent({
 
                   {currentStep === 'payment' && (
                     <div className="bg-white rounded-2xl shadow-lg p-8">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment Method</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Moyen de paiement</h2>
                       
                       <div className="space-y-4">
                         {/* Cash on Delivery - Only show if enabled */}
@@ -711,7 +711,7 @@ function ElectronicsCheckoutContent({
                       )}
 
                       <div className="mt-8">
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Order Notes (Optional)</label>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Notes de commande (Optionnel)</label>
                         <textarea
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
@@ -772,9 +772,7 @@ function ElectronicsCheckoutContent({
                           onClick={handlePlaceOrder}
                           className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2"
                         >
-                          <Lock className="w-5 h-5" />
-                          Place Order
-                        </button>
+                          <Lock className="w-5 h-5" />Passer la commande</button>
                       </div>
                     </div>
                   )}
@@ -783,17 +781,17 @@ function ElectronicsCheckoutContent({
                 {/* Order Summary */}
                 <div className="lg:col-span-1">
                   <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-6">Résumé de la commande</h3>
                     
                     {/* Coupon Code */}
                     <div className="mb-6 border-b border-gray-200 pb-6">
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Coupon Code</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter coupon code"
+                          placeholder="Entrez le code promo"
                           className="flex-grow px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           disabled={couponApplied}
                         />
@@ -847,19 +845,19 @@ function ElectronicsCheckoutContent({
                     
                     <div className="space-y-4 mb-6">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal</span>
+                        <span className="text-gray-600">Sous-total</span>
                         <span className="font-semibold">{formatCurrency(cartSummary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       
                       {discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span className="text-gray-600">Discount</span>
+                          <span className="text-gray-600">Réduction</span>
                           <span className="font-semibold">-{formatCurrency(discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Shipping</span>
+                        <span className="text-gray-600">Livraison</span>
                         <span className="font-semibold">{formatCurrency(shippingCost, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">

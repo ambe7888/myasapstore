@@ -172,9 +172,7 @@ export default function Register({
                 <form onSubmit={handleSubmit}>
                   {/* First Name */}
                   <div className="mb-6">
-                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">
-                      First Name
-                    </label>
+                    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <User className="h-5 w-5 text-gray-400" />
@@ -198,9 +196,7 @@ export default function Register({
                   
                   {/* Last Name */}
                   <div className="mb-6">
-                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Last Name
-                    </label>
+                    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <User className="h-5 w-5 text-gray-400" />
@@ -224,9 +220,7 @@ export default function Register({
                   
                   {/* Email */}
                   <div className="mb-6">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Mail className="h-5 w-5 text-gray-400" />

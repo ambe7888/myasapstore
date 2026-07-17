@@ -316,7 +316,7 @@ function BeautyProductDetailContent({
                     ) : (
                       <div className="flex items-center text-red-500 bg-red-50 px-4 py-2 rounded-full">
                         <Info className="h-5 w-5 mr-2" />
-                        <span className="font-medium">Out of Stock</span>
+                        <span className="font-medium">Rupture de stock</span>
                       </div>
                     )}
                   </div>
@@ -349,7 +349,7 @@ function BeautyProductDetailContent({
 
                   {/* Quantity */}
                   <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5">
-                    <h3 className="text-base font-semibold text-gray-900 mb-3">Quantity</h3>
+                    <h3 className="text-base font-semibold text-gray-900 mb-3">Quantité</h3>
                     <div className="flex items-center bg-white rounded-full border-2 border-rose-200 w-fit">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -420,9 +420,7 @@ function BeautyProductDetailContent({
                         ? 'border-b-2 border-rose-500 text-rose-600'
                         : 'text-gray-600 hover:text-rose-500'
                     }`}
-                  >
-                    Description
-                  </button>
+                  >Description</button>
                   {product.specifications && (
                     <button
                       onClick={() => setActiveTab('specifications')}

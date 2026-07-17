@@ -278,11 +278,11 @@ export default function FashionCheckout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -463,7 +463,7 @@ export default function FashionCheckout({
         <div className="bg-black text-white py-20">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-thin tracking-wide mb-6">Checkout</h1>
+              <h1 className="text-5xl font-thin tracking-wide mb-6">Passer à la caisse</h1>
               <p className="text-white/70 font-light text-lg">
                 Complete your order with confidence
               </p>
@@ -557,9 +557,7 @@ export default function FashionCheckout({
                         
                         {/* Last Name */}
                         <div className="hidden">
-                          <label htmlFor="shipping-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            Last Name *
-                          </label>
+                          <label htmlFor="shipping-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">Nom *</label>
                           <input
                             id="shipping-last-name"
                             type="text"
@@ -576,9 +574,7 @@ export default function FashionCheckout({
                         
                         {/* Email */}
                         <div>
-                          <label htmlFor="shipping-email" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            Email Address (Optional)
-                          </label>
+                          <label htmlFor="shipping-email" className="block text-sm font-light tracking-wide uppercase mb-3">Adresse e-mail (Optionnel)</label>
                           <input
                             id="shipping-email"
                             type="email"
@@ -595,9 +591,7 @@ export default function FashionCheckout({
                         
                         {/* Phone */}
                         <div>
-                          <label htmlFor="shipping-phone" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            Phone Number *
-                          </label>
+                          <label htmlFor="shipping-phone" className="block text-sm font-light tracking-wide uppercase mb-3">Téléphone *</label>
                           <input
                             id="shipping-phone"
                             type="tel"
@@ -623,7 +617,7 @@ export default function FashionCheckout({
                             onChange={(e) => handleShippingCountryChange(e.target.value)}
                             className="block w-full px-4 py-3 border border-gray-300 font-light focus:outline-none focus:border-black transition-colors"
                           >
-                            <option value="">Select Country</option>
+                            <option value="">Sélectionner le pays</option>
                             {countries?.map((country: any) => (
                               <option key={country.id} value={country.id}>
                                 {country.name}
@@ -711,7 +705,7 @@ export default function FashionCheckout({
                       
                       {/* Shipping Methods */}
                       <div>
-                        <h3 className="text-lg font-light tracking-wide mb-6">Shipping Method</h3>
+                        <h3 className="text-lg font-light tracking-wide mb-6">Méthode de livraison</h3>
                         
                         <div className="space-y-4">
                           {shippingMethods.length > 0 ? (
@@ -752,9 +746,7 @@ export default function FashionCheckout({
                               );
                             })
                           ) : (
-                            <div className="text-center py-8 text-gray-500 font-light">
-                              No shipping methods available
-                            </div>
+                            <div className="text-center py-8 text-gray-500 font-light">Aucune zone de livraison disponible</div>
                           )}
                         </div>
                       </div>
@@ -794,9 +786,7 @@ export default function FashionCheckout({
                           )}
 {/* Order Notes */}
                       <div>
-                        <label htmlFor="order-notes" className="block text-sm font-light tracking-wide uppercase mb-3">
-                          Order Notes (Optional)
-                        </label>
+                        <label htmlFor="order-notes" className="block text-sm font-light tracking-wide uppercase mb-3">Notes de commande (Optionnel)</label>
                         <textarea
                           id="order-notes"
                           rows={4}
@@ -871,7 +861,7 @@ export default function FashionCheckout({
                         <div className="bg-gray-50 p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Contact Information</p>
+                              <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Informations de contact</p>
                               <p className="text-sm text-black font-light">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-sm text-black font-light">{shippingEmail}</p>
                               <p className="text-sm text-black font-light">{shippingPhone}</p>
@@ -884,7 +874,7 @@ export default function FashionCheckout({
                             </div>
                           </div>
                           <div className="mt-6 pt-6 border-t border-gray-200">
-                            <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Shipping Method</p>
+                            <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Méthode de livraison</p>
                             <p className="text-sm text-black font-light">
                               {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
                             </p>
@@ -895,7 +885,7 @@ export default function FashionCheckout({
                       {/* Order Notes */}
                       {orderNotes && (
                         <div>
-                          <h3 className="text-lg font-light tracking-wide mb-6">Order Notes</h3>
+                          <h3 className="text-lg font-light tracking-wide mb-6">Notes de commande</h3>
                           
                           <div className="bg-gray-50 p-6">
                             <p className="text-sm text-black font-light">{orderNotes}</p>
@@ -969,9 +959,7 @@ export default function FashionCheckout({
                             
                             {/* Last Name */}
                         <div className="hidden">
-                              <label htmlFor="billing-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                Last Name *
-                              </label>
+                              <label htmlFor="billing-last-name" className="block text-sm font-light tracking-wide uppercase mb-3">Nom *</label>
                               <input
                                 id="billing-last-name"
                                 type="text"
@@ -983,9 +971,7 @@ export default function FashionCheckout({
                             
                             {/* Email */}
                             <div>
-                              <label htmlFor="billing-email" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                Email Address (Optional)
-                              </label>
+                              <label htmlFor="billing-email" className="block text-sm font-light tracking-wide uppercase mb-3">Adresse e-mail (Optionnel)</label>
                               <input
                                 id="billing-email"
                                 type="email"
@@ -997,9 +983,7 @@ export default function FashionCheckout({
                             
                             {/* Phone */}
                             <div>
-                              <label htmlFor="billing-phone" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                Phone Number *
-                              </label>
+                              <label htmlFor="billing-phone" className="block text-sm font-light tracking-wide uppercase mb-3">Téléphone *</label>
                               <input
                                 id="billing-phone"
                                 type="tel"
@@ -1034,7 +1018,7 @@ export default function FashionCheckout({
                                 onChange={(e) => handleBillingCountryChange(e.target.value)}
                                 className="block w-full px-4 py-3 border border-gray-300 font-light focus:outline-none focus:border-black transition-colors"
                               >
-                                <option value="">Select Country</option>
+                                <option value="">Sélectionner le pays</option>
                                 {countries?.map((country: any) => (
                                   <option key={country.id} value={country.id}>
                                     {country.name}
@@ -1104,7 +1088,7 @@ export default function FashionCheckout({
                       
                       {/* Payment Methods */}
                       <div>
-                        <h3 className="text-lg font-light tracking-wide mb-6">Payment Method</h3>
+                        <h3 className="text-lg font-light tracking-wide mb-6">Moyen de paiement</h3>
                         
                         <div className="space-y-4">
                           {/* Cash on Delivery - Only show if enabled */}
@@ -1278,9 +1262,7 @@ export default function FashionCheckout({
                           type="button"
                           onClick={handlePlaceOrder}
                           className="bg-black text-white px-8 py-3 font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors"
-                        >
-                          Place Order
-                        </button>
+                        >Passer la commande</button>
                       </div>
                     </div>
                   </div>
@@ -1290,7 +1272,7 @@ export default function FashionCheckout({
               {/* Order Summary */}
               <div className="lg:col-span-2">
                 <div className="bg-black text-white p-8 sticky top-6">
-                  <h2 className="text-2xl font-thin tracking-widest uppercase mb-8 text-center">Order Summary</h2>
+                  <h2 className="text-2xl font-thin tracking-widest uppercase mb-8 text-center">Résumé de la commande</h2>
                   <div className="w-16 h-px bg-white mx-auto mb-8"></div>
                   
                   {/* Order Items */}
@@ -1336,7 +1318,7 @@ export default function FashionCheckout({
                   {/* Coupon Code */}
                   <div className="mb-8 border-t border-gray-200 pt-8">
                     <div className="flex flex-col space-y-3">
-                      <label htmlFor="coupon" className="text-sm font-light tracking-widest uppercase text-white">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-light tracking-widest uppercase text-white">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1344,7 +1326,7 @@ export default function FashionCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter coupon code"
+                          placeholder="Entrez le code promo"
                           className="flex-grow px-3 py-2 bg-white text-black font-light focus:outline-none text-sm"
                           disabled={couponApplied}
                         />
@@ -1400,19 +1382,19 @@ export default function FashionCheckout({
                   {/* Price Summary */}
                   <div className="space-y-4">
                     <div className="flex justify-between text-sm text-gray-300 font-light">
-                      <p>Subtotal</p>
+                      <p>Sous-total</p>
                       <p>{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-sm text-green-400 font-light">
-                        <p>Discount</p>
+                        <p>Réduction</p>
                         <p>-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-sm text-gray-300 font-light">
-                      <p>Shipping</p>
+                      <p>Livraison</p>
                       <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
                     </div>
                     

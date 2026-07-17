@@ -278,7 +278,7 @@ export default function OrderConfirmation({
                     <div className="flex items-start">
                       <Truck className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-gray-500">Shipping Method</p>
+                        <p className="text-sm font-medium text-gray-500">Méthode de livraison</p>
                         <p className="text-sm text-gray-900">{orderData.shipping_method}</p>
                       </div>
                     </div>
@@ -297,7 +297,7 @@ export default function OrderConfirmation({
                     <div className="flex items-start">
                       <CreditCard className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-gray-500">Payment Method</p>
+                        <p className="text-sm font-medium text-gray-500">Moyen de paiement</p>
                         <p className="text-sm text-gray-900">{orderData.payment_method}</p>
                       </div>
                     </div>
@@ -314,15 +314,9 @@ export default function OrderConfirmation({
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                               Product
                             </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Price
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Quantity
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Total
-                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -362,9 +356,7 @@ export default function OrderConfirmation({
                           })}
                           {orderData.subtotal && orderData.discount && orderData.discount > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600">
-                                Subtotal
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600">Sous-total</td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600">
                                 {formatCurrency(orderData.subtotal, storeSettings, currencies)}
                               </td>
@@ -382,9 +374,7 @@ export default function OrderConfirmation({
                           )}
                           {orderData.shipping && orderData.shipping > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600">
-                                Shipping
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600">Livraison</td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600">
                                 {formatCurrency(orderData.shipping, storeSettings, currencies)}
                               </td>
@@ -401,9 +391,7 @@ export default function OrderConfirmation({
                             </tr>
                           )}
                           <tr className="bg-gray-50">
-                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-medium text-gray-900">
-                              Total
-                            </td>
+                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-medium text-gray-900">Total</td>
                             <td className="px-6 py-4 text-right text-sm font-medium text-gray-900">
                               {formatCurrency(orderData.total, storeSettings, currencies)}
                             </td>
@@ -444,7 +432,7 @@ export default function OrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-medium text-gray-900">Shipping</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Livraison</h3>
                         <p className="mt-2 text-base text-gray-500">
                           Your order will be shipped via {orderData.shipping_method}. You can track your order in your account.
                         </p>
@@ -465,9 +453,7 @@ export default function OrderConfirmation({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="inline-flex justify-center items-center px-6 py-3 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </div>

@@ -70,9 +70,7 @@ export default function ElectronicsForgotPassword({
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email Field */}
                     <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
-                        Email Address
-                      </label>
+                      <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">Adresse e-mail</label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input

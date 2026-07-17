@@ -115,9 +115,7 @@ export default function BeautyProfile({
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-rose-50 rounded-2xl p-6">
-                          <label className="block text-sm font-medium text-gray-500 mb-3">
-                            First Name
-                          </label>
+                          <label className="block text-sm font-medium text-gray-500 mb-3">Prénom</label>
                           <div className="relative">
                             <input
                               type="text"
@@ -130,9 +128,7 @@ export default function BeautyProfile({
                         </div>
                         
                         <div className="bg-rose-50 rounded-2xl p-6">
-                          <label className="block text-sm font-medium text-gray-500 mb-3">
-                            Last Name
-                          </label>
+                          <label className="block text-sm font-medium text-gray-500 mb-3">Nom</label>
                           <div className="relative">
                             <input
                               type="text"
@@ -184,13 +180,11 @@ export default function BeautyProfile({
                     <div>
                       <div className="flex items-center mb-8">
                         <Mail className="h-6 w-6 text-rose-500 mr-3" />
-                        <h3 className="text-2xl font-light text-gray-900">Contact Information</h3>
+                        <h3 className="text-2xl font-light text-gray-900">Informations de contact</h3>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-rose-50 rounded-2xl p-6">
-                          <label className="block text-sm font-medium text-gray-500 mb-3">
-                            Email Address
-                          </label>
+                          <label className="block text-sm font-medium text-gray-500 mb-3">Adresse e-mail</label>
                           <div className="relative">
                             <input
                               type="email"
@@ -203,9 +197,7 @@ export default function BeautyProfile({
                         </div>
                         
                         <div className="bg-rose-50 rounded-2xl p-6">
-                          <label className="block text-sm font-medium text-gray-500 mb-3">
-                            Phone Number
-                          </label>
+                          <label className="block text-sm font-medium text-gray-500 mb-3">Téléphone</label>
                           <div className="relative">
                             <input
                               type="tel"

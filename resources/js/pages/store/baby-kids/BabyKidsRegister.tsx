@@ -95,9 +95,7 @@ export default function BabyKidsRegister({
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                           </svg>
-                        </div>
-                        First Name
-                      </label>
+                        </div>Prénom</label>
                       <input
                         id="first_name"
                         type="text"
@@ -119,9 +117,7 @@ export default function BabyKidsRegister({
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                           </svg>
-                        </div>
-                        Last Name
-                      </label>
+                        </div>Nom</label>
                       <input
                         id="last_name"
                         type="text"
@@ -147,9 +143,7 @@ export default function BabyKidsRegister({
                           <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                           <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                         </svg>
-                      </div>
-                      Email Address
-                    </label>
+                      </div>Adresse e-mail</label>
                     <input
                       id="email"
                       type="email"

@@ -306,7 +306,7 @@ export default function CarsOrderConfirmation({
                     <div className="space-y-4">
                       {orderData.subtotal && (
                         <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                          <span className="font-bold tracking-wider uppercase">Subtotal</span>
+                          <span className="font-bold tracking-wider uppercase">Sous-total</span>
                           <span className="font-black text-white">{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -318,7 +318,7 @@ export default function CarsOrderConfirmation({
                       )}
                       {orderData.shipping && orderData.shipping > 0 && (
                         <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                          <span className="font-bold tracking-wider uppercase">Shipping</span>
+                          <span className="font-bold tracking-wider uppercase">Livraison</span>
                           <span className="font-black text-white">{formatCurrency(orderData.shipping, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -367,7 +367,7 @@ export default function CarsOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <CreditCard className="h-8 w-8 text-red-600 mr-4 mt-1" />
                         <div>
-                          <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-3">Payment Method</p>
+                          <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-3">Moyen de paiement</p>
                           <p className="text-gray-900 font-medium">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -384,9 +384,7 @@ export default function CarsOrderConfirmation({
                   href={generateStoreUrl('store.products', store)}
                   className="bg-red-600 hover:bg-black text-white px-12 py-4 font-bold tracking-wider uppercase transition-colors inline-flex items-center"
                 >
-                  <Wrench className="h-6 w-6 mr-3" />
-                  Continue Shopping
-                </Link>
+                  <Wrench className="h-6 w-6 mr-3" />Continuer vos achats</Link>
               </div>
             </div>
           </div>

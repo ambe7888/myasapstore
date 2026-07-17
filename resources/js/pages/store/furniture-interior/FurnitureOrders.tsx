@@ -130,9 +130,7 @@ export default function FurnitureOrders({
                             href={generateStoreUrl('store.order-detail', store, { orderNumber: order.id })}
                             className="bg-yellow-800 text-white px-6 py-3 rounded-2xl font-bold hover:bg-yellow-900 transition-colors flex items-center justify-center"
                           >
-                            <Eye className="h-5 w-5 mr-2" />
-                            View Details
-                          </Link>
+                            <Eye className="h-5 w-5 mr-2" />Voir les détails</Link>
                           {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
                             <button className="border-2 border-amber-600 text-amber-800 px-6 py-3 rounded-2xl font-bold hover:bg-amber-50 transition-colors flex items-center justify-center">
                               <ShoppingBag className="h-5 w-5 mr-2" />

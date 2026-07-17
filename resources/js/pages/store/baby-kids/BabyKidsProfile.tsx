@@ -159,9 +159,7 @@ export default function BabyKidsProfile({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {/* First Name */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              First Name
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
                             <div className="relative">
                               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
@@ -182,9 +180,7 @@ export default function BabyKidsProfile({
 
                           {/* Last Name */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Last Name
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
                             <div className="relative">
                               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
@@ -205,9 +201,7 @@ export default function BabyKidsProfile({
 
                           {/* Email */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Email Address
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Adresse e-mail</label>
                             <div className="relative">
                               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input
@@ -228,9 +222,7 @@ export default function BabyKidsProfile({
 
                           {/* Phone */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Phone Number
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
                             <div className="relative">
                               <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                               <input

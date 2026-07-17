@@ -209,14 +209,14 @@ function JewelryCartContent({
                         <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-3">
                           <Star className="w-6 h-6 text-yellow-200" />
                         </div>
-                        <h2 className="text-xl font-serif tracking-wide">Order Summary</h2>
+                        <h2 className="text-xl font-serif tracking-wide">Résumé de la commande</h2>
                         <p className="text-yellow-200 text-sm mt-1">{dynamicCartItems.length} luxury item{dynamicCartItems.length !== 1 ? 's' : ''}</p>
                       </div>
 
                       <div className="bg-white/10 rounded-xl p-4 mb-6">
                         <div className="space-y-3">
                           <div className="flex justify-between text-sm text-yellow-100">
-                            <span>Subtotal</span>
+                            <span>Sous-total</span>
                             <span className="font-semibold">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                           </div>
                           
@@ -228,7 +228,7 @@ function JewelryCartContent({
                           )}
                           
                           <div className="flex justify-between text-sm text-yellow-100">
-                            <span>Shipping</span>
+                            <span>Livraison</span>
                             <span className="font-semibold">
                               {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                             </span>
@@ -259,9 +259,7 @@ function JewelryCartContent({
                           href={generateStoreUrl('store.products', store)}
                           className="w-full bg-white/20 text-white px-6 py-4 rounded-xl font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center backdrop-blur-sm"
                         >
-                          <Gem className="w-5 h-5 mr-2" />
-                          Continue Shopping
-                        </Link>
+                          <Gem className="w-5 h-5 mr-2" />Continuer vos achats</Link>
                       </div>
                     </div>
                   </div>

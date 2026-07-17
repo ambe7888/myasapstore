@@ -224,9 +224,9 @@ export default function BeautyCheckout({
     
     const newErrors: Record<string, string> = {};
     
-    if (!shippingFirstName) newErrors.shippingFirstName = 'First name is required';
-    if (!shippingLastName) newErrors.shippingLastName = 'Last name is required';
-    if (!shippingPhone) newErrors.shippingPhone = 'Phone number is required';
+    if (!shippingFirstName) newErrors.shippingFirstName = "Le prénom est requis";
+    if (!shippingLastName) newErrors.shippingLastName = "Le nom est requis";
+    if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
     if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
     if (!shippingCity) newErrors.shippingCity = 'City is required';
     if (!shippingState) newErrors.shippingState = 'State is required';
@@ -492,9 +492,7 @@ export default function BeautyCheckout({
                         
                         {/* Last Name */}
                         <div className="hidden">
-                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-900 mb-3">
-                            Last Name *
-                          </label>
+                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-900 mb-3">Nom *</label>
                           <input
                             id="shipping-last-name"
                             type="text"
@@ -511,9 +509,7 @@ export default function BeautyCheckout({
                         
                         {/* Email */}
                         <div>
-                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-900 mb-3">
-                            Email Address (Optional)
-                          </label>
+                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-900 mb-3">Adresse e-mail (Optionnel)</label>
                           <input
                             id="shipping-email"
                             type="email"
@@ -530,9 +526,7 @@ export default function BeautyCheckout({
                         
                         {/* Phone */}
                         <div>
-                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-900 mb-3">
-                            Phone Number *
-                          </label>
+                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-900 mb-3">Téléphone *</label>
                           <input
                             id="shipping-phone"
                             type="tel"
@@ -558,7 +552,7 @@ export default function BeautyCheckout({
                             onChange={(e) => handleCountryChange(e.target.value)}
                             className="block w-full px-4 py-3 rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors bg-white/80"
                           >
-                            <option value="">Select Country</option>
+                            <option value="">Sélectionner le pays</option>
                             {countries?.map((country: any) => (
                               <option key={country.id} value={country.id}>
                                 {country.name}
@@ -645,7 +639,7 @@ export default function BeautyCheckout({
                       
                       {/* Shipping Methods */}
                       <div>
-                        <h3 className="text-xl font-medium text-gray-900 mb-6">Shipping Method</h3>
+                        <h3 className="text-xl font-medium text-gray-900 mb-6">Méthode de livraison</h3>
                         
                         <div className="space-y-4">
                           {shippingMethods.length > 0 ? (
@@ -692,9 +686,7 @@ export default function BeautyCheckout({
                               );
                             })
                           ) : (
-                            <div className="text-center py-8 text-gray-500">
-                              No shipping methods available
-                            </div>
+                            <div className="text-center py-8 text-gray-500">Aucune zone de livraison disponible</div>
                           )}
                         </div>
                       </div>
@@ -734,9 +726,7 @@ export default function BeautyCheckout({
                           )}
 {/* Order Notes */}
                       <div>
-                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-900 mb-3">
-                          Order Notes (Optional)
-                        </label>
+                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-900 mb-3">Notes de commande (Optionnel)</label>
                         <textarea
                           id="order-notes"
                           rows={4}
@@ -811,7 +801,7 @@ export default function BeautyCheckout({
                         <div className="bg-white/60 rounded-2xl p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <p className="text-sm font-medium text-gray-500 mb-2">Contact Information</p>
+                              <p className="text-sm font-medium text-gray-500 mb-2">Informations de contact</p>
                               <p className="text-gray-900">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-gray-900">{shippingEmail}</p>
                               <p className="text-gray-900">{shippingPhone}</p>
@@ -824,7 +814,7 @@ export default function BeautyCheckout({
                             </div>
                           </div>
                           <div className="mt-6 pt-6 border-t border-rose-200">
-                            <p className="text-sm font-medium text-gray-500 mb-2">Shipping Method</p>
+                            <p className="text-sm font-medium text-gray-500 mb-2">Méthode de livraison</p>
                             <p className="text-gray-900">
                               {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
                             </p>
@@ -835,7 +825,7 @@ export default function BeautyCheckout({
                       {/* Order Notes */}
                       {orderNotes && (
                         <div>
-                          <h3 className="text-xl font-medium text-gray-900 mb-6">Order Notes</h3>
+                          <h3 className="text-xl font-medium text-gray-900 mb-6">Notes de commande</h3>
                           
                           <div className="bg-white/60 rounded-2xl p-6">
                             <p className="text-gray-900">{orderNotes}</p>
@@ -901,7 +891,7 @@ export default function BeautyCheckout({
                       
                       {/* Payment Methods */}
                       <div>
-                        <h3 className="text-xl font-medium text-gray-900 mb-6">Payment Method</h3>
+                        <h3 className="text-xl font-medium text-gray-900 mb-6">Moyen de paiement</h3>
                         
                         <div className="space-y-4">
                           {/* Cash on Delivery - Only show if enabled */}
@@ -1091,9 +1081,7 @@ export default function BeautyCheckout({
                           onClick={handlePlaceOrder}
                           className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2"
                         >
-                          <Sparkles className="h-5 w-5" />
-                          Place Order
-                        </button>
+                          <Sparkles className="h-5 w-5" />Passer la commande</button>
                       </div>
                     </div>
                   </div>
@@ -1138,7 +1126,7 @@ export default function BeautyCheckout({
                   {/* Coupon Code */}
                   <div className="mb-8 border-t border-white/20 pt-8">
                     <div className="flex flex-col space-y-3">
-                      <label htmlFor="coupon" className="text-sm font-medium text-white">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-medium text-white">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1146,7 +1134,7 @@ export default function BeautyCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter coupon code"
+                          placeholder="Entrez le code promo"
                           className="flex-grow px-3 py-2 bg-white/20 text-white placeholder-white/60 rounded-l-xl focus:outline-none text-sm"
                           disabled={couponApplied}
                         />
@@ -1202,19 +1190,19 @@ export default function BeautyCheckout({
                   {/* Price Summary */}
                   <div className="space-y-4">
                     <div className="flex justify-between text-sm text-white/80">
-                      <p>Subtotal</p>
+                      <p>Sous-total</p>
                       <p>{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-sm text-green-300">
-                        <p>Discount</p>
+                        <p>Réduction</p>
                         <p>-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-sm text-white/80">
-                      <p>Shipping</p>
+                      <p>Livraison</p>
                       <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
                     </div>
                     

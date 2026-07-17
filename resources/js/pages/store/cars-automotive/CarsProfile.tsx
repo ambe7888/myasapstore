@@ -164,7 +164,7 @@ export default function CarsProfile({
                   </div>
                   <div className="p-8 space-y-6">
                     <div>
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">First Name</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Prénom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -179,7 +179,7 @@ export default function CarsProfile({
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Last Name</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Nom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -206,13 +206,13 @@ export default function CarsProfile({
                   </div>
                   <div className="p-8 space-y-6">
                     <div>
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Email Address</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Adresse e-mail</label>
                       <div className="bg-gray-50 p-4 border-2 border-gray-200">
                         <span className="text-lg font-bold text-gray-900">{user.email}</span>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Phone Number</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Téléphone</label>
                       {isEditing ? (
                         <input
                           type="tel"

@@ -357,7 +357,7 @@ export default function BlogDetail({
                 {/* Categories */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
                   <div className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Categories</h3>
+                    <h3 className="text-lg font-bold mb-4">Catégories</h3>
                     <ul className="space-y-2">
                       {categories.map(category => (
                         <li key={category.id}>

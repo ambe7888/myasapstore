@@ -67,9 +67,7 @@ export default function FurnitureLogin({
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-amber-100">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Email Address
-                    </label>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         type="email"

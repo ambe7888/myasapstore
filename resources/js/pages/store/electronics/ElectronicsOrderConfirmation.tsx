@@ -233,7 +233,7 @@ export default function ElectronicsOrderConfirmation({
                   
                   <div className="bg-white rounded-xl shadow-md p-6 text-center">
                     <Truck className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Shipping</p>
+                    <p className="text-sm font-semibold text-gray-500 mb-2">Livraison</p>
                     <p className="text-gray-900 font-bold">{orderData.shipping_method}</p>
                   </div>
                   
@@ -297,13 +297,13 @@ export default function ElectronicsOrderConfirmation({
                   {/* Order Summary */}
                   <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div className="bg-blue-600 text-white p-6">
-                      <h3 className="text-xl font-bold">Order Summary</h3>
+                      <h3 className="text-xl font-bold">Résumé de la commande</h3>
                     </div>
                     
                     <div className="p-6 space-y-4">
                       {orderData.subtotal && (
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Subtotal</span>
+                          <span className="text-gray-600">Sous-total</span>
                           <span className="font-semibold">{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -317,7 +317,7 @@ export default function ElectronicsOrderConfirmation({
                       
                       {orderData.shipping && (
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Shipping</span>
+                          <span className="text-gray-600">Livraison</span>
                           <span className="font-semibold">{formatCurrency(orderData.shipping, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -384,7 +384,7 @@ export default function ElectronicsOrderConfirmation({
                         <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                           <Truck className="w-8 h-8 text-blue-600" />
                         </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">Shipping</h3>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">Livraison</h3>
                         <p className="text-gray-600">Your order will be shipped with tracking</p>
                       </div>
                       
@@ -415,9 +415,7 @@ export default function ElectronicsOrderConfirmation({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </section>

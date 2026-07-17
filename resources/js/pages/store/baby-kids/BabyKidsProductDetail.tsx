@@ -313,9 +313,7 @@ function BabyKidsProductDetailContent({
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-2 text-red-700 bg-red-100 px-4 py-2 rounded-full font-semibold">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        Out of Stock
-                      </span>
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>Rupture de stock</span>
                     )}
                   </div>
 
@@ -361,9 +359,7 @@ function BabyKidsProductDetailContent({
 
                   {/* Quantity */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Quantity
-                    </label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Quantité</label>
                     <div className="flex items-center space-x-3">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -431,9 +427,7 @@ function BabyKidsProductDetailContent({
                         ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
                         : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                     }`}
-                  >
-                    Description
-                  </button>
+                  >Description</button>
                   {product.specifications && (
                     <button
                       onClick={() => setActiveTab('specifications')}

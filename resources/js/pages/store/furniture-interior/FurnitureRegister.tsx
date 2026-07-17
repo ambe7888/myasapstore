@@ -92,9 +92,7 @@ export default function FurnitureRegister({
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Email Address
-                    </label>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         type="email"

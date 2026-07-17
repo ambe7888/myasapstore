@@ -66,7 +66,7 @@ function FurnitureCartContent({
       <div className="bg-yellow-800 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
+            <h1 className="text-3xl font-bold mb-4">Panier d'achat</h1>
             <div className="w-16 h-0.5 bg-amber-200 mx-auto"></div>
           </div>
         </div>
@@ -178,9 +178,7 @@ function FurnitureCartContent({
                                 </span>
                               ) : (
                                 <span className="inline-flex items-center gap-2 text-red-700 bg-red-100 px-3 py-1 rounded-full text-sm font-medium">
-                                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                  Out of Stock
-                                </span>
+                                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>Rupture de stock</span>
                               )}
                             </div>
                           </div>
@@ -248,15 +246,15 @@ function FurnitureCartContent({
 
                 <div className="lg:col-span-1">
                   <div className="bg-amber-50 rounded-2xl p-6 shadow-lg border-2 border-amber-100 sticky top-6">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6">Order Summary</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-6">Résumé de la commande</h2>
                     
                     <div className="space-y-4 mb-6">
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Subtotal</span>
+                        <span className="text-slate-600">Sous-total</span>
                         <span className="font-bold text-slate-900">{formatCurrency(summary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Shipping</span>
+                        <span className="text-slate-600">Livraison</span>
                         <span className="font-bold text-slate-900">
                           {summary.shipping === 0 ? 'Free' : formatCurrency(summary.shipping, storeSettings, currencies)}
                         </span>
@@ -278,7 +276,7 @@ function FurnitureCartContent({
                       className="group w-full bg-yellow-800 text-white px-10 py-5 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 mb-4 shadow-2xl hover:shadow-3xl transform hover:-translate-y-2"
                     >
                       <ShoppingCart className="w-5 h-5" />
-                      <span>Proceed to Checkout</span>
+                      <span>Passer à la caisse</span>
                       <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
@@ -289,7 +287,7 @@ function FurnitureCartContent({
                       className="group w-full border-3 border-yellow-700 text-yellow-800 px-10 py-5 rounded-2xl font-bold hover:bg-yellow-800 hover:text-white hover:border-yellow-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-2xl"
                     >
                       <ArrowLeft className="w-5 h-5" />
-                      <span>Continue Shopping</span>
+                      <span>Continuer vos achats</span>
                     </Link>
                   </div>
                 </div>
@@ -299,7 +297,7 @@ function FurnitureCartContent({
                 <div className="w-32 h-32 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <ShoppingCart className="w-16 h-16 text-amber-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">Your cart is empty</h2>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">Votre panier est vide</h2>
                 <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto leading-relaxed">
                   Discover our beautiful furniture collection and start creating your dream space
                 </p>

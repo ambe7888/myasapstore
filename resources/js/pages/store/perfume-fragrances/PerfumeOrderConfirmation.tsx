@@ -304,7 +304,7 @@ export default function PerfumeOrderConfirmation({
                     <div className="space-y-4">
                       {orderData.subtotal && (
                         <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                          <span className="font-medium">Subtotal</span>
+                          <span className="font-medium">Sous-total</span>
                           <span className="font-medium text-white">{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -316,7 +316,7 @@ export default function PerfumeOrderConfirmation({
                       )}
                       {orderData.shipping && orderData.shipping > 0 && (
                         <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                          <span className="font-medium">Shipping</span>
+                          <span className="font-medium">Livraison</span>
                           <span className="font-medium text-white">{formatCurrency(orderData.shipping, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -365,7 +365,7 @@ export default function PerfumeOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <CreditCard className="h-8 w-8 text-purple-800 mr-4 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-purple-800 mb-3">Payment Method</p>
+                          <p className="text-sm font-medium text-purple-800 mb-3">Moyen de paiement</p>
                           <p className="text-gray-900">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -387,9 +387,7 @@ export default function PerfumeOrderConfirmation({
                 <Link 
                   href={generateStoreUrl('store.products', store)} 
                   className="border border-purple-800 text-purple-800 px-8 py-4 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors inline-block"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </div>

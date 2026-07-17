@@ -156,9 +156,7 @@ function ElectronicsWishlistContent({
                             {/* Stock Status */}
                             {!isInStock && (
                               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="bg-gray-900 text-white px-4 py-2 rounded-lg font-semibold">
-                                  Out of Stock
-                                </span>
+                                <span className="bg-gray-900 text-white px-4 py-2 rounded-lg font-semibold">Rupture de stock</span>
                               </div>
                             )}
                           </div>
@@ -233,7 +231,7 @@ function ElectronicsWishlistContent({
                     href={generateStoreUrl('store.products', store)}
                     className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
-                    <span>Continue Shopping</span>
+                    <span>Continuer vos achats</span>
                     <ShoppingCart className="w-5 h-5 ml-2" />
                   </Link>
                 </div>

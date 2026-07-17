@@ -154,7 +154,7 @@ export default function PerfumeProfile({
                   </div>
                   <div className="p-8 space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">First Name</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Prénom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -169,7 +169,7 @@ export default function PerfumeProfile({
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">Last Name</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Nom</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -191,18 +191,18 @@ export default function PerfumeProfile({
                   <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 rounded-t-3xl">
                     <div className="flex items-center">
                       <Mail className="h-6 w-6 text-amber-400 mr-3" />
-                      <h3 className="text-2xl font-light">Contact Information</h3>
+                      <h3 className="text-2xl font-light">Informations de contact</h3>
                     </div>
                   </div>
                   <div className="p-8 space-y-6">
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">Email Address</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Adresse e-mail</label>
                       <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
                         <span className="text-lg text-gray-900">{user.email}</span>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">Phone Number</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Téléphone</label>
                       {isEditing ? (
                         <input
                           type="tel"

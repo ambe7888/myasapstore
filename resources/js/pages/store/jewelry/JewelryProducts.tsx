@@ -385,7 +385,7 @@ export default function JewelryProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-yellow-600 focus:ring-yellow-500"
                       />
-                      <span className="text-sm text-neutral-700">Out of Stock</span>
+                      <span className="text-sm text-neutral-700">Rupture de stock</span>
                     </label>
                   </div>
                 </div>

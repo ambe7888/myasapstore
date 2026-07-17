@@ -210,11 +210,11 @@ export default function BabyKidsCheckout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -398,7 +398,7 @@ export default function BabyKidsCheckout({
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Checkout</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Passer à la caisse</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
                 Complete your order for your little ones
@@ -475,7 +475,7 @@ export default function BabyKidsCheckout({
                             )}
                           </div>
                           <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Last Name *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Nom *</label>
                             <input
                               type="text"
                               value={shippingLastName}
@@ -529,7 +529,7 @@ export default function BabyKidsCheckout({
                               onChange={(e) => handleShippingCountryChange(e.target.value)}
                               className="w-full px-4 py-3 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500"
                             >
-                              <option value="">Select Country</option>
+                              <option value="">Sélectionner le pays</option>
                               {countries?.map((country: any) => (
                                 <option key={country.id} value={country.id}>
                                   {country.name}
@@ -604,7 +604,7 @@ export default function BabyKidsCheckout({
 
                         {/* Shipping Methods */}
                         <div className="mt-8">
-                          <h3 className="text-lg font-bold text-gray-800 mb-4">Shipping Method</h3>
+                          <h3 className="text-lg font-bold text-gray-800 mb-4">Méthode de livraison</h3>
                           
                           <div className="space-y-3">
                             {shippingMethods.length > 0 ? (
@@ -644,9 +644,7 @@ export default function BabyKidsCheckout({
                                 );
                               })
                             ) : (
-                              <div className="text-center py-8 text-gray-500">
-                                No shipping methods available
-                              </div>
+                              <div className="text-center py-8 text-gray-500">Aucune zone de livraison disponible</div>
                             )}
                           </div>
                         </div>
@@ -681,7 +679,7 @@ export default function BabyKidsCheckout({
                           )}
 {/* Order Notes */}
                         <div className="mt-8">
-                          <label className="block text-sm font-bold text-gray-700 mb-2">Order Notes (Optional)</label>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">Notes de commande (Optionnel)</label>
                           <textarea
                             rows={4}
                             value={orderNotes}
@@ -766,7 +764,7 @@ export default function BabyKidsCheckout({
                               </div>
                             </div>
                             <div className="mt-6 pt-6 border-t-2 border-pink-300">
-                              <p className="text-sm font-bold text-pink-600 mb-2">Shipping Method</p>
+                              <p className="text-sm font-bold text-pink-600 mb-2">Méthode de livraison</p>
                               <p className="text-gray-800">
                                 {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
                               </p>
@@ -777,7 +775,7 @@ export default function BabyKidsCheckout({
                         {/* Order Notes */}
                         {orderNotes && (
                           <div>
-                            <h3 className="text-lg font-bold text-gray-800 mb-4">Order Notes</h3>
+                            <h3 className="text-lg font-bold text-gray-800 mb-4">Notes de commande</h3>
                             
                             <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                               <p className="text-gray-800">{orderNotes}</p>
@@ -812,7 +810,7 @@ export default function BabyKidsCheckout({
                     <div className="relative bg-white rounded-3xl shadow-xl border-4 border-yellow-400 p-8">
                       <div className="flex items-center mb-6">
                         <CreditCard className="h-6 w-6 text-yellow-500 mr-3" />
-                        <h2 className="text-2xl font-bold text-gray-800">Payment Method</h2>
+                        <h2 className="text-2xl font-bold text-gray-800">Moyen de paiement</h2>
                       </div>
                       
                       <div className="space-y-8">
@@ -842,7 +840,7 @@ export default function BabyKidsCheckout({
                         
                         {/* Payment Methods */}
                         <div>
-                          <h3 className="text-lg font-bold text-gray-800 mb-4">Payment Method</h3>
+                          <h3 className="text-lg font-bold text-gray-800 mb-4">Moyen de paiement</h3>
                           
                           <div className="space-y-3">
                             {/* Cash on Delivery - Only show if enabled */}
@@ -1021,9 +1019,7 @@ export default function BabyKidsCheckout({
                           onClick={handlePlaceOrder}
                           className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors flex items-center gap-3"
                         >
-                          <Lock className="w-5 h-5" />
-                          Place Order
-                        </button>
+                          <Lock className="w-5 h-5" />Passer la commande</button>
                       </div>
                     </div>
                   </div>
@@ -1036,7 +1032,7 @@ export default function BabyKidsCheckout({
                   <div className="absolute -top-4 -left-4 -right-4 -bottom-4 bg-blue-200 rounded-3xl opacity-30 -z-10"></div>
                   <div className="flex items-center mb-6">
                     <Heart className="h-6 w-6 text-blue-500 mr-3" />
-                    <h2 className="text-2xl font-bold text-gray-800">Order Summary</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">Résumé de la commande</h2>
                   </div>
                   
                   {/* Order Items */}
@@ -1078,7 +1074,7 @@ export default function BabyKidsCheckout({
                   {/* Coupon Code */}
                   <div className="mb-6 p-4 bg-yellow-50 rounded-2xl border-2 border-yellow-200">
                     <div className="flex flex-col space-y-3">
-                      <label htmlFor="coupon" className="text-sm font-bold text-gray-700">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-bold text-gray-700">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1086,7 +1082,7 @@ export default function BabyKidsCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter coupon code"
+                          placeholder="Entrez le code promo"
                           className="flex-grow px-3 py-2 border-2 border-yellow-300 rounded-l-2xl focus:outline-none focus:border-yellow-500"
                           disabled={couponApplied}
                         />
@@ -1146,19 +1142,19 @@ export default function BabyKidsCheckout({
                   {/* Price Summary */}
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                      <p className="font-bold">Subtotal</p>
+                      <p className="font-bold">Sous-total</p>
                       <p className="font-bold">{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-green-600 border-b border-blue-200 pb-2">
-                        <p className="font-bold">Discount</p>
+                        <p className="font-bold">Réduction</p>
                         <p className="font-bold">-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                      <p className="font-bold">Shipping</p>
+                      <p className="font-bold">Livraison</p>
                       <p className="font-bold">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
                     </div>
                     

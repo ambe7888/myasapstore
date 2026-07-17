@@ -164,9 +164,7 @@ export default function CarsOrders({
                             href={generateStoreUrl('store.order-detail', store, { orderNumber: order.id })}
                             className="bg-red-600 hover:bg-black text-white px-8 py-4 font-bold tracking-wider uppercase transition-colors flex items-center justify-center min-w-[200px]"
                           >
-                            <Eye className="h-5 w-5 mr-2" />
-                            View Details
-                          </Link>
+                            <Eye className="h-5 w-5 mr-2" />Voir les détails</Link>
                           
                           {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
                             <button className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 font-bold tracking-wider uppercase transition-all flex items-center justify-center min-w-[200px]">

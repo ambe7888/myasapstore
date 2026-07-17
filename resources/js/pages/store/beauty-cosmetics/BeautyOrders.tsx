@@ -147,9 +147,7 @@ export default function BeautyOrders({
                             href={generateStoreUrl('store.order-detail', store, { orderNumber: order.id })}
                             className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/30 transition-colors text-center flex items-center justify-center gap-2"
                           >
-                            <Eye className="h-4 w-4" />
-                            View Details
-                          </Link>
+                            <Eye className="h-4 w-4" />Voir les détails</Link>
                           {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
                             <button className="px-6 py-3 bg-white text-rose-600 rounded-full font-medium hover:bg-rose-50 transition-colors flex items-center justify-center gap-2">
                               <Heart className="h-4 w-4" />

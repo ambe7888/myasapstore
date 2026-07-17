@@ -127,9 +127,7 @@ export default function CarsLogin({
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Email Field */}
                   <div>
-                    <label htmlFor="email" className="block text-red-600 font-bold tracking-widest uppercase text-sm mb-4">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-red-600 font-bold tracking-widest uppercase text-sm mb-4">Adresse e-mail</label>
                     <div className="relative">
                       <input
                         id="email"

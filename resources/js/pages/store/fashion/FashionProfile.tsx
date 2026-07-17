@@ -97,9 +97,7 @@ export default function FashionProfile({
                     <h2 className="text-2xl font-thin mb-6 tracking-wide">Personal Information</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                          First Name
-                        </label>
+                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Prénom</label>
                         <div className="relative">
                           <input
                             type="text"
@@ -112,9 +110,7 @@ export default function FashionProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                          Last Name
-                        </label>
+                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Nom</label>
                         <div className="relative">
                           <input
                             type="text"
@@ -130,12 +126,10 @@ export default function FashionProfile({
 
                   {/* Contact Information */}
                   <div>
-                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Contact Information</h2>
+                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Informations de contact</h2>
                     <div className="space-y-6">
                       <div>
-                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                          Email Address
-                        </label>
+                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Adresse e-mail</label>
                         <div className="relative">
                           <input
                             type="email"
@@ -148,9 +142,7 @@ export default function FashionProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                          Phone Number
-                        </label>
+                        <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Téléphone</label>
                         <div className="relative">
                           <input
                             type="tel"

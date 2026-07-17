@@ -298,7 +298,7 @@ function CartContent({
         <div className="bg-primary text-white py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Shopping Cart</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Panier d'achat</h1>
               <p className="text-white/80">
                 Review your items and proceed to checkout
               </p>
@@ -312,7 +312,7 @@ function CartContent({
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Shopping Cart</span>
+              <span className="text-gray-800 font-medium">Panier d'achat</span>
             </div>
           </div>
         </div>
@@ -329,10 +329,10 @@ function CartContent({
                       <thead className="bg-gray-50 border-b">
                         <tr>
                           <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                          <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Price</th>
-                          <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                          <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Subtotal</th>
-                          <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Remove</th>
+                          <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Prix</th>
+                          <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
+                          <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Sous-total</th>
+                          <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Retirer</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
@@ -454,9 +454,7 @@ function CartContent({
                     <Link 
                       href={generateStoreUrl('store.products', store)}
                       className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
                 </div>
                 
@@ -467,19 +465,19 @@ function CartContent({
                     
                     <div className="space-y-4">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal</span>
+                        <span className="text-gray-600">Sous-total</span>
                         <span className="font-medium">{formatCurrency(dynamicSummary.subtotal, storeSettings, currencies)}</span>
                       </div>
                       
                       {dynamicSummary.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span>Discount</span>
+                          <span>Réduction</span>
                           <span>-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Shipping</span>
+                        <span className="text-gray-600">Livraison</span>
                         <span className="font-medium">{formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}</span>
                       </div>
                       
@@ -524,9 +522,7 @@ function CartContent({
                           href={generateStoreUrl('store.checkout', store)}
                           className="w-full py-3 px-4 bg-primary text-white rounded-md font-medium hover:bg-blue-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary flex items-center justify-center transition-colors duration-200"
                         >
-                          <CreditCard className="h-5 w-5 mr-2" />
-                          Proceed to Checkout
-                        </Link>
+                          <CreditCard className="h-5 w-5 mr-2" />Passer à la caisse</Link>
                       </div>
                       
                       {/* Shipping Info */}
@@ -549,7 +545,7 @@ function CartContent({
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gray-100 mb-6">
                   <ShoppingBag className="h-12 w-12 text-gray-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Votre panier est vide</h2>
                 <p className="text-gray-500 mb-6">Looks like you haven't added any products to your cart yet</p>
                 <Link 
                   href={generateStoreUrl('store.products', store)}

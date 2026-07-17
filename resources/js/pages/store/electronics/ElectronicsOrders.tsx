@@ -130,9 +130,7 @@ export default function ElectronicsOrders({
                               href={generateStoreUrl('store.order-detail', store, { orderNumber: order.id })}
                               className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                             >
-                              <Eye className="w-4 h-4 mr-2" />
-                              View Details
-                            </Link>
+                              <Eye className="w-4 h-4 mr-2" />Voir les détails</Link>
                             {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
                               <button className="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-slate-900 transition-colors">
                                 Reorder

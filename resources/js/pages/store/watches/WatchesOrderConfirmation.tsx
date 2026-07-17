@@ -237,7 +237,7 @@ export default function WatchesOrderConfirmation({
                 
                 <div className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
                   <Truck className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-slate-700 mb-2">Shipping</p>
+                  <p className="text-sm font-medium text-slate-700 mb-2">Livraison</p>
                   <p className="text-slate-900">{orderData.shipping_method}</p>
                 </div>
                 
@@ -274,15 +274,9 @@ export default function WatchesOrderConfirmation({
                             <th scope="col" className="px-6 py-3 text-left text-sm font-medium text-slate-700">
                               Product
                             </th>
-                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">
-                              Price
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">
-                              Quantity
-                            </th>
-                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">
-                              Total
-                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">Prix</th>
+                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">Quantité</th>
+                            <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">Total</th>
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-slate-200">
@@ -322,9 +316,7 @@ export default function WatchesOrderConfirmation({
                           })}
                           {orderData.subtotal && orderData.discount > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-slate-600">
-                                Subtotal
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-slate-600">Sous-total</td>
                               <td className="px-6 py-4 text-right text-sm text-slate-600">
                                 {formatCurrency(orderData.subtotal, storeSettings, currencies)}
                               </td>
@@ -342,9 +334,7 @@ export default function WatchesOrderConfirmation({
                           )}
                           {orderData.shipping && orderData.shipping > 0 && (
                             <tr>
-                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-slate-600">
-                                Shipping
-                              </td>
+                              <td colSpan={3} className="px-6 py-4 text-right text-sm text-slate-600">Livraison</td>
                               <td className="px-6 py-4 text-right text-sm text-slate-600">
                                 {formatCurrency(orderData.shipping, storeSettings, currencies)}
                               </td>
@@ -361,9 +351,7 @@ export default function WatchesOrderConfirmation({
                             </tr>
                           )}
                           <tr className="bg-slate-50">
-                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-medium text-slate-900">
-                              Total
-                            </td>
+                            <td colSpan={3} className="px-6 py-4 text-right text-sm font-medium text-slate-900">Total</td>
                             <td className="px-6 py-4 text-right text-sm font-medium text-slate-900">
                               {formatCurrency(orderData.total, storeSettings, currencies)}
                             </td>
@@ -402,7 +390,7 @@ export default function WatchesOrderConfirmation({
                       <div className="flex items-start">
                         <CreditCard className="h-5 w-5 text-amber-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-slate-700 mb-3">Payment Method</p>
+                          <p className="text-sm font-medium text-slate-700 mb-3">Moyen de paiement</p>
                           <p className="text-sm text-slate-900">{orderData.payment_method}</p>
                         </div>
                       </div>
@@ -418,9 +406,7 @@ export default function WatchesOrderConfirmation({
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="bg-amber-500 text-slate-900 px-8 py-4 rounded-xl font-medium hover:bg-amber-600 transition-colors"
-                >
-                  Continue Shopping
-                </Link>
+                >Continuer vos achats</Link>
               </div>
             </div>
           </div>

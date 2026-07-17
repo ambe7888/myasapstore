@@ -187,7 +187,7 @@ export default function ElectronicsOrderDetail({
 
                   {/* Order Summary */}
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Order Summary</h3>
+                    <h3 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Résumé de la commande</h3>
                     <div className="bg-gray-50 p-4 space-y-3">
                       <div className="flex justify-between">
                         <span>Subtotal:</span>
@@ -221,11 +221,11 @@ export default function ElectronicsOrderDetail({
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Payment Method</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">Moyen de paiement</h4>
                       <p className="text-gray-600">{order.payment_method}</p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Shipping Method</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">Méthode de livraison</h4>
                       <p className="text-gray-600">{order.shipping_method}</p>
                     </div>
                   </div>

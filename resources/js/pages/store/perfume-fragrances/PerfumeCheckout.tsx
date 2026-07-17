@@ -306,11 +306,11 @@ function PerfumeCheckout({
     const newErrors: Record<string, string> = {};
     
     if (!shippingFirstName) {
-      newErrors.shippingFirstName = 'First name is required';
+      newErrors.shippingFirstName = "Le prénom est requis";
     }
     
     if (!shippingPhone) {
-      newErrors.shippingPhone = 'Phone number is required';
+      newErrors.shippingPhone = "Le numéro de téléphone est requis";
     }
     
     if (!shippingStreet) {
@@ -566,7 +566,7 @@ function PerfumeCheckout({
                     <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 -mx-8 -mt-8 mb-8 rounded-t-3xl">
                       <div className="flex items-center">
                         <Package className="h-6 w-6 text-amber-400 mr-3" />
-                        <h2 className="text-2xl font-light">Delivery Information</h2>
+                        <h2 className="text-2xl font-light">Informations de livraison</h2>
                       </div>
                     </div>
                     
@@ -593,9 +593,7 @@ function PerfumeCheckout({
                         
                         {/* Last Name */}
                         <div className="hidden">
-                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-2">
-                            Last Name *
-                          </label>
+                          <label htmlFor="shipping-last-name" className="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
                           <input
                             id="shipping-last-name"
                             type="text"
@@ -612,9 +610,7 @@ function PerfumeCheckout({
                         
                         {/* Email */}
                         <div>
-                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-2">
-                            Email Address (Optional)
-                          </label>
+                          <label htmlFor="shipping-email" className="block text-sm font-medium text-gray-700 mb-2">Adresse e-mail (Optionnel)</label>
                           <input
                             id="shipping-email"
                             type="email"
@@ -631,9 +627,7 @@ function PerfumeCheckout({
                         
                         {/* Phone */}
                         <div>
-                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-700 mb-2">
-                            Phone Number *
-                          </label>
+                          <label htmlFor="shipping-phone" className="block text-sm font-medium text-gray-700 mb-2">Téléphone *</label>
                           <input
                             id="shipping-phone"
                             type="tel"
@@ -659,7 +653,7 @@ function PerfumeCheckout({
                             onChange={(e) => handleShippingCountryChange(e.target.value)}
                             className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                           >
-                            <option value="">Select Country</option>
+                            <option value="">Sélectionner le pays</option>
                             {countries?.map((country: any) => (
                               <option key={country.id} value={country.id}>
                                 {country.name}
@@ -786,9 +780,7 @@ function PerfumeCheckout({
                               );
                             })
                           ) : (
-                            <div className="text-center py-8 text-gray-500">
-                              No shipping methods available
-                            </div>
+                            <div className="text-center py-8 text-gray-500">Aucune zone de livraison disponible</div>
                           )}
                         </div>
                       </div>
@@ -828,9 +820,7 @@ function PerfumeCheckout({
                           )}
 {/* Order Notes */}
                       <div className="mt-8">
-                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-2">
-                          Special Instructions (Optional)
-                        </label>
+                        <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-2">Instructions spéciales (Optionnel)</label>
                         <textarea
                           id="order-notes"
                           rows={4}
@@ -898,7 +888,7 @@ function PerfumeCheckout({
                       
                       {/* Delivery Information */}
                       <div>
-                        <h3 className="text-xl font-medium text-purple-800 mb-4">Delivery Information</h3>
+                        <h3 className="text-xl font-medium text-purple-800 mb-4">Informations de livraison</h3>
                         
                         <div className="bg-stone-50 p-6 rounded-xl border border-purple-100">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -961,7 +951,7 @@ function PerfumeCheckout({
                     <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 -mx-8 -mt-8 mb-8 rounded-t-3xl">
                       <div className="flex items-center">
                         <CreditCard className="h-6 w-6 text-amber-400 mr-3" />
-                        <h2 className="text-2xl font-light">Payment Details</h2>
+                        <h2 className="text-2xl font-light">Détails de paiement</h2>
                       </div>
                     </div>
                     
@@ -992,7 +982,7 @@ function PerfumeCheckout({
                       
                       {/* Payment Methods */}
                       <div>
-                        <h3 className="text-xl font-medium text-purple-800 mb-4">Payment Method</h3>
+                        <h3 className="text-xl font-medium text-purple-800 mb-4">Moyen de paiement</h3>
                         
                         <div className="space-y-3">
                           {/* Cash on Delivery - Only show if enabled */}
@@ -1170,9 +1160,7 @@ function PerfumeCheckout({
                           onClick={handlePlaceOrder}
                           className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 rounded-full font-medium transition-colors flex items-center gap-3"
                         >
-                          <Lock className="w-5 h-5" />
-                          Complete Order
-                        </button>
+                          <Lock className="w-5 h-5" />Valider la commande</button>
                       </div>
                     </div>
                   </div>
@@ -1184,7 +1172,7 @@ function PerfumeCheckout({
                 <div className="bg-gradient-to-br from-purple-800 to-purple-900 text-white p-8 rounded-3xl sticky top-8 border border-purple-700">
                   <div className="flex items-center mb-6">
                     <Sparkles className="h-6 w-6 text-amber-400 mr-3" />
-                    <h2 className="text-2xl font-light">Order Summary</h2>
+                    <h2 className="text-2xl font-light">Résumé de la commande</h2>
                   </div>
                   
                   {/* Order Items */}
@@ -1225,7 +1213,7 @@ function PerfumeCheckout({
                   {/* Coupon Code */}
                   <div className="mb-6 pb-6 border-b border-purple-700">
                     <div className="flex flex-col space-y-3">
-                      <label htmlFor="coupon" className="text-sm font-medium text-amber-400">Coupon Code</label>
+                      <label htmlFor="coupon" className="text-sm font-medium text-amber-400">Code promo</label>
                       <div className="flex">
                         <input
                           type="text"
@@ -1293,19 +1281,19 @@ function PerfumeCheckout({
                   {/* Price Summary */}
                   <div className="space-y-3">
                     <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                      <p className="font-medium">Subtotal</p>
+                      <p className="font-medium">Sous-total</p>
                       <p className="font-medium text-white">{formatCurrency(updatedCartSummary.subtotal, storeSettings, currencies)}</p>
                     </div>
                     
                     {updatedCartSummary.discount > 0 && (
                       <div className="flex justify-between text-green-400 border-b border-purple-700 pb-2">
-                        <p className="font-medium">Discount</p>
+                        <p className="font-medium">Réduction</p>
                         <p className="font-medium">-{formatCurrency(updatedCartSummary.discount, storeSettings, currencies)}</p>
                       </div>
                     )}
                     
                     <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                      <p className="font-medium">Shipping</p>
+                      <p className="font-medium">Livraison</p>
                       <p className="font-medium text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
                     </div>
                     

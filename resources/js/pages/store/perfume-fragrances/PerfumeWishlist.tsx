@@ -103,9 +103,7 @@ function PerfumeWishlistContent({
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="inline-flex items-center px-6 py-3 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
-                    >
-                      Continue Shopping
-                    </Link>
+                    >Continuer vos achats</Link>
                   </div>
                 </div>
 

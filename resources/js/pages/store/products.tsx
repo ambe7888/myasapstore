@@ -238,7 +238,7 @@ export default function ProductListing({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                      placeholder="Search products..."
+                      placeholder="Rechercher des produits..."
                       className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
@@ -246,7 +246,7 @@ export default function ProductListing({
 
                 {/* Categories */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Categories</label>
+                  <label className="block text-sm font-medium mb-2">Catégories</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     {categories.map((category) => (
                       <label key={category.id} className="flex items-center">
@@ -383,7 +383,7 @@ export default function ProductListing({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-primary focus:ring-primary"
                       />
-                      <span className="text-sm">Out of Stock</span>
+                      <span className="text-sm">Rupture de stock</span>
                     </label>
                   </div>
                 </div>
@@ -577,7 +577,7 @@ export default function ProductListing({
                 <div className="text-center py-12">
                   <div className="text-gray-500 mb-4">
                     <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-medium mb-2">No products found</h3>
+                    <h3 className="text-lg font-medium mb-2">Aucun produit trouvé</h3>
                     <p>Try adjusting your filters or search terms</p>
                   </div>
                   <button

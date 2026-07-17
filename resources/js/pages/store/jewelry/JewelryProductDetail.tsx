@@ -275,7 +275,7 @@ function JewelryProductDetailContent({
                     ) : (
                       <div className="flex items-center text-red-500">
                         <Info className="h-4 w-4 mr-2" />
-                        <span className="font-light text-sm">Out of Stock</span>
+                        <span className="font-light text-sm">Rupture de stock</span>
                       </div>
                     )}
                   </div>
@@ -309,7 +309,7 @@ function JewelryProductDetailContent({
                   {/* Quantity & Actions */}
                   <div className="space-y-6">
                     <div className="flex items-center space-x-4">
-                      <label className="text-sm font-medium text-gray-700 tracking-wide uppercase">Quantity</label>
+                      <label className="text-sm font-medium text-gray-700 tracking-wide uppercase">Quantité</label>
                       <div className="flex items-center border-2 border-yellow-200 rounded-xl">
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -367,9 +367,7 @@ function JewelryProductDetailContent({
                       ? 'border-b-2 border-yellow-600 text-yellow-600'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
-                >
-                  Description
-                </button>
+                >Description</button>
                 {product.specifications && (
                   <button
                     onClick={() => setActiveTab('specifications')}

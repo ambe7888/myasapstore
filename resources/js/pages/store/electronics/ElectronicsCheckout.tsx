@@ -410,7 +410,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
 
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-semibold text-gray-700 mb-2">Country *</label>
                             <select
                               value={shippingData.country}
@@ -425,7 +425,7 @@ function ElectronicsCheckoutContent({
                               ))}
                             </select>
                           </div>
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-semibold text-gray-700 mb-2">State *</label>
                             <select
                               value={shippingData.state}
@@ -446,7 +446,7 @@ function ElectronicsCheckoutContent({
                               <p className="mt-1 text-sm text-red-600">{shippingErrors.state}</p>
                             )}
                           </div>
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-semibold text-gray-700 mb-2">City *</label>
                             <select
                               value={shippingData.city}
@@ -471,7 +471,7 @@ function ElectronicsCheckoutContent({
                               <p className="mt-1 text-sm text-red-600">{shippingErrors.city}</p>
                             )}
                           </div>
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-semibold text-gray-700 mb-2">ZIP / Postal Code *</label>
                             <input
                               type="text"

@@ -957,7 +957,7 @@ export default function Checkout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-medium text-gray-700 mb-1">
                             ZIP / Postal Code *
                           </label>
@@ -1275,7 +1275,7 @@ export default function Checkout({
                             </div>
                             
                             {/* ZIP/Postal Code */}
-                            <div>
+                            <div className="hidden">
                               <label htmlFor="billing-zip" className="block text-sm font-medium text-gray-700 mb-1">
                                 ZIP / Postal Code *
                               </label>

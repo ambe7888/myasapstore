@@ -719,7 +719,7 @@ function FurnitureCheckout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-bold text-amber-800 mb-2">
                             ZIP / Postal Code *
                           </label>

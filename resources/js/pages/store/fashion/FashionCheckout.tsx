@@ -689,7 +689,7 @@ export default function FashionCheckout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-light tracking-wide uppercase mb-3">
                             ZIP / Postal Code *
                           </label>
@@ -1086,7 +1086,7 @@ export default function FashionCheckout({
                             </div>
                             
                             {/* ZIP/Postal Code */}
-                            <div>
+                            <div className="hidden">
                               <label htmlFor="billing-zip" className="block text-sm font-light tracking-wide uppercase mb-3">
                                 ZIP / Postal Code *
                               </label>

@@ -580,7 +580,7 @@ function JewelryCheckout({
                           
 
                           
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
                               Country *
                             </label>
@@ -598,7 +598,7 @@ function JewelryCheckout({
                             </select>
                           </div>
                           
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
                               State / Province *
                             </label>
@@ -622,7 +622,7 @@ function JewelryCheckout({
                             )}
                           </div>
                           
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
                               City *
                             </label>
@@ -650,7 +650,7 @@ function JewelryCheckout({
                             )}
                           </div>
                           
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
                               ZIP / Postal Code *
                             </label>

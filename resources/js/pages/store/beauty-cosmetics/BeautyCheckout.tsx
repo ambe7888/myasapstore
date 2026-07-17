@@ -624,7 +624,7 @@ export default function BeautyCheckout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-medium text-gray-900 mb-3">
                             ZIP / Postal Code *
                           </label>

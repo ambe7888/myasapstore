@@ -522,7 +522,7 @@ export default function BabyKidsCheckout({
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-bold text-gray-700 mb-2">Country *</label>
                             <select
                               value={shippingCountry}
@@ -537,7 +537,7 @@ export default function BabyKidsCheckout({
                               ))}
                             </select>
                           </div>
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-bold text-gray-700 mb-2">State *</label>
                             <select
                               value={shippingState}
@@ -561,7 +561,7 @@ export default function BabyKidsCheckout({
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-bold text-gray-700 mb-2">City *</label>
                             <select
                               value={shippingCity}
@@ -586,7 +586,7 @@ export default function BabyKidsCheckout({
                               <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingCity}</p>
                             )}
                           </div>
-                          <div>
+                          <div className="hidden">
                             <label className="block text-sm font-bold text-gray-700 mb-2">ZIP Code *</label>
                             <input
                               type="text"

@@ -725,7 +725,7 @@ function PerfumeCheckout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-medium text-gray-700 mb-2">
                             ZIP / Postal Code *
                           </label>

@@ -734,7 +734,7 @@ function CarsCheckout({
                         </div>
                         
                         {/* ZIP/Postal Code */}
-                        <div>
+                        <div className="hidden">
                           <label htmlFor="shipping-zip" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
                             ZIP / Postal Code *
                           </label>

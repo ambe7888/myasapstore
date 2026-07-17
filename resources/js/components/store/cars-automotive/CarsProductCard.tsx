@@ -6,6 +6,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { usePage, router, Link } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface Product {
   id: number;

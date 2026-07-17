@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import StickyBottomBar from '@/components/store/StickyBottomBar';
+import BuyNowButton from '@/components/store/BuyNowButton';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -500,12 +502,17 @@ export default function ProductDetail({
                     )}
                     {!isInStock ? 'Out of Stock' : !allVariantsSelected ? 'Select Options' : isAddingToCart ? 'Adding...' : 'Add to Cart'}
                   </button> */}
-                  <AddToCartButton
+                  <StickyBottomBar>
+  <div className="flex gap-2 w-full">
+    <div className="flex-1"><AddToCartButton
                     product={{...product, variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null}}
                     storeSlug={storeSlug}
                     className="w-full py-2 rounded-md text-sm font-medium transition-all duration-300 bg-primary text-white hover:bg-blue-700"
                     isShowOption={false}
-                  />
+                  /></div>
+    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
+  </div>
+</StickyBottomBar>
 
                   <button
                     onClick={handleAddToWishlist}

@@ -6,6 +6,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface ProductProps {
   id: number;
@@ -208,11 +209,14 @@ export default function ProductCard({
         
         {/* Add to cart button */}
         <div className="mt-3">
-          <AddToCartButton
+          <div className="flex gap-2 w-full">
+  <div className="flex-1"><AddToCartButton
             product={{ id, name, price, sale_price, cover_image, variants, stock, is_active }}
             store={store}
             className="w-full py-2 rounded-md text-sm font-medium transition-all duration-300 bg-primary text-white hover:bg-blue-700"
-          />
+          /></div>
+  <div className="flex-1"><BuyNowButton product={{ id, name, price, sale_price, cover_image, variants, stock, is_active }} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
+</div>
         </div>
       </div>
     </div>

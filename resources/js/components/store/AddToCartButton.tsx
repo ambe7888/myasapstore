@@ -18,9 +18,10 @@ interface AddToCartButtonProps {
   store: any;
   className?: string;
   isShowOption?: boolean;
+  quantity?: number;
 }
 
-export default function AddToCartButton({ product, store, className = '', isShowOption=true }: AddToCartButtonProps) {
+export default function AddToCartButton({ product, store, className = '', isShowOption=true, quantity=1 }: AddToCartButtonProps) {
   const { addToCart, loading } = useCart();
   
   const hasVariants = product.variants && (
@@ -44,7 +45,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
       }
       return;
     }
-    await addToCart(product, {variants:product.variants});
+    await addToCart(product, {variants:product.variants}, quantity);
   };
 
   if (isOutOfStock) {

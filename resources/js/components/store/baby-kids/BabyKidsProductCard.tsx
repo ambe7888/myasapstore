@@ -5,6 +5,7 @@ import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { getImageUrl } from '@/utils/image-helper';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface Product {
   id: number;
@@ -171,6 +172,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
               </svg>
               <span>{product.variants && product.variants.length > 0 ? 'Select Options' : 'Add to Cart'}</span>
             </button>
+<BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" />
           </div>
         </div>
       </div>

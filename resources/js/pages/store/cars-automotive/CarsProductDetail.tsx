@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import StickyBottomBar from '@/components/store/StickyBottomBar';
+import BuyNowButton from '@/components/store/BuyNowButton';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import { Head, usePage } from '@inertiajs/react';
@@ -472,7 +474,9 @@ function CarsProductDetailInner({
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-1 gap-4">
-                    <button
+                    <StickyBottomBar>
+  <div className="flex gap-2 w-full">
+    <button
                       onClick={handleAddToCart}
                       disabled={!isInStock || cartLoading || (hasVariants && !allVariantsSelected)}
                       className={`w-full flex items-center justify-center space-x-3 py-4 font-black text-sm uppercase tracking-widest transition-all ${
@@ -488,6 +492,9 @@ function CarsProductDetailInner({
                          'Add to Cart'}
                       </span>
                     </button>
+    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
+  </div>
+</StickyBottomBar>
                     
                     <div className="grid grid-cols-2 gap-4">
                       <button

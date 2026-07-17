@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import StickyBottomBar from '@/components/store/StickyBottomBar';
+import BuyNowButton from '@/components/store/BuyNowButton';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -381,7 +383,9 @@ function BabyKidsProductDetailContent({
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                    <button
+                    <StickyBottomBar>
+  <div className="flex gap-2 w-full">
+    <button
                       onClick={handleAddToCart}
                       disabled={cartLoading || product.stock <= 0}
                       className="flex-1 bg-pink-500 text-white py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
@@ -391,6 +395,9 @@ function BabyKidsProductDetailContent({
                       </svg>
                       <span>{cartLoading ? 'Adding...' : 'Add to Cart'}</span>
                     </button>
+    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
+  </div>
+</StickyBottomBar>
                     
                     <button
                       onClick={async () => await toggleWishlist(product.id)}

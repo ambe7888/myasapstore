@@ -6,6 +6,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface FashionProductCardProps {
   product: {
@@ -162,11 +163,14 @@ export default function FashionProductCard({
         </div>
         
         {/* Add to cart button */}
-        <AddToCartButton
+        <div className="flex gap-2 w-full">
+  <div className="flex-1"><AddToCartButton
           product={product}
           store={store}
           className="w-full py-3 bg-black text-white font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors"
-        />
+        /></div>
+  <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" /></div>
+</div>
       </div>
     </div>
   );

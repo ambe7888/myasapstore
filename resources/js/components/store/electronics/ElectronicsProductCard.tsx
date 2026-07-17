@@ -6,6 +6,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface ElectronicsProductCardProps {
   product: {
@@ -191,11 +192,14 @@ export default function ElectronicsProductCard({
         </div>
         
         {/* Add to cart button */}
-        <AddToCartButton
+        <div className="flex gap-2 w-full">
+  <div className="flex-1"><AddToCartButton
           product={product}
           store={store}
           className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-        />
+        /></div>
+  <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" /></div>
+</div>
       </div>
     </div>
   );

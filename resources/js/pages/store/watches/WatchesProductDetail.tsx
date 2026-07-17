@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import StickyBottomBar from '@/components/store/StickyBottomBar';
+import BuyNowButton from '@/components/store/BuyNowButton';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import { Head, usePage } from '@inertiajs/react';
@@ -377,7 +379,9 @@ function WatchesProductDetail({
                     {/* Actions */}
                     <div className="pt-4">
                       <div className="flex gap-2">
-                        <AddToCartButton
+                        <StickyBottomBar>
+  <div className="flex gap-2 w-full">
+    <div className="flex-1"><AddToCartButton
                           product={{
                             ...product,
                             variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
@@ -385,7 +389,10 @@ function WatchesProductDetail({
                           storeSlug={store.slug}
                           className="flex-1 py-3 font-medium tracking-wider uppercase text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors"
                           isShowOption={false}
-                        />
+                        /></div>
+    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
+  </div>
+</StickyBottomBar>
                         
                         <button 
                           onClick={async () => await toggleWishlist(product.id)}

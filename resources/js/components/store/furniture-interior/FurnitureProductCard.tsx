@@ -5,6 +5,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { useStoreCurrency } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface FurnitureProductCardProps {
   product: any;

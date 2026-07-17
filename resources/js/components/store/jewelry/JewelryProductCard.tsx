@@ -5,6 +5,7 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import BuyNowButton from '@/components/store/BuyNowButton';
 
 interface JewelryProductCardProps {
   product: any;

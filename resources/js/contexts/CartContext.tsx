@@ -26,7 +26,7 @@ interface CartContextType {
   total: number;
   summary: CartSummary;
   loading: boolean;
-  addToCart: (product: any, variants?: any) => Promise<void>;
+  addToCart: (product: any, variants?: any, quantity?: number) => Promise<void>;
   updateQuantity: (id: number, quantity: number) => Promise<void>;
   removeItem: (id: number) => Promise<void>;
   syncCart: () => Promise<void>;
@@ -98,14 +98,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
     }
   };
 
-  const addToCart = async (product: any, variants?: any) => {
+  const addToCart = async (product: any, variants?: any, quantity: number = 1) => {
     setLoading(true);
     try {
       // Always use API for now (handles both logged in and guest users)
       await axios.post(route('api.cart.add'), {
         store_id: storeId,
         product_id: product.id,
-        quantity: 1,
+        quantity: quantity,
         variants
       });
       await refreshCart();

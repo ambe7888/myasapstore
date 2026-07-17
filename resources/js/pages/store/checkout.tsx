@@ -210,6 +210,7 @@ export default function Checkout({
   ];
   
   const [currentStep, setCurrentStep] = useState('shipping');
+  const [showAllShipping, setShowAllShipping] = useState(false);
   
   // Shipping form state
   const [shippingFirstName, setShippingFirstName] = useState(userData.name.split(' ')[0] || '');
@@ -879,30 +880,6 @@ export default function Checkout({
                           )}
                         </div>
                         
-                        {/* Address */}
-                        <div className="md:col-span-2">
-                          <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-1">
-                            Address *
-                          </label>
-                          <div className="relative">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                              <MapPin className="h-5 w-5 text-gray-400" />
-                            </div>
-                            <input
-                              id="shipping-street"
-                              type="text"
-                              value={shippingStreet}
-                              onChange={(e) => setShippingStreet(e.target.value)}
-                              className={`block w-full pl-10 pr-3 py-2 border ${
-                                shippingErrors.shippingStreet ? 'border-red-500' : 'border-gray-300'
-                              } rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary`}
-                            />
-                          </div>
-                          {shippingErrors.shippingStreet && (
-                            <p className="mt-1 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
-                          )}
-                        </div>
-                        
                         {/* Country */}
                         <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-medium text-gray-700 mb-1">
@@ -1005,7 +982,7 @@ export default function Checkout({
                         
                         <div className="space-y-4">
                           {shippingMethods.length > 0 ? (
-                            shippingMethods.map((method) => {
+                            (showAllShipping ? shippingMethods : shippingMethods.slice(0, 3)).map((method) => {
                               const shippingCost = method.type === 'free_shipping' && cartSummary.subtotal >= (method.min_order_amount || 0) 
                                 ? 0 
                                 : method.cost + (method.handling_fee || 0);
@@ -1049,7 +1026,45 @@ export default function Checkout({
                         </div>
                       </div>
                       
-                      {/* Order Notes */}
+                      {/* Adresse exacte de livraison (Rue, Maison, Repère) */}
+                        <div className="mt-8">
+                          <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-1">
+                            Address *
+                          </label>
+                          <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <MapPin className="h-5 w-5 text-gray-400" />
+                            </div>
+                            <input
+                              id="shipping-street"
+                              type="text"
+                              value={shippingStreet}
+                              onChange={(e) => setShippingStreet(e.target.value)}
+                              className={`block w-full pl-10 pr-3 py-2 border ${
+                                shippingErrors.shippingStreet ? 'border-red-500' : 'border-gray-300'
+                              } rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary`}
+                            />
+                          </div>
+                          {shippingErrors.shippingStreet && (
+                            <p className="mt-1 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
+                          )}
+                        </div>
+                        
+                        
+                      
+                          {shippingMethods.length > 3 && (
+                            <div className="mt-4 pt-2 border-t border-gray-100 text-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowAllShipping(!showAllShipping)}
+                                className="text-sm font-bold underline cursor-pointer hover:opacity-80 transition-opacity"
+                                style={{ color: 'inherit' }}
+                              >
+                                {showAllShipping ? "Voir moins de zones" : `Voir ${shippingMethods.length - 3} autres zones`}
+                              </button>
+                            </div>
+                          )}
+{/* Order Notes */}
                       <div className="mt-8">
                         <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-1">
                           Order Notes (Optional)

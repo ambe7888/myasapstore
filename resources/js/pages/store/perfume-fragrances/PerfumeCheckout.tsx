@@ -123,6 +123,7 @@ function PerfumeCheckout({
   ];
   
   const [currentStep, setCurrentStep] = useState('shipping');
+  const [showAllShipping, setShowAllShipping] = useState(false);
   
   // Shipping form state
   const [shippingFirstName, setShippingFirstName] = useState(userData.name.split(' ')[0] || '');
@@ -647,25 +648,6 @@ function PerfumeCheckout({
                           )}
                         </div>
                         
-                        {/* Address */}
-                        <div className="md:col-span-2">
-                          <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-2">
-                            Address *
-                          </label>
-                          <input
-                            id="shipping-street"
-                            type="text"
-                            value={shippingStreet}
-                            onChange={(e) => setShippingStreet(e.target.value)}
-                            className={`block w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                          />
-                          {shippingErrors.shippingStreet && (
-                            <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
-                          )}
-                        </div>
-                        
                         {/* Country */}
                         <div className="hidden">
                           <label htmlFor="shipping-country" className="block text-sm font-medium text-gray-700 mb-2">
@@ -768,7 +750,7 @@ function PerfumeCheckout({
                         
                         <div className="space-y-3">
                           {shippingMethods.length > 0 ? (
-                            shippingMethods.map((method) => {
+                            (showAllShipping ? shippingMethods : shippingMethods.slice(0, 3)).map((method) => {
                               const shippingCost = method.type === 'free_shipping' && cartSummary.subtotal >= (method.min_order_amount || 0) 
                                 ? 0 
                                 : method.cost + (method.handling_fee || 0);
@@ -811,7 +793,40 @@ function PerfumeCheckout({
                         </div>
                       </div>
                       
-                      {/* Order Notes */}
+                      {/* Adresse exacte de livraison (Rue, Maison, Repère) */}
+                        <div className="mt-8">
+                          <label htmlFor="shipping-street" className="block text-sm font-medium text-gray-700 mb-2">
+                            Address *
+                          </label>
+                          <input
+                            id="shipping-street"
+                            type="text"
+                            value={shippingStreet}
+                            onChange={(e) => setShippingStreet(e.target.value)}
+                            className={`block w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
+                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                          />
+                          {shippingErrors.shippingStreet && (
+                            <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
+                          )}
+                        </div>
+                        
+                        
+                      
+                          {shippingMethods.length > 3 && (
+                            <div className="mt-4 pt-2 border-t border-gray-100 text-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowAllShipping(!showAllShipping)}
+                                className="text-sm font-bold underline cursor-pointer hover:opacity-80 transition-opacity"
+                                style={{ color: 'inherit' }}
+                              >
+                                {showAllShipping ? "Voir moins de zones" : `Voir ${shippingMethods.length - 3} autres zones`}
+                              </button>
+                            </div>
+                          )}
+{/* Order Notes */}
                       <div className="mt-8">
                         <label htmlFor="order-notes" className="block text-sm font-medium text-gray-700 mb-2">
                           Special Instructions (Optional)

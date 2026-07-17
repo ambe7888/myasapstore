@@ -66,6 +66,7 @@ export default function BabyKidsCheckout({
   ];
   
   const [currentStep, setCurrentStep] = useState('shipping');
+  const [showAllShipping, setShowAllShipping] = useState(false);
   
   // Form states
   const [shippingFirstName, setShippingFirstName] = useState(userData.name.split(' ')[0] || '');
@@ -520,21 +521,6 @@ export default function BabyKidsCheckout({
                           </div>
                         </div>
 
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">Address *</label>
-                          <input
-                            type="text"
-                            value={shippingStreet}
-                            onChange={(e) => setShippingStreet(e.target.value)}
-                            className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
-                            }`}
-                          />
-                          {shippingErrors.shippingStreet && (
-                            <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
-                          )}
-                        </div>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
                             <label className="block text-sm font-bold text-gray-700 mb-2">Country *</label>
@@ -622,7 +608,7 @@ export default function BabyKidsCheckout({
                           
                           <div className="space-y-3">
                             {shippingMethods.length > 0 ? (
-                              shippingMethods.map((method) => {
+                              (showAllShipping ? shippingMethods : shippingMethods.slice(0, 3)).map((method) => {
                                 const shippingCost = method.type === 'free_shipping' && cartSummary.subtotal >= (method.min_order_amount || 0) 
                                   ? 0 
                                   : method.cost + (method.handling_fee || 0);
@@ -665,7 +651,35 @@ export default function BabyKidsCheckout({
                           </div>
                         </div>
 
-                        {/* Order Notes */}
+                        <div className="mt-8">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">Adresse exacte de livraison (Rue, Maison, Repère) *</label>
+                          <input
+                            type="text"
+                            value={shippingStreet}
+                            onChange={(e) => setShippingStreet(e.target.value)}
+                            className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
+                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
+                            }`}
+                          />
+                          {shippingErrors.shippingStreet && (
+                            <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
+                          )}
+                        </div>
+
+                        
+                          {shippingMethods.length > 3 && (
+                            <div className="mt-4 pt-2 border-t border-gray-100 text-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowAllShipping(!showAllShipping)}
+                                className="text-sm font-bold underline cursor-pointer hover:opacity-80 transition-opacity"
+                                style={{ color: 'inherit' }}
+                              >
+                                {showAllShipping ? "Voir moins de zones" : `Voir ${shippingMethods.length - 3} autres zones`}
+                              </button>
+                            </div>
+                          )}
+{/* Order Notes */}
                         <div className="mt-8">
                           <label className="block text-sm font-bold text-gray-700 mb-2">Order Notes (Optional)</label>
                           <textarea

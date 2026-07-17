@@ -51,6 +51,7 @@ function ElectronicsCheckoutContent({
   ];
   
   const [currentStep, setCurrentStep] = useState('shipping');
+  const [showAllShipping, setShowAllShipping] = useState(false);
   const [shippingData, setShippingData] = useState({
     firstName: user?.name?.split(' ')[0] || '',
     lastName: user?.name?.split(' ')[1] || '',
@@ -408,20 +409,7 @@ function ElectronicsCheckoutContent({
                               <p className="mt-1 text-sm text-red-600">{shippingErrors.phone}</p>
                             )}
                           </div>
-                          <div className="md:col-span-2">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Address *</label>
-                            <input
-                              type="text"
-                              value={shippingData.street}
-                              onChange={(e) => setShippingData({...shippingData, street: e.target.value})}
-                              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                                shippingErrors.street ? 'border-red-500' : 'border-gray-300'
-                              }`}
-                            />
-                            {shippingErrors.street && (
-                              <p className="mt-1 text-sm text-red-600">{shippingErrors.street}</p>
-                            )}
-                          </div>
+
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">Country *</label>
                             <select
@@ -507,7 +495,7 @@ function ElectronicsCheckoutContent({
                             <p className="mb-4 text-sm text-red-600">{shippingErrors.shipping}</p>
                           )}
                           <div className="space-y-3">
-                            {shippingMethods.map((method) => (
+                            {(showAllShipping ? shippingMethods : shippingMethods.slice(0, 3)).map((method) => (
                               <label key={method.id} className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 cursor-pointer">
                                 <input
                                   type="radio"
@@ -524,6 +512,33 @@ function ElectronicsCheckoutContent({
                               </label>
                             ))}
                           </div>
+                          {shippingMethods.length > 3 && (
+                            <div className="mt-4 pt-2 border-t border-gray-100 text-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowAllShipping(!showAllShipping)}
+                                className="text-sm font-bold underline cursor-pointer hover:opacity-80 transition-opacity"
+                                style={{ color: 'inherit' }}
+                              >
+                                {showAllShipping ? "Voir moins de zones" : `Voir ${shippingMethods.length - 3} autres zones`}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="mt-8">
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Adresse exacte de livraison (Rue, Maison, Repère) *</label>
+                            <input
+                              type="text"
+                              value={shippingData.street}
+                              onChange={(e) => setShippingData({...shippingData, street: e.target.value})}
+                              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                                shippingErrors.street ? 'border-red-500' : 'border-gray-300'
+                              }`}
+                            />
+                            {shippingErrors.street && (
+                              <p className="mt-1 text-sm text-red-600">{shippingErrors.street}</p>
+                            )}
                         </div>
 
                         {/* Order Notes */}

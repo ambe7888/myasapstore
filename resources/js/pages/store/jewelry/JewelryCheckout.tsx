@@ -122,6 +122,7 @@ function JewelryCheckout({
   ];
   
   const [currentStep, setCurrentStep] = useState('shipping');
+  const [showAllShipping, setShowAllShipping] = useState(false);
   
   // Form states
   const [shippingFirstName, setShippingFirstName] = useState(userData.name.split(' ')[0] || '');
@@ -577,23 +578,7 @@ function JewelryCheckout({
                             )}
                           </div>
                           
-                          <div className="md:col-span-2">
-                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              Address *
-                            </label>
-                            <input
-                              type="text"
-                              value={shippingStreet}
-                              onChange={(e) => setShippingStreet(e.target.value)}
-                              className={`w-full px-4 py-3 rounded-lg border-2 ${
-                                shippingErrors.shippingStreet ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
-                              } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
-                              placeholder="123 Main Street, Apt 4B"
-                            />
-                            {shippingErrors.shippingStreet && (
-                              <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
-                            )}
-                          </div>
+
                           
                           <div>
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
@@ -693,7 +678,7 @@ function JewelryCheckout({
                           
                           <div className="space-y-4">
                             {shippingMethods.length > 0 ? (
-                              shippingMethods.map((method) => {
+                              (showAllShipping ? shippingMethods : shippingMethods.slice(0, 3)).map((method) => {
                                 const shippingCost = method.type === 'free_shipping' && cartSummary.subtotal >= (method.min_order_amount || 0) 
                                   ? 0 
                                   : method.cost + (method.handling_fee || 0);
@@ -755,7 +740,38 @@ function JewelryCheckout({
                           </div>
                         </div>
                         
-                        {/* Order Notes */}
+                        
+                          {shippingMethods.length > 3 && (
+                            <div className="mt-4 pt-2 border-t border-gray-100 text-center">
+                              <button
+                                type="button"
+                                onClick={() => setShowAllShipping(!showAllShipping)}
+                                className="text-sm font-bold underline cursor-pointer hover:opacity-80 transition-opacity"
+                                style={{ color: 'inherit' }}
+                              >
+                                {showAllShipping ? "Voir moins de zones" : `Voir ${shippingMethods.length - 3} autres zones`}
+                              </button>
+                            </div>
+                          )}
+
+                        <div className="mt-8">
+                            <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
+                              Adresse exacte de livraison (Rue, Maison, Repère) *
+                            </label>
+                            <input
+                              type="text"
+                              value={shippingStreet}
+                              onChange={(e) => setShippingStreet(e.target.value)}
+                              className={`w-full px-4 py-3 rounded-lg border-2 ${
+                                shippingErrors.shippingStreet ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
+                              } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
+                              placeholder="Ex: Riviera 3, Face à la pharmacie"
+                            />
+                            {shippingErrors.shippingStreet && (
+                              <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingStreet}</p>
+                            )}
+                        </div>
+{/* Order Notes */}
                         <div className="pt-8 border-t border-gray-200">
                           <label className="block text-sm font-medium text-gray-700 mb-3">
                             Special Instructions (Optional)

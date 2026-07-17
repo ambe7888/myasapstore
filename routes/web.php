@@ -347,6 +347,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('permission:manage-products')->group(function () {
             Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->middleware('permission:view-products')->name('products.index');
             Route::get('products/export', [\App\Http\Controllers\ProductController::class, 'export'])->middleware('permission:export-products')->name('products.export');
+            Route::post('products/import', [\App\Http\Controllers\ProductController::class, 'import'])->middleware('permission:create-products')->name('products.import');
             Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->middleware('permission:create-products')->name('products.create');
             Route::post('products', [\App\Http\Controllers\ProductController::class, 'store'])->middleware('permission:create-products')->name('products.store');
             Route::get('products/{id}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->middleware('permission:edit-products')->name('products.edit');
@@ -360,6 +361,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('permission:manage-categories')->group(function () {
             Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->middleware('permission:view-categories')->name('categories.index');
             Route::get('categories/export', [\App\Http\Controllers\CategoryController::class, 'export'])->middleware('permission:export-categories')->name('categories.export');
+            Route::post('categories/import', [\App\Http\Controllers\CategoryController::class, 'import'])->middleware('permission:create-categories')->name('categories.import');
             Route::get('categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])->middleware('permission:create-categories')->name('categories.create');
             Route::post('categories', [\App\Http\Controllers\CategoryController::class, 'store'])->middleware('permission:create-categories')->name('categories.store');
             Route::get('categories/{id}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])->middleware('permission:edit-categories')->name('categories.edit');

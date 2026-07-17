@@ -328,4 +328,103 @@ class ProductController extends BaseController
         
         return response()->stream($callback, 200, $headers);
     }
+    
+    /**
+     * Import products from CSV.
+     */
+    public function import(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+        $user = Auth::user();
+        $currentStoreId = getCurrentStoreId($user);
+
+        $file = $request->file('file');
+        $handle = fopen($file->path(), 'r');
+
+        $header = fgetcsv($handle);
+        if (!$header) {
+            return redirect()->back()->with('error', __('Invalid CSV file.'));
+        }
+
+        $successCount = 0;
+        $errorCount = 0;
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (count($row) < 2) continue;
+
+            $name = $row[0] ?? '';
+            if (empty($name)) continue;
+
+            $sku = $row[1] ?? '';
+            if (strtolower(trim($sku)) === 'not set') $sku = '';
+            
+            // If SKU is empty, generate one
+            if (empty($sku)) {
+                $sku = strtoupper(\Illuminate\Support\Str::random(8));
+            }
+
+            $categoryName = $row[2] ?? '';
+            $priceStr = $row[3] ?? '0';
+            $salePriceStr = $row[4] ?? '';
+            $stockStr = $row[5] ?? '0';
+            $statusStr = $row[7] ?? 'Active';
+
+            // Clean numbers (extract float from string like "$1,234.56" -> 1234.56)
+            $price = (float) filter_var($priceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $salePrice = strtolower(trim($salePriceStr)) === 'not set' || empty($salePriceStr) 
+                            ? null 
+                            : (float) filter_var($salePriceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $stock = (int) filter_var($stockStr, FILTER_SANITIZE_NUMBER_INT);
+            
+            $status = strtolower(trim($statusStr)) === 'inactive' ? 0 : 1;
+
+            $categoryId = null;
+            if (!empty($categoryName) && strtolower(trim($categoryName)) !== 'uncategorized') {
+                $category = Category::where('store_id', $currentStoreId)
+                    ->where('name', trim($categoryName))
+                    ->first();
+                if ($category) {
+                    $categoryId = $category->id;
+                }
+            }
+
+            $product = Product::where('store_id', $currentStoreId)
+                ->where('sku', $sku)
+                ->first();
+
+            if ($product) {
+                // Update
+                $product->update([
+                    'name' => $name,
+                    'category_id' => $categoryId,
+                    'price' => $price,
+                    'sale_price' => $salePrice,
+                    'stock' => $stock,
+                    'is_active' => $status,
+                ]);
+            } else {
+                // Create
+                $slug = \Illuminate\Support\Str::slug($name) . '-' . \Illuminate\Support\Str::random(4);
+                Product::create([
+                    'store_id' => $currentStoreId,
+                    'name' => $name,
+                    'slug' => $slug,
+                    'sku' => $sku,
+                    'category_id' => $categoryId,
+                    'price' => $price,
+                    'sale_price' => $salePrice,
+                    'stock' => $stock,
+                    'is_active' => $status,
+                ]);
+            }
+            $successCount++;
+        }
+
+        fclose($handle);
+
+        return redirect()->back()->with('success', __(':count products imported successfully.', ['count' => $successCount]));
+    }
 }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { PageTemplate } from '@/components/page-template';
-import { Plus, RefreshCw, Download, Folder, Eye, Edit, Trash2 } from 'lucide-react';
+import { Plus, RefreshCw, Download, Folder, Eye, Edit, Trash2, Upload } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
-import { router, usePage } from '@inertiajs/react';
+import { router, usePage, useForm } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
 import { Permission } from '@/components/Permission';
 import { usePermissions } from '@/hooks/usePermissions';
@@ -15,7 +15,22 @@ export default function Categories() {
   const { t } = useTranslation();
   const { categories, stats } = usePage().props as any;
   const [categoryToDelete, setCategoryToDelete] = useState<number | null>(null);
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const { hasPermission } = usePermissions();
+
+  const { data, setData, post, processing, errors, reset } = useForm({
+    file: null as File | null,
+  });
+
+  const handleImport = (e: React.FormEvent) => {
+    e.preventDefault();
+    post(route('categories.import'), {
+      onSuccess: () => {
+        setIsImportModalOpen(false);
+        reset();
+      },
+    });
+  };
 
   const handleDelete = () => {
     if (categoryToDelete) {
@@ -36,6 +51,13 @@ export default function Categories() {
   }
   
   if (hasPermission('create-categories')) {
+    pageActions.push({
+      label: t('Import'),
+      icon: <Upload className="h-4 w-4" />,
+      variant: 'outline' as const,
+      onClick: () => setIsImportModalOpen(true)
+    });
+    
     pageActions.push({
       label: t('Create Category'),
       icon: <Plus className="h-4 w-4" />,
@@ -217,6 +239,51 @@ export default function Categories() {
               {t('Delete')}
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Import Modal */}
+      <Dialog open={isImportModalOpen} onOpenChange={(open) => {
+        setIsImportModalOpen(open);
+        if (!open) reset();
+      }}>
+        <DialogContent>
+          <form onSubmit={handleImport}>
+            <DialogHeader>
+              <DialogTitle>{t('Import Categories')}</DialogTitle>
+              <DialogDescription>
+                {t('Upload a CSV file to import categories. Ensure the file has the correct headers.')}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <input 
+                type="file" 
+                accept=".csv,.txt"
+                onChange={(e) => setData('file', e.target.files ? e.target.files[0] : null)}
+                className="w-full text-sm text-slate-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100"
+              />
+              {errors.file && <div className="text-sm text-red-500 mt-2">{errors.file}</div>}
+              
+              <div className="mt-4 p-4 bg-muted rounded-md text-xs">
+                <p className="font-semibold mb-2">{t('Expected CSV Format:')}</p>
+                <p className="mb-1 text-muted-foreground">Category Name, Slug, Parent Category, Description, Sort Order, Status</p>
+                <p className="text-muted-foreground">{t('Note: First row is assumed to be headers and will be skipped.')}</p>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => { setIsImportModalOpen(false); reset(); }}>
+                {t('Cancel')}
+              </Button>
+              <Button type="submit" disabled={!data.file || processing}>
+                {t('Import')}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </PageTemplate>

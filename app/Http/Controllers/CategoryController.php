@@ -281,4 +281,88 @@ class CategoryController extends BaseController
         
         return response()->stream($callback, 200, $headers);
     }
+    
+    /**
+     * Import categories from CSV.
+     */
+    public function import(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+        $user = Auth::user();
+        $currentStoreId = getCurrentStoreId($user);
+
+        $file = $request->file('file');
+        $handle = fopen($file->path(), 'r');
+
+        $header = fgetcsv($handle);
+        if (!$header) {
+            return redirect()->back()->with('error', __('Invalid CSV file.'));
+        }
+
+        $successCount = 0;
+        $errorCount = 0;
+
+        while (($row = fgetcsv($handle)) !== false) {
+            if (count($row) < 2) continue; // Skip empty/invalid rows
+
+            $name = $row[0] ?? '';
+            if (empty($name)) continue; // Name is required
+
+            $slug = !empty($row[1]) ? $row[1] : \Illuminate\Support\Str::slug($name);
+            $parentName = $row[2] ?? '';
+            $description = $row[3] ?? null;
+            
+            $sortOrder = 0;
+            if (isset($row[4]) && is_numeric($row[4])) {
+                $sortOrder = (int)$row[4];
+            }
+            
+            $status = isset($row[5]) && strtolower(trim($row[5])) === 'inactive' ? 0 : 1;
+
+            $parentId = null;
+            if (!empty($parentName) && strtolower(trim($parentName)) !== 'root category') {
+                $parent = Category::where('store_id', $currentStoreId)
+                    ->where('name', trim($parentName))
+                    ->first();
+                if ($parent) {
+                    $parentId = $parent->id;
+                }
+            }
+
+            // Find existing category by slug or create new one
+            $category = Category::where('store_id', $currentStoreId)
+                ->where('slug', $slug)
+                ->first();
+
+            if ($category) {
+                // Update
+                $category->update([
+                    'name' => $name,
+                    'parent_id' => $parentId,
+                    'description' => $description,
+                    'sort_order' => $sortOrder,
+                    'is_active' => $status,
+                ]);
+            } else {
+                // Create
+                Category::create([
+                    'store_id' => $currentStoreId,
+                    'name' => $name,
+                    'slug' => $slug,
+                    'parent_id' => $parentId,
+                    'description' => $description,
+                    'sort_order' => $sortOrder,
+                    'is_active' => $status,
+                ]);
+            }
+            $successCount++;
+        }
+
+        fclose($handle);
+
+        return redirect()->back()->with('success', __(':count categories imported successfully.', ['count' => $successCount]));
+    }
 }

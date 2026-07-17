@@ -360,11 +360,6 @@ class ProductController extends BaseController
 
             $sku = $row[1] ?? '';
             if (strtolower(trim($sku)) === 'not set') $sku = '';
-            
-            // If SKU is empty, generate one
-            if (empty($sku)) {
-                $sku = strtoupper(\Illuminate\Support\Str::random(8));
-            }
 
             $categoryName = $row[2] ?? '';
             $priceStr = $row[3] ?? '0';
@@ -391,9 +386,24 @@ class ProductController extends BaseController
                 }
             }
 
-            $product = Product::where('store_id', $currentStoreId)
-                ->where('sku', $sku)
-                ->first();
+            // Find existing product: first by SKU (if provided), then by Name
+            $product = null;
+            if (!empty($sku)) {
+                $product = Product::where('store_id', $currentStoreId)
+                    ->where('sku', $sku)
+                    ->first();
+            }
+            
+            if (!$product) {
+                $product = Product::where('store_id', $currentStoreId)
+                    ->where('name', trim($name))
+                    ->first();
+            }
+
+            // If we still don't have an SKU, generate one now
+            if (empty($sku)) {
+                $sku = strtoupper(\Illuminate\Support\Str::random(8));
+            }
 
             if ($product) {
                 // Update
@@ -426,5 +436,27 @@ class ProductController extends BaseController
         fclose($handle);
 
         return redirect()->back()->with('success', __(':count products imported successfully.', ['count' => $successCount]));
+    }
+    
+    /**
+     * Delete all products for the current store.
+     */
+    public function destroyAll()
+    {
+        $user = Auth::user();
+        $currentStoreId = getCurrentStoreId($user);
+        
+        $products = Product::where('store_id', $currentStoreId)->get();
+        
+        foreach ($products as $product) {
+            // Delete associated images/media
+            if ($product->image) {
+                \Storage::disk('public')->delete($product->image);
+            }
+            $product->clearMediaCollection('products');
+            $product->delete();
+        }
+        
+        return redirect()->route('products.index')->with('success', __('All products have been deleted successfully.'));
     }
 }

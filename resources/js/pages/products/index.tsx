@@ -17,6 +17,7 @@ export default function Products() {
   const { products, stats } = usePage().props as any;
   const [productToDelete, setProductToDelete] = useState<number | null>(null);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
 
   const { hasPermission } = usePermissions();
 
@@ -41,6 +42,12 @@ export default function Products() {
     }
   };
 
+  const handleDeleteAll = () => {
+    router.delete(route('products.destroyAll'), {
+      onSuccess: () => setIsDeleteAllModalOpen(false)
+    });
+  };
+
   const pageActions = [];
   
   if (hasPermission('export-products')) {
@@ -49,6 +56,15 @@ export default function Products() {
       icon: <Download className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => window.open(route('products.export'), '_blank')
+    });
+  }
+  
+  if (hasPermission('delete-products')) {
+    pageActions.push({
+      label: t('Delete All'),
+      icon: <Trash2 className="h-4 w-4" />,
+      variant: 'destructive' as const,
+      onClick: () => setIsDeleteAllModalOpen(true)
     });
   }
   
@@ -272,6 +288,26 @@ export default function Products() {
               </Button>
             </DialogFooter>
           </form>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Delete All Confirmation Dialog */}
+      <Dialog open={isDeleteAllModalOpen} onOpenChange={setIsDeleteAllModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('Delete All Products')}</DialogTitle>
+            <DialogDescription>
+              {t('Are you absolutely sure you want to delete ALL your products? This action cannot be undone and will remove all product images and data.')}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteAllModalOpen(false)}>
+              {t('Cancel')}
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteAll}>
+              {t('Delete All')}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </PageTemplate>

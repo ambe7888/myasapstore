@@ -274,14 +274,19 @@ class ProductController extends BaseController
     /**
      * Export products data as CSV.
      */
-    public function export()
+    public function export(Request $request)
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
-        $products = Product::with('category')
-                        ->where('store_id', $currentStoreId)
-                        ->get();
+        $query = Product::with('category')->where('store_id', $currentStoreId);
+        
+        if ($request->has('ids')) {
+            $ids = explode(',', $request->ids);
+            $query->whereIn('id', $ids);
+        }
+        
+        $products = $query->get();
         
         $csvData = [];
         $csvData[] = ['Product Name', 'SKU', 'Category', 'Price', 'Sale Price', 'Stock', 'Variants', 'Status', 'Created Date'];
@@ -439,24 +444,60 @@ class ProductController extends BaseController
     }
     
     /**
-     * Delete all products for the current store.
+     * Handle bulk actions for products.
      */
-    public function destroyAll()
+    public function bulkAction(Request $request)
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
-        $products = Product::where('store_id', $currentStoreId)->get();
+        $request->validate([
+            'action' => 'required|string|in:delete,activate,deactivate',
+            'ids' => 'required|array',
+            'ids.*' => 'integer'
+        ]);
         
-        foreach ($products as $product) {
-            // Delete associated images/media
-            if ($product->image) {
-                \Storage::disk('public')->delete($product->image);
-            }
-            $product->clearMediaCollection('products');
-            $product->delete();
+        $action = $request->action;
+        $ids = $request->ids;
+        
+        $products = Product::where('store_id', $currentStoreId)
+            ->whereIn('id', $ids)
+            ->get();
+            
+        if ($products->isEmpty()) {
+            return redirect()->back()->with('error', __('No products selected or you do not have permission.'));
         }
         
-        return redirect()->route('products.index')->with('success', __('All products have been deleted successfully.'));
+        $count = $products->count();
+        
+        if ($action === 'delete') {
+            foreach ($products as $product) {
+                if ($product->image) {
+                    \Storage::disk('public')->delete($product->image);
+                }
+                $product->clearMediaCollection('products');
+                $product->delete();
+            }
+            return redirect()->back()->with('success', __(':count products deleted successfully.', ['count' => $count]));
+        } elseif ($action === 'activate') {
+            foreach ($products as $product) {
+                if (!$product->is_active) {
+                    $productCheck = $user->canAddProductToStore($currentStoreId);
+                    if (!$productCheck['allowed']) {
+                        continue; // Skip activation if limit reached
+                    }
+                    $product->is_active = true;
+                    $product->save();
+                }
+            }
+            return redirect()->back()->with('success', __('Selected products activated.'));
+        } elseif ($action === 'deactivate') {
+            Product::where('store_id', $currentStoreId)
+                ->whereIn('id', $ids)
+                ->update(['is_active' => false]);
+            return redirect()->back()->with('success', __('Selected products deactivated.'));
+        }
+        
+        return redirect()->back();
     }
 }

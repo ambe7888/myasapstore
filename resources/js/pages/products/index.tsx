@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { PageTemplate } from '@/components/page-template';
-import { Plus, RefreshCw, Download, Package, Eye, Edit, Trash2, Star, Upload } from 'lucide-react';
+import { Plus, RefreshCw, Download, Package, Eye, Edit, Trash2, Star, Upload, Power, PowerOff } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
 import { router, usePage, useForm } from '@inertiajs/react';
@@ -17,7 +18,8 @@ export default function Products() {
   const { products, stats } = usePage().props as any;
   const [productToDelete, setProductToDelete] = useState<number | null>(null);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
+  const [isBulkDeleteModalOpen, setIsBulkDeleteModalOpen] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
 
   const { hasPermission } = usePermissions();
 
@@ -42,46 +44,119 @@ export default function Products() {
     }
   };
 
-  const handleDeleteAll = () => {
-    router.delete(route('products.destroyAll'), {
-      onSuccess: () => setIsDeleteAllModalOpen(false)
+  const handleBulkAction = (action: string) => {
+    if (selectedProducts.length === 0) return;
+    
+    if (action === 'delete') {
+      setIsBulkDeleteModalOpen(true);
+      return;
+    }
+    
+    if (action === 'export') {
+      window.open(route('products.export') + '?ids=' + selectedProducts.join(','), '_blank');
+      return;
+    }
+
+    router.post(route('products.bulk'), {
+      action,
+      ids: selectedProducts
+    }, {
+      onSuccess: () => setSelectedProducts([])
     });
+  };
+
+  const executeBulkDelete = () => {
+    router.post(route('products.bulk'), {
+      action: 'delete',
+      ids: selectedProducts
+    }, {
+      onSuccess: () => {
+        setIsBulkDeleteModalOpen(false);
+        setSelectedProducts([]);
+      }
+    });
+  };
+
+  const toggleSelection = (id: number) => {
+    setSelectedProducts(prev => 
+      prev.includes(id) ? prev.filter(pId => pId !== id) : [...prev, id]
+    );
+  };
+
+  const toggleAll = () => {
+    if (selectedProducts.length === products.length && products.length > 0) {
+      setSelectedProducts([]);
+    } else {
+      setSelectedProducts(products.map((p: any) => p.id));
+    }
   };
 
   const pageActions = [];
   
-  if (hasPermission('export-products')) {
+  if (selectedProducts.length > 0) {
     pageActions.push({
-      label: t('Export'),
-      icon: <Download className="h-4 w-4" />,
-      variant: 'outline' as const,
-      onClick: () => window.open(route('products.export'), '_blank')
-    });
-  }
-  
-  if (hasPermission('delete-products')) {
-    pageActions.push({
-      label: t('Delete All'),
-      icon: <Trash2 className="h-4 w-4" />,
-      variant: 'destructive' as const,
-      onClick: () => setIsDeleteAllModalOpen(true)
-    });
-  }
-  
-  if (hasPermission('create-products')) {
-    pageActions.push({
-      label: t('Import'),
-      icon: <Upload className="h-4 w-4" />,
-      variant: 'outline' as const,
-      onClick: () => setIsImportModalOpen(true)
+      label: t('{{count}} Selected', { count: selectedProducts.length }),
+      variant: 'ghost' as const,
+      onClick: () => {}
     });
     
-    pageActions.push({
-      label: t('Create Product'),
-      icon: <Plus className="h-4 w-4" />,
-      variant: 'default' as const,
-      onClick: () => router.visit(route('products.create'))
-    });
+    if (hasPermission('edit-products')) {
+      pageActions.push({
+        label: t('Activate'),
+        icon: <Power className="h-4 w-4" />,
+        variant: 'outline' as const,
+        onClick: () => handleBulkAction('activate')
+      });
+      pageActions.push({
+        label: t('Deactivate'),
+        icon: <PowerOff className="h-4 w-4" />,
+        variant: 'outline' as const,
+        onClick: () => handleBulkAction('deactivate')
+      });
+    }
+    
+    if (hasPermission('export-products')) {
+      pageActions.push({
+        label: t('Export'),
+        icon: <Download className="h-4 w-4" />,
+        variant: 'outline' as const,
+        onClick: () => handleBulkAction('export')
+      });
+    }
+    
+    if (hasPermission('delete-products')) {
+      pageActions.push({
+        label: t('Delete'),
+        icon: <Trash2 className="h-4 w-4" />,
+        variant: 'destructive' as const,
+        onClick: () => handleBulkAction('delete')
+      });
+    }
+  } else {
+    if (hasPermission('export-products')) {
+      pageActions.push({
+        label: t('Export All'),
+        icon: <Download className="h-4 w-4" />,
+        variant: 'outline' as const,
+        onClick: () => window.open(route('products.export'), '_blank')
+      });
+    }
+    
+    if (hasPermission('create-products')) {
+      pageActions.push({
+        label: t('Import'),
+        icon: <Upload className="h-4 w-4" />,
+        variant: 'outline' as const,
+        onClick: () => setIsImportModalOpen(true)
+      });
+      
+      pageActions.push({
+        label: t('Create Product'),
+        icon: <Plus className="h-4 w-4" />,
+        variant: 'default' as const,
+        onClick: () => router.visit(route('products.create'))
+      });
+    }
   }
 
   return (
@@ -146,8 +221,15 @@ export default function Products() {
 
         {/* Products List */}
         <Card>
-          <CardHeader>
-            <CardTitle>{t('Product Catalog')}</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Checkbox 
+                checked={products.length > 0 && selectedProducts.length === products.length}
+                onCheckedChange={toggleAll}
+                aria-label="Select all"
+              />
+              <CardTitle>{t('Product Catalog')}</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -170,6 +252,11 @@ export default function Products() {
                 products.map((product: any) => (
                   <div key={product.id} className="flex items-center justify-between p-4 border rounded-lg">
                     <div className="flex items-center space-x-4">
+                      <Checkbox 
+                        checked={selectedProducts.includes(product.id)}
+                        onCheckedChange={() => toggleSelection(product.id)}
+                        aria-label={`Select ${product.name}`}
+                      />
                       <div className="w-16 h-16 rounded-lg overflow-hidden border">
                         {product.cover_image ? (
                           <img
@@ -291,21 +378,21 @@ export default function Products() {
         </DialogContent>
       </Dialog>
       
-      {/* Delete All Confirmation Dialog */}
-      <Dialog open={isDeleteAllModalOpen} onOpenChange={setIsDeleteAllModalOpen}>
+      {/* Bulk Delete Confirmation Dialog */}
+      <Dialog open={isBulkDeleteModalOpen} onOpenChange={setIsBulkDeleteModalOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('Delete All Products')}</DialogTitle>
+            <DialogTitle>{t('Delete Selected Products')}</DialogTitle>
             <DialogDescription>
-              {t('Are you absolutely sure you want to delete ALL your products? This action cannot be undone and will remove all product images and data.')}
+              {t('Are you absolutely sure you want to delete the {{count}} selected products? This action cannot be undone and will remove all product images and data.', { count: selectedProducts.length })}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteAllModalOpen(false)}>
+            <Button variant="outline" onClick={() => setIsBulkDeleteModalOpen(false)}>
               {t('Cancel')}
             </Button>
-            <Button variant="destructive" onClick={handleDeleteAll}>
-              {t('Delete All')}
+            <Button variant="destructive" onClick={executeBulkDelete}>
+              {t('Delete Selected')}
             </Button>
           </DialogFooter>
         </DialogContent>

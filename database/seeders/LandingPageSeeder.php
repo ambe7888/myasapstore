@@ -21,8 +21,8 @@ class LandingPageSeeder extends Seeder
         LandingPageSetting::updateOrCreate(
             ['id' => 1],
             [
-            'company_name' => 'StoreGo',
-            'contact_email' => 'support@storego.com',
+            'company_name' => 'My Store Asap',
+            'contact_email' => 'support@mystoreasap.com',
             'contact_phone' => '+1 (555) 123-4567',
             'contact_address' => 'San Francisco, CA',
             'config_sections' => [

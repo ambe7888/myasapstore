@@ -43,79 +43,79 @@ class LandingPageSetting extends Model
                     ],
                     [
                         'key' => 'hero',
-                        'title' => 'Launch Your Online Store in Minutes',
-                        'subtitle' => 'Create and manage multiple online stores with our powerful e-commerce platform.',
-                        'announcement_text' => '🚀 New: Advanced Analytics Dashboard',
-                        'primary_button_text' => 'Start Free Trial',
-                        'secondary_button_text' => 'Login',
+                        'title' => 'Lancez votre boutique en ligne en quelques minutes',
+                        'subtitle' => 'Créez et gérez plusieurs boutiques en ligne grâce à notre plateforme e-commerce tout-en-un.',
+                        'announcement_text' => '🚀 NOUVEAU : Tableau de bord analytique avancé disponible',
+                        'primary_button_text' => 'Commencer l\'essai gratuit',
+                        'secondary_button_text' => 'Connexion',
                         'image' => '',
                         'background_color' => '#f8fafc',
                         'text_color' => '#1f2937',
                         'layout' => 'image-right',
                         'height' => 600,
                         'stats' => [
-                            ['value' => '10K+', 'label' => 'Active Users'],
-                            ['value' => '50+', 'label' => 'Countries'],
-                            ['value' => '99%', 'label' => 'Satisfaction']
+                            ['value' => '10K+', 'label' => 'Boutiques Actives'],
+                            ['value' => '50+', 'label' => 'Pays Couverts'],
+                            ['value' => '99%', 'label' => 'Satisfaction Clients']
                         ],
                         'card' => [
-                            'name' => 'John Doe',
-                            'title' => 'Senior Developer',
+                            'name' => 'Jean Dupont',
+                            'title' => 'Développeur Senior',
                             'company' => 'Tech Solutions Inc.',
                             'initials' => 'JD'
                         ]
                     ],
                     [
                         'key' => 'features',
-                        'title' => 'Everything You Need to Sell Online',
-                        'description' => 'Powerful e-commerce features designed for modern businesses.',
+                        'title' => 'Tout ce dont vous avez besoin pour vendre en ligne',
+                        'description' => 'Des outils e-commerce puissants conçus pour développer votre activité.',
                         'background_color' => '#ffffff',
                         'layout' => 'grid',
                         'columns' => 3,
                         'image' => '',
                         'show_icons' => true,
                         'features_list' => [
-                            ['title' => 'Multi-Store Management', 'description' => 'Create and manage unlimited online stores from one dashboard.', 'icon' => 'store'],
-                            ['title' => '30+ Payment Gateways', 'description' => 'Accept payments via Stripe, PayPal, Razorpay, and more.', 'icon' => 'credit-card'],
-                            ['title' => 'Advanced Analytics', 'description' => 'Track sales, customers, and performance with detailed reports.', 'icon' => 'bar-chart']
+                            ['title' => 'Gestion Multi-Boutiques', 'description' => 'Créez et gérez un nombre illimité de boutiques en ligne depuis un seul tableau de bord.', 'icon' => 'store'],
+                            ['title' => '30+ Passerelles de Paiement', 'description' => 'Acceptez les paiements par carte, Stripe, PayPal, FedaPay, CinetPay et plus encore.', 'icon' => 'credit-card'],
+                            ['title' => 'Analyses & Statistiques Avancées', 'description' => 'Suivez vos ventes, vos clients et vos performances avec des rapports détaillés en temps réel.', 'icon' => 'bar-chart']
                         ]
                     ],
                     [
                         'key' => 'screenshots',
-                        'title' => 'See StoreGo in Action',
-                        'subtitle' => 'Explore our intuitive dashboard and powerful store management features.',
+                        'title' => 'Découvrez My Store Asap en action',
+                        'subtitle' => 'Explorez notre interface intuitive et nos outils de gestion d\'exception.',
                         'screenshots_list' => [
                             [
                                 'src' => '/screenshots/hero.png',
-                                'alt' => 'See Store SaaS Dashboard Overview',
-                                'title' => 'Dashboard Overview',
-                                'description' => 'Comprehensive dashboard with all your digital cards and analytics'
+                                'alt' => 'Vue d\'ensemble du tableau de bord',
+                                'title' => 'Vue d\'ensemble du Tableau de Bord',
+                                'description' => 'Un tableau de bord complet pour piloter vos boutiques et analyser vos chiffres.'
                             ],
                             [
                                 'src' => '/screenshots/store-builder.png',
-                                'alt' => 'Store Builder Interface',
-                                'title' => 'Store Builder',
-                                'description' => 'Intuitive interface for creating and managing online stores'
+                                'alt' => 'Créateur de boutique',
+                                'title' => 'Créateur de Boutique',
+                                'description' => 'Une interface fluide pour personnaliser et publier vos boutiques.'
                             ]
                         ]
                     ],
                     [
                         'key' => 'why_choose_us',
-                        'title' => 'Why Choose StoreGo?',
-                        'subtitle' => 'The complete e-commerce solution for modern businesses.',
+                        'title' => 'Pourquoi choisir My Store Asap ?',
+                        'subtitle' => 'La solution e-commerce globale pour les entrepreneurs modernes.',
                         'reasons' => [
-                            ['title' => 'Multi-Store Architecture', 'description' => 'Manage unlimited stores from one account with centralized dashboard.', 'icon' => 'stores'],
-                            ['title' => 'No Transaction Fees', 'description' => 'Keep 100% of your profits with transparent pricing.', 'icon' => 'money']
+                            ['title' => 'Architecture Multi-Boutiques', 'description' => 'Gérez plusieurs enseignes à partir d\'un seul compte centralisé.', 'icon' => 'stores'],
+                            ['title' => 'Zéro commission cachée', 'description' => 'Conservez 100% de vos profits avec notre tarification claire et transparente.', 'icon' => 'money']
                         ],
                         'stats' => [
-                            ['value' => '10K+', 'label' => 'Active Users', 'color' => 'blue'],
+                            ['value' => '10K+', 'label' => 'Boutiques Actives', 'color' => 'blue'],
                             ['value' => '99%', 'label' => 'Satisfaction', 'color' => 'green']
                         ]
                     ],
                     [
                         'key' => 'templates',
-                        'title' => 'Explore Our Templates',
-                        'subtitle' => 'Choose from our professionally designed templates to create your perfect digital business card.',
+                        'title' => 'Explorez nos thèmes professionnels',
+                        'subtitle' => 'Choisissez parmi une sélection de thèmes élégants adaptés à votre secteur d\'activité.',
                         'background_color' => '#f8fafc',
                         'layout' => 'grid',
                         'columns' => 3,
@@ -133,107 +133,107 @@ class LandingPageSetting extends Model
                             ['name' => 'eventplanner', 'category' => 'services'],
                             ['name' => 'tech-startup', 'category' => 'technology']
                         ],
-                        'cta_text' => 'View All Templates',
+                        'cta_text' => 'Voir tous les thèmes',
                         'cta_link' => '#'
                     ],
                     [
                         'key' => 'about',
-                        'title' => 'About',
-                        'description' => 'We are passionate about empowering entrepreneurs to build successful e-commerce businesses.',
-                        'story_title' => 'Revolutionizing Multi-Store E-commerce Since 2019',
-                        'story_content' => 'Founded by e-commerce experts and technology innovators, StoreGo was created to solve the challenges of managing multiple online stores.',
+                        'title' => 'À Propos de Nous',
+                        'description' => 'Nous sommes passionnés par l\'autonomisation des entrepreneurs pour créer et développer des entreprises e-commerce prospères.',
+                        'story_title' => 'La Révolution E-commerce Multi-Boutiques',
+                        'story_content' => 'Conçu par des experts du e-commerce et de la technologie, My Store Asap a été créé pour simplifier la gestion de boutiques en ligne à grande échelle.',
                         'image' => '',
                         'background_color' => '#f9fafb',
                         'layout' => 'image-right',
                         'stats' => [
-                            ['value' => '4+ Years', 'label' => 'Experience', 'color' => 'blue'],
-                            ['value' => '10K+', 'label' => 'Happy Users', 'color' => 'green'],
-                            ['value' => '50+', 'label' => 'Countries', 'color' => 'purple']
+                            ['value' => '4+ Ans', 'label' => 'Expérience', 'color' => 'blue'],
+                            ['value' => '10K+', 'label' => 'Utilisateurs Heureux', 'color' => 'green'],
+                            ['value' => '50+', 'label' => 'Pays', 'color' => 'purple']
                         ]
                     ],
                     [
                         'key' => 'team',
-                        'title' => 'Meet Our Team',
-                        'subtitle' => 'We\'re a diverse team of innovators and problem-solvers.',
-                        'cta_title' => 'Want to Join Our Team?',
-                        'cta_description' => 'We\'re always looking for talented individuals.',
-                        'cta_button_text' => 'View Open Positions',
+                        'title' => 'Notre Équipe',
+                        'subtitle' => 'Une équipe d\'innovateurs passionnés à votre service.',
+                        'cta_title' => 'Vous souhaitez nous rejoindre ?',
+                        'cta_description' => 'Nous recherchons toujours des talents pour agrandir notre équipe.',
+                        'cta_button_text' => 'Voir les postes ouverts',
                         'members' => [
-                            ['name' => 'Sarah Johnson', 'role' => 'CEO & Founder', 'bio' => 'Former tech executive with 15+ years experience.', 'image' => '', 'linkedin' => '#', 'email' => 'sarah@storego.com']
+                            ['name' => 'Sarah Johnson', 'role' => 'Fondatrice & CEO', 'bio' => 'Experte tech et e-commerce avec plus de 15 ans d\'expérience.', 'image' => '', 'linkedin' => '#', 'email' => 'sarah@mystoreasap.com']
                         ]
                     ],
                     [
                         'key' => 'testimonials',
-                        'title' => 'What Our Clients Say',
-                        'subtitle' => 'Don\'t just take our word for it.',
-                        'trust_title' => 'Trusted by Professionals Worldwide',
+                        'title' => 'Ce que disent nos clients',
+                        'subtitle' => 'Découvrez les retours des marchands qui développent leur business avec nous.',
+                        'trust_title' => 'Adopté par des milliers de marchands dans le monde',
                         'trust_stats' => [
-                            ['value' => '4.9/5', 'label' => 'Average Rating', 'color' => 'blue'],
-                            ['value' => '10K+', 'label' => 'Happy Users', 'color' => 'green']
+                            ['value' => '4.9/5', 'label' => 'Note Moyenne', 'color' => 'blue'],
+                            ['value' => '10K+', 'label' => 'Marchands Satisfaits', 'color' => 'green']
                         ],
                         'testimonials' => [
-                            ['name' => 'Alex Thompson', 'role' => 'Sales Director', 'company' => 'TechCorp Inc.', 'content' => 'StoreGo has revolutionized how I manage my online stores.', 'rating' => 5]
+                            ['name' => 'Alexandre Martin', 'role' => 'Directeur des Ventes', 'company' => 'TechCorp Inc.', 'content' => 'My Store Asap a totalement révolutionné notre manière de gérer nos boutiques en ligne.', 'rating' => 5]
                         ]
                     ],
                     [
                         'key' => 'active_campaigns',
-                        'title' => 'Featured Business Promotions',
-                        'subtitle' => 'Explore businesses we\'re currently promoting and discover amazing services',
+                        'title' => 'Promotions & Entreprises à la Une',
+                        'subtitle' => 'Découvrez les entreprises actuellement propulsées par notre plateforme',
                         'background_color' => '#f8fafc',
                         'show_view_all' => true,
                         'max_display' => 6
                     ],
                     [
                         'key' => 'plans',
-                        'title' => 'Choose Your Plan',
-                        'subtitle' => 'Start with our free plan and upgrade as you grow.',
-                        'faq_text' => 'Have questions about our plans? Contact our sales team'
+                        'title' => 'Choisissez votre formule',
+                        'subtitle' => 'Commencez dès aujourd\'hui et évoluez selon la croissance de votre entreprise.',
+                        'faq_text' => 'Des questions sur nos tarifs ? Contactez notre équipe commerciale'
                     ],
                     [
                         'key' => 'faq',
-                        'title' => 'Frequently Asked Questions',
-                        'subtitle' => 'Got questions? We\'ve got answers.',
-                        'cta_text' => 'Still have questions?',
-                        'button_text' => 'Contact Support',
+                        'title' => 'Foire Aux Questions',
+                        'subtitle' => 'Une question ? Nous avons les réponses.',
+                        'cta_text' => 'Vous avez encore des questions ?',
+                        'button_text' => 'Contacter le Support',
                         'faqs' => [
-                            ['question' => 'How does StoreGo work?', 'answer' => 'StoreGo allows you to create and manage multiple online stores from a single dashboard with different themes and products.']
+                            ['question' => 'Comment fonctionne My Store Asap ?', 'answer' => 'My Store Asap vous permet de créer et gérer plusieurs boutiques en ligne indépendantes depuis une interface unique, avec différents thèmes, produits et devises.']
                         ]
                     ],
                     [
                         'key' => 'newsletter',
-                        'title' => 'Stay Updated with StoreGo',
-                        'subtitle' => 'Get the latest e-commerce tips and platform updates.',
-                        'privacy_text' => 'No spam, unsubscribe at any time.',
+                        'title' => 'Restez informé avec My Store Asap',
+                        'subtitle' => 'Recevez nos conseils e-commerce exclusifs et les mises à jour de la plateforme.',
+                        'privacy_text' => 'Pas de spam, désabonnez-vous à tout moment.',
                         'benefits' => [
-                            ['icon' => '📧', 'title' => 'Weekly Updates', 'description' => 'Latest features and improvements']
+                            ['icon' => '📧', 'title' => 'Mises à jour hebdomadaires', 'description' => 'Dernières fonctionnalités et astuces']
                         ]
                     ],
                     [
                         'key' => 'contact',
-                        'title' => 'Get in Touch',
-                        'subtitle' => 'Have questions about StoreGo? We\'d love to hear from you.',
-                        'form_title' => 'Send us a Message',
-                        'info_title' => 'Contact Information',
-                        'info_description' => 'We\'re here to help and answer any question you might have.',
+                        'title' => 'Contactez-nous',
+                        'subtitle' => 'Des questions sur My Store Asap ? Notre équipe est là pour vous répondre.',
+                        'form_title' => 'Envoyez-nous un message',
+                        'info_title' => 'Informations de contact',
+                        'info_description' => 'Nous sommes là pour vous aider et répondre à toutes vos interrogations.',
                         'layout' => 'split',
                         'background_color' => '#f9fafb'
                     ],
                     [
                         'key' => 'footer',
-                        'description' => 'Empowering entrepreneurs with powerful multi-store e-commerce solutions.',
-                        'newsletter_title' => 'Stay Updated',
-                        'newsletter_subtitle' => 'Join our newsletter for updates',
+                        'description' => 'Donnez une nouvelle dimension à votre business grâce à notre plateforme e-commerce multi-boutiques.',
+                        'newsletter_title' => 'Restez connecté',
+                        'newsletter_subtitle' => 'Inscrivez-vous à notre newsletter',
                         'links' => [
-                            'product' => [['name' => 'Features', 'href' => '#features'], ['name' => 'Pricing', 'href' => '#pricing']],
-                            'company' => [['name' => 'About Us', 'href' => '#about'], ['name' => 'Contact', 'href' => '#contact']]
+                            'product' => [['name' => 'Fonctionnalités', 'href' => '#features'], ['name' => 'Tarifs', 'href' => '#pricing']],
+                            'company' => [['name' => 'À Propos', 'href' => '#about'], ['name' => 'Contact', 'href' => '#contact']]
                         ],
                         'social_links' => [
                             ['name' => 'Facebook', 'icon' => 'Facebook', 'href' => '#'],
                             ['name' => 'Twitter', 'icon' => 'Twitter', 'href' => '#']
                         ],
                         'section_titles' => [
-                            'product' => 'Product',
-                            'company' => 'Company'
+                            'product' => 'Produit',
+                            'company' => 'Entreprise'
                         ]
                     ]
                 ],
@@ -251,9 +251,9 @@ class LandingPageSetting extends Model
                     'accent' => '#065f46'
                 ],
                 'seo' => [
-                    'meta_title' => 'StoreGo - Multi-Store E-commerce Platform',
-                    'meta_description' => 'Create and manage multiple online stores with StoreGo. 30+ payment gateways, beautiful themes, and powerful features.',
-                    'meta_keywords' => 'ecommerce platform, online store builder, multi-store management, sell online'
+                    'meta_title' => 'My Store Asap - Plateforme E-Commerce Multi-Boutiques SaaS',
+                    'meta_description' => 'Créez et gérez plusieurs boutiques en ligne facilement avec My Store Asap. 30+ passerelles de paiement, thèmes professionnels et fonctionnalités puissantes.',
+                    'meta_keywords' => 'plateforme ecommerce, createur de boutique en ligne, gestion multi boutiques, vendre en ligne'
                 ],
                 'custom_css' => '',
                 'custom_js' => '',

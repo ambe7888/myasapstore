@@ -47,32 +47,32 @@ export default function StoreHomepage({ store = {}, storeContent = {}, storeSett
             store={store}
             customFooter={<Footer storeName={store.name || storeTheme.store.name} logo={store.logo || storeTheme.store.logo} content={content.footer} />}
           >
-            {content.hero?.show_section !== false && <HeroSection content={content.hero} baseUrl={baseUrl} />}
-            {content.categories?.show_section !== false && <CategorySection categories={categories} content={content.categories} />}
-            {content.featured_products?.show_section !== false && <FeaturedProductsSection products={featuredProducts} content={content.featured_products} storeSettings={storeSettings} currencies={currencies} />}
-            {InfoBoxesSection && content.info_boxes?.show_section !== false && <InfoBoxesSection content={content.info_boxes} storeSettings={storeSettings} currencies={currencies} />}
-            {CTASection && (content.cta_boxes?.show_section !== false || content.cta_bottom?.show_section !== false) && (
+            {content.show_sections?.hero !== false && <HeroSection content={content.hero} baseUrl={baseUrl} />}
+            {content.show_sections?.categories !== false && <CategorySection categories={categories} content={content.categories} />}
+            {content.show_sections?.featured_products !== false && <FeaturedProductsSection products={featuredProducts} content={content.featured_products} storeSettings={storeSettings} currencies={currencies} />}
+            {InfoBoxesSection && content.show_sections?.info_boxes !== false && <InfoBoxesSection content={content.info_boxes} storeSettings={storeSettings} currencies={currencies} />}
+            {CTASection && (content.show_sections?.cta_boxes !== false || content.show_sections?.cta_bottom !== false) && (
               <CTASection 
                 content={content.cta_section} 
-                ctaBoxes={content.cta_boxes?.show_section !== false ? (content.cta_section?.cta_boxes || content.cta_boxes) : []} 
-                bottomSection={content.cta_bottom?.show_section !== false ? (content.cta_section?.cta_bottom_section || content.cta_bottom_section || content.cta_section?.cta_bottom || content.cta_bottom) : null} 
+                ctaBoxes={content.show_sections?.cta_boxes !== false ? (content.cta_section?.cta_boxes || content.cta_boxes) : []} 
+                bottomSection={content.show_sections?.cta_bottom !== false ? (content.cta_section?.cta_bottom_section || content.cta_bottom_section || content.cta_section?.cta_bottom || content.cta_bottom) : null} 
               />
             )}
-            {content.trending_products?.show_section !== false && (
+            {content.show_sections?.trending_products !== false && (
               <TrendingProductsSection 
                 products={trendingProducts} 
                 content={content.trending_products} 
-                stats={content.stats_section?.show_section !== false ? (content.trending_stats || content.stats_section) : null} 
-                designProcess={content.design_process?.show_section !== false ? content.design_process : null} 
+                stats={content.show_sections?.stats_section !== false ? (content.trending_stats || content.stats_section) : null} 
+                designProcess={content.show_sections?.design_process !== false ? content.design_process : null} 
                 storeSettings={storeSettings} 
                 currencies={currencies} 
               />
             )}
-            {content.brand_logos?.show_section !== false && (
-              <BrandLogoSlider content={{...content.brand_logos, stats: content.stats_section?.show_section !== false ? (content.brand_logos?.stats || content.stats_section?.stats || content.stats_section) : null}} />
+            {content.show_sections?.brand_logos !== false && (
+              <BrandLogoSlider content={{...content.brand_logos, stats: content.show_sections?.stats_section !== false ? (content.brand_logos?.stats || content.stats_section?.stats || content.stats_section) : null}} />
             )}
-            {content.newsletter?.show_section !== false && <NewsletterSection content={content.newsletter} />}
-            {content.blog?.show_section !== false && <BlogSection posts={blogPosts} content={content.blog} storeSlug={store.slug} />}
+            {content.show_sections?.newsletter !== false && <NewsletterSection content={content.newsletter} />}
+            {content.show_sections?.blog !== false && <BlogSection posts={blogPosts} content={content.blog} storeSlug={store.slug} />}
           </StoreLayout>
         </WishlistProvider>
       </CartProvider>

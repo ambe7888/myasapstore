@@ -226,7 +226,7 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
     // Check if it's a togglable section (everything except header, footer, store)
     const isTogglable = !['header', 'footer', 'store'].includes(sectionKey);
     // Get the current show_section value (defaults to true if not defined)
-    const showSection = sectionData.show_section !== false;
+    const showSection = data.content.show_sections?.[sectionKey] !== false;
 
     return (
       <Card key={sectionKey}>
@@ -241,7 +241,7 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
                 id={`toggle_${sectionKey}`}
                 checked={showSection}
                 onCheckedChange={(checked) => {
-                  updateNestedField([sectionKey, 'show_section'], checked);
+                  updateNestedField(['show_sections', sectionKey], checked);
                 }}
               />
               <Label htmlFor={`toggle_${sectionKey}`} className="text-xs font-semibold uppercase tracking-wider cursor-pointer">
@@ -269,7 +269,7 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
   };
 
   const getSectionTabs = () => {
-    const sections = Object.keys(data.content || {});
+    const sections = Object.keys(data.content || {}).filter(key => key !== 'show_sections');
     
     return sections.map(sectionKey => ({
       key: sectionKey,

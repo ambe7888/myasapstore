@@ -1,11 +1,11 @@
 {
   "header": {
     "welcome_text": {
-      "value": "Free design consultation with every purchase",
+      "value": "Livraison gratuite à partir de 50 € d'achat !",
       "type": "text"
     },
     "phone_text": {
-      "value": "Design Help: +1 555 DESIGN",
+      "value": "Conseils & Commandes : +1 555 SNEAKERS",
       "type": "text"
     },
     "show_welcome": {
@@ -19,15 +19,15 @@
   },
   "hero": {
     "badge_text": {
-      "value": "Handcrafted Furniture",
+      "value": "Nouvelle Collection de Chaussures",
       "type": "text"
     },
     "title": {
-      "value": "Beautiful Spaces Start Here",
+      "value": "Marchez avec style et confort",
       "type": "text"
     },
     "subtitle": {
-      "value": "Discover thoughtfully designed furniture that brings warmth and character to every room in your home.",
+      "value": "Découvrez notre sélection exclusive de sneakers, talons et chaussures de ville conçues pour sublimer chacun de vos pas.",
       "type": "textarea"
     },
     "button_text": {
@@ -39,11 +39,11 @@
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "Design Services",
+      "value": "Guide des tailles",
       "type": "text"
     },
     "secondary_button_link": {
-      "value": "/design-services",
+      "value": "/size-guide",
       "type": "text"
     },
     "image": {
@@ -54,33 +54,33 @@
       "value": [
         {
           "number": "4.9★",
-          "label": "Rating"
+          "label": "Avis Clients"
         },
         {
-          "number": "25+",
-          "label": "Years"
+          "number": "10K+",
+          "label": "Membres"
         }
       ],
       "type": "array"
     },
     "room_section": {
       "title": {
-        "value": "Acheter par pièce",
+        "value": "Acheter par catégorie",
         "type": "text"
       },
       "rooms": {
         "value": [
           {
-            "name": "Living Room"
+            "name": "Sneakers & Sport"
           },
           {
-            "name": "Bedroom"
+            "name": "Talons & Escarpins"
           },
           {
-            "name": "Dining Room"
+            "name": "Mocassins & Ville"
           },
           {
-            "name": "Office"
+            "name": "Bottes & Bottines"
           }
         ],
         "type": "array"
@@ -88,15 +88,15 @@
     },
     "catalog_info": {
       "title": {
-        "value": "Furniture Catalog 2024",
+        "value": "Catalogue Chaussures 2024",
         "type": "text"
       },
       "description": {
-        "value": "Premium handcrafted collection",
+        "value": "Collection premium fabriquée à la main",
         "type": "text"
       },
       "button_text": {
-        "value": "Browse All",
+        "value": "Voir tout",
         "type": "text"
       },
       "button_link": {
@@ -107,76 +107,76 @@
         "value": [
           {
             "number": "150+",
-            "label": "Products"
+            "label": "Modèles"
           },
           {
             "number": "12",
-            "label": "Categories"
+            "label": "Marques"
           },
           {
             "number": "4.9★",
-            "label": "Rating"
+            "label": "Avis Clients"
           }
         ],
         "type": "array"
       }
     },
     "floating_badge": {
-      "value": "NEW 2024",
+      "value": "NOUVEAUTÉ 2024",
       "type": "text"
     }
   },
   "categories": {
     "title": {
-      "value": "Acheter par pièce",
+      "value": "Acheter par catégorie",
       "type": "text"
     },
     "description": {
-      "value": "Find the perfect pieces for every space in your home.",
+      "value": "Trouvez la paire parfaite adaptée à toutes vos tenues et occasions.",
       "type": "textarea"
     }
   },
   "featured_products": {
     "title": {
-      "value": "Collection vedette",
+      "value": "Sélection du moment",
       "type": "text"
     },
     "description": {
-      "value": "Carefully selected pieces that bring style and comfort to your home.",
+      "value": "Des modèles soigneusement sélectionnés pour allier élégance et bien-être au quotidien.",
       "type": "textarea"
     }
   },
   "newsletter": {
     "title": {
-      "value": "Wooden Craft Stories",
+      "value": "Le Club Sneakers & Co",
       "type": "text"
     },
     "subtitle": {
-      "value": "Join our community of furniture lovers and get exclusive access to new collections, design tips, and artisan stories.",
+      "value": "Rejoignez notre communauté de passionnés de chaussures et bénéficiez d'un accès exclusif aux nouvelles collections et offres privées.",
       "type": "textarea"
     },
     "placeholder_text": {
-      "value": "your@email.com",
+      "value": "votre@email.com",
       "type": "text"
     },
     "button_text": {
-      "value": "Join Community",
+      "value": "Rejoindre le club",
       "type": "text"
     },
     "privacy_text": {
-      "value": "Unsubscribe anytime. Your privacy is protected.",
+      "value": "Désinscription possible à tout moment. Vos données sont protégées.",
       "type": "text"
     },
     "benefits": {
       "value": [
         {
-          "text": "New handcrafted arrivals"
+          "text": "Nouveautés en avant-première"
         },
         {
-          "text": "Design tips & inspiration"
+          "text": "Conseils d'entretien de vos paires"
         },
         {
-          "text": "Exclusive member offers"
+          "text": "Offres exclusives membres"
         }
       ],
       "type": "array"
@@ -185,94 +185,94 @@
   "cta_boxes": {
     "value": [
       {
-        "icon": "palette",
-        "title": "Interior Design",
-        "subtitle": "Professional consultation"
+        "icon": "truck",
+        "title": "Livraison rapide",
+        "subtitle": "Chez vous sous 48-72h"
       },
       {
-        "icon": "ruler",
-        "title": "Custom Pieces",
-        "subtitle": "Made to your specifications"
+        "icon": "refresh-cw",
+        "title": "Retours faciles",
+        "subtitle": "Échanges sous 30 jours"
       },
       {
-        "icon": "home",
-        "title": "Room Planning",
-        "subtitle": "3D design service"
+        "icon": "shield",
+        "title": "Paiement 100% sécurisé",
+        "subtitle": "Transactions cryptées"
       },
       {
         "icon": "award",
-        "title": "Quality Materials",
-        "subtitle": "Sustainable & durable"
+        "title": "Qualité garantie",
+        "subtitle": "Matériaux premium"
       }
     ],
     "type": "array"
   },
   "cta_bottom": {
     "title": {
-      "value": "Ready to Transform Your Space?",
+      "value": "Besoin d'aide pour choisir votre taille ?",
       "type": "text"
     },
     "description": {
-      "value": "Schedule a free consultation with our wooden furniture experts and discover how we can bring your vision to life.",
+      "value": "Consultez notre guide des tailles interactif ou contactez un conseiller chaussures pour trouver l'ajustement idéal.",
       "type": "textarea"
     },
     "primary_button_text": {
-      "value": "Book Free Consultation",
+      "value": "Consulter le Guide des Tailles",
       "type": "text"
     },
     "primary_button_link": {
-      "value": "/consultation",
+      "value": "/size-guide",
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "View Portfolio",
+      "value": "Contacter un conseiller",
       "type": "text"
     },
     "secondary_button_link": {
-      "value": "/portfolio",
+      "value": "/contact",
       "type": "text"
     }
   },
   "trending_products": {
     "title": {
-      "value": "Popular Right Now",
+      "value": "Les tendances du moment",
       "type": "text"
     },
     "description": {
-      "value": "See what other customers are loving in their homes.",
+      "value": "Découvrez les paires les plus vendues et appréciées par notre communauté.",
       "type": "textarea"
     }
   },
   "design_process": {
     "title": {
-      "value": "Our Design Process",
+      "value": "Notre savoir-faire",
       "type": "text"
     },
     "description": {
-      "value": "From concept to completion, we guide you through every step of creating your perfect wooden furniture space.",
+      "value": "De la conception des modèles à la sélection des cuirs, nous créons des chaussures d'exception.",
       "type": "textarea"
     },
     "steps": {
       "value": [
         {
           "step": "01",
-          "title": "Consultation",
-          "description": "Understanding your vision and needs"
+          "title": "Conception",
+          "description": "Design ergonomique & moderne"
         },
         {
           "step": "02",
-          "title": "Design",
-          "description": "3D visualization and planning"
+          "title": "Sélection",
+          "description": "Matières premières d'excellence"
         },
         {
           "step": "03",
-          "title": "Selection",
-          "description": "Curating the perfect pieces"
+          "title": "Fabrication",
+          "description": "Artisanat d'art & finitions"
         },
         {
           "step": "04",
-          "title": "Installation",
-          "description": "Professional setup and styling"
+          "title": "Contrôle",
+          "description": "Vérification rigoureuse de la qualité"
         }
       ],
       "type": "array"
@@ -280,26 +280,26 @@
   },
   "stats_section": {
     "title": {
-      "value": "Trusted by Thousands",
+      "value": "Approuvé par des milliers de clients",
       "type": "text"
     },
     "stats": {
       "value": [
         {
           "number": "50+",
-          "label": "Premium Brands"
+          "label": "Modèles exclusifs"
         },
         {
           "number": "25+",
-          "label": "Years Experience"
+          "label": "Ans d'expertise"
         },
         {
           "number": "10K+",
-          "label": "Happy Customers"
+          "label": "Clients satisfaits"
         },
         {
           "number": "99%",
-          "label": "Satisfaction Rate"
+          "label": "Taux de satisfaction"
         }
       ],
       "type": "array"
@@ -307,38 +307,38 @@
   },
   "brand_logos": {
     "title": {
-      "value": "Partenaires de confiance",
+      "value": "Marques partenaires",
       "type": "text"
     },
     "description": {
-      "value": "We work with premium material suppliers and craftsmen worldwide.",
+      "value": "Nous collaborons avec les fabricants et artisans les plus réputés pour garantir l'excellence.",
       "type": "textarea"
     },
     "logos": {
       "value": [
         {
           "image": "/storage/media/71/brand-logo-furniture-interior-1.png",
-          "name": "Premium Woods"
+          "name": "Marque Sport"
         },
         {
           "image": "/storage/media/72/brand-logo-furniture-interior-2.png",
-          "name": "Eco Materials"
+          "name": "Eco Cuir"
         },
         {
           "image": "/storage/media/73/brand-logo-furniture-interior-3.png",
-          "name": "Luxury Finishes"
+          "name": "Premium Sole"
         },
         {
           "image": "/storage/media/74/brand-logo-furniture-interior-4.png",
-          "name": "Sustainable Sources"
+          "name": "Sneaker Lab"
         },
         {
           "image": "/storage/media/75/brand-logo-furniture-interior-5.png",
-          "name": "Artisan Craft"
+          "name": "Artisan Bottier"
         },
         {
           "image": "/storage/media/76/brand-logo-furniture-interior-6.png",
-          "name": "Quality Design"
+          "name": "Design Ville"
         }
       ],
       "type": "array"
@@ -346,40 +346,40 @@
   },
   "blog": {
     "title": {
-      "value": "Design Inspiration",
+      "value": "Actualités & Conseils",
       "type": "text"
     },
     "description": {
-      "value": "Ideas and tips to help you create the perfect space.",
+      "value": "Guides d'entretien, tendances mode et actualités de la culture sneaker.",
       "type": "textarea"
     }
   },
   "footer": {
     "description": {
-      "value": "Creating beautiful, comfortable homes with thoughtfully designed furniture and expert design services.",
+      "value": "Des chaussures de qualité supérieure alliant confort de marche, élégance intemporelle et durabilité.",
       "type": "textarea"
     },
     "menu1": {
       "title": {
-        "value": "Service client",
+        "value": "Assistance",
         "type": "text"
       },
       "links": {
         "value": [
           {
-            "name": "Design Help",
+            "name": "Guide des tailles",
             "href": "#"
           },
           {
-            "name": "Delivery Info",
+            "name": "Livraisons & Retours",
             "href": "#"
           },
           {
-            "name": "Care Guide",
+            "name": "Conseils d'entretien",
             "href": "#"
           },
           {
-            "name": "Contactez-nous",
+            "name": "Nous contacter",
             "href": "#"
           }
         ],
@@ -388,25 +388,25 @@
     },
     "menu2": {
       "title": {
-        "value": "Company",
+        "value": "Boutique",
         "type": "text"
       },
       "links": {
         "value": [
           {
-            "name": "À propos de nous",
+            "name": "À propos",
             "href": "#"
           },
           {
-            "name": "Our Story",
+            "name": "Notre histoire",
             "href": "#"
           },
           {
-            "name": "Showrooms",
+            "name": "Points de vente",
             "href": "#"
           },
           {
-            "name": "Privacy",
+            "name": "Confidentialité",
             "href": "#"
           }
         ],
@@ -415,15 +415,15 @@
     },
     "contact": {
       "address": {
-        "value": "123 Design Street, Furniture District, NY 10001",
+        "value": "12 Avenue de la Mode, Quartier des Créateurs, Paris 75001",
         "type": "textarea"
       },
       "phone": {
-        "value": "+1 (555) 123-4567",
+        "value": "+33 (0) 1 23 45 67 89",
         "type": "text"
       },
       "email": {
-        "value": "hello@furniturestore.com",
+        "value": "contact@shoesstore.com",
         "type": "email"
       }
     },

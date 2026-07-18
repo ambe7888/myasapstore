@@ -40,8 +40,8 @@ const baseThemeData = [
   },
   {
     id: 'furniture-interior',
-    name: 'Meubles & Intérieur',
-    description: 'Design premium pour les magasins de meubles et l\'aménagement intérieur',
+    name: 'Chaussures & Souliers',
+    description: 'Design moderne et dynamique idéal pour les boutiques de chaussures et sneakers',
     imagePath: '/storage/placeholder/themes/furniture-interior.webp'
   },
   {

@@ -35,8 +35,12 @@ class StoreController extends BaseController
         $totalCustomers = \App\Models\Customer::whereIn('store_id', $storeIds)->count();
         $totalRevenue = \App\Models\Order::whereIn('store_id', $storeIds)->where('payment_status', 'paid')->sum('total_amount');
         
+        // Find the oldest store id for the current owner to mark as default
+        $ownerId = $user->type === 'company' ? $user->id : ($user->created_by ?? $user->id);
+        $firstStoreId = Store::where('user_id', $ownerId)->orderBy('id', 'asc')->value('id');
+        
         // Add individual store statistics and URLs
-        $stores = $stores->map(function ($store) {
+        $stores = $stores->map(function ($store) use ($firstStoreId) {
             $store->total_orders = \App\Models\Order::where('store_id', $store->id)->count();
             $store->total_customers = \App\Models\Customer::where('store_id', $store->id)->count();
             $store->total_revenue = \App\Models\Order::where('store_id', $store->id)->where('payment_status', 'paid')->sum('total_amount');
@@ -59,6 +63,9 @@ class StoreController extends BaseController
             $store->qr_code_url = getStoreQrCodeUrl($store);
             $store->copy_link_url = getStoreCopyLinkUrl($store);
             $store->visit_store_url = getStoreVisitUrl($store);
+            
+            // Mark as default if it is the first store
+            $store->is_default = ($store->id === $firstStoreId);
             
             return $store;
         });
@@ -435,6 +442,15 @@ class StoreController extends BaseController
         }
         
         $store = $query->firstOrFail();
+        
+        // Prevent deleting the default (first) store
+        $ownerId = $user->type === 'company' ? $user->id : ($user->created_by ?? $user->id);
+        $firstStoreId = Store::where('user_id', $ownerId)->orderBy('id', 'asc')->value('id');
+        
+        if ($store->id === $firstStoreId) {
+            return redirect()->back()->with('error', __('You cannot delete your default store.'));
+        }
+        
         $store->delete();
 
         return redirect()->route('stores.index')->with('success', __('Store deleted successfully'));

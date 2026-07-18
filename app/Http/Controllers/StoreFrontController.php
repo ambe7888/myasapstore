@@ -59,8 +59,11 @@ class StoreFrontController extends Controller
         // Get categories
         $categories = Category::where('store_id', $storeId)
             ->where('is_active', true)
-            ->whereNull('parent_id')
-            ->take(4)
+            ->where(function($query) {
+                $query->whereNull('parent_id')
+                      ->orWhereHas('products');
+            })
+            ->take(8)
             ->get()
             ->map(function ($category) {
                 return [

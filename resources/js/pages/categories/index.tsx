@@ -150,7 +150,13 @@ export default function Categories() {
                 </div>
               ) : (
                 categories.map((category: any) => (
-                  <div key={category.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div 
+                    key={category.id} 
+                    className={`flex items-center justify-between p-4 border rounded-lg transition-all ${
+                      category.depth > 0 ? 'bg-slate-50/50 border-l-4 border-l-primary/40' : ''
+                    }`}
+                    style={{ marginLeft: `${(category.depth || 0) * 1.5}rem` }}
+                  >
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 rounded-lg overflow-hidden border">
                         {category.image ? (

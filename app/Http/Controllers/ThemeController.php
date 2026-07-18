@@ -196,12 +196,15 @@ class ThemeController extends Controller
         // Get categories for the store
         $categories = Category::where('store_id', $store['id'])
             ->where('is_active', true)
-            ->whereNull('parent_id') // Only get parent categories
+            ->where(function($query) {
+                $query->whereNull('parent_id')
+                      ->orWhereHas('products');
+            })
             ->withCount('products')
             ->orderBy('sort_order')
             ->orderBy('name')
             ->latest()
-            ->take(4)
+            ->take(8)
             ->get()
             ->map(function ($category) use ($storeSlug, $isCustomDomain) {
                 return [

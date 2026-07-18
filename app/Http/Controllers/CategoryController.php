@@ -19,16 +19,19 @@ class CategoryController extends BaseController
         $currentStoreId = getCurrentStoreId($user);
         
         // Get categories for the current store with parent relationship and product count
-        $categories = Category::with('parent')
+        $allCategories = Category::with('parent')
                             ->withCount('products')
                             ->where('store_id', $currentStoreId)
                             ->get();
         
+        // Sort hierarchically
+        $categories = $this->buildCategoryHierarchy($allCategories);
+        
         // Get statistics
-        $totalCategories = $categories->count();
-        $activeCategories = $categories->where('is_active', true)->count();
-        $parentCategories = $categories->whereNull('parent_id')->count();
-        $subCategories = $categories->whereNotNull('parent_id')->count();
+        $totalCategories = $allCategories->count();
+        $activeCategories = $allCategories->where('is_active', true)->count();
+        $parentCategories = $allCategories->whereNull('parent_id')->count();
+        $subCategories = $allCategories->whereNotNull('parent_id')->count();
         
         return Inertia::render('categories/index', [
             'categories' => $categories,
@@ -39,6 +42,21 @@ class CategoryController extends BaseController
                 'sub' => $subCategories
             ]
         ]);
+    }
+
+    private function buildCategoryHierarchy($categories, $parentId = null, $depth = 0)
+    {
+        $result = [];
+        $filtered = $categories->where('parent_id', $parentId)->sortBy('sort_order');
+        
+        foreach ($filtered as $category) {
+            $category->depth = $depth;
+            $result[] = $category;
+            $children = $this->buildCategoryHierarchy($categories, $category->id, $depth + 1);
+            $result = array_merge($result, $children);
+        }
+        
+        return $result;
     }
 
     /**

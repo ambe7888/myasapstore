@@ -187,7 +187,7 @@ function ElectronicsProductDetail({
       >
         <div className="bg-gray-50 min-h-screen">
           {/* Breadcrumb */}
-          <div className="bg-white border-b border-gray-200">
+          <div className="bg-white border-b border-gray-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">
               <nav className="text-sm">
                 <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-blue-600 transition-colors">Home</a>

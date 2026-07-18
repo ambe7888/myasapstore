@@ -204,7 +204,7 @@ function WatchesProductDetail({
       >
         <div className="bg-white min-h-screen">
           {/* Breadcrumb */}
-          <div className="bg-slate-50 border-b border-slate-200">
+          <div className="bg-slate-50 border-b border-slate-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-4">
               <nav className="text-sm font-light tracking-wide">
                 <a href={`/store/${store.slug}`} className="text-slate-500 hover:text-amber-600 transition-colors">Home</a>

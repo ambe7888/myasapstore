@@ -298,7 +298,7 @@ function CarsProductDetailInner({
             </div>
             
             {/* Breadcrumb */}
-            <nav className="text-sm font-bold tracking-wide text-gray-300">
+            <nav className="text-sm font-bold tracking-wide text-gray-300 store-breadcrumb">
               <a href={generateStoreUrl('store.home', store)} className="hover:text-red-400 transition-colors">Garage</a>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-500 inline" />
               {product.category && (

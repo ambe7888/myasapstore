@@ -173,7 +173,7 @@ function PerfumeProductDetailContent({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <section className="py-6 bg-stone-50">
+        <section className="py-6 bg-stone-50 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm text-gray-600">
               <Link href={generateStoreUrl('store.home', store)} className="hover:text-purple-800">Home</Link>

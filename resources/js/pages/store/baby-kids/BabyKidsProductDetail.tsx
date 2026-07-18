@@ -183,7 +183,7 @@ function BabyKidsProductDetailContent({
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             {/* Breadcrumbs */}
-            <nav className="flex items-center space-x-2 text-sm mb-8">
+            <nav className="flex items-center space-x-2 text-sm mb-8 store-breadcrumb">
               <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-pink-600 transition-colors">
                 Home
               </a>

@@ -191,7 +191,7 @@ export default function BeautyProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-rose-50 py-4">
+        <div className="bg-rose-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-rose-600">{t("Home")}</Link>

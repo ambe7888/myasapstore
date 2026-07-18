@@ -187,7 +187,7 @@ export default function FurnitureProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-amber-50 py-4 border-b border-amber-200">
+        <div className="bg-amber-50 py-4 border-b border-amber-200 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-amber-700 hover:text-amber-800">{t("Home")}</Link>

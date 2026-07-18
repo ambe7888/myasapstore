@@ -187,7 +187,7 @@ export default function WatchesProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-slate-50 py-4 border-b border-slate-200">
+        <div className="bg-slate-50 py-4 border-b border-slate-200 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-slate-500 hover:text-amber-600">{t("Home")}</Link>

@@ -199,7 +199,7 @@ function FashionProductDetail({
       >
         <div className="bg-white min-h-screen">
           {/* Breadcrumb */}
-          <div className="border-b border-gray-100">
+          <div className="border-b border-gray-100 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">
               <nav className="text-sm font-light tracking-wide">
                 <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-black transition-colors">Home</a>

@@ -103,7 +103,7 @@ export default function JewelryOrders({
         theme={store.theme}
       >
         {/* Navigation Breadcrumb */}
-        <div className="bg-yellow-50 border-b border-yellow-200">
+        <div className="bg-yellow-50 border-b border-yellow-200 store-breadcrumb">
           <div className="container mx-auto px-4 py-4">
             <Link
               href={generateStoreUrl('store.home', store)}

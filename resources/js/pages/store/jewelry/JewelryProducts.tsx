@@ -185,7 +185,7 @@ export default function JewelryProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-neutral-50 py-4 border-b">
+        <div className="bg-neutral-50 py-4 border-b store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-neutral-500 hover:text-yellow-600">{t("Home")}</Link>

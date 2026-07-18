@@ -189,7 +189,7 @@ export default function PerfumeProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-purple-50 py-4 border-b border-purple-100">
+        <div className="bg-purple-50 py-4 border-b border-purple-100 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-purple-600 hover:text-purple-700">{t("Home")}</Link>

@@ -70,6 +70,14 @@ function StoreLayoutContent({
       }
     `;
     
+    if (content.show_sections?.breadcrumb === false) {
+      cssContent += `
+        .store-breadcrumb {
+          display: none !important;
+        }
+      `;
+    }
+    
     if (store?.custom_css) {
       cssContent += store.custom_css;
     }

@@ -409,7 +409,7 @@ export default function WatchesCheckout({
         theme="watches"
       >
         {/* Breadcrumb */}
-        <div className="bg-white border-b border-slate-200">
+        <div className="bg-white border-b border-slate-200 store-breadcrumb">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center text-sm text-slate-600">
               <Link href={generateStoreUrl('store.home', store)} className="hover:text-amber-600 transition-colors">Home</Link>

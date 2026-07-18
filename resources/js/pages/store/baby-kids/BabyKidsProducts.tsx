@@ -191,7 +191,7 @@ export default function BabyKidsProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-pink-50 py-4 border-b border-pink-200">
+        <div className="bg-pink-50 py-4 border-b border-pink-200 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-pink-600 hover:text-pink-700">{t("Home")}</Link>

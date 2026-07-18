@@ -275,8 +275,9 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
     };
 
     return (
-      <Card>
-        <CardHeader>
+      <>
+        <Card>
+          <CardHeader>
           <CardTitle>{t('Section Layout Order')}</CardTitle>
           <CardDescription>{t('Use buttons to change the display order of sections on your store homepage.')}</CardDescription>
         </CardHeader>
@@ -332,8 +333,31 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
           </div>
         </CardContent>
       </Card>
-    );
-  };
+
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle>{t('Global Settings')}</CardTitle>
+          <CardDescription>{t('Configure global features across all store pages.')}</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between p-4 border rounded-xl bg-white shadow-sm hover:border-primary/30 transition-all">
+            <div>
+              <div className="font-semibold text-slate-700 text-sm">{t('Show Breadcrumbs')}</div>
+              <p className="text-xs text-slate-400 mt-1">{t('Display path navigation at the top of secondary pages (e.g. Products, Wishlist, Details).')}</p>
+            </div>
+            <Switch
+              id="toggle_global_breadcrumb"
+              checked={data.content.show_sections?.breadcrumb !== false}
+              onCheckedChange={(checked) => {
+                updateNestedField(['show_sections', 'breadcrumb'], checked);
+              }}
+            />
+          </div>
+        </CardContent>
+      </Card>
+    </>
+  );
+};
 
   const renderSection = (sectionKey: string, sectionData: any) => {
     const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());

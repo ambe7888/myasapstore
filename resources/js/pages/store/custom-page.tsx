@@ -148,7 +148,7 @@ export default function CustomPage({
         </div>
         
         {/* Breadcrumb */}
-        <div className="bg-gray-50 py-4">
+        <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
               <a href={`/store/${store.slug || actualTheme}`} className="text-gray-500 hover:text-primary">Home</a>

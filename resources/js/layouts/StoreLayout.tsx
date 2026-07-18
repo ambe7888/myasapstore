@@ -53,7 +53,7 @@ function StoreLayoutContent({
     if (!store) return;
     
     // Inject custom CSS
-    if (store.custom_css || store.primary_color || store.button_radius) {
+    if (store.custom_css || store.primary_color || store.button_radius || store.button_color_add_to_cart || store.button_color_buy_now) {
       const existingStyle = document.getElementById('store-custom-css');
       if (existingStyle) {
         existingStyle.remove();
@@ -65,14 +65,14 @@ function StoreLayoutContent({
       let cssContent = '';
       
       // Inject design variables
-      if (store.primary_color || store.button_radius) {
-        cssContent += `
-          :root {
-            ${store.primary_color ? `--theme-color: ${store.primary_color};` : ''}
-            ${store.button_radius ? `--radius: ${store.button_radius};` : ''}
-          }
-        `;
-      }
+      cssContent += `
+        :root {
+          ${store.primary_color ? `--theme-color: ${store.primary_color};` : ''}
+          ${store.button_radius ? `--radius: ${store.button_radius};` : ''}
+          --btn-add-to-cart-color: ${store.button_color_add_to_cart || store.primary_color || 'var(--theme-color, #4f46e5)'};
+          --btn-buy-now-color: ${store.button_color_buy_now || '#16a34a'};
+        }
+      `;
       
       // Add custom CSS
       if (store.custom_css) {

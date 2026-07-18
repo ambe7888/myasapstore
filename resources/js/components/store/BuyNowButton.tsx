@@ -75,7 +75,8 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
     <button
       onClick={handleClick}
       disabled={loading}
-      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} ${className}`}
+      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
+      style={{ backgroundColor: 'var(--btn-buy-now-color)' }}
     >
       {hasVariants && !hasSelectedVariants ? (
         <>

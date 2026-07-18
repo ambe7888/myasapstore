@@ -193,13 +193,21 @@ export default function ElectronicsProductCard({
         
         {/* Add to cart button */}
         <div className="flex gap-2 w-full">
-  <div className="flex-1"><AddToCartButton
-          product={product}
-          store={store}
-          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-        /></div>
-  <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" /></div>
-</div>
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-lg text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-lg flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

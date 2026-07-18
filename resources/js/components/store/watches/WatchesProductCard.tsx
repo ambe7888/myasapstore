@@ -198,15 +198,23 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
 
         {/* Add to Cart Button */}
         <div className="flex gap-2 w-full">
-  <div className="flex-1"><AddToCartButton
-          product={product}
-          store={store}
-          className="w-full py-3 bg-slate-900 text-white font-medium tracking-wider uppercase text-sm hover:bg-slate-800 transition-colors duration-300 disabled:bg-slate-400"
-          disabled={!isInStock}
-          isShowOption={hasVariants}
-        /></div>
-  <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" /></div>
-</div>
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 text-white font-semibold text-xs tracking-wider uppercase flex items-center justify-center"
+              disabled={!isInStock}
+              isShowOption={hasVariants}
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold text-xs tracking-wider uppercase flex items-center justify-center shadow-sm" 
+            />
+          </div>
+        </div>
       </div>
 
       {/* Decorative Elements */}

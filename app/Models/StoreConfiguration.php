@@ -52,6 +52,8 @@ class StoreConfiguration extends Model
             'button_radius' => '0.625rem',
             'button_text_add_to_cart' => '',
             'button_text_buy_now' => '',
+            'button_color_add_to_cart' => '',
+            'button_color_buy_now' => '',
         ];
         
         // Convert string boolean values to actual booleans

@@ -164,13 +164,21 @@ export default function FashionProductCard({
         
         {/* Add to cart button */}
         <div className="flex gap-2 w-full">
-  <div className="flex-1"><AddToCartButton
-          product={product}
-          store={store}
-          className="w-full py-3 bg-black text-white font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors"
-        /></div>
-  <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" /></div>
-</div>
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-lg text-xs font-semibold text-white flex items-center justify-center"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-lg flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -65,7 +65,8 @@ export default function AddToCartButton({ product, store, className = '', isShow
     <button
       onClick={handleClick}
       disabled={loading}
-      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} ${className}`}
+      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
+      style={{ backgroundColor: 'var(--btn-add-to-cart-color)' }}
     >
       {hasVariants && !hasSelectedVariants ? (
         <>

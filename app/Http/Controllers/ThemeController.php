@@ -53,6 +53,8 @@ class ThemeController extends Controller
                 'button_radius' => $configuration['button_radius'] ?? '0.625rem',
                 'button_text_add_to_cart' => $configuration['button_text_add_to_cart'] ?? '',
                 'button_text_buy_now' => $configuration['button_text_buy_now'] ?? '',
+                'button_color_add_to_cart' => $configuration['button_color_add_to_cart'] ?? '',
+                'button_color_buy_now' => $configuration['button_color_buy_now'] ?? '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -105,6 +107,8 @@ class ThemeController extends Controller
                 'button_radius' => $configuration['button_radius'] ?? '0.625rem',
                 'button_text_add_to_cart' => $configuration['button_text_add_to_cart'] ?? '',
                 'button_text_buy_now' => $configuration['button_text_buy_now'] ?? '',
+                'button_color_add_to_cart' => $configuration['button_color_add_to_cart'] ?? '',
+                'button_color_buy_now' => $configuration['button_color_buy_now'] ?? '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

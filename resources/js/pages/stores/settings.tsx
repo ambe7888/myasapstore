@@ -127,7 +127,7 @@ export default function StoreSettings({ store, settings }: Props) {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="primary_color">{t('Primary Color')}</Label>
+                <Label htmlFor="primary_color">{t('Theme / Primary Color')}</Label>
                 <div className="flex gap-2 items-center">
                   <Input
                     type="color"
@@ -141,6 +141,48 @@ export default function StoreSettings({ store, settings }: Props) {
                     className="w-32"
                     value={formData.primary_color || '#4f46e5'}
                     onChange={(e) => updateSetting('primary_color', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="button_color_add_to_cart">{t('Add to Cart Button Color')}</Label>
+                <p className="text-xs text-muted-foreground">{t('Leave empty to use primary theme color')}</p>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="button_color_add_to_cart"
+                    className="w-16 h-10 p-1"
+                    value={formData.button_color_add_to_cart || formData.primary_color || '#4f46e5'}
+                    onChange={(e) => updateSetting('button_color_add_to_cart', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    placeholder={t('Default (Theme)')}
+                    value={formData.button_color_add_to_cart || ''}
+                    onChange={(e) => updateSetting('button_color_add_to_cart', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="button_color_buy_now">{t('Buy Now Button Color')}</Label>
+                <p className="text-xs text-muted-foreground">{t('Leave empty to use default green color')}</p>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="button_color_buy_now"
+                    className="w-16 h-10 p-1"
+                    value={formData.button_color_buy_now || '#16a34a'}
+                    onChange={(e) => updateSetting('button_color_buy_now', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    placeholder="#16a34a"
+                    value={formData.button_color_buy_now || ''}
+                    onChange={(e) => updateSetting('button_color_buy_now', e.target.value)}
                   />
                 </div>
               </div>

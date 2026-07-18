@@ -21,6 +21,7 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
   const store = props.store || {};
   
   const [imageError, setImageError] = useState(false);
+  const [isFallback, setIsFallback] = useState(!product.cover_image && !product.image);
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
   
@@ -44,8 +45,9 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
           <img
             src={getProductCoverImage(product, store)}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} group-hover:scale-105 transition-transform duration-500`}
             onError={(e) => {
+              setIsFallback(true);
               const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
               (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
             }}

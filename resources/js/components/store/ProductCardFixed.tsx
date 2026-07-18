@@ -40,6 +40,7 @@ export default function ProductCard({
   const store = props.store;
   const [isHovered, setIsHovered] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isFallback, setIsFallback] = useState(!cover_image);
   
   const hasVariants = variants && variants.length > 0;
   const isOnSale = sale_price && sale_price < price;
@@ -90,8 +91,9 @@ export default function ProductCard({
         <img 
           src={getProductCoverImage({ cover_image, name }, store)} 
           alt={name}
-          className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           onError={(e) => {
+            setIsFallback(true);
             const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
             (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
           }}

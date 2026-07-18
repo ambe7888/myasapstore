@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
@@ -34,6 +34,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
   const store = props.store;
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
+  const [isFallback, setIsFallback] = useState(!product.cover_image && !product.image);
   
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price!) / product.price) * 100) : 0;
@@ -50,8 +51,9 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
           <img
             src={getProductCoverImage(product, store)}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} group-hover:scale-105 transition-transform duration-300`}
             onError={(e) => {
+              setIsFallback(true);
               const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
               (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
             }}

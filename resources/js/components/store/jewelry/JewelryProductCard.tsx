@@ -6,6 +6,7 @@ import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 
 interface JewelryProductCardProps {
   product: any;
@@ -152,6 +153,24 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
             <span className="text-xs text-neutral-500 ml-2">({product.total_reviews || product.reviews_count || 0})</span>
           </div>
         )}
+
+        {/* Add to Cart & Buy Now Buttons */}
+        <div className="flex gap-2 w-full mt-4">
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-lg text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-lg flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

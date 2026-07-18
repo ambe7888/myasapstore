@@ -6,6 +6,7 @@ import { useCart } from '@/contexts/CartContext';
 import { useStoreCurrency } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 
 interface FurnitureProductCardProps {
   product: any;
@@ -177,26 +178,23 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
           )}
         </div>
 
-        {/* Add to Cart Button */}
-        <button
-          onClick={async (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (isOutOfStock) return;
-            if (hasVariants) {
-              router.visit(generateStoreUrl('store.product', store,  { id: product.id }));
-              return;
-            }
-            await addToCart(product);
-          }}
-          disabled={cartLoading || isOutOfStock}
-          className={`w-full bg-amber-700 text-white py-3 px-4 rounded-2xl font-bold hover:bg-amber-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1 ${cartLoading || isOutOfStock ? 'cursor-not-allowed opacity-50' : ''}`}
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
-          </svg>
-          {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-        </button>
+        {/* Add to Cart & Buy Now Buttons */}
+        <div className="flex gap-2 w-full mt-3">
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-2xl text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-2xl flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

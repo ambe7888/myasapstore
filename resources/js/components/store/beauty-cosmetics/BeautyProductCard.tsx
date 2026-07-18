@@ -6,6 +6,7 @@ import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 
 interface Product {
   id: number;
@@ -193,6 +194,24 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
               <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
             </svg>
           </button>
+        </div>
+
+        {/* Add to Cart & Buy Now Buttons */}
+        <div className="flex gap-2 w-full mt-4">
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-full text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-full flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
         </div>
       </div>
 

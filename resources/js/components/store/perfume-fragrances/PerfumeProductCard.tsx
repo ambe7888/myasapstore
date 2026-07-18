@@ -168,33 +168,22 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
           )}
         </div>
 
-        {/* Add to Cart Button */}
-        <div className="space-y-3">
-          {hasVariants ? (
-            <Link
-              href={generateStoreUrl('store.product', store,  { id: product.id })}
-              className="w-full bg-purple-100 text-purple-800 py-3 rounded-full font-medium hover:bg-purple-200 transition-colors duration-300 text-center block"
-            >
-              Select Options
-            </Link>
-          ) : (
-            <button
-              onClick={async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (isOutOfStock) return;
-                await addToCart(product);
-              }}
-              disabled={cartLoading || isOutOfStock}
-              className={`w-full py-3 rounded-full font-medium transition-colors duration-300 ${
-                isOutOfStock 
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                  : 'bg-purple-800 text-white hover:bg-purple-900'
-              } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-            >
-              {isOutOfStock ? 'Out of Stock' : cartLoading ? 'Adding...' : 'Add to Cart'}
-            </button>
-          )}
+        {/* Add to Cart & Buy Now Buttons */}
+        <div className="flex gap-2 w-full mt-3">
+          <div className="flex-1">
+            <AddToCartButton
+              product={product}
+              store={store}
+              className="w-full h-10 rounded-full text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+            />
+          </div>
+          <div className="flex-1">
+            <BuyNowButton 
+              product={product} 
+              store={store} 
+              className="w-full h-10 text-white font-semibold rounded-full flex items-center justify-center text-xs shadow-sm" 
+            />
+          </div>
         </div>
       </div>
     </div>

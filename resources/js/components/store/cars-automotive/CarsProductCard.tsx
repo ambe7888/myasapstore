@@ -7,6 +7,7 @@ import { useCart } from '@/contexts/CartContext';
 import { usePage, router, Link } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 
 interface Product {
   id: number;
@@ -140,8 +141,8 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
           )}
         </div>
 
-        {/* Stock & Add to Cart */}
-        <div className="flex items-center justify-between">
+        {/* Stock & Buttons */}
+        <div className="flex flex-col gap-2 mt-3">
           <div className="flex items-center">
             <div className={`w-2 h-2 rounded-full mr-2 ${isInStock ? 'bg-green-500' : 'bg-red-500'}`}></div>
             <span className="text-xs font-bold tracking-wider uppercase text-gray-600">
@@ -149,23 +150,22 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
             </span>
           </div>
 
-          <button 
-            onClick={async (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (!isInStock) return;
-              if (hasVariants) {
-                router.visit(generateStoreUrl('store.product', store,  { id: product.id }));
-                return;
-              }
-              await addToCart(product, {});
-            }}
-            className="bg-red-600 hover:bg-black text-white px-4 py-2 font-bold text-sm tracking-wider uppercase transition-colors flex items-center gap-2 disabled:bg-gray-400"
-            disabled={!isInStock || cartLoading}
-          >
-            <ShoppingCart className="h-4 w-4" />
-            {hasVariants ? 'Options' : 'Add'}
-          </button>
+          <div className="flex gap-2 w-full">
+            <div className="flex-1">
+              <AddToCartButton
+                product={product}
+                store={store}
+                className="w-full h-10 text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+              />
+            </div>
+            <div className="flex-1">
+              <BuyNowButton 
+                product={product} 
+                store={store} 
+                className="w-full h-10 text-white font-semibold flex items-center justify-center text-xs shadow-sm" 
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

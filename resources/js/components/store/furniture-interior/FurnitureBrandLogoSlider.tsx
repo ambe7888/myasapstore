@@ -58,19 +58,21 @@ function FurnitureBrandLogoSlider({ content }: FurnitureBrandLogoSliderProps) {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mt-20 pt-16 border-t-2 border-amber-200">
-          {(content?.stats?.value || content?.stats || [
-            { number: '50+', label: 'Premium Brands' },
-            { number: '25+', label: 'Years Experience' },
-            { number: '10K+', label: 'Happy Customers' },
-            { number: '99%', label: 'Satisfaction Rate' }
-          ]).map((stat, index) => (
-            <div key={index} className="text-center group">
-              <div className="text-3xl lg:text-4xl font-bold text-slate-900 mb-3 group-hover:text-amber-800 transition-colors duration-300">{stat.number}</div>
-              <p className="text-slate-700 text-base font-medium">{stat.label}</p>
-            </div>
-          ))}
-        </div>
+        {content?.stats !== null && content?.stats?.show_section !== false && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mt-20 pt-16 border-t-2 border-amber-200">
+            {(content?.stats?.value || content?.stats || [
+              { number: '50+', label: 'Premium Brands' },
+              { number: '25+', label: 'Years Experience' },
+              { number: '10K+', label: 'Happy Customers' },
+              { number: '99%', label: 'Satisfaction Rate' }
+            ]).map((stat: any, index: number) => (
+              <div key={index} className="text-center group">
+                <div className="text-3xl lg:text-4xl font-bold text-slate-900 mb-3 group-hover:text-amber-800 transition-colors duration-300">{stat.number}</div>
+                <p className="text-slate-700 text-base font-medium">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <style jsx>{`

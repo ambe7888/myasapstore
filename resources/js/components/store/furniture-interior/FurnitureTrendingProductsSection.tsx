@@ -72,33 +72,35 @@ function FurnitureTrendingProductsSection({
         )}
 
         {/* Design Process Section */}
-        <div className="mt-24 bg-white/90 backdrop-blur-sm rounded-3xl p-12 lg:p-16 border-2 border-yellow-200 shadow-2xl hover:shadow-3xl transition-all duration-500">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 tracking-tight">
-              {designProcess?.title || 'Our Design Process'}
-            </h3>
-            <p className="text-lg lg:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
-              {designProcess?.description || 'From concept to completion, we guide you through every step of creating your perfect wooden furniture space.'}
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {(designProcess?.steps || [
-              { step: '01', title: 'Consultation', description: 'Understanding your vision and needs' },
-              { step: '02', title: 'Design', description: '3D visualization and planning' },
-              { step: '03', title: 'Selection', description: 'Curating the perfect pieces' },
-              { step: '04', title: 'Installation', description: 'Professional setup and styling' }
-            ]).map((item, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-yellow-100 text-yellow-800 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-xl group-hover:scale-110 group-hover:bg-yellow-200 transition-all duration-500">
-                  {item.step}
+        {designProcess && designProcess.show_section !== false && (
+          <div className="mt-24 bg-white/90 backdrop-blur-sm rounded-3xl p-12 lg:p-16 border-2 border-yellow-200 shadow-2xl hover:shadow-3xl transition-all duration-500">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 tracking-tight">
+                {designProcess?.title || 'Our Design Process'}
+              </h3>
+              <p className="text-lg lg:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
+                {designProcess?.description || 'From concept to completion, we guide you through every step of creating your perfect wooden furniture space.'}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+              {(designProcess?.steps || [
+                { step: '01', title: 'Consultation', description: 'Understanding your vision and needs' },
+                { step: '02', title: 'Design', description: '3D visualization and planning' },
+                { step: '03', title: 'Selection', description: 'Curating the perfect pieces' },
+                { step: '04', title: 'Installation', description: 'Professional setup and styling' }
+              ]).map((item: any, index: number) => (
+                <div key={index} className="text-center group">
+                  <div className="w-20 h-20 bg-yellow-100 text-yellow-800 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-xl group-hover:scale-110 group-hover:bg-yellow-200 transition-all duration-500">
+                    {item.step}
+                  </div>
+                  <h4 className="text-lg lg:text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-800 transition-colors duration-300">{item.title}</h4>
+                  <p className="text-slate-700 text-base font-medium leading-relaxed">{item.description}</p>
                 </div>
-                <h4 className="text-lg lg:text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-800 transition-colors duration-300">{item.title}</h4>
-                <p className="text-slate-700 text-base font-medium leading-relaxed">{item.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

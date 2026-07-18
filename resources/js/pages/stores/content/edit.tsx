@@ -223,15 +223,45 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
   const renderSection = (sectionKey: string, sectionData: any) => {
     const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     
+    // Check if it's a togglable section (everything except header, footer, store)
+    const isTogglable = !['header', 'footer', 'store'].includes(sectionKey);
+    // Get the current show_section value (defaults to true if not defined)
+    const showSection = sectionData.show_section !== false;
+
     return (
       <Card key={sectionKey}>
-        <CardHeader>
-          <CardTitle>{sectionTitle}</CardTitle>
-          <CardDescription>{t('Configure {{section}} content', { section: sectionTitle.toLowerCase() })}</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          <div>
+            <CardTitle>{sectionTitle}</CardTitle>
+            <CardDescription>{t('Configure {{section}} content', { section: sectionTitle.toLowerCase() })}</CardDescription>
+          </div>
+          {isTogglable && (
+            <div className="flex items-center space-x-2 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-lg shadow-sm">
+              <Switch
+                id={`toggle_${sectionKey}`}
+                checked={showSection}
+                onCheckedChange={(checked) => {
+                  updateNestedField([sectionKey, 'show_section'], checked);
+                }}
+              />
+              <Label htmlFor={`toggle_${sectionKey}`} className="text-xs font-semibold uppercase tracking-wider cursor-pointer">
+                {showSection ? t('Active') : t('Inactive')}
+              </Label>
+            </div>
+          )}
         </CardHeader>
         <CardContent className="space-y-4">
-          {Object.entries(sectionData).map(([key, value]) => 
-            renderField(key, value, [sectionKey])
+          {!showSection && isTogglable ? (
+            <div className="text-center py-8 text-muted-foreground bg-slate-50/50 rounded-xl border-2 border-dashed border-slate-200">
+              <p className="font-medium text-slate-500 mb-1">{t('This section is hidden')}</p>
+              <p className="text-xs text-slate-400">{t('Toggle the switch above to activate and configure this section.')}</p>
+            </div>
+          ) : (
+            Object.entries(sectionData)
+              .filter(([key]) => key !== 'show_section')
+              .map(([key, value]) => 
+                renderField(key, value, [sectionKey])
+              )
           )}
         </CardContent>
       </Card>

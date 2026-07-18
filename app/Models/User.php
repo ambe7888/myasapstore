@@ -334,8 +334,10 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
     {
         $plan = $this->getCurrentPlan();
         
+        $allThemes = ['home-accessories', 'fashion', 'electronics', 'beauty-cosmetics', 'jewelry', 'watches', 'furniture-interior', 'cars-automotive', 'baby-kids', 'perfume-fragrances'];
+        
         if (!$plan) {
-            return ['home-accessories'];
+            return $allThemes;
         }
         
         $themes = $plan->themes;
@@ -345,8 +347,8 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
             $themes = json_decode($themes, true);
         }
         
-        // Return themes if available, otherwise default
-        return (is_array($themes) && !empty($themes)) ? $themes : ['home-accessories'];
+        // Return themes if available, otherwise default to all themes
+        return (is_array($themes) && !empty($themes)) ? $themes : $allThemes;
     }
 
     /**

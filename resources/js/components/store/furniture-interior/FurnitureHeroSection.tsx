@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Home, Sofa, Palette, Truck } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
-import { usePage } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import { usePage } from '@inertiajs/react';
 
 interface FurnitureHeroSectionProps {
   content?: any;
@@ -88,7 +88,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                 {/* Action Buttons */}
                 <div className={`space-y-3 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                   <a 
-                    href={content?.button_link ? `${baseUrl}${content.button_link}` : '#'}
+                    href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
                     className="w-full bg-yellow-800 text-white py-4 px-6 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                     <span>{content?.button_text || 'Shop Collection'}</span>
                   </a>
                   <a 
-                    href={content?.secondary_button_link ? `${baseUrl}${content.secondary_button_link}` : '#'}
+                    href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
                     className="w-full border-2 border-yellow-700 text-yellow-800 py-4 px-6 rounded-2xl font-bold hover:bg-yellow-800 hover:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-2 hover:scale-105"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

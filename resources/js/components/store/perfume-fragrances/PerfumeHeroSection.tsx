@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface PerfumeHeroSectionProps {
   content?: any;
@@ -52,13 +53,13 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${baseUrl}${content.button_link}` : '#'}
+                href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
                 className="bg-purple-800 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 text-center"
               >
                 {content?.button_text || 'Explore Fragrances'}
               </a>
               <a 
-                href={content?.secondary_button_link ? `${baseUrl}${content.secondary_button_link}` : '#'}
+                href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
                 className="border-2 border-purple-800 text-purple-800 px-8 py-4 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors duration-300 text-center"
               >
                 {content?.secondary_button_text || 'Fragrance Guide'}

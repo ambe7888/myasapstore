@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface BabyKidsHeroSectionProps {
   content?: any;
@@ -91,7 +92,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
               {/* Bottom Action */}
               <div className="absolute bottom-4 left-4 right-4">
                 <a 
-                  href={content?.button_link ? `${baseUrl}${content.button_link}` : '#'}
+                  href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
                   className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold hover:bg-pink-600 transition-colors duration-300 shadow-xl flex items-center justify-center"
                 >
                   <span>{content?.button_text || 'Shop Now'}</span>

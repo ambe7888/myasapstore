@@ -391,8 +391,11 @@ class ThemeController extends Controller
         if ($store['theme'] === 'electronics') $cartPage = 'store/electronics/ElectronicsCart';
         if ($store['theme'] === 'beauty-cosmetics') $cartPage = 'store/beauty-cosmetics/BeautyCart';
         if ($store['theme'] === 'jewelry') $cartPage = 'store/jewelry/JewelryCart';
+        if ($store['theme'] === 'watches') $cartPage = 'store/watches/WatchesCart';
+        if ($store['theme'] === 'furniture-interior') $cartPage = 'store/furniture-interior/FurnitureCart';
         if ($store['theme'] === 'cars-automotive') $cartPage = 'store/cars-automotive/CarsCart';
         if ($store['theme'] === 'baby-kids') $cartPage = 'store/baby-kids/BabyKidsCart';
+        if ($store['theme'] === 'perfume-fragrances') $cartPage = 'store/perfume-fragrances/PerfumeCart';
         
         return Inertia::render($cartPage, array_merge([
             'store' => $store,
@@ -466,10 +469,12 @@ class ThemeController extends Controller
         if ($store['theme'] === 'electronics') $profilePage = 'store/electronics/ElectronicsProfile';
         if ($store['theme'] === 'beauty-cosmetics') $profilePage = 'store/beauty-cosmetics/BeautyProfile';
         if ($store['theme'] === 'jewelry') $profilePage = 'store/jewelry/JewelryProfile';
+        if ($store['theme'] === 'watches') $profilePage = 'store/watches/WatchesProfile';
         if ($store['theme'] === 'furniture-interior') $profilePage = 'store/furniture-interior/FurnitureProfile';
         if ($store['theme'] === 'cars-automotive') $profilePage = 'store/cars-automotive/CarsProfile';
         if ($store['theme'] === 'baby-kids') $profilePage = 'store/baby-kids/BabyKidsProfile';
-        
+        if ($store['theme'] === 'perfume-fragrances') $profilePage = 'store/perfume-fragrances/PerfumeProfile';
+
         return Inertia::render($profilePage, array_merge([
             'user' => $user,
             'store' => $store,
@@ -552,6 +557,7 @@ class ThemeController extends Controller
         if ($store['theme'] === 'furniture-interior') $ordersPage = 'store/furniture-interior/FurnitureOrders';
         if ($store['theme'] === 'cars-automotive') $ordersPage = 'store/cars-automotive/CarsOrders';
         if ($store['theme'] === 'baby-kids') $ordersPage = 'store/baby-kids/BabyKidsOrders';
+        if ($store['theme'] === 'perfume-fragrances') $ordersPage = 'store/perfume-fragrances/PerfumeOrders';
         
         return Inertia::render($ordersPage, array_merge([
             'orders' => $orders,
@@ -706,11 +712,13 @@ class ThemeController extends Controller
         if ($store['theme'] === 'home-accessories') $productPage = 'store/product'; // Use default with custom fields support
         if ($store['theme'] === 'fashion') $productPage = 'store/fashion/FashionProductDetail';
         if ($store['theme'] === 'electronics') $productPage = 'store/electronics/ElectronicsProductDetail';
-        if ($store['theme'] === 'beauty-cosmetics') $productPage = 'store/beauty-cosmetics/BeautyProduct';
+        if ($store['theme'] === 'beauty-cosmetics') $productPage = 'store/beauty-cosmetics/BeautyProductDetail';
         if ($store['theme'] === 'jewelry') $productPage = 'store/jewelry/JewelryProductDetail';
         if ($store['theme'] === 'watches') $productPage = 'store/watches/WatchesProductDetail';
+        if ($store['theme'] === 'furniture-interior') $productPage = 'store/furniture-interior/FurnitureProductDetail';
         if ($store['theme'] === 'cars-automotive') $productPage = 'store/cars-automotive/CarsProductDetail';
         if ($store['theme'] === 'baby-kids') $productPage = 'store/baby-kids/BabyKidsProductDetail';
+        if ($store['theme'] === 'perfume-fragrances') $productPage = 'store/perfume-fragrances/PerfumeProductDetail';
         
         return Inertia::render($productPage, array_merge([
             'product' => $productData,
@@ -797,8 +805,11 @@ class ThemeController extends Controller
         if ($store['theme'] === 'electronics') $wishlistPage = 'store/electronics/ElectronicsWishlist';
         if ($store['theme'] === 'beauty-cosmetics') $wishlistPage = 'store/beauty-cosmetics/BeautyWishlist';
         if ($store['theme'] === 'jewelry') $wishlistPage = 'store/jewelry/JewelryWishlist';
+        if ($store['theme'] === 'watches') $wishlistPage = 'store/watches/WatchesWishlist';
+        if ($store['theme'] === 'furniture-interior') $wishlistPage = 'store/furniture-interior/FurnitureWishlist';
         if ($store['theme'] === 'cars-automotive') $wishlistPage = 'store/cars-automotive/CarsWishlist';
         if ($store['theme'] === 'baby-kids') $wishlistPage = 'store/baby-kids/BabyKidsWishlist';
+        if ($store['theme'] === 'perfume-fragrances') $wishlistPage = 'store/perfume-fragrances/PerfumeWishlist';
         
         return Inertia::render($wishlistPage, array_merge([
             'store' => $store,
@@ -840,8 +851,11 @@ class ThemeController extends Controller
         if ($store['theme'] === 'electronics') $blogPage = 'store/electronics/ElectronicsBlog';
         if ($store['theme'] === 'beauty-cosmetics') $blogPage = 'store/beauty-cosmetics/BeautyBlog';
         if ($store['theme'] === 'jewelry') $blogPage = 'store/jewelry/JewelryBlog';
+        if ($store['theme'] === 'watches') $blogPage = 'store/watches/WatchesBlog';
+        if ($store['theme'] === 'furniture-interior') $blogPage = 'store/furniture-interior/FurnitureBlog';
         if ($store['theme'] === 'cars-automotive') $blogPage = 'store/cars-automotive/CarsBlog';
         if ($store['theme'] === 'baby-kids') $blogPage = 'store/baby-kids/BabyKidsBlog';
+        if ($store['theme'] === 'perfume-fragrances') $blogPage = 'store/perfume-fragrances/PerfumeBlog';
         
         return Inertia::render($blogPage, array_merge([
             'store' => $store,
@@ -880,8 +894,11 @@ class ThemeController extends Controller
         if ($store['theme'] === 'electronics') $blogPostPage = 'store/electronics/ElectronicsBlogPost';
         if ($store['theme'] === 'beauty-cosmetics') $blogPostPage = 'store/beauty-cosmetics/BeautyBlogPost';
         if ($store['theme'] === 'jewelry') $blogPostPage = 'store/jewelry/JewelryBlogPost';
+        if ($store['theme'] === 'watches') $blogPostPage = 'store/watches/WatchesBlogPost';
+        if ($store['theme'] === 'furniture-interior') $blogPostPage = 'store/furniture-interior/FurnitureBlogPost';
         if ($store['theme'] === 'cars-automotive') $blogPostPage = 'store/cars-automotive/CarsBlogPost';
         if ($store['theme'] === 'baby-kids') $blogPostPage = 'store/baby-kids/BabyKidsBlogPost';
+        if ($store['theme'] === 'perfume-fragrances') $blogPostPage = 'store/perfume-fragrances/PerfumeBlogPost';
         
         return Inertia::render($blogPostPage, array_merge([
             'store' => $store,

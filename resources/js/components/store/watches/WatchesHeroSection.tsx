@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface WatchesHeroSectionProps {
   content?: any;
@@ -55,7 +56,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-6 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${baseUrl}${content.button_link}` : '#'}
+                href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
                 className="group bg-amber-500 text-slate-900 px-10 py-4 font-medium tracking-wider uppercase text-sm hover:bg-amber-400 transition-all duration-300 inline-flex items-center justify-center min-w-[220px]"
               >
                 <span>{content?.button_text || 'Explore Collection'}</span>
@@ -64,7 +65,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
                 </svg>
               </a>
               <a 
-                href={content?.secondary_button_link ? `${baseUrl}${content.secondary_button_link}` : '#'}
+                href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
                 className="group border-2 border-white text-white px-10 py-4 font-medium tracking-wider uppercase text-sm hover:bg-white hover:text-slate-900 transition-all duration-300 inline-flex items-center justify-center min-w-[220px]"
               >
                 <span>{content?.secondary_button_text || 'Watch Guide'}</span>

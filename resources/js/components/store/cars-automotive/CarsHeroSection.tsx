@@ -2,6 +2,7 @@ import React from 'react';
 import { Zap, ShieldCheck, Wrench } from 'lucide-react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '../../../utils/image-helper';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface HeroContent {
   badge_text?: { value: string };
@@ -72,13 +73,13 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 pt-4">
               <a
-                href={heroContent.button_link ? `${baseUrl}${heroContent.button_link}` : '#'}
+                href={heroContent.button_link ? `${baseUrl || ''}${heroContent.button_link}` : generateStoreUrl('store.products', store)}
                 className="inline-flex items-center justify-center px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold tracking-wider uppercase transition-all transform hover:scale-105"
               >
                 {heroContent.button_text || 'Shop Parts'}
               </a>
               <a
-                href={heroContent.secondary_button_link ? `${baseUrl}${heroContent.secondary_button_link}` : '#'}
+                href={heroContent.secondary_button_link ? `${baseUrl || ''}${heroContent.secondary_button_link}` : generateStoreUrl('store.products', store)}
                 className="inline-flex items-center justify-center px-10 py-5 border-2 border-white text-white hover:bg-white hover:text-black font-bold tracking-wider uppercase transition-all transform hover:scale-105"
               >
                 {heroContent.secondary_button_text || 'View Catalog'}

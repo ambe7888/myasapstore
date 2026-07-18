@@ -202,7 +202,7 @@ export default function BeautyProducts({
         </div>
 
         {/* Page Header */}
-        <div className="bg-rose-50 py-20">
+        <div className="bg-rose-50 py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <div className="flex items-center justify-center mb-4">

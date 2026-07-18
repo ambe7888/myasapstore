@@ -159,7 +159,7 @@ export default function FashionOrderConfirmation({
         theme="fashion"
       >
         {/* Hero Section */}
-        <div className="bg-black text-white py-24">
+        <div className="bg-black text-white py-24 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white mb-8">

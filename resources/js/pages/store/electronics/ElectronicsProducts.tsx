@@ -210,7 +210,7 @@ export default function ElectronicsProducts({
         </div>
 
         {/* Page Header */}
-        <div className="bg-slate-900 text-white py-20">
+        <div className="bg-slate-900 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl font-bold mb-6">Electronics Collection</h1>

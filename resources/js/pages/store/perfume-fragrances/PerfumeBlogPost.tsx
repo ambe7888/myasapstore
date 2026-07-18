@@ -55,7 +55,7 @@ export default function PerfumeBlogPost({
         customFooter={<PerfumeFooter storeName={store.name} logo={store.logo} content={storeContent?.footer} />}
       >
         {/* Hero Section */}
-        <section className="py-20 bg-stone-50">
+        <section className="py-20 bg-stone-50 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <div className="mb-6">

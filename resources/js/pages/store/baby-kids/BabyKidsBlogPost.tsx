@@ -75,7 +75,7 @@ export default function BabyKidsBlogPost({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-pink-50 py-16 relative overflow-hidden">
+        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
           {/* Playful Background */}
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-12 h-12 bg-pink-200 rounded-full opacity-30 animate-pulse"></div>

@@ -353,6 +353,20 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
               }}
             />
           </div>
+
+          <div className="flex items-center justify-between p-4 border rounded-xl bg-white shadow-sm hover:border-primary/30 transition-all">
+            <div>
+              <div className="font-semibold text-slate-700 text-sm">{t('Show Page Header Banners')}</div>
+              <p className="text-xs text-slate-400 mt-1">{t('Display the large header banners with page titles at the top of secondary pages.')}</p>
+            </div>
+            <Switch
+              id="toggle_global_page_header"
+              checked={data.content.show_sections?.page_header !== false}
+              onCheckedChange={(checked) => {
+                updateNestedField(['show_sections', 'page_header'], checked);
+              }}
+            />
+          </div>
         </CardContent>
       </Card>
     </>

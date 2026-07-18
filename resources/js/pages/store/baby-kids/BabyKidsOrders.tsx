@@ -67,7 +67,7 @@ export default function BabyKidsOrders({
         theme="baby-kids"
       >
         {/* Hero Section */}
-        <div className="bg-pink-50 py-20 relative overflow-hidden">
+        <div className="bg-pink-50 py-20 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
             <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>

@@ -68,7 +68,7 @@ function PerfumeWishlistContent({
     return (
       <>
         {/* Hero Section */}
-        <section className="py-16 bg-stone-50">
+        <section className="py-16 bg-stone-50 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">

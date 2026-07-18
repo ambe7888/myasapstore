@@ -460,7 +460,7 @@ export default function FashionCheckout({
         theme="fashion"
       >
         {/* Hero Section */}
-        <div className="bg-black text-white py-20">
+        <div className="bg-black text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">Passer à la caisse</h1>

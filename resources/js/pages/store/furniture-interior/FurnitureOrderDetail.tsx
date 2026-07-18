@@ -114,7 +114,7 @@ export default function FurnitureOrderDetail({
         theme="furniture-interior"
       >
         {/* Hero Section */}
-        <div className="bg-yellow-800 text-white py-16">
+        <div className="bg-yellow-800 text-white py-16 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-4xl font-bold mb-4">Order Details</h1>

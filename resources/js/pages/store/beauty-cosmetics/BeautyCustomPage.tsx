@@ -47,7 +47,7 @@ export default function BeautyCustomPage({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-rose-50 py-20">
+        <div className="bg-rose-50 py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl font-light text-gray-900 mb-6">{page.title}</h1>

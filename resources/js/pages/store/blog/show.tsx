@@ -172,7 +172,7 @@ export default function BlogDetail({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="relative">
+        <div className="relative store-page-header">
           <div className="h-64 md:h-96 w-full bg-primary overflow-hidden">
             <img 
               src={post.featured_image ? getImageUrl(post.featured_image) : `https://placehold.co/1200x600?text=${encodeURIComponent(post.title)}`}

@@ -159,7 +159,7 @@ export default function FurnitureOrderConfirmation({
         theme="furniture-interior"
       >
         {/* Hero Section */}
-        <div className="bg-yellow-800 text-white py-20">
+        <div className="bg-yellow-800 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl font-bold mb-6">Order Confirmed!</h1>

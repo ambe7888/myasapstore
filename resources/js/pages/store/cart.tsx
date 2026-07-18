@@ -295,7 +295,7 @@ function CartContent({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-primary text-white py-12">
+        <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-4xl font-bold mb-4">Panier d'achat</h1>

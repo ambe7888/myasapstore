@@ -198,7 +198,7 @@ export default function FurnitureProducts({
         </div>
 
         {/* Page Header */}
-        <div className="bg-yellow-800 text-white py-12">
+        <div className="bg-yellow-800 text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-3xl font-bold mb-4">Furniture Collection</h1>

@@ -55,7 +55,7 @@ export default function BeautyBlogPost({
         customFooter={<BeautyFooter storeName={store.name} logo={store.logo} />}
       >
         {/* Hero Section */}
-        <div className="bg-rose-50 py-16">
+        <div className="bg-rose-50 py-16 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               {/* Back Button */}

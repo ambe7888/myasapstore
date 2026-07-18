@@ -77,6 +77,14 @@ function StoreLayoutContent({
         }
       `;
     }
+
+    if (content.show_sections?.page_header === false) {
+      cssContent += `
+        .store-page-header {
+          display: none !important;
+        }
+      `;
+    }
     
     if (store?.custom_css) {
       cssContent += store.custom_css;

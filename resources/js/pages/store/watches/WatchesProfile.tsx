@@ -100,7 +100,7 @@ export default function WatchesProfile({
         theme="watches"
       >
         {/* Hero Section */}
-        <section className="relative h-96 flex items-center overflow-hidden bg-slate-900">
+        <section className="relative h-96 flex items-center overflow-hidden bg-slate-900 store-page-header">
           <div className="absolute inset-0 bg-slate-900/80"></div>
           <div className="relative z-10 w-full">
             <div className="container mx-auto px-4">

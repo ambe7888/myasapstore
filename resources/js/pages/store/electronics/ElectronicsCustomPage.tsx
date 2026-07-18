@@ -48,7 +48,7 @@ export default function ElectronicsCustomPage({
       >
         <div className="bg-gray-50 min-h-screen">
           {/* Page Header */}
-          <section className="bg-slate-900 text-white py-20">
+          <section className="bg-slate-900 text-white py-20 store-page-header">
             <div className="container mx-auto px-4 text-center">
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <FileText className="w-8 h-8" />

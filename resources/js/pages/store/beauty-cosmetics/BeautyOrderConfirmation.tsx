@@ -158,7 +158,7 @@ export default function BeautyOrderConfirmation({
         theme="beauty-cosmetics"
       >
         {/* Hero Section */}
-        <div className="bg-rose-50 py-24">
+        <div className="bg-rose-50 py-24 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-rose-500 mb-8 shadow-2xl">

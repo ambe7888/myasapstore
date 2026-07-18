@@ -71,7 +71,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
     try {
       const response = await axios.get(route('api.cart.index'), { params: { store_id: storeId } });
       console.log('Cart refresh response:', response.data);
-      const cartItems = response.data.items || [];
+      const cartItems = (response.data.items || []).map((item: any) => ({
+        ...item,
+        quantity: Number(item.quantity) || 1
+      }));
       const cartCount = response.data.count || cartItems.length || 0;
       
       setItems(cartItems);
@@ -105,7 +108,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
       await axios.post(route('api.cart.add'), {
         store_id: storeId,
         product_id: product.id,
-        quantity: quantity,
+        quantity: Number(quantity) || 1,
         variants
       });
       await refreshCart();
@@ -116,14 +119,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
   };
 
   const updateQuantity = async (id: number, quantity: number) => {
+    const numQuantity = Number(quantity);
+    
+    // Optimistic UI Update for instant feedback
+    setItems(currentItems => currentItems.map(item => 
+      item.id === id ? { ...item, quantity: numQuantity } : item
+    ));
+
     setLoading(true);
     try {
-      console.log('🚀 API Call: PUT', route('api.cart.update', { id }), { quantity, store_id: storeId });
-      const response = await axios.put(route('api.cart.update', { id }), { quantity, store_id: storeId });
+      console.log('🚀 API Call: PUT', route('api.cart.update', { id }), { quantity: numQuantity, store_id: storeId });
+      const response = await axios.put(route('api.cart.update', { id }), { quantity: numQuantity, store_id: storeId });
       console.log('✅ API Success:', response.data);
       await refreshCart();
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ API Error:', error.response?.data || error.message);
+      await refreshCart(); // Revert optimistic update on error
     } finally {
       setLoading(false);
     }

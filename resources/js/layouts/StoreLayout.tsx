@@ -224,16 +224,20 @@ function StoreLayoutContent({
       `;
     }
 
+    // Only apply theme color overrides if user explicitly set a custom primary color (non-empty string)
+    const hasCustomPrimaryColor = !!(store?.primary_color && store.primary_color.trim() !== '');
+
     let cssContent = `
       :root {
-        ${store?.primary_color ? `--theme-color: ${store.primary_color};` : ''}
+        ${hasCustomPrimaryColor ? `--theme-color: ${store.primary_color};` : ''}
         ${store?.button_radius ? `--radius: ${store.button_radius};` : ''}
-        --btn-add-to-cart-color: ${store?.button_color_add_to_cart || store?.primary_color || 'var(--theme-color, #4f46e5)'};
+        --btn-add-to-cart-color: ${store?.button_color_add_to_cart || (hasCustomPrimaryColor ? store!.primary_color : 'var(--theme-color, #4f46e5)')};
         --btn-buy-now-color: ${store?.button_color_buy_now || '#16a34a'};
       }
     `;
 
-    if (store?.primary_color) {
+    // Apply theme-specific color overrides ONLY when user set a custom color
+    if (hasCustomPrimaryColor) {
       cssContent += `
         :root {
           --primary-hover-color: color-mix(in srgb, var(--theme-color) 85%, black);

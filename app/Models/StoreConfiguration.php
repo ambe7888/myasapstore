@@ -48,12 +48,15 @@ class StoreConfiguration extends Model
             'google_analytics' => '',
             'tiktok_pixel' => '',
             'snapchat_pixel' => '',
-            'primary_color' => '#4f46e5',
+            'primary_color' => '',
             'button_radius' => '0.625rem',
             'button_text_add_to_cart' => '',
             'button_text_buy_now' => '',
             'button_color_add_to_cart' => '',
             'button_color_buy_now' => '',
+            'text_title_color' => '',
+            'text_button_color' => '',
+            'site_bg_color' => '',
         ];
         
         // Convert string boolean values to actual booleans

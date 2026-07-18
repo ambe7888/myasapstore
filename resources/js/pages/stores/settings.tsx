@@ -161,20 +161,28 @@ export default function StoreSettings({ store, settings }: Props) {
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <div>
                 <CardTitle>{t('Appearance Settings')}</CardTitle>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {t('Leave any color field empty to use the theme default color.')}
+                </p>
               </div>
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={resetColors}
-                className="text-xs border-amber-200 hover:bg-amber-50 text-amber-900"
+                className="text-xs border-red-200 hover:bg-red-50 text-red-700"
               >
-                {t('Reset Colors to Default')}
+                {t('Reset All Colors to Default')}
               </Button>
             </CardHeader>
             <CardContent className="space-y-6">
+
+              {/* Primary / Theme Color */}
               <div className="space-y-2">
                 <Label htmlFor="primary_color">{t('Theme / Primary Color')}</Label>
+                <p className="text-xs text-muted-foreground">
+                  {t('Default for this theme')}: <code className="bg-muted px-1 rounded">{getDefaultThemeColor()}</code>
+                </p>
                 <div className="flex gap-2 items-center">
                   <Input
                     type="color"
@@ -185,13 +193,26 @@ export default function StoreSettings({ store, settings }: Props) {
                   />
                   <Input
                     type="text"
-                    className="w-32"
-                    value={formData.primary_color || getDefaultThemeColor()}
+                    className="w-36"
+                    placeholder={getDefaultThemeColor()}
+                    value={formData.primary_color || ''}
                     onChange={(e) => updateSetting('primary_color', e.target.value)}
                   />
+                  {formData.primary_color && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => updateSetting('primary_color', '')}
+                      className="text-xs text-muted-foreground"
+                    >
+                      {t('Clear')}
+                    </Button>
+                  )}
                 </div>
               </div>
 
+              {/* Add to Cart Button Color */}
               <div className="space-y-2">
                 <Label htmlFor="button_color_add_to_cart">{t('Add to Cart Button Color')}</Label>
                 <p className="text-xs text-muted-foreground">{t('Leave empty to use primary theme color')}</p>
@@ -200,19 +221,23 @@ export default function StoreSettings({ store, settings }: Props) {
                     type="color"
                     id="button_color_add_to_cart"
                     className="w-16 h-10 p-1"
-                    value={formData.button_color_add_to_cart || formData.primary_color || '#4f46e5'}
+                    value={formData.button_color_add_to_cart || formData.primary_color || getDefaultThemeColor()}
                     onChange={(e) => updateSetting('button_color_add_to_cart', e.target.value)}
                   />
                   <Input
                     type="text"
-                    className="w-32"
-                    placeholder={t('Default (Theme)')}
+                    className="w-36"
+                    placeholder={t('Default (Theme color)')}
                     value={formData.button_color_add_to_cart || ''}
                     onChange={(e) => updateSetting('button_color_add_to_cart', e.target.value)}
                   />
+                  {formData.button_color_add_to_cart && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => updateSetting('button_color_add_to_cart', '')} className="text-xs text-muted-foreground">{t('Clear')}</Button>
+                  )}
                 </div>
               </div>
 
+              {/* Buy Now Button Color */}
               <div className="space-y-2">
                 <Label htmlFor="button_color_buy_now">{t('Buy Now Button Color')}</Label>
                 <p className="text-xs text-muted-foreground">{t('Leave empty to use default green color')}</p>
@@ -226,36 +251,21 @@ export default function StoreSettings({ store, settings }: Props) {
                   />
                   <Input
                     type="text"
-                    className="w-32"
+                    className="w-36"
                     placeholder="#16a34a"
                     value={formData.button_color_buy_now || ''}
                     onChange={(e) => updateSetting('button_color_buy_now', e.target.value)}
                   />
+                  {formData.button_color_buy_now && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => updateSetting('button_color_buy_now', '')} className="text-xs text-muted-foreground">{t('Clear')}</Button>
+                  )}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="text_title_color">{t('Heading / Large Text Color')}</Label>
-                <div className="flex gap-2 items-center">
-                  <Input
-                    type="color"
-                    id="text_title_color"
-                    className="w-16 h-10 p-1"
-                    value={formData.text_title_color || '#0f172a'}
-                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
-                  />
-                  <Input
-                    type="text"
-                    className="w-32"
-                    placeholder="#0f172a"
-                    value={formData.text_title_color || ''}
-                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
-                  />
-                </div>
-              </div>
-
+              {/* Button Text Color */}
               <div className="space-y-2">
                 <Label htmlFor="text_button_color">{t('Button Text Color')}</Label>
+                <p className="text-xs text-muted-foreground">{t('Leave empty to use default (white)')}</p>
                 <div className="flex gap-2 items-center">
                   <Input
                     type="color"
@@ -266,16 +276,46 @@ export default function StoreSettings({ store, settings }: Props) {
                   />
                   <Input
                     type="text"
-                    className="w-32"
+                    className="w-36"
                     placeholder="#ffffff"
                     value={formData.text_button_color || ''}
                     onChange={(e) => updateSetting('text_button_color', e.target.value)}
                   />
+                  {formData.text_button_color && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => updateSetting('text_button_color', '')} className="text-xs text-muted-foreground">{t('Clear')}</Button>
+                  )}
                 </div>
               </div>
 
+              {/* Heading / Large Text Color */}
+              <div className="space-y-2">
+                <Label htmlFor="text_title_color">{t('Heading / Large Text Color')}</Label>
+                <p className="text-xs text-muted-foreground">{t('Leave empty to use theme default heading color')}</p>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="text_title_color"
+                    className="w-16 h-10 p-1"
+                    value={formData.text_title_color || '#0f172a'}
+                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-36"
+                    placeholder="#0f172a"
+                    value={formData.text_title_color || ''}
+                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
+                  />
+                  {formData.text_title_color && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => updateSetting('text_title_color', '')} className="text-xs text-muted-foreground">{t('Clear')}</Button>
+                  )}
+                </div>
+              </div>
+
+              {/* Site Background Color */}
               <div className="space-y-2">
                 <Label htmlFor="site_bg_color">{t('Site Background Color')}</Label>
+                <p className="text-xs text-muted-foreground">{t('Leave empty to use theme default background')}</p>
                 <div className="flex gap-2 items-center">
                   <Input
                     type="color"
@@ -286,14 +326,18 @@ export default function StoreSettings({ store, settings }: Props) {
                   />
                   <Input
                     type="text"
-                    className="w-32"
+                    className="w-36"
                     placeholder="#ffffff"
                     value={formData.site_bg_color || ''}
                     onChange={(e) => updateSetting('site_bg_color', e.target.value)}
                   />
+                  {formData.site_bg_color && (
+                    <Button type="button" variant="ghost" size="sm" onClick={() => updateSetting('site_bg_color', '')} className="text-xs text-muted-foreground">{t('Clear')}</Button>
+                  )}
                 </div>
               </div>
 
+              {/* Button Style */}
               <div className="space-y-2">
                 <Label htmlFor="button_radius">{t('Button Style')}</Label>
                 <select
@@ -309,6 +353,7 @@ export default function StoreSettings({ store, settings }: Props) {
                 </select>
               </div>
 
+              {/* Add to Cart Text */}
               <div className="space-y-2">
                 <Label htmlFor="button_text_add_to_cart">{t('Add to Cart Text')}</Label>
                 <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
@@ -320,6 +365,7 @@ export default function StoreSettings({ store, settings }: Props) {
                 />
               </div>
 
+              {/* Buy Now Text */}
               <div className="space-y-2">
                 <Label htmlFor="button_text_buy_now">{t('Buy Now Text')}</Label>
                 <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
@@ -330,6 +376,7 @@ export default function StoreSettings({ store, settings }: Props) {
                   onChange={(e) => updateSetting('button_text_buy_now', e.target.value)}
                 />
               </div>
+
             </CardContent>
           </Card>
         </TabsContent>

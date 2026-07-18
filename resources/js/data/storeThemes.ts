@@ -4,62 +4,62 @@ import { getImageUrl } from '@/utils/image-helper';
 const baseThemeData = [
   {
     id: 'home-accessories',
-    name: 'Home Accessories',
-    description: 'Clean and modern design for home accessories and decor products',
+    name: 'Maison & Décoration',
+    description: 'Design épuré et moderne pour les accessoires de maison et objets de décoration',
     imagePath: '/storage/placeholder/themes/home-accessories.webp'
   },
   {
     id: 'fashion',
-    name: 'Fashion',
-    description: 'Elegant and trendy design perfect for fashion and apparel brands',
+    name: 'Mode & Habillement',
+    description: 'Design élégant et tendance idéal pour les marques de mode et vêtements',
     imagePath: '/storage/placeholder/themes/fashion.webp'
   },
   {
     id: 'electronics',
-    name: 'Electronics & Gadgets',
-    description: 'Modern tech-focused design for electronics and gadget stores',
+    name: 'Électronique & High-Tech',
+    description: 'Design high-tech moderne pour les boutiques d\'électronique et gadgets',
     imagePath: '/storage/placeholder/themes/electronics.webp'
   },
   {
     id: 'beauty-cosmetics',
-    name: 'Beauty & Cosmetics',
-    description: 'Clean and elegant design perfect for beauty and cosmetics brands',
+    name: 'Beauté & Cosmétiques',
+    description: 'Design raffiné et élégant parfait pour les produits de beauté et soins',
     imagePath: '/storage/placeholder/themes/beauty-cosmetics.webp'
   },
   {
     id: 'jewelry',
-    name: 'Jewelry',
-    description: 'Elegant and luxurious design perfect for jewelry and accessories',
+    name: 'Bijouterie & Joaillerie',
+    description: 'Design luxueux et sophistiqué idéal pour la bijouterie et accessoires',
     imagePath: '/storage/placeholder/themes/jewelry.webp'
   },
   {
     id: 'watches',
-    name: 'Watches',
-    description: 'Premium luxury design perfect for timepieces and watch collections',
+    name: 'Horlogerie & Montres',
+    description: 'Design haut de gamme et prestige parfait pour les montres et garde-temps',
     imagePath: '/storage/placeholder/themes/watches.webp'
   },
   {
     id: 'furniture-interior',
-    name: 'Furniture & Interior Design',
-    description: 'Premium design for furniture stores and interior design services',
+    name: 'Meubles & Intérieur',
+    description: 'Design premium pour les magasins de meubles et l\'aménagement intérieur',
     imagePath: '/storage/placeholder/themes/furniture-interior.webp'
   },
   {
     id: 'cars-automotive',
-    name: 'Cars & Automotive',
-    description: 'Dynamic design perfect for automotive and car dealership stores',
+    name: 'Automobile & Accessoires',
+    description: 'Design dynamique parfait pour l\'automobile, pièces et accessoires',
     imagePath: '/storage/placeholder/themes/cars-automotive.webp'
   },
   {
     id: 'baby-kids',
-    name: 'Baby & Kids',
-    description: 'Playful and colorful design perfect for baby and children products',
+    name: 'Bébé & Enfants',
+    description: 'Design ludique et chaleureux idéal pour les vêtements et jouets pour enfants',
     imagePath: '/storage/placeholder/themes/baby-kids.webp'
   },
   {
     id: 'perfume-fragrances',
-    name: 'Perfume & Fragrances',
-    description: 'Elegant and luxurious design perfect for perfume and fragrance brands',
+    name: 'Parfumerie & Fragrances',
+    description: 'Design envoûtant et luxueux parfait pour les parfums et soins parfumés',
     imagePath: '/storage/placeholder/themes/perfume-fragrances.webp'
   }
 ];

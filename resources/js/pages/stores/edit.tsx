@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageTemplate } from '@/components/page-template';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Check, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,9 +9,60 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
-import { Check } from 'lucide-react';
 import { getStoreThemes } from '@/data/storeThemes';
 import MediaPicker from '@/components/MediaPicker';
+
+function ThemePreviewCard({ theme, isSelected, onSelect }: { theme: any; isSelected: boolean; onSelect: () => void }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div 
+      className={`cursor-pointer rounded-lg border-2 p-1 transition-all duration-200 ${
+        isSelected ? 'border-primary ring-2 ring-primary/20' : 'border-gray-200 hover:border-gray-300'
+      }`}
+      onClick={onSelect}
+    >
+      <div className="relative aspect-video overflow-hidden rounded-md bg-gray-100 dark:bg-gray-800">
+        {!loaded && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 dark:bg-slate-800 animate-pulse z-10">
+            <Loader2 className="h-6 w-6 animate-spin text-primary/70 mb-1" />
+            <span className="text-[10px] text-muted-foreground font-medium">Chargement...</span>
+          </div>
+        )}
+        <img
+          src={theme.thumbnail}
+          alt={theme.name}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          className={`h-full w-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          onError={(e) => {
+            setLoaded(true);
+            const target = e.target as HTMLImageElement;
+            if (target.src.endsWith('.webp')) {
+              target.src = target.src.replace('.webp', '.png');
+            } else {
+              target.src = `https://placehold.co/300x180?text=${encodeURIComponent(theme.name)}`;
+            }
+          }}
+        />
+        {isSelected && (
+          <div className="absolute inset-0 flex items-center justify-center bg-primary/20 z-20">
+            <div className="rounded-full bg-primary p-1 shadow-md">
+              <Check className="h-4 w-4 text-white" />
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="p-2">
+        <h3 className="font-medium text-sm">{theme.name}</h3>
+        <p className="text-xs text-muted-foreground line-clamp-2">
+          {theme.description}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 interface EditStoreProps {
   store: any;
@@ -220,42 +271,12 @@ export default function EditStore({ store, availableThemes, planPermissions, ser
                   {getStoreThemes().filter(theme => 
                     availableThemes === null || availableThemes.includes(theme.id)
                   ).map((theme) => (
-                    <div 
+                    <ThemePreviewCard
                       key={theme.id}
-                      className={`cursor-pointer rounded-lg border-2 p-1 transition-all duration-200 ${
-                        formData.theme === theme.id ? 'border-primary' : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                      onClick={() => setFormData(prev => ({ ...prev, theme: theme.id }))}
-                    >
-                      <div className="relative aspect-video overflow-hidden rounded-md">
-                        <img
-                          src={theme.thumbnail}
-                          alt={theme.name}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            if (target.src.endsWith('.webp')) {
-                              target.src = target.src.replace('.webp', '.png');
-                            }
-                          }}
-                        />
-                        {formData.theme === theme.id && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-primary/20">
-                            <div className="rounded-full bg-primary p-1">
-                              <Check className="h-4 w-4 text-white" />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-2">
-                        <h3 className="font-medium text-sm">{theme.name}</h3>
-                        <p className="text-xs text-muted-foreground line-clamp-2">
-                          {theme.description}
-                        </p>
-                      </div>
-                    </div>
+                      theme={theme}
+                      isSelected={formData.theme === theme.id}
+                      onSelect={() => setFormData(prev => ({ ...prev, theme: theme.id }))}
+                    />
                   ))}
                 </div>
               </CardContent>

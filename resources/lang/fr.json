@@ -1,4 +1,4 @@
-﻿{
+{
     "10001": "Autres produits",
     "\tPaid Amount": "Montant versÃ©",
     " 1 to 15 Days": "1 Ã  15 jours",
@@ -130,7 +130,10 @@
     "Add notes about this contact...": "Ajoutez des notes sur ce contact...",
     "Add overlay on background image": "Ajouter une superposition sur l' image d' arriÃ¨re-plan",
     "Add products to begin": "Ajouter des produits pour commencer",
-    "Add to Cart": "Ajouter au panier",`n    "Select Options": "Sélectionner les options",`n    "Please select product options before proceeding.": "Veuillez sélectionner les options du produit avant de continuer.",`n    "Please select product options before adding to cart.": "Veuillez sélectionner les options du produit avant d'ajouter au panier.",
+    "Add to Cart": "Ajouter au panier",
+    "Select Options": "Sélectionner les options",
+    "Please select product options before proceeding.": "Veuillez sélectionner les options du produit avant de continuer.",
+    "Please select product options before adding to cart.": "Veuillez sélectionner les options du produit avant d'ajouter au panier,",
     "Add to home screen": "Ajouter Ã  l'Ã©cran d'accueil",
     "Add your custom CSS here": "Ajoutez votre CSS personnalisÃ© ici",
     "Add your custom JavaScript here": "Ajoutez votre JavaScript personnalisÃ© ici",

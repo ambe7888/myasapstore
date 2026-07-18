@@ -762,6 +762,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
 
     
+    // Migration runner endpoint for web browser execution
+    Route::get('/run-migrations', function (\Illuminate\Http\Request $request) {
+        $key = $request->query('key');
+        $user = auth()->user();
+        if ($key !== 'asap_migrate_2026' && (!$user || $user->type !== 'superadmin')) {
+            return response('Unauthorized: Invalid key or user rights', 403);
+        }
+        
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            $output = \Illuminate\Support\Facades\Artisan::output();
+            return response()->json([
+                'success' => true,
+                'message' => 'Migrations executed successfully!',
+                'output' => $output
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    });
+
     // Store switching route
     Route::post('switch-store', [\App\Http\Controllers\StoreSwitcherController::class, 'switchStore'])->name('switch-store');
     

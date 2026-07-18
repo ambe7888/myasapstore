@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -100,6 +101,7 @@ export default function JewelryProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: JewelryProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'jewelry-store';
   
@@ -186,7 +188,7 @@ export default function JewelryProducts({
         <div className="bg-neutral-50 py-4 border-b">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-neutral-500 hover:text-yellow-600">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-neutral-500 hover:text-yellow-600">{t("Home")}</Link>
               <span className="mx-2 text-neutral-400">/</span>
               <span className="text-neutral-900 font-medium">Collection</span>
             </div>
@@ -228,13 +230,13 @@ export default function JewelryProducts({
                     onClick={clearFilters}
                     className="text-sm text-yellow-600 hover:text-yellow-700 font-medium"
                   >
-                    Clear All
+                    {t("Clear All")}
                   </button>
                 </div>
 
                 {/* Search */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2 uppercase tracking-wide">Search</label>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2 uppercase tracking-wide">{t("Search")}</label>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-neutral-400" />
                     <input
@@ -277,13 +279,13 @@ export default function JewelryProducts({
 
                 {/* Price Range */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">Price Range</label>
+                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">{t("Price Range")}</label>
                   <div className="flex items-center space-x-2">
                     <input
                       type="number"
                       value={priceRange.min}
                       onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                      placeholder="Min"
+                      placeholder={t("Min")}
                       className="w-full px-3 py-2 border border-neutral-300 text-sm focus:outline-none focus:border-yellow-600"
                     />
                     <span className="text-neutral-500">-</span>
@@ -291,7 +293,7 @@ export default function JewelryProducts({
                       type="number"
                       value={priceRange.max}
                       onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                      placeholder="Max"
+                      placeholder={t("Max")}
                       className="w-full px-3 py-2 border border-neutral-300 text-sm focus:outline-none focus:border-yellow-600"
                     />
                   </div>
@@ -328,7 +330,7 @@ export default function JewelryProducts({
 
                 {/* Rating */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">Rating</label>
+                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">{t("Rating")}</label>
                   <div className="space-y-2">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <label key={rating} className="flex items-center">
@@ -355,7 +357,7 @@ export default function JewelryProducts({
 
                 {/* Availability */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">Availability</label>
+                  <label className="block text-sm font-medium text-neutral-700 mb-3 uppercase tracking-wide">{t("Availability")}</label>
                   <div className="space-y-2">
                     <label className="flex items-center">
                       <input
@@ -375,7 +377,7 @@ export default function JewelryProducts({
                         onChange={() => setAvailability('in_stock')}
                         className="mr-2 text-yellow-600 focus:ring-yellow-500"
                       />
-                      <span className="text-sm text-neutral-700">In Stock</span>
+                      <span className="text-sm text-neutral-700">{t("In Stock")}</span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -385,7 +387,7 @@ export default function JewelryProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-yellow-600 focus:ring-yellow-500"
                       />
-                      <span className="text-sm text-neutral-700">Rupture de stock</span>
+                      <span className="text-sm text-neutral-700">{t("Out of Stock")}</span>
                     </label>
                   </div>
                 </div>
@@ -394,7 +396,7 @@ export default function JewelryProducts({
                   onClick={applyFilters}
                   className="w-full bg-yellow-600 text-white py-3 px-6 font-medium uppercase tracking-wide hover:bg-yellow-700 transition-colors"
                 >
-                  Apply Filters
+                  {t("Apply Filters")}
                 </button>
               </div>
             </div>
@@ -431,7 +433,7 @@ export default function JewelryProducts({
 
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-neutral-600">Sort by:</label>
+                      <label className="text-sm text-neutral-600">{t("Sort by:")}</label>
                       <select
                         value={sortBy}
                         onChange={(e) => {
@@ -455,16 +457,16 @@ export default function JewelryProducts({
                         }}
                         className="border border-neutral-300 px-3 py-1 text-sm focus:outline-none focus:border-yellow-600"
                       >
-                        <option value="popularity">Most Popular</option>
-                        <option value="newest">New Arrivals</option>
-                        <option value="price_low_high">Price: Low to High</option>
-                        <option value="price_high_low">Price: High to Low</option>
-                        <option value="rating">Highest Rated</option>
+                        <option value="popularity">{t("Most Popular")}</option>
+                        <option value="newest">{t("New Arrivals")}</option>
+                        <option value="price_low_high">{t("Price: Low to High")}</option>
+                        <option value="price_high_low">{t("Price: High to Low")}</option>
+                        <option value="rating">{t("Highest Rated")}</option>
                       </select>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-neutral-600">Show:</label>
+                      <label className="text-sm text-neutral-600">{t("Show:")}</label>
                       <select
                         value={perPage}
                         onChange={(e) => {
@@ -498,8 +500,7 @@ export default function JewelryProducts({
                 </div>
 
                 <div className="mt-4 text-sm text-neutral-600">
-                  Showing {pagination.from}-{pagination.to} of {pagination.total} pieces
-                </div>
+                  {t('Showing {{from}}-{{to}} of {{total}} pieces', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
               </div>
 
               {/* Products Grid/List */}
@@ -612,7 +613,7 @@ export default function JewelryProducts({
                     onClick={clearFilters}
                     className="bg-yellow-600 text-white px-6 py-3 font-medium uppercase tracking-wide hover:bg-yellow-700 transition-colors"
                   >
-                    Clear all filters
+                    {t("Clear all filters")}
                   </button>
                 </div>
               )}

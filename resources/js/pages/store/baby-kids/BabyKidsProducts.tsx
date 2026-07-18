@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -106,6 +107,7 @@ export default function BabyKidsProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: BabyKidsProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'baby-kids-store';
   
@@ -192,7 +194,7 @@ export default function BabyKidsProducts({
         <div className="bg-pink-50 py-4 border-b border-pink-200">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-pink-600 hover:text-pink-700">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-pink-600 hover:text-pink-700">{t("Home")}</Link>
               <span className="mx-2 text-pink-400">/</span>
               <span className="text-gray-900 font-medium">Baby & Kids</span>
             </div>
@@ -233,13 +235,13 @@ export default function BabyKidsProducts({
                         onClick={clearFilters}
                         className="text-sm text-pink-600 hover:text-pink-700 font-medium"
                       >
-                        Clear All
+                        {t("Clear All")}
                       </button>
                     </div>
 
                     {/* Search */}
                     <div className="mb-6">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t("Search")}</label>
                       <div className="relative">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-pink-400" />
                         <input
@@ -282,13 +284,13 @@ export default function BabyKidsProducts({
 
                     {/* Price Range */}
                     <div className="mb-6">
-                      <label className="block text-sm font-medium text-gray-700 mb-3">Price Range</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">{t("Price Range")}</label>
                       <div className="flex items-center space-x-2">
                         <input
                           type="number"
                           value={priceRange.min}
                           onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                          placeholder="Min"
+                          placeholder={t("Min")}
                           className="w-full px-3 py-2 border-2 border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-400"
                         />
                         <span className="text-gray-500">-</span>
@@ -296,7 +298,7 @@ export default function BabyKidsProducts({
                           type="number"
                           value={priceRange.max}
                           onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                          placeholder="Max"
+                          placeholder={t("Max")}
                           className="w-full px-3 py-2 border-2 border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-400"
                         />
                       </div>
@@ -305,7 +307,7 @@ export default function BabyKidsProducts({
                     {/* Brands */}
                     {brands.length > 0 && (
                       <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Brands</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-3">{t("Brands")}</label>
                         <div className="space-y-2 max-h-40 overflow-y-auto">
                           {brands.map((brand) => (
                             <label key={brand.id} className="flex items-center">
@@ -333,7 +335,7 @@ export default function BabyKidsProducts({
 
                     {/* Rating */}
                     <div className="mb-6">
-                      <label className="block text-sm font-medium text-gray-700 mb-3">Rating</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">{t("Rating")}</label>
                       <div className="space-y-2">
                         {[5, 4, 3, 2, 1].map((rating) => (
                           <label key={rating} className="flex items-center">
@@ -360,7 +362,7 @@ export default function BabyKidsProducts({
 
                     {/* Availability */}
                     <div className="mb-6">
-                      <label className="block text-sm font-medium text-gray-700 mb-3">Availability</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">{t("Availability")}</label>
                       <div className="space-y-2">
                         <label className="flex items-center">
                           <input
@@ -380,7 +382,7 @@ export default function BabyKidsProducts({
                             onChange={() => setAvailability('in_stock')}
                             className="mr-2 text-pink-500 focus:ring-pink-400"
                           />
-                          <span className="text-sm text-gray-700">In Stock</span>
+                          <span className="text-sm text-gray-700">{t("In Stock")}</span>
                         </label>
                         <label className="flex items-center">
                           <input
@@ -390,7 +392,7 @@ export default function BabyKidsProducts({
                             onChange={() => setAvailability('out_of_stock')}
                             className="mr-2 text-pink-500 focus:ring-pink-400"
                           />
-                          <span className="text-sm text-gray-700">Rupture de stock</span>
+                          <span className="text-sm text-gray-700">{t("Out of Stock")}</span>
                         </label>
                       </div>
                     </div>
@@ -399,7 +401,7 @@ export default function BabyKidsProducts({
                       onClick={applyFilters}
                       className="w-full bg-pink-500 text-white py-3 px-6 rounded-full font-bold hover:bg-pink-600 transition-colors shadow-lg"
                     >
-                      Apply Filters
+                      {t("Apply Filters")}
                     </button>
                   </div>
                 </div>
@@ -439,7 +441,7 @@ export default function BabyKidsProducts({
 
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
-                          <label className="text-sm text-gray-600">Sort by:</label>
+                          <label className="text-sm text-gray-600">{t("Sort by:")}</label>
                           <select
                             value={sortBy}
                             onChange={(e) => {
@@ -463,16 +465,16 @@ export default function BabyKidsProducts({
                             }}
                             className="border-2 border-pink-200 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-pink-400"
                           >
-                            <option value="popularity">Most Popular</option>
-                            <option value="newest">New Arrivals</option>
-                            <option value="price_low_high">Price: Low to High</option>
-                            <option value="price_high_low">Price: High to Low</option>
-                            <option value="rating">Highest Rated</option>
+                            <option value="popularity">{t("Most Popular")}</option>
+                            <option value="newest">{t("New Arrivals")}</option>
+                            <option value="price_low_high">{t("Price: Low to High")}</option>
+                            <option value="price_high_low">{t("Price: High to Low")}</option>
+                            <option value="rating">{t("Highest Rated")}</option>
                           </select>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <label className="text-sm text-gray-600">Show:</label>
+                          <label className="text-sm text-gray-600">{t("Show:")}</label>
                           <select
                             value={perPage}
                             onChange={(e) => {
@@ -506,8 +508,7 @@ export default function BabyKidsProducts({
                     </div>
 
                     <div className="mt-4 text-sm text-gray-600">
-                      Showing {pagination.from}-{pagination.to} of {pagination.total} adorable items
-                    </div>
+                      {t('Showing {{from}}-{{to}} of {{total}} adorable items', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
                   </div>
                 </div>
 
@@ -614,7 +615,7 @@ export default function BabyKidsProducts({
                       onClick={clearFilters}
                       className="bg-pink-500 text-white px-6 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors shadow-lg"
                     >
-                      Clear all filters
+                      {t("Clear all filters")}
                     </button>
                   </div>
                 )}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, Eye, Star } from 'lucide-react';
 import { Link, usePage, router } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AddToCartButton from './AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
@@ -48,6 +49,7 @@ export default function ProductCard({
   storeSettings,
   currencies
 }: ProductProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const store = props.store;
   const finalStoreSettings = storeSettings || props.storeSettings || {};
@@ -124,7 +126,7 @@ export default function ProductCard({
         {!isInStock && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
             <span className="bg-white/80 text-gray-800 text-sm font-medium px-3 py-1 rounded-md backdrop-blur-sm">
-              Out of Stock
+              {t("Out of Stock")}
             </span>
           </div>
         )}
@@ -133,7 +135,7 @@ export default function ProductCard({
         {hasVariants && (
           <div className="absolute top-3 left-3">
             <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">
-              In Variant
+              {t("In Variant")}
             </span>
           </div>
         )}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -102,6 +103,7 @@ export default function CarsProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: CarsProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'cars-store';
   
@@ -188,7 +190,7 @@ export default function CarsProducts({
         <div className="bg-gray-100 py-4 border-b border-gray-200">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-600 hover:text-red-600">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-600 hover:text-red-600">{t("Home")}</Link>
               <span className="mx-2 text-gray-400">/</span>
               <span className="text-gray-900 font-bold">Auto Parts</span>
             </div>
@@ -224,12 +226,12 @@ export default function CarsProducts({
               <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                 <div className="bg-white border border-gray-200 p-6 sticky top-24">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-black text-gray-900 tracking-wider uppercase">Filters</h3>
+                    <h3 className="text-lg font-black text-gray-900 tracking-wider uppercase">{t("Filters")}</h3>
                     <button
                       onClick={clearFilters}
                       className="text-sm text-red-600 hover:text-red-700 font-bold tracking-wider uppercase"
                     >
-                      Clear All
+                      {t("Clear All")}
                     </button>
                   </div>
 
@@ -251,7 +253,7 @@ export default function CarsProducts({
 
                   {/* Categories */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Catégories</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Categories")}</label>
                     <div className="space-y-2 max-h-40 overflow-y-auto">
                       {categories.map((category) => (
                         <label key={category.id} className="flex items-center">
@@ -278,13 +280,13 @@ export default function CarsProducts({
 
                   {/* Price Range */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Price Range</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Price Range")}</label>
                     <div className="flex items-center space-x-2">
                       <input
                         type="number"
                         value={priceRange.min}
                         onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                        placeholder="Min"
+                        placeholder={t("Min")}
                         className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-red-600"
                       />
                       <span className="text-gray-500">-</span>
@@ -292,7 +294,7 @@ export default function CarsProducts({
                         type="number"
                         value={priceRange.max}
                         onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                        placeholder="Max"
+                        placeholder={t("Max")}
                         className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-red-600"
                       />
                     </div>
@@ -301,7 +303,7 @@ export default function CarsProducts({
                   {/* Brands */}
                   {brands.length > 0 && (
                     <div className="mb-6">
-                      <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Brands</label>
+                      <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Brands")}</label>
                       <div className="space-y-2 max-h-40 overflow-y-auto">
                         {brands.map((brand) => (
                           <label key={brand.id} className="flex items-center">
@@ -329,7 +331,7 @@ export default function CarsProducts({
 
                   {/* Rating */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Rating</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Rating")}</label>
                     <div className="space-y-2">
                       {[5, 4, 3, 2, 1].map((rating) => (
                         <label key={rating} className="flex items-center">
@@ -356,7 +358,7 @@ export default function CarsProducts({
 
                   {/* Availability */}
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">Availability</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Availability")}</label>
                     <div className="space-y-2">
                       <label className="flex items-center">
                         <input
@@ -376,7 +378,7 @@ export default function CarsProducts({
                           onChange={() => setAvailability('in_stock')}
                           className="mr-2 text-red-600 focus:ring-red-500"
                         />
-                        <span className="text-sm text-gray-700 font-medium">In Stock</span>
+                        <span className="text-sm text-gray-700 font-medium">{t("In Stock")}</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -386,7 +388,7 @@ export default function CarsProducts({
                           onChange={() => setAvailability('out_of_stock')}
                           className="mr-2 text-red-600 focus:ring-red-500"
                         />
-                        <span className="text-sm text-gray-700 font-medium">Rupture de stock</span>
+                        <span className="text-sm text-gray-700 font-medium">{t("Out of Stock")}</span>
                       </label>
                     </div>
                   </div>
@@ -395,7 +397,7 @@ export default function CarsProducts({
                     onClick={applyFilters}
                     className="w-full bg-red-600 text-white py-3 px-6 font-bold tracking-wider uppercase hover:bg-red-700 transition-colors"
                   >
-                    Apply Filters
+                    {t("Apply Filters")}
                   </button>
                 </div>
               </div>
@@ -432,7 +434,7 @@ export default function CarsProducts({
 
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <label className="text-sm text-gray-600 font-medium">Sort by:</label>
+                        <label className="text-sm text-gray-600 font-medium">{t("Sort by:")}</label>
                         <select
                           value={sortBy}
                           onChange={(e) => {
@@ -456,16 +458,16 @@ export default function CarsProducts({
                           }}
                           className="border border-gray-300 px-3 py-1 text-sm focus:outline-none focus:border-red-600"
                         >
-                          <option value="popularity">Most Popular</option>
-                          <option value="newest">New Arrivals</option>
-                          <option value="price_low_high">Price: Low to High</option>
-                          <option value="price_high_low">Price: High to Low</option>
-                          <option value="rating">Highest Rated</option>
+                          <option value="popularity">{t("Most Popular")}</option>
+                          <option value="newest">{t("New Arrivals")}</option>
+                          <option value="price_low_high">{t("Price: Low to High")}</option>
+                          <option value="price_high_low">{t("Price: High to Low")}</option>
+                          <option value="rating">{t("Highest Rated")}</option>
                         </select>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <label className="text-sm text-gray-600 font-medium">Show:</label>
+                        <label className="text-sm text-gray-600 font-medium">{t("Show:")}</label>
                         <select
                           value={perPage}
                           onChange={(e) => {
@@ -499,8 +501,7 @@ export default function CarsProducts({
                   </div>
 
                   <div className="mt-4 text-sm text-gray-600 font-medium">
-                    Showing {pagination.from}-{pagination.to} of {pagination.total} auto parts
-                  </div>
+                    {t('Showing {{from}}-{{to}} of {{total}} auto parts', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
                 </div>
 
                 {/* Products Grid/List */}
@@ -601,7 +602,7 @@ export default function CarsProducts({
                       onClick={clearFilters}
                       className="bg-red-600 text-white px-6 py-3 font-bold tracking-wider uppercase hover:bg-red-700 transition-colors"
                     >
-                      Clear all filters
+                      {t("Clear all filters")}
                     </button>
                   </div>
                 )}

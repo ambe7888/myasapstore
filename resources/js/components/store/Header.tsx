@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { 
   Search, 
   ShoppingCart, 
@@ -42,6 +43,7 @@ function Header({
   content,
   theme = 'default'
 }: HeaderProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const store = props.store;
   
@@ -169,19 +171,19 @@ function Header({
                   {isLoggedIn ? (
                     <>
                       <div className="px-4 py-3 border-b border-gray-200">
-                        <p className="text-sm font-medium text-gray-900">Hello, {userName}</p>
+                        <p className="text-sm font-medium text-gray-900">{t('Hello,')} {userName}</p>
                       </div>
                       <Link 
                         href={generateStoreUrl('store.my-profile', store)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        My Profile
+                        {t('My Profile')}
                       </Link>
                       <Link 
                         href={generateStoreUrl('store.my-orders', store)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        My Orders
+                        {t('My Orders')}
                       </Link>
                       <Link 
                         href={generateStoreUrl('store.logout', store)} 
@@ -189,7 +191,7 @@ function Header({
                         as="button" 
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Logout
+                        {t('Logout')}
                       </Link>
                     </>
                   ) : (
@@ -198,13 +200,13 @@ function Header({
                         href={generateStoreUrl('store.login', store)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Login
+                        {t('Login')}
                       </Link>
                       <Link 
                         href={generateStoreUrl('store.register', store)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Register
+                        {t('Register')}
                       </Link>
                     </>
                   )}

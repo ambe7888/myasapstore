@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -101,6 +102,7 @@ export default function FashionProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: FashionProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'fashion-store';
   
@@ -192,9 +194,9 @@ export default function FashionProducts({
         <div className="bg-gray-50 py-4">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-pink-600">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-pink-600">{t("Home")}</Link>
               <span className="mx-2 text-gray-400">/</span>
-              <span className="text-gray-800 font-medium">Products</span>
+              <span className="text-gray-800 font-medium">{t("Products")}</span>
             </div>
           </div>
         </div>
@@ -222,13 +224,13 @@ export default function FashionProducts({
                     onClick={clearFilters}
                     className="text-sm text-gray-600 hover:text-black font-light uppercase tracking-wide underline hover:no-underline transition-all"
                   >
-                    Clear All
+                    {t("Clear All")}
                   </button>
                 </div>
 
                 {/* Search */}
                 <div className="mb-6">
-                  <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">Search</label>
+                  <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">{t("Search")}</label>
                   <div className="relative">
                     <input
                       type="text"
@@ -270,14 +272,14 @@ export default function FashionProducts({
 
                 {/* Price Range */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Price Range</label>
+                  <label className="block text-sm font-medium mb-2">{t("Price Range")}</label>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
                         type="number"
                         value={priceRange.min}
                         onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                        placeholder="Min"
+                        placeholder={t("Min")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                       />
                       <span className="text-gray-500">-</span>
@@ -285,7 +287,7 @@ export default function FashionProducts({
                         type="number"
                         value={priceRange.max}
                         onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                        placeholder="Max"
+                        placeholder={t("Max")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                       />
                     </div>
@@ -323,7 +325,7 @@ export default function FashionProducts({
 
                 {/* Rating */}
                 <div className="mb-6">
-                  <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">Rating</label>
+                  <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">{t("Rating")}</label>
                   <div className="space-y-2">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <label key={rating} className="flex items-center">
@@ -350,7 +352,7 @@ export default function FashionProducts({
 
                 {/* Availability */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Availability</label>
+                  <label className="block text-sm font-medium mb-2">{t("Availability")}</label>
                   <div className="space-y-2">
                     <label className="flex items-center">
                       <input
@@ -360,7 +362,7 @@ export default function FashionProducts({
                         onChange={() => setAvailability('all')}
                         className="mr-2 text-pink-600 focus:ring-pink-500"
                       />
-                      <span className="text-sm">All Products</span>
+                      <span className="text-sm">{t("All Products")}</span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -370,7 +372,7 @@ export default function FashionProducts({
                         onChange={() => setAvailability('in_stock')}
                         className="mr-2 text-pink-600 focus:ring-pink-500"
                       />
-                      <span className="text-sm">In Stock</span>
+                      <span className="text-sm">{t("In Stock")}</span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -380,7 +382,7 @@ export default function FashionProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-2 text-pink-600 focus:ring-pink-500"
                       />
-                      <span className="text-sm">Rupture de stock</span>
+                      <span className="text-sm">{t("Out of Stock")}</span>
                     </label>
                   </div>
                 </div>
@@ -389,7 +391,7 @@ export default function FashionProducts({
                   onClick={applyFilters}
                   className="w-full border border-black text-black py-3 px-6 font-light uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-300"
                 >
-                  Apply Filters
+                  {t("Apply Filters")}
                 </button>
               </div>
             </div>
@@ -426,7 +428,7 @@ export default function FashionProducts({
 
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-gray-600">Sort by:</label>
+                      <label className="text-sm text-gray-600">{t("Sort by:")}</label>
                       <select
                         value={sortBy}
                         onChange={(e) => {
@@ -451,16 +453,16 @@ export default function FashionProducts({
                         }}
                         className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
                       >
-                        <option value="popularity">Popularity</option>
-                        <option value="newest">Newest</option>
-                        <option value="price_low_high">Price: Low to High</option>
-                        <option value="price_high_low">Price: High to Low</option>
-                        <option value="rating">Rating</option>
+                        <option value="popularity">{t("Popularity")}</option>
+                        <option value="newest">{t("Newest")}</option>
+                        <option value="price_low_high">{t("Price: Low to High")}</option>
+                        <option value="price_high_low">{t("Price: High to Low")}</option>
+                        <option value="rating">{t("Rating")}</option>
                       </select>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-gray-600">Show:</label>
+                      <label className="text-sm text-gray-600">{t("Show:")}</label>
                       <select
                         value={perPage}
                         onChange={(e) => {
@@ -496,8 +498,7 @@ export default function FashionProducts({
 
                 {/* Results count */}
                 <div className="mt-4 text-sm text-gray-600">
-                  Showing {pagination.from}-{pagination.to} of {pagination.total} products
-                </div>
+                  {t('Showing {{from}}-{{to}} of {{total}} products', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
               </div>
 
               {/* Products Grid/List */}
@@ -590,14 +591,14 @@ export default function FashionProducts({
                 <div className="text-center py-12">
                   <div className="text-gray-500 mb-4">
                     <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-medium mb-2">Aucun produit trouvé</h3>
-                    <p>Try adjusting your filters or search terms</p>
+                    <h3 className="text-lg font-medium mb-2">{t("No products found")}</h3>
+                    <p>{t("Try adjusting your filters or search terms")}</p>
                   </div>
                   <button
                     onClick={clearFilters}
                     className="text-black hover:underline"
                   >
-                    Clear all filters
+                    {t("Clear all filters")}
                   </button>
                 </div>
               )}

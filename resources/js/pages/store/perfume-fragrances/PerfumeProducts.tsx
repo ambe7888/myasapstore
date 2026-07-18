@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -104,6 +105,7 @@ export default function PerfumeProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: PerfumeProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'perfume-store';
   
@@ -190,7 +192,7 @@ export default function PerfumeProducts({
         <div className="bg-purple-50 py-4 border-b border-purple-100">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-purple-600 hover:text-purple-700">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-purple-600 hover:text-purple-700">{t("Home")}</Link>
               <span className="mx-2 text-purple-400">/</span>
               <span className="text-gray-900 font-medium">Fragrances</span>
             </div>
@@ -223,7 +225,7 @@ export default function PerfumeProducts({
                       onClick={clearFilters}
                       className="text-sm text-purple-600 hover:text-purple-700 font-medium"
                     >
-                      Clear All
+                      {t("Clear All")}
                     </button>
                   </div>
 
@@ -272,13 +274,13 @@ export default function PerfumeProducts({
 
                   {/* Price Range */}
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Price Range</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">{t("Price Range")}</label>
                     <div className="flex items-center space-x-2">
                       <input
                         type="number"
                         value={priceRange.min}
                         onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                        placeholder="Min"
+                        placeholder={t("Min")}
                         className="w-full px-3 py-2 border border-purple-200 rounded-full text-sm focus:outline-none focus:border-purple-400"
                       />
                       <span className="text-gray-500">-</span>
@@ -286,7 +288,7 @@ export default function PerfumeProducts({
                         type="number"
                         value={priceRange.max}
                         onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                        placeholder="Max"
+                        placeholder={t("Max")}
                         className="w-full px-3 py-2 border border-purple-200 rounded-full text-sm focus:outline-none focus:border-purple-400"
                       />
                     </div>
@@ -323,7 +325,7 @@ export default function PerfumeProducts({
 
                   {/* Rating */}
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Rating</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">{t("Rating")}</label>
                     <div className="space-y-2">
                       {[5, 4, 3, 2, 1].map((rating) => (
                         <label key={rating} className="flex items-center">
@@ -350,7 +352,7 @@ export default function PerfumeProducts({
 
                   {/* Availability */}
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Availability</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">{t("Availability")}</label>
                     <div className="space-y-2">
                       <label className="flex items-center">
                         <input
@@ -370,7 +372,7 @@ export default function PerfumeProducts({
                           onChange={() => setAvailability('in_stock')}
                           className="mr-2 text-purple-600 focus:ring-purple-500"
                         />
-                        <span className="text-sm text-gray-700">In Stock</span>
+                        <span className="text-sm text-gray-700">{t("In Stock")}</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -380,7 +382,7 @@ export default function PerfumeProducts({
                           onChange={() => setAvailability('out_of_stock')}
                           className="mr-2 text-purple-600 focus:ring-purple-500"
                         />
-                        <span className="text-sm text-gray-700">Rupture de stock</span>
+                        <span className="text-sm text-gray-700">{t("Out of Stock")}</span>
                       </label>
                     </div>
                   </div>
@@ -389,7 +391,7 @@ export default function PerfumeProducts({
                     onClick={applyFilters}
                     className="w-full bg-purple-800 text-white py-3 px-6 rounded-full font-medium hover:bg-purple-900 transition-colors"
                   >
-                    Apply Filters
+                    {t("Apply Filters")}
                   </button>
                 </div>
               </div>
@@ -426,7 +428,7 @@ export default function PerfumeProducts({
 
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <label className="text-sm text-gray-600">Sort by:</label>
+                        <label className="text-sm text-gray-600">{t("Sort by:")}</label>
                         <select
                           value={sortBy}
                           onChange={(e) => {
@@ -450,16 +452,16 @@ export default function PerfumeProducts({
                           }}
                           className="border border-purple-200 rounded-full px-3 py-1 text-sm focus:outline-none focus:border-purple-400"
                         >
-                          <option value="popularity">Most Popular</option>
-                          <option value="newest">New Arrivals</option>
-                          <option value="price_low_high">Price: Low to High</option>
-                          <option value="price_high_low">Price: High to Low</option>
-                          <option value="rating">Highest Rated</option>
+                          <option value="popularity">{t("Most Popular")}</option>
+                          <option value="newest">{t("New Arrivals")}</option>
+                          <option value="price_low_high">{t("Price: Low to High")}</option>
+                          <option value="price_high_low">{t("Price: High to Low")}</option>
+                          <option value="rating">{t("Highest Rated")}</option>
                         </select>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <label className="text-sm text-gray-600">Show:</label>
+                        <label className="text-sm text-gray-600">{t("Show:")}</label>
                         <select
                           value={perPage}
                           onChange={(e) => {
@@ -493,8 +495,7 @@ export default function PerfumeProducts({
                   </div>
 
                   <div className="mt-4 text-sm text-gray-600">
-                    Showing {pagination.from}-{pagination.to} of {pagination.total} fragrances
-                  </div>
+                    {t('Showing {{from}}-{{to}} of {{total}} fragrances', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
                 </div>
 
                 {/* Products Grid/List */}
@@ -597,7 +598,7 @@ export default function PerfumeProducts({
                       onClick={clearFilters}
                       className="bg-purple-800 text-white px-6 py-3 rounded-full font-medium hover:bg-purple-900 transition-colors"
                     >
-                      Clear all filters
+                      {t("Clear all filters")}
                     </button>
                   </div>
                 )}

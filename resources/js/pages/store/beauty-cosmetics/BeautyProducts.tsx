@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -101,6 +102,7 @@ export default function BeautyProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: BeautyProductsProps) {
+  const { t } = useTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'beauty-store';
   
@@ -192,9 +194,9 @@ export default function BeautyProducts({
         <div className="bg-rose-50 py-4">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-rose-600">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-rose-600">{t("Home")}</Link>
               <span className="mx-2 text-gray-400">/</span>
-              <span className="text-gray-800 font-medium">Products</span>
+              <span className="text-gray-800 font-medium">{t("Products")}</span>
             </div>
           </div>
         </div>
@@ -233,7 +235,7 @@ export default function BeautyProducts({
                     onClick={clearFilters}
                     className="text-sm text-rose-600 hover:text-rose-800 font-semibold px-3 py-1 rounded-lg hover:bg-rose-100 transition-colors"
                   >
-                    Clear All
+                    {t("Clear All")}
                   </button>
                 </div>
 
@@ -282,14 +284,14 @@ export default function BeautyProducts({
 
                 {/* Price Range */}
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Price Range</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">{t("Price Range")}</label>
                   <div className="bg-white p-4 rounded-xl border-2 border-rose-100">
                     <div className="flex items-center space-x-3">
                       <input
                         type="number"
                         value={priceRange.min}
                         onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                        placeholder="Min"
+                        placeholder={t("Min")}
                         className="w-full px-4 py-3 border-2 border-rose-200 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
                       />
                       <span className="text-rose-600 font-bold">—</span>
@@ -297,7 +299,7 @@ export default function BeautyProducts({
                         type="number"
                         value={priceRange.max}
                         onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                        placeholder="Max"
+                        placeholder={t("Max")}
                         className="w-full px-4 py-3 border-2 border-rose-200 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
                       />
                     </div>
@@ -362,7 +364,7 @@ export default function BeautyProducts({
 
                 {/* Availability */}
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Availability</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">{t("Availability")}</label>
                   <div className="space-y-3">
                     <label className="flex items-center p-2 rounded-lg hover:bg-rose-100 transition-colors cursor-pointer">
                       <input
@@ -372,7 +374,7 @@ export default function BeautyProducts({
                         onChange={() => setAvailability('all')}
                         className="mr-3 w-4 h-4 text-rose-600 focus:ring-rose-500"
                       />
-                      <span className="text-sm font-medium text-rose-700">All Products</span>
+                      <span className="text-sm font-medium text-rose-700">{t("All Products")}</span>
                     </label>
                     <label className="flex items-center p-2 rounded-lg hover:bg-rose-100 transition-colors cursor-pointer">
                       <input
@@ -382,7 +384,7 @@ export default function BeautyProducts({
                         onChange={() => setAvailability('in_stock')}
                         className="mr-3 w-4 h-4 text-rose-600 focus:ring-rose-500"
                       />
-                      <span className="text-sm font-medium text-rose-700">In Stock</span>
+                      <span className="text-sm font-medium text-rose-700">{t("In Stock")}</span>
                     </label>
                     <label className="flex items-center p-2 rounded-lg hover:bg-rose-100 transition-colors cursor-pointer">
                       <input
@@ -392,7 +394,7 @@ export default function BeautyProducts({
                         onChange={() => setAvailability('out_of_stock')}
                         className="mr-3 w-4 h-4 text-rose-600 focus:ring-rose-500"
                       />
-                      <span className="text-sm font-medium text-rose-700">Rupture de stock</span>
+                      <span className="text-sm font-medium text-rose-700">{t("Out of Stock")}</span>
                     </label>
                   </div>
                 </div>
@@ -401,7 +403,7 @@ export default function BeautyProducts({
                   onClick={applyFilters}
                   className="w-full bg-rose-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-rose-700 transition-colors duration-300"
                 >
-                  Apply Filters
+                  {t("Apply Filters")}
                 </button>
               </div>
             </div>
@@ -438,7 +440,7 @@ export default function BeautyProducts({
 
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-gray-600 font-medium">Sort by:</label>
+                      <label className="text-sm text-gray-600 font-medium">{t("Sort by:")}</label>
                       <select
                         value={sortBy}
                         onChange={(e) => {
@@ -463,16 +465,16 @@ export default function BeautyProducts({
                         }}
                         className="border-2 border-rose-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
                       >
-                        <option value="popularity">Most Popular</option>
-                        <option value="newest">New Arrivals</option>
-                        <option value="price_low_high">Price: Low to High</option>
-                        <option value="price_high_low">Price: High to Low</option>
-                        <option value="rating">Highest Rated</option>
+                        <option value="popularity">{t("Most Popular")}</option>
+                        <option value="newest">{t("New Arrivals")}</option>
+                        <option value="price_low_high">{t("Price: Low to High")}</option>
+                        <option value="price_high_low">{t("Price: High to Low")}</option>
+                        <option value="rating">{t("Highest Rated")}</option>
                       </select>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-sm text-gray-600 font-medium">Show:</label>
+                      <label className="text-sm text-gray-600 font-medium">{t("Show:")}</label>
                       <select
                         value={perPage}
                         onChange={(e) => {
@@ -508,8 +510,7 @@ export default function BeautyProducts({
 
                 {/* Results count */}
                 <div className="mt-4 text-sm text-gray-600 font-medium">
-                  Showing {pagination.from}-{pagination.to} of {pagination.total} beauty products
-                </div>
+                  {t('Showing {{from}}-{{to}} of {{total}} beauty products', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
               </div>
 
               {/* Products Grid/List */}
@@ -581,7 +582,7 @@ export default function BeautyProducts({
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm font-semibold">
                                       <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-                                      <span>Rupture de stock</span>
+                                      <span>{t("Out of Stock")}</span>
                                     </div>
                                   )}
                                 </div>
@@ -613,13 +614,13 @@ export default function BeautyProducts({
                   <div className="text-gray-500 mb-6">
                     <Sparkles className="h-16 w-16 mx-auto mb-6 opacity-50 text-rose-300" />
                     <h3 className="text-xl font-semibold mb-3 text-gray-700">No beauty products found</h3>
-                    <p className="text-gray-600">Try adjusting your filters or search terms to discover more products</p>
+                    <p className="text-gray-600">{t("Try adjusting your filters or search terms")} to discover more products</p>
                   </div>
                   <button
                     onClick={clearFilters}
                     className="bg-rose-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-rose-700 transition-colors duration-300"
                   >
-                    Clear all filters
+                    {t("Clear all filters")}
                   </button>
                 </div>
               )}

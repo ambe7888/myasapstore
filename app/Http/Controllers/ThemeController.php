@@ -49,6 +49,10 @@ class ThemeController extends Controller
                 'google_analytics' => $configuration['google_analytics'] ?: '',
                 'tiktok_pixel' => $configuration['tiktok_pixel'] ?: '',
                 'snapchat_pixel' => $configuration['snapchat_pixel'] ?: '',
+                'primary_color' => $configuration['primary_color'] ?? '#4f46e5',
+                'button_radius' => $configuration['button_radius'] ?? '0.625rem',
+                'button_text_add_to_cart' => $configuration['button_text_add_to_cart'] ?? '',
+                'button_text_buy_now' => $configuration['button_text_buy_now'] ?? '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -97,6 +101,10 @@ class ThemeController extends Controller
                 'google_analytics' => $configuration['google_analytics'] ?: '',
                 'tiktok_pixel' => $configuration['tiktok_pixel'] ?: '',
                 'snapchat_pixel' => $configuration['snapchat_pixel'] ?: '',
+                'primary_color' => $configuration['primary_color'] ?? '#4f46e5',
+                'button_radius' => $configuration['button_radius'] ?? '0.625rem',
+                'button_text_add_to_cart' => $configuration['button_text_add_to_cart'] ?? '',
+                'button_text_buy_now' => $configuration['button_text_buy_now'] ?? '',
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

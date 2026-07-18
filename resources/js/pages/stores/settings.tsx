@@ -57,8 +57,9 @@ export default function StoreSettings({ store, settings }: Props) {
       ]}
     >
       <Tabs defaultValue="general" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="general">{t('General')}</TabsTrigger>
+          <TabsTrigger value="appearance">{t('Appearance')}</TabsTrigger>
           <TabsTrigger value="tracking">{t('Tracking & Analytics')}</TabsTrigger>
           <TabsTrigger value="advanced">{t('Advanced')}</TabsTrigger>
         </TabsList>
@@ -113,6 +114,71 @@ export default function StoreSettings({ store, settings }: Props) {
                   onChange={(value) => updateSetting('favicon', value)}
                   placeholder={t('Select store favicon...')}
                   showPreview={true}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="appearance" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('Appearance Settings')}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="primary_color">{t('Primary Color')}</Label>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="primary_color"
+                    className="w-16 h-10 p-1"
+                    value={formData.primary_color || '#4f46e5'}
+                    onChange={(e) => updateSetting('primary_color', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    value={formData.primary_color || '#4f46e5'}
+                    onChange={(e) => updateSetting('primary_color', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="button_radius">{t('Button Style')}</Label>
+                <select
+                  id="button_radius"
+                  className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  value={formData.button_radius || '0.625rem'}
+                  onChange={(e) => updateSetting('button_radius', e.target.value)}
+                >
+                  <option value="0">{t('Square')}</option>
+                  <option value="0.375rem">{t('Slightly Rounded')}</option>
+                  <option value="0.625rem">{t('Rounded')}</option>
+                  <option value="9999px">{t('Pill')}</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="button_text_add_to_cart">{t('Add to Cart Text')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
+                <Input
+                  id="button_text_add_to_cart"
+                  placeholder={t('Add to Cart')}
+                  value={formData.button_text_add_to_cart || ''}
+                  onChange={(e) => updateSetting('button_text_add_to_cart', e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="button_text_buy_now">{t('Buy Now Text')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
+                <Input
+                  id="button_text_buy_now"
+                  placeholder={t('Buy Now')}
+                  value={formData.button_text_buy_now || ''}
+                  onChange={(e) => updateSetting('button_text_buy_now', e.target.value)}
                 />
               </div>
             </CardContent>

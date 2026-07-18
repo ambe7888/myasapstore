@@ -145,6 +145,11 @@ export default function StoreManagement({ stores = [], aggregatedStats = {} }) {
                         <Badge variant={store.config_status ? 'default' : 'secondary'}>
                           {store.config_status ? t('Active') : t('Inactive')}
                         </Badge>
+                        {store.is_default && (
+                          <Badge variant="outline" className="border-primary text-primary">
+                            {t('Default Store')}
+                          </Badge>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground">
                         {store.enable_custom_domain && store.custom_domain ? (
@@ -186,9 +191,11 @@ export default function StoreManagement({ stores = [], aggregatedStats = {} }) {
                       </Button>
                     </Permission>
                     <Permission permission="delete-stores">
-                      <Button variant="ghost" size="sm" onClick={() => setStoreToDelete(store.id)}>
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      {!store.is_default && (
+                        <Button variant="ghost" size="sm" onClick={() => setStoreToDelete(store.id)}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
                     </Permission>
                   </div>
                 </div>

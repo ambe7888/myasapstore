@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If request is for a file or directory that exists in public/, serve it directly
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # Redirect everything to the public/ subdirectory
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

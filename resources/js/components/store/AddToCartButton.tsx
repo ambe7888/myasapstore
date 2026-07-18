@@ -3,6 +3,7 @@ import { ShoppingCart, Settings } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { router } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import { useTranslation } from 'react-i18next';
 
 interface AddToCartButtonProps {
   product: {
@@ -23,6 +24,7 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ product, store, className = '', isShowOption=true, quantity=1 }: AddToCartButtonProps) {
   const { addToCart, loading } = useCart();
+  const { t } = useTranslation();
   
   const hasVariants = product.variants && (
     Array.isArray(product.variants) ? product.variants.length > 0 : 
@@ -41,7 +43,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
         router.visit(generateStoreUrl('store.product', store, {id: product.id}));
       } else {
         // On product page, show alert to select variants
-        alert('Please select product options before adding to cart.');
+        alert(t('Please select product options before adding to cart.'));
       }
       return;
     }
@@ -54,7 +56,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
         disabled 
         className={`bg-gray-300 text-gray-500 cursor-not-allowed ${className}`}
       >
-        Out of Stock
+        {t('Out of Stock')}
       </button>
     );
   }
@@ -68,12 +70,12 @@ export default function AddToCartButton({ product, store, className = '', isShow
       {hasVariants && !hasSelectedVariants ? (
         <>
           <Settings className="h-4 w-4 mr-2" />
-          {isShowOption ? 'Select Options' : 'Select Options'}
+          {t('Select Options')}
         </>
       ) : (
         <>
           <ShoppingCart className="h-4 w-4 mr-2" />
-          Add to Cart
+          {store?.button_text_add_to_cart || t('Add to Cart')}
         </>
       )}
     </button>

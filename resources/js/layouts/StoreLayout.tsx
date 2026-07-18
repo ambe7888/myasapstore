@@ -53,7 +53,7 @@ function StoreLayoutContent({
     if (!store) return;
     
     // Inject custom CSS
-    if (store.custom_css) {
+    if (store.custom_css || store.primary_color || store.button_radius) {
       const existingStyle = document.getElementById('store-custom-css');
       if (existingStyle) {
         existingStyle.remove();
@@ -61,7 +61,25 @@ function StoreLayoutContent({
       
       const style = document.createElement('style');
       style.id = 'store-custom-css';
-      style.textContent = store.custom_css;
+      
+      let cssContent = '';
+      
+      // Inject design variables
+      if (store.primary_color || store.button_radius) {
+        cssContent += `
+          :root {
+            ${store.primary_color ? `--theme-color: ${store.primary_color};` : ''}
+            ${store.button_radius ? `--radius: ${store.button_radius};` : ''}
+          }
+        `;
+      }
+      
+      // Add custom CSS
+      if (store.custom_css) {
+        cssContent += store.custom_css;
+      }
+      
+      style.textContent = cssContent;
       document.head.appendChild(style);
     }
     

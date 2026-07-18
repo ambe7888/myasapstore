@@ -47,7 +47,11 @@ class StoreConfiguration extends Model
             'facebook_pixel' => '',
             'google_analytics' => '',
             'tiktok_pixel' => '',
-            'snapchat_pixel' => ''
+            'snapchat_pixel' => '',
+            'primary_color' => '#4f46e5',
+            'button_radius' => '0.625rem',
+            'button_text_add_to_cart' => '',
+            'button_text_buy_now' => '',
         ];
         
         // Convert string boolean values to actual booleans

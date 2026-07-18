@@ -31,7 +31,7 @@
       "type": "textarea"
     },
     "button_text": {
-      "value": "Shop Collection",
+      "value": "Découvrir la collection",
       "type": "text"
     },
     "button_link": {
@@ -39,7 +39,7 @@
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "View Catalog",
+      "value": "Voir le catalogue",
       "type": "text"
     },
     "secondary_button_link": {

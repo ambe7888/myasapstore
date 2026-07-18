@@ -1,11 +1,11 @@
 {
   "header": {
     "welcome_text": {
-      "value": "Free shipping on orders over $75",
+      "value": "Livraison gratuite dès 75 $ d'achat",
       "type": "text"
     },
     "phone_text": {
-      "value": "Fragrance Concierge: +1 555 SCENT",
+      "value": "Service client parfum : +1 555 SCENT",
       "type": "text"
     },
     "show_welcome": {
@@ -19,19 +19,19 @@
   },
   "hero": {
     "badge_text": {
-      "value": "Signature Collection 2024",
+      "value": "Collection Signature 2024",
       "type": "text"
     },
     "title": {
-      "value": "Discover Your Signature Scent",
+      "value": "Découvrez votre parfum signature",
       "type": "text"
     },
     "subtitle": {
-      "value": "Immerse yourself in our curated collection of luxury fragrances, where each bottle tells a unique story of elegance, passion, and timeless sophistication.",
+      "value": "Plongez dans notre collection de parfums de luxe, où chaque flacon raconte une histoire unique d'élégance et de sophistication.",
       "type": "textarea"
     },
     "button_text": {
-      "value": "Explore Fragrances",
+      "value": "Explorer les parfums",
       "type": "text"
     },
     "button_link": {
@@ -39,7 +39,7 @@
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "Fragrance Guide",
+      "value": "Guide des parfums",
       "type": "text"
     },
     "secondary_button_link": {
@@ -53,11 +53,11 @@
   },
   "categories": {
     "title": {
-      "value": "Fragrance Families",
+      "value": "Familles olfactives",
       "type": "text"
     },
     "description": {
-      "value": "Explore our carefully curated fragrance categories, from fresh citrus to warm oriental blends, each crafted to complement your unique personality.",
+      "value": "Explorez nos catégories de fragrances, des notes agrumes fraîches aux accords orientaux chaleureux.",
       "type": "textarea"
     }
   },
@@ -146,7 +146,7 @@
       "type": "textarea"
     },
     "primary_button_text": {
-      "value": "Book Consultation",
+      "value": "Prendre rendez-vous",
       "type": "text"
     },
     "primary_button_link": {

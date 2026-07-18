@@ -1,7 +1,7 @@
 {
   "header": {
     "welcome_text": {
-      "value": "Free shipping on orders over $75",
+      "value": "Livraison gratuite dès 75 $ d'achat",
       "type": "text"
     },
     "phone_text": {
@@ -23,7 +23,7 @@
       "type": "text"
     },
     "title": {
-      "value": "Little Ones, Big Dreams",
+      "value": "Tout-petits, grands rêves",
       "type": "text"
     },
     "subtitle": {
@@ -66,7 +66,7 @@
   },
   "categories": {
     "title": {
-      "value": "Shop by Age",
+      "value": "Acheter par âge",
       "type": "text"
     },
     "description": {
@@ -98,7 +98,7 @@
       "type": "textarea"
     },
     "placeholder_text": {
-      "value": "Enter your email",
+      "value": "Entrez votre e-mail",
       "type": "text"
     },
     "button_text": {
@@ -271,7 +271,7 @@
     },
     "menu1": {
       "title": {
-        "value": "Customer Care",
+        "value": "Service client",
         "type": "text"
       },
       "links": {

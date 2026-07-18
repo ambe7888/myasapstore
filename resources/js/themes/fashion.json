@@ -181,7 +181,7 @@
     },
     "menu1": {
       "title": {
-        "value": "Customer Care",
+        "value": "Service client",
         "type": "text"
       },
       "links": {

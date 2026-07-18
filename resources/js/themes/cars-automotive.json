@@ -23,7 +23,7 @@
       "type": "text"
     },
     "title": {
-      "value": "Drive Your Passion",
+      "value": "Pilotez votre passion",
       "type": "text"
     },
     "subtitle": {
@@ -31,7 +31,7 @@
       "type": "textarea"
     },
     "button_text": {
-      "value": "Shop Parts",
+      "value": "Acheter des pièces",
       "type": "text"
     },
     "button_link": {
@@ -39,7 +39,7 @@
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "View Catalog",
+      "value": "Voir le catalogue",
       "type": "text"
     },
     "secondary_button_link": {

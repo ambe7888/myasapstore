@@ -39,7 +39,7 @@
       "type": "text"
     },
     "secondary_button_text": {
-      "value": "Book Consultation",
+      "value": "Prendre rendez-vous",
       "type": "text"
     },
     "secondary_button_link": {
@@ -98,7 +98,7 @@
       "type": "textarea"
     },
     "placeholder_text": {
-      "value": "Enter your email",
+      "value": "Entrez votre e-mail",
       "type": "text"
     },
     "button_text": {

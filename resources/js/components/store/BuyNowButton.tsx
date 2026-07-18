@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Settings } from 'lucide-react';
-import { useCart } from '@/contexts/CartContext';
 import { router } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import { useTranslation } from 'react-i18next';
+import QuickCheckoutModal from '@/components/store/QuickCheckoutModal';
 
 interface BuyNowButtonProps {
   product: {
@@ -23,9 +23,8 @@ interface BuyNowButtonProps {
 }
 
 export default function BuyNowButton({ product, store, className = '', isShowOption=true, quantity=1 }: BuyNowButtonProps) {
-  const { addToCart } = useCart();
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const hasVariants = product.variants && (
     Array.isArray(product.variants) ? product.variants.length > 0 : 
@@ -36,12 +35,15 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
   
   const isOutOfStock = product.is_active === false || (product.stock !== undefined && product.stock !== null && Number(product.stock) <= 0);
 
-  const handleClick = async () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (isOutOfStock) return;
+
     if (hasVariants && !hasSelectedVariants) {
       if (isShowOption) {
         // Redirect to product page to select variants
-        router.visit(generateStoreUrl('store.product', store, {id: product.id}));
+        router.visit(generateStoreUrl('store.product', store, { id: product.id }));
       } else {
         // On product page, show alert to select variants
         alert(t('Please select product options before proceeding.'));
@@ -49,15 +51,8 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
       return;
     }
     
-    setLoading(true);
-    try {
-        await addToCart(product, {variants:product.variants}, quantity);
-        // Redirect to checkout immediately
-        window.location.href = generateStoreUrl('store.checkout', store);
-    } catch (error) {
-        console.error('Error placing direct order', error);
-        setLoading(false);
-    }
+    // Open Quick Express Order Modal
+    setIsModalOpen(true);
   };
 
   if (isOutOfStock) {
@@ -72,23 +67,32 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
   }
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={loading}
-      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
-      style={{ backgroundColor: store?.button_color_buy_now || 'var(--btn-buy-now-color, #16a34a)' }}
-    >
-      {hasVariants && !hasSelectedVariants ? (
-        <>
-          <Settings className="h-4 w-4 mr-2" />
-          {t('Select Options')}
-        </>
-      ) : (
-        <>
-          <ShoppingBag className="h-4 w-4 mr-2" />
-          {loading ? t('Redirecting...') : (store?.button_text_buy_now || t('Buy Now'))}
-        </>
-      )}
-    </button>
+    <>
+      <button
+        onClick={handleClick}
+        className={`flex items-center justify-center hover:brightness-95 transition-all ${className}`}
+        style={{ backgroundColor: store?.button_color_buy_now || 'var(--btn-buy-now-color, #16a34a)' }}
+      >
+        {hasVariants && !hasSelectedVariants ? (
+          <>
+            <Settings className="h-4 w-4 mr-2" />
+            {t('Select Options')}
+          </>
+        ) : (
+          <>
+            <ShoppingBag className="h-4 w-4 mr-2" />
+            {store?.button_text_buy_now || t('Buy Now')}
+          </>
+        )}
+      </button>
+
+      <QuickCheckoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={product}
+        store={store}
+        initialQuantity={quantity}
+      />
+    </>
   );
 }

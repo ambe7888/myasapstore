@@ -49,7 +49,7 @@ export default function CarsLogin({
         theme={store.theme}
       >
         {/* Light Industrial Layout */}
-        <div className="min-h-screen bg-gray-100 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-100 relative overflow-hidden store-page-header">
           {/* Background Elements */}
           <div className="absolute inset-0">
             <div className="absolute top-20 left-20 w-64 h-64 border-2 border-red-600 opacity-5 rotate-45"></div>

@@ -52,7 +52,7 @@ export default function CarsRegister({
         theme={store.theme}
       >
         {/* Light Industrial Layout */}
-        <div className="min-h-screen bg-gray-100 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-100 relative overflow-hidden store-page-header">
           {/* Background Elements */}
           <div className="absolute inset-0">
             <div className="absolute top-10 right-10 w-80 h-80 border-2 border-red-600 opacity-5 rotate-12"></div>

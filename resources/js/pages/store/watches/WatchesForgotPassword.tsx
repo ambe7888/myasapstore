@@ -46,7 +46,8 @@ export default function WatchesForgotPassword({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="min-h-screen bg-slate-50 flex">
+        
+        <div className="min-h-screen bg-slate-50 flex store-page-header">
           {/* Left Side - Account Security */}
           <div className="hidden lg:flex lg:w-1/2 bg-slate-100 items-center justify-center p-12">
             <div className="max-w-md">

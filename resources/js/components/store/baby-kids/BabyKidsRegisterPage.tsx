@@ -54,7 +54,8 @@ export default function BabyKidsRegisterPage({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="min-h-screen bg-pink-50 flex items-center justify-center p-4 relative overflow-hidden">
+        
+        <div className="min-h-screen bg-pink-50 flex items-center justify-center p-4 relative overflow-hidden store-page-header">
           {/* Background Decorations */}
           <div className="absolute inset-0">
             <div className="absolute top-20 left-20 w-12 h-12 bg-pink-200 rounded-full opacity-40 animate-pulse"></div>

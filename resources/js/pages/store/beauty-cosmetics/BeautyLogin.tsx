@@ -49,7 +49,7 @@ export default function BeautyLogin({
         customPages={customPages}
         customFooter={<BeautyFooter storeName={store.name} logo={store.logo} />}
       >
-        <div className="min-h-screen bg-rose-50 flex items-center justify-center py-12 px-4">
+        <div className="min-h-screen bg-rose-50 flex items-center justify-center py-12 px-4 store-page-header">
           <div className="max-w-md w-full">
             {/* Header */}
             <div className="text-center mb-8">

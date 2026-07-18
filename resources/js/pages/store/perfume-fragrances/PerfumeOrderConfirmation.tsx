@@ -142,7 +142,7 @@ export default function PerfumeOrderConfirmation({
         theme="perfume-fragrances"
       >
         {/* Elegant Success Header */}
-        <div className="bg-gradient-to-r from-purple-50 to-stone-50 py-20 border-b border-purple-200">
+        <div className="bg-gradient-to-r from-purple-50 to-stone-50 py-20 border-b border-purple-200 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <div className="flex items-center justify-center mb-8">

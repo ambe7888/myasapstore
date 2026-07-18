@@ -63,7 +63,7 @@ function FurnitureCartContent({
       storeId={store.id}
       theme={store.theme || 'furniture-interior'}
     >
-      <div className="bg-yellow-800 text-white py-12">
+      <div className="bg-yellow-800 text-white py-12 store-page-header">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">Panier d'achat</h1>

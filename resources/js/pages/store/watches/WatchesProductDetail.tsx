@@ -202,7 +202,8 @@ function WatchesProductDetail({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="bg-white min-h-screen">
+        
+        <div className="bg-white min-h-screen store-page-header">
           {/* Breadcrumb */}
           <div className="bg-slate-50 border-b border-slate-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-4">

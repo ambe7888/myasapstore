@@ -46,7 +46,7 @@ export default function CarsCustomPage({
         theme={store.theme}
       >
         {/* Unique Automotive Header */}
-        <div className="bg-gray-900 text-white py-8 border-b-4 border-red-600">
+        <div className="bg-gray-900 text-white py-8 border-b-4 border-red-600 store-page-header">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">

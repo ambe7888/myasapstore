@@ -62,7 +62,7 @@ export default function FashionBlogPost({
         theme={store.theme}
       >
         {/* Hero Image */}
-        <div className="relative h-96 bg-black overflow-hidden">
+        <div className="relative h-96 bg-black overflow-hidden store-page-header">
           <img
             src={getImageUrl(post.featured_image)}
             alt={post.title}

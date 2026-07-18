@@ -58,7 +58,7 @@ export default function FashionRegister({
         theme={store.theme || 'fashion'}
       >
         {/* Modern Full-Screen Layout */}
-        <div className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+        <div className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-black to-gray-800 store-page-header">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{

@@ -47,7 +47,7 @@ export default function BabyKidsForgotPassword({
         storeContent={storeContent}
         customFooter={<BabyKidsFooter storeName={store.name} logo={store.logo} content={storeContent.footer} />}
       >
-        <div className="min-h-screen bg-pink-50 relative overflow-hidden">
+        <div className="min-h-screen bg-pink-50 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
             <div className="absolute top-20 left-20 w-16 h-16 bg-pink-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
             <div className="absolute top-40 right-32 w-12 h-12 bg-blue-300 rounded-full opacity-50 animate-float-delayed"></div>

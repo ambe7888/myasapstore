@@ -53,7 +53,8 @@ export default function ElectronicsRegister({
         storeContent={storeContent}
         theme={store.theme || 'electronics'}
       >
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+        
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 store-page-header">
           <div className="max-w-md w-full">
             {/* Header */}
             <div className="text-center mb-8">

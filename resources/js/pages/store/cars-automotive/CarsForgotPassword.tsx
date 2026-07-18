@@ -46,7 +46,7 @@ export default function CarsForgotPassword({
         theme={store.theme}
       >
         {/* Light Industrial Layout */}
-        <div className="min-h-screen bg-gray-100 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-100 relative overflow-hidden store-page-header">
           {/* Background Elements */}
           <div className="absolute inset-0">
             <div className="absolute top-20 right-20 w-72 h-72 border-2 border-red-600 opacity-5 rotate-45"></div>

@@ -75,7 +75,7 @@ function BeautyCartContent({
       storeId={store.id}
       theme={store.theme}
     >
-      <div className="bg-gradient-to-br from-rose-50 to-pink-50 py-20">
+      <div className="bg-gradient-to-br from-rose-50 to-pink-50 py-20 store-page-header">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6">

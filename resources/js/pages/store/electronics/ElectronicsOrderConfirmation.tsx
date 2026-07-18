@@ -157,7 +157,8 @@ export default function ElectronicsOrderConfirmation({
         storeContent={storeContent}
         theme="electronics"
       >
-        <div className="bg-gray-50 min-h-screen">
+        
+        <div className="bg-gray-50 min-h-screen store-page-header">
           {/* Breadcrumb */}
           <div className="bg-white border-b border-gray-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">

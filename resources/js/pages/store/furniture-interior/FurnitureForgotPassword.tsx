@@ -51,7 +51,8 @@ export default function FurnitureForgotPassword({
         storeId={store.id}
         theme={store.theme || 'furniture-interior'}
       >
-        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex items-center py-12">
+        
+        <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex items-center py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-md mx-auto">
               

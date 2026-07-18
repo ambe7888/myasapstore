@@ -117,7 +117,7 @@ export default function JewelryOrderDetail({
         theme={store.theme}
       >
         {/* Navigation */}
-        <div className="bg-yellow-50 border-b border-yellow-200">
+        <div className="bg-yellow-50 border-b border-yellow-200 store-page-header">
           <div className="container mx-auto px-4 py-3">
             <Link
               href={generateStoreUrl('store.my-orders', store)}

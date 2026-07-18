@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import MediaPicker from '@/components/MediaPicker';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   store: any;
@@ -28,6 +29,18 @@ export default function StoreSettings({ store, settings }: Props) {
 
   const updateSetting = (key: string, value: any) => {
     setFormData(prev => ({ ...prev, [key]: value }));
+  };
+
+  const resetColors = () => {
+    setFormData(prev => ({
+      ...prev,
+      primary_color: '',
+      button_color_add_to_cart: '',
+      button_color_buy_now: '',
+      text_title_color: '',
+      text_button_color: '',
+      site_bg_color: ''
+    }));
   };
 
   const pageActions = [
@@ -122,8 +135,19 @@ export default function StoreSettings({ store, settings }: Props) {
 
         <TabsContent value="appearance" className="space-y-6">
           <Card>
-            <CardHeader>
-              <CardTitle>{t('Appearance Settings')}</CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
+              <div>
+                <CardTitle>{t('Appearance Settings')}</CardTitle>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={resetColors}
+                className="text-xs border-amber-200 hover:bg-amber-50 text-amber-900"
+              >
+                {t('Reset Colors to Default')}
+              </Button>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">

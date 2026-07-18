@@ -87,7 +87,8 @@ export default function ElectronicsOrderDetail({
         storeContent={storeContent}
         theme="electronics"
       >
-        <div className="bg-slate-900 text-white py-20">
+        
+        <div className="bg-slate-900 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl font-bold tracking-wide mb-6">Order Details</h1>

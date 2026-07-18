@@ -58,7 +58,7 @@ export default function JewelryRegister({
         theme={store.theme}
       >
         {/* Luxury Cream Background with Subtle Pattern */}
-        <div className="min-h-screen bg-yellow-50 relative">
+        <div className="min-h-screen bg-yellow-50 relative store-page-header">
           {/* Elegant Pattern Overlay */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{

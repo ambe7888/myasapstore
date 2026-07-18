@@ -203,7 +203,8 @@ export default function JewelryProducts({
             }}></div>
           </div>
           
-          <div className="container mx-auto px-4 py-20 relative z-10">
+          
+        <div className="container mx-auto px-4 py-20 relative z-10 store-page-header">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-20 h-20 bg-yellow-600 rounded-full shadow-lg mb-8">
                 <Gem className="w-10 h-10 text-white" />

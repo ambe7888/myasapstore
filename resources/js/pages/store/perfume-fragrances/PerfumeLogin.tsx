@@ -52,7 +52,7 @@ export default function PerfumeLogin({
         storeId={store.id}
         customFooter={<PerfumeFooter storeName={store.name} logo={store.logo} content={storeContent?.footer} />}
       >
-        <div className="min-h-screen bg-stone-100 flex items-center justify-center py-12 px-4">
+        <div className="min-h-screen bg-stone-100 flex items-center justify-center py-12 px-4 store-page-header">
           <div className="max-w-md w-full">
             
             {/* Card */}

@@ -59,7 +59,7 @@ export default function CarsBlogPost({
         theme={store.theme}
       >
         {/* Automotive Header */}
-        <div className="bg-black text-white py-12 border-b-4 border-red-600">
+        <div className="bg-black text-white py-12 border-b-4 border-red-600 store-page-header">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <Link

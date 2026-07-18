@@ -116,7 +116,7 @@ export default function WatchesOrderDetail({
         theme="watches"
       >
         {/* Navigation */}
-        <div className="bg-slate-50 border-b border-slate-200">
+        <div className="bg-slate-50 border-b border-slate-200 store-page-header">
           <div className="container mx-auto px-4 py-4">
             <Link
               href={generateStoreUrl('store.my-orders', store)}

@@ -98,7 +98,7 @@ export default function BeautyOrderDetail({
         storeId={store.id}
         customFooter={<BeautyFooter storeName={store.name} logo={store.logo} />}
       >
-        <div className="bg-rose-50 py-20">
+        <div className="bg-rose-50 py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-rose-500 mb-8 shadow-2xl">

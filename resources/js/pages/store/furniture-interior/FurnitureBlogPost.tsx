@@ -58,7 +58,7 @@ export default function FurnitureBlogPost({
         storeId={store.id}
         theme={store.theme || 'furniture-interior'}
       >
-        <div className="bg-yellow-800 text-white py-12">
+        <div className="bg-yellow-800 text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <Link

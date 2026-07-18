@@ -197,7 +197,8 @@ function FashionProductDetail({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="bg-white min-h-screen">
+        
+        <div className="bg-white min-h-screen store-page-header">
           {/* Breadcrumb */}
           <div className="border-b border-gray-100 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">

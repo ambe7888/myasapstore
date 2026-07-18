@@ -46,7 +46,8 @@ export default function ElectronicsCustomPage({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="bg-gray-50 min-h-screen">
+        
+        <div className="bg-gray-50 min-h-screen store-page-header">
           {/* Page Header */}
           <section className="bg-slate-900 text-white py-20 store-page-header">
             <div className="container mx-auto px-4 text-center">

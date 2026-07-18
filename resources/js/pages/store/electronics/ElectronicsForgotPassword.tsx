@@ -52,7 +52,8 @@ export default function ElectronicsForgotPassword({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+        
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 store-page-header">
           <div className="max-w-md w-full">
             {!emailSent ? (
               <>

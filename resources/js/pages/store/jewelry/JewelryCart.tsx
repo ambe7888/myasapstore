@@ -73,7 +73,7 @@ function JewelryCartContent({
       storeContent={storeContent}
       theme={store.theme}
     >
-      <div className="bg-yellow-50 relative overflow-hidden">
+      <div className="bg-yellow-50 relative overflow-hidden store-page-header">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d97706' fill-opacity='0.3'%3E%3Cpath d='M40 40c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm20 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z'/%3E%3C/g%3E%3C/svg%3E")`

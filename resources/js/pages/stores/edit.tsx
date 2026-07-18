@@ -231,6 +231,8 @@ export default function EditStore({ store, availableThemes, planPermissions, ser
                         <img
                           src={theme.thumbnail}
                           alt={theme.name}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover"
                         />
                         {formData.theme === theme.id && (

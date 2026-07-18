@@ -274,6 +274,8 @@ export default function CreateStore({ availableThemes, planPermissions, serverIp
                         <img
                           src={theme.thumbnail}
                           alt={theme.name}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover theme-preview-image"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = `https://placehold.co/300x180?text=${encodeURIComponent(theme.name)}`;

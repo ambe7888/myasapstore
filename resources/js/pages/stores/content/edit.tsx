@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import MediaLibraryButton from '@/components/MediaLibraryButton';
 import { getImageUrl } from '@/utils/image-helper';
+import { Badge } from '@/components/ui/badge';
 
 interface Store {
   id: number;
@@ -220,6 +221,120 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
     return null;
   };
 
+  const renderSectionOrder = () => {
+    const defaultOrder = [
+      'hero',
+      'categories',
+      'featured_products',
+      'info_boxes',
+      'cta_section',
+      'trending_products',
+      'brand_logos',
+      'newsletter',
+      'blog'
+    ];
+
+    const currentOrder = data.content.section_order || defaultOrder;
+    const orderedSections = [...new Set([...currentOrder, ...defaultOrder])].filter(
+      key => defaultOrder.includes(key)
+    );
+
+    const sectionTitles: Record<string, string> = {
+      hero: t('Hero Section'),
+      categories: t('Categories'),
+      featured_products: t('Featured Products'),
+      info_boxes: t('Info Boxes'),
+      cta_section: t('CTA Boxes & Bottom'),
+      trending_products: t('Trending Products & Design Process'),
+      brand_logos: t('Brand Logos & Stats'),
+      newsletter: t('Newsletter'),
+      blog: t('Blog')
+    };
+
+    const isSectionHidden = (sectionKey: string) => {
+      if (sectionKey === 'cta_section') {
+        return data.content.show_sections?.cta_boxes === false && data.content.show_sections?.cta_bottom === false;
+      }
+      return data.content.show_sections?.[sectionKey] === false;
+    };
+
+    const moveSection = (index: number, direction: 'up' | 'down') => {
+      const newOrder = [...orderedSections];
+      const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+      if (targetIndex >= 0 && targetIndex < newOrder.length) {
+        const temp = newOrder[index];
+        newOrder[index] = newOrder[targetIndex];
+        newOrder[targetIndex] = temp;
+
+        setData('content', {
+          ...data.content,
+          section_order: newOrder
+        });
+      }
+    };
+
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('Section Layout Order')}</CardTitle>
+          <CardDescription>{t('Use buttons to change the display order of sections on your store homepage.')}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {orderedSections.map((sectionKey, index) => {
+              const label = sectionTitles[sectionKey] || sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+              const isHidden = isSectionHidden(sectionKey);
+
+              return (
+                <div 
+                  key={sectionKey} 
+                  className={`flex items-center justify-between p-4 border rounded-xl bg-white shadow-sm transition-all ${
+                    isHidden ? 'opacity-60 border-slate-200 bg-slate-50/50' : 'border-slate-200 hover:border-primary/30'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="font-semibold text-slate-700 text-sm">
+                      {index + 1}. {label}
+                    </div>
+                    {isHidden && (
+                      <Badge variant="secondary" className="text-[10px] uppercase font-bold py-0.5 px-2 bg-slate-200 text-slate-600">
+                        {t('Hidden')}
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0"
+                      disabled={index === 0}
+                      onClick={() => moveSection(index, 'up')}
+                    >
+                      ↑
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0"
+                      disabled={index === orderedSections.length - 1}
+                      onClick={() => moveSection(index, 'down')}
+                    >
+                      ↓
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
   const renderSection = (sectionKey: string, sectionData: any) => {
     const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     
@@ -269,7 +384,7 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
   };
 
   const getSectionTabs = () => {
-    const sections = Object.keys(data.content || {}).filter(key => key !== 'show_sections');
+    const sections = Object.keys(data.content || {}).filter(key => key !== 'show_sections' && key !== 'section_order');
     
     return sections.map(sectionKey => ({
       key: sectionKey,
@@ -294,7 +409,10 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
     }
   ];
 
-  const tabs = getSectionTabs();
+  const tabs = [
+    { key: 'section_order', label: t('Layout Order'), sections: [] },
+    ...getSectionTabs()
+  ];
 
   return (
     <PageTemplate 
@@ -320,8 +438,12 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
 
           {tabs.map(tab => (
             <TabsContent key={tab.key} value={tab.key} className="space-y-6">
-              {tab.sections.map(sectionKey => 
-                data.content[sectionKey] ? renderSection(sectionKey, data.content[sectionKey]) : null
+              {tab.key === 'section_order' ? (
+                renderSectionOrder()
+              ) : (
+                tab.sections.map(sectionKey => 
+                  data.content[sectionKey] ? renderSection(sectionKey, data.content[sectionKey]) : null
+                )
               )}
             </TabsContent>
           ))}

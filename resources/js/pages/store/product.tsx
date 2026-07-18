@@ -344,7 +344,7 @@ export default function ProductDetail({
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Product Images */}
-              <div className="sticky top-24">
+              <div className="md:sticky md:top-24 h-fit">
                 <div className="bg-white rounded-xl overflow-hidden shadow-md">
                   <ImageGallery images={productImages.map(img => getProductImageUrl(img.url))} />
                 </div>

@@ -33,7 +33,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
   
   const hasSelectedVariants = product.variants && !Array.isArray(product.variants) && Object.keys(product.variants).length > 0 && Object.values(product.variants).every(v => v !== null && v !== undefined && v !== '');
   
-  const isOutOfStock = !product.is_active || product.stock <= 0;
+  const isOutOfStock = product.is_active === false || (product.stock !== undefined && product.stock !== null && Number(product.stock) <= 0);
 
   const handleClick = async () => {
     if (isOutOfStock) return;
@@ -66,7 +66,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
       onClick={handleClick}
       disabled={loading}
       className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
-      style={{ backgroundColor: 'var(--btn-add-to-cart-color)' }}
+      style={{ backgroundColor: store?.button_color_add_to_cart || store?.primary_color || 'var(--btn-add-to-cart-color, #4f46e5)' }}
     >
       {hasVariants && !hasSelectedVariants ? (
         <>

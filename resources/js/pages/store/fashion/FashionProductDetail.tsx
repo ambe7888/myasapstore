@@ -86,6 +86,7 @@ function FashionProductDetail({
   const [productReviews, setProductReviews] = useState(product.reviews || []);
   const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
   const [averageRating, setAverageRating] = useState(product.average_rating || 0);
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
 
   // Add scroll lock effect for modal
   React.useEffect(() => {
@@ -348,27 +349,50 @@ function FashionProductDetail({
                   </div>
 
                   {/* Add to Cart & Actions */}
-                  <div className="flex flex-wrap gap-4">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <div className="flex-1"><AddToCartButton
-                      product={{
-                        ...product,
-                        variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
-                      }}
-                      storeSlug={store.slug}
-                      className="flex-1 py-3 font-light tracking-widest uppercase text-sm bg-black text-white hover:bg-gray-900 transition-colors"
-                      isShowOption={false}
-                    /></div>
-    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
-  </div>
-</StickyBottomBar>
-                    <button className="p-3 border border-gray-300 hover:bg-gray-50 transition-colors">
-                      <Heart className="h-5 w-5 text-gray-600" />
-                    </button>
-                    <button className="p-3 border border-gray-300 hover:bg-gray-50 transition-colors">
-                      <Share2 className="h-5 w-5 text-gray-600" />
-                    </button>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 font-light tracking-widest uppercase text-sm bg-black text-white hover:bg-gray-900 transition-colors flex items-center justify-center rounded-lg"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                      </div>
+                      <button className="h-12 w-12 border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center rounded-lg">
+                        <Heart className="h-5 w-5 text-gray-600" />
+                      </button>
+                      <button className="h-12 w-12 border border-gray-300 hover:bg-gray-50 transition-colors flex items-center justify-center rounded-lg">
+                        <Share2 className="h-5 w-5 text-gray-600" />
+                      </button>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 font-light tracking-widest uppercase text-sm bg-black text-white hover:bg-gray-900 transition-colors flex items-center justify-center rounded-lg"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -69,6 +70,7 @@ function BabyKidsProductDetailContent({
   
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
   
   const isProductInWishlist = isInWishlist(product.id);
   
@@ -135,6 +137,9 @@ function BabyKidsProductDetailContent({
   })();
   
   const hasVariants = productVariants && productVariants.length > 0;
+  const allVariantsSelected = !hasVariants || productVariants.every(
+    (variant: any) => selectedVariants[variant.name]
+  );
 
   const handleAddToCart = async () => {
     if (hasVariants) {
@@ -382,37 +387,58 @@ function BabyKidsProductDetailContent({
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <button
-                      onClick={handleAddToCart}
-                      disabled={cartLoading || product.stock <= 0}
-                      className="flex-1 bg-pink-500 text-white py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                    >
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                      </svg>
-                      <span>{cartLoading ? 'Adding...' : 'Add to Cart'}</span>
-                    </button>
-    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
-  </div>
-</StickyBottomBar>
-                    
-                    <button
-                      onClick={async () => await toggleWishlist(product.id)}
-                      disabled={wishlistLoading}
-                      className={`px-6 py-4 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center justify-center space-x-2 ${
-                        isProductInWishlist
-                          ? 'bg-pink-500 text-white'
-                          : 'border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white'
-                      } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-                    >
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                      </svg>
-                      <span>{isProductInWishlist ? 'In Wishlist' : 'Add to Wishlist'}</span>
-                    </button>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 rounded-full font-bold text-lg bg-pink-500 text-white hover:bg-pink-600 transition-all duration-300 shadow-lg flex items-center justify-center"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                      </div>
+                      <button
+                        onClick={async () => await toggleWishlist(product.id)}
+                        disabled={wishlistLoading}
+                        className={`h-12 px-6 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center justify-center space-x-2 ${
+                          isProductInWishlist
+                            ? 'bg-pink-500 text-white'
+                            : 'border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white'
+                        } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+                      >
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                        </svg>
+                        <span>{isProductInWishlist ? 'In Wishlist' : 'Add to Wishlist'}</span>
+                      </button>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 rounded-full font-bold text-lg bg-pink-500 text-white hover:bg-pink-600 transition-all duration-300 shadow-lg flex items-center justify-center"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
               </div>
             </div>

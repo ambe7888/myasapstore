@@ -1,13 +1,37 @@
 import React, { useEffect, useState } from 'react';
 
-export default function StickyBottomBar({ children }: { children: React.ReactNode }) {
+interface StickyBottomBarProps {
+  children: React.ReactNode;
+  targetRef?: React.RefObject<HTMLElement | null>;
+}
+
+export default function StickyBottomBar({ children, targetRef }: StickyBottomBarProps) {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Small delay to animate in after load
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!targetRef) {
+      // Small delay to animate in after load if no targetRef is provided
+      const timer = setTimeout(() => setIsVisible(true), 100);
+      return () => clearTimeout(timer);
+    }
+
+    const handleScroll = () => {
+      if (!targetRef.current) return;
+      const rect = targetRef.current.getBoundingClientRect();
+      // Show sticky bar when the bottom of targetRef is above the viewport (scrolled past)
+      setIsVisible(rect.bottom < 0);
+    };
+
+    // Run once on mount
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [targetRef]);
 
   return (
     <>

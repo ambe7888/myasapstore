@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { BeautyFooter, BeautyProductCard } from '@/components/store/beauty-cosmetics';
 import { Star, Heart, Share2, ChevronRight, Minus, Plus, Check, Info } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
@@ -89,6 +90,7 @@ function BeautyProductDetailContent({
   
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
   
   const isProductInWishlist = isInWishlist(product.id);
 
@@ -374,39 +376,58 @@ function BeautyProductDetailContent({
                   </div>
 
                   {/* Add to Cart & Actions */}
-                  <div className="flex gap-3">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <button
-                      onClick={handleAddToCart}
-                      disabled={!isInStock || cartLoading || (hasVariants && !allVariantsSelected)}
-                      className={`flex-1 py-3 px-6 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl ${
-                        !isInStock || cartLoading || (hasVariants && !allVariantsSelected)
-                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                          : 'bg-rose-600 text-white hover:bg-rose-700'
-                      }`}
-                    >
-                      {cartLoading ? 'Adding...' : 'Add to Beauty Bag'}
-                    </button>
-    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
-  </div>
-</StickyBottomBar>
-                    
-                    <button 
-                      onClick={async () => await toggleWishlist(product.id)}
-                      disabled={wishlistLoading}
-                      className={`p-3 rounded-full border-2 transition-all shadow-lg hover:shadow-xl ${
-                        isProductInWishlist 
-                          ? 'bg-rose-600 border-rose-600 text-white' 
-                          : 'bg-white border-rose-200 text-rose-600 hover:border-rose-300'
-                      } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-                    >
-                      <Heart className={`h-5 w-5 ${isProductInWishlist ? 'fill-current' : ''}`} />
-                    </button>
-                    
-                    <button className="p-3 bg-white border-2 border-rose-200 rounded-full text-rose-600 hover:border-rose-300 transition-all shadow-lg hover:shadow-xl">
-                      <Share2 className="h-5 w-5" />
-                    </button>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 rounded-full font-semibold bg-rose-600 text-white hover:bg-rose-700 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                      </div>
+                      <button 
+                        onClick={async () => await toggleWishlist(product.id)}
+                        disabled={wishlistLoading}
+                        className={`h-12 w-12 rounded-full border-2 transition-all shadow-lg hover:shadow-xl flex items-center justify-center ${
+                          isProductInWishlist 
+                            ? 'bg-rose-600 border-rose-600 text-white' 
+                            : 'bg-white border-rose-200 text-rose-600 hover:border-rose-300'
+                        } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+                      >
+                        <Heart className={`h-5 w-5 ${isProductInWishlist ? 'fill-current' : ''}`} />
+                      </button>
+                      <button className="h-12 w-12 bg-white border-2 border-rose-200 rounded-full text-rose-600 hover:border-rose-300 transition-all shadow-lg hover:shadow-xl flex items-center justify-center">
+                        <Share2 className="h-5 w-5" />
+                      </button>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 rounded-full font-semibold bg-rose-600 text-white hover:bg-rose-700 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
 
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { CarsFooter, CarsRelatedProducts, CarsImageGallery } from '@/components/store/cars-automotive';
 import { Star, Heart, Share2, ChevronRight, Minus, Plus, Check, Info, Zap, Wrench, Settings, ShoppingCart, Eye } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
@@ -232,6 +233,7 @@ function CarsProductDetailInner({
   const { addToCart, loading: cartLoading } = useCart();
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const isProductInWishlist = isInWishlist(product.id);
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
 
   // Parse custom fields safely
   const customFields = (() => {
@@ -473,28 +475,45 @@ function CarsProductDetailInner({
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="grid grid-cols-1 gap-4">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <button
-                      onClick={handleAddToCart}
-                      disabled={!isInStock || cartLoading || (hasVariants && !allVariantsSelected)}
-                      className={`w-full flex items-center justify-center space-x-3 py-4 font-black text-sm uppercase tracking-widest transition-all ${
-                        !isInStock || (hasVariants && !allVariantsSelected)
-                          ? 'bg-gray-400 text-white cursor-not-allowed'
-                          : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-lg transform hover:-translate-y-1'
-                      } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-                    >
-                      <ShoppingCart className="h-5 w-5" />
-                      <span>
-                        {!isInStock ? 'Out of Stock' : 
-                         hasVariants && !allVariantsSelected ? 'Select Options' : 
-                         'Add to Cart'}
-                      </span>
-                    </button>
-    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
-  </div>
-</StickyBottomBar>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 bg-red-600 text-white font-black text-sm uppercase tracking-widest transition-all hover:bg-red-700 hover:shadow-lg flex items-center justify-center rounded-lg"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                      </div>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 bg-red-600 text-white font-black text-sm uppercase tracking-widest transition-all hover:bg-red-700 hover:shadow-lg flex items-center justify-center rounded-lg"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
+                  </div>
                     
                     <div className="grid grid-cols-2 gap-4">
                       <button
@@ -696,7 +715,6 @@ function CarsProductDetailInner({
               </div>
             </div>
           </div>
-        </div>
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (

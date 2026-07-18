@@ -87,6 +87,7 @@ function ElectronicsProductDetail({
   const [productReviews, setProductReviews] = useState(product.reviews || []);
   const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
   const [averageRating, setAverageRating] = useState(product.average_rating || 0);
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
 
   // Add scroll lock effect for modal
   React.useEffect(() => {
@@ -364,27 +365,50 @@ function ElectronicsProductDetail({
                   </div>
 
                   {/* Add to Cart & Actions */}
-                  <div className="flex flex-wrap gap-4">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <div className="flex-1"><AddToCartButton
-                      product={{
-                        ...product,
-                        variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
-                      }}
-                      storeSlug={store.slug}
-                      className="flex-1 py-4 font-semibold text-lg bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                      isShowOption={false}
-                    /></div>
-    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
-  </div>
-</StickyBottomBar>
-                    <button className="p-4 border-2 border-gray-300 hover:border-red-500 hover:bg-red-50 transition-all duration-300 rounded-lg">
-                      <Heart className="h-6 w-6 text-gray-600 hover:text-red-500" />
-                    </button>
-                    <button className="p-4 border-2 border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 rounded-lg">
-                      <Share2 className="h-6 w-6 text-gray-600 hover:text-blue-500" />
-                    </button>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 font-semibold text-lg bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl flex items-center justify-center"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                      </div>
+                      <button className="h-12 w-12 border-2 border-gray-300 hover:border-red-500 hover:bg-red-50 transition-all duration-300 rounded-lg flex items-center justify-center">
+                        <Heart className="h-6 w-6 text-gray-600 hover:text-red-500" />
+                      </button>
+                      <button className="h-12 w-12 border-2 border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 rounded-lg flex items-center justify-center">
+                        <Share2 className="h-6 w-6 text-gray-600 hover:text-blue-500" />
+                      </button>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 font-semibold text-lg bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl flex items-center justify-center"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
 
                   {/* Product Tabs */}

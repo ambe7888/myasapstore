@@ -63,6 +63,7 @@ function JewelryProductDetailContent({
     const [productReviews, setProductReviews] = useState(product.reviews || []);
     const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
     const [averageRating, setAverageRating] = useState(product.average_rating || 0);
+    const buttonsRef = React.useRef<HTMLDivElement>(null);
 
     // Add scroll lock effect for modal
     React.useEffect(() => {
@@ -329,26 +330,27 @@ function JewelryProductDetailContent({
                       </div>
                     </div>
                     
-                    <div className="flex space-x-4">
-                      <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <div className="flex-1"><AddToCartButton
-                        product={{
-                          ...product,
-                          variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
-                        }}
-                        storeSlug={store.slug}
-                        className="flex-1 bg-yellow-600 text-white py-4 font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50"
-                        isShowOption={false}
-                      /></div>
-    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
-  </div>
-</StickyBottomBar>
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 bg-yellow-600 text-white font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 flex items-center justify-center rounded-lg"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                      </div>
                       
                       <button
                         onClick={handleWishlistToggle}
                         disabled={wishlistLoading}
-                        className={`px-6 py-4 border-2 transition-colors ${
+                        className={`h-12 w-12 border-2 transition-colors flex items-center justify-center rounded-lg ${
                           isProductInWishlist 
                             ? 'border-red-500 text-red-500 hover:bg-red-50' 
                             : 'border-yellow-600 text-yellow-600 hover:bg-yellow-50'
@@ -357,6 +359,26 @@ function JewelryProductDetailContent({
                         <Heart className={`w-5 h-5 ${isProductInWishlist ? 'fill-red-500' : ''}`} />
                       </button>
                     </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 bg-yellow-600 text-white font-medium hover:bg-yellow-700 transition-colors disabled:opacity-50 flex items-center justify-center rounded-lg"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
                 </div>
                 

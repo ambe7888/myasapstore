@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -59,6 +60,7 @@ function PerfumeProductDetailContent({
   const [productReviews, setProductReviews] = useState(product.reviews || []);
   const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
   const [averageRating, setAverageRating] = useState(product.average_rating || 0);
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (showReviewModal) {
@@ -370,30 +372,27 @@ function PerfumeProductDetailContent({
                     )}
                   </div>
 
-                  <div className="flex space-x-4">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <button
-                      onClick={handleAddToCart}
-                      disabled={cartLoading || isOutOfStock || (hasValidVariants && !allVariantsSelected)}
-                      className={`flex-1 py-4 rounded-full font-medium transition-colors duration-300 ${
-                        isOutOfStock || (hasValidVariants && !allVariantsSelected)
-                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                          : 'bg-purple-800 text-white hover:bg-purple-900'
-                      } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-                    >
-                      {isOutOfStock ? 'Out of Stock' : 
-                       hasValidVariants && !allVariantsSelected ? 'Select Options' : 
-                       cartLoading ? 'Adding...' : 'Add to Cart'}
-                    </button>
-    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
-  </div>
-</StickyBottomBar>
+                  <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full">
+                    <div className="flex-1">
+                      <AddToCartButton
+                        product={{
+                          ...product,
+                          variants: hasValidVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                        }}
+                        storeSlug={store.slug}
+                        store={store}
+                        className="w-full h-12 py-3 rounded-full font-medium transition-colors duration-300 bg-purple-800 text-white hover:bg-purple-900 flex items-center justify-center"
+                        isShowOption={false}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                    </div>
                     
                     <button
                       onClick={async () => await toggleWishlist(product.id)}
                       disabled={wishlistLoading}
-                      className={`w-16 h-16 rounded-full border-2 flex items-center justify-center transition-colors duration-300 ${
+                      className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors duration-300 ${
                         isProductInWishlist
                           ? 'border-red-500 bg-red-50 text-red-500'
                           : 'border-gray-300 text-gray-600 hover:border-purple-400 hover:text-purple-600'
@@ -404,6 +403,26 @@ function PerfumeProductDetailContent({
                       </svg>
                     </button>
                   </div>
+
+                  <StickyBottomBar targetRef={buttonsRef}>
+                    <div className="flex gap-2 w-full">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasValidVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 py-3 rounded-full font-medium transition-colors duration-300 bg-purple-800 text-white hover:bg-purple-900 flex items-center justify-center"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                      </div>
+                    </div>
+                  </StickyBottomBar>
                 </div>
               </div>
             </div>

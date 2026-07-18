@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
+import AddToCartButton from '@/components/store/AddToCartButton';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -69,6 +70,7 @@ function FurnitureProductDetailContent({
   
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
@@ -320,37 +322,57 @@ function FurnitureProductDetailContent({
                   </div>
                 )}
 
-                <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
-                  <div className="flex gap-4">
-                    <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <button
-                      onClick={handleAddToCart}
-                      disabled={cartLoading || isOutOfStock}
-                      className={`flex-1 bg-yellow-800 text-white px-8 py-4 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 ${cartLoading || isOutOfStock ? 'cursor-not-allowed opacity-50 transform-none' : ''}`}
-                    >
-                      <ShoppingCart className="w-6 h-6" />
-                      <span className="text-lg">
-                        {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-                      </span>
-                    </button>
-    <BuyNowButton product={product} store={store} className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-green-600 transition-all shadow-lg flex items-center justify-center" quantity={quantity} />
-  </div>
-</StickyBottomBar>
-                    
-                    <button
-                      onClick={handleWishlistToggle}
-                      disabled={wishlistLoading}
-                      className={`w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl ${
-                        isProductInWishlist
-                          ? 'bg-amber-600 text-white scale-110'
-                          : 'bg-white text-amber-700 hover:bg-amber-50 hover:scale-110 border border-amber-200'
-                      } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
-                    >
-                      <Heart className={`w-6 h-6 ${isProductInWishlist ? 'fill-current' : ''}`} />
-                    </button>
+                  <div className="w-full">
+                    <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{
+                            ...product,
+                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                          }}
+                          storeSlug={store.slug}
+                          store={store}
+                          className="w-full h-12 bg-yellow-800 text-white font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl rounded-xl"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl" quantity={quantity} />
+                      </div>
+                      
+                      <button
+                        onClick={handleWishlistToggle}
+                        disabled={wishlistLoading}
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl ${
+                          isProductInWishlist
+                            ? 'bg-amber-600 text-white scale-110'
+                            : 'bg-white text-amber-700 hover:bg-amber-50 hover:scale-110 border border-amber-200'
+                        } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+                      >
+                        <Heart className="w-6 h-6" />
+                      </button>
+                    </div>
+
+                    <StickyBottomBar targetRef={buttonsRef}>
+                      <div className="flex gap-2 w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 bg-yellow-800 text-white font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl rounded-xl"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl" quantity={quantity} />
+                        </div>
+                      </div>
+                    </StickyBottomBar>
                   </div>
-                </div>
               </div>
             </div>
 

@@ -90,6 +90,7 @@ function WatchesProductDetail({
   const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
   const [averageRating, setAverageRating] = useState(product.average_rating || 0);
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
+  const buttonsRef = React.useRef<HTMLDivElement>(null);
 
   // Add scroll lock effect for modal
   React.useEffect(() => {
@@ -378,21 +379,22 @@ function WatchesProductDetail({
 
                     {/* Actions */}
                     <div className="pt-4">
-                      <div className="flex gap-2">
-                        <StickyBottomBar>
-  <div className="flex gap-2 w-full">
-    <div className="flex-1"><AddToCartButton
-                          product={{
-                            ...product,
-                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
-                          }}
-                          storeSlug={store.slug}
-                          className="flex-1 py-3 font-medium tracking-wider uppercase text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors"
-                          isShowOption={false}
-                        /></div>
-    <div className="flex-1"><BuyNowButton product={product} store={store} className="w-full h-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} /></div>
-  </div>
-</StickyBottomBar>
+                      <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full">
+                        <div className="flex-1">
+                          <AddToCartButton
+                            product={{
+                              ...product,
+                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            }}
+                            storeSlug={store.slug}
+                            store={store}
+                            className="w-full h-12 py-3 font-medium tracking-wider uppercase text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors flex items-center justify-center"
+                            isShowOption={false}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        </div>
                         
                         <button 
                           onClick={async () => await toggleWishlist(product.id)}
@@ -410,6 +412,26 @@ function WatchesProductDetail({
                           <Share2 className="h-4 w-4 text-slate-600" />
                         </button>
                       </div>
+
+                      <StickyBottomBar targetRef={buttonsRef}>
+                        <div className="flex gap-2 w-full">
+                          <div className="flex-1">
+                            <AddToCartButton
+                              product={{
+                                ...product,
+                                variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                              }}
+                              storeSlug={store.slug}
+                              store={store}
+                              className="w-full h-12 py-3 font-medium tracking-wider uppercase text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors flex items-center justify-center"
+                              isShowOption={false}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                          </div>
+                        </div>
+                      </StickyBottomBar>
                     </div>
 
                     {/* Quick Info */}

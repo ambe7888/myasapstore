@@ -14,29 +14,41 @@ class ProductController extends BaseController
     /**
      * Display a listing of the products.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
-        // Get products for the current store with category relationship
-        $products = Product::with('category')
-                        ->where('store_id', $currentStoreId)
-                        ->latest()
-                        ->get();
+        // Base query for store products to calculate stats accurately
+        $baseQuery = Product::where('store_id', $currentStoreId);
         
-        // Get statistics
-        $totalProducts = $products->count();
-        $activeProducts = $products->where('is_active', true)->count();
+        $totalProducts = $baseQuery->count();
+        $activeProducts = (clone $baseQuery)->where('is_active', true)->count();
         // Get low stock threshold from settings (default: 20)
         $lowStockThreshold = \App\Models\Setting::getSetting('low_stock_threshold', $user->id, $currentStoreId, 20);
-        $lowStockProducts = $products->where('stock', '<=', $lowStockThreshold)->count();
-        $totalValue = $products->sum(function ($product) {
+        $lowStockProducts = (clone $baseQuery)->where('stock', '<=', $lowStockThreshold)->count();
+        $totalValue = (clone $baseQuery)->get()->sum(function ($product) {
             return $product->price * $product->stock;
         });
+
+        // Filtered query for listing
+        $query = Product::with('category')->where('store_id', $currentStoreId);
+        
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        
+        $products = $query->latest()->get();
+        
+        // Get categories for the filter dropdown
+        $categories = Category::where('store_id', $currentStoreId)
+                            ->where('is_active', true)
+                            ->get();
         
         return Inertia::render('products/index', [
             'products' => $products,
+            'categories' => $categories,
+            'filters' => $request->only(['category_id']),
             'stats' => [
                 'total' => $totalProducts,
                 'active' => $activeProducts,

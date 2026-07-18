@@ -12,16 +12,22 @@ import { getImageUrl } from '@/utils/image-helper';
 import { Permission } from '@/components/Permission';
 import { usePermissions } from '@/hooks/usePermissions';
 import { formatCurrency } from '@/utils/helpers';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function Products() {
   const { t } = useTranslation();
-  const { products, stats } = usePage().props as any;
+  const { products, stats, categories, filters } = usePage().props as any;
   const [productToDelete, setProductToDelete] = useState<number | null>(null);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isBulkDeleteModalOpen, setIsBulkDeleteModalOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
 
   const { hasPermission } = usePermissions();
+
+  const handleCategoryFilterChange = (value: string) => {
+    const categoryId = value === 'all' ? '' : value;
+    router.get(route('products.index'), { category_id: categoryId }, { preserveState: true, replace: true });
+  };
 
   const { data, setData, post, processing, errors, reset } = useForm({
     file: null as File | null,
@@ -229,6 +235,24 @@ export default function Products() {
                 aria-label="Select all"
               />
               <CardTitle>{t('Product Catalog')}</CardTitle>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Select 
+                value={filters?.category_id ? String(filters.category_id) : 'all'} 
+                onValueChange={handleCategoryFilterChange}
+              >
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder={t('All Categories')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('All Categories')}</SelectItem>
+                  {categories?.map((category: any) => (
+                    <SelectItem key={category.id} value={String(category.id)}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </CardHeader>
           <CardContent>

@@ -343,6 +343,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('stores/{id}/settings', [\App\Http\Controllers\StoreSettingsController::class, 'show'])->name('stores.settings');
         Route::put('stores/{id}/settings', [\App\Http\Controllers\StoreSettingsController::class, 'update'])->name('stores.settings.update');
         
+        // Product Funnel (Landing Page) routes
+        Route::get('stores/{storeId}/funnels', [\App\Http\Controllers\ProductFunnelController::class, 'index'])->name('stores.funnels.index');
+        Route::get('stores/{storeId}/funnels/create', [\App\Http\Controllers\ProductFunnelController::class, 'create'])->name('stores.funnels.create');
+        Route::post('stores/{storeId}/funnels', [\App\Http\Controllers\ProductFunnelController::class, 'store'])->name('stores.funnels.store');
+        Route::get('stores/{storeId}/funnels/{funnelId}/edit', [\App\Http\Controllers\ProductFunnelController::class, 'edit'])->name('stores.funnels.edit');
+        Route::put('stores/{storeId}/funnels/{funnelId}', [\App\Http\Controllers\ProductFunnelController::class, 'update'])->name('stores.funnels.update');
+        Route::put('stores/{storeId}/funnels/{funnelId}/publish', [\App\Http\Controllers\ProductFunnelController::class, 'publish'])->name('stores.funnels.publish');
+        Route::delete('stores/{storeId}/funnels/{funnelId}', [\App\Http\Controllers\ProductFunnelController::class, 'destroy'])->name('stores.funnels.destroy');
+        Route::post('stores/{storeId}/funnels/{funnelId}/blocks', [\App\Http\Controllers\ProductFunnelController::class, 'addBlock'])->name('stores.funnels.blocks.add');
+        
         // Product Management routes with permissions
         Route::middleware('permission:manage-products')->group(function () {
             Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->middleware('permission:view-products')->name('products.index');

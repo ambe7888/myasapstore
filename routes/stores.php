@@ -87,5 +87,20 @@ Route::prefix('{storeSlug?}')->middleware('store.status')->group(function () {
     Route::get('/blog', [ThemeController::class, 'blog'])->name('store.blog');
     Route::get('/blog/post/{slug}', [ThemeController::class, 'blogPost'])->name('store.blog.show')->where('slug', '[a-z0-9\-]+');
 
+    // Product Funnel / Landing Page routes
+    Route::get('/funnel/{slug}', [\App\Http\Controllers\FunnelPublicController::class, 'show'])->name('store.funnel')->where('slug', '[a-z0-9\-]+');
+    Route::post('/funnel/{funnelId}/track-view', [\App\Http\Controllers\FunnelPublicController::class, 'trackView'])->name('store.funnel.track-view');
+    Route::post('/funnel/{funnelId}/track-click', [\App\Http\Controllers\FunnelPublicController::class, 'trackClick'])->name('store.funnel.track-click');
+    Route::post('/funnel/{funnelId}/track-order', [\App\Http\Controllers\FunnelPublicController::class, 'trackOrder'])->name('store.funnel.track-order');
+
     Route::get('/', [ThemeController::class, 'home'])->name('store.home');
 });
+
+// Custom domain funnel route (accessed without store slug prefix)
+Route::middleware(['domain.resolver'])->group(function () {
+    Route::get('/funnel/{slug}', [\App\Http\Controllers\FunnelPublicController::class, 'showCustomDomain'])->name('store.funnel.custom')->where('slug', '[a-z0-9\-]+');
+    Route::post('/funnel/{funnelId}/track-view', [\App\Http\Controllers\FunnelPublicController::class, 'trackView']);
+    Route::post('/funnel/{funnelId}/track-click', [\App\Http\Controllers\FunnelPublicController::class, 'trackClick']);
+    Route::post('/funnel/{funnelId}/track-order', [\App\Http\Controllers\FunnelPublicController::class, 'trackOrder']);
+});
+

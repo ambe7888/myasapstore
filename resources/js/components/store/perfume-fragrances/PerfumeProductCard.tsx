@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
 import AddToCartButton from '@/components/store/AddToCartButton';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
@@ -42,10 +42,13 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
       <div className="relative aspect-[4/5] overflow-hidden">
         <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
           <img
-            src={imageError ? fallbackImage : getImageUrl(productImage)}
+            src={getProductCoverImage(product, store)}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            onError={() => setImageError(true)}
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
           />
         </Link>
         

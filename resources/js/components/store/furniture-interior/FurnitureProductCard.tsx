@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { useStoreCurrency } from '@/hooks/use-store-currency';
@@ -56,12 +56,17 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
     <div className="group bg-white rounded-3xl shadow-lg shadow-amber-200/30 hover:shadow-2xl hover:shadow-amber-300/40 transition-all duration-500 overflow-hidden border border-amber-100 hover:border-amber-200 transform hover:-translate-y-2">
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-amber-50">
-        <img
-          src={getImageSrc()}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          onError={handleImageError}
-        />
+        <Link href={generateStoreUrl('store.product', store,  { id: product.id })} className="block w-full h-full">
+          <img
+            src={getProductCoverImage(product, store)}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
+          />
+        </Link>
         
         {/* Wooden Frame Effect */}
         <div className="absolute inset-0 border-4 border-amber-800/20 rounded-lg m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

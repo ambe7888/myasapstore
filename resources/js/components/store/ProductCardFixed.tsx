@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, ShoppingCart, Eye, Star } from 'lucide-react';
 import { Link, usePage } from '@inertiajs/react';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface ProductProps {
@@ -88,11 +88,12 @@ export default function ProductCard({
       {/* Product Image */}
       <Link href={generateStoreUrl('store.product', store, {id:id})} className="block relative overflow-hidden aspect-square">
         <img 
-          src={getImageUrl(cover_image)} 
+          src={getProductCoverImage({ cover_image, name }, store)} 
           alt={name}
           className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://placehold.co/600x600?text=${encodeURIComponent(name)}`;
+            const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+            (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
           }}
         />
         

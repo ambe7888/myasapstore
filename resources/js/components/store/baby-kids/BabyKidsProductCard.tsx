@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -63,11 +63,12 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
           <div className="relative aspect-square overflow-hidden">
             <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
               <img
-                src={getImageUrl(product.cover_image || product.image)}
+                src={getProductCoverImage(product, store)}
                 alt={product.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = `https://placehold.co/400x400/fef7f7/ec4899?text=${encodeURIComponent(product.name)}`;
+                  const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+                  (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
                 }}
               />
             </Link>

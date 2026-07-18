@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
@@ -18,15 +18,11 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
   const { props } = usePage();
   const finalStoreSettings = storeSettings || props.storeSettings || {};
   const finalCurrencies = currencies || props.currencies || [];
-  const store = props.store;
+  const store = props.store || {};
+  
   const [imageError, setImageError] = useState(false);
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
-  
-  // Debug: Log image information
-  const imageSource = product.cover_image || product.image;
-  const imageUrl = imageSource ? getImageUrl(imageSource) : '';
-  console.log('Product:', product.name, 'Image URL:', imageUrl, 'Cover Image:', product.cover_image, 'Image:', product.image);
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
@@ -44,12 +40,17 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
   return (
     <div className="group bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
       <div className="relative overflow-hidden aspect-square">
-        <img
-          src={imageError || !imageUrl ? `https://placehold.co/400x400/f5f5f5/d4af37?text=${encodeURIComponent(product.name)}` : imageUrl}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          onError={() => setImageError(true)}
-        />
+        <Link href={generateStoreUrl('store.product', store, { id: product.id })}>
+          <img
+            src={getProductCoverImage(product, store)}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
+          />
+        </Link>
         
         {hasDiscount && (
           <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 text-xs font-medium uppercase">

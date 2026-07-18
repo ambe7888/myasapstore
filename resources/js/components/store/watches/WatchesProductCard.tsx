@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Eye } from 'lucide-react';
 import { formatCurrency } from '@/utils/currency-formatter';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import AddToCartButton from '@/components/store/AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
-import { usePage, router } from '@inertiajs/react';
+import { usePage, Link, router } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 
@@ -23,6 +23,10 @@ interface Product {
     name: string;
   };
   href?: string;
+  total_reviews?: number;
+  reviews_count?: number;
+  average_rating?: number;
+  rating?: number;
 }
 
 interface WatchesProductCardProps {
@@ -55,14 +59,17 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
     >
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-slate-50">
-        <img
-          src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/f8fafc/64748b?text=${encodeURIComponent(product.name)}`}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://placehold.co/400x400/f8fafc/64748b?text=${encodeURIComponent(product.name)}`;
-          }}
-        />
+        <Link href={generateStoreUrl('store.product', store, { id: product.id })}>
+          <img
+            src={getProductCoverImage(product, store)}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
+          />
+        </Link>
         
         {/* Discount Badge */}
         {hasDiscount && (

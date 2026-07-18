@@ -4,7 +4,7 @@ import { Link, usePage, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AddToCartButton from './AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
@@ -114,11 +114,12 @@ export default function ProductCard({
         className="block relative overflow-hidden aspect-square"
       >
         <img 
-          src={getImageUrl(cover_image)} 
+          src={getProductCoverImage({ cover_image, name }, store)} 
           alt={name}
           className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://placehold.co/600x600?text=${encodeURIComponent(name)}`;
+            const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+            (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
           }}
         />
         

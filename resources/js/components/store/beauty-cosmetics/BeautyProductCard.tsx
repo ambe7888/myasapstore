@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { usePage, Link, router } from '@inertiajs/react';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
@@ -95,12 +95,17 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
 
       {/* Product Image with Glassmorphism Effect */}
       <div className="relative aspect-[3/4] overflow-hidden">
-        <img
-          src={imageError ? fallbackImage : getImageUrl(product.cover_image || product.image)}
-          alt={product.name}
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-          onError={() => setImageError(true)}
-        />
+        <Link href={generateStoreUrl('store.product', store, { id: product.id })}>
+          <img
+            src={getProductCoverImage(product, store)}
+            alt={product.name}
+            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
+          />
+        </Link>
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

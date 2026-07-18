@@ -55,3 +55,23 @@ export function getImageUrl(path: string): string {
   
   return `${baseUrl}${cleanPath}`;
 }
+
+/**
+ * Get product cover image with store logo / ASAP store logo fallback
+ */
+export function getProductCoverImage(product: any, store?: any): string {
+  const rawImage = product?.cover_image || product?.image || (Array.isArray(product?.images) ? product.images[0] : null);
+  
+  if (rawImage && typeof rawImage === 'string' && rawImage.trim() !== '' && !rawImage.includes('placeholder')) {
+    return getImageUrl(rawImage);
+  }
+  
+  // Store Logo Fallback
+  const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+  if (storeLogo && typeof storeLogo === 'string' && storeLogo.trim() !== '') {
+    return getImageUrl(storeLogo);
+  }
+  
+  // ASAP Store Logo Fallback
+  return getImageUrl('/images/logos/logo-dark.png');
+}

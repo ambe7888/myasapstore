@@ -3,7 +3,7 @@ import { Heart, Eye, Star } from 'lucide-react';
 import { Link, usePage, router } from '@inertiajs/react';
 import AddToCartButton from '../AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
@@ -69,11 +69,12 @@ export default function FashionProductCard({
         className="block relative overflow-hidden aspect-[3/4]"
       >
         <img 
-          src={getImageUrl(product.cover_image)} 
+          src={getProductCoverImage(product, store)} 
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://placehold.co/400x500/f5f5f5/666666?text=${encodeURIComponent(product.name)}`;
+            const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+            (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
           }}
         />
         

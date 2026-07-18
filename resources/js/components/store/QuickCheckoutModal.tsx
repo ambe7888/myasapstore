@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ShoppingBag, CheckCircle2, Truck, ShieldCheck, Loader2 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
+import { getProductCoverImage } from '@/utils/image-helper';
 import axios from 'axios';
 
 interface QuickCheckoutModalProps {
@@ -97,8 +99,11 @@ export default function QuickCheckoutModal({
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+  const modalJSX = (
+    <div 
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
+    >
       <div 
         className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 my-auto max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
@@ -134,9 +139,13 @@ export default function QuickCheckoutModal({
           {/* Product Summary Card */}
           <div className="flex gap-4 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 items-center">
             <img
-              src={product.cover_image || product.image || '/placeholder.jpg'}
+              src={getProductCoverImage(product, store)}
               alt={product.name}
               className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700"
+              onError={(e) => {
+                const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+                (e.target as HTMLImageElement).src = storeLogo ? storeLogo : '/images/logos/logo-dark.png';
+              }}
             />
             <div className="flex-1 min-w-0">
               <h4 className="font-bold text-slate-900 dark:text-white text-sm truncate">{product.name}</h4>
@@ -288,4 +297,6 @@ export default function QuickCheckoutModal({
       </div>
     </div>
   );
+
+  return createPortal(modalJSX, document.body);
 }

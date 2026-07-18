@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
 import { formatCurrency } from '@/utils/currency-formatter';
-import { getImageUrl } from '@/utils/image-helper';
+import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { usePage, router, Link } from '@inertiajs/react';
@@ -46,11 +46,17 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
     <div className="group bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 hover:border-red-600">
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
-        <img
-          src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(product.name)}`}
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+        <Link href={productUrl} className="block w-full h-full">
+          <img
+            src={getProductCoverImage(product, store)}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
+              (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
+            }}
+          />
+        </Link>
         
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">

@@ -43,17 +43,6 @@ export function getImageUrl(path: string): string {
       }
     }
     
-    // Handle any subdirectory by detecting if we're not at root
-    if (!baseUrl && pathname !== '/' && !pathname.startsWith('/storage/')) {
-      const pathParts = pathname.split('/').filter(part => part);
-      // If we have path segments and the first one isn't a known route, it's likely a base path
-      if (pathParts.length > 0) {
-        // Take the first path segment as potential base path
-        const potentialBasePath = '/' + pathParts[0];
-        baseUrl = origin + potentialBasePath;
-      }
-    }
-    
     // Final fallback
     if (!baseUrl) {
       baseUrl = origin;

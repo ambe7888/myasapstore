@@ -278,7 +278,12 @@ export default function CreateStore({ availableThemes, planPermissions, serverIp
                           decoding="async"
                           className="h-full w-full object-cover theme-preview-image"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = `https://placehold.co/300x180?text=${encodeURIComponent(theme.name)}`;
+                            const target = e.target as HTMLImageElement;
+                            if (target.src.endsWith('.webp')) {
+                              target.src = target.src.replace('.webp', '.png');
+                            } else {
+                              target.src = `https://placehold.co/300x180?text=${encodeURIComponent(theme.name)}`;
+                            }
                           }}
                         />
                         {formData.theme === theme.id && (

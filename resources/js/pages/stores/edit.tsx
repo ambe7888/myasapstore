@@ -234,6 +234,12 @@ export default function EditStore({ store, availableThemes, planPermissions, ser
                           loading="lazy"
                           decoding="async"
                           className="h-full w-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (target.src.endsWith('.webp')) {
+                              target.src = target.src.replace('.webp', '.png');
+                            }
+                          }}
                         />
                         {formData.theme === theme.id && (
                           <div className="absolute inset-0 flex items-center justify-center bg-primary/20">

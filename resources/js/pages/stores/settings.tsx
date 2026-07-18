@@ -27,8 +27,27 @@ export default function StoreSettings({ store, settings }: Props) {
     });
   };
 
-  const updateSetting = (key: string, value: any) => {
-    setFormData(prev => ({ ...prev, [key]: value }));
+  const getDefaultThemeColor = () => {
+    switch (store?.theme) {
+      case 'furniture-interior':
+        return '#894B00';
+      case 'cars-automotive':
+        return '#dc2626';
+      case 'beauty-cosmetics':
+        return '#ec4899';
+      case 'baby-kids':
+        return '#db2777';
+      case 'perfume-fragrances':
+        return '#7c3aed';
+      case 'electronics':
+        return '#2563eb';
+      case 'fashion':
+        return '#0f172a';
+      case 'watches':
+        return '#1e293b';
+      default:
+        return '#4f46e5';
+    }
   };
 
   const resetColors = () => {
@@ -41,6 +60,10 @@ export default function StoreSettings({ store, settings }: Props) {
       text_button_color: '',
       site_bg_color: ''
     }));
+  };
+
+  const updateSetting = (key: string, value: any) => {
+    setFormData(prev => ({ ...prev, [key]: value }));
   };
 
   const pageActions = [
@@ -157,13 +180,13 @@ export default function StoreSettings({ store, settings }: Props) {
                     type="color"
                     id="primary_color"
                     className="w-16 h-10 p-1"
-                    value={formData.primary_color || '#4f46e5'}
+                    value={formData.primary_color || getDefaultThemeColor()}
                     onChange={(e) => updateSetting('primary_color', e.target.value)}
                   />
                   <Input
                     type="text"
                     className="w-32"
-                    value={formData.primary_color || '#4f46e5'}
+                    value={formData.primary_color || getDefaultThemeColor()}
                     onChange={(e) => updateSetting('primary_color', e.target.value)}
                   />
                 </div>

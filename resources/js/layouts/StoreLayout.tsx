@@ -67,23 +67,23 @@ function StoreLayoutContent({
     if (activeTheme === 'furniture-interior') {
       themeCss = `
         /* Furniture Theme Specific Overrides */
-        .bg-yellow-800, .bg-amber-800 {
+        .bg-yellow-800, .bg-amber-800, .bg-amber-700, .bg-amber-900 {
           background-color: var(--theme-color) !important;
           border-color: var(--theme-color) !important;
         }
-        .hover\\:bg-yellow-900:hover, .hover\\:bg-amber-900:hover {
+        .hover\\:bg-yellow-900:hover, .hover\\:bg-amber-800:hover, .hover\\:bg-amber-900:hover {
           background-color: var(--primary-hover-color) !important;
         }
-        .text-yellow-800, .text-amber-800, .text-yellow-700 {
+        .text-yellow-800, .text-amber-800, .text-yellow-700, .text-amber-700, .text-amber-600 {
           color: var(--theme-color) !important;
         }
         .bg-amber-50, .bg-yellow-50, .bg-yellow-100, .bg-amber-100 {
           background-color: var(--bg-light-color) !important;
         }
-        .border-yellow-200, .border-amber-200 {
+        .border-yellow-200, .border-amber-200, .border-amber-100 {
           border-color: var(--border-light-color) !important;
         }
-        a.bg-yellow-800, button.bg-yellow-800 {
+        a.bg-yellow-800, button.bg-yellow-800, a.bg-amber-700, button.bg-amber-700 {
           color: var(--btn-text-color) !important;
         }
       `;

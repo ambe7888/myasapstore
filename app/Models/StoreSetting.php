@@ -27,7 +27,7 @@ class StoreSetting extends Model
             return $themeDefaults;
         }
         
-        $mergedSettings = array_replace_recursive($themeDefaults, $settings->content);
+        $mergedSettings = self::mergeSettings($themeDefaults, $settings->content);
         
         // Special handling for social_links - don't merge with defaults if user has custom settings
         if (isset($settings->content['footer']['social_links'])) {
@@ -35,6 +35,32 @@ class StoreSetting extends Model
         }
         
         return $mergedSettings;
+    }
+    
+    private static function mergeSettings($defaults, $custom)
+    {
+        if (!is_array($defaults) || !is_array($custom)) {
+            return $custom;
+        }
+
+        // If one of them is a list (sequential array), completely replace it
+        $isListDefaults = empty($defaults) || (array_keys($defaults) === range(0, count($defaults) - 1));
+        $isListCustom = empty($custom) || (array_keys($custom) === range(0, count($custom) - 1));
+        
+        if ($isListDefaults || $isListCustom) {
+            return $custom;
+        }
+
+        $merged = $defaults;
+        foreach ($custom as $key => $value) {
+            if (array_key_exists($key, $defaults) && is_array($defaults[$key]) && is_array($value)) {
+                $merged[$key] = self::mergeSettings($defaults[$key], $value);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
     }
     
     public static function updateSettings($storeId, $theme, $content)

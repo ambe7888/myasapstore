@@ -197,13 +197,6 @@ export function AppSidebar() {
                     href: route('stores.content.index')
                 });
             }
-
-            if (currentStore && (userRole === 'company' || hasPermission(permissions, 'manage-stores') || hasPermission(permissions, 'view-stores'))) {
-                storeChildren.push({
-                    title: t('Product Funnels'),
-                    href: route('stores.funnels.index', currentStore.id)
-                });
-            }
             
             if (storeChildren.length > 0) {
                 items.push({
@@ -222,6 +215,13 @@ export function AppSidebar() {
                 productChildren.push({
                     title: t('Products'),
                     href: route('products.index')
+                });
+            }
+
+            if (currentStore && (userRole === 'company' || hasPermission(permissions, 'manage-products') || hasPermission(permissions, 'view-products'))) {
+                productChildren.push({
+                    title: t('Product Funnels'),
+                    href: route('stores.funnels.index', currentStore.id)
                 });
             }
             

@@ -188,6 +188,66 @@ export default function StoreSettings({ store, settings }: Props) {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="text_title_color">{t('Heading / Large Text Color')}</Label>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="text_title_color"
+                    className="w-16 h-10 p-1"
+                    value={formData.text_title_color || '#0f172a'}
+                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    placeholder="#0f172a"
+                    value={formData.text_title_color || ''}
+                    onChange={(e) => updateSetting('text_title_color', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="text_button_color">{t('Button Text Color')}</Label>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="text_button_color"
+                    className="w-16 h-10 p-1"
+                    value={formData.text_button_color || '#ffffff'}
+                    onChange={(e) => updateSetting('text_button_color', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    placeholder="#ffffff"
+                    value={formData.text_button_color || ''}
+                    onChange={(e) => updateSetting('text_button_color', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="site_bg_color">{t('Site Background Color')}</Label>
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    id="site_bg_color"
+                    className="w-16 h-10 p-1"
+                    value={formData.site_bg_color || '#ffffff'}
+                    onChange={(e) => updateSetting('site_bg_color', e.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    className="w-32"
+                    placeholder="#ffffff"
+                    value={formData.site_bg_color || ''}
+                    onChange={(e) => updateSetting('site_bg_color', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="button_radius">{t('Button Style')}</Label>
                 <select
                   id="button_radius"

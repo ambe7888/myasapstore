@@ -63,10 +63,62 @@ function StoreLayoutContent({
     
     let cssContent = `
       :root {
-        ${store?.primary_color ? `--theme-color: ${store.primary_color};` : ''}
-        ${store?.button_radius ? `--radius: ${store.button_radius};` : ''}
-        --btn-add-to-cart-color: ${store?.button_color_add_to_cart || store?.primary_color || 'var(--theme-color, #4f46e5)'};
+        --theme-color: ${store?.primary_color || '#4f46e5'};
+        --radius: ${store?.button_radius || '0.625rem'};
+        --btn-add-to-cart-color: ${store?.button_color_add_to_cart || store?.primary_color || 'var(--theme-color)'};
         --btn-buy-now-color: ${store?.button_color_buy_now || '#16a34a'};
+        --btn-text-color: ${store?.text_button_color || '#ffffff'};
+        --title-text-color: ${store?.text_title_color || '#0f172a'};
+        --site-bg-color: ${store?.site_bg_color || '#ffffff'};
+        
+        --primary-hover-color: color-mix(in srgb, var(--theme-color) 85%, black);
+        --bg-light-color: color-mix(in srgb, var(--theme-color) 6%, white);
+        --border-light-color: color-mix(in srgb, var(--theme-color) 15%, white);
+      }
+      
+      /* Global Theme Overrides based on custom settings */
+      body, .min-h-screen, main {
+        background-color: var(--site-bg-color) !important;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--title-text-color) !important;
+      }
+      
+      /* Primary backgrounds across all themes */
+      .bg-yellow-800, .bg-amber-800, .bg-red-600, .bg-slate-900, .bg-black, .bg-blue-600, .bg-rose-500, .bg-rose-600, .bg-pink-500, .bg-pink-600, .bg-purple-600 {
+        background-color: var(--theme-color) !important;
+        border-color: var(--theme-color) !important;
+      }
+      
+      /* Primary hover backgrounds */
+      .hover\\:bg-yellow-900:hover, .hover\\:bg-amber-900:hover, .hover\\:bg-red-700:hover, .hover\\:bg-slate-800:hover, .hover\\:bg-gray-900:hover, .hover\\:bg-blue-700:hover, .hover\\:bg-rose-600:hover, .hover\\:bg-rose-700:hover, .hover\\:bg-pink-600:hover, .hover\\:bg-pink-700:hover, .hover\\:bg-purple-700:hover {
+        background-color: var(--primary-hover-color) !important;
+      }
+      
+      /* Accent texts across all themes */
+      .text-yellow-800, .text-amber-800, .text-yellow-700, .text-red-600, .text-slate-900, .text-blue-600, .text-rose-500, .text-rose-600, .text-pink-500, .text-pink-600, .text-purple-600 {
+        color: var(--theme-color) !important;
+      }
+      
+      /* Light backgrounds */
+      .bg-amber-50, .bg-yellow-50, .bg-yellow-100, .bg-amber-100, .bg-red-50, .bg-slate-50, .bg-gray-50, .bg-blue-50, .bg-rose-50, .bg-pink-50, .bg-purple-50 {
+        background-color: var(--bg-light-color) !important;
+      }
+      
+      /* Light borders */
+      .border-yellow-200, .border-amber-200, .border-red-200, .border-slate-200, .border-gray-200, .border-blue-200, .border-rose-200, .border-pink-200, .border-purple-200 {
+        border-color: var(--border-light-color) !important;
+      }
+      
+      /* Primary button text color */
+      a.bg-yellow-800, button.bg-yellow-800, a.bg-red-600, button.bg-red-600, a.bg-blue-600, button.bg-blue-600, a.bg-rose-500, button.bg-rose-500, a.bg-pink-500, button.bg-pink-500, a.bg-purple-600, button.bg-purple-600 {
+        color: var(--btn-text-color) !important;
+      }
+      
+      /* Button borders radius overrides */
+      .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
+        border-radius: var(--radius) !important;
       }
     `;
     
@@ -193,7 +245,23 @@ function StoreLayoutContent({
       if (ttPixel) ttPixel.remove();
       if (snapPixel) snapPixel.remove();
     };
-  }, [store?.custom_css, store?.custom_javascript, store?.facebook_pixel, store?.google_analytics, store?.tiktok_pixel, store?.snapchat_pixel]);
+  }, [
+    store?.custom_css, 
+    store?.custom_javascript, 
+    store?.facebook_pixel, 
+    store?.google_analytics, 
+    store?.tiktok_pixel, 
+    store?.snapchat_pixel,
+    content?.show_sections?.breadcrumb,
+    content?.show_sections?.page_header,
+    store?.primary_color,
+    store?.button_radius,
+    store?.button_color_add_to_cart,
+    store?.button_color_buy_now,
+    store?.text_button_color,
+    store?.text_title_color,
+    store?.site_bg_color
+  ]);
   
   // Get theme-specific footer component
   const components = getThemeComponents(theme || 'default');

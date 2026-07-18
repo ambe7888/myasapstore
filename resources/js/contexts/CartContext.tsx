@@ -71,7 +71,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
     try {
       const response = await axios.get(route('api.cart.index'), { params: { store_id: storeId } });
       console.log('Cart refresh response:', response.data);
-      const cartItems = (response.data.items || []).map((item: any) => ({
+      const rawItems = response.data.items || [];
+      const itemsArray = Array.isArray(rawItems) ? rawItems : Object.values(rawItems);
+      const cartItems = itemsArray.map((item: any) => ({
         ...item,
         quantity: Number(item.quantity) || 1
       }));

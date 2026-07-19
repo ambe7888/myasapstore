@@ -22,6 +22,7 @@ interface Plan {
   max_stores: number;
   max_users_per_store: number;
   max_products_per_store: number;
+  max_funnels: number;
   storage_limit: number;
   enable_custdomain: string;
   enable_custsubdomain: string;
@@ -57,6 +58,7 @@ export default function PlanForm({ plan, hasDefaultPlan = false, otherDefaultPla
     max_stores: plan?.max_stores || 0,
     max_users_per_store: plan?.max_users_per_store || 0,
     max_products_per_store: plan?.max_products_per_store || 0,
+    max_funnels: plan?.max_funnels ?? 0,
     storage_limit: plan?.storage_limit || 0,
     enable_custdomain: plan?.enable_custdomain || 'off',
     enable_custsubdomain: plan?.enable_custsubdomain || 'off',
@@ -199,6 +201,18 @@ export default function PlanForm({ plan, hasDefaultPlan = false, otherDefaultPla
                   name="max_products_per_store"
                   type="number"
                   value={formData.max_products_per_store}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="max_funnels">{t("Maximum Product Funnels")} <span className="text-xs text-muted-foreground">({t("-1 for unlimited")})</span></Label>
+                <Input
+                  id="max_funnels"
+                  name="max_funnels"
+                  type="number"
+                  value={formData.max_funnels}
                   onChange={handleChange}
                   required
                 />

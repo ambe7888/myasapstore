@@ -55,5 +55,5 @@ export const toast = {
 };
 
 export const CustomToast = () => {
-    return <Toaster position="top-right" duration={5000} richColors closeButton />;
+    return <Toaster position="bottom-right" duration={5000} richColors closeButton />;
 };

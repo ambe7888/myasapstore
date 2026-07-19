@@ -53,8 +53,10 @@ interface Plan {
   trial_days: number;
   features: string[];
   stats: {
-    businesses: number | string;
-    users: number | string;
+    stores: number | string;
+    users_per_store: number | string;
+    products_per_store: number | string;
+    funnels: number | string;
     storage: string;
     templates: number | string;
   };
@@ -634,7 +636,8 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     users_per_store: <Users className="h-5 w-5" />,
     products_per_store: <Box className="h-5 w-5" />,
     storage: <HardDrive className="h-5 w-5" />,
-    templates: <FileText className="h-5 w-5" />
+    templates: <FileText className="h-5 w-5" />,
+    funnels: <Zap className="h-5 w-5" />
   };
 
   return (
@@ -905,6 +908,21 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
                       </div>
                       <div className="relative text-xs font-medium text-purple-600 uppercase tracking-wide">
                         {t("Themes")}
+                      </div>
+                    </div>
+
+                    <div className="relative overflow-hidden bg-white rounded-xl border border-gray-200 p-3 group-hover:border-primary/30 transition-colors">
+                      <div className="absolute inset-0 bg-gradient-to-br from-rose-50 to-transparent opacity-70"></div>
+                      <div className="relative flex items-center gap-2 mb-1">
+                        <div className="p-1.5 rounded-full bg-rose-100 text-rose-600">
+                          {statIcons.funnels}
+                        </div>
+                        <div className="text-xl font-bold text-rose-700">
+                          {plan.stats.funnels === -1 || plan.stats.funnels === '-1' ? t("Unlimited") : plan.stats.funnels}
+                        </div>
+                      </div>
+                      <div className="relative text-xs font-medium text-rose-600 uppercase tracking-wide">
+                        {t("Funnels")}
                       </div>
                     </div>
                   </div>

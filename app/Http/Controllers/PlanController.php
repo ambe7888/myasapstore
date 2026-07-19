@@ -56,6 +56,7 @@ class PlanController extends Controller
                     'stores' => $plan->max_stores ?? $plan->business ?? 0,
                     'users_per_store' => $plan->max_users_per_store ?? $plan->max_users ?? 0,
                     'products_per_store' => $plan->max_products_per_store ?? 0,
+                    'funnels' => $plan->max_funnels ?? 0,
                     'storage' => $plan->storage_limit . ' GB',
                     'templates' => $this->getThemeCount($plan->themes)
                 ],
@@ -128,6 +129,7 @@ class PlanController extends Controller
             'max_stores' => 'required|integer|min:0',
             'max_users_per_store' => 'required|integer|min:0',
             'max_products_per_store' => 'required|integer|min:0',
+            'max_funnels' => 'required|integer|min:-1',
             'storage_limit' => 'required|numeric|min:0',
             'enable_custdomain' => 'nullable|in:on,off',
             'enable_custsubdomain' => 'nullable|in:on,off',
@@ -200,6 +202,7 @@ class PlanController extends Controller
             'max_stores' => 'required|integer|min:0',
             'max_users_per_store' => 'required|integer|min:0',
             'max_products_per_store' => 'required|integer|min:0',
+            'max_funnels' => 'required|integer|min:-1',
             'storage_limit' => 'required|numeric|min:0',
             'enable_custdomain' => 'nullable|in:on,off',
             'enable_custsubdomain' => 'nullable|in:on,off',

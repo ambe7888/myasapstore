@@ -90,8 +90,40 @@ export default function FunnelCheckoutPopup({
     }
   };
 
+  const themeColor = store?.primary_color || '#4f46e5';
+
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+      {/* Dynamic Theme Styles to replace hardcoded violet */}
+      <style>{`
+        .funnel-theme-text {
+          color: ${themeColor} !important;
+        }
+        .funnel-theme-bg {
+          background-color: ${themeColor} !important;
+        }
+        .funnel-theme-border {
+          border-color: ${themeColor} !important;
+        }
+        .funnel-theme-bg-light {
+          background-color: color-mix(in srgb, ${themeColor} 8%, white) !important;
+        }
+        .funnel-theme-border-light {
+          border-color: color-mix(in srgb, ${themeColor} 20%, white) !important;
+        }
+        .funnel-theme-btn {
+          background-color: ${themeColor} !important;
+          color: #ffffff !important;
+        }
+        .funnel-theme-btn:hover {
+          background-color: color-mix(in srgb, ${themeColor} 85%, black) !important;
+        }
+        .funnel-theme-ring:focus {
+          --tw-ring-color: ${themeColor} !important;
+          border-color: ${themeColor} !important;
+        }
+      `}</style>
+
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
@@ -100,7 +132,7 @@ export default function FunnelCheckoutPopup({
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="h-5 w-5 text-violet-600" />
+            <ShoppingBag className="h-5 w-5 funnel-theme-text" />
             <span className="font-bold text-slate-800">
               {step === 'success' ? t('Order Confirmed!') : t('Checkout')}
             </span>
@@ -115,8 +147,8 @@ export default function FunnelCheckoutPopup({
           <div className="flex items-center px-5 py-2.5 bg-slate-50 border-b border-slate-100">
             {['info', 'shipping', 'payment'].map((s, i) => (
               <React.Fragment key={s}>
-                <div className={`flex items-center gap-1.5 text-xs font-medium ${step === s ? 'text-violet-600' : 'text-slate-400'}`}>
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${step === s ? 'bg-violet-600 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                <div className={`flex items-center gap-1.5 text-xs font-medium ${step === s ? 'funnel-theme-text' : 'text-slate-400'}`}>
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${step === s ? 'funnel-theme-bg text-white' : 'bg-slate-200 text-slate-500'}`}>
                     {i + 1}
                   </div>
                   {s === 'info' ? t('Info') : s === 'shipping' ? t('Shipping') : t('Payment')}
@@ -138,7 +170,7 @@ export default function FunnelCheckoutPopup({
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm text-slate-800 truncate">{product.name}</p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="font-bold text-violet-700">{price} {currency}</span>
+                  <span className="font-bold funnel-theme-text">{price} {currency}</span>
                   {product.sale_price && (
                     <span className="text-xs text-slate-400 line-through">{product.price} {currency}</span>
                   )}
@@ -173,7 +205,7 @@ export default function FunnelCheckoutPopup({
                         onClick={() => setSelectedVariant({ ...selectedVariant, [variant.name]: option })}
                         className={`px-3 py-1.5 text-xs rounded-lg border-2 font-medium transition-all ${
                           selectedVariant?.[variant.name] === option
-                            ? 'border-violet-500 bg-violet-50 text-violet-700'
+                            ? 'funnel-theme-border funnel-theme-bg-light funnel-theme-text'
                             : 'border-slate-200 text-slate-600 hover:border-slate-300'
                         }`}
                       >
@@ -238,7 +270,7 @@ export default function FunnelCheckoutPopup({
                     onClick={() => setSelectedShipping(method)}
                     className={`w-full flex items-center justify-between p-3.5 rounded-xl border-2 text-left transition-all ${
                       selectedShipping?.id === method.id
-                        ? 'border-violet-500 bg-violet-50'
+                        ? 'funnel-theme-border funnel-theme-bg-light'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
@@ -261,7 +293,7 @@ export default function FunnelCheckoutPopup({
                 <Label className="text-xs">{t('Order Notes (optional)')}</Label>
                 <textarea
                   rows={2}
-                  className="w-full text-sm rounded-xl border border-slate-200 p-3 resize-none focus:outline-none focus:ring-2 focus:ring-violet-200"
+                  className="w-full text-sm rounded-xl border border-slate-200 p-3 resize-none focus:outline-none focus:ring-2 funnel-theme-ring"
                   value={form.notes}
                   onChange={e => setField('notes', e.target.value)}
                   placeholder={t('Special instructions...')}
@@ -285,7 +317,7 @@ export default function FunnelCheckoutPopup({
                     onClick={() => setField('payment_method', method.value)}
                     className={`w-full flex items-center gap-3 p-3.5 rounded-xl border-2 text-left transition-all ${
                       form.payment_method === method.value
-                        ? 'border-violet-500 bg-violet-50'
+                        ? 'funnel-theme-border funnel-theme-bg-light'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
@@ -308,7 +340,7 @@ export default function FunnelCheckoutPopup({
                 </div>
                 <div className="border-t border-slate-200 pt-2 flex justify-between font-bold">
                   <span>{t('Total')}</span>
-                  <span className="text-violet-700 text-lg">{total.toFixed(2)} {currency}</span>
+                  <span className="funnel-theme-text text-lg font-bold">{total.toFixed(2)} {currency}</span>
                 </div>
               </div>
             </div>
@@ -349,7 +381,7 @@ export default function FunnelCheckoutPopup({
                 </Button>
               )}
               <Button
-                className="flex-1 gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700"
+                className="flex-1 gap-2 funnel-theme-btn font-bold rounded-xl py-3.5"
                 disabled={loading}
                 onClick={() => {
                   if (step === 'info') {
@@ -362,11 +394,11 @@ export default function FunnelCheckoutPopup({
                   }
                 }}
               >
-                {loading && <Loader className="h-4 w-4 animate-spin" />}
+                {loading && <Loader className="h-4 w-4 animate-spin mr-1" />}
                 {step === 'payment'
                   ? (loading ? t('Placing Order...') : t('Place Order'))
                   : t('Continue')}
-                {!loading && step !== 'payment' && <ChevronRight className="h-4 w-4" />}
+                {!loading && step !== 'payment' && <ChevronRight className="h-4 w-4 ml-1" />}
               </Button>
             </div>
             {step === 'payment' && (
@@ -380,3 +412,4 @@ export default function FunnelCheckoutPopup({
     </div>
   );
 }
+

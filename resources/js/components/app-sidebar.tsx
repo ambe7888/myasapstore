@@ -217,13 +217,6 @@ export function AppSidebar() {
                     href: route('products.index')
                 });
             }
-
-            if (currentStore && (userRole === 'company' || hasPermission(permissions, 'manage-products') || hasPermission(permissions, 'view-products'))) {
-                productChildren.push({
-                    title: t('Product Funnels'),
-                    href: route('stores.funnels.index', currentStore.id)
-                });
-            }
             
             if (hasPermission(permissions, 'manage-categories')) {
                 productChildren.push({
@@ -246,6 +239,15 @@ export function AppSidebar() {
                     children: productChildren
                 });
             }
+        }
+
+        // Product Funnels (Standalone menu right after Product Management)
+        if (currentStore && (userRole === 'company' || hasPermission(permissions, 'manage-products') || hasPermission(permissions, 'view-products'))) {
+            items.push({
+                title: t('Product Funnels'),
+                href: route('stores.funnels.index', currentStore.id),
+                icon: Zap,
+            });
         }
 
         // Order Management

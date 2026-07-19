@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 import axios from 'axios';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import { formatCurrency } from '@/utils/currency-formatter';
 
 interface Props {
   product: any;
@@ -352,15 +353,17 @@ export default function FunnelCheckoutPopup({
                 <p className="text-sm font-bold text-slate-700 mb-2">{t('Order Summary')}</p>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">{t('Subtotal')}</span>
-                  <span className="font-medium">{subtotal.toFixed(2)} {currency}</span>
+                  <span className="font-medium">{formatCurrency(subtotal, storeSettings, currencies)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">{t('Shipping')}</span>
-                  <span className="font-medium">{Number(shippingCost) === 0 ? t('Free') : `${shippingCost} ${currency}`}</span>
+                  <span className="font-medium">
+                    {Number(shippingCost) === 0 ? t('Free') : formatCurrency(shippingCost, storeSettings, currencies)}
+                  </span>
                 </div>
                 <div className="border-t border-slate-200 pt-2 flex justify-between font-bold">
                   <span>{t('Total')}</span>
-                  <span className="funnel-theme-text text-lg font-bold">{total.toFixed(2)} {currency}</span>
+                  <span className="funnel-theme-text text-lg font-bold">{formatCurrency(total, storeSettings, currencies)}</span>
                 </div>
               </div>
 

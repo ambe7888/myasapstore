@@ -1384,9 +1384,12 @@ if (! function_exists('formatStoreCurrency')) {
             // Currency formatting settings
             $symbol = $currency ? $currency->symbol : 'FCFA';
             $position = $storeSettings['currencySymbolPosition'] ?? 'after';
-            $decimals = (int)($storeSettings['decimalFormat'] ?? 0);
+            $decimals = 0; // Forced to 0 decimals
             $decimalSeparator = $storeSettings['decimalSeparator'] ?? '.';
             $thousandsSeparator = $storeSettings['thousandsSeparator'] ?? ' ';
+            if ($thousandsSeparator === 'space' || $thousandsSeparator === '') {
+                $thousandsSeparator = ' ';
+            }
             
             // Format the number
             $formattedNumber = number_format($numAmount, $decimals, $decimalSeparator, $thousandsSeparator);

@@ -41,24 +41,28 @@ export function formatStoreCurrency(
     symbol: '$',
     name: 'US Dollar',
     position: 'before',
-    decimals: 2,
+    decimals: 0,
     decimal_separator: '.',
-    thousands_separator: ','
+    thousands_separator: ' '
   };
 
   // Convert amount to number
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
-  if (isNaN(numAmount)) return `${currency.symbol}0${currency.decimal_separator}${'0'.repeat(currency.decimals)}`;
+  if (isNaN(numAmount)) return `${currency.symbol} 0`;
 
-  // Format with 0 decimal places as requested
+  // Force 0 decimal places
   const formattedNumber = numAmount.toFixed(0);
   
   // Split into integer and decimal parts
   const parts = formattedNumber.split('.');
   
   // Add thousands separator
-  if (currency.thousands_separator) {
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, currency.thousands_separator);
+  let thousandsSeparator = currency.thousands_separator;
+  if (thousandsSeparator === ' ' || thousandsSeparator === 'space' || thousandsSeparator === '') {
+    thousandsSeparator = ' ';
+  }
+  if (thousandsSeparator && thousandsSeparator !== 'none') {
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
   }
 
   // Join with decimal separator
@@ -80,37 +84,36 @@ export function formatCurrency(
 ): string {
   const {
     defaultCurrency = 'USD',
-    decimalFormat = '2',
+    decimalFormat = '0',
     decimalSeparator = '.',
-    thousandsSeparator = ',',
+    thousandsSeparator = ' ',
     currencySymbolPosition = 'before',
     currencySymbolSpace = false,
-    floatNumber = true
+    floatNumber = false
   } = storeSettings;
 
   // Convert amount to number
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
-  if (isNaN(numAmount)) return '$0.00';
+  if (isNaN(numAmount)) return '$0';
 
   // Get currency symbol
   const currency = currencies.find(c => c.code === defaultCurrency);
   const symbol = currency?.symbol || '$';
 
-  // Handle float number setting
-  const finalAmount = (floatNumber === false || floatNumber === '0') 
-    ? Math.floor(numAmount) 
-    : numAmount;
-
-  // Format decimal places (forced to 0)
+  // Force 0 decimal places
   const decimalPlaces = 0;
-  const formattedNumber = finalAmount.toFixed(decimalPlaces);
+  const formattedNumber = numAmount.toFixed(decimalPlaces);
 
   // Split into integer and decimal parts
   const parts = formattedNumber.split('.');
   
   // Add thousands separator
-  if (thousandsSeparator && thousandsSeparator !== 'none') {
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
+  let sep = thousandsSeparator;
+  if (sep === ' ' || sep === 'space' || sep === '') {
+    sep = ' ';
+  }
+  if (sep && sep !== 'none') {
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
   }
 
   // Join with decimal separator

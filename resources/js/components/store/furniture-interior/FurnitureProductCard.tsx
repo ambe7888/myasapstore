@@ -3,7 +3,7 @@ import { Link, router, usePage } from '@inertiajs/react';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
-import { useStoreCurrency } from '@/hooks/use-store-currency';
+import { useStoreCurrency, useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -22,6 +22,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
   const storeCurrency = useStoreCurrency();
+  const formatPrice = useCurrencyFormatter();
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
@@ -30,11 +31,6 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
   const hasVariants = product.variants && 
     ((Array.isArray(product.variants) && product.variants.length > 0) ||
      (typeof product.variants === 'string' && product.variants.trim() !== '' && product.variants !== '[]'));
-
-  const formatPrice = (price: number) => {
-    const numPrice = Number(price) || 0;
-    return `${storeCurrency.symbol}${numPrice.toFixed(storeCurrency.decimals)}`;
-  };
 
   const handleWishlistToggle = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -104,17 +100,17 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {product.is_featured && (
             <span className="bg-amber-500 text-white px-2 py-1 text-xs font-bold rounded-lg shadow-md">
-              ⭐ Featured
+              ⭐ En vedette
             </span>
           )}
           {product.variants && product.variants.length > 0 && (
             <span className="bg-amber-800 text-amber-100 px-2 py-1 text-xs font-bold rounded-lg shadow-md">
-              In Variant
+              Multi-variantes
             </span>
           )}
           {product.discount_percentage > 0 && (
             <span className="bg-red-500 text-white px-2 py-1 text-xs font-bold rounded-lg shadow-md">
-              -{product.discount_percentage}% OFF
+              -{product.discount_percentage}%
             </span>
           )}
         </div>
@@ -175,7 +171,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
                 {formatPrice(product.price)}
               </span>
               <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full ml-auto">
-                Save {formatPrice(product.price - product.sale_price)}
+                Économie: {formatPrice(product.price - product.sale_price)}
               </span>
             </>
           ) : (

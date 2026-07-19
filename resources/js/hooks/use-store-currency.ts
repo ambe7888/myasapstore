@@ -39,17 +39,22 @@ export function useCurrencyFormatter() {
   
   return (amount: number | string): string => {
     const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
-    if (isNaN(numAmount)) return `${storeCurrency.symbol}0${storeCurrency.decimal_separator}${'0'.repeat(storeCurrency.decimals)}`;
+    if (isNaN(numAmount)) return `${storeCurrency.symbol} 0`;
 
-    // Format with specified decimal places
-    const formattedNumber = numAmount.toFixed(storeCurrency.decimals);
+    // Force 0 decimal places project-wide for shop
+    const decimals = 0;
+    const formattedNumber = numAmount.toFixed(decimals);
     
     // Split into integer and decimal parts
     const parts = formattedNumber.split('.');
     
     // Add thousands separator
-    if (storeCurrency.thousands_separator) {
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, storeCurrency.thousands_separator);
+    let thousandsSeparator = storeCurrency.thousands_separator;
+    if (thousandsSeparator === ' ' || thousandsSeparator === 'space' || thousandsSeparator === '') {
+      thousandsSeparator = ' ';
+    }
+    if (thousandsSeparator && thousandsSeparator !== 'none') {
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
     }
 
     // Join with decimal separator

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { BabyKidsProductCard } from '@/components/store/baby-kids';
-import { useStoreCurrency } from '@/hooks/use-store-currency';
+import { useStoreCurrency, useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface Product {
@@ -32,12 +32,7 @@ export default function BabyKidsFeaturedProductsSection({
   const { props } = usePage();
   const store = props.store;
   const storeCurrency = useStoreCurrency();
-  
-  const formatPrice = (price: number | string) => {
-    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
-    if (isNaN(numPrice)) return `${storeCurrency.symbol}0.00`;
-    return `${storeCurrency.symbol}${numPrice.toFixed(storeCurrency.decimals)}`;
-  };
+  const formatPrice = useCurrencyFormatter();
 
   const addToWishlist = (productId: number) => {
     console.log('Add to wishlist:', productId);

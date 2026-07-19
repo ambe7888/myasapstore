@@ -7,6 +7,7 @@ use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use App\Models\Currency;
 use App\Models\ReferralSetting;
+use App\Models\Store;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -243,16 +244,36 @@ class HandleInertiaRequests extends Middleware
             'thousands_separator' => ' '
         ];
         
-        // Return default if no user
-        if (!$user) {
+        $store = $request->attributes->get('resolved_store');
+        if (!$store) {
+            $storeSlug = $request->route('storeSlug') ?? null;
+            if ($storeSlug) {
+                $store = Store::where('slug', $storeSlug)->first();
+            }
+        }
+        
+        $userId = null;
+        $storeId = null;
+        
+        if ($store) {
+            $userId = $store->user_id;
+            $storeId = $store->id;
+        } elseif ($user) {
+            $userId = $user->id;
+            if ($user->type === 'company' && getCurrentStoreId($user)) {
+                $storeId = getCurrentStoreId($user);
+            }
+        }
+        
+        if (!$userId) {
             return $defaultCurrency;
         }
         
         try {
-            // Get company/global currency settings
-            $companySettings = settings($user->id);
+            // Get store currency settings
+            $companySettings = settings($userId, $storeId);
             
-            // Get currency code from company settings
+            // Get currency code from settings
             $currencyCode = $companySettings['defaultCurrency'] ?? 'XOF';
             
             // Get currency details from currencies table
@@ -264,7 +285,7 @@ class HandleInertiaRequests extends Middleware
                     'symbol' => $currency->symbol,
                     'name' => $currency->name,
                     'position' => $companySettings['currencySymbolPosition'] ?? 'before',
-                    'decimals' => (int)($companySettings['decimalFormat'] ?? 2),
+                    'decimals' => 0, // Force 0 decimal places project-wide on shop
                     'decimal_separator' => $companySettings['decimalSeparator'] ?? '.',
                     'thousands_separator' => $companySettings['thousandsSeparator'] ?? ','
                 ];

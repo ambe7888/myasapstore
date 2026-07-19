@@ -26,13 +26,13 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
         <div className="text-center mb-16 lg:mb-20">
           <div className="inline-flex items-center gap-3 bg-amber-100 border-2 border-amber-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
             <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
-            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Featured Collection</span>
+            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Collection en vedette</span>
           </div>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Designer Favorites'}
+            {content?.title || 'Coups de cœur'}
           </h2>
           <p className="text-lg lg:text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
-            {content?.description || 'Handpicked wooden furniture pieces by our interior design experts - the statement pieces that define contemporary living spaces.'}
+            {content?.description || 'Une sélection de qualité, choisie avec soin pour vous.'}
           </p>
         </div>
 
@@ -58,7 +58,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
                     <svg className="w-16 h-16 text-yellow-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    <p className="text-yellow-700 text-sm font-semibold">Featured Product {index + 1}</p>
+                    <p className="text-yellow-700 text-sm font-semibold">Produit vedette {index + 1}</p>
                   </div>
                 </div>
                 <div className="p-6">
@@ -78,7 +78,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center gap-3 bg-yellow-800 text-white px-12 py-5 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 group shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 hover:scale-105"
           >
-            <span>View All Products</span>
+            <span>Voir tous les produits</span>
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

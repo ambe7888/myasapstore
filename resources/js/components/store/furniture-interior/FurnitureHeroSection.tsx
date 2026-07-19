@@ -32,14 +32,14 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                 </svg>
               </div>
               <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">
-                {content?.badge_text || 'Handcrafted Furniture'}
+                {content?.badge_text || 'Produits d\'excellence'}
               </span>
             </div>
             
             <div className={`flex items-center gap-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
               {(content?.stats || [
-                { number: '4.9★', label: 'Rating' },
-                { number: '25+', label: 'Years' }
+                { number: '4.9★', label: 'Avis clients' },
+                { number: '100%', label: 'Garantie' }
               ]).map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-lg font-bold text-amber-800">{stat.number}</div>
@@ -58,21 +58,21 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
               <div className="lg:col-span-1 space-y-8">
                 <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                   <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                    {content?.title || 'Beautiful Spaces Start Here'}
+                    {content?.title || 'Votre satisfaction, notre priorité'}
                   </h1>
                   <p className="text-lg text-slate-700 leading-relaxed mb-8">
-                    {content?.subtitle || 'Discover thoughtfully designed furniture that brings warmth and character to every room in your home.'}
+                    {content?.subtitle || 'Découvrez notre sélection exclusive de produits de qualité supérieure, conçus avec soin pour vous.'}
                   </p>
                 </div>
 
                 {/* Room Types */}
                 <div className={`space-y-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-sm font-bold text-amber-800 uppercase tracking-wider mb-4">{content?.room_section?.title || 'Shop by Room'}</h3>
+                  <h3 className="text-sm font-bold text-amber-800 uppercase tracking-wider mb-4">{content?.room_section?.title || 'Parcourir nos produits'}</h3>
                   {(content?.room_section?.rooms || [
-                    { name: 'Living Room' },
-                    { name: 'Bedroom' },
-                    { name: 'Dining Room' },
-                    { name: 'Office' }
+                    { name: 'Nouveautés' },
+                    { name: 'Populaires' },
+                    { name: 'Exclusivités' },
+                    { name: 'Promotions' }
                   ]).map((room, index) => (
                     <div key={index} className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white transition-all duration-300 cursor-pointer group">
                       <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-200 transition-colors">
@@ -94,7 +94,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <span>{content?.button_text || 'Shop Collection'}</span>
+                    <span>{content?.button_text || 'Découvrir la collection'}</span>
                   </a>
                   <a 
                     href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
@@ -103,7 +103,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                     </svg>
-                    <span>{content?.secondary_button_text || 'Design Services'}</span>
+                    <span>{content?.secondary_button_text || 'En savoir plus'}</span>
                   </a>
                 </div>
               </div>
@@ -118,16 +118,14 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                       <div className="relative aspect-[16/9] rounded-xl overflow-hidden">
                         <img 
                           src={getImageUrl(content?.image || '/storage/media/70/home-banner-furniture-interior.png')}
-                          alt="Featured Furniture" 
+                          alt="Featured Products" 
                           className="w-full h-full object-cover"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = 'https://placehold.co/800x450/f5f5dc/8b7355?text=Featured+Furniture';
+                            (e.target as HTMLImageElement).src = 'https://placehold.co/800x450/f5f5dc/8b7355?text=Featured+Products';
                           }}
                         />
                       </div>
                     </div>
-                    
-
                   </div>
                   
                   {/* Catalog Info Panel */}
@@ -140,24 +138,24 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                           </svg>
                         </div>
                         <div>
-                          <h3 className="font-bold text-slate-900">{content?.catalog_info?.title || 'Furniture Catalog 2024'}</h3>
-                          <p className="text-sm text-slate-600">{content?.catalog_info?.description || 'Premium handcrafted collection'}</p>
+                          <h3 className="font-bold text-slate-900">{content?.catalog_info?.title || 'Catalogue Produits'}</h3>
+                          <p className="text-sm text-slate-600">{content?.catalog_info?.description || 'Sélection de qualité supérieure'}</p>
                         </div>
                       </div>
                       <a 
                         href={content?.catalog_info?.button_link || generateStoreUrl('store.products', store)}
                         className="bg-yellow-800 text-white px-4 py-2 rounded-xl font-bold hover:bg-yellow-900 transition-colors inline-block"
                       >
-                        {content?.catalog_info?.button_text || 'Browse All'}
+                        {content?.catalog_info?.button_text || 'Tout Parcourir'}
                       </a>
                     </div>
                     
                     {/* Quick Stats */}
                     <div className="grid grid-cols-3 gap-4">
                       {(content?.catalog_info?.stats || [
-                        { number: '150+', label: 'Products' },
-                        { number: '12', label: 'Categories' },
-                        { number: '4.9★', label: 'Rating' }
+                        { number: '150+', label: 'Produits' },
+                        { number: '12', label: 'Catégories' },
+                        { number: '4.9★', label: 'Avis' }
                       ]).map((stat, index) => (
                         <div key={index} className="text-center p-3 bg-amber-50 rounded-xl">
                           <div className="text-2xl font-bold text-amber-800">{stat.number}</div>
@@ -169,15 +167,13 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                   
                   {/* Floating Badge */}
                   <div className="absolute -top-3 -right-3 bg-amber-500 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg">
-                    {content?.floating_badge || 'NEW 2024'}
+                    {content?.floating_badge || 'NOUVEAU'}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );

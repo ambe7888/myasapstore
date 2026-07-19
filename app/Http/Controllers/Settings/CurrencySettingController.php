@@ -18,11 +18,18 @@ class CurrencySettingController extends Controller
             $validated = $request->validate([
                 'decimalFormat' => 'required|string|in:0,1,2,3,4',
                 'defaultCurrency' => 'required|string|exists:currencies,code',
-                'thousandsSeparator' => 'required|string',
+                'thousandsSeparator' => 'nullable|string',
                 'floatNumber' => 'required|boolean',
                 'currencySymbolSpace' => 'required|boolean',
                 'currencySymbolPosition' => 'required|string|in:before,after',
             ]);
+            
+            $thousandsSeparator = $request->input('thousandsSeparator');
+            if ($thousandsSeparator === null || $thousandsSeparator === '') {
+                $validated['thousandsSeparator'] = ' ';
+            } else {
+                $validated['thousandsSeparator'] = $thousandsSeparator;
+            }
             
             // Custom validation for decimal separator
             $decimalSeparator = $request->input('decimalSeparator');

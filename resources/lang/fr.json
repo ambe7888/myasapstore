@@ -2724,7 +2724,7 @@
     "customer@example.com": "client@exemple.com",
     "days left": "jours restants",
     "e.g., 10001-10299": "Ex. : 10001-10299",
-    "e.g., StoreGo Support, Your Store Name": "Ex. : Support StoreGo, Le nom de votre boutique",
+    "e.g., StoreGo Support, Your Store Name": "Ex. : Support My Store Asap, Le nom de votre boutique",
     "example.com": "exemple.com",
     "files": "fichiers",
     "https://example.com/cart": "https://exemple.com/panier",
@@ -2807,7 +2807,8 @@
     "Beauty Products": "Produits de beauté",
     "Kids Products": "Produits pour enfants",
     "Clothing & Fashion": "Vêtements & Mode",
-    "Electronics": "Électronique""Product Funnels": "Tunnels de vente",
+    "Electronics": "Électronique",
+    "Product Funnels": "Tunnels de vente",
     "New Funnel": "Nouveau tunnel",
     "Create a Funnel": "Créer un tunnel de vente"
 }

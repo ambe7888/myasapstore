@@ -612,9 +612,9 @@ if (! function_exists('getEnabledPaymentMethods')) {
         
         // COD, WhatsApp, Telegram only for company/store checkout, not for plan purchases
         if ($isSuperAdmin && $storeId === null) {
-            $methods = ['stripe', 'paypal', 'razorpay', 'mercadopago', 'paystack', 'flutterwave', 'bank', 'paytabs', 'skrill', 'coingate', 'payfast', 'tap', 'xendit', 'paytr', 'mollie', 'toyyibpay', 'cashfree', 'iyzipay', 'benefit', 'ozow', 'easebuzz', 'khalti', 'authorizenet', 'fedapay', 'payhere', 'cinetpay', 'paymentwall'];
+            $methods = ['paypal', 'paystack', 'bank', 'cinetpay'];
         } else {
-            $methods = ['cod', 'stripe', 'paypal', 'razorpay', 'mercadopago', 'paystack', 'flutterwave', 'bank', 'paytabs', 'skrill', 'coingate', 'payfast', 'tap', 'xendit', 'paytr', 'mollie', 'toyyibpay', 'cashfree', 'iyzipay', 'benefit', 'ozow', 'easebuzz', 'khalti', 'authorizenet', 'fedapay', 'payhere', 'cinetpay', 'paymentwall', 'whatsapp', 'telegram'];
+            $methods = ['cod', 'paypal', 'paystack', 'bank', 'cinetpay', 'whatsapp', 'telegram'];
         }
         
         $enabled = [];

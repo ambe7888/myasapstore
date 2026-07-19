@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
+import axios from 'axios';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface Props {
   product: any;
@@ -48,6 +50,29 @@ export default function FunnelCheckoutPopup({
   });
 
   const setField = (key: string, value: string) => setForm(prev => ({ ...prev, [key]: value }));
+
+  // Payment methods
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
+  const [loadingPayments, setLoadingPayments] = useState(false);
+
+  // Fetch payment methods
+  React.useEffect(() => {
+    if (store?.id) {
+      setLoadingPayments(true);
+      axios.get(generateStoreUrl('store.payment-methods', store))
+        .then(response => {
+          setPaymentMethods(response.data);
+          if (response.data.length > 0) {
+            setField('payment_method', response.data[0].id);
+          }
+          setLoadingPayments(false);
+        })
+        .catch(err => {
+          console.error("Error loading payment methods:", err);
+          setLoadingPayments(false);
+        });
+    }
+  }, [store]);
 
   const price = product.sale_price || product.price;
   const shippingCost = selectedShipping?.cost || 0;
@@ -305,14 +330,21 @@ export default function FunnelCheckoutPopup({
 
               <div className="space-y-1.5">
                 <Label className="text-xs">Mode de paiement</Label>
-                <select
-                  value={form.payment_method}
-                  onChange={e => setField('payment_method', e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-md border border-input bg-transparent text-slate-900 outline-none h-9"
-                >
-                  <option value="cod">💵 Paiement à la livraison</option>
-                  <option value="bank_transfer">🏦 Virement bancaire</option>
-                </select>
+                {loadingPayments ? (
+                  <div className="text-xs text-slate-500 py-2">Chargement des modes de paiement...</div>
+                ) : (
+                  <select
+                    value={form.payment_method}
+                    onChange={e => setField('payment_method', e.target.value)}
+                    className="w-full px-3 py-2 text-sm rounded-md border border-input bg-transparent text-slate-900 outline-none h-9"
+                  >
+                    {paymentMethods.map((method: any) => (
+                      <option key={method.id} value={method.id}>
+                        {method.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
 
               {/* Order Summary */}

@@ -1539,4 +1539,40 @@ class ThemeController extends Controller
             
         return response()->json($shippingMethods);
     }
+
+    public function getPaymentMethodsApi(Request $request)
+    {
+        $storeSlug = request()->route('storeSlug') ?? null;
+        $store = $this->getStore($request, $storeSlug);
+        
+        $storeModel = \App\Models\Store::find($store['id']);
+        $enabledPaymentMethods = [];
+        if ($storeModel && $storeModel->user) {
+            $enabledPaymentMethods = getEnabledPaymentMethods($storeModel->user->id, $store['id']);
+        }
+        
+        $formatted = [];
+        $labels = [
+            'cod' => '💵 Paiement à la livraison',
+            'whatsapp' => '💬 Commander via WhatsApp',
+            'bank' => '🏦 Virement bancaire',
+            'stripe' => '💳 Carte bancaire (Stripe)',
+            'paypal' => '🅿️ PayPal',
+            'razorpay' => '💳 Razorpay',
+            'paystack' => '💳 Paystack',
+            'flutterwave' => '💳 Flutterwave',
+            'coingate' => '🪙 CoinGate',
+            'tap' => '💳 Tap Payment',
+            'telegram' => '💬 Telegram',
+        ];
+        
+        foreach ($enabledPaymentMethods as $method => $config) {
+            $formatted[] = [
+                'id' => $method,
+                'name' => $labels[$method] ?? ucwords(str_replace('_', ' ', $method))
+            ];
+        }
+        
+        return response()->json($formatted);
+    }
 }

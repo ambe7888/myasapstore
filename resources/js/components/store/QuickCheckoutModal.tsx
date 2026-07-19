@@ -40,7 +40,11 @@ export default function QuickCheckoutModal({
   const [selectedShippingId, setSelectedShippingId] = useState<string>('');
   const [loadingShipping, setLoadingShipping] = useState(false);
 
-  // Fetch shipping methods
+  // Payment methods
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
+  const [loadingPayments, setLoadingPayments] = useState(false);
+
+  // Fetch shipping and payment methods
   React.useEffect(() => {
     if (isOpen && store?.id) {
       setLoadingShipping(true);
@@ -55,6 +59,20 @@ export default function QuickCheckoutModal({
         .catch(err => {
           console.error("Error loading shipping methods:", err);
           setLoadingShipping(false);
+        });
+
+      setLoadingPayments(true);
+      axios.get(generateStoreUrl('store.payment-methods', store))
+        .then(response => {
+          setPaymentMethods(response.data);
+          if (response.data.length > 0) {
+            setPaymentMethod(response.data[0].id);
+          }
+          setLoadingPayments(false);
+        })
+        .catch(err => {
+          console.error("Error loading payment methods:", err);
+          setLoadingPayments(false);
         });
     }
   }, [isOpen, store]);
@@ -301,15 +319,21 @@ export default function QuickCheckoutModal({
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Mode de paiement
               </label>
-              <select
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
-              >
-                <option value="cod">💵 Paiement à la livraison</option>
-                <option value="whatsapp">💬 Commander via WhatsApp</option>
-                <option value="bank">🏦 Virement bancaire</option>
-              </select>
+              {loadingPayments ? (
+                <div className="text-xs text-slate-500 py-2">Chargement des modes de paiement...</div>
+              ) : (
+                <select
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                >
+                  {paymentMethods.map((method) => (
+                    <option key={method.id} value={method.id}>
+                      {method.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
 
             {/* Total & Guarantee */}

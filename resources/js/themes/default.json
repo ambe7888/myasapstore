@@ -1,142 +1,142 @@
 {
-  "header": {
-    "welcome_text": "Bienvenue dans notre boutique",
-    "phone_text": "Appelez-nous : +1 234 567 8900",
-    "show_welcome": true,
-    "show_phone": true
-  },
-  "hero": {
-    "badge_text": "New Collection",
-    "title": "Transformez votre espace",
-    "subtitle": "Découvrez notre collection d'accessoires de maison pour embellir votre espace de vie.",
-    "button_text": "Acheter maintenant",
-    "button_link": "#",
-    "secondary_button_text": "Voir les collections",
-    "secondary_button_link": "#",
-    "image": "/storage/default-hero.jpg",
-    "info_boxes": [
-      {
-        "icon": "truck",
-        "title": "Free Shipping",
-        "description": "On orders over $50"
-      },
-      {
-        "icon": "refresh-cw",
-        "title": "Easy Returns",
-        "description": "30-day return policy"
-      },
-      {
-        "icon": "shield-check",
-        "title": "Secure Checkout",
-        "description": "100% protected"
-      }
-    ]
-  },
-  "categories": {
-    "title": "Acheter par catégorie",
-    "description": "Explorez nos catégories pour trouver exactement ce dont vous avez besoin pour votre maison."
-  },
-  "featured_products": {
-    "title": "Produits en vedette",
-    "description": "Découvrez notre sélection de produits haut de gamme les plus appréciés."
-  },
-  "newsletter": {
-    "title": "Restez informé",
-    "subtitle": "Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour et offres exclusives.",
-    "placeholder_text": "Entrez votre adresse e-mail",
-    "button_text": "S'abonner",
-    "privacy_text": "Nous respectons votre vie privée. Désabonnez-vous à tout moment."
-  },
-  "cta_boxes": [
-    {
-      "icon": "home",
-      "title": "Décoration d'intérieur",
-      "subtitle": "Transformez votre salon"
+    "header": {
+        "welcome_text": "Bienvenue dans notre boutique",
+        "phone_text": "Appelez-nous : +1 234 567 8900",
+        "show_welcome": true,
+        "show_phone": true
     },
-    {
-      "icon": "star",
-      "title": "Qualité supérieure",
-      "subtitle": "Des produits sélectionnés pour vous"
+    "hero": {
+        "badge_text": "New Collection",
+        "title": "Transformez votre espace",
+        "subtitle": "Découvrez notre collection d'accessoires de maison pour embellir votre espace de vie.",
+        "button_text": "Acheter maintenant",
+        "button_link": "#",
+        "secondary_button_text": "Voir les collections",
+        "secondary_button_link": "#",
+        "image": "\/storage\/default-hero.jpg",
+        "info_boxes": [
+            {
+                "icon": "truck",
+                "title": "Free Shipping",
+                "description": "On orders over $50"
+            },
+            {
+                "icon": "refresh-cw",
+                "title": "Easy Returns",
+                "description": "30-day return policy"
+            },
+            {
+                "icon": "shield-check",
+                "title": "Secure Checkout",
+                "description": "100% protected"
+            }
+        ]
     },
-    {
-      "icon": "truck",
-      "title": "Livraison rapide",
-      "subtitle": "Envoi rapide et fiable"
+    "categories": {
+        "title": "Acheter par catégorie",
+        "description": "Explorez nos catégories pour trouver exactement ce dont vous avez besoin pour votre maison."
     },
-    {
-      "icon": "shield-check",
-      "title": "Achats sécurisés",
-      "subtitle": "Paiement 100% protégé"
-    }
-  ],
-  "trending_products": {
-    "title": "Tendances actuelles",
-    "description": "Découvrez ce qui est populaire en ce moment."
-  },
-  "brand_logos": {
-    "title": "Approuvé par les plus grandes marques",
-    "show_title": true,
-    "logos": [
-      {
-        "name": "Brand 1",
-        "image": "/storage/brands/brand1.png"
-      },
-      {
-        "name": "Brand 2",
-        "image": "/storage/brands/brand2.png"
-      },
-      {
-        "name": "Brand 3",
-        "image": "/storage/brands/brand3.png"
-      }
-    ]
-  },
-  "blog": {
-    "title": "Derniers articles de notre blog",
-    "description": "Restez informé avec nos derniers articles et conseils de décoration."
-  },
-  "footer": {
-    "description": "Votre partenaire de confiance pour des accessoires de maison de qualité et un service client exceptionnel.",
-    "menu": {
-      "title": "Liens rapides",
-      "links": [
+    "featured_products": {
+        "title": "Produits en vedette",
+        "description": "Découvrez notre sélection de produits haut de gamme les plus appréciés."
+    },
+    "newsletter": {
+        "title": "Restez informé",
+        "subtitle": "Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour et offres exclusives.",
+        "placeholder_text": "Entrez votre adresse e-mail",
+        "button_text": "S'abonner",
+        "privacy_text": "Nous respectons votre vie privée. Désabonnez-vous à tout moment."
+    },
+    "cta_boxes": [
         {
-          "name": "À propos de nous",
-          "href": "#"
+            "icon": "home",
+            "title": "Décoration d'intérieur",
+            "subtitle": "Transformez votre salon"
         },
         {
-          "name": "Contactez-nous",
-          "href": "#"
+            "icon": "star",
+            "title": "Qualité supérieure",
+            "subtitle": "Des produits sélectionnés pour vous"
         },
         {
-          "name": "FAQ",
-          "href": "#"
+            "icon": "truck",
+            "title": "Livraison rapide",
+            "subtitle": "Envoi rapide et fiable"
         },
         {
-          "name": "Politique de confidentialité",
-          "href": "#"
+            "icon": "shield-check",
+            "title": "Achats sécurisés",
+            "subtitle": "Paiement 100% protégé"
         }
-      ]
-    },
-    "contact": {
-      "address": "123 Main Street, City, State 12345",
-      "phone": "+1 (555) 123-4567",
-      "email": "info@example.com"
-    },
-    "social_links": [
-      {
-        "platform": "facebook",
-        "url": ""
-      },
-      {
-        "platform": "twitter",
-        "url": ""
-      },
-      {
-        "platform": "instagram",
-        "url": ""
-      }
     ],
-    "copyright_text": "© {year} {store_name}. Tous droits réservés."
-  }
+    "trending_products": {
+        "title": "Tendances actuelles",
+        "description": "Découvrez ce qui est populaire en ce moment."
+    },
+    "brand_logos": {
+        "title": "Approuvé par les plus grandes marques",
+        "show_title": true,
+        "logos": [
+            {
+                "name": "Brand 1",
+                "image": "\/storage\/brands\/brand1.png"
+            },
+            {
+                "name": "Brand 2",
+                "image": "\/storage\/brands\/brand2.png"
+            },
+            {
+                "name": "Brand 3",
+                "image": "\/storage\/brands\/brand3.png"
+            }
+        ]
+    },
+    "blog": {
+        "title": "Derniers articles de notre blog",
+        "description": "Restez informé avec nos derniers articles et conseils de décoration."
+    },
+    "footer": {
+        "description": "Votre partenaire de confiance pour des accessoires de maison de qualité et un service client exceptionnel.",
+        "menu": {
+            "title": "Liens rapides",
+            "links": [
+                {
+                    "name": "À propos de nous",
+                    "href": "#"
+                },
+                {
+                    "name": "Contactez-nous",
+                    "href": "#"
+                },
+                {
+                    "name": "FAQ",
+                    "href": "#"
+                },
+                {
+                    "name": "Politique de confidentialité",
+                    "href": "#"
+                }
+            ]
+        },
+        "contact": {
+            "address": "123 Main Street, City, State 12345",
+            "phone": "+1 (555) 123-4567",
+            "email": "info@example.com"
+        },
+        "social_links": [
+            {
+                "platform": "facebook",
+                "url": ""
+            },
+            {
+                "platform": "twitter",
+                "url": ""
+            },
+            {
+                "platform": "instagram",
+                "url": ""
+            }
+        ],
+        "copyright_text": "© {year} {store_name}. Tous droits réservés."
+    }
 }

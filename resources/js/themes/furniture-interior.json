@@ -1,456 +1,456 @@
 {
-  "header": {
-    "welcome_text": {
-      "value": "Livraison gratuite à partir de 50 € d'achat !",
-      "type": "text"
-    },
-    "phone_text": {
-      "value": "Conseils & Commandes : +1 555 SNEAKERS",
-      "type": "text"
-    },
-    "show_welcome": {
-      "value": true,
-      "type": "boolean"
-    },
-    "show_phone": {
-      "value": true,
-      "type": "boolean"
-    }
-  },
-  "hero": {
-    "badge_text": {
-      "value": "Nouvelle Collection de Chaussures",
-      "type": "text"
-    },
-    "title": {
-      "value": "Marchez avec style et confort",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Découvrez notre sélection exclusive de sneakers, talons et chaussures de ville conçues pour sublimer chacun de vos pas.",
-      "type": "textarea"
-    },
-    "button_text": {
-      "value": "Découvrir la collection",
-      "type": "text"
-    },
-    "button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "secondary_button_text": {
-      "value": "Guide des tailles",
-      "type": "text"
-    },
-    "secondary_button_link": {
-      "value": "/size-guide",
-      "type": "text"
-    },
-    "image": {
-      "value": "/storage/media/70/home-banner-furniture-interior.png",
-      "type": "image"
-    },
-    "stats": {
-      "value": [
-        {
-          "number": "4.9★",
-          "label": "Avis Clients"
+    "header": {
+        "welcome_text": {
+            "value": "Livraison gratuite disponible",
+            "type": "text"
         },
-        {
-          "number": "10K+",
-          "label": "Membres"
+        "phone_text": {
+            "value": "Service Client : +33 1 00 00 00 00",
+            "type": "text"
+        },
+        "show_welcome": {
+            "value": true,
+            "type": "boolean"
+        },
+        "show_phone": {
+            "value": true,
+            "type": "boolean"
         }
-      ],
-      "type": "array"
     },
-    "room_section": {
-      "title": {
-        "value": "Acheter par catégorie",
-        "type": "text"
-      },
-      "rooms": {
+    "hero": {
+        "badge_text": {
+            "value": "Sélection Exclusive",
+            "type": "text"
+        },
+        "title": {
+            "value": "Votre satisfaction, notre priorité",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Découvrez notre sélection exclusive de produits de qualité supérieure, conçus avec soin pour vous.",
+            "type": "textarea"
+        },
+        "button_text": {
+            "value": "Découvrir la collection",
+            "type": "text"
+        },
+        "button_link": {
+            "value": "#",
+            "type": "text"
+        },
+        "secondary_button_text": {
+            "value": "En savoir plus",
+            "type": "text"
+        },
+        "secondary_button_link": {
+            "value": "\/size-guide",
+            "type": "text"
+        },
+        "image": {
+            "value": "\/storage\/media\/70\/home-banner-furniture-interior.png",
+            "type": "image"
+        },
+        "stats": {
+            "value": [
+                {
+                    "number": "4.9★",
+                    "label": "Avis clients"
+                },
+                {
+                    "number": "10K+",
+                    "label": "Garantie"
+                }
+            ],
+            "type": "array"
+        },
+        "room_section": {
+            "title": {
+                "value": "Acheter par catégorie",
+                "type": "text"
+            },
+            "rooms": {
+                "value": [
+                    {
+                        "name": "Nouveautés"
+                    },
+                    {
+                        "name": "Populaires"
+                    },
+                    {
+                        "name": "Exclusivités"
+                    },
+                    {
+                        "name": "Promotions"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "catalog_info": {
+            "title": {
+                "value": "Catalogue Produits",
+                "type": "text"
+            },
+            "description": {
+                "value": "Sélection de qualité supérieure",
+                "type": "text"
+            },
+            "button_text": {
+                "value": "Tout Parcourir",
+                "type": "text"
+            },
+            "button_link": {
+                "value": "#",
+                "type": "text"
+            },
+            "stats": {
+                "value": [
+                    {
+                        "number": "150+",
+                        "label": "Modèles"
+                    },
+                    {
+                        "number": "12",
+                        "label": "Marques"
+                    },
+                    {
+                        "number": "4.9★",
+                        "label": "Avis Clients"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "floating_badge": {
+            "value": "NOUVEAUTÉ 2024",
+            "type": "text"
+        }
+    },
+    "categories": {
+        "title": {
+            "value": "Parcourir par catégorie",
+            "type": "text"
+        },
+        "description": {
+            "value": "Trouvez l'article parfait adapté à toutes vos occasions.",
+            "type": "textarea"
+        }
+    },
+    "featured_products": {
+        "title": {
+            "value": "Sélection du moment",
+            "type": "text"
+        },
+        "description": {
+            "value": "Des produits de qualité supérieure, sélectionnés avec soin pour vous.",
+            "type": "textarea"
+        }
+    },
+    "newsletter": {
+        "title": {
+            "value": "Inscrivez-vous à notre newsletter",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Rejoignez notre communauté et profitez d'offres exclusives et de nouveautés.",
+            "type": "textarea"
+        },
+        "placeholder_text": {
+            "value": "votre@email.com",
+            "type": "text"
+        },
+        "button_text": {
+            "value": "S'inscrire",
+            "type": "text"
+        },
+        "privacy_text": {
+            "value": "Désinscription possible à tout moment. Vos données sont protégées.",
+            "type": "text"
+        },
+        "benefits": {
+            "value": [
+                {
+                    "text": "Nouveautés en avant-première"
+                },
+                {
+                    "text": "Conseils d'entretien de vos paires"
+                },
+                {
+                    "text": "Offres exclusives membres"
+                }
+            ],
+            "type": "array"
+        }
+    },
+    "cta_boxes": {
         "value": [
-          {
-            "name": "Sneakers & Sport"
-          },
-          {
-            "name": "Talons & Escarpins"
-          },
-          {
-            "name": "Mocassins & Ville"
-          },
-          {
-            "name": "Bottes & Bottines"
-          }
+            {
+                "icon": "truck",
+                "title": "Livraison rapide",
+                "subtitle": "Chez vous sous 48-72h"
+            },
+            {
+                "icon": "refresh-cw",
+                "title": "Retours faciles",
+                "subtitle": "Échanges sous 30 jours"
+            },
+            {
+                "icon": "shield",
+                "title": "Paiement sécurisé",
+                "subtitle": "Transactions cryptées"
+            },
+            {
+                "icon": "award",
+                "title": "Qualité garantie",
+                "subtitle": "Matériaux premium"
+            }
         ],
         "type": "array"
-      }
     },
-    "catalog_info": {
-      "title": {
-        "value": "Catalogue Chaussures 2024",
-        "type": "text"
-      },
-      "description": {
-        "value": "Collection premium fabriquée à la main",
-        "type": "text"
-      },
-      "button_text": {
-        "value": "Voir tout",
-        "type": "text"
-      },
-      "button_link": {
-        "value": "#",
-        "type": "text"
-      },
-      "stats": {
-        "value": [
-          {
-            "number": "150+",
-            "label": "Modèles"
-          },
-          {
-            "number": "12",
-            "label": "Marques"
-          },
-          {
-            "number": "4.9★",
-            "label": "Avis Clients"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "floating_badge": {
-      "value": "NOUVEAUTÉ 2024",
-      "type": "text"
-    }
-  },
-  "categories": {
-    "title": {
-      "value": "Acheter par catégorie",
-      "type": "text"
-    },
-    "description": {
-      "value": "Trouvez la paire parfaite adaptée à toutes vos tenues et occasions.",
-      "type": "textarea"
-    }
-  },
-  "featured_products": {
-    "title": {
-      "value": "Sélection du moment",
-      "type": "text"
-    },
-    "description": {
-      "value": "Des modèles soigneusement sélectionnés pour allier élégance et bien-être au quotidien.",
-      "type": "textarea"
-    }
-  },
-  "newsletter": {
-    "title": {
-      "value": "Le Club Sneakers & Co",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Rejoignez notre communauté de passionnés de chaussures et bénéficiez d'un accès exclusif aux nouvelles collections et offres privées.",
-      "type": "textarea"
-    },
-    "placeholder_text": {
-      "value": "votre@email.com",
-      "type": "text"
-    },
-    "button_text": {
-      "value": "Rejoindre le club",
-      "type": "text"
-    },
-    "privacy_text": {
-      "value": "Désinscription possible à tout moment. Vos données sont protégées.",
-      "type": "text"
-    },
-    "benefits": {
-      "value": [
-        {
-          "text": "Nouveautés en avant-première"
+    "cta_bottom": {
+        "title": {
+            "value": "Besoin d'aide pour votre choix ?",
+            "type": "text"
         },
-        {
-          "text": "Conseils d'entretien de vos paires"
+        "description": {
+            "value": "Contactez notre service client pour toute question concernant nos produits et services.",
+            "type": "textarea"
         },
-        {
-          "text": "Offres exclusives membres"
+        "primary_button_text": {
+            "value": "Nous contacter",
+            "type": "text"
+        },
+        "primary_button_link": {
+            "value": "\/size-guide",
+            "type": "text"
+        },
+        "secondary_button_text": {
+            "value": "En savoir plus",
+            "type": "text"
+        },
+        "secondary_button_link": {
+            "value": "\/contact",
+            "type": "text"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "cta_boxes": {
-    "value": [
-      {
-        "icon": "truck",
-        "title": "Livraison rapide",
-        "subtitle": "Chez vous sous 48-72h"
-      },
-      {
-        "icon": "refresh-cw",
-        "title": "Retours faciles",
-        "subtitle": "Échanges sous 30 jours"
-      },
-      {
-        "icon": "shield",
-        "title": "Paiement 100% sécurisé",
-        "subtitle": "Transactions cryptées"
-      },
-      {
-        "icon": "award",
-        "title": "Qualité garantie",
-        "subtitle": "Matériaux premium"
-      }
-    ],
-    "type": "array"
-  },
-  "cta_bottom": {
-    "title": {
-      "value": "Besoin d'aide pour choisir votre taille ?",
-      "type": "text"
     },
-    "description": {
-      "value": "Consultez notre guide des tailles interactif ou contactez un conseiller chaussures pour trouver l'ajustement idéal.",
-      "type": "textarea"
-    },
-    "primary_button_text": {
-      "value": "Consulter le Guide des Tailles",
-      "type": "text"
-    },
-    "primary_button_link": {
-      "value": "/size-guide",
-      "type": "text"
-    },
-    "secondary_button_text": {
-      "value": "Contacter un conseiller",
-      "type": "text"
-    },
-    "secondary_button_link": {
-      "value": "/contact",
-      "type": "text"
-    }
-  },
-  "trending_products": {
-    "title": {
-      "value": "Les tendances du moment",
-      "type": "text"
-    },
-    "description": {
-      "value": "Découvrez les paires les plus vendues et appréciées par notre communauté.",
-      "type": "textarea"
-    }
-  },
-  "design_process": {
-    "title": {
-      "value": "Notre savoir-faire",
-      "type": "text"
-    },
-    "description": {
-      "value": "De la conception des modèles à la sélection des cuirs, nous créons des chaussures d'exception.",
-      "type": "textarea"
-    },
-    "steps": {
-      "value": [
-        {
-          "step": "01",
-          "title": "Conception",
-          "description": "Design ergonomique & moderne"
+    "trending_products": {
+        "title": {
+            "value": "Les tendances du moment",
+            "type": "text"
         },
-        {
-          "step": "02",
-          "title": "Sélection",
-          "description": "Matières premières d'excellence"
-        },
-        {
-          "step": "03",
-          "title": "Fabrication",
-          "description": "Artisanat d'art & finitions"
-        },
-        {
-          "step": "04",
-          "title": "Contrôle",
-          "description": "Vérification rigoureuse de la qualité"
+        "description": {
+            "value": "Découvrez les articles les plus populaires et les nouveautés de cette saison.",
+            "type": "textarea"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "stats_section": {
-    "title": {
-      "value": "Approuvé par des milliers de clients",
-      "type": "text"
     },
-    "stats": {
-      "value": [
-        {
-          "number": "50+",
-          "label": "Modèles exclusifs"
+    "design_process": {
+        "title": {
+            "value": "Notre Engagement",
+            "type": "text"
         },
-        {
-          "number": "25+",
-          "label": "Ans d'expertise"
+        "description": {
+            "value": "De la commande à la livraison, nous vous garantissons une expérience simple, rapide et professionnelle.",
+            "type": "textarea"
         },
-        {
-          "number": "10K+",
-          "label": "Clients satisfaits"
-        },
-        {
-          "number": "99%",
-          "label": "Taux de satisfaction"
+        "steps": {
+            "value": [
+                {
+                    "step": "01",
+                    "title": "Sélection",
+                    "description": "Des articles choisis avec le plus grand soin"
+                },
+                {
+                    "step": "02",
+                    "title": "Qualité",
+                    "description": "Des standards exigeants et certifiés"
+                },
+                {
+                    "step": "03",
+                    "title": "Commande",
+                    "description": "Achat simple et sécurisé en quelques clics"
+                },
+                {
+                    "step": "04",
+                    "title": "Livraison",
+                    "description": "Expédition rapide directement chez vous"
+                }
+            ],
+            "type": "array"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "brand_logos": {
-    "title": {
-      "value": "Marques partenaires",
-      "type": "text"
     },
-    "description": {
-      "value": "Nous collaborons avec les fabricants et artisans les plus réputés pour garantir l'excellence.",
-      "type": "textarea"
-    },
-    "logos": {
-      "value": [
-        {
-          "image": "/storage/media/71/brand-logo-furniture-interior-1.png",
-          "name": "Marque Sport"
+    "stats_section": {
+        "title": {
+            "value": "Approuvé par des milliers de clients",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/72/brand-logo-furniture-interior-2.png",
-          "name": "Eco Cuir"
-        },
-        {
-          "image": "/storage/media/73/brand-logo-furniture-interior-3.png",
-          "name": "Premium Sole"
-        },
-        {
-          "image": "/storage/media/74/brand-logo-furniture-interior-4.png",
-          "name": "Sneaker Lab"
-        },
-        {
-          "image": "/storage/media/75/brand-logo-furniture-interior-5.png",
-          "name": "Artisan Bottier"
-        },
-        {
-          "image": "/storage/media/76/brand-logo-furniture-interior-6.png",
-          "name": "Design Ville"
+        "stats": {
+            "value": [
+                {
+                    "number": "50+",
+                    "label": "Articles de choix"
+                },
+                {
+                    "number": "25+",
+                    "label": "Années d'expertise"
+                },
+                {
+                    "number": "10K+",
+                    "label": "Clients satisfaits"
+                },
+                {
+                    "number": "99%",
+                    "label": "Satisfaction"
+                }
+            ],
+            "type": "array"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "blog": {
-    "title": {
-      "value": "Actualités & Conseils",
-      "type": "text"
     },
-    "description": {
-      "value": "Guides d'entretien, tendances mode et actualités de la culture sneaker.",
-      "type": "textarea"
-    }
-  },
-  "footer": {
-    "description": {
-      "value": "Des chaussures de qualité supérieure alliant confort de marche, élégance intemporelle et durabilité.",
-      "type": "textarea"
-    },
-    "menu1": {
-      "title": {
-        "value": "Assistance",
-        "type": "text"
-      },
-      "links": {
-        "value": [
-          {
-            "name": "Guide des tailles",
-            "href": "#"
-          },
-          {
-            "name": "Livraisons & Retours",
-            "href": "#"
-          },
-          {
-            "name": "Conseils d'entretien",
-            "href": "#"
-          },
-          {
-            "name": "Nous contacter",
-            "href": "#"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "menu2": {
-      "title": {
-        "value": "Boutique",
-        "type": "text"
-      },
-      "links": {
-        "value": [
-          {
-            "name": "À propos",
-            "href": "#"
-          },
-          {
-            "name": "Notre histoire",
-            "href": "#"
-          },
-          {
-            "name": "Points de vente",
-            "href": "#"
-          },
-          {
-            "name": "Confidentialité",
-            "href": "#"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "contact": {
-      "address": {
-        "value": "12 Avenue de la Mode, Quartier des Créateurs, Paris 75001",
-        "type": "textarea"
-      },
-      "phone": {
-        "value": "+33 (0) 1 23 45 67 89",
-        "type": "text"
-      },
-      "email": {
-        "value": "contact@shoesstore.com",
-        "type": "email"
-      }
-    },
-    "social_links": {
-      "value": [
-        {
-          "platform": "instagram",
-          "url": ""
+    "brand_logos": {
+        "title": {
+            "value": "Nos Partenaires",
+            "type": "text"
         },
-        {
-          "platform": "pinterest",
-          "url": ""
+        "description": {
+            "value": "Nous collaborons avec des partenaires de confiance pour vous offrir le meilleur.",
+            "type": "textarea"
         },
-        {
-          "platform": "facebook",
-          "url": ""
-        },
-        {
-          "platform": "youtube",
-          "url": ""
+        "logos": {
+            "value": [
+                {
+                    "image": "\/storage\/media\/71\/brand-logo-furniture-interior-1.png",
+                    "name": "Partenaire 1"
+                },
+                {
+                    "image": "\/storage\/media\/72\/brand-logo-furniture-interior-2.png",
+                    "name": "Partenaire 2"
+                },
+                {
+                    "image": "\/storage\/media\/73\/brand-logo-furniture-interior-3.png",
+                    "name": "Partenaire 3"
+                },
+                {
+                    "image": "\/storage\/media\/74\/brand-logo-furniture-interior-4.png",
+                    "name": "Partenaire 4"
+                },
+                {
+                    "image": "\/storage\/media\/75\/brand-logo-furniture-interior-5.png",
+                    "name": "Partenaire 5"
+                },
+                {
+                    "image": "\/storage\/media\/76\/brand-logo-furniture-interior-6.png",
+                    "name": "Partenaire 6"
+                }
+            ],
+            "type": "array"
         }
-      ],
-      "type": "array"
     },
-    "copyright_text": {
-      "value": "© {year} {store_name}. Tous droits réservés.",
-      "type": "text"
+    "blog": {
+        "title": {
+            "value": "Actualités & Conseils",
+            "type": "text"
+        },
+        "description": {
+            "value": "Retrouvez nos derniers articles, conseils et actualités.",
+            "type": "textarea"
+        }
+    },
+    "footer": {
+        "description": {
+            "value": "Des chaussures de qualité supérieure alliant confort de marche, élégance intemporelle et durabilité.",
+            "type": "textarea"
+        },
+        "menu1": {
+            "title": {
+                "value": "Assistance",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "Guide des tailles",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Livraisons & Retours",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Conseils d'entretien",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Nous contacter",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "menu2": {
+            "title": {
+                "value": "Boutique",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "À propos",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Notre histoire",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Points de vente",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Confidentialité",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "contact": {
+            "address": {
+                "value": "12 Avenue de la Mode, Quartier des Créateurs, Paris 75001",
+                "type": "textarea"
+            },
+            "phone": {
+                "value": "+33 (0) 1 23 45 67 89",
+                "type": "text"
+            },
+            "email": {
+                "value": "contact@shoesstore.com",
+                "type": "email"
+            }
+        },
+        "social_links": {
+            "value": [
+                {
+                    "platform": "instagram",
+                    "url": ""
+                },
+                {
+                    "platform": "pinterest",
+                    "url": ""
+                },
+                {
+                    "platform": "facebook",
+                    "url": ""
+                },
+                {
+                    "platform": "youtube",
+                    "url": ""
+                }
+            ],
+            "type": "array"
+        },
+        "copyright_text": {
+            "value": "© {year} {store_name}. Tous droits réservés.",
+            "type": "text"
+        }
     }
-  }
 }

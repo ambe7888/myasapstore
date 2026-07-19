@@ -1,276 +1,280 @@
 {
-  "header": {
-    "welcome_text": {
-      "value": "Free shipping on orders over $100",
-      "type": "text"
-    },
-    "phone_text": {
-      "value": "Style Hotline: +1 555 FASHION",
-      "type": "text"
-    },
-    "show_welcome": {
-      "value": true,
-      "type": "boolean"
-    },
-    "show_phone": {
-      "value": true,
-      "type": "boolean"
-    }
-  },
-  "hero": {
-    "badge_text": {
-      "value": "Spring Collection 2024",
-      "type": "text"
-    },
-    "title": {
-      "value": "Define Your Style",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Discover the latest trends and timeless pieces that express your unique personality and elevate your wardrobe.",
-      "type": "textarea"
-    },
-    "button_text": {
-      "value": "Acheter maintenant",
-      "type": "text"
-    },
-    "button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "secondary_button_text": {
-      "value": "View Lookbook",
-      "type": "text"
-    },
-    "secondary_button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "image": {
-      "value": "/storage/media/36/home-banner-fashion.png",
-      "type": "image"
-    },
-    "info_boxes": [
-      {
-        "icon": "truck",
-        "title": "Express Delivery",
-        "description": "Next-day delivery available"
-      },
-      {
-        "icon": "refresh-cw",
-        "title": "Easy Exchanges",
-        "description": "60-day exchange policy"
-      },
-      {
-        "icon": "award",
-        "title": "Qualité supérieure",
-        "description": "Curated designer pieces"
-      }
-    ]
-  },
-  "categories": {
-    "title": {
-      "value": "Shop by Style",
-      "type": "text"
-    },
-    "description": {
-      "value": "Explore our curated collections designed for every occasion and personal style preference.",
-      "type": "textarea"
-    }
-  },
-  "featured_products": {
-    "title": {
-      "value": "Editor's Picks",
-      "type": "text"
-    },
-    "description": {
-      "value": "Handpicked by our style experts - the must-have pieces that define this season's trends.",
-      "type": "textarea"
-    }
-  },
-  "newsletter": {
-    "title": {
-      "value": "Style Insider",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Be the first to know about new arrivals, exclusive sales, and styling tips from our fashion experts.",
-      "type": "textarea"
-    },
-    "placeholder_text": {
-      "value": "Entrez votre e-mail pour des conseils de style",
-      "type": "text"
-    },
-    "button_text": {
-      "value": "Rejoindre maintenant",
-      "type": "text"
-    },
-    "privacy_text": {
-      "value": "Unsubscribe anytime. Your style, your choice.",
-      "type": "text"
-    }
-  },
-  "cta_boxes": {
-    "value": [
-      {
-        "icon": "sparkles",
-        "title": "Personal Styling",
-        "subtitle": "Free styling consultation"
-      },
-      {
-        "icon": "heart",
-        "title": "Wishlist Alerts",
-        "subtitle": "Get notified when items go on sale"
-      },
-      {
-        "icon": "gift",
-        "title": "Gift Cards",
-        "subtitle": "Perfect for fashion lovers"
-      },
-      {
-        "icon": "users",
-        "title": "VIP Membership",
-        "subtitle": "Exclusive access & rewards"
-      }
-    ],
-    "type": "array"
-  },
-  "trending_products": {
-    "title": {
-      "value": "Tendances actuelles",
-      "type": "text"
-    },
-    "description": {
-      "value": "The hottest pieces everyone's talking about - from runway to street style.",
-      "type": "textarea"
-    }
-  },
-  "brand_logos": {
-    "logos": {
-      "value": [
-        {
-          "image": "/storage/media/37/brand-logo-fashion-1.png"
+    "header": {
+        "welcome_text": {
+            "value": "Livraison gratuite disponible",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/38/brand-logo-fashion-2.png"
+        "phone_text": {
+            "value": "Service Client : +33 1 00 00 00 00",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/39/brand-logo-fashion-3.png"
+        "show_welcome": {
+            "value": true,
+            "type": "boolean"
         },
-        {
-          "image": "/storage/media/40/brand-logo-fashion-4.png"
+        "show_phone": {
+            "value": true,
+            "type": "boolean"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "blog": {
-    "title": {
-      "value": "Style Journal",
-      "type": "text"
     },
-    "description": {
-      "value": "Fashion insights, styling tips, and trend forecasts from industry experts and influencers.",
-      "type": "textarea"
-    }
-  },
-  "footer": {
-    "description": {
-      "value": "Your destination for contemporary fashion and timeless style. Curating the world's best designers and emerging brands.",
-      "type": "textarea"
+    "hero": {
+        "badge_text": {
+            "value": "Sélection Exclusive",
+            "type": "text"
+        },
+        "title": {
+            "value": "Votre satisfaction, notre priorité",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Découvrez notre sélection exclusive de produits de qualité supérieure, conçus avec soin pour vous.",
+            "type": "textarea"
+        },
+        "button_text": {
+            "value": "Découvrir la collection",
+            "type": "text"
+        },
+        "button_link": {
+            "value": "#",
+            "type": "text"
+        },
+        "secondary_button_text": {
+            "value": "En savoir plus",
+            "type": "text"
+        },
+        "secondary_button_link": {
+            "value": "#",
+            "type": "text"
+        },
+        "image": {
+            "value": "\/storage\/media\/36\/home-banner-fashion.png",
+            "type": "image"
+        },
+        "info_boxes": [
+            {
+                "icon": "truck",
+                "title": "Express Delivery",
+                "description": "Next-day delivery available"
+            },
+            {
+                "icon": "refresh-cw",
+                "title": "Easy Exchanges",
+                "description": "60-day exchange policy"
+            },
+            {
+                "icon": "award",
+                "title": "Qualité supérieure",
+                "description": "Curated designer pieces"
+            }
+        ]
     },
-    "menu1": {
-      "title": {
-        "value": "Service client",
-        "type": "text"
-      },
-      "links": {
+    "categories": {
+        "title": {
+            "value": "Parcourir par catégorie",
+            "type": "text"
+        },
+        "description": {
+            "value": "Trouvez l'article parfait adapté à toutes vos occasions.",
+            "type": "textarea"
+        }
+    },
+    "featured_products": {
+        "title": {
+            "value": "Sélection du moment",
+            "type": "text"
+        },
+        "description": {
+            "value": "Des produits de qualité supérieure, sélectionnés avec soin pour vous.",
+            "type": "textarea"
+        }
+    },
+    "newsletter": {
+        "title": {
+            "value": "Inscrivez-vous à notre newsletter",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Rejoignez notre communauté et profitez d'offres exclusives et de nouveautés.",
+            "type": "textarea"
+        },
+        "placeholder_text": {
+            "value": "votre@email.com",
+            "type": "text"
+        },
+        "button_text": {
+            "value": "S'inscrire",
+            "type": "text"
+        },
+        "privacy_text": {
+            "value": "Désinscription possible à tout moment. Vos données sont protégées.",
+            "type": "text"
+        }
+    },
+    "cta_boxes": {
         "value": [
-          {
-            "name": "Size Guide",
-            "href": "#"
-          },
-          {
-            "name": "Shipping & Returns",
-            "href": "#"
-          },
-          {
-            "name": "Contactez-nous",
-            "href": "#"
-          },
-          {
-            "name": "Style Advice",
-            "href": "#"
-          }
+            {
+                "icon": "sparkles",
+                "title": "Livraison rapide",
+                "subtitle": "Chez vous sous 48-72h"
+            },
+            {
+                "icon": "heart",
+                "title": "Retours faciles",
+                "subtitle": "Échanges sous 30 jours"
+            },
+            {
+                "icon": "gift",
+                "title": "Paiement sécurisé",
+                "subtitle": "Transactions cryptées"
+            },
+            {
+                "icon": "users",
+                "title": "Qualité garantie",
+                "subtitle": "Matériaux premium"
+            }
         ],
         "type": "array"
-      }
     },
-    "menu2": {
-      "title": {
-        "value": "Company",
-        "type": "text"
-      },
-      "links": {
-        "value": [
-          {
-            "name": "À propos de nous",
-            "href": "#"
-          },
-          {
-            "name": "Careers",
-            "href": "#"
-          },
-          {
-            "name": "Press",
-            "href": "#"
-          },
-          {
-            "name": "Politique de confidentialité",
-            "href": "#"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "contact": {
-      "address": {
-        "value": "789 Fashion Avenue, Style District, NY 10018",
-        "type": "textarea"
-      },
-      "phone": {
-        "value": "+1 (555) 328-4466",
-        "type": "text"
-      },
-      "email": {
-        "value": "hello@fashionstore.com",
-        "type": "email"
-      }
-    },
-    "social_links": {
-      "value": [
-        {
-          "platform": "instagram",
-          "url": ""
+    "trending_products": {
+        "title": {
+            "value": "Les tendances du moment",
+            "type": "text"
         },
-        {
-          "platform": "tiktok",
-          "url": ""
-        },
-        {
-          "platform": "pinterest",
-          "url": ""
-        },
-        {
-          "platform": "youtube",
-          "url": ""
+        "description": {
+            "value": "Découvrez les articles les plus populaires et les nouveautés de cette saison.",
+            "type": "textarea"
         }
-      ],
-      "type": "array"
     },
-    "copyright_text": {
-      "value": "© {year} {store_name}. Tous droits réservés.",
-      "type": "text"
+    "brand_logos": {
+        "logos": {
+            "value": [
+                {
+                    "image": "\/storage\/media\/37\/brand-logo-fashion-1.png",
+                    "name": "Partenaire 1"
+                },
+                {
+                    "image": "\/storage\/media\/38\/brand-logo-fashion-2.png",
+                    "name": "Partenaire 2"
+                },
+                {
+                    "image": "\/storage\/media\/39\/brand-logo-fashion-3.png",
+                    "name": "Partenaire 3"
+                },
+                {
+                    "image": "\/storage\/media\/40\/brand-logo-fashion-4.png",
+                    "name": "Partenaire 4"
+                }
+            ],
+            "type": "array"
+        }
+    },
+    "blog": {
+        "title": {
+            "value": "Actualités & Conseils",
+            "type": "text"
+        },
+        "description": {
+            "value": "Retrouvez nos derniers articles, conseils et actualités.",
+            "type": "textarea"
+        }
+    },
+    "footer": {
+        "description": {
+            "value": "Your destination for contemporary fashion and timeless style. Curating the world's best designers and emerging brands.",
+            "type": "textarea"
+        },
+        "menu1": {
+            "title": {
+                "value": "Service client",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "Size Guide",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Shipping & Returns",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Contactez-nous",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Style Advice",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "menu2": {
+            "title": {
+                "value": "Company",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "À propos de nous",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Careers",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Press",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Politique de confidentialité",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "contact": {
+            "address": {
+                "value": "789 Fashion Avenue, Style District, NY 10018",
+                "type": "textarea"
+            },
+            "phone": {
+                "value": "+1 (555) 328-4466",
+                "type": "text"
+            },
+            "email": {
+                "value": "hello@fashionstore.com",
+                "type": "email"
+            }
+        },
+        "social_links": {
+            "value": [
+                {
+                    "platform": "instagram",
+                    "url": ""
+                },
+                {
+                    "platform": "tiktok",
+                    "url": ""
+                },
+                {
+                    "platform": "pinterest",
+                    "url": ""
+                },
+                {
+                    "platform": "youtube",
+                    "url": ""
+                }
+            ],
+            "type": "array"
+        },
+        "copyright_text": {
+            "value": "© {year} {store_name}. Tous droits réservés.",
+            "type": "text"
+        }
     }
-  }
 }

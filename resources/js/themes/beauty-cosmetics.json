@@ -1,333 +1,339 @@
 {
-  "header": {
-    "welcome_text": {
-      "value": "Livraison gratuite dès 75 $ d'achat",
-      "type": "text"
-    },
-    "phone_text": {
-      "value": "Beauty Hotline: +1 555 BEAUTY",
-      "type": "text"
-    },
-    "show_welcome": {
-      "value": true,
-      "type": "boolean"
-    },
-    "show_phone": {
-      "value": true,
-      "type": "boolean"
-    }
-  },
-  "hero": {
-    "badge_text": {
-      "value": "New Arrivals 2024",
-      "type": "text"
-    },
-    "title": {
-      "value": "Révélez votre beauté naturelle",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Discover premium skincare, makeup, and wellness products that celebrate your unique beauty and boost your confidence.",
-      "type": "textarea"
-    },
-    "button_text": {
-      "value": "Découvrir la collection",
-      "type": "text"
-    },
-    "button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "secondary_button_text": {
-      "value": "Beauty Guide",
-      "type": "text"
-    },
-    "secondary_button_link": {
-      "value": "/beauty-guide",
-      "type": "text"
-    },
-    "image": {
-      "value": "/storage/media/12/home-banner-beauty-cosmetics.png",
-      "type": "image"
-    },
-    "floating_card": {
-      "title": {
-        "value": "Loved by 50K+",
-        "type": "text"
-      },
-      "subtitle": {
-        "value": "Beauty enthusiasts",
-        "type": "text"
-      }
-    },
-    "info_boxes": [
-      {
-        "icon": "sparkles",
-        "title": "Beauté propre",
-        "description": "Cruelty-free & natural ingredients"
-      },
-      {
-        "icon": "heart",
-        "title": "Skin-First",
-        "description": "Dermatologist tested formulas"
-      },
-      {
-        "icon": "shield",
-        "title": "Safe & Pure",
-        "description": "No harmful chemicals"
-      }
-    ]
-  },
-  "categories": {
-    "title": {
-      "value": "Acheter par catégorie",
-      "type": "text"
-    },
-    "description": {
-      "value": "Explore our carefully curated beauty collections designed to enhance your natural radiance and self-care routine.",
-      "type": "textarea"
-    }
-  },
-  "featured_products": {
-    "title": {
-      "value": "Beauty Essentials",
-      "type": "text"
-    },
-    "description": {
-      "value": "Handpicked by beauty experts - the must-have products that deliver results and elevate your beauty routine.",
-      "type": "textarea"
-    }
-  },
-  "newsletter": {
-    "title": {
-      "value": "Join Our Beauty Community",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Be the first to discover new products, get exclusive beauty tips, and enjoy member-only discounts.",
-      "type": "textarea"
-    },
-    "highlight_text": {
-      "value": "💄 Get 15% off your first order!",
-      "type": "text"
-    },
-    "placeholder_text": {
-      "value": "Enter your email for beauty updates",
-      "type": "text"
-    },
-    "button_text": {
-      "value": "Join Community",
-      "type": "text"
-    },
-    "benefits": {
-      "value": [
-        {
-          "icon": "🎁",
-          "title": "Exclusive Offers",
-          "description": "Member-only discounts & early access"
+    "header": {
+        "welcome_text": {
+            "value": "Livraison gratuite disponible",
+            "type": "text"
         },
-        {
-          "icon": "✨",
-          "title": "Beauty Tips",
-          "description": "Weekly tutorials & expert advice"
+        "phone_text": {
+            "value": "Service Client : +33 1 00 00 00 00",
+            "type": "text"
         },
-        {
-          "icon": "💌",
-          "title": "Nouveautés",
-          "description": "First to know about latest products"
+        "show_welcome": {
+            "value": true,
+            "type": "boolean"
+        },
+        "show_phone": {
+            "value": true,
+            "type": "boolean"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "cta_boxes": {
-    "value": [
-      {
-        "icon": "user-check",
-        "title": "Skin Analysis",
-        "subtitle": "Free personalized consultation"
-      },
-      {
-        "icon": "calendar",
-        "title": "Beauty Calendar",
-        "subtitle": "Track your skincare routine"
-      },
-      {
-        "icon": "gift",
-        "title": "Beauty Box",
-        "subtitle": "Monthly curated surprises"
-      },
-      {
-        "icon": "star",
-        "title": "Rewards Program",
-        "subtitle": "Earn points with every purchase"
-      }
-    ],
-    "type": "array"
-  },
-  "trending_products": {
-    "title": {
-      "value": "Tendances actuelles",
-      "type": "text"
     },
-    "description": {
-      "value": "The most-loved products that beauty enthusiasts can't stop talking about.",
-      "type": "textarea"
-    }
-  },
-  "brand_logos": {
-    "logos": {
-      "value": [
-        {
-          "image": "/storage/media/13/brand-logo-beauty-1.png"
+    "hero": {
+        "badge_text": {
+            "value": "Sélection Exclusive",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/14/brand-logo-beauty-2.png"
+        "title": {
+            "value": "Votre satisfaction, notre priorité",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/15/brand-logo-beauty-3.png"
+        "subtitle": {
+            "value": "Découvrez notre sélection exclusive de produits de qualité supérieure, conçus avec soin pour vous.",
+            "type": "textarea"
         },
-        {
-          "image": "/storage/media/16/brand-logo-beauty-4.png"
+        "button_text": {
+            "value": "Découvrir la collection",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/17/brand-logo-beauty-5.png"
+        "button_link": {
+            "value": "#",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/18/brand-logo-beauty-6.png"
+        "secondary_button_text": {
+            "value": "En savoir plus",
+            "type": "text"
+        },
+        "secondary_button_link": {
+            "value": "\/beauty-guide",
+            "type": "text"
+        },
+        "image": {
+            "value": "\/storage\/media\/12\/home-banner-beauty-cosmetics.png",
+            "type": "image"
+        },
+        "floating_card": {
+            "title": {
+                "value": "Loved by 50K+",
+                "type": "text"
+            },
+            "subtitle": {
+                "value": "Beauty enthusiasts",
+                "type": "text"
+            }
+        },
+        "info_boxes": [
+            {
+                "icon": "sparkles",
+                "title": "Beauté propre",
+                "description": "Cruelty-free & natural ingredients"
+            },
+            {
+                "icon": "heart",
+                "title": "Skin-First",
+                "description": "Dermatologist tested formulas"
+            },
+            {
+                "icon": "shield",
+                "title": "Safe & Pure",
+                "description": "No harmful chemicals"
+            }
+        ]
+    },
+    "categories": {
+        "title": {
+            "value": "Parcourir par catégorie",
+            "type": "text"
+        },
+        "description": {
+            "value": "Trouvez l'article parfait adapté à toutes vos occasions.",
+            "type": "textarea"
         }
-      ],
-      "type": "array"
     },
-    "stats": {
-      "value": [
-        {
-          "number": "50K+",
-          "label": "Happy Customers"
+    "featured_products": {
+        "title": {
+            "value": "Sélection du moment",
+            "type": "text"
         },
-        {
-          "number": "200+",
-          "label": "Beauty Brands"
-        },
-        {
-          "number": "5K+",
-          "label": "Products"
-        },
-        {
-          "number": "98%",
-          "label": "Satisfaction Rate"
+        "description": {
+            "value": "Des produits de qualité supérieure, sélectionnés avec soin pour vous.",
+            "type": "textarea"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "blog": {
-    "title": {
-      "value": "Journal beauté",
-      "type": "text"
     },
-    "description": {
-      "value": "Expert tips, tutorials, and insights to help you discover your perfect beauty routine and boost your confidence.",
-      "type": "textarea"
-    }
-  },
-  "footer": {
-    "description": {
-      "value": "Your trusted beauty destination for premium skincare, makeup, and wellness products. Celebrating natural beauty and self-care.",
-      "type": "textarea"
+    "newsletter": {
+        "title": {
+            "value": "Inscrivez-vous à notre newsletter",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Rejoignez notre communauté et profitez d'offres exclusives et de nouveautés.",
+            "type": "textarea"
+        },
+        "highlight_text": {
+            "value": "💄 Get 15% off your first order!",
+            "type": "text"
+        },
+        "placeholder_text": {
+            "value": "votre@email.com",
+            "type": "text"
+        },
+        "button_text": {
+            "value": "S'inscrire",
+            "type": "text"
+        },
+        "benefits": {
+            "value": [
+                {
+                    "icon": "🎁",
+                    "title": "Exclusive Offers",
+                    "description": "Member-only discounts & early access"
+                },
+                {
+                    "icon": "✨",
+                    "title": "Beauty Tips",
+                    "description": "Weekly tutorials & expert advice"
+                },
+                {
+                    "icon": "💌",
+                    "title": "Nouveautés",
+                    "description": "First to know about latest products"
+                }
+            ],
+            "type": "array"
+        }
     },
-    "menu1": {
-      "title": {
-        "value": "Service client",
-        "type": "text"
-      },
-      "links": {
+    "cta_boxes": {
         "value": [
-          {
-            "name": "Beauty Consultation",
-            "href": "#"
-          },
-          {
-            "name": "Shipping & Returns",
-            "href": "#"
-          },
-          {
-            "name": "Contactez-nous",
-            "href": "#"
-          },
-          {
-            "name": "Ingredient Guide",
-            "href": "#"
-          }
+            {
+                "icon": "user-check",
+                "title": "Livraison rapide",
+                "subtitle": "Chez vous sous 48-72h"
+            },
+            {
+                "icon": "calendar",
+                "title": "Retours faciles",
+                "subtitle": "Échanges sous 30 jours"
+            },
+            {
+                "icon": "gift",
+                "title": "Paiement sécurisé",
+                "subtitle": "Transactions cryptées"
+            },
+            {
+                "icon": "star",
+                "title": "Qualité garantie",
+                "subtitle": "Matériaux premium"
+            }
         ],
         "type": "array"
-      }
     },
-    "menu2": {
-      "title": {
-        "value": "Company",
-        "type": "text"
-      },
-      "links": {
-        "value": [
-          {
-            "name": "À propos de nous",
-            "href": "#"
-          },
-          {
-            "name": "Careers",
-            "href": "#"
-          },
-          {
-            "name": "Press",
-            "href": "#"
-          },
-          {
-            "name": "Politique de confidentialité",
-            "href": "#"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "contact": {
-      "address": {
-        "value": "456 Beauty Boulevard, Wellness District, CA 90210",
-        "type": "textarea"
-      },
-      "phone": {
-        "value": "+1 (555) 239-8847",
-        "type": "text"
-      },
-      "email": {
-        "value": "hello@beautystore.com",
-        "type": "email"
-      }
-    },
-    "social_links": {
-      "value": [
-        {
-          "platform": "instagram",
-          "url": ""
+    "trending_products": {
+        "title": {
+            "value": "Les tendances du moment",
+            "type": "text"
         },
-        {
-          "platform": "youtube",
-          "url": ""
-        },
-        {
-          "platform": "tiktok",
-          "url": ""
-        },
-        {
-          "platform": "pinterest",
-          "url": ""
+        "description": {
+            "value": "Découvrez les articles les plus populaires et les nouveautés de cette saison.",
+            "type": "textarea"
         }
-      ],
-      "type": "array"
     },
-    "copyright_text": {
-      "value": "© {year} {store_name}. Tous droits réservés.",
-      "type": "text"
+    "brand_logos": {
+        "logos": {
+            "value": [
+                {
+                    "image": "\/storage\/media\/13\/brand-logo-beauty-1.png",
+                    "name": "Partenaire 1"
+                },
+                {
+                    "image": "\/storage\/media\/14\/brand-logo-beauty-2.png",
+                    "name": "Partenaire 2"
+                },
+                {
+                    "image": "\/storage\/media\/15\/brand-logo-beauty-3.png",
+                    "name": "Partenaire 3"
+                },
+                {
+                    "image": "\/storage\/media\/16\/brand-logo-beauty-4.png",
+                    "name": "Partenaire 4"
+                },
+                {
+                    "image": "\/storage\/media\/17\/brand-logo-beauty-5.png",
+                    "name": "Partenaire 5"
+                },
+                {
+                    "image": "\/storage\/media\/18\/brand-logo-beauty-6.png",
+                    "name": "Partenaire 6"
+                }
+            ],
+            "type": "array"
+        },
+        "stats": {
+            "value": [
+                {
+                    "number": "50K+",
+                    "label": "Happy Customers"
+                },
+                {
+                    "number": "200+",
+                    "label": "Beauty Brands"
+                },
+                {
+                    "number": "5K+",
+                    "label": "Products"
+                },
+                {
+                    "number": "98%",
+                    "label": "Satisfaction Rate"
+                }
+            ],
+            "type": "array"
+        }
+    },
+    "blog": {
+        "title": {
+            "value": "Actualités & Conseils",
+            "type": "text"
+        },
+        "description": {
+            "value": "Retrouvez nos derniers articles, conseils et actualités.",
+            "type": "textarea"
+        }
+    },
+    "footer": {
+        "description": {
+            "value": "Your trusted beauty destination for premium skincare, makeup, and wellness products. Celebrating natural beauty and self-care.",
+            "type": "textarea"
+        },
+        "menu1": {
+            "title": {
+                "value": "Service client",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "Beauty Consultation",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Shipping & Returns",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Contactez-nous",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Ingredient Guide",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "menu2": {
+            "title": {
+                "value": "Company",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "À propos de nous",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Careers",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Press",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Politique de confidentialité",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "contact": {
+            "address": {
+                "value": "456 Beauty Boulevard, Wellness District, CA 90210",
+                "type": "textarea"
+            },
+            "phone": {
+                "value": "+1 (555) 239-8847",
+                "type": "text"
+            },
+            "email": {
+                "value": "hello@beautystore.com",
+                "type": "email"
+            }
+        },
+        "social_links": {
+            "value": [
+                {
+                    "platform": "instagram",
+                    "url": ""
+                },
+                {
+                    "platform": "youtube",
+                    "url": ""
+                },
+                {
+                    "platform": "tiktok",
+                    "url": ""
+                },
+                {
+                    "platform": "pinterest",
+                    "url": ""
+                }
+            ],
+            "type": "array"
+        },
+        "copyright_text": {
+            "value": "© {year} {store_name}. Tous droits réservés.",
+            "type": "text"
+        }
     }
-  }
 }

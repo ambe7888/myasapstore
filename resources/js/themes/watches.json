@@ -1,283 +1,289 @@
 {
-  "header": {
-    "welcome_text": {
-      "value": "Livraison gratuite dès 500 $",
-      "type": "text"
-    },
-    "phone_text": {
-      "value": "Experts horlogers : +1 555 WATCHES",
-      "type": "text"
-    },
-    "show_welcome": {
-      "value": true,
-      "type": "boolean"
-    },
-    "show_phone": {
-      "value": true,
-      "type": "boolean"
-    }
-  },
-  "hero": {
-    "badge_text": {
-      "value": "Précision suisse 2024",
-      "type": "text"
-    },
-    "title": {
-      "value": "Maîtrisez le temps",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Découvrez des garde-temps d'exception alliant artisanat traditionnel et innovation moderne.",
-      "type": "textarea"
-    },
-    "button_text": {
-      "value": "Explorer la collection",
-      "type": "text"
-    },
-    "button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "secondary_button_text": {
-      "value": "Guide des montres",
-      "type": "text"
-    },
-    "secondary_button_link": {
-      "value": "#",
-      "type": "text"
-    },
-    "image": {
-      "value": "/storage/media/61/home-banner-watches.png",
-      "type": "image"
-    }
-  },
-  "categories": {
-    "title": {
-      "value": "Acheter par collection",
-      "type": "text"
-    },
-    "description": {
-      "value": "Explorez nos garde-temps de luxe, des modèles classiques aux chronographes de sport.",
-      "type": "textarea"
-    }
-  },
-  "featured_products": {
-    "title": {
-      "value": "Collection Master",
-      "type": "text"
-    },
-    "description": {
-      "value": "Sélectionné par nos horlogers - des montres exceptionnelles au sommet de l'art.",
-      "type": "textarea"
-    }
-  },
-  "newsletter": {
-    "title": {
-      "value": "Cercle des horlogers",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Rejoignez notre communauté pour des conseils de collectionneurs.",
-      "type": "textarea"
-    },
-    "placeholder_text": {
-      "value": "Entrez votre e-mail pour des offres exclusives",
-      "type": "text"
-    },
-    "button_text": {
-      "value": "Rejoindre le cercle",
-      "type": "text"
-    },
-    "privacy_text": {
-      "value": "Désabonnez-vous à tout moment.",
-      "type": "text"
-    }
-  },
-  "cta_boxes": {
-    "value": [
-      {
-        "icon": "settings",
-        "title": "Services d'horlogerie",
-        "subtitle": "Entretien & réparation professionnels"
-      },
-      {
-        "icon": "star",
-        "title": "Club des collectionneurs",
-        "subtitle": "Accès exclusif à des pièces rares"
-      },
-      {
-        "icon": "gift",
-        "title": "Chèques cadeaux",
-        "subtitle": "Parfait pour les passionnés de montres"
-      },
-      {
-        "icon": "users",
-        "title": "Conciergerie VIP",
-        "subtitle": "Assistance shopping personnalisée"
-      }
-    ],
-    "type": "array"
-  },
-  "cta_bottom": {
-    "title": {
-      "value": "Rejoindre le cercle d'élite",
-      "type": "text"
-    },
-    "subtitle": {
-      "value": "Découvrez un service personnalisé et accédez aux plus belles montres du monde.",
-      "type": "textarea"
-    },
-    "button_text": {
-      "value": "Commencer",
-      "type": "text"
-    },
-    "button_link": {
-      "value": "/contact",
-      "type": "text"
-    }
-  },
-  "trending_products": {
-    "title": {
-      "value": "Montres tendance",
-      "type": "text"
-    },
-    "description": {
-      "value": "Les montres les plus recherchées par les collectionneurs et passionnés.",
-      "type": "textarea"
-    }
-  },
-  "brand_logos": {
-    "logos": {
-      "value": [
-        {
-          "image": "/storage/media/62/brand-logo-watches-1.png"
+    "header": {
+        "welcome_text": {
+            "value": "Livraison gratuite disponible",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/63/brand-logo-watches-2.png"
+        "phone_text": {
+            "value": "Service Client : +33 1 00 00 00 00",
+            "type": "text"
         },
-        {
-          "image": "/storage/media/64/brand-logo-watches-3.png"
+        "show_welcome": {
+            "value": true,
+            "type": "boolean"
         },
-        {
-          "image": "/storage/media/65/brand-logo-watches-4.png"
-        },
-        {
-          "image": "/storage/media/66/brand-logo-watches-5.png"
-        },
-        {
-          "image": "/storage/media/67/brand-logo-watches-6.png"
+        "show_phone": {
+            "value": true,
+            "type": "boolean"
         }
-      ],
-      "type": "array"
-    }
-  },
-  "blog": {
-    "title": {
-      "value": "Horological Journal",
-      "type": "text"
     },
-    "description": {
-      "value": "Expert insights into watchmaking, collecting tips, and the latest developments in the world of luxury timepieces.",
-      "type": "textarea"
-    }
-  },
-  "footer": {
-    "description": {
-      "value": "Your premier destination for luxury timepieces. Curating the world's finest watches with uncompromising attention to quality and authenticity.",
-      "type": "textarea"
+    "hero": {
+        "badge_text": {
+            "value": "Sélection Exclusive",
+            "type": "text"
+        },
+        "title": {
+            "value": "Votre satisfaction, notre priorité",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Découvrez notre sélection exclusive de produits de qualité supérieure, conçus avec soin pour vous.",
+            "type": "textarea"
+        },
+        "button_text": {
+            "value": "Découvrir la collection",
+            "type": "text"
+        },
+        "button_link": {
+            "value": "#",
+            "type": "text"
+        },
+        "secondary_button_text": {
+            "value": "En savoir plus",
+            "type": "text"
+        },
+        "secondary_button_link": {
+            "value": "#",
+            "type": "text"
+        },
+        "image": {
+            "value": "\/storage\/media\/61\/home-banner-watches.png",
+            "type": "image"
+        }
     },
-    "menu1": {
-      "title": {
-        "value": "Customer Service",
-        "type": "text"
-      },
-      "links": {
+    "categories": {
+        "title": {
+            "value": "Parcourir par catégorie",
+            "type": "text"
+        },
+        "description": {
+            "value": "Trouvez l'article parfait adapté à toutes vos occasions.",
+            "type": "textarea"
+        }
+    },
+    "featured_products": {
+        "title": {
+            "value": "Sélection du moment",
+            "type": "text"
+        },
+        "description": {
+            "value": "Des produits de qualité supérieure, sélectionnés avec soin pour vous.",
+            "type": "textarea"
+        }
+    },
+    "newsletter": {
+        "title": {
+            "value": "Inscrivez-vous à notre newsletter",
+            "type": "text"
+        },
+        "subtitle": {
+            "value": "Rejoignez notre communauté et profitez d'offres exclusives et de nouveautés.",
+            "type": "textarea"
+        },
+        "placeholder_text": {
+            "value": "votre@email.com",
+            "type": "text"
+        },
+        "button_text": {
+            "value": "S'inscrire",
+            "type": "text"
+        },
+        "privacy_text": {
+            "value": "Désinscription possible à tout moment. Vos données sont protégées.",
+            "type": "text"
+        }
+    },
+    "cta_boxes": {
         "value": [
-          {
-            "name": "Watch Care Guide",
-            "href": "#"
-          },
-          {
-            "name": "Warranty & Service",
-            "href": "#"
-          },
-          {
-            "name": "Contact Experts",
-            "href": "#"
-          },
-          {
-            "name": "Authentication",
-            "href": "#"
-          }
+            {
+                "icon": "settings",
+                "title": "Livraison rapide",
+                "subtitle": "Chez vous sous 48-72h"
+            },
+            {
+                "icon": "star",
+                "title": "Retours faciles",
+                "subtitle": "Échanges sous 30 jours"
+            },
+            {
+                "icon": "gift",
+                "title": "Paiement sécurisé",
+                "subtitle": "Transactions cryptées"
+            },
+            {
+                "icon": "users",
+                "title": "Qualité garantie",
+                "subtitle": "Matériaux premium"
+            }
         ],
         "type": "array"
-      }
     },
-    "menu2": {
-      "title": {
-        "value": "Company",
-        "type": "text"
-      },
-      "links": {
-        "value": [
-          {
-            "name": "À propos de nous",
-            "href": "#"
-          },
-          {
-            "name": "Careers",
-            "href": "#"
-          },
-          {
-            "name": "Press",
-            "href": "#"
-          },
-          {
-            "name": "Politique de confidentialité",
-            "href": "#"
-          }
-        ],
-        "type": "array"
-      }
-    },
-    "contact": {
-      "address": {
-        "value": "456 Horological Avenue, Timepiece District, NY 10019",
-        "type": "textarea"
-      },
-      "phone": {
-        "value": "+1 (555) 928-2463",
-        "type": "text"
-      },
-      "email": {
-        "value": "hello@watchstore.com",
-        "type": "email"
-      }
-    },
-    "social_links": {
-      "value": [
-        {
-          "platform": "instagram",
-          "url": ""
+    "cta_bottom": {
+        "title": {
+            "value": "Besoin d'aide pour votre choix ?",
+            "type": "text"
         },
-        {
-          "platform": "youtube",
-          "url": ""
+        "subtitle": {
+            "value": "Découvrez un service personnalisé et accédez aux plus belles montres du monde.",
+            "type": "textarea"
         },
-        {
-          "platform": "facebook",
-          "url": ""
+        "button_text": {
+            "value": "Commencer",
+            "type": "text"
         },
-        {
-          "platform": "twitter",
-          "url": ""
+        "button_link": {
+            "value": "\/contact",
+            "type": "text"
         }
-      ],
-      "type": "array"
     },
-    "copyright_text": {
-      "value": "© {year} {store_name}. Tous droits réservés.",
-      "type": "text"
+    "trending_products": {
+        "title": {
+            "value": "Les tendances du moment",
+            "type": "text"
+        },
+        "description": {
+            "value": "Découvrez les articles les plus populaires et les nouveautés de cette saison.",
+            "type": "textarea"
+        }
+    },
+    "brand_logos": {
+        "logos": {
+            "value": [
+                {
+                    "image": "\/storage\/media\/62\/brand-logo-watches-1.png",
+                    "name": "Partenaire 1"
+                },
+                {
+                    "image": "\/storage\/media\/63\/brand-logo-watches-2.png",
+                    "name": "Partenaire 2"
+                },
+                {
+                    "image": "\/storage\/media\/64\/brand-logo-watches-3.png",
+                    "name": "Partenaire 3"
+                },
+                {
+                    "image": "\/storage\/media\/65\/brand-logo-watches-4.png",
+                    "name": "Partenaire 4"
+                },
+                {
+                    "image": "\/storage\/media\/66\/brand-logo-watches-5.png",
+                    "name": "Partenaire 5"
+                },
+                {
+                    "image": "\/storage\/media\/67\/brand-logo-watches-6.png",
+                    "name": "Partenaire 6"
+                }
+            ],
+            "type": "array"
+        }
+    },
+    "blog": {
+        "title": {
+            "value": "Actualités & Conseils",
+            "type": "text"
+        },
+        "description": {
+            "value": "Retrouvez nos derniers articles, conseils et actualités.",
+            "type": "textarea"
+        }
+    },
+    "footer": {
+        "description": {
+            "value": "Your premier destination for luxury timepieces. Curating the world's finest watches with uncompromising attention to quality and authenticity.",
+            "type": "textarea"
+        },
+        "menu1": {
+            "title": {
+                "value": "Customer Service",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "Watch Care Guide",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Warranty & Service",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Contact Experts",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Authentication",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "menu2": {
+            "title": {
+                "value": "Company",
+                "type": "text"
+            },
+            "links": {
+                "value": [
+                    {
+                        "name": "À propos de nous",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Careers",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Press",
+                        "href": "#"
+                    },
+                    {
+                        "name": "Politique de confidentialité",
+                        "href": "#"
+                    }
+                ],
+                "type": "array"
+            }
+        },
+        "contact": {
+            "address": {
+                "value": "456 Horological Avenue, Timepiece District, NY 10019",
+                "type": "textarea"
+            },
+            "phone": {
+                "value": "+1 (555) 928-2463",
+                "type": "text"
+            },
+            "email": {
+                "value": "hello@watchstore.com",
+                "type": "email"
+            }
+        },
+        "social_links": {
+            "value": [
+                {
+                    "platform": "instagram",
+                    "url": ""
+                },
+                {
+                    "platform": "youtube",
+                    "url": ""
+                },
+                {
+                    "platform": "facebook",
+                    "url": ""
+                },
+                {
+                    "platform": "twitter",
+                    "url": ""
+                }
+            ],
+            "type": "array"
+        },
+        "copyright_text": {
+            "value": "© {year} {store_name}. Tous droits réservés.",
+            "type": "text"
+        }
     }
-  }
 }

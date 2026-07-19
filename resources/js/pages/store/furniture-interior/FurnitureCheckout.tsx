@@ -761,11 +761,11 @@ function FurnitureCheckout({
                                         <div>
                                           <span className="block text-sm font-bold text-slate-900">{method.name}</span>
                                           <span className="block text-sm text-slate-600">
-                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                            {method.description || (method.delivery_time ? `Livraison sous ${method.delivery_time}` : 'Livraison standard')}
                                           </span>
                                         </div>
                                         <span className="text-lg font-bold text-amber-800">
-                                          {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                          {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                         </span>
                                       </div>
                                     </label>
@@ -782,7 +782,7 @@ function FurnitureCheckout({
                       {/* Adresse exacte de livraison (Rue, Maison, Repère) */}
                         <div className="mt-8">
                           <label htmlFor="shipping-street" className="block text-sm font-bold text-amber-800 mb-2">
-                            Address *
+                            Adresse *
                           </label>
                           <input
                             id="shipping-street"
@@ -895,16 +895,16 @@ function FurnitureCheckout({
                               <p className="text-slate-900">{shippingPhone}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-bold text-amber-800 mb-2">Delivery Address</p>
+                              <p className="text-sm font-bold text-amber-800 mb-2">Adresse de livraison</p>
                               <p className="text-slate-900">{shippingStreet}</p>
                               <p className="text-slate-900">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                               <p className="text-slate-900">{selectedCountryName}</p>
                             </div>
                           </div>
                           <div className="mt-6 pt-6 border-t border-amber-200">
-                            <p className="text-sm font-bold text-amber-800 mb-2">Delivery Method</p>
+                            <p className="text-sm font-bold text-amber-800 mb-2">Mode de livraison</p>
                             <p className="text-slate-900">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Livraison standard'})` : 'Aucun mode de livraison sélectionné'}
                             </p>
                           </div>
                         </div>

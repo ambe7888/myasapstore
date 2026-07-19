@@ -192,7 +192,7 @@ export default function FurnitureProducts({
             <div className="flex items-center text-sm">
               <Link href={generateStoreUrl('store.home', store)} className="text-amber-700 hover:text-amber-800">{t("Home")}</Link>
               <span className="mx-2 text-amber-400">/</span>
-              <span className="text-slate-900 font-medium">Furniture</span>
+              <span className="text-slate-900 font-medium">Boutique</span>
             </div>
           </div>
         </div>
@@ -201,10 +201,10 @@ export default function FurnitureProducts({
         <div className="bg-yellow-800 text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-3xl font-bold mb-4">Furniture Collection</h1>
+              <h1 className="text-3xl font-bold mb-4">Notre Collection</h1>
               <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-4"></div>
               <p className="text-amber-100 text-lg max-w-2xl mx-auto">
-                Discover thoughtfully designed furniture that brings warmth and character to every room
+                Découvrez notre sélection exclusive de produits de qualité supérieure.
               </p>
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function FurnitureProducts({
               <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                 <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24 border border-amber-100">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-bold text-slate-900">Filter Options</h3>
+                    <h3 className="text-lg font-bold text-slate-900">Options de filtrage</h3>
                     <button
                       onClick={clearFilters}
                       className="text-sm text-amber-700 hover:text-amber-800 font-medium"
@@ -236,7 +236,7 @@ export default function FurnitureProducts({
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                        placeholder="Search furniture..."
+                        placeholder="Rechercher un produit..."
                         className="w-full pl-10 pr-4 py-2 border border-amber-200 rounded-xl focus:outline-none focus:border-amber-500"
                       />
                     </div>
@@ -244,7 +244,7 @@ export default function FurnitureProducts({
 
                   {/* Categories */}
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-slate-700 mb-3">Room Categories</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-3">Catégories</label>
                     <div className="space-y-2 max-h-40 overflow-y-auto">
                       {categories.map((category) => (
                         <label key={category.id} className="flex items-center">
@@ -359,7 +359,7 @@ export default function FurnitureProducts({
                           onChange={() => setAvailability('all')}
                           className="mr-2 text-amber-600 focus:ring-amber-500"
                         />
-                        <span className="text-sm text-slate-700">All Items</span>
+                        <span className="text-sm text-slate-700">Tous les articles</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -404,7 +404,7 @@ export default function FurnitureProducts({
                         className="lg:hidden flex items-center px-3 py-2 border border-amber-300 rounded-xl hover:bg-amber-50"
                       >
                         <Filter className="h-4 w-4 mr-2" />
-                        Filters
+                        Filtres
                       </button>
                       
                       <div className="flex items-center gap-2">
@@ -492,7 +492,7 @@ export default function FurnitureProducts({
                   </div>
 
                   <div className="mt-4 text-sm text-slate-600">
-                    {t('Showing {{from}}-{{to}} of {{total}} furniture pieces', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
+                    {t('Affichage de {{from}} à {{to}} sur {{total}} articles', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
                 </div>
 
                 {/* Products Grid/List */}
@@ -514,7 +514,7 @@ export default function FurnitureProducts({
                               <div className="absolute inset-0 border-4 border-amber-800/20 rounded-lg m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               {product.sale_price && (
                                 <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-xl shadow-md">
-                                  SALE
+                                  PROMO
                                 </div>
                               )}
                             </Link>
@@ -523,7 +523,7 @@ export default function FurnitureProducts({
                                 <div className="flex-1">
                                   <div className="mb-2">
                                     <span className="text-xs font-bold text-amber-700 uppercase tracking-wider bg-amber-100 px-2 py-1 rounded-full">
-                                      {product.category?.name || 'Furniture'}
+                                      {product.category?.name || 'Boutique'}
                                     </span>
                                   </div>
                                   <div className="flex items-center justify-between mb-3">
@@ -533,12 +533,12 @@ export default function FurnitureProducts({
                                     {product.stock > 0 ? (
                                       <div className="flex items-center text-green-600 text-sm ml-4">
                                         <Award className="h-4 w-4 mr-1" />
-                                        <span>In Stock ({product.stock})</span>
+                                        <span>En stock ({product.stock})</span>
                                       </div>
                                     ) : (
                                       <div className="flex items-center text-red-600 text-sm ml-4">
                                         <Home className="h-4 w-4 mr-1" />
-                                        <span>Made to Order</span>
+                                        <span>Sur commande</span>
                                       </div>
                                     )}
                                   </div>
@@ -553,7 +553,7 @@ export default function FurnitureProducts({
                                         })}
                                       </div>
                                       <span className="text-sm text-slate-600 ml-2">({Number(product.average_rating || product.rating || 0).toFixed(1)})</span>
-                                      <span className="text-xs text-slate-500 ml-2">• {product.total_reviews || product.reviews_count || 0} reviews</span>
+                                      <span className="text-xs text-slate-500 ml-2">• {product.total_reviews || product.reviews_count || 0} avis</span>
                                     </div>
                                   )}
                                   <div className="flex items-center mb-4">
@@ -562,7 +562,7 @@ export default function FurnitureProducts({
                                         <span className="text-2xl font-bold text-amber-800">{formatCurrency(product.sale_price, storeSettings, currencies)}</span>
                                         <span className="text-lg text-slate-500 line-through ml-3">{formatCurrency(product.price, storeSettings, currencies)}</span>
                                         <span className="ml-3 bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full">
-                                          {Math.round(((product.price - product.sale_price) / product.price) * 100)}% OFF
+                                          -{Math.round(((product.price - product.sale_price) / product.price) * 100)}%
                                         </span>
                                       </>
                                     ) : (
@@ -599,8 +599,8 @@ export default function FurnitureProducts({
                   <div className="text-center py-16">
                     <div className="text-slate-500 mb-6">
                       <Sofa className="h-16 w-16 mx-auto mb-6 opacity-50" />
-                      <h3 className="text-xl font-bold mb-3 text-slate-700">No furniture found</h3>
-                      <p className="text-slate-600">Try adjusting your filters to discover more pieces</p>
+                      <h3 className="text-xl font-bold mb-3 text-slate-700">Aucun produit trouvé</h3>
+                      <p className="text-slate-600">Essayez d'ajuster vos filtres pour découvrir d'autres articles</p>
                     </div>
                     <button
                       onClick={clearFilters}
@@ -620,7 +620,7 @@ export default function FurnitureProducts({
                         disabled={pagination.current_page === 1}
                         className="px-4 py-2 border border-amber-200 rounded-xl text-sm hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Previous
+                        Précédent
                       </button>
                       
                       {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -645,7 +645,7 @@ export default function FurnitureProducts({
                         disabled={pagination.current_page === pagination.last_page}
                         className="px-4 py-2 border border-amber-200 rounded-xl text-sm hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Next
+                        Suivant
                       </button>
                     </nav>
                   </div>

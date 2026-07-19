@@ -244,7 +244,7 @@ function FurnitureProductDetailContent({
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                     </svg>
-                    {product.category?.name || 'Furniture'}
+                    {product.category?.name || 'Boutique'}
                   </div>
                   
                   <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
@@ -440,7 +440,7 @@ function FurnitureProductDetailContent({
                   {activeTab === 'description' && (
                     <div 
                       className="prose prose-slate max-w-none text-slate-700 leading-relaxed max-h-80 overflow-y-auto"
-                      dangerouslySetInnerHTML={{ __html: product.description || 'Beautifully crafted furniture piece that brings warmth and elegance to your living space. Made with premium materials and attention to detail.' }}
+                      dangerouslySetInnerHTML={{ __html: product.description || 'Produit de qualité supérieure, conçu avec soin pour vous.' }}
                     />
                   )}
 

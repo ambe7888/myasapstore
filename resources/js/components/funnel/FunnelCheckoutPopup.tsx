@@ -20,15 +20,16 @@ interface Props {
   onSuccess: (orderNumber: string) => void;
 }
 
-type Step = 'info' | 'shipping' | 'payment' | 'success';
+type Step = 'checkout' | 'success';
 
 export default function FunnelCheckoutPopup({
   product, store, storeSettings, currencies, shippingMethods, isLoggedIn, customer, funnelId, onClose, onSuccess
 }: Props) {
   const { t } = useTranslation();
 
-  const [step, setStep] = useState<Step>('info');
+  const [step, setStep] = useState<Step>('checkout');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [orderNumber, setOrderNumber] = useState('');
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
@@ -57,23 +58,42 @@ export default function FunnelCheckoutPopup({
   const hasVariants = product.variants && product.variants.length > 0;
 
   const placeOrder = async () => {
+    if (!form.first_name.trim()) {
+      setError('Veuillez entrer votre nom complet.');
+      return;
+    }
+    if (!form.phone.trim()) {
+      setError('Veuillez entrer votre numéro de téléphone.');
+      return;
+    }
+    if (!selectedShipping) {
+      setError('Veuillez sélectionner une zone de livraison.');
+      return;
+    }
+    if (!form.address.trim()) {
+      setError('Veuillez entrer votre adresse précise.');
+      return;
+    }
+
     setLoading(true);
+    setError(null);
     try {
       await router.post(route('store.order.place', { storeSlug: store.slug }), {
-        product_id:     product.id,
-        quantity:       quantity,
-        variant:        selectedVariant,
-        shipping_id:    selectedShipping?.id,
-        payment_method: form.payment_method,
-        first_name:     form.first_name,
-        last_name:      form.last_name,
-        email:          form.email,
-        phone:          form.phone,
-        address:        form.address,
-        city:           form.city,
-        country:        form.country,
-        notes:          form.notes,
-        funnel_id:      funnelId,
+        product_id:         product.id,
+        quantity:           quantity,
+        variant:            selectedVariant,
+        shipping_id:        selectedShipping?.id,
+        shipping_method_id: selectedShipping?.id,
+        payment_method:     form.payment_method,
+        first_name:         form.first_name,
+        last_name:          form.last_name,
+        email:              form.email,
+        phone:              form.phone,
+        address:            form.address,
+        city:               selectedShipping?.name || 'Livraison',
+        country:            form.country,
+        notes:              form.notes,
+        funnel_id:          funnelId,
       }, {
         preserveState: true,
         onSuccess: (page: any) => {
@@ -83,9 +103,14 @@ export default function FunnelCheckoutPopup({
           onSuccess(num);
           setLoading(false);
         },
-        onError: () => setLoading(false),
+        onError: (errors: any) => {
+          const firstError = Object.values(errors)[0] as string;
+          setError(firstError || 'Erreur lors de la validation de votre commande.');
+          setLoading(false);
+        },
       });
-    } catch {
+    } catch (err) {
+      setError('Une erreur est survenue lors de la commande.');
       setLoading(false);
     }
   };
@@ -142,23 +167,6 @@ export default function FunnelCheckoutPopup({
           </button>
         </div>
 
-        {/* Steps indicator */}
-        {step !== 'success' && (
-          <div className="flex items-center px-5 py-2.5 bg-slate-50 border-b border-slate-100">
-            {['info', 'shipping', 'payment'].map((s, i) => (
-              <React.Fragment key={s}>
-                <div className={`flex items-center gap-1.5 text-xs font-medium ${step === s ? 'funnel-theme-text' : 'text-slate-400'}`}>
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${step === s ? 'funnel-theme-bg text-white' : 'bg-slate-200 text-slate-500'}`}>
-                    {i + 1}
-                  </div>
-                  {s === 'info' ? t('Info') : s === 'shipping' ? t('Shipping') : t('Payment')}
-                </div>
-                {i < 2 && <ChevronRight className="h-3 w-3 text-slate-300 mx-2 flex-shrink-0" />}
-              </React.Fragment>
-            ))}
-          </div>
-        )}
-
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-5">
           {/* Order Summary */}
@@ -192,7 +200,7 @@ export default function FunnelCheckoutPopup({
           )}
 
           {/* Variants */}
-          {step === 'info' && hasVariants && (
+          {step === 'checkout' && hasVariants && (
             <div className="mb-5">
               {product.variants.map((variant: any) => (
                 <div key={variant.name} className="mb-3">
@@ -218,113 +226,93 @@ export default function FunnelCheckoutPopup({
             </div>
           )}
 
-          {/* Step: Info */}
-          {step === 'info' && (
-            <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label className="text-xs">{t('First Name')} *</Label>
-                  <Input className="h-9 text-sm" value={form.first_name} onChange={e => setField('first_name', e.target.value)} />
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-xs">{t('Last Name')} *</Label>
-                  <Input className="h-9 text-sm" value={form.last_name} onChange={e => setField('last_name', e.target.value)} />
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <Label className="text-xs">{t('Email')} *</Label>
-                <Input className="h-9 text-sm" type="email" value={form.email} onChange={e => setField('email', e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label className="text-xs">{t('Phone')} *</Label>
-                <Input className="h-9 text-sm" type="tel" value={form.phone} onChange={e => setField('phone', e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label className="text-xs">{t('Address')} *</Label>
-                <Input className="h-9 text-sm" value={form.address} onChange={e => setField('address', e.target.value)} />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label className="text-xs">{t('City')} *</Label>
-                  <Input className="h-9 text-sm" value={form.city} onChange={e => setField('city', e.target.value)} />
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-xs">{t('Country')}</Label>
-                  <Input className="h-9 text-sm" value={form.country} onChange={e => setField('country', e.target.value)} />
-                </div>
-              </div>
+          {/* Error Message */}
+          {error && (
+            <div className="p-3 mb-4 text-xs font-medium text-rose-700 bg-rose-50 rounded-xl border border-rose-200">
+              {error}
             </div>
           )}
 
-          {/* Step: Shipping */}
-          {step === 'shipping' && (
-            <div className="space-y-2">
-              <p className="text-sm font-semibold text-slate-700 mb-3">{t('Select shipping method')}</p>
-              {shippingMethods.length === 0 ? (
-                <p className="text-sm text-slate-400">{t('Free shipping')}</p>
-              ) : (
-                shippingMethods.map((method: any) => (
-                  <button
-                    key={method.id}
-                    type="button"
-                    onClick={() => setSelectedShipping(method)}
-                    className={`w-full flex items-center justify-between p-3.5 rounded-xl border-2 text-left transition-all ${
-                      selectedShipping?.id === method.id
-                        ? 'funnel-theme-border funnel-theme-bg-light'
-                        : 'border-slate-200 hover:border-slate-300'
-                    }`}
+          {/* Checkout Form */}
+          {step === 'checkout' && (
+            <form onSubmit={(e) => { e.preventDefault(); placeOrder(); }} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Nom complet *</Label>
+                  <Input
+                    required
+                    placeholder="Ex: Jean Dupont"
+                    className="h-9 text-sm focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-indigo-500"
+                    value={form.first_name}
+                    onChange={e => setField('first_name', e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Téléphone *</Label>
+                  <Input
+                    required
+                    type="tel"
+                    placeholder="Ex: 06 12 34 56 78"
+                    className="h-9 text-sm"
+                    value={form.phone}
+                    onChange={e => setField('phone', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Adresse e-mail</Label>
+                  <Input
+                    type="email"
+                    placeholder="Ex: jean.dupont@gmail.com"
+                    className="h-9 text-sm"
+                    value={form.email}
+                    onChange={e => setField('email', e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Zone de livraison *</Label>
+                  <select
+                    required
+                    value={selectedShipping?.id || ''}
+                    onChange={e => {
+                      const selected = shippingMethods.find(m => m.id.toString() === e.target.value);
+                      setSelectedShipping(selected || null);
+                    }}
+                    className="w-full px-3 py-2 text-sm rounded-md border border-input bg-transparent text-slate-900 outline-none h-9"
                   >
-                    <div className="flex items-center gap-2">
-                      <Package className="h-4 w-4 text-slate-400" />
-                      <div>
-                        <p className="font-semibold text-sm">{method.name}</p>
-                        {method.estimated_days && (
-                          <p className="text-xs text-slate-400">{method.estimated_days} {t('days')}</p>
-                        )}
-                      </div>
-                    </div>
-                    <span className="font-bold text-sm text-slate-800">
-                      {Number(method.cost) === 0 ? t('Free') : `${method.cost} ${currency}`}
-                    </span>
-                  </button>
-                ))
-              )}
-              <div className="space-y-1.5 mt-4">
-                <Label className="text-xs">{t('Order Notes (optional)')}</Label>
-                <textarea
-                  rows={2}
-                  className="w-full text-sm rounded-xl border border-slate-200 p-3 resize-none focus:outline-none focus:ring-2 funnel-theme-ring"
-                  value={form.notes}
-                  onChange={e => setField('notes', e.target.value)}
-                  placeholder={t('Special instructions...')}
+                    <option value="">Sélectionnez votre zone</option>
+                    {shippingMethods.map((method: any) => (
+                      <option key={method.id} value={method.id}>
+                        {method.name} ({Number(method.cost) === 0 ? 'Gratuit' : `${method.cost} ${currency}`})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-xs">Adresse précise (Rue, Quartier, Bâtiment...) *</Label>
+                <Input
+                  required
+                  placeholder="Ex: Rue 12, Lot 4, à côté de la pharmacie"
+                  className="h-9 text-sm"
+                  value={form.address}
+                  onChange={e => setField('address', e.target.value)}
                 />
               </div>
-            </div>
-          )}
 
-          {/* Step: Payment */}
-          {step === 'payment' && (
-            <div className="space-y-4">
-              <p className="text-sm font-semibold text-slate-700">{t('Payment Method')}</p>
-              <div className="space-y-2">
-                {[
-                  { value: 'cod', label: t('Cash on Delivery'), icon: '💵' },
-                  { value: 'bank_transfer', label: t('Bank Transfer'), icon: '🏦' },
-                ].map(method => (
-                  <button
-                    key={method.value}
-                    type="button"
-                    onClick={() => setField('payment_method', method.value)}
-                    className={`w-full flex items-center gap-3 p-3.5 rounded-xl border-2 text-left transition-all ${
-                      form.payment_method === method.value
-                        ? 'funnel-theme-border funnel-theme-bg-light'
-                        : 'border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <span className="text-xl">{method.icon}</span>
-                    <span className="font-semibold text-sm">{method.label}</span>
-                  </button>
-                ))}
+              <div className="space-y-1.5">
+                <Label className="text-xs">Mode de paiement</Label>
+                <select
+                  value={form.payment_method}
+                  onChange={e => setField('payment_method', e.target.value)}
+                  className="w-full px-3 py-2 text-sm rounded-md border border-input bg-transparent text-slate-900 outline-none h-9"
+                >
+                  <option value="cod">💵 Paiement à la livraison</option>
+                  <option value="bank_transfer">🏦 Virement bancaire</option>
+                </select>
               </div>
 
               {/* Order Summary */}
@@ -343,7 +331,19 @@ export default function FunnelCheckoutPopup({
                   <span className="funnel-theme-text text-lg font-bold">{total.toFixed(2)} {currency}</span>
                 </div>
               </div>
-            </div>
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  className="w-full gap-2 funnel-theme-btn font-bold rounded-xl py-3.5"
+                  disabled={loading}
+                >
+                  {loading && <Loader className="h-4 w-4 animate-spin mr-1" />}
+                  {loading ? 'Validation de la commande...' : 'Confirmer la commande'}
+                </Button>
+              </div>
+            </form>
           )}
 
           {/* Success */}
@@ -366,48 +366,6 @@ export default function FunnelCheckoutPopup({
             </div>
           )}
         </div>
-
-        {/* Footer Actions */}
-        {step !== 'success' && (
-          <div className="px-5 py-4 border-t border-slate-100 bg-white">
-            <div className="flex gap-3">
-              {step !== 'info' && (
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() => setStep(step === 'payment' ? 'shipping' : 'info')}
-                >
-                  {t('Back')}
-                </Button>
-              )}
-              <Button
-                className="flex-1 gap-2 funnel-theme-btn font-bold rounded-xl py-3.5"
-                disabled={loading}
-                onClick={() => {
-                  if (step === 'info') {
-                    if (!form.first_name || !form.phone || !form.address) return;
-                    setStep('shipping');
-                  } else if (step === 'shipping') {
-                    setStep('payment');
-                  } else {
-                    placeOrder();
-                  }
-                }}
-              >
-                {loading && <Loader className="h-4 w-4 animate-spin mr-1" />}
-                {step === 'payment'
-                  ? (loading ? t('Placing Order...') : t('Place Order'))
-                  : t('Continue')}
-                {!loading && step !== 'payment' && <ChevronRight className="h-4 w-4 ml-1" />}
-              </Button>
-            </div>
-            {step === 'payment' && (
-              <p className="text-center text-xs text-slate-400 mt-2">
-                🔒 {t('Secure checkout')}
-              </p>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

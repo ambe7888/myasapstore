@@ -81,6 +81,7 @@ Route::prefix('{storeSlug?}')->middleware('store.status')->group(function () {
     
     // Checkout routes
     Route::get('/checkout', [ThemeController::class, 'checkout'])->name('store.checkout');
+    Route::get('/shipping-methods', [ThemeController::class, 'getShippingMethods'])->name('store.shipping-methods');
     Route::get('/order-confirmation/{orderNumber?}', [ThemeController::class, 'orderConfirmation'])->name('store.order-confirmation');
     
     // Blog routes

@@ -1519,7 +1519,24 @@ class ThemeController extends Controller
         ], $this->getCommonData()));
     }
 
-
-
-
+    public function getShippingMethods(Request $request)
+    {
+        $storeSlug = request()->route('storeSlug') ?? null;
+        $store = $this->getStore($request, $storeSlug);
+        
+        $shippingMethods = Shipping::where('store_id', $store['id'])
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get()
+            ->map(function ($method) {
+                return [
+                    'id' => $method->id,
+                    'name' => $method->name,
+                    'cost' => (float)$method->cost,
+                    'delivery_time' => $method->delivery_time,
+                ];
+            });
+            
+        return response()->json($shippingMethods);
+    }
 }

@@ -31,14 +31,40 @@ export default function QuickCheckoutModal({
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('cod');
+
+  // Shipping methods
+  const [shippingMethods, setShippingMethods] = useState<any[]>([]);
+  const [selectedShippingId, setSelectedShippingId] = useState<string>('');
+  const [loadingShipping, setLoadingShipping] = useState(false);
+
+  // Fetch shipping methods
+  React.useEffect(() => {
+    if (isOpen && store?.id) {
+      setLoadingShipping(true);
+      axios.get(generateStoreUrl('store.shipping-methods', store))
+        .then(response => {
+          setShippingMethods(response.data);
+          if (response.data.length > 0) {
+            setSelectedShippingId(response.data[0].id.toString());
+          }
+          setLoadingShipping(false);
+        })
+        .catch(err => {
+          console.error("Error loading shipping methods:", err);
+          setLoadingShipping(false);
+        });
+    }
+  }, [isOpen, store]);
 
   if (!isOpen || !product) return null;
 
   const unitPrice = product.sale_price && product.sale_price < product.price ? product.sale_price : product.price;
-  const totalPrice = unitPrice * quantity;
+  const selectedShipping = shippingMethods.find(m => m.id.toString() === selectedShippingId);
+  const shippingCost = selectedShipping ? Number(selectedShipping.cost) : 0;
+  const totalPrice = (unitPrice * quantity) + shippingCost;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +74,10 @@ export default function QuickCheckoutModal({
     }
     if (!phone.trim()) {
       setError('Veuillez entrer votre numéro de téléphone.');
+      return;
+    }
+    if (!selectedShippingId) {
+      setError('Veuillez sélectionner une zone de livraison.');
       return;
     }
     if (!address.trim()) {
@@ -65,15 +95,19 @@ export default function QuickCheckoutModal({
       // Step 2: Submit order to store.order.place endpoint
       const orderPayload = {
         store_id: store?.id,
+        product_id: product.id,
+        quantity: quantity,
+        variants: product.variants,
         customer_first_name: firstName,
         customer_last_name: lastName || '',
-        customer_email: `${phone.replace(/\D/g, '') || 'client'}@store.local`,
+        customer_email: email.trim() || `${phone.replace(/\D/g, '') || 'client'}@store.local`,
         customer_phone: phone,
         shipping_address: address,
-        shipping_city: city || 'Livraison',
+        shipping_city: selectedShipping?.name || 'Livraison',
         billing_address: address,
-        billing_city: city || 'Livraison',
+        billing_city: selectedShipping?.name || 'Livraison',
         payment_method: paymentMethod,
+        shipping_method_id: Number(selectedShippingId),
       };
 
       const orderUrl = generateStoreUrl('store.order.place', store);
@@ -183,7 +217,7 @@ export default function QuickCheckoutModal({
 
           {/* Order Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Nom complet <span className="text-rose-500">*</span>
@@ -212,47 +246,70 @@ export default function QuickCheckoutModal({
               </div>
             </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Adresse e-mail
+                </label>
+                <input
+                  type="email"
+                  placeholder="Ex: jean.dupont@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Zone de livraison <span className="text-rose-500">*</span>
+                </label>
+                {loadingShipping ? (
+                  <div className="text-xs text-slate-500 py-2">Chargement des zones...</div>
+                ) : (
+                  <select
+                    required
+                    value={selectedShippingId}
+                    onChange={(e) => setSelectedShippingId(e.target.value)}
+                    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                  >
+                    <option value="">Sélectionnez votre zone</option>
+                    {shippingMethods.map((method) => (
+                      <option key={method.id} value={method.id}>
+                        {method.name} ({method.cost === 0 ? 'Gratuit' : `${method.cost} ${store?.storeSettings?.currency_symbol || 'MAD'}`})
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </div>
+
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                Adresse de livraison <span className="text-rose-500">*</span>
+                Adresse précise (Rue, Quartier, Bâtiment...) <span className="text-rose-500">*</span>
               </label>
               <input
                 type="text"
                 required
-                placeholder="Rue, Quartier, Bâtiment..."
+                placeholder="Ex: Rue 12, Lot 4, à côté de la pharmacie"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Ville / Commune
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ex: Abidjan, Paris..."
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Paiement
-                </label>
-                <select
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
-                >
-                  <option value="cod">💵 Paiement à la livraison</option>
-                  <option value="whatsapp">💬 Commander via WhatsApp</option>
-                  <option value="bank">🏦 Virement bancaire</option>
-                </select>
-              </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Mode de paiement
+              </label>
+              <select
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+              >
+                <option value="cod">💵 Paiement à la livraison</option>
+                <option value="whatsapp">💬 Commander via WhatsApp</option>
+                <option value="bank">🏦 Virement bancaire</option>
+              </select>
             </div>
 
             {/* Total & Guarantee */}

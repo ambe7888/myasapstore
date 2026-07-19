@@ -23,6 +23,69 @@ class OrderController extends Controller
     {
         $storeSlug = request()->route('storeSlug') ?? null;
         [$store, $storeSlug] = resolveStore($request, $storeSlug);
+        
+        // Normalize fields from different checkout modal versions
+        if ($request->has('first_name') && !$request->has('customer_first_name')) {
+            $request->merge(['customer_first_name' => $request->first_name]);
+        }
+        if ($request->has('last_name') && !$request->has('customer_last_name')) {
+            $request->merge(['customer_last_name' => $request->last_name]);
+        }
+        if ($request->has('phone') && !$request->has('customer_phone')) {
+            $request->merge(['customer_phone' => $request->phone]);
+        }
+        if ($request->has('email') && !$request->has('customer_email')) {
+            $request->merge(['customer_email' => $request->email]);
+        }
+        if ($request->has('address') && !$request->has('shipping_address')) {
+            $request->merge(['shipping_address' => $request->address]);
+        }
+        if ($request->has('city') && !$request->has('shipping_city')) {
+            $request->merge(['shipping_city' => $request->city]);
+        }
+        if ($request->has('shipping_id') && !$request->has('shipping_method_id')) {
+            $request->merge(['shipping_method_id' => $request->shipping_id]);
+        }
+        if (!$request->has('store_id') && $store) {
+            $request->merge(['store_id' => $store->id]);
+        }
+
+        // If product_id is passed, we populate the cart dynamically for express checkout
+        if ($request->has('product_id') && $store) {
+            $sessionId = session()->getId();
+            $customerId = auth()->guard('customer')->check() ? auth()->guard('customer')->id() : null;
+
+            // Clear current cart for this session/customer
+            $cartQuery = \App\Models\CartItem::where('store_id', $store->id);
+            if ($customerId) {
+                $cartQuery->where('customer_id', $customerId);
+            } else {
+                $cartQuery->where('session_id', $sessionId)->whereNull('customer_id');
+            }
+            $cartQuery->delete();
+
+            // Find product and variants
+            $product = \App\Models\Product::findOrFail($request->product_id);
+            $variants = $request->variant ?? $request->variants ?? null;
+            if (is_string($variants)) {
+                $variants = json_decode($variants, true);
+            }
+            if (isset($variants['variants'])) {
+                $variants = $variants['variants'];
+            }
+
+            // Create new cart item
+            \App\Models\CartItem::create([
+                'store_id' => $store->id,
+                'customer_id' => $customerId,
+                'session_id' => $sessionId,
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity ?? 1,
+                'variants' => json_encode($variants),
+                'price' => $product->sale_price ?? $product->price
+            ]);
+        }
+
         try {
             $validationRules = [
                 'store_id' => 'required|exists:stores,id',

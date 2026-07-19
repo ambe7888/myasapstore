@@ -173,7 +173,14 @@ export default function FurnitureProducts({
 
   return (
     <>
-      <Head title={`Furniture Collection - ${store.name || 'Furniture Store'}`} />
+      <Head title={`Notre Collection - ${store.name || 'Boutique'}`}>
+        <meta name="description" content={`Découvrez tous nos produits sur la boutique ${store.name || 'Boutique'}.`} />
+        <meta name="keywords" content={`${store.name || 'boutique'}, produits, catalogue, acheter`} />
+        <meta property="og:title" content={`Notre Collection - ${store.name || 'Boutique'}`} />
+        <meta property="og:description" content={`Découvrez tous nos produits sur la boutique ${store.name || 'Boutique'}.`} />
+        {store.logo && <meta property="og:image" content={store.logo} />}
+        <meta property="og:type" content="website" />
+      </Head>
       
       <StoreLayout
         storeName={store.name}

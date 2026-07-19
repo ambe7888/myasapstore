@@ -67,7 +67,23 @@ export default function FashionOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: FashionOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -144,7 +160,7 @@ export default function FashionOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -165,9 +181,9 @@ export default function FashionOrderConfirmation({
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white mb-8">
                 <CheckCircle className="h-10 w-10 text-black" />
               </div>
-              <h1 className="text-5xl font-thin tracking-wide mb-6">Order Confirmed</h1>
+              <h1 className="text-5xl font-thin tracking-wide mb-6">Commande Confirmée</h1>
               <p className="text-white/70 font-light text-lg mb-8">
-                Thank you for choosing us. Your order has been successfully placed.
+                Thank you for choosing us. Votre commande a été enregistrée avec succès.
               </p>
               <div className="inline-block bg-white text-black px-8 py-3 font-light tracking-widest uppercase text-sm">
                 Order #{orderData.id}
@@ -185,23 +201,23 @@ export default function FashionOrderConfirmation({
                   <MessageCircle className="h-10 w-10 text-green-600 animate-pulse" />
                 </div>
                 <h3 className="text-3xl font-thin tracking-wide text-green-800 mb-6">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <p className="text-green-700 font-light text-lg mb-8">
-                  Your order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-3 font-light tracking-widest uppercase text-sm hover:bg-green-700 transition-colors"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border border-gray-300 text-black px-8 py-3 font-light tracking-widest uppercase text-sm hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -218,13 +234,13 @@ export default function FashionOrderConfirmation({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <div className="text-center">
                   <Calendar className="h-8 w-8 text-gray-400 mx-auto mb-4" />
-                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Order Date</p>
+                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Date de la commande</p>
                   <p className="font-light">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="text-center">
                   <Package className="h-8 w-8 text-gray-400 mx-auto mb-4" />
-                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Status</p>
+                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Statut</p>
                   <p className="font-light">{orderData.status}</p>
                 </div>
                 
@@ -236,16 +252,16 @@ export default function FashionOrderConfirmation({
                 
                 <div className="text-center">
                   <CreditCard className="h-8 w-8 text-gray-400 mx-auto mb-4" />
-                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Payment</p>
+                  <p className="text-xs font-light tracking-widest uppercase text-gray-500 mb-2">Paiement</p>
                   <p className="font-light">{orderData.payment_method}</p>
                 </div>
               </div>
 
-              {/* Order Details */}
+              {/* Détails de la commande */}
               <div className="bg-white border border-gray-200 mb-16">
                 <div className="p-8 border-b border-gray-200">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-2xl font-thin tracking-wide">Order Details</h2>
+                    <h2 className="text-2xl font-thin tracking-wide">Détails de la commande</h2>
                     <span className="inline-flex items-center px-3 py-1 text-xs font-light tracking-wide uppercase bg-yellow-100 text-yellow-800">
                       {orderData.status}
                     </span>
@@ -262,7 +278,7 @@ export default function FashionOrderConfirmation({
                         <thead className="bg-gray-50">
                           <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-light tracking-widest uppercase text-gray-500">
-                              Product
+                              Produit
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">Prix</th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-light tracking-widest uppercase text-gray-500">Quantité</th>
@@ -315,7 +331,7 @@ export default function FashionOrderConfirmation({
                           {orderData.discount && orderData.discount > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-green-600 font-light">
-                                Discount {orderData.coupon_code && `(${orderData.coupon_code})`}
+                                Remise {orderData.coupon_code && `(${orderData.coupon_code})`}
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-green-600 font-light">
                                 -{formatCurrency(orderData.discount, storeSettings, currencies)}
@@ -333,7 +349,7 @@ export default function FashionOrderConfirmation({
                           {orderData.tax && orderData.tax > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600 font-light">
-                                Tax
+                                Taxe
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600 font-light">
                                 {formatCurrency(orderData.tax, storeSettings, currencies)}
@@ -356,7 +372,7 @@ export default function FashionOrderConfirmation({
               {/* Addresses & Info */}
               <div className="bg-white border border-gray-200 mb-16">
                 <div className="p-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-thin tracking-wide">Shipping & Payment Information</h2>
+                  <h2 className="text-2xl font-thin tracking-wide">Shipping & Paiement Information</h2>
                 </div>
                 
                 <div className="p-8">
@@ -392,7 +408,7 @@ export default function FashionOrderConfirmation({
               {/* Next Steps */}
               <div className="bg-white border border-gray-200 mb-16">
                 <div className="p-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-thin tracking-wide">What's Next?</h2>
+                  <h2 className="text-2xl font-thin tracking-wide">Et ensuite ?</h2>
                 </div>
                 
                 <div className="p-8">
@@ -404,9 +420,9 @@ export default function FashionOrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-light text-black">Order Processing</h3>
+                        <h3 className="text-lg font-light text-black">Traitement de la commande</h3>
                         <p className="mt-2 text-base text-gray-500 font-light">
-                          We're currently processing your order. You'll receive an email when your order ships.
+                          Nous tratons actuellement votre commande. You'll receive an email when your order ships.
                         </p>
                       </div>
                     </div>
@@ -420,7 +436,7 @@ export default function FashionOrderConfirmation({
                       <div className="ml-4">
                         <h3 className="text-lg font-light text-black">Livraison</h3>
                         <p className="mt-2 text-base text-gray-500 font-light">
-                          Your order will be shipped via {orderData.shipping_method}. You can track your order in your account.
+                          Votre commande sera expédiée via {orderData.shipping_method}. You can track your order in your account.
                         </p>
                       </div>
                     </div>

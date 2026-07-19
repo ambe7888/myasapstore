@@ -192,12 +192,19 @@ class OrderService
             'payment_gateway' => 'whatsapp',
         ]);
 
-        // Send WhatsApp message
-        if ($order->whatsapp_number) {
+        // Send WhatsApp message to seller
+        $store = $order->store;
+        $sellerWhatsappNumber = getSetting('whatsapp_phone_number', '', $store->user_id, $store->id);
+        
+        if (empty($sellerWhatsappNumber)) {
+            $sellerWhatsappNumber = $order->whatsapp_number;
+        }
+
+        if ($sellerWhatsappNumber) {
             $whatsappService = new \App\Services\WhatsAppService();
-            $result = $whatsappService->sendOrderConfirmation($order, $order->whatsapp_number);
+            $result = $whatsappService->sendOrderConfirmation($order, $sellerWhatsappNumber);
         } else {
-            \Log::warning('No WhatsApp number provided for order', ['order_id' => $order->id]);
+            \Log::warning('No WhatsApp number provided for order by seller or buyer', ['order_id' => $order->id]);
         }
 
         return [

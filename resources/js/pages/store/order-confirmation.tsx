@@ -73,6 +73,22 @@ export default function OrderConfirmation({
 }: OrderConfirmationProps) {
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
   
+  useEffect(() => {
+    if (order && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: order.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(order.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [order?.id]);
+  
   // Auto redirect to WhatsApp like WhatsStore
   useEffect(() => {
     if (whatsappRedirectUrl && order?.payment_method === 'WhatsApp') {
@@ -170,7 +186,7 @@ export default function OrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -187,9 +203,9 @@ export default function OrderConfirmation({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Order Confirmation</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Confirmation de commande</h1>
               <p className="text-white/80">
-                Thank you for your purchase!
+                Merci pour votre achat !
               </p>
             </div>
           </div>
@@ -199,9 +215,9 @@ export default function OrderConfirmation({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Order Confirmation</span>
+              <span className="text-gray-800 font-medium">Confirmation de commande</span>
             </div>
           </div>
         </div>
@@ -215,12 +231,12 @@ export default function OrderConfirmation({
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
                   <CheckCircle className="h-8 w-8 text-green-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Your order has been placed!</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Votre commande a été enregistrée !</h2>
                 <p className="text-gray-600 mb-4">
-                  We've sent a confirmation email to {orderData.shipping_address?.name ? orderData.shipping_address.name.split(' ')[0] : 'you'} with the order details.
+                  Nous vous avons envoyé un e-mail de confirmation avec les détails de la commande.
                 </p>
                 <div className="inline-flex items-center justify-center bg-white rounded-md px-4 py-2 border border-gray-300 shadow-sm">
-                  <span className="text-sm font-medium text-gray-700 mr-2">Order Number:</span>
+                  <span className="text-sm font-medium text-gray-700 mr-2">Numéro de commande :</span>
                   <span className="text-sm font-bold text-gray-900">{orderData.id}</span>
                 </div>
               </div>
@@ -232,10 +248,10 @@ export default function OrderConfirmation({
                     <MessageCircle className="h-8 w-8 text-green-600 animate-pulse" />
                   </div>
                   <h3 className="text-lg font-medium text-green-800 mb-2">
-                    Opening WhatsApp...
+                    Ouverture de WhatsApp...
                   </h3>
                   <p className="text-green-700 mb-4">
-                    Your order confirmation will open in WhatsApp automatically.
+                    La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                   </p>
                   <div className="flex justify-center gap-3">
                     <button
@@ -243,13 +259,13 @@ export default function OrderConfirmation({
                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
                     >
                       <MessageCircle className="h-4 w-4 mr-2" />
-                      Open Now
+                      Ouvrir maintenant
                     </button>
                     <button
                       onClick={dismissWhatsAppPrompt}
                       className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
-                      Skip
+                      Passer
                     </button>
                   </div>
                 </div>
@@ -259,7 +275,7 @@ export default function OrderConfirmation({
               <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
                 <div className="p-6 border-b border-gray-200">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-lg font-medium text-gray-900">Order Details</h2>
+                    <h2 className="text-lg font-medium text-gray-900">Détails de la commande</h2>
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                       {orderData.status}
                     </span>
@@ -271,7 +287,7 @@ export default function OrderConfirmation({
                     <div className="flex items-start">
                       <Calendar className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-gray-500">Order Date</p>
+                        <p className="text-sm font-medium text-gray-500">Date de la commande</p>
                         <p className="text-sm text-gray-900">{formatDate(orderData.date)}</p>
                       </div>
                     </div>
@@ -285,7 +301,7 @@ export default function OrderConfirmation({
                     <div className="flex items-start">
                       <MapPin className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-gray-500">Shipping Address</p>
+                        <p className="text-sm font-medium text-gray-500">Adresse de livraison</p>
                         <p className="text-sm text-gray-900">
                           {orderData.shipping_address.name}<br />
                           {orderData.shipping_address.street}<br />
@@ -305,14 +321,14 @@ export default function OrderConfirmation({
                   
                   {/* Order Items */}
                   <div className="mt-8">
-                    <h3 className="text-base font-medium text-gray-900 mb-4">Order Items</h3>
+                    <h3 className="text-base font-medium text-gray-900 mb-4">Articles commandés</h3>
                     
                     <div className="overflow-hidden border border-gray-200 rounded-md">
-                      <table className="min-w-full divide-y divide-gray-200">
+                       <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                           <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Product
+                              Produit
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
@@ -365,7 +381,7 @@ export default function OrderConfirmation({
                           {orderData.discount && orderData.discount > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-green-600">
-                                Discount {orderData.coupon_code && `(${orderData.coupon_code})`}
+                                Remise {orderData.coupon_code && `(${orderData.coupon_code})`}
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-green-600">
                                 -{formatCurrency(orderData.discount, storeSettings, currencies)}
@@ -383,7 +399,7 @@ export default function OrderConfirmation({
                           {orderData.tax && orderData.tax > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-gray-600">
-                                Tax
+                                Taxe
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-gray-600">
                                 {formatCurrency(orderData.tax, storeSettings, currencies)}
@@ -406,7 +422,7 @@ export default function OrderConfirmation({
               {/* Next Steps */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
                 <div className="p-6 border-b border-gray-200">
-                  <h2 className="text-lg font-medium text-gray-900">What's Next?</h2>
+                  <h2 className="text-lg font-medium text-gray-900">Et ensuite ?</h2>
                 </div>
                 
                 <div className="p-6">
@@ -418,9 +434,9 @@ export default function OrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-medium text-gray-900">Order Processing</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Traitement de la commande</h3>
                         <p className="mt-2 text-base text-gray-500">
-                          We're currently processing your order. You'll receive an email when your order ships.
+                          Nous traitons actuellement votre commande. Vous recevrez un e-mail lors de son expédition.
                         </p>
                       </div>
                     </div>
@@ -434,7 +450,7 @@ export default function OrderConfirmation({
                       <div className="ml-4">
                         <h3 className="text-lg font-medium text-gray-900">Livraison</h3>
                         <p className="mt-2 text-base text-gray-500">
-                          Your order will be shipped via {orderData.shipping_method}. You can track your order in your account.
+                          Votre commande sera expédiée par {orderData.shipping_method}. Vous pouvez suivre son statut dans votre compte.
                         </p>
                       </div>
                     </div>
@@ -448,7 +464,7 @@ export default function OrderConfirmation({
                   href={generateStoreUrl('store.my-orders', store)}
                   className="inline-flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
-                  View My Orders
+                  Voir mes commandes
                 </Link>
                 <Link
                   href={generateStoreUrl('store.products', store)}

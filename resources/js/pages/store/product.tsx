@@ -98,6 +98,18 @@ export default function ProductDetail({
   // Get theme-specific components
   const actualTheme = store?.theme || theme;
   
+  React.useEffect(() => {
+    if (product && typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'ViewContent', {
+        content_name: product.name,
+        content_ids: [product.id.toString()],
+        content_type: 'product',
+        value: Number(product.sale_price || product.price || 0),
+        currency: store?.storeSettings?.currency || 'MAD'
+      });
+    }
+  }, [product?.id]);
+
   // Use dynamic imports for theme-specific product detail pages to avoid circular dependencies
   const [ThemeProductDetailPage, setThemeProductDetailPage] = React.useState<React.ComponentType<any> | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -307,7 +319,14 @@ export default function ProductDetail({
 
   return (
     <>
-      <Head title={`${product.name} - ${store.name || storeTheme.store.name}`} />
+      <Head title={`${product.name} - ${store.name || storeTheme.store.name}`}>
+        <meta name="description" content={product.description ? product.description.substring(0, 160) : `Achetez ${product.name} sur ${store.name || 'Boutique'}.`} />
+        <meta name="keywords" content={`${product.name}, ${store.name || 'boutique'}, achat, en ligne, ecommerce`} />
+        <meta property="og:title" content={`${product.name} - ${store.name || storeTheme.store.name}`} />
+        <meta property="og:description" content={product.description ? product.description.substring(0, 160) : `Achetez ${product.name} sur ${store.name || 'Boutique'}.`} />
+        {product.cover_image && <meta property="og:image" content={getImageUrl(product.cover_image)} />}
+        <meta property="og:type" content="product" />
+      </Head>
 
       <StoreLayout
         storeName={store.name || storeTheme.store.name}
@@ -519,23 +538,49 @@ export default function ProductDetail({
                 </div>
 
                 <StickyBottomBar targetRef={buttonsRef}>
-                  <div className="flex gap-2 w-full">
-                    <div className="flex-1">
-                      <AddToCartButton
-                        product={{...product, variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null}}
-                        storeSlug={storeSlug}
-                        store={store}
-                        className="w-full h-12 rounded-lg text-sm font-semibold transition-all duration-300 bg-primary text-white hover:bg-blue-700 flex items-center justify-center"
-                        isShowOption={false}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <BuyNowButton
-                        product={product}
-                        store={store}
-                        className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
-                        quantity={quantity}
-                      />
+                  <div className="flex flex-col gap-2 w-full">
+                    {/* Floating Variants selection */}
+                    {hasVariants && productVariants && (
+                      <div className="flex flex-wrap gap-2 items-center bg-gray-50 dark:bg-slate-800 p-2 rounded-xl border border-gray-200 dark:border-slate-700 max-h-[100px] overflow-y-auto w-full justify-between">
+                        <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Options:</span>
+                        <div className="flex flex-wrap gap-2">
+                          {productVariants.map((variant) => (
+                            <div key={variant.name} className="flex items-center gap-1">
+                              <span className="text-[10px] font-semibold text-gray-600 dark:text-gray-300">{variant.name}:</span>
+                              <select
+                                value={selectedVariants[variant.name] || ''}
+                                onChange={(e) => handleVariantChange(variant.name, e.target.value)}
+                                className="px-2 py-0.5 text-[10px] rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-900 text-gray-800 dark:text-white outline-none"
+                              >
+                                {variant.values.map((val) => (
+                                  <option key={val} value={val}>{val}</option>
+                                ))}
+                              </select>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="flex gap-2 w-full">
+                      <div className="flex-1">
+                        <AddToCartButton
+                          product={{...product, variants: selectedVariants}}
+                          storeSlug={storeSlug}
+                          store={store}
+                          className="w-full h-12 rounded-lg text-sm font-semibold transition-all duration-300 bg-primary text-white hover:bg-blue-700 flex items-center justify-center"
+                          isShowOption={false}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <BuyNowButton
+                          product={{...product, variants: selectedVariants}}
+                          store={store}
+                          className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
+                          quantity={quantity}
+                          isShowOption={false}
+                        />
+                      </div>
                     </div>
                   </div>
                 </StickyBottomBar>

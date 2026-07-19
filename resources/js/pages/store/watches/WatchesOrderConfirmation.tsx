@@ -67,7 +67,23 @@ export default function WatchesOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: WatchesOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -144,7 +160,7 @@ export default function WatchesOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -166,11 +182,11 @@ export default function WatchesOrderConfirmation({
               <div className="max-w-4xl">
                 <div className="mb-6">
                   <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
-                    Order Confirmed
+                    Commande Confirmée
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
-                  Thank You
+                  Merci
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
                   Your luxury timepiece order <span className="bg-amber-500 text-slate-900 px-3 py-1 rounded font-medium">#{orderData.id}</span> has been successfully placed
@@ -191,24 +207,24 @@ export default function WatchesOrderConfirmation({
                   <MessageCircle className="w-10 h-10 text-green-600 animate-pulse" />
                 </div>
                 <h3 className="text-4xl font-light text-green-800 mb-6 tracking-tight">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <div className="w-16 h-px bg-green-500 mx-auto mb-6"></div>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
-                  Your luxury timepiece order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-lg"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-medium hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -225,13 +241,13 @@ export default function WatchesOrderConfirmation({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <div className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
                   <Calendar className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-slate-700 mb-2">Order Date</p>
+                  <p className="text-sm font-medium text-slate-700 mb-2">Date de la commande</p>
                   <p className="text-slate-900">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
                   <Package className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-slate-700 mb-2">Status</p>
+                  <p className="text-sm font-medium text-slate-700 mb-2">Statut</p>
                   <p className="text-slate-900">{orderData.status}</p>
                 </div>
                 
@@ -243,18 +259,18 @@ export default function WatchesOrderConfirmation({
                 
                 <div className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200">
                   <CreditCard className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-slate-700 mb-2">Payment</p>
+                  <p className="text-sm font-medium text-slate-700 mb-2">Paiement</p>
                   <p className="text-slate-900">{orderData.payment_method}</p>
                 </div>
               </div>
 
-              {/* Order Details */}
+              {/* Détails de la commande */}
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 mb-8">
                 <div className="p-6 border-b border-slate-200">
                   <div className="flex justify-between items-center">
                     <h2 className="text-xl font-medium text-slate-900 flex items-center">
                       <Clock className="w-5 h-5 text-amber-500 mr-2" />
-                      Order Details
+                      Détails de la commande
                     </h2>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
                       {orderData.status}
@@ -265,14 +281,14 @@ export default function WatchesOrderConfirmation({
                 <div className="p-6">
                   {/* Order Items */}
                   <div className="mb-8">
-                    <h3 className="text-lg font-medium text-slate-900 mb-6">Your Timepieces</h3>
+                    <h3 className="text-lg font-medium text-slate-900 mb-6">Vos articles</h3>
                     
                     <div className="overflow-hidden border border-slate-200 rounded-lg">
                       <table className="min-w-full divide-y divide-slate-200">
                         <thead className="bg-slate-50">
                           <tr>
                             <th scope="col" className="px-6 py-3 text-left text-sm font-medium text-slate-700">
-                              Product
+                              Produit
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">Prix</th>
                             <th scope="col" className="px-6 py-3 text-right text-sm font-medium text-slate-700">Quantité</th>
@@ -325,7 +341,7 @@ export default function WatchesOrderConfirmation({
                           {orderData.discount && orderData.discount > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-green-600">
-                                Discount {orderData.coupon_code && `(${orderData.coupon_code})`}
+                                Remise {orderData.coupon_code && `(${orderData.coupon_code})`}
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-green-600">
                                 -{formatCurrency(orderData.discount, storeSettings, currencies)}
@@ -343,7 +359,7 @@ export default function WatchesOrderConfirmation({
                           {orderData.tax && orderData.tax > 0 && (
                             <tr>
                               <td colSpan={3} className="px-6 py-4 text-right text-sm text-slate-600">
-                                Tax
+                                Taxe
                               </td>
                               <td className="px-6 py-4 text-right text-sm text-slate-600">
                                 {formatCurrency(orderData.tax, storeSettings, currencies)}
@@ -363,10 +379,10 @@ export default function WatchesOrderConfirmation({
                 </div>
               </div>
 
-              {/* Shipping & Payment Info */}
+              {/* Shipping & Paiement Info */}
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 mb-8">
                 <div className="p-6 border-b border-slate-200">
-                  <h2 className="text-xl font-medium text-slate-900">Delivery & Payment Information</h2>
+                  <h2 className="text-xl font-medium text-slate-900">Livraison & Paiement Information</h2>
                 </div>
                 
                 <div className="p-6">
@@ -375,7 +391,7 @@ export default function WatchesOrderConfirmation({
                       <div className="flex items-start">
                         <MapPin className="h-5 w-5 text-amber-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-slate-700 mb-3">Delivery Address</p>
+                          <p className="text-sm font-medium text-slate-700 mb-3">Livraison Address</p>
                           <p className="text-sm text-slate-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />

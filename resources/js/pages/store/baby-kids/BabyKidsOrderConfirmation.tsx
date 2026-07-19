@@ -30,7 +30,23 @@ export default function BabyKidsOrderConfirmation({
   customPages = [],
 }: BabyKidsOrderConfirmationProps) {
   const storeSlug = store.slug || 'demo';
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (order && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: order.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(order.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [order?.id]);
+const { props } = usePage();
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
   
@@ -57,7 +73,7 @@ export default function BabyKidsOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -85,7 +101,7 @@ export default function BabyKidsOrderConfirmation({
               <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Check className="h-12 w-12 text-white" />
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Order Confirmed!</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Commande Confirmée!</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 mb-4">
                 Thank you for your order! Your little ones will love their new items.
@@ -111,10 +127,10 @@ export default function BabyKidsOrderConfirmation({
                 <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MessageCircle className="h-8 w-8 text-white animate-pulse" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Opening WhatsApp...</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">Ouverture de WhatsApp...</h3>
                 <div className="w-16 h-1 bg-pink-400 mx-auto rounded-full mb-4"></div>
                 <p className="text-lg text-gray-600 mb-3">
-                  Your order confirmation will open in WhatsApp automatically for your little ones!
+                  La confirmation de votre commande s'ouvrira sur WhatsApp automatically for your little ones!
                 </p>
                 <p className="text-sm text-gray-500 mb-6">
                   You'll receive all order details and can chat with us directly.
@@ -134,7 +150,7 @@ export default function BabyKidsOrderConfirmation({
                     onClick={() => setShowWhatsappPrompt(false)}
                     className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -142,7 +158,7 @@ export default function BabyKidsOrderConfirmation({
           </div>
         )}
 
-        {/* Order Details */}
+        {/* Détails de la commande */}
         <div className="bg-white py-16">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -153,7 +169,7 @@ export default function BabyKidsOrderConfirmation({
                   <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 p-8">
                     <div className="flex items-center mb-6">
                       <Package className="h-6 w-6 text-pink-500 mr-3" />
-                      <h2 className="text-2xl font-bold text-gray-800">Order Details</h2>
+                      <h2 className="text-2xl font-bold text-gray-800">Détails de la commande</h2>
                     </div>
                     
                     {/* Order Items */}
@@ -163,10 +179,10 @@ export default function BabyKidsOrderConfirmation({
                           <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl border-2 border-pink-200">
                             <img
                               src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
-                              alt={item.product?.name || item.name || 'Product'}
+                              alt={item.product?.name || item.name || 'Produit'}
                               className="h-full w-full object-cover"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.product?.name || item.name || 'Product')}`;
+                                (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.product?.name || item.name || 'Produit')}`;
                               }}
                             />
                           </div>
@@ -181,7 +197,7 @@ export default function BabyKidsOrderConfirmation({
                       ))}
                     </div>
 
-                    {/* Delivery Information */}
+                    {/* Livraison Information */}
                     <div className="mb-8">
                       <h3 className="text-lg font-bold text-gray-800 mb-4">Informations de livraison</h3>
                       
@@ -194,22 +210,22 @@ export default function BabyKidsOrderConfirmation({
                             <p className="text-gray-800">{order.customer_phone || ''}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Delivery Address</p>
+                            <p className="text-sm font-bold text-pink-600 mb-2">Livraison Address</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.street || '' : order.shipping_address || ''}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? `${order.shipping_address?.city || ''}, ${order.shipping_address?.state || ''} ${order.shipping_address?.zip || ''}` : `${order.shipping_city || ''}, ${order.shipping_state || ''} ${order.shipping_postal_code || ''}`}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.country || '' : order.shipping_country || ''}</p>
                           </div>
                         </div>
                         <div className="mt-6 pt-6 border-t-2 border-pink-300">
-                          <p className="text-sm font-bold text-pink-600 mb-2">Delivery Method</p>
-                          <p className="text-gray-800">{order.shipping_method || 'Standard Delivery'}</p>
+                          <p className="text-sm font-bold text-pink-600 mb-2">Livraison Method</p>
+                          <p className="text-gray-800">{order.shipping_method || 'Standard Livraison'}</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Payment Information */}
+                    {/* Paiement Information */}
                     <div className="mb-8">
-                      <h3 className="text-lg font-bold text-gray-800 mb-4">Payment Information</h3>
+                      <h3 className="text-lg font-bold text-gray-800 mb-4">Paiement Information</h3>
                       
                       <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,7 +261,7 @@ export default function BabyKidsOrderConfirmation({
                           <span>{formatCurrency(parseFloat(order.shipping || 0), storeSettings, currencies)}</span>
                         </div>
                         <div className="flex justify-between text-gray-600">
-                          <span>Tax</span>
+                          <span>Taxe</span>
                           <span>{formatCurrency(parseFloat(order.tax || 0), storeSettings, currencies)}</span>
                         </div>
                         <div className="flex justify-between text-xl font-bold text-gray-800 pt-3 border-t-2 border-pink-400">
@@ -267,7 +283,7 @@ export default function BabyKidsOrderConfirmation({
                     <h2 className="text-2xl font-bold text-gray-800">Résumé de la commande</h2>
                   </div>
                   
-                  {/* Status */}
+                  {/* Statut */}
                   <div className="text-center mb-6">
                     <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Check className="h-8 w-8 text-white" />
@@ -279,11 +295,11 @@ export default function BabyKidsOrderConfirmation({
                   {/* Order Info */}
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                      <p className="font-bold">Order Date</p>
+                      <p className="font-bold">Date de la commande</p>
                       <p className="font-bold">{new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                      <p className="font-bold">Payment</p>
+                      <p className="font-bold">Paiement</p>
                       <p className="font-bold capitalize">{order.payment_method}</p>
                     </div>
                     {order.shipping_method && (
@@ -305,7 +321,7 @@ export default function BabyKidsOrderConfirmation({
                   {/* Secure Checkout */}
                   <div className="flex items-center justify-center mb-4">
                     <Gift className="h-4 w-4 text-blue-500 mr-2" />
-                    <p className="text-xs text-gray-600 font-bold">Order Confirmed & Secure</p>
+                    <p className="text-xs text-gray-600 font-bold">Commande Confirmée & Secure</p>
                   </div>
 
 

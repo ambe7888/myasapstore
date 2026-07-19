@@ -352,17 +352,12 @@ function FurnitureCheckout({
 
   // Handle order placement
   const handlePlaceOrder = async () => {
-    // Validate WhatsApp number if WhatsApp payment is selected
-    if (paymentMethod === 'whatsapp') {
+    // Validate WhatsApp number if WhatsApp payment is selected (optional now)
+    if (paymentMethod === 'whatsapp' && whatsappNumber) {
       const newErrors: Record<string, string> = {};
-      
-      if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
-      } else {
-        const phoneRegex = /^[+]?[0-9]{10,15}$/;
-        if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
-        }
+      const phoneRegex = /^[+]?[0-9]{10,15}$/;
+      if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
+        newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
       }
       
       if (Object.keys(newErrors).length > 0) {
@@ -1117,36 +1112,6 @@ function FurnitureCheckout({
                           })}
                         </div>
                       </div>
-                      
-                      {/* WhatsApp Number Input */}
-                      {paymentMethod === 'whatsapp' && (
-                        <div>
-                          <h3 className="text-xl font-bold text-slate-900 mb-4">WhatsApp Details</h3>
-                          
-                          <div>
-                            <label htmlFor="whatsapp-number" className="block text-sm font-bold text-amber-800 mb-2">
-                              WhatsApp Number *
-                            </label>
-                            <input
-                              id="whatsapp-number"
-                              type="tel"
-                              value={whatsappNumber}
-                              onChange={handleWhatsAppNumberChange}
-                              placeholder="+1234567890"
-                              className={`block w-full px-4 py-3 border-2 rounded-xl ${
-                                paymentErrors.whatsappNumber ? 'border-red-500' : 'border-amber-200'
-                              } focus:outline-none focus:border-amber-600 transition-colors`}
-                            />
-                            {paymentErrors.whatsappNumber && (
-                              <p className="mt-2 text-sm text-red-600">{paymentErrors.whatsappNumber}</p>
-                            )}
-                            <p className="mt-2 text-sm text-slate-600">
-                              Enter your WhatsApp number with country code (e.g., +1234567890)
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                      
                       {/* General Payment Errors */}
                       {paymentErrors.general && (
                         <div>

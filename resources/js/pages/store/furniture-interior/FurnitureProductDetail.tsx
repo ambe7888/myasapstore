@@ -354,21 +354,55 @@ function FurnitureProductDetailContent({
                     </div>
 
                     <StickyBottomBar targetRef={buttonsRef}>
-                      <div className="flex gap-2 w-full">
-                        <div className="flex-1">
-                          <AddToCartButton
-                            product={{
-                              ...product,
-                              variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
-                            }}
-                            storeSlug={store.slug}
-                            store={store}
-                            className="w-full h-12 bg-yellow-800 text-white font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl rounded-xl"
-                            isShowOption={false}
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl" quantity={quantity} />
+                      <div className="flex flex-col gap-2 w-full">
+                        {/* Floating Variants selection */}
+                        {hasVariants && productVariants && (
+                          <div className="flex flex-wrap gap-2 items-center bg-amber-50/80 p-2 rounded-xl border border-amber-200 max-h-[100px] overflow-y-auto w-full justify-between">
+                            <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Options:</span>
+                            <div className="flex flex-wrap gap-2">
+                              {productVariants.map((variant) => (
+                                <div key={variant.name} className="flex items-center gap-1">
+                                  <span className="text-[10px] font-semibold text-slate-700">{variant.name}:</span>
+                                  <select
+                                    value={selectedVariants[variant.name] || ''}
+                                    onChange={(e) => handleVariantChange(variant.name, e.target.value)}
+                                    className="px-2 py-0.5 text-[10px] rounded border border-amber-300 bg-white text-slate-800 outline-none"
+                                  >
+                                    {variant.values.map((val) => (
+                                      <option key={val} value={val}>{val}</option>
+                                    ))}
+                                  </select>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div className="flex gap-2 w-full">
+                          <div className="flex-1">
+                            <AddToCartButton
+                              product={{
+                                ...product,
+                                variants: selectedVariants
+                              }}
+                              storeSlug={store.slug}
+                              store={store}
+                              className="w-full h-12 bg-yellow-800 text-white font-bold hover:bg-yellow-900 transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl rounded-xl"
+                              isShowOption={false}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <BuyNowButton
+                              product={{
+                                ...product,
+                                variants: selectedVariants
+                              }}
+                              store={store}
+                              className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl"
+                              quantity={quantity}
+                              isShowOption={false}
+                            />
+                          </div>
                         </div>
                       </div>
                     </StickyBottomBar>
@@ -774,7 +808,14 @@ function FurnitureProductDetailContent({
 export default function FurnitureProductDetail(props: FurnitureProductDetailProps) {
   return (
     <>
-      <Head title={`${props.product.name} - ${props.store.name}`} />
+      <Head title={`${props.product.name} - ${props.store.name}`}>
+        <meta name="description" content={props.product.description ? props.product.description.substring(0, 160) : `Achetez ${props.product.name} sur ${props.store.name || 'Boutique'}.`} />
+        <meta name="keywords" content={`${props.product.name}, ${props.store.name || 'boutique'}, achat, en ligne, ecommerce`} />
+        <meta property="og:title" content={`${props.product.name} - ${props.store.name}`} />
+        <meta property="og:description" content={props.product.description ? props.product.description.substring(0, 160) : `Achetez ${props.product.name} sur ${props.store.name || 'Boutique'}.`} />
+        {props.product.cover_image && <meta property="og:image" content={getImageUrl(props.product.cover_image)} />}
+        <meta property="og:type" content="product" />
+      </Head>
       <StoreLayout
         storeName={props.store.name}
         logo={props.store.logo}

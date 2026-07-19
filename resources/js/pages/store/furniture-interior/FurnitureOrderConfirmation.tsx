@@ -144,7 +144,7 @@ export default function FurnitureOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -162,12 +162,12 @@ export default function FurnitureOrderConfirmation({
         <div className="bg-yellow-800 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-bold mb-6">Order Confirmed!</h1>
+              <h1 className="text-5xl font-bold mb-6">Commande Confirmée !</h1>
               <p className="text-amber-200 text-xl mb-8">
-                Thank you for choosing our furniture. Your order has been successfully placed.
+                Merci pour votre achat. Votre commande a été enregistrée avec succès.
               </p>
               <div className="inline-block bg-white text-yellow-800 px-8 py-4 rounded-2xl font-bold text-lg shadow-lg">
-                Order #{orderData.id}
+                Commande #{orderData.id}
               </div>
             </div>
           </div>
@@ -182,23 +182,23 @@ export default function FurnitureOrderConfirmation({
                   <MessageCircle className="w-10 h-10 text-green-600 animate-pulse" />
                 </div>
                 <h3 className="text-4xl font-bold text-green-800 mb-6">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
-                  Your furniture order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-green-700 transition-colors shadow-lg"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-2xl font-bold hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -215,25 +215,25 @@ export default function FurnitureOrderConfirmation({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <div className="text-center bg-amber-50 rounded-3xl p-8 border-2 border-amber-200">
                   <Calendar className="h-10 w-10 text-amber-800 mx-auto mb-4" />
-                  <p className="text-sm font-bold text-amber-800 mb-2">Order Date</p>
+                  <p className="text-sm font-bold text-amber-800 mb-2">Date de la commande</p>
                   <p className="text-slate-900 font-medium">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="text-center bg-amber-50 rounded-3xl p-8 border-2 border-amber-200">
                   <Package className="h-10 w-10 text-amber-800 mx-auto mb-4" />
-                  <p className="text-sm font-bold text-amber-800 mb-2">Status</p>
+                  <p className="text-sm font-bold text-amber-800 mb-2">Statut</p>
                   <p className="text-slate-900 font-medium">{orderData.status}</p>
                 </div>
                 
                 <div className="text-center bg-amber-50 rounded-3xl p-8 border-2 border-amber-200">
                   <Truck className="h-10 w-10 text-amber-800 mx-auto mb-4" />
-                  <p className="text-sm font-bold text-amber-800 mb-2">Delivery</p>
+                  <p className="text-sm font-bold text-amber-800 mb-2">Livraison</p>
                   <p className="text-slate-900 font-medium">{orderData.shipping_method}</p>
                 </div>
                 
                 <div className="text-center bg-amber-50 rounded-3xl p-8 border-2 border-amber-200">
                   <CreditCard className="h-10 w-10 text-amber-800 mx-auto mb-4" />
-                  <p className="text-sm font-bold text-amber-800 mb-2">Payment</p>
+                  <p className="text-sm font-bold text-amber-800 mb-2">Paiement</p>
                   <p className="text-slate-900 font-medium">{orderData.payment_method}</p>
                 </div>
               </div>
@@ -242,7 +242,7 @@ export default function FurnitureOrderConfirmation({
               <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 mb-12">
                 <div className="p-8 border-b border-amber-200">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-3xl font-bold text-slate-900">Order Details</h2>
+                    <h2 className="text-3xl font-bold text-slate-900">Détails de la commande</h2>
                     <span className="inline-flex items-center px-4 py-2 text-sm font-bold rounded-2xl bg-green-100 text-green-800">
                       {orderData.status}
                     </span>
@@ -252,7 +252,7 @@ export default function FurnitureOrderConfirmation({
                 <div className="p-8">
                   {/* Order Items */}
                   <div className="mb-8">
-                    <h3 className="text-xl font-bold text-slate-900 mb-6">Your Furniture</h3>
+                    <h3 className="text-xl font-bold text-slate-900 mb-6">Vos articles</h3>
                     
                     <div className="space-y-4">
                       {orderData.items?.map((item) => {
@@ -272,8 +272,8 @@ export default function FurnitureOrderConfirmation({
                             </div>
                             <div className="flex-1">
                               <div className="text-lg font-bold text-slate-900">{item.name}</div>
-                              <div className="text-sm text-slate-600">Quantity: {item.quantity}</div>
-                              <div className="text-sm text-slate-600">Price: {formatCurrency(item.price, storeSettings, currencies)}</div>
+                              <div className="text-sm text-slate-600">Quantité : {item.quantity}</div>
+                              <div className="text-sm text-slate-600">Prix : {formatCurrency(item.price, storeSettings, currencies)}</div>
                             </div>
                             <div className="text-xl font-bold text-amber-800">
                               {formatCurrency(itemTotal, storeSettings, currencies)}
@@ -294,19 +294,19 @@ export default function FurnitureOrderConfirmation({
                         )}
                         {orderData.discount && orderData.discount > 0 && (
                           <div className="flex justify-between text-green-600">
-                            <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
+                            <span>Remise {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
                             <span>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
                           </div>
                         )}
                         {orderData.shipping && orderData.shipping > 0 && (
                           <div className="flex justify-between text-slate-700">
-                            <span>Delivery</span>
+                            <span>Livraison</span>
                             <span>{formatCurrency(orderData.shipping, storeSettings, currencies)}</span>
                           </div>
                         )}
                         {orderData.tax && orderData.tax > 0 && (
                           <div className="flex justify-between text-slate-700">
-                            <span>Tax</span>
+                            <span>Taxe</span>
                             <span>{formatCurrency(orderData.tax, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -323,7 +323,7 @@ export default function FurnitureOrderConfirmation({
               {/* Delivery & Payment Info */}
               <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 mb-12">
                 <div className="p-8 border-b border-amber-200">
-                  <h2 className="text-3xl font-bold text-slate-900">Delivery & Payment Information</h2>
+                  <h2 className="text-3xl font-bold text-slate-900">Informations de livraison & paiement</h2>
                 </div>
                 
                 <div className="p-8">
@@ -332,7 +332,7 @@ export default function FurnitureOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <MapPin className="h-6 w-6 text-amber-800 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-bold text-amber-800 mb-3">Delivery Address</p>
+                          <p className="text-sm font-bold text-amber-800 mb-3">Adresse de livraison</p>
                           <p className="text-slate-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />

@@ -31,7 +31,14 @@ export default function StoreHomepage({ store = {}, storeContent = {}, storeSett
   
   return (
     <>
-      <Head title={`${store.name || storeTheme.store.name} - Store`} />
+      <Head title={`${store.name || storeTheme.store.name} - Boutique`}>
+        <meta name="description" content={store.description || content.store?.description || storeTheme.store.description} />
+        <meta name="keywords" content={`${store.name || 'store'}, boutique, en ligne, ecommerce, achat`} />
+        <meta property="og:title" content={`${store.name || storeTheme.store.name} - Boutique`} />
+        <meta property="og:description" content={store.description || content.store?.description || storeTheme.store.description} />
+        {store.logo && <meta property="og:image" content={store.logo} />}
+        <meta property="og:type" content="website" />
+      </Head>
       
       <CartProvider storeId={store.id} isLoggedIn={isLoggedIn}>
         <WishlistProvider>

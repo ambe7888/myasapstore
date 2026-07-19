@@ -67,7 +67,23 @@ export default function PerfumeOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: PerfumeOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -110,8 +126,8 @@ export default function PerfumeOrderConfirmation({
       zip: '',
       country: ''
     },
-    payment_method: 'Cash on Delivery',
-    shipping_method: 'Standard Delivery'
+    payment_method: 'Cash on Livraison',
+    shipping_method: 'Standard Livraison'
   };
   
   const orderData = order || defaultOrder;
@@ -127,7 +143,7 @@ export default function PerfumeOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -156,7 +172,7 @@ export default function PerfumeOrderConfirmation({
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Order Confirmed
+                Commande Confirmée
               </h1>
               
               <p className="text-xl text-gray-600 font-light leading-relaxed mb-8">
@@ -164,7 +180,7 @@ export default function PerfumeOrderConfirmation({
               </p>
               
               <div className="inline-flex items-center bg-white border-2 border-purple-200 rounded-full px-8 py-4 shadow-lg">
-                <span className="text-purple-800 font-medium mr-3">Order Number:</span>
+                <span className="text-purple-800 font-medium mr-3">Numéro de commande :</span>
                 <span className="text-purple-800 font-bold text-lg">{orderData.id}</span>
               </div>
             </div>
@@ -187,7 +203,7 @@ export default function PerfumeOrderConfirmation({
                 </div>
                 
                 <h3 className="text-2xl font-light text-purple-800 mb-4">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 
                 <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
@@ -208,7 +224,7 @@ export default function PerfumeOrderConfirmation({
                     onClick={() => setShowWhatsappPrompt(false)}
                     className="border-2 border-purple-800 text-purple-800 px-6 py-3 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -216,32 +232,32 @@ export default function PerfumeOrderConfirmation({
           </div>
         )}
 
-        {/* Order Status Cards */}
+        {/* Order Statut Cards */}
         <div className="bg-white py-16 border-b border-purple-100">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div className="bg-gradient-to-br from-purple-50 to-stone-50 rounded-3xl p-6 text-center border border-purple-100">
                   <Calendar className="h-12 w-12 text-purple-800 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-purple-800 mb-2">Order Date</p>
+                  <p className="text-sm font-medium text-purple-800 mb-2">Date de la commande</p>
                   <p className="text-gray-900 font-medium">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="bg-gradient-to-br from-purple-50 to-stone-50 rounded-3xl p-6 text-center border border-purple-100">
                   <Package className="h-12 w-12 text-purple-800 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-purple-800 mb-2">Status</p>
+                  <p className="text-sm font-medium text-purple-800 mb-2">Statut</p>
                   <p className="text-gray-900 font-medium">{orderData.status}</p>
                 </div>
                 
                 <div className="bg-gradient-to-br from-purple-50 to-stone-50 rounded-3xl p-6 text-center border border-purple-100">
                   <Truck className="h-12 w-12 text-purple-800 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-purple-800 mb-2">Delivery</p>
+                  <p className="text-sm font-medium text-purple-800 mb-2">Livraison</p>
                   <p className="text-gray-900 font-medium">{orderData.shipping_method}</p>
                 </div>
                 
                 <div className="bg-gradient-to-br from-purple-50 to-stone-50 rounded-3xl p-6 text-center border border-purple-100">
                   <CreditCard className="h-12 w-12 text-purple-800 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-purple-800 mb-2">Payment</p>
+                  <p className="text-sm font-medium text-purple-800 mb-2">Paiement</p>
                   <p className="text-gray-900 font-medium">{orderData.payment_method}</p>
                 </div>
               </div>
@@ -249,7 +265,7 @@ export default function PerfumeOrderConfirmation({
           </div>
         </div>
 
-        {/* Order Details */}
+        {/* Détails de la commande */}
         <div className="bg-stone-50 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
@@ -288,8 +304,8 @@ export default function PerfumeOrderConfirmation({
                           </div>
                           <div className="flex-1">
                             <div className="text-xl font-medium text-gray-900">{item.name}</div>
-                            <div className="text-sm text-gray-600 mt-1">Quantity: {item.quantity}</div>
-                            <div className="text-sm text-gray-600">Unit Price: {formatCurrency(item.price, storeSettings, currencies)}</div>
+                            <div className="text-sm text-gray-600 mt-1">Quantité : {item.quantity}</div>
+                            <div className="text-sm text-gray-600">Unit Prix : {formatCurrency(item.price, storeSettings, currencies)}</div>
                           </div>
                           <div className="text-2xl font-medium text-purple-800">
                             {formatCurrency(itemTotal, storeSettings, currencies)}
@@ -310,7 +326,7 @@ export default function PerfumeOrderConfirmation({
                       )}
                       {orderData.discount && orderData.discount > 0 && (
                         <div className="flex justify-between text-green-400 border-b border-purple-700 pb-2">
-                          <span className="font-medium">Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
+                          <span className="font-medium">Remise {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
                           <span className="font-medium">-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -322,7 +338,7 @@ export default function PerfumeOrderConfirmation({
                       )}
                       {orderData.tax && orderData.tax > 0 && (
                         <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                          <span className="font-medium">Tax</span>
+                          <span className="font-medium">Taxe</span>
                           <span className="font-medium text-white">{formatCurrency(orderData.tax, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -335,12 +351,12 @@ export default function PerfumeOrderConfirmation({
                 </div>
               </div>
 
-              {/* Delivery & Payment Info */}
+              {/* Livraison & Paiement Info */}
               <div className="bg-white rounded-3xl shadow-lg mb-12 border border-purple-100">
                 <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-6 rounded-t-3xl">
                   <div className="flex items-center">
                     <Heart className="h-8 w-8 text-amber-400 mr-4" />
-                    <h2 className="text-3xl font-light">Delivery & Payment Details</h2>
+                    <h2 className="text-3xl font-light">Livraison & Paiement Details</h2>
                   </div>
                 </div>
                 
@@ -350,7 +366,7 @@ export default function PerfumeOrderConfirmation({
                       <div className="flex items-start mb-4">
                         <MapPin className="h-8 w-8 text-purple-800 mr-4 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-purple-800 mb-3">Delivery Address</p>
+                          <p className="text-sm font-medium text-purple-800 mb-3">Livraison Address</p>
                           <p className="text-gray-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />
@@ -382,7 +398,7 @@ export default function PerfumeOrderConfirmation({
                   href={generateStoreUrl('store.my-orders', store)}
                   className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block"
                 >
-                  View My Orders
+                  Voir mes commandes
                 </Link>
                 <Link 
                   href={generateStoreUrl('store.products', store)} 

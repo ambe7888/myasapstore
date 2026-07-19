@@ -113,6 +113,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
         quantity: Number(quantity) || 1,
         variants
       });
+      
+      // Trigger Facebook Pixel AddToCart event
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        try {
+          const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+          (window as any).fbq('track', 'AddToCart', {
+            content_name: product.name,
+            content_ids: [product.id.toString()],
+            content_type: 'product',
+            value: Number(product.sale_price || product.price || 0) * (Number(quantity) || 1),
+            currency: currency
+          });
+        } catch (e) {
+          console.error('FB AddToCart error:', e);
+        }
+      }
+
       await refreshCart();
     } catch (error) {
     } finally {

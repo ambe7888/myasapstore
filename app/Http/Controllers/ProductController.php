@@ -119,7 +119,11 @@ class ProductController extends BaseController
         
         $product = new Product();
         $product->name = $request->name;
-        $product->sku = $request->sku;
+        if (empty($request->sku)) {
+            $product->sku = $this->generateAutoSku($request->name);
+        } else {
+            $product->sku = $request->sku;
+        }
         $product->description = $request->description;
         $product->specifications = $request->specifications;
         $product->details = $request->details;
@@ -234,7 +238,13 @@ class ProductController extends BaseController
         ]);
         
         $product->name = $request->name;
-        $product->sku = $request->sku;
+        if (empty($request->sku)) {
+            if (empty($product->sku)) {
+                $product->sku = $this->generateAutoSku($request->name);
+            }
+        } else {
+            $product->sku = $request->sku;
+        }
         $product->description = $request->description ?? $product->description;
         $product->specifications = $request->specifications ?? $product->specifications;
         $product->details = $request->details ?? $product->details;
@@ -518,5 +528,28 @@ class ProductController extends BaseController
         }
         
         return redirect()->back();
+    }
+
+    /**
+     * Generate a unique SKU automatically.
+     */
+    private function generateAutoSku(string $name): string
+    {
+        $initials = '';
+        $words = explode(' ', $name);
+        foreach ($words as $word) {
+            $initials .= substr($word, 0, 1);
+        }
+        $initials = preg_replace('/[^A-Za-z0-9]/', '', $initials);
+        $initials = strtoupper(substr($initials, 0, 3));
+        if (empty($initials)) {
+            $initials = 'PROD';
+        }
+        
+        do {
+            $sku = $initials . '-' . strtoupper(\Illuminate\Support\Str::random(6));
+        } while (Product::where('sku', $sku)->exists());
+
+        return $sku;
     }
 }

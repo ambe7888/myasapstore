@@ -63,7 +63,23 @@ function JewelryOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: JewelryOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (order && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: order.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(order.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [order?.id]);
+const { props } = usePage();
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
   const [showWhatsAppPrompt, setShowWhatsAppPrompt] = useState(false);
@@ -103,7 +119,7 @@ function JewelryOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -130,7 +146,7 @@ function JewelryOrderConfirmation({
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-5xl font-light text-gray-800 mb-6 tracking-wide">
-                Order Confirmed
+                Commande Confirmée
               </h1>
               <div className="w-24 h-px bg-yellow-500 mx-auto mb-6"></div>
               <p className="text-gray-600 font-light text-lg max-w-2xl mx-auto leading-relaxed mb-8">
@@ -139,11 +155,11 @@ function JewelryOrderConfirmation({
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl px-6 py-4 border border-yellow-200 shadow-lg">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Order Number</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Numéro de commande</p>
                   <p className="text-xl font-semibold text-yellow-600 tracking-wider">{order.order_number || order.id || 'N/A'}</p>
                 </div>
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl px-6 py-4 border border-yellow-200 shadow-lg">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Order Date</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Date de la commande</p>
                   <p className="text-xl font-semibold text-gray-700">{new Date(order.created_at || Date.now()).toLocaleDateString()}</p>
                 </div>
               </div>
@@ -160,24 +176,24 @@ function JewelryOrderConfirmation({
                   <MessageCircle className="w-10 h-10 text-green-600 animate-pulse" />
                 </div>
                 <h3 className="text-4xl font-light text-green-800 mb-6 tracking-wide">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <div className="w-24 h-px bg-green-500 mx-auto mb-6"></div>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
-                  Your luxury jewelry order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -190,7 +206,7 @@ function JewelryOrderConfirmation({
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               
-              {/* Order Details */}
+              {/* Détails de la commande */}
               <div className="lg:col-span-2">
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-yellow-200/50 overflow-hidden">
                   <div className="p-8">
@@ -199,7 +215,7 @@ function JewelryOrderConfirmation({
                     <div className="mb-8">
                       <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
                         <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-semibold text-green-800">Order Status: Confirmed</h3>
+                          <h3 className="text-lg font-semibold text-green-800">Order Statut: Confirmed</h3>
                           <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Processing</span>
                         </div>
                         
@@ -298,9 +314,9 @@ function JewelryOrderConfirmation({
 
                     </div>
 
-                    {/* Delivery Information */}
+                    {/* Livraison Information */}
                     <div className="pt-8 border-t border-yellow-200">
-                      <h3 className="text-2xl font-serif text-gray-800 mb-6 tracking-wide">Delivery & Care Information</h3>
+                      <h3 className="text-2xl font-serif text-gray-800 mb-6 tracking-wide">Livraison & Care Information</h3>
                       
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* Shipping Address */}
@@ -309,7 +325,7 @@ function JewelryOrderConfirmation({
                             <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mr-4 shadow-md">
                               <Package className="w-6 h-6 text-white" />
                             </div>
-                            <h4 className="font-semibold text-gray-800 text-lg">Delivery Address</h4>
+                            <h4 className="font-semibold text-gray-800 text-lg">Livraison Address</h4>
                           </div>
                           <div className="bg-white/80 rounded-lg p-4">
                             <p className="font-semibold text-gray-800 text-lg">{order.shipping_address?.name || 'N/A'}</p>
@@ -321,7 +337,7 @@ function JewelryOrderConfirmation({
                           </div>
                         </div>
 
-                        {/* Estimated Delivery */}
+                        {/* Estimated Livraison */}
                         <div className="bg-gradient-to-br from-blue-50/70 to-indigo-50/70 rounded-2xl p-6 border border-blue-200/60 hover:shadow-md transition-shadow">
                           <div className="flex items-center mb-4">
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 shadow-md">
@@ -381,7 +397,7 @@ function JewelryOrderConfirmation({
                           
                           {parseFloat(order.discount || 0) > 0 && (
                             <div className="flex justify-between text-sm text-green-200">
-                              <span>Special Discount</span>
+                              <span>Special Remise</span>
                               <span className="font-semibold">-{formatCurrency(order.discount || 0, storeSettings, currencies)}</span>
                             </div>
                           )}
@@ -392,7 +408,7 @@ function JewelryOrderConfirmation({
                           </div>
                           
                           <div className="flex justify-between text-sm text-yellow-100">
-                            <span>Tax</span>
+                            <span>Taxe</span>
                             <span className="font-semibold">{formatCurrency(order.tax || 0, storeSettings, currencies)}</span>
                           </div>
                           

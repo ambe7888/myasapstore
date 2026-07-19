@@ -180,7 +180,14 @@ export default function ProductListing({
 
   return (
     <>
-      <Head title={`Products - ${store.name || 'Store'}`} />
+      <Head title={`Produits - ${store.name || 'Boutique'}`}>
+        <meta name="description" content={`Découvrez tous nos produits sur la boutique ${store.name || 'Boutique'}.`} />
+        <meta name="keywords" content={`${store.name || 'boutique'}, produits, catalogue, acheter`} />
+        <meta property="og:title" content={`Produits - ${store.name || 'Boutique'}`} />
+        <meta property="og:description" content={`Découvrez tous nos produits sur la boutique ${store.name || 'Boutique'}.`} />
+        {store.logo && <meta property="og:image" content={store.logo} />}
+        <meta property="og:type" content="website" />
+      </Head>
       
       <StoreLayout
         storeName={store.name}

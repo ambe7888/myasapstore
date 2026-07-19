@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { X, ShoppingBag, CheckCircle2, Truck, ShieldCheck, Loader2 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { getProductCoverImage } from '@/utils/image-helper';
 import axios from 'axios';
 
@@ -23,6 +23,34 @@ export default function QuickCheckoutModal({
   initialQuantity = 1
 }: QuickCheckoutModalProps) {
   const { addToCart } = useCart();
+  const format = useCurrencyFormatter();
+  
+  // Parse variants safely
+  const productVariants = React.useMemo(() => {
+    if (!product || !product.variants) return [];
+    if (Array.isArray(product.variants)) return product.variants;
+    try {
+      return JSON.parse(product.variants);
+    } catch (error) {
+      return [];
+    }
+  }, [product?.variants]);
+
+  const hasVariants = productVariants && productVariants.length > 0;
+
+  // Selected variants state
+  const [selectedVariants, setSelectedVariants] = useState<{ [key: string]: string }>(() => {
+    const initial: { [key: string]: string } = {};
+    if (productVariants && productVariants.length > 0) {
+      productVariants.forEach((v: any) => {
+        if (v.values && v.values.length > 0) {
+          initial[v.name] = v.values[0];
+        }
+      });
+    }
+    return initial;
+  });
+
   const [quantity, setQuantity] = useState(initialQuantity);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -108,14 +136,14 @@ export default function QuickCheckoutModal({
 
     try {
       // Step 1: Ensure product is added to cart
-      await addToCart(product, { variants: product.variants }, quantity);
+      await addToCart(product, hasVariants ? selectedVariants : null, quantity);
 
       // Step 2: Submit order to store.order.place endpoint
       const orderPayload = {
         store_id: store?.id,
         product_id: product.id,
         quantity: quantity,
-        variants: product.variants,
+        variants: hasVariants ? selectedVariants : null,
         customer_first_name: firstName,
         customer_last_name: lastName || '',
         customer_email: email.trim() || `${phone.replace(/\D/g, '') || 'client'}@store.local`,
@@ -202,12 +230,12 @@ export default function QuickCheckoutModal({
             <div className="flex-1 min-w-0">
               <h4 className="font-bold text-slate-900 dark:text-white text-sm truncate">{product.name}</h4>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-emerald-600 font-bold text-base">
-                  {formatCurrency(unitPrice, store?.storeSettings, store?.currencies)}
+                <span className="font-bold text-base" style={{ color: store?.primary_color || '#10b981' }}>
+                  {format(unitPrice)}
                 </span>
                 {product.sale_price && product.sale_price < product.price && (
                   <span className="text-xs text-slate-400 line-through">
-                    {formatCurrency(product.price, store?.storeSettings, store?.currencies)}
+                    {format(product.price)}
                   </span>
                 )}
               </div>
@@ -235,6 +263,32 @@ export default function QuickCheckoutModal({
 
           {/* Order Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Variants Selectors */}
+            {hasVariants && (
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3 mb-2">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Sélectionner les options :</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {productVariants.map((variant: any) => (
+                    <div key={variant.name} className="flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        {variant.name}
+                      </label>
+                      <select
+                        value={selectedVariants[variant.name] || ''}
+                        onChange={(e) => setSelectedVariants(prev => ({ ...prev, [variant.name]: e.target.value }))}
+                        className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                        style={{ borderRadius: store?.button_radius || '0.75rem' }}
+                      >
+                        {variant.values.map((val: string) => (
+                          <option key={val} value={val}>{val}</option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
@@ -246,7 +300,8 @@ export default function QuickCheckoutModal({
                   placeholder="Ex: Jean Dupont"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none animate-none"
+                  style={{ borderRadius: store?.button_radius || '0.75rem' }}
                 />
               </div>
               <div>
@@ -259,7 +314,8 @@ export default function QuickCheckoutModal({
                   placeholder="Ex: 06 12 34 56 78"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                  style={{ borderRadius: store?.button_radius || '0.75rem' }}
                 />
               </div>
             </div>
@@ -274,7 +330,8 @@ export default function QuickCheckoutModal({
                   placeholder="Ex: jean.dupont@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                  style={{ borderRadius: store?.button_radius || '0.75rem' }}
                 />
               </div>
               <div>
@@ -288,7 +345,8 @@ export default function QuickCheckoutModal({
                     required
                     value={selectedShippingId}
                     onChange={(e) => setSelectedShippingId(e.target.value)}
-                    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                    style={{ borderRadius: store?.button_radius || '0.75rem' }}
                   >
                     <option value="">Sélectionnez votre zone</option>
                     {shippingMethods.map((method) => (
@@ -311,7 +369,8 @@ export default function QuickCheckoutModal({
                 placeholder="Ex: Rue 12, Lot 4, à côté de la pharmacie"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                style={{ borderRadius: store?.button_radius || '0.75rem' }}
               />
             </div>
 
@@ -325,7 +384,8 @@ export default function QuickCheckoutModal({
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                  style={{ borderRadius: store?.button_radius || '0.75rem' }}
                 >
                   {paymentMethods.map((method) => (
                     <option key={method.id} value={method.id}>
@@ -340,15 +400,20 @@ export default function QuickCheckoutModal({
             <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">Total à payer :</span>
-                <span className="text-xl font-black text-emerald-600">
-                  {formatCurrency(totalPrice, store?.storeSettings, store?.currencies)}
+                <span className="text-xl font-black" style={{ color: store?.primary_color || '#10b981' }}>
+                  {format(totalPrice)}
                 </span>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-6 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold text-sm rounded-2xl shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3.5 px-6 active:scale-[0.98] text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg animate-none"
+                style={{
+                  backgroundColor: store?.button_color_buy_now || store?.primary_color || '#10b981',
+                  borderRadius: store?.button_radius || '1rem',
+                  color: store?.text_button_color || '#ffffff'
+                }}
               >
                 {loading ? (
                   <>

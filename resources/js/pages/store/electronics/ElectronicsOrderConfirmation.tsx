@@ -67,7 +67,23 @@ export default function ElectronicsOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: ElectronicsOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -143,7 +159,7 @@ export default function ElectronicsOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -178,9 +194,9 @@ export default function ElectronicsOrderConfirmation({
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-green-600" />
                   </div>
-                  <h1 className="text-4xl font-bold text-gray-900 mb-4">Order Confirmed!</h1>
+                  <h1 className="text-4xl font-bold text-gray-900 mb-4">Commande Confirmée!</h1>
                   <p className="text-xl text-gray-600 mb-6">
-                    Thank you for your purchase. Your order has been successfully placed.
+                    Thank you for your purchase. Votre commande a été enregistrée avec succès.
                   </p>
                   <div className="inline-flex items-center bg-blue-50 rounded-lg px-6 py-3">
                     <span className="text-blue-600 font-semibold mr-2">Order ID:</span>
@@ -195,10 +211,10 @@ export default function ElectronicsOrderConfirmation({
                       <MessageCircle className="w-8 h-8 text-green-600 animate-pulse" />
                     </div>
                     <h3 className="text-xl font-bold text-green-800 mb-2">
-                      Opening WhatsApp...
+                      Ouverture de WhatsApp...
                     </h3>
                     <p className="text-green-700 mb-6">
-                      Your order confirmation will open in WhatsApp automatically.
+                      La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                     </p>
                     <div className="flex justify-center gap-4">
                       <button
@@ -206,13 +222,13 @@ export default function ElectronicsOrderConfirmation({
                         className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors shadow-lg flex items-center"
                       >
                         <MessageCircle className="w-5 h-5 mr-2" />
-                        Open Now
+                        Ouvrir maintenant
                       </button>
                       <button
                         onClick={dismissWhatsAppPrompt}
                         className="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:border-green-600 hover:text-green-600 transition-colors"
                       >
-                        Skip
+                        Passer
                       </button>
                     </div>
                   </div>
@@ -222,13 +238,13 @@ export default function ElectronicsOrderConfirmation({
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                   <div className="bg-white rounded-xl shadow-md p-6 text-center">
                     <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Order Date</p>
+                    <p className="text-sm font-semibold text-gray-500 mb-2">Date de la commande</p>
                     <p className="text-gray-900 font-bold">{formatDate(orderData.date)}</p>
                   </div>
                   
                   <div className="bg-white rounded-xl shadow-md p-6 text-center">
                     <Package className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Status</p>
+                    <p className="text-sm font-semibold text-gray-500 mb-2">Statut</p>
                     <p className="text-gray-900 font-bold">{orderData.status}</p>
                   </div>
                   
@@ -240,7 +256,7 @@ export default function ElectronicsOrderConfirmation({
                   
                   <div className="bg-white rounded-xl shadow-md p-6 text-center">
                     <CreditCard className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-                    <p className="text-sm font-semibold text-gray-500 mb-2">Payment</p>
+                    <p className="text-sm font-semibold text-gray-500 mb-2">Paiement</p>
                     <p className="text-gray-900 font-bold">{orderData.payment_method}</p>
                   </div>
                 </div>
@@ -248,7 +264,7 @@ export default function ElectronicsOrderConfirmation({
             </div>
           </section>
 
-          {/* Order Details */}
+          {/* Détails de la commande */}
           <section className="py-8">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -311,7 +327,7 @@ export default function ElectronicsOrderConfirmation({
                       
                       {orderData.discount && orderData.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
+                          <span>Remise {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
                           <span className="font-semibold">-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -325,7 +341,7 @@ export default function ElectronicsOrderConfirmation({
                       
                       {orderData.tax && (
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Tax</span>
+                          <span className="text-gray-600">Taxe</span>
                           <span className="font-semibold">{formatCurrency(orderData.tax, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -386,14 +402,14 @@ export default function ElectronicsOrderConfirmation({
                           <Truck className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-lg font-bold text-gray-900 mb-2">Livraison</h3>
-                        <p className="text-gray-600">Your order will be shipped with tracking</p>
+                        <p className="text-gray-600">Votre commande sera expédiée with tracking</p>
                       </div>
                       
                       <div className="text-center">
                         <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                           <CheckCircle className="w-8 h-8 text-blue-600" />
                         </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">Delivery</h3>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">Livraison</h3>
                         <p className="text-gray-600">Enjoy your new electronics!</p>
                       </div>
                     </div>

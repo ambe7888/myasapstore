@@ -31,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
             DemoModeMiddleware::class,
+            \App\Http\Middleware\SecurityHeadersMiddleware::class,
         ]);
         
         $middleware->api(append: [

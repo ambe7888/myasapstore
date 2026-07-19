@@ -105,6 +105,20 @@ export default function Checkout({
   countries = [],
   customPages = [],
 }: CheckoutProps) {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'InitiateCheckout', {
+          value: Number(cartSummary?.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB InitiateCheckout error:', e);
+      }
+    }
+  }, []);
+
   // Get theme-specific components
   const actualTheme = store?.theme || theme;
   
@@ -443,22 +457,17 @@ export default function Checkout({
   
   // Handle order placement
   const handlePlaceOrder = async () => {
-    // Validate WhatsApp number if WhatsApp payment is selected
-    if (paymentMethod === 'whatsapp') {
+    // Validate WhatsApp number if WhatsApp payment is selected (optional now)
+    if (paymentMethod === 'whatsapp' && whatsappNumber) {
       const newErrors: Record<string, string> = {};
-      
-      if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
-      } else {
-        const phoneRegex = /^[+]?[0-9]{10,15}$/;
-        if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
-        }
+      const phoneRegex = /^[+]?[0-9]{10,15}$/;
+      if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
+        newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
       }
       
       if (Object.keys(newErrors).length > 0) {
         setPaymentErrors(newErrors);
-        return; // Stop execution if validation fails
+        return;
       }
     }
     
@@ -1443,43 +1452,6 @@ export default function Checkout({
                           })}
                         </div>
                       </div>
-                      
-                      {/* WhatsApp Number Input */}
-                      {paymentMethod === 'whatsapp' && (
-                        <div className="mb-8">
-                          <h3 className="text-base font-medium text-gray-900 mb-4">WhatsApp Details</h3>
-                          
-                          <div className="space-y-4">
-                            <div>
-                              <label htmlFor="whatsapp-number" className="block text-sm font-medium text-gray-700 mb-1">
-                                WhatsApp Number *
-                              </label>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                  <Phone className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                  id="whatsapp-number"
-                                  type="tel"
-                                  value={whatsappNumber}
-                                  onChange={handleWhatsAppNumberChange}
-                                  placeholder="+1234567890"
-                                  className={`block w-full pl-10 pr-3 py-2 border ${
-                                    paymentErrors.whatsappNumber ? 'border-red-500' : 'border-gray-300'
-                                  } rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary`}
-                                />
-                              </div>
-                              {paymentErrors.whatsappNumber && (
-                                <p className="mt-1 text-sm text-red-600">{paymentErrors.whatsappNumber}</p>
-                              )}
-                              <p className="mt-1 text-sm text-gray-500">
-                                Enter your WhatsApp number with country code (e.g., +1234567890)
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      
                       {/* General Payment Errors */}
                       {paymentErrors.general && (
                         <div className="mb-8">

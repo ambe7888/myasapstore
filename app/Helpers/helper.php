@@ -1430,15 +1430,19 @@ if (! function_exists('getStoreUrl')) {
         
         $path = ltrim($path, '/');
         
+        // Skip custom domain generation if testing on localhost/local environment to avoid sending the user to the live internet
+        $host = request()->getHost();
+        $isLocal = in_array($host, ['localhost', '127.0.0.1']) || str_contains($host, '.local');
+        
         // Check for custom domain first
-        if ($store->enable_custom_domain && $store->custom_domain) {
+        if (!$isLocal && $store->enable_custom_domain && $store->custom_domain) {
             $protocol = request()->isSecure() ? 'https://' : 'http://';
             $baseUrl = $protocol . $store->custom_domain;
             return $path ? $baseUrl . '/' . $path : $baseUrl;
         }
         
         // Check for custom subdomain
-        if ($store->enable_custom_subdomain && $store->custom_subdomain) {
+        if (!$isLocal && $store->enable_custom_subdomain && $store->custom_subdomain) {
             $protocol = request()->isSecure() ? 'https://' : 'http://';
             $baseUrl = $protocol . $store->custom_subdomain;
             return $path ? $baseUrl . '/' . $path : $baseUrl;

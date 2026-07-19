@@ -111,9 +111,9 @@ class OrderController extends Controller
                 'bank_transfer_receipt' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
             ];
             
-            // Add WhatsApp number validation if payment method is WhatsApp
+            // Add WhatsApp number validation if payment method is WhatsApp (now optional)
             if ($request->payment_method === 'whatsapp') {
-                $validationRules['whatsapp_number'] = 'required|string|regex:/^[+]?[0-9]{10,15}$/|max:20';
+                $validationRules['whatsapp_number'] = 'nullable|string|max:20';
             }
             
             // Add bank transfer file validation if payment method is bank
@@ -201,6 +201,13 @@ class OrderController extends Controller
 
             // Create order
             $order = $this->orderService->createOrder($orderData, $cartItems);
+
+            // Send Facebook Conversion API (CAPI) Purchase Event
+            try {
+                \App\Services\FacebookCapiService::sendPurchaseEvent($order);
+            } catch (\Exception $e) {
+                \Log::error('FB CAPI error in OrderController: ' . $e->getMessage());
+            }
 
             // Update coupon usage if coupon was used
             if ($request->coupon_code && $calculation['coupon']) {

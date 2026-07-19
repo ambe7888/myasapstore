@@ -324,7 +324,13 @@ export default function LandingPage() {
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
-        {seo?.meta_keywords && <meta name="keywords" content={seo.meta_keywords} />}
+        <meta name="keywords" content={seo?.meta_keywords || 'SaaS, create online store, ecommerce store builder, shop builder, custom domain shop'} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
       </Head>
       <div
         className="min-h-screen bg-white"

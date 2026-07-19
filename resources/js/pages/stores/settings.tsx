@@ -408,6 +408,16 @@ export default function StoreSettings({ store, settings }: Props) {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="facebook_capi_token">{t('Facebook Conversion API (CAPI) Access Token')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Enter your System User Access Token for server-side event tracking')}</p>
+                <Input
+                  id="facebook_capi_token"
+                  placeholder="EAAG..."
+                  value={formData.facebook_capi_token || ''}
+                  onChange={(e) => updateSetting('facebook_capi_token', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="tiktok_pixel">{t('TikTok Pixel ID')}</Label>
                 <p className="text-sm text-muted-foreground">{t('Example: CXXXXXXXXXXXXXXX')}</p>
                 <Input

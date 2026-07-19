@@ -67,7 +67,23 @@ export default function BeautyOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: BeautyOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -143,7 +159,7 @@ export default function BeautyOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -165,10 +181,10 @@ export default function BeautyOrderConfirmation({
                 <CheckCircle className="h-12 w-12 text-white" />
               </div>
               <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6">
-                Order Confirmed!
+                Commande Confirmée!
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
-                Thank you for choosing us for your beauty journey. Your order has been successfully placed.
+                Thank you for choosing us for your beauty journey. Votre commande a été enregistrée avec succès.
               </p>
               <div className="inline-block bg-white text-rose-600 px-8 py-4 rounded-full font-semibold shadow-lg">
                 Order #{orderData.id}
@@ -186,23 +202,23 @@ export default function BeautyOrderConfirmation({
                   <MessageCircle className="h-12 w-12 text-green-600 animate-pulse" />
                 </div>
                 <h3 className="text-4xl font-light text-green-800 mb-6">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
-                  Your order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full font-semibold hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -219,13 +235,13 @@ export default function BeautyOrderConfirmation({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <div className="text-center bg-rose-50 rounded-2xl p-6">
                   <Calendar className="h-8 w-8 text-rose-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-500 mb-2">Order Date</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">Date de la commande</p>
                   <p className="font-semibold text-gray-900">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="text-center bg-rose-50 rounded-2xl p-6">
                   <Package className="h-8 w-8 text-rose-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-500 mb-2">Status</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">Statut</p>
                   <p className="font-semibold text-gray-900">{orderData.status}</p>
                 </div>
                 
@@ -237,16 +253,16 @@ export default function BeautyOrderConfirmation({
                 
                 <div className="text-center bg-rose-50 rounded-2xl p-6">
                   <CreditCard className="h-8 w-8 text-rose-500 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-500 mb-2">Payment</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">Paiement</p>
                   <p className="font-semibold text-gray-900">{orderData.payment_method}</p>
                 </div>
               </div>
 
-              {/* Order Details */}
+              {/* Détails de la commande */}
               <div className="bg-white rounded-3xl shadow-xl border border-rose-100 mb-16 overflow-hidden">
                 <div className="bg-rose-500 p-8">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-3xl font-light text-white">Order Details</h2>
+                    <h2 className="text-3xl font-light text-white">Détails de la commande</h2>
                     <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
                       {orderData.status}
                     </span>
@@ -298,7 +314,7 @@ export default function BeautyOrderConfirmation({
                         )}
                         {orderData.discount && orderData.discount > 0 && (
                           <div className="flex justify-between text-green-600">
-                            <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
+                            <span>Remise {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
                             <span>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -310,7 +326,7 @@ export default function BeautyOrderConfirmation({
                         )}
                         {orderData.tax && orderData.tax > 0 && (
                           <div className="flex justify-between text-gray-600">
-                            <span>Tax</span>
+                            <span>Taxe</span>
                             <span>{formatCurrency(orderData.tax, storeSettings, currencies)}</span>
                           </div>
                         )}
@@ -329,7 +345,7 @@ export default function BeautyOrderConfirmation({
               {/* Addresses & Info */}
               <div className="bg-white rounded-3xl shadow-xl border border-rose-100 mb-16 overflow-hidden">
                 <div className="bg-rose-500 p-8">
-                  <h2 className="text-3xl font-light text-white">Shipping & Payment Information</h2>
+                  <h2 className="text-3xl font-light text-white">Shipping & Paiement Information</h2>
                 </div>
                 
                 <div className="p-8">
@@ -365,7 +381,7 @@ export default function BeautyOrderConfirmation({
               {/* Next Steps */}
               <div className="bg-white rounded-3xl shadow-xl border border-rose-100 mb-16 overflow-hidden">
                 <div className="bg-rose-500 p-8">
-                  <h2 className="text-3xl font-light text-white">What's Next?</h2>
+                  <h2 className="text-3xl font-light text-white">Et ensuite ?</h2>
                 </div>
                 
                 <div className="p-8">
@@ -377,7 +393,7 @@ export default function BeautyOrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-medium text-gray-900">Order Processing</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Traitement de la commande</h3>
                         <p className="mt-2 text-gray-600">
                           We're carefully preparing your beauty products. You'll receive an email when your order ships.
                         </p>
@@ -391,7 +407,7 @@ export default function BeautyOrderConfirmation({
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-medium text-gray-900">Beauty Delivery</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Beauty Livraison</h3>
                         <p className="mt-2 text-gray-600">
                           Your beauty essentials will be shipped via {orderData.shipping_method}. Track your order in your account.
                         </p>

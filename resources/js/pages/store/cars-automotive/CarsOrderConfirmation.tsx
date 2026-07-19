@@ -67,7 +67,23 @@ export default function CarsOrderConfirmation({
   whatsappRedirectUrl,
   customPages = [],
 }: CarsOrderConfirmationProps) {
-  const { props } = usePage();
+  
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
+const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
   const currencies = props.currencies || [];
@@ -96,8 +112,8 @@ export default function CarsOrderConfirmation({
       zip: '',
       country: ''
     },
-    payment_method: 'Cash on Delivery',
-    shipping_method: 'Standard Delivery'
+    payment_method: 'Cash on Livraison',
+    shipping_method: 'Standard Livraison'
   };
   
   const orderData = order || defaultOrder;
@@ -144,7 +160,7 @@ export default function CarsOrderConfirmation({
 
   return (
     <>
-      <Head title={`Order Confirmation - ${store.name}`} />
+      <Head title={`Confirmation de commande - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -197,7 +213,7 @@ export default function CarsOrderConfirmation({
                   <MessageCircle className="w-10 h-10 text-white transform -rotate-45 animate-pulse" />
                 </div>
                 <h3 className="text-4xl font-black tracking-wider uppercase text-green-800 mb-6">
-                  Opening WhatsApp...
+                  Ouverture de WhatsApp...
                 </h3>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
                   Your automotive parts order confirmation will open in WhatsApp automatically.
@@ -207,13 +223,13 @@ export default function CarsOrderConfirmation({
                     onClick={handleWhatsAppClick}
                     className="bg-green-600 text-white px-8 py-4 font-black tracking-wider uppercase hover:bg-green-700 transition-colors"
                   >
-                    Open Now
+                    Ouvrir maintenant
                   </button>
                   <button
                     onClick={dismissWhatsAppPrompt}
                     className="border-2 border-gray-600 text-gray-700 px-8 py-4 font-black tracking-wider uppercase hover:border-green-600 hover:text-green-600 transition-colors"
                   >
-                    Skip
+                    Passer
                   </button>
                 </div>
               </div>
@@ -221,32 +237,32 @@ export default function CarsOrderConfirmation({
           </div>
         )}
 
-        {/* Order Status Grid */}
+        {/* Order Statut Grid */}
         <div className="bg-gray-900 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div className="bg-black border-l-4 border-red-600 p-6 text-center">
                   <Calendar className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Order Date</p>
+                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Date de la commande</p>
                   <p className="text-white font-bold">{formatDate(orderData.date)}</p>
                 </div>
                 
                 <div className="bg-black border-l-4 border-red-600 p-6 text-center">
                   <Package className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Status</p>
+                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Statut</p>
                   <p className="text-white font-bold">{orderData.status}</p>
                 </div>
                 
                 <div className="bg-black border-l-4 border-red-600 p-6 text-center">
                   <Truck className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Delivery</p>
+                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Livraison</p>
                   <p className="text-white font-bold">{orderData.shipping_method}</p>
                 </div>
                 
                 <div className="bg-black border-l-4 border-red-600 p-6 text-center">
                   <CreditCard className="h-12 w-12 text-red-600 mx-auto mb-4" />
-                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Payment</p>
+                  <p className="text-sm font-black tracking-wider uppercase text-red-400 mb-2">Paiement</p>
                   <p className="text-white font-bold">{orderData.payment_method}</p>
                 </div>
               </div>
@@ -254,7 +270,7 @@ export default function CarsOrderConfirmation({
           </div>
         </div>
 
-        {/* Order Details */}
+        {/* Détails de la commande */}
         <div className="bg-gray-50 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
@@ -290,8 +306,8 @@ export default function CarsOrderConfirmation({
                           </div>
                           <div className="flex-1">
                             <div className="text-xl font-bold text-gray-900">{item.name}</div>
-                            <div className="text-sm text-gray-600 mt-1">Quantity: {item.quantity}</div>
-                            <div className="text-sm text-gray-600">Unit Price: {formatCurrency(item.price, storeSettings, currencies)}</div>
+                            <div className="text-sm text-gray-600 mt-1">Quantité : {item.quantity}</div>
+                            <div className="text-sm text-gray-600">Unit Prix : {formatCurrency(item.price, storeSettings, currencies)}</div>
                           </div>
                           <div className="text-2xl font-bold text-red-600">
                             {formatCurrency(itemTotal, storeSettings, currencies)}
@@ -312,7 +328,7 @@ export default function CarsOrderConfirmation({
                       )}
                       {orderData.discount && orderData.discount > 0 && (
                         <div className="flex justify-between text-green-400 border-b border-gray-700 pb-2">
-                          <span className="font-bold tracking-wider uppercase">Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
+                          <span className="font-bold tracking-wider uppercase">Remise {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
                           <span className="font-black">-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -324,7 +340,7 @@ export default function CarsOrderConfirmation({
                       )}
                       {orderData.tax && orderData.tax > 0 && (
                         <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                          <span className="font-bold tracking-wider uppercase">Tax</span>
+                          <span className="font-bold tracking-wider uppercase">Taxe</span>
                           <span className="font-black text-white">{formatCurrency(orderData.tax, storeSettings, currencies)}</span>
                         </div>
                       )}
@@ -337,12 +353,12 @@ export default function CarsOrderConfirmation({
                 </div>
               </div>
 
-              {/* Installation & Payment Info */}
+              {/* Installation & Paiement Info */}
               <div className="bg-white border-l-8 border-red-600 shadow-lg mb-12">
                 <div className="bg-black text-white px-8 py-6">
                   <div className="flex items-center">
                     <Settings className="h-8 w-8 text-red-600 mr-4" />
-                    <h2 className="text-3xl font-black tracking-wider uppercase">Installation & Payment</h2>
+                    <h2 className="text-3xl font-black tracking-wider uppercase">Installation & Paiement</h2>
                   </div>
                 </div>
                 

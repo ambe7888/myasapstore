@@ -19,6 +19,9 @@ class CheckStoreStatus
             $store = Store::where('slug', $storeSlug)->first();
             
             if ($store) {
+                // Set store context for the request
+                $request->attributes->set('resolved_store', $store);
+                
                 // If store has custom domain or subdomain enabled, block regular route access
                 // BUT allow if this is a custom domain request (resolved by DomainResolver)
                 if (($store->enable_custom_domain || $store->enable_custom_subdomain) && 

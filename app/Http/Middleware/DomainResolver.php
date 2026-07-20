@@ -41,6 +41,23 @@ class DomainResolver
                             ->where('enable_custom_subdomain', true)
                             ->first();
             }
+
+            // Fallback: Check if it is a main domain subdomain using the store slug (e.g. slug.mystoreasap.com)
+            if (!$store) {
+                $hostParts = explode('.', $cleanHost);
+                $mainDomain = parse_url(config('app.url'), PHP_URL_HOST);
+                if ($mainDomain) {
+                    $mainDomainParts = explode('.', Store::sanitizeDomain($mainDomain));
+                    if (count($hostParts) > count($mainDomainParts)) {
+                        $subdomain = $hostParts[0];
+                        if ($subdomain !== 'www') {
+                            $store = Store::where('slug', $subdomain)
+                                ->where('is_active', true)
+                                ->first();
+                        }
+                    }
+                }
+            }
         }
         
         // Check store status via configuration

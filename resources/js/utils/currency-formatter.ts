@@ -82,6 +82,12 @@ export function formatCurrency(
   storeSettings: CurrencySettings = {}, 
   currencies: Currency[] = []
 ): string {
+  // If we have a global storeCurrency from active Inertia page, use formatStoreCurrency instead
+  const globalStoreCurrency = typeof window !== 'undefined' && (window as any).page?.props?.storeCurrency;
+  if (globalStoreCurrency) {
+    return formatStoreCurrency(amount, globalStoreCurrency);
+  }
+
   const {
     defaultCurrency = 'USD',
     decimalFormat = '0',

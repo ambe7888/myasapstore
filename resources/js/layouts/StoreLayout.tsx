@@ -3,6 +3,7 @@ import Header from '@/components/store/Header';
 import storeTheme from '@/config/store-theme';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
+import { router } from '@inertiajs/react';
 import { StoreContentProvider, useStoreContent } from '@/contexts/StoreContentContext';
 import { getThemeComponents } from '@/config/theme-registry';
 import { useStoreFavicon } from '@/hooks/use-store-favicon';
@@ -48,6 +49,40 @@ function StoreLayoutContent({
   const { storeContent } = useStoreContent();
   const content = Object.keys(storeContent).length > 0 ? storeContent : storeTheme;
   
+  // Dynamic pageview tracking on client-side routing
+  useEffect(() => {
+    if (!store) return;
+    if (!store.facebook_pixel && !store.google_analytics && !store.tiktok_pixel && !store.snapchat_pixel) return;
+
+    const unregister = router.on('success', (event) => {
+      // 1. Facebook PageView
+      if (store.facebook_pixel && (window as any).fbq) {
+        (window as any).fbq('track', 'PageView');
+      }
+
+      // 2. Google Analytics PageView
+      if (store.google_analytics && (window as any).gtag) {
+        (window as any).gtag('config', store.google_analytics, {
+          page_path: event.detail.page.url
+        });
+      }
+
+      // 3. TikTok PageView
+      if (store.tiktok_pixel && (window as any).ttq) {
+        (window as any).ttq.page();
+      }
+
+      // 4. Snapchat PageView
+      if (store.snapchat_pixel && (window as any).snaptr) {
+        (window as any).snaptr('track', 'PAGE_VIEW');
+      }
+    });
+
+    return () => {
+      unregister();
+    };
+  }, [store?.facebook_pixel, store?.google_analytics, store?.tiktok_pixel, store?.snapchat_pixel]);
+
   // Inject custom CSS and JavaScript
   useEffect(() => {
     if (!store) return;

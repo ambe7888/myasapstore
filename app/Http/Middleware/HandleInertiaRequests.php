@@ -252,6 +252,42 @@ class HandleInertiaRequests extends Middleware
             }
         }
         
+        // If still no store, try to resolve from the current domain host
+        if (!$store) {
+            $host = $request->getHost();
+            $cleanHost = Store::sanitizeDomain($host);
+            if ($cleanHost) {
+                // Try custom domain
+                $store = Store::where('custom_domain', $cleanHost)
+                    ->where('enable_custom_domain', true)
+                    ->first();
+                
+                // Try custom subdomain
+                if (!$store) {
+                    $store = Store::where('custom_subdomain', $cleanHost)
+                        ->where('enable_custom_subdomain', true)
+                        ->first();
+                }
+                
+                // Try slug subdomain (e.g. slug.mystoreasap.com)
+                if (!$store) {
+                    $mainDomain = parse_url(config('app.url'), PHP_URL_HOST);
+                    if ($mainDomain) {
+                        $hostParts = explode('.', $cleanHost);
+                        $mainDomainParts = explode('.', Store::sanitizeDomain($mainDomain));
+                        if (count($hostParts) > count($mainDomainParts)) {
+                            $subdomain = $hostParts[0];
+                            if ($subdomain !== 'www') {
+                                $store = Store::where('slug', $subdomain)
+                                    ->where('is_active', true)
+                                    ->first();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         $userId = null;
         $storeId = null;
         

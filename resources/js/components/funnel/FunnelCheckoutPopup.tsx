@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 import axios from 'axios';
 import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 
 interface Props {
   product: any;
@@ -29,6 +29,7 @@ export default function FunnelCheckoutPopup({
   product, store, storeSettings, currencies, shippingMethods, isLoggedIn, customer, funnelId, onClose, onSuccess
 }: Props) {
   const { t } = useTranslation();
+  const formatAmount = useCurrencyFormatter();
 
   const [step, setStep] = useState<Step>('checkout');
   const [loading, setLoading] = useState(false);
@@ -62,14 +63,24 @@ export default function FunnelCheckoutPopup({
       setLoadingPayments(true);
       axios.get(generateApiUrl('store.payment-methods', store))
         .then(response => {
-          setPaymentMethods(response.data);
-          if (response.data.length > 0) {
-            setField('payment_method', response.data[0].id);
+          const methods = response.data;
+          if (methods.length > 0) {
+            setPaymentMethods(methods);
+            setField('payment_method', methods[0].id);
+          } else {
+            // Fallback: always show at least COD
+            const fallback = [{ id: 'cod', name: '💵 Paiement à la livraison' }];
+            setPaymentMethods(fallback);
+            setField('payment_method', 'cod');
           }
           setLoadingPayments(false);
         })
         .catch(err => {
           console.error("Error loading payment methods:", err);
+          // Fallback on error
+          const fallback = [{ id: 'cod', name: '💵 Paiement à la livraison' }];
+          setPaymentMethods(fallback);
+          setField('payment_method', 'cod');
           setLoadingPayments(false);
         });
     }
@@ -79,7 +90,6 @@ export default function FunnelCheckoutPopup({
   const shippingCost = selectedShipping?.cost || 0;
   const subtotal = price * quantity;
   const total = subtotal + Number(shippingCost);
-  const currency = storeSettings?.currency_symbol || 'MAD';
 
   const hasVariants = product.variants && product.variants.length > 0;
 
@@ -204,9 +214,9 @@ export default function FunnelCheckoutPopup({
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm text-slate-800 truncate">{product.name}</p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="font-bold funnel-theme-text">{price} {currency}</span>
+                  <span className="font-bold funnel-theme-text">{formatAmount(price)}</span>
                   {product.sale_price && (
-                    <span className="text-xs text-slate-400 line-through">{product.price} {currency}</span>
+                    <span className="text-xs text-slate-400 line-through">{formatAmount(product.price)}</span>
                   )}
                 </div>
                 {/* Quantity */}
@@ -311,7 +321,7 @@ export default function FunnelCheckoutPopup({
                     <option value="">Sélectionnez votre zone</option>
                     {shippingMethods.map((method: any) => (
                       <option key={method.id} value={method.id}>
-                        {method.name} ({Number(method.cost) === 0 ? 'Gratuit' : `${method.cost} ${currency}`})
+                        {method.name} ({Number(method.cost) === 0 ? 'Gratuit' : formatAmount(method.cost)})
                       </option>
                     ))}
                   </select>
@@ -353,17 +363,17 @@ export default function FunnelCheckoutPopup({
                 <p className="text-sm font-bold text-slate-700 mb-2">{t('Order Summary')}</p>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">{t('Subtotal')}</span>
-                  <span className="font-medium">{formatCurrency(subtotal, storeSettings, currencies)}</span>
+                  <span className="font-medium">{formatAmount(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">{t('Shipping')}</span>
                   <span className="font-medium">
-                    {Number(shippingCost) === 0 ? t('Free') : formatCurrency(shippingCost, storeSettings, currencies)}
+                    {Number(shippingCost) === 0 ? t('Free') : formatAmount(shippingCost)}
                   </span>
                 </div>
                 <div className="border-t border-slate-200 pt-2 flex justify-between font-bold">
                   <span>{t('Total')}</span>
-                  <span className="funnel-theme-text text-lg font-bold">{formatCurrency(total, storeSettings, currencies)}</span>
+                  <span className="funnel-theme-text text-lg font-bold">{formatAmount(total)}</span>
                 </div>
               </div>
 

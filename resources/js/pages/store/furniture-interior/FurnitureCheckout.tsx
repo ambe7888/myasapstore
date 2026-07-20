@@ -472,7 +472,7 @@ function FurnitureCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -654,7 +654,7 @@ function FurnitureCheckout({
                         {/* State/Province */}
                         <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-bold text-amber-800 mb-2">
-                            State / Province *
+                            Région / Province *
                           </label>
                           <select
                             id="shipping-state"
@@ -949,7 +949,7 @@ function FurnitureCheckout({
                     <div className="space-y-8">
                       {/* Billing Address */}
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-4">Billing Address</h3>
+                        <h3 className="text-xl font-bold text-slate-900 mb-4">Adresse de facturation</h3>
                         
                         <div className="flex items-center mb-6">
                           <input
@@ -1265,11 +1265,11 @@ function FurnitureCheckout({
                     
                     <div className="flex justify-between text-slate-700">
                       <p>Livraison</p>
-                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
+                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-slate-700">
-                      <p>Tax</p>
+                      <p>Taxe</p>
                       <p>{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

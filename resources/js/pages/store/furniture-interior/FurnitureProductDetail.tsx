@@ -153,7 +153,7 @@ function FurnitureProductDetailContent({
   const handleAddToCart = async () => {
     if (isOutOfStock) return;
     if (hasVariants && !allVariantsSelected) {
-      alert('Please select all options');
+      alert('Veuillez sélectionner toutes les options');
       return;
     }
     await addToCart(product, hasVariants ? selectedVariants : null, 1);
@@ -178,7 +178,7 @@ function FurnitureProductDetailContent({
                 className="flex items-center gap-2 text-amber-200 hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Shop
+                Retour aux produits
               </button>
               <div className="text-amber-200">/</div>
               <Link href={generateStoreUrl('store.products', store) + '?category=' + product.category?.id} className="text-sm hover:text-white transition-colors">{product.category?.name}</Link>
@@ -203,14 +203,14 @@ function FurnitureProductDetailContent({
                   
                   {hasDiscount && (
                     <div className="absolute top-6 left-6 bg-red-500 text-white px-6 py-3 text-lg font-bold rounded-2xl shadow-xl">
-                      <span className="block text-sm">SAVE</span>
+                      <span className="block text-sm">REMISE</span>
                       <span className="block text-2xl leading-none">{discountPercentage}%</span>
                     </div>
                   )}
                   
                   {hasVariants && (
                     <div className="absolute top-6 right-6 bg-amber-800 text-amber-100 px-3 py-1 text-xs font-bold rounded-lg shadow-md">
-                      In Variant
+                      Multi-variantes
                     </div>
                   )}
                 </div>
@@ -261,7 +261,7 @@ function FurnitureProductDetailContent({
                           );
                         })}
                       </div>
-                      <span className="text-slate-600">({Number(averageRating || product.average_rating || product.rating || 0).toFixed(1)}) {totalReviews || product.reviews_count || productReviews?.length || 0} reviews</span>
+                      <span className="text-slate-600">({Number(averageRating || product.average_rating || product.rating || 0).toFixed(1)}) {totalReviews || product.reviews_count || productReviews?.length || 0} avis</span>
                     </div>
                   )}
                 </div>
@@ -276,7 +276,7 @@ function FurnitureProductDetailContent({
                         {formatCurrency(product.price, finalStoreSettings, finalCurrencies)}
                       </span>
                       <span className="bg-red-100 text-red-700 text-lg font-bold px-4 py-2 rounded-xl">
-                        Save {formatCurrency(product.price - product.sale_price, finalStoreSettings, finalCurrencies)}
+                        Économie : {formatCurrency(product.price - product.sale_price, finalStoreSettings, finalCurrencies)}
                       </span>
                     </>
                   ) : (
@@ -287,7 +287,7 @@ function FurnitureProductDetailContent({
                 </div>
 
                 <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">About This Piece</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">À propos de cet article</h3>
                   <p className="text-lg text-slate-700 leading-relaxed">
                     {product.description?.replace(/<[^>]*>/g, '').substring(0, 200)}
                     {product.description && product.description.replace(/<[^>]*>/g, '').length > 200 ? '...' : ''}
@@ -296,7 +296,7 @@ function FurnitureProductDetailContent({
 
                 {hasVariants && (
                   <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
-                    <h3 className="text-xl font-bold text-slate-900 mb-4">Choose Options</h3>
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">Choisir les options</h3>
                     <div className="space-y-6">
                       {productVariants.map((variant) => (
                         <div key={variant.name}>
@@ -431,7 +431,7 @@ function FurnitureProductDetailContent({
                           : 'text-slate-600 hover:text-amber-800 hover:bg-amber-50'
                       }`}
                     >
-                      Specifications
+                      Spécifications
                     </button>
                   )}
                   {product.details && (
@@ -443,7 +443,7 @@ function FurnitureProductDetailContent({
                           : 'text-slate-600 hover:text-amber-800 hover:bg-amber-50'
                       }`}
                     >
-                      Product Details
+                      Détails
                     </button>
                   )}
                   {hasCustomFields && (
@@ -455,7 +455,7 @@ function FurnitureProductDetailContent({
                           : 'text-slate-600 hover:text-amber-800 hover:bg-amber-50'
                       }`}
                     >
-                      Advanced
+                      Caractéristiques
                     </button>
                   )}
                   <button
@@ -466,7 +466,7 @@ function FurnitureProductDetailContent({
                         : 'text-slate-600 hover:text-amber-800 hover:bg-amber-50'
                     }`}
                   >
-                    Reviews ({totalReviews || product.reviews_count || productReviews?.length || 0})
+                    Avis ({totalReviews || product.reviews_count || productReviews?.length || 0})
                   </button>
                 </div>
 
@@ -495,8 +495,8 @@ function FurnitureProductDetailContent({
                   {activeTab === 'advanced' && hasCustomFields && (
                     <div className="space-y-6 max-h-80 overflow-y-auto">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Advanced Product Information</h3>
-                        <p className="text-slate-600 mb-6">Furniture specifications and custom attributes</p>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Informations complémentaires</h3>
+                        <p className="text-slate-600 mb-6">Caractéristiques complémentaires de l'article</p>
                       </div>
                       <div className="bg-amber-50 border border-amber-200 rounded-lg overflow-hidden">
                         <div className="divide-y divide-amber-100">
@@ -533,7 +533,7 @@ function FurnitureProductDetailContent({
                                 );
                               })}
                             </div>
-                            <span className="text-sm font-bold">Based on {totalReviews || 0} reviews</span>
+                            <span className="text-sm font-bold">Basé sur {totalReviews || 0} avis</span>
                           </div>
 
                           <button
@@ -546,7 +546,7 @@ function FurnitureProductDetailContent({
                             }}
                             className="px-6 py-3 bg-yellow-800 text-white rounded-2xl hover:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           >
-                            Write a Review
+                            Donner votre avis
                           </button>
                         </div>
 
@@ -566,7 +566,7 @@ function FurnitureProductDetailContent({
                                         );
                                       })}
                                     </div>
-                                    <div className="text-sm text-slate-600">{totalReviews || product.reviews_count || productReviews?.length || 0} reviews</div>
+                                    <div className="text-sm text-slate-600">{totalReviews || product.reviews_count || productReviews?.length || 0} avis</div>
                                   </div>
                                 </div>
                               </div>
@@ -598,7 +598,7 @@ function FurnitureProductDetailContent({
                                     {review.store_response && (
                                       <div className="bg-amber-50 border-l-4 border-amber-600 p-3 mt-3">
                                         <div className="flex items-center mb-1">
-                                          <span className="text-sm font-bold text-amber-800">Store Response:</span>
+                                          <span className="text-sm font-bold text-amber-800">Réponse de la boutique :</span>
                                         </div>
                                         <p className="text-sm text-slate-700">{review.store_response}</p>
                                       </div>
@@ -609,7 +609,7 @@ function FurnitureProductDetailContent({
                             </>
                           ) : (
                             <div className="text-center py-8">
-                              <p className="text-slate-500">No reviews yet. Be the first to review this product!</p>
+                              <p className="text-slate-500">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
                             </div>
                           )}
                         </div>
@@ -626,8 +626,8 @@ function FurnitureProductDetailContent({
           <div className="bg-white py-20">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-slate-900 mb-4">You Might Also Like</h2>
-                <p className="text-slate-600 text-lg">Discover more beautiful furniture pieces</p>
+                <h2 className="text-4xl font-bold text-slate-900 mb-4">Vous aimerez aussi</h2>
+                <p className="text-slate-600 text-lg">Découvrez notre sélection de qualité choisie pour vous</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((relatedProduct) => (

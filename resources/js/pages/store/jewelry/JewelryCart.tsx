@@ -230,7 +230,7 @@ function JewelryCartContent({
                           <div className="flex justify-between text-sm text-yellow-100">
                             <span>Livraison</span>
                             <span className="font-semibold">
-                              {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
+                              {dynamicSummary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                             </span>
                           </div>
                           

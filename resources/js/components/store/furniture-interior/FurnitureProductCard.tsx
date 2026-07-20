@@ -161,21 +161,25 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         )}
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex flex-col gap-1.5 mb-4">
           {product.sale_price && product.sale_price < product.price ? (
-            <>
-              <span className="text-2xl font-bold text-amber-800">
-                {formatPrice(product.sale_price)}
-              </span>
-              <span className="text-slate-400 line-through text-sm">
-                {formatPrice(product.price)}
-              </span>
-              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full ml-auto">
-                Économie: {formatPrice(product.price - product.sale_price)}
-              </span>
-            </>
+            <div className="flex flex-col gap-1">
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-2xl font-bold text-amber-800 whitespace-nowrap">
+                  {formatPrice(product.sale_price)}
+                </span>
+                <span className="text-slate-400 line-through text-sm whitespace-nowrap">
+                  {formatPrice(product.price)}
+                </span>
+              </div>
+              <div>
+                <span className="inline-block bg-red-50 text-red-700 text-xs font-bold px-2 py-0.5 rounded-lg border border-red-100">
+                  Économie: {formatPrice(product.price - product.sale_price)}
+                </span>
+              </div>
+            </div>
           ) : (
-            <span className="text-2xl font-bold text-amber-800">
+            <span className="text-2xl font-bold text-amber-800 whitespace-nowrap">
               {formatPrice(product.price)}
             </span>
           )}

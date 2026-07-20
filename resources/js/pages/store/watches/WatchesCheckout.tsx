@@ -394,7 +394,7 @@ export default function WatchesCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -571,7 +571,7 @@ export default function WatchesCheckout({
                           {/* State/Province */}
                         <div className="hidden">
                             <label htmlFor="shipping-state" className="block text-sm font-medium text-slate-700 mb-2">
-                              State / Province *
+                              Région / Province *
                             </label>
                             <select
                               id="shipping-state"
@@ -680,7 +680,7 @@ export default function WatchesCheckout({
                                         </div>
                                       </div>
                                       <div className="text-sm font-medium text-slate-900">
-                                        {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                        {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                       </div>
                                     </div>
                                   </label>
@@ -871,7 +871,7 @@ export default function WatchesCheckout({
                       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 space-y-8">
                         {/* Billing Address */}
                         <div>
-                          <h3 className="text-lg font-medium text-slate-900 mb-6">Billing Address</h3>
+                          <h3 className="text-lg font-medium text-slate-900 mb-6">Adresse de facturation</h3>
                           
                           <div className="flex items-center mb-6">
                             <input
@@ -1203,11 +1203,11 @@ export default function WatchesCheckout({
                       
                       <div className="flex justify-between text-sm text-slate-600">
                         <span>Livraison</span>
-                        <span>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</span>
+                        <span>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Sélectionner le mode'}</span>
                       </div>
                       
                       <div className="flex justify-between text-sm text-slate-600">
-                        <span>Tax</span>
+                        <span>Taxe</span>
                         <span>{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</span>
                       </div>
                       

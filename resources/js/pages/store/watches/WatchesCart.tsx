@@ -228,7 +228,7 @@ function WatchesCartContent({
                         <div className="flex justify-between text-sm text-slate-200">
                           <span>Livraison</span>
                           <span className="font-medium">
-                            {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
+                            {dynamicSummary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                           </span>
                         </div>
                         

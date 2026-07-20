@@ -226,7 +226,7 @@ export default function PerfumeOrderDetail({
                   )}
                   <div className="flex justify-between text-purple-200">
                     <span>Livraison</span>
-                    <span className="text-white">{order.shipping === 0 ? 'Free' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
+                    <span className="text-white">{order.shipping === 0 ? 'Gratuit' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
                   </div>
                   <div className="flex justify-between text-purple-200">
                     <span>Tax</span>

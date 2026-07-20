@@ -374,7 +374,7 @@ export default function BabyKidsCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -635,7 +635,7 @@ export default function BabyKidsCheckout({
                                             </span>
                                           </div>
                                           <span className="text-lg font-bold text-pink-500">
-                                            {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                            {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                           </span>
                                         </div>
                                       </label>
@@ -757,7 +757,7 @@ export default function BabyKidsCheckout({
                                 <p className="text-gray-800">{shippingPhone}</p>
                               </div>
                               <div>
-                                <p className="text-sm font-bold text-pink-600 mb-2">Shipping Address</p>
+                                <p className="text-sm font-bold text-pink-600 mb-2">Adresse de livraison</p>
                                 <p className="text-gray-800">{shippingStreet}</p>
                                 <p className="text-gray-800">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                                 <p className="text-gray-800">{selectedCountryName}</p>
@@ -816,7 +816,7 @@ export default function BabyKidsCheckout({
                       <div className="space-y-8">
                         {/* Billing Address */}
                         <div>
-                          <h3 className="text-lg font-bold text-gray-800 mb-4">Billing Address</h3>
+                          <h3 className="text-lg font-bold text-gray-800 mb-4">Adresse de facturation</h3>
                           
                           <div className="flex items-center mb-6">
                             <input
@@ -833,7 +833,7 @@ export default function BabyKidsCheckout({
                           
                           {!sameAsShipping && (
                             <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
-                              <p className="text-sm text-gray-600">Billing address form would go here</p>
+                              <p className="text-sm text-gray-600">Le formulaire d'adresse de facturation s'affichera ici.</p>
                             </div>
                           )}
                         </div>
@@ -1155,11 +1155,11 @@ export default function BabyKidsCheckout({
                     
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
                       <p className="font-bold">Livraison</p>
-                      <p className="font-bold">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
+                      <p className="font-bold">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'Gratuit' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-gray-600 border-b border-blue-200 pb-2">
-                      <p className="font-bold">Tax</p>
+                      <p className="font-bold">Taxe</p>
                       <p className="font-bold">{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

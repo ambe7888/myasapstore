@@ -252,7 +252,7 @@ export default function WatchesOrderDetail({
                     )}
                     <div className="flex justify-between py-2 text-slate-600">
                       <span>Shipping:</span>
-                      <span>{order.shipping === 0 ? 'Free' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
+                      <span>{order.shipping === 0 ? 'Gratuit' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
                     </div>
                     <div className="flex justify-between py-2 text-slate-600">
                       <span>Tax:</span>

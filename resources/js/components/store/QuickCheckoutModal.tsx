@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { X, ShoppingBag, CheckCircle2, Truck, ShieldCheck, Loader2 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { useCurrencyFormatter } from '@/hooks/use-store-currency';
+import { useCurrencyFormatter, useStoreCurrency } from '@/hooks/use-store-currency';
 import { getProductCoverImage } from '@/utils/image-helper';
 import axios from 'axios';
 
@@ -24,6 +24,7 @@ export default function QuickCheckoutModal({
 }: QuickCheckoutModalProps) {
   const { addToCart } = useCart();
   const format = useCurrencyFormatter();
+  const storeCurrency = useStoreCurrency();
   
   // Parse variants safely
   const productVariants = React.useMemo(() => {
@@ -351,7 +352,7 @@ export default function QuickCheckoutModal({
                     <option value="">Sélectionnez votre zone</option>
                     {shippingMethods.map((method) => (
                       <option key={method.id} value={method.id}>
-                        {method.name} ({method.cost === 0 ? 'Gratuit' : `${method.cost} ${store?.storeSettings?.currency_symbol || 'MAD'}`})
+                        {method.name} ({method.cost === 0 ? 'Gratuit' : `${method.cost} ${storeCurrency.symbol}`})
                       </option>
                     ))}
                   </select>

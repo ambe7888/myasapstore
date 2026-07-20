@@ -470,7 +470,7 @@ function PerfumeCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -665,7 +665,7 @@ function PerfumeCheckout({
                         {/* State/Province */}
                         <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-medium text-gray-700 mb-2">
-                            State / Province *
+                            Région / Province *
                           </label>
                           <select
                             id="shipping-state"
@@ -771,7 +771,7 @@ function PerfumeCheckout({
                                           </span>
                                         </div>
                                         <span className="text-lg font-medium text-purple-800">
-                                          {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                          {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                         </span>
                                       </div>
                                     </label>
@@ -958,7 +958,7 @@ function PerfumeCheckout({
                     <div className="space-y-8">
                       {/* Billing Address */}
                       <div>
-                        <h3 className="text-xl font-medium text-purple-800 mb-4">Billing Address</h3>
+                        <h3 className="text-xl font-medium text-purple-800 mb-4">Adresse de facturation</h3>
                         
                         <div className="flex items-center mb-6">
                           <input
@@ -1294,11 +1294,11 @@ function PerfumeCheckout({
                     
                     <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
                       <p className="font-medium">Livraison</p>
-                      <p className="font-medium text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
+                      <p className="font-medium text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'Gratuit' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-purple-200 border-b border-purple-700 pb-2">
-                      <p className="font-medium">Tax</p>
+                      <p className="font-medium">Taxe</p>
                       <p className="font-medium text-white">{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

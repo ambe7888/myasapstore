@@ -256,7 +256,7 @@ function FurnitureCartContent({
                       <div className="flex justify-between">
                         <span className="text-slate-600">Livraison</span>
                         <span className="font-bold text-slate-900">
-                          {summary.shipping === 0 ? 'Free' : formatCurrency(summary.shipping, storeSettings, currencies)}
+                          {summary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(summary.shipping, storeSettings, currencies)}
                         </span>
                       </div>
                       <div className="flex justify-between">

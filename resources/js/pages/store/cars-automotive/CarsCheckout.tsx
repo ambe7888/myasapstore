@@ -477,7 +477,7 @@ function CarsCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -674,7 +674,7 @@ function CarsCheckout({
                         {/* State/Province */}
                         <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
-                            State / Province *
+                            Région / Province *
                           </label>
                           <select
                             id="shipping-state"
@@ -780,7 +780,7 @@ function CarsCheckout({
                                           </span>
                                         </div>
                                         <span className="text-lg font-bold text-red-600">
-                                          {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                          {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                         </span>
                                       </div>
                                     </label>
@@ -969,7 +969,7 @@ function CarsCheckout({
                     <div className="space-y-8">
                       {/* Billing Address */}
                       <div>
-                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Billing Address</h3>
+                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Adresse de facturation</h3>
                         
                         <div className="flex items-center mb-6">
                           <input
@@ -1308,11 +1308,11 @@ function CarsCheckout({
                     
                     <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
                       <p className="font-bold tracking-wider uppercase">Livraison</p>
-                      <p className="font-black text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}</p>
+                      <p className="font-black text-white">{selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'Gratuit' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-gray-300 border-b border-gray-700 pb-2">
-                      <p className="font-bold tracking-wider uppercase">Tax</p>
+                      <p className="font-bold tracking-wider uppercase">Taxe</p>
                       <p className="font-black text-white">{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

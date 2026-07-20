@@ -171,7 +171,7 @@ function FashionCartContent({
                       <div className="flex justify-between">
                         <span className="font-light">Livraison</span>
                         <span className="font-medium">
-                          {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
+                          {dynamicSummary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                         </span>
                       </div>
                       

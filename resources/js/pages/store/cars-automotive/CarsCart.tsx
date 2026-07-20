@@ -266,7 +266,7 @@ function CarsCartContent({
                       <div className="flex justify-between border-b border-gray-700 pb-2">
                         <span className="font-bold tracking-wider uppercase text-gray-300">Livraison</span>
                         <span className="font-black text-green-400">
-                          {summary.shipping === 0 ? 'FREE' : formatCurrency(summary.shipping, storeSettings, currencies)}
+                          {summary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(summary.shipping, storeSettings, currencies)}
                         </span>
                       </div>
                       <div className="flex justify-between border-b border-gray-700 pb-2">

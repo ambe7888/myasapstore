@@ -77,7 +77,7 @@ export default function WatchesRegister({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Free Shipping</div>
+                    <div className="text-slate-900 font-medium">Livraison gratuite</div>
                     <div className="text-slate-600 text-sm">On all orders over $500</div>
                   </div>
                 </div>

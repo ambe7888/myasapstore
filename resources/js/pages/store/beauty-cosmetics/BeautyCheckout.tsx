@@ -228,7 +228,7 @@ export default function BeautyCheckout({
     if (!shippingLastName) newErrors.shippingLastName = "Le nom est requis";
     if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
     if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
-    if (!shippingCity) newErrors.shippingCity = 'City is required';
+    if (!shippingCity) newErrors.shippingCity = 'La ville est requise';
     if (!shippingState) newErrors.shippingState = 'State is required';
     if (!shippingZip) newErrors.shippingZip = 'ZIP code is required';
     
@@ -380,7 +380,7 @@ export default function BeautyCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -564,7 +564,7 @@ export default function BeautyCheckout({
                         {/* State/Province */}
                         <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-medium text-gray-900 mb-3">
-                            State / Province *
+                            Région / Province *
                           </label>
                           <select
                             id="shipping-state"
@@ -671,13 +671,13 @@ export default function BeautyCheckout({
                                           {method.min_order_amount > 0 && (
                                             <span className="block text-xs text-gray-500 mt-1">
                                               {method.type === 'free_shipping' 
-                                                ? `Free shipping on orders over $${method.min_order_amount}` 
+                                                ? `Livraison gratuite pour les commandes de plus de $${method.min_order_amount}` 
                                                 : `Minimum order: $${method.min_order_amount}`}
                                             </span>
                                           )}
                                         </div>
                                         <span className="font-semibold text-rose-600">
-                                          {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                          {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                         </span>
                                       </div>
                                     </label>
@@ -807,7 +807,7 @@ export default function BeautyCheckout({
                               <p className="text-gray-900">{shippingPhone}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-gray-500 mb-2">Shipping Address</p>
+                              <p className="text-sm font-medium text-gray-500 mb-2">Adresse de livraison</p>
                               <p className="text-gray-900">{shippingStreet}</p>
                               <p className="text-gray-900">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                               <p className="text-gray-900">{selectedCountryName}</p>
@@ -866,7 +866,7 @@ export default function BeautyCheckout({
                     <div className="space-y-8">
                       {/* Billing Address */}
                       <div>
-                        <h3 className="text-xl font-medium text-gray-900 mb-6">Billing Address</h3>
+                        <h3 className="text-xl font-medium text-gray-900 mb-6">Adresse de facturation</h3>
                         
                         <div className="flex items-center mb-6">
                           <input
@@ -1203,11 +1203,11 @@ export default function BeautyCheckout({
                     
                     <div className="flex justify-between text-sm text-white/80">
                       <p>Livraison</p>
-                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
+                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-sm text-white/80">
-                      <p>Tax</p>
+                      <p>Taxe</p>
                       <p>{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

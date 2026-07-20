@@ -478,7 +478,9 @@ function CartContent({
                       
                       <div className="flex justify-between">
                         <span className="text-gray-600">Livraison</span>
-                        <span className="font-medium">{formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}</span>
+                        <span className="font-medium">
+                          {dynamicSummary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
+                        </span>
                       </div>
                       
                       <div className="flex justify-between">
@@ -529,7 +531,7 @@ function CartContent({
                       <div className="mt-6 text-sm text-gray-500">
                         <div className="flex items-center mb-2">
                           <Truck className="h-4 w-4 mr-2" />
-                          <span>Free shipping on orders over $100</span>
+                          <span>Livraison gratuite pour les commandes de plus de $100</span>
                         </div>
                         <div className="flex items-center">
                           <ShoppingBag className="h-4 w-4 mr-2" />

@@ -226,7 +226,7 @@ function JewelryCheckout({
     else if (!/\S+@\S+\.\S+/.test(shippingEmail)) newErrors.shippingEmail = 'Email is invalid';
     if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
     if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
-    if (!shippingCity) newErrors.shippingCity = 'City is required';
+    if (!shippingCity) newErrors.shippingCity = 'La ville est requise';
     if (!shippingState) newErrors.shippingState = 'State is required';
     if (!shippingZip) newErrors.shippingZip = 'ZIP code is required';
     
@@ -375,7 +375,7 @@ function JewelryCheckout({
 
   return (
     <>
-      <Head title={`Luxury Checkout - ${store.name}`} />
+      <Head title={`Luxury Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -594,7 +594,7 @@ function JewelryCheckout({
                           
                           <div className="hidden">
                             <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
-                              State / Province *
+                              Région / Province *
                             </label>
                             <select
                               value={shippingState}
@@ -709,14 +709,14 @@ function JewelryCheckout({
                                             {method.min_order_amount > 0 && (
                                               <span className="block text-xs text-gray-500 mt-2 bg-gray-50 px-2 py-1 rounded">
                                                 {method.type === 'free_shipping' 
-                                                  ? `Free shipping on orders over $${method.min_order_amount}` 
+                                                  ? `Livraison gratuite pour les commandes de plus de $${method.min_order_amount}` 
                                                   : `Minimum order: $${method.min_order_amount}`}
                                               </span>
                                             )}
                                           </div>
                                           <div className="text-right ml-4">
                                             <span className="text-lg font-semibold text-gray-800">
-                                              {shippingCost === 0 ? 'FREE' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                              {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                             </span>
                                           </div>
                                         </div>
@@ -873,7 +873,7 @@ function JewelryCheckout({
                                 <p className="text-gray-800 font-light">{shippingPhone}</p>
                               </div>
                               <div>
-                                <p className="text-sm font-light text-gray-600 mb-2 tracking-wide uppercase">Address</p>
+                                <p className="text-sm font-light text-gray-600 mb-2 tracking-wide uppercase">Adresse</p>
                                 <p className="text-gray-800 font-light">{shippingStreet}</p>
                                 <p className="text-gray-800 font-light">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                                 <p className="text-gray-800 font-light">{selectedCountryName}</p>
@@ -944,7 +944,7 @@ function JewelryCheckout({
                       <div className="space-y-8">
                         {/* Billing Address */}
                         <div>
-                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Billing Address</h3>
+                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Adresse de facturation</h3>
                           
                           <div className="flex items-center mb-6">
                             <input
@@ -1291,12 +1291,12 @@ function JewelryCheckout({
                     <div className="flex justify-between text-sm text-yellow-100">
                       <span>Livraison</span>
                       <span className="font-medium">
-                        {selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'FREE' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Select method'}
+                        {selectedShippingId ? (updatedCartSummary.shipping === 0 ? 'Gratuit' : formatCurrency(updatedCartSummary.shipping, storeSettings, currencies)) : 'Sélectionner le mode'}
                       </span>
                     </div>
                     
                     <div className="flex justify-between text-sm text-yellow-100">
-                      <span>Tax</span>
+                      <span>Taxe</span>
                       <span className="font-medium">{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</span>
                     </div>
                     

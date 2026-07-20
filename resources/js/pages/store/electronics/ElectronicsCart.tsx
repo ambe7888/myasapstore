@@ -278,7 +278,7 @@ function ElectronicsCartContent({
                         <div className="flex justify-between">
                           <span className="text-gray-600">Livraison</span>
                           <span className="font-semibold">
-                            {(dynamicSummary.shipping || 0) === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping || 0, storeSettings, currencies)}
+                            {(dynamicSummary.shipping || 0) === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping || 0, storeSettings, currencies)}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -310,7 +310,7 @@ function ElectronicsCartContent({
                         </div>
                         <div className="flex items-center gap-2">
                           <Truck className="w-4 h-4 text-blue-600" />
-                          <span>Free shipping on orders over $99</span>
+                          <span>Livraison gratuite pour les commandes de plus de $99</span>
                         </div>
                       </div>
                     </div>

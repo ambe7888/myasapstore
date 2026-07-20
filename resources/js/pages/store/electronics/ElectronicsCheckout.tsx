@@ -253,7 +253,7 @@ function ElectronicsCheckoutContent({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -341,10 +341,10 @@ function ElectronicsCheckoutContent({
                         }
                         if (!shippingData.phone) newErrors.phone = "Le numéro de téléphone est requis";
                         if (!shippingData.street) newErrors.street = 'Street address is required';
-                        if (!shippingData.city) newErrors.city = 'City is required';
+                        if (!shippingData.city) newErrors.city = 'La ville est requise';
                         if (!shippingData.state) newErrors.state = 'State is required';
                         if (!shippingData.zip) newErrors.zip = 'ZIP code is required';
-                        if (!selectedShippingId) newErrors.shipping = 'Please select a shipping method';
+                        if (!selectedShippingId) newErrors.shipping = 'Veuillez sélectionner un mode de livraison';
                         
                         if (Object.keys(newErrors).length > 0) {
                           setShippingErrors(newErrors);
@@ -862,7 +862,7 @@ function ElectronicsCheckoutContent({
                         <span className="font-semibold">{formatCurrency(shippingCost, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Tax</span>
+                        <span className="text-gray-600">Taxe</span>
                         <span className="font-semibold">{formatCurrency(cartSummary.tax, storeSettings, currencies)}</span>
                       </div>
                       <div className="border-t border-gray-200 pt-4">

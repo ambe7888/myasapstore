@@ -96,7 +96,7 @@ export default function HeroSection({
                   </svg>
                 </div>
                 <div>
-                  <span className="text-sm font-medium block">Free Shipping</span>
+                  <span className="text-sm font-medium block">Livraison gratuite</span>
                   <span className="text-xs text-gray-500">On orders over $50</span>
                 </div>
               </div>

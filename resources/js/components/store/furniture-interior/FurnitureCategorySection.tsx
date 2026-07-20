@@ -18,13 +18,13 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
         <div className="text-center mb-16 lg:mb-20">
           <div className="inline-flex items-center gap-3 bg-amber-100 border-2 border-amber-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
             <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
-            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Room Collections</span>
+            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Nos Collections</span>
           </div>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Shop by Room'}
+            {content?.title || 'Acheter par catégorie'}
           </h2>
           <p className="text-lg lg:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Find the perfect wooden furniture pieces for every space in your home.'}
+            {content?.description || 'Découvrez notre sélection de qualité choisie avec soin pour vous.'}
           </p>
         </div>
 

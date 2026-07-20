@@ -260,7 +260,7 @@ function PerfumeCartContent({
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Livraison</span>
-                        <span className="font-medium">{summary.shipping === 0 ? 'Free' : formatCurrency(summary.shipping, storeSettings, currencies)}</span>
+                        <span className="font-medium">{summary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(summary.shipping, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Tax</span>

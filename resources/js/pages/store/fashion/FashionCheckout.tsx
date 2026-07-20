@@ -445,7 +445,7 @@ export default function FashionCheckout({
 
   return (
     <>
-      <Head title={`Checkout - ${store.name}`} />
+      <Head title={`Paiement - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -629,7 +629,7 @@ export default function FashionCheckout({
                         {/* State/Province */}
                         <div className="hidden">
                           <label htmlFor="shipping-state" className="block text-sm font-light tracking-wide uppercase mb-3">
-                            State / Province *
+                            Région / Province *
                           </label>
                           <select
                             id="shipping-state"
@@ -734,13 +734,13 @@ export default function FashionCheckout({
                                     {method.min_order_amount > 0 && (
                                       <span className="block text-xs text-gray-400 font-light">
                                         {method.type === 'free_shipping' 
-                                          ? `Free shipping on orders over $${method.min_order_amount}` 
+                                          ? `Livraison gratuite pour les commandes de plus de $${method.min_order_amount}` 
                                           : `Minimum order: $${method.min_order_amount}`}
                                       </span>
                                     )}
                                   </label>
                                   <span className="ml-auto text-sm font-light text-black">
-                                    {shippingCost === 0 ? 'Free' : formatCurrency(shippingCost, storeSettings, currencies)}
+                                    {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                   </span>
                                 </div>
                               );
@@ -867,7 +867,7 @@ export default function FashionCheckout({
                               <p className="text-sm text-black font-light">{shippingPhone}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Shipping Address</p>
+                              <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Adresse de livraison</p>
                               <p className="text-sm text-black font-light">{shippingStreet}</p>
                               <p className="text-sm text-black font-light">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                               <p className="text-sm text-black font-light">{selectedCountryName}</p>
@@ -926,7 +926,7 @@ export default function FashionCheckout({
                     <div className="space-y-8">
                       {/* Billing Address */}
                       <div>
-                        <h3 className="text-lg font-light tracking-wide mb-6">Billing Address</h3>
+                        <h3 className="text-lg font-light tracking-wide mb-6">Adresse de facturation</h3>
                         
                         <div className="flex items-center mb-6">
                           <input
@@ -1030,7 +1030,7 @@ export default function FashionCheckout({
                             {/* State/Province */}
                         <div className="hidden">
                               <label htmlFor="billing-state" className="block text-sm font-light tracking-wide uppercase mb-3">
-                                State / Province *
+                                Région / Province *
                               </label>
                               <select
                                 id="billing-state"
@@ -1395,11 +1395,11 @@ export default function FashionCheckout({
                     
                     <div className="flex justify-between text-sm text-gray-300 font-light">
                       <p>Livraison</p>
-                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Select method'}</p>
+                      <p>{selectedShippingId ? formatCurrency(updatedCartSummary.shipping, storeSettings, currencies) : 'Sélectionner le mode'}</p>
                     </div>
                     
                     <div className="flex justify-between text-sm text-gray-300 font-light">
-                      <p>Tax</p>
+                      <p>Taxe</p>
                       <p>{formatCurrency(updatedCartSummary.tax, storeSettings, currencies)}</p>
                     </div>
                     

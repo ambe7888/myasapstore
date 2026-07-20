@@ -187,7 +187,7 @@ function BeautyCartContent({
                     <div className="flex justify-between items-center">
                       <span className="text-gray-600">Livraison</span>
                       <span className="font-semibold text-gray-900">
-                        {dynamicSummary.shipping === 0 ? 'Free' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
+                        {dynamicSummary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(dynamicSummary.shipping, storeSettings, currencies)}
                       </span>
                     </div>
                     
@@ -221,7 +221,7 @@ function BeautyCartContent({
                   <div className="mt-8 space-y-3 text-sm text-gray-600">
                     <div className="flex items-center gap-3">
                       <Truck className="h-4 w-4 text-rose-500" />
-                      <span>Free shipping on orders over $75</span>
+                      <span>Livraison gratuite pour les commandes de plus de $75</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <ShoppingBag className="h-4 w-4 text-rose-500" />

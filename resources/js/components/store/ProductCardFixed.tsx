@@ -3,6 +3,7 @@ import { Heart, ShoppingCart, Eye, Star } from 'lucide-react';
 import { Link, usePage } from '@inertiajs/react';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { generateStoreUrl } from '@/utils/store-url-helper';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 
 interface ProductProps {
   id: number;
@@ -39,6 +40,7 @@ export default function ProductCard({
   const { props } = usePage();
   const store = props.store;
   const [isHovered, setIsHovered] = useState(false);
+  const format = useCurrencyFormatter();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isFallback, setIsFallback] = useState(!cover_image);
   
@@ -169,11 +171,11 @@ export default function ProductCard({
         <div className="mt-1 flex items-center">
           {isOnSale ? (
             <>
-              <span className="font-bold text-primary">${sale_price?.toFixed(2)}</span>
-              <span className="text-gray-500 text-sm line-through ml-2">${price.toFixed(2)}</span>
+              <span className="font-bold text-primary">{format(sale_price || 0)}</span>
+              <span className="text-gray-500 text-sm line-through ml-2">{format(price)}</span>
             </>
           ) : (
-            <span className="font-bold">${price.toFixed(2)}</span>
+            <span className="font-bold">{format(price)}</span>
           )}
         </div>
         

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AddToCartButton from './AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 
@@ -55,6 +55,7 @@ export default function ProductCard({
   const finalStoreSettings = storeSettings || props.storeSettings || {};
   const finalCurrencies = currencies || props.currencies || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
+  const format = useCurrencyFormatter();
   
   const [isHovered, setIsHovered] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -204,11 +205,11 @@ export default function ProductCard({
         <div className="mt-1 flex items-center">
           {isOnSale ? (
             <>
-              <span className="font-bold text-primary">{formatCurrency(sale_price || 0, finalStoreSettings, finalCurrencies)}</span>
-              <span className="text-gray-500 text-sm line-through ml-2">{formatCurrency(price, finalStoreSettings, finalCurrencies)}</span>
+              <span className="font-bold text-primary">{format(sale_price || 0)}</span>
+              <span className="text-gray-500 text-sm line-through ml-2">{format(price)}</span>
             </>
           ) : (
-            <span className="font-bold">{formatCurrency(price, finalStoreSettings, finalCurrencies)}</span>
+            <span className="font-bold">{format(price)}</span>
           )}
         </div>
         

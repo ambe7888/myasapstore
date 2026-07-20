@@ -3,7 +3,7 @@ import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { usePage, Link, router } from '@inertiajs/react';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -41,6 +41,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
   const finalCurrencies = currencies || props.currencies || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
+  const format = useCurrencyFormatter();
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
@@ -178,11 +179,11 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold text-rose-600">
-              {formatCurrency(displayPrice, finalStoreSettings, finalCurrencies)}
+              {format(displayPrice)}
             </span>
             {hasDiscount && (
               <span className="text-sm text-gray-400 line-through">
-                {formatCurrency(product.price, finalStoreSettings, finalCurrencies)}
+                {format(product.price)}
               </span>
             )}
           </div>

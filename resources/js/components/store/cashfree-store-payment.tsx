@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { usePage } from '@inertiajs/react';
 import axios from 'axios';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import '../../css/cashfree-modal-fix.css';
 
 interface CashfreeStorePaymentProps {
@@ -124,7 +124,7 @@ export function CashfreeStorePayment({
       if (result.paymentDetails) {
         // Payment completed, verify on server
         try {
-          await axios.post(generateStoreUrl('store.cashfree.verify-payment', store), {
+          await axios.post(generateApiUrl('store.cashfree.verify-payment', store), {
             order_id: order_id,
             cf_payment_id: result.paymentDetails?.paymentId,
             _token: document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')

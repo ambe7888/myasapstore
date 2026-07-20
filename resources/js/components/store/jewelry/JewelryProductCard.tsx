@@ -3,7 +3,7 @@ import { Link, usePage, router } from '@inertiajs/react';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -27,6 +27,7 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
+  const format = useCurrencyFormatter();
   
   // Check if product has variants
   const hasVariants = product.variants && 
@@ -127,14 +128,14 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
           {product.category?.name}
         </p>
         
-        <div className="flex items-center justify-center space-x-2 mb-3">
-          {product.sale_price ? (
+         <div className="flex items-center justify-center space-x-2 mb-3">
+          {hasDiscount ? (
             <>
-              <span className="text-xl font-medium text-neutral-900">{formatCurrency(product.sale_price, finalStoreSettings, finalCurrencies)}</span>
-              <span className="text-sm text-neutral-500 line-through">{formatCurrency(product.price, finalStoreSettings, finalCurrencies)}</span>
+              <span className="text-xl font-medium text-neutral-900">{format(product.sale_price!)}</span>
+              <span className="text-sm text-neutral-500 line-through">{format(product.price)}</span>
             </>
           ) : (
-            <span className="text-xl font-medium text-neutral-900">{formatCurrency(product.price, finalStoreSettings, finalCurrencies)}</span>
+            <span className="text-xl font-medium text-neutral-900">{format(product.price)}</span>
           )}
         </div>
         

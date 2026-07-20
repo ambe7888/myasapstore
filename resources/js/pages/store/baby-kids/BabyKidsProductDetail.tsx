@@ -401,9 +401,7 @@ function BabyKidsProductDetailContent({
                           isShowOption={false}
                         />
                       </div>
-                      <div className="flex-1">
-                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
-                      </div>
+                        <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
                       <button
                         onClick={async () => await toggleWishlist(product.id)}
                         disabled={wishlistLoading}
@@ -434,9 +432,7 @@ function BabyKidsProductDetailContent({
                             isShowOption={false}
                           />
                         </div>
-                        <div className="flex-1">
-                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
-                        </div>
+                          <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
                       </div>
                     </StickyBottomBar>
                   </div>

@@ -4,7 +4,7 @@ import { Link, usePage, router } from '@inertiajs/react';
 import AddToCartButton from '../AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 
@@ -39,6 +39,7 @@ export default function ElectronicsProductCard({
   const finalStoreSettings = storeSettings || props.storeSettings || {};
   const finalCurrencies = currencies || props.currencies || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
+  const format = useCurrencyFormatter();
   
   const [isHovered, setIsHovered] = useState(false);
   const [isFallback, setIsFallback] = useState(!product.cover_image && !product.image);
@@ -171,11 +172,11 @@ export default function ElectronicsProductCard({
         <div className="mb-4">
           {isOnSale ? (
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-blue-600">{formatCurrency(product.sale_price || 0, finalStoreSettings, finalCurrencies)}</span>
-              <span className="text-lg text-gray-500 line-through">{formatCurrency(product.price, finalStoreSettings, finalCurrencies)}</span>
+              <span className="text-2xl font-bold text-blue-600">{format(product.sale_price || 0)}</span>
+              <span className="text-lg text-gray-500 line-through">{format(product.price)}</span>
             </div>
           ) : (
-            <span className="text-2xl font-bold text-gray-900">{formatCurrency(product.price, finalStoreSettings, finalCurrencies)}</span>
+            <span className="text-2xl font-bold text-gray-900">{format(product.price)}</span>
           )}
         </div>
         

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ShoppingBag, CheckCircle2, Truck, ShieldCheck, Loader2 } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { useCurrencyFormatter, useStoreCurrency } from '@/hooks/use-store-currency';
 import { getProductCoverImage } from '@/utils/image-helper';
 import axios from 'axios';
@@ -39,18 +39,33 @@ export default function QuickCheckoutModal({
 
   const hasVariants = productVariants && productVariants.length > 0;
 
-  // Selected variants state
-  const [selectedVariants, setSelectedVariants] = useState<{ [key: string]: string }>(() => {
-    const initial: { [key: string]: string } = {};
-    if (productVariants && productVariants.length > 0) {
-      productVariants.forEach((v: any) => {
-        if (v.values && v.values.length > 0) {
-          initial[v.name] = v.values[0];
-        }
-      });
+  // Selected variants state - re-init when product changes
+  const [selectedVariants, setSelectedVariants] = useState<{ [key: string]: string }>({});
+  
+  // Re-initialize selected variants when product/modal opens
+  React.useEffect(() => {
+    if (isOpen && productVariants && productVariants.length > 0) {
+      const initial: { [key: string]: string } = {};
+      // If product.variants is an object (already selected), use those values
+      if (product?.variants && !Array.isArray(product.variants) && typeof product.variants === 'object') {
+        const variantObj = product.variants;
+        productVariants.forEach((v: any) => {
+          if (variantObj[v.name]) {
+            initial[v.name] = variantObj[v.name];
+          } else if (v.values && v.values.length > 0) {
+            initial[v.name] = v.values[0];
+          }
+        });
+      } else {
+        productVariants.forEach((v: any) => {
+          if (v.values && v.values.length > 0) {
+            initial[v.name] = v.values[0];
+          }
+        });
+      }
+      setSelectedVariants(initial);
     }
-    return initial;
-  });
+  }, [isOpen, product?.id]);
 
   const [quantity, setQuantity] = useState(initialQuantity);
   const [loading, setLoading] = useState(false);
@@ -77,7 +92,7 @@ export default function QuickCheckoutModal({
   React.useEffect(() => {
     if (isOpen && store?.id) {
       setLoadingShipping(true);
-      axios.get(generateStoreUrl('store.shipping-methods', store))
+      axios.get(generateApiUrl('store.shipping-methods', store))
         .then(response => {
           setShippingMethods(response.data);
           if (response.data.length > 0) {
@@ -91,7 +106,7 @@ export default function QuickCheckoutModal({
         });
 
       setLoadingPayments(true);
-      axios.get(generateStoreUrl('store.payment-methods', store))
+      axios.get(generateApiUrl('store.payment-methods', store))
         .then(response => {
           setPaymentMethods(response.data);
           if (response.data.length > 0) {
@@ -104,7 +119,7 @@ export default function QuickCheckoutModal({
           setLoadingPayments(false);
         });
     }
-  }, [isOpen, store]);
+  }, [isOpen, store?.id]);
 
   if (!isOpen || !product) return null;
 
@@ -157,7 +172,7 @@ export default function QuickCheckoutModal({
         shipping_method_id: Number(selectedShippingId),
       };
 
-      const orderUrl = generateStoreUrl('store.order.place', store);
+      const orderUrl = generateApiUrl('store.order.place', store);
       const response = await axios.post(orderUrl, orderPayload, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
@@ -352,7 +367,7 @@ export default function QuickCheckoutModal({
                     <option value="">Sélectionnez votre zone</option>
                     {shippingMethods.map((method) => (
                       <option key={method.id} value={method.id}>
-                        {method.name} ({method.cost === 0 ? 'Gratuit' : `${method.cost} ${storeCurrency.symbol}`})
+                        {method.name} ({method.cost === 0 ? 'Gratuit' : format(method.cost)})
                       </option>
                     ))}
                   </select>

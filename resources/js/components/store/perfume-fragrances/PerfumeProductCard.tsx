@@ -4,7 +4,7 @@ import AddToCartButton from '@/components/store/AddToCartButton';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
 
@@ -24,6 +24,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
   
   const isProductInWishlist = isInWishlist(product.id);
   const isOutOfStock = !product.is_active || product.stock <= 0;
+  const format = useCurrencyFormatter();
   
   // Check if product has variants
   const hasVariants = product.variants && 
@@ -152,15 +153,15 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
             {product.sale_price && product.sale_price < product.price ? (
               <>
                 <span className="text-xl font-semibold text-purple-800">
-                  {formatCurrency(product.sale_price, storeSettings, currencies)}
+                  {format(product.sale_price)}
                 </span>
                 <span className="text-gray-500 line-through text-sm">
-                  {formatCurrency(product.price, storeSettings, currencies)}
+                  {format(product.price)}
                 </span>
               </>
             ) : (
               <span className="text-xl font-semibold text-purple-800">
-                {formatCurrency(product.price, storeSettings, currencies)}
+                {format(product.price)}
               </span>
             )}
           </div>

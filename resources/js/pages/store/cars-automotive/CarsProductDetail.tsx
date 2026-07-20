@@ -489,9 +489,7 @@ function CarsProductDetailInner({
                           isShowOption={false}
                         />
                       </div>
-                      <div className="flex-1">
-                        <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
-                      </div>
+                        <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                     </div>
 
                     <StickyBottomBar targetRef={buttonsRef}>
@@ -509,7 +507,7 @@ function CarsProductDetailInner({
                           />
                         </div>
                         <div className="flex-1">
-                          <BuyNowButton product={product} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                          <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                         </div>
                       </div>
                     </StickyBottomBar>

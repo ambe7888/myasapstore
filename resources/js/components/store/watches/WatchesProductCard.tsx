@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye } from 'lucide-react';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import AddToCartButton from '@/components/store/AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -51,6 +51,7 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
      (typeof product.variants === 'string' && product.variants.trim() !== '' && product.variants !== '[]'));
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const isProductInWishlist = isInWishlist(product.id);
+  const format = useCurrencyFormatter();
 
   return (
     <div 
@@ -171,15 +172,15 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
             {hasDiscount ? (
               <>
                 <span className="text-xl font-light text-slate-900">
-                  {formatCurrency(product.sale_price!, storeSettings, currencies)}
+                  {format(product.sale_price!)}
                 </span>
                 <span className="text-sm text-slate-500 line-through font-light">
-                  {formatCurrency(product.price, storeSettings, currencies)}
+                  {format(product.price)}
                 </span>
               </>
             ) : (
               <span className="text-xl font-light text-slate-900">
-                {formatCurrency(product.price, storeSettings, currencies)}
+                {format(product.price)}
               </span>
             )}
           </div>

@@ -381,7 +381,7 @@ function ElectronicsProductDetail({
                         />
                       </div>
                       <div className="flex-1">
-                        <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                       </div>
                       <button className="h-12 w-12 border-2 border-gray-300 hover:border-red-500 hover:bg-red-50 transition-all duration-300 rounded-lg flex items-center justify-center">
                         <Heart className="h-6 w-6 text-gray-600 hover:text-red-500" />
@@ -406,7 +406,7 @@ function ElectronicsProductDetail({
                           />
                         </div>
                         <div className="flex-1">
-                          <BuyNowButton product={product} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                          <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                         </div>
                       </div>
                     </StickyBottomBar>

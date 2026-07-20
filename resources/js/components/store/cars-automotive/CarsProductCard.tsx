@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
@@ -35,6 +35,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
   const [isFallback, setIsFallback] = useState(!product.cover_image && !product.image);
+  const format = useCurrencyFormatter();
   
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price!) / product.price) * 100) : 0;
@@ -136,15 +137,15 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
           {hasDiscount ? (
             <>
               <span className="text-xl font-bold text-red-600">
-                {formatCurrency(product.sale_price!, storeSettings, currencies)}
+                {format(product.sale_price!)}
               </span>
               <span className="text-sm text-gray-500 line-through">
-                {formatCurrency(product.price, storeSettings, currencies)}
+                {format(product.price)}
               </span>
             </>
           ) : (
             <span className="text-xl font-bold text-black">
-              {formatCurrency(product.price, storeSettings, currencies)}
+              {format(product.price)}
             </span>
           )}
         </div>

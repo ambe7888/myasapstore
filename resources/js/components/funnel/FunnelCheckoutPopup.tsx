@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 import axios from 'axios';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
 
 interface Props {
@@ -60,7 +60,7 @@ export default function FunnelCheckoutPopup({
   React.useEffect(() => {
     if (store?.id) {
       setLoadingPayments(true);
-      axios.get(generateStoreUrl('store.payment-methods', store))
+      axios.get(generateApiUrl('store.payment-methods', store))
         .then(response => {
           setPaymentMethods(response.data);
           if (response.data.length > 0) {

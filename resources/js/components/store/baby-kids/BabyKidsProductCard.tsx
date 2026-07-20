@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import BuyNowButton from '@/components/store/BuyNowButton';
@@ -38,6 +38,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
   const { addToCart, loading: cartLoading } = useCart();
   const { props } = usePage();
   const store = props.store;
+  const format = useCurrencyFormatter();
 
   const handleAddToCart = async (product: Product) => {
     if (product.variants && product.variants.length > 0) {
@@ -135,15 +136,15 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
               {product.sale_price ? (
                 <>
                   <span className="text-xl font-bold text-red-500">
-                    {formatCurrency(product.sale_price, storeSettings, currencies)}
+                    {format(product.sale_price)}
                   </span>
                   <span className="text-sm text-gray-500 line-through">
-                    {formatCurrency(product.price, storeSettings, currencies)}
+                    {format(product.price)}
                   </span>
                 </>
               ) : (
                 <span className="text-xl font-bold text-gray-800">
-                  {formatCurrency(product.price, storeSettings, currencies)}
+                  {format(product.price)}
                 </span>
               )}
             </div>

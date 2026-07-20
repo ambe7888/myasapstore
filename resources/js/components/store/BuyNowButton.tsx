@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Settings } from 'lucide-react';
-import { router } from '@inertiajs/react';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { ShoppingBag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import QuickCheckoutModal from '@/components/store/QuickCheckoutModal';
 
@@ -26,32 +24,15 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const hasVariants = product.variants && (
-    Array.isArray(product.variants) ? product.variants.length > 0 : 
-    Object.keys(product.variants).length > 0
-  );
-  
-  const hasSelectedVariants = product.variants && !Array.isArray(product.variants) && Object.keys(product.variants).length > 0 && Object.values(product.variants).every(v => v !== null && v !== undefined && v !== '');
-  
   const isOutOfStock = product.is_active === false || (product.stock !== undefined && product.stock !== null && Number(product.stock) <= 0);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (isOutOfStock) return;
-
-    if (hasVariants && !hasSelectedVariants) {
-      if (isShowOption) {
-        // Redirect to product page to select variants
-        router.visit(generateStoreUrl('store.product', store, { id: product.id }));
-      } else {
-        // On product page, show alert to select variants
-        alert(t('Please select product options before proceeding.'));
-      }
-      return;
-    }
     
-    // Open Quick Express Order Modal
+    // Always open Quick Express Order Modal
+    // The modal itself handles variant selection
     setIsModalOpen(true);
   };
 
@@ -73,17 +54,8 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
         className={`flex items-center justify-center hover:brightness-95 transition-all ${className}`}
         style={{ backgroundColor: store?.button_color_buy_now || 'var(--btn-buy-now-color, #16a34a)' }}
       >
-        {hasVariants && !hasSelectedVariants ? (
-          <>
-            <Settings className="h-4 w-4 mr-2" />
-            {t('Select Options')}
-          </>
-        ) : (
-          <>
-            <ShoppingBag className="h-4 w-4 mr-2" />
-            {store?.button_text_buy_now || t('Buy Now')}
-          </>
-        )}
+        <ShoppingBag className="h-4 w-4 mr-2" />
+        {store?.button_text_buy_now || t('Buy Now')}
       </button>
 
       <QuickCheckoutModal
@@ -96,3 +68,4 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
     </>
   );
 }
+

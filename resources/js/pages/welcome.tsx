@@ -3,7 +3,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function Welcome() {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, globalSettings } = usePage<any>().props;
     const { t } = useTranslation();
 
     return (
@@ -11,6 +11,22 @@ export default function Welcome() {
             <Head title={t('Welcome')}>
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                
+                {/* SEO Meta Tags */}
+                <meta name="description" content={globalSettings?.metaDescription || "MyStoreAsap - Créez votre boutique en ligne en 1 minute et commencez à vendre directement sur WhatsApp et les réseaux sociaux."} />
+                <meta name="keywords" content={globalSettings?.metaKeywords || "boutique en ligne, e-commerce, whatsapp store, e-commerce gratuit, vendre sur instagram, boutique e-commerce rapide"} />
+                
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={globalSettings?.titleText || "MyStoreAsap | Créez votre boutique en ligne rapidement"} />
+                <meta property="og:description" content={globalSettings?.metaDescription || "Créez votre boutique en ligne en 1 minute et commencez à vendre directement sur WhatsApp et les réseaux sociaux."} />
+                {globalSettings?.metaImage && <meta property="og:image" content={globalSettings.metaImage} />}
+                
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={globalSettings?.titleText || "MyStoreAsap | Créez votre boutique en ligne rapidement"} />
+                <meta name="twitter:description" content={globalSettings?.metaDescription || "Créez votre boutique en ligne en 1 minute et commencez à vendre directement sur WhatsApp et les réseaux sociaux."} />
+                {globalSettings?.metaImage && <meta name="twitter:image" content={globalSettings.metaImage} />}
             </Head>
             <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
                 <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">

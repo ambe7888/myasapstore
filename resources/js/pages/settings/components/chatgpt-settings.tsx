@@ -8,9 +8,10 @@ import { SettingsSection } from '@/components/settings-section';
 import { useTranslation } from 'react-i18next';
 import { router, usePage } from '@inertiajs/react';
 import { toast } from '@/components/custom-toast';
+import { Switch } from '@/components/ui/switch';
 
 interface ChatGptSettingsProps {
-  settings?: Record<string, string>;
+  settings?: Record<string, any>;
 }
 
 export default function ChatGptSettings({ settings = {} }: ChatGptSettingsProps) {
@@ -20,37 +21,40 @@ export default function ChatGptSettings({ settings = {} }: ChatGptSettingsProps)
   // Default settings
   const defaultSettings = {
     chatgptKey: '',
-    chatgptModel: 'gpt-3.5-turbo'
+    chatgptModel: 'gpt-3.5-turbo',
+    chatgptEnabled: '1'
   };
   
   // Combine settings from props and page props
   const settingsData = Object.keys(settings).length > 0 
     ? settings 
     : (pageProps.settings || {});
+    
+  const getEnabledState = (val: any) => {
+    if (val === undefined || val === null) return true;
+    return val === '1' || val === 1 || val === true || val === 'true' || val === 'on';
+  };
   
   // Initialize state with merged settings
   const [chatgptSettings, setChatgptSettings] = useState(() => ({
     chatgptKey: settingsData.chatgptKey || defaultSettings.chatgptKey,
-    chatgptModel: settingsData.chatgptModel || defaultSettings.chatgptModel
+    chatgptModel: settingsData.chatgptModel || defaultSettings.chatgptModel,
+    chatgptEnabled: getEnabledState(settingsData.chatgptEnabled)
   }));
   
   // Update state when settings change
   useEffect(() => {
     if (Object.keys(settingsData).length > 0) {
-      const mergedSettings = Object.keys(defaultSettings).reduce((acc, key) => {
-        acc[key] = settingsData[key] || defaultSettings[key];
-        return acc;
-      }, {} as Record<string, string>);
-      
-      setChatgptSettings(prevSettings => ({
-        ...prevSettings,
-        ...mergedSettings
-      }));
+      setChatgptSettings({
+        chatgptKey: settingsData.chatgptKey || '',
+        chatgptModel: settingsData.chatgptModel || 'gpt-3.5-turbo',
+        chatgptEnabled: getEnabledState(settingsData.chatgptEnabled)
+      });
     }
   }, [settingsData]);
 
   // Handle form changes
-  const handleSettingsChange = (field: string, value: string) => {
+  const handleSettingsChange = (field: string, value: string | boolean) => {
     setChatgptSettings(prev => ({
       ...prev,
       [field]: value
@@ -83,6 +87,20 @@ export default function ChatGptSettings({ settings = {} }: ChatGptSettingsProps)
     >
       <form id="chatgpt-settings-form" onSubmit={submitChatgptSettings} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex items-center justify-between p-4 bg-muted/20 border rounded-xl md:col-span-2">
+            <div className="space-y-0.5">
+              <Label htmlFor="chatgptEnabled">{t("Enable AI Assistant")}</Label>
+              <p className="text-sm text-muted-foreground">
+                {t("Display the AI assistant icon in the admin panel to help generate content")}
+              </p>
+            </div>
+            <Switch
+              id="chatgptEnabled"
+              checked={chatgptSettings.chatgptEnabled}
+              onCheckedChange={(checked) => handleSettingsChange('chatgptEnabled', checked)}
+            />
+          </div>
+
           <div className="grid gap-2 md:col-span-2">
             <Label htmlFor="chatgptKey">{t("Chat GPT Key")}</Label>
             <Input

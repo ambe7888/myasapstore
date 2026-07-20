@@ -125,11 +125,15 @@ class SystemSettingsController extends Controller
     {
         try {
             $validated = $request->validate([
-                'chatgptKey' => 'required|string',
+                'chatgptKey' => 'nullable|string',
                 'chatgptModel' => 'required|string',
+                'chatgptEnabled' => 'required|boolean',
             ]);
             
             foreach ($validated as $key => $value) {
+                if (is_bool($value)) {
+                    $value = $value ? '1' : '0';
+                }
                 updateSetting($key, $value);
             }
 

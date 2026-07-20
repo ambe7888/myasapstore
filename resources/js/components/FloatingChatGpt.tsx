@@ -5,13 +5,21 @@ import { Button } from '@/components/ui/button';
 import { usePage } from '@inertiajs/react';
 
 export function FloatingChatGpt() {
-  const { auth } = usePage().props as any;
+  const { auth, globalSettings } = usePage().props as any;
   const [isOpen, setIsOpen] = useState(false);
   const [generatedContent, setGeneratedContent] = useState('');
   
   useEffect(() => {
   }, [isOpen]);
   
+  // Check if AI is enabled globally in settings
+  const isChatgptEnabledGlobally = globalSettings?.chatgptEnabled === undefined || 
+    globalSettings?.chatgptEnabled === '1' || 
+    globalSettings?.chatgptEnabled === 1 || 
+    globalSettings?.chatgptEnabled === true || 
+    globalSettings?.chatgptEnabled === 'true' ||
+    globalSettings?.chatgptEnabled === 'on';
+
   // Check if user can access ChatGPT
   const userRole = auth?.roles?.[0] || auth?.user?.type;
   const isSuperAdmin = userRole === 'superadmin' || auth?.user?.type === 'superadmin';
@@ -32,8 +40,8 @@ export function FloatingChatGpt() {
     canUseChatGPT = hasActivePlan && creator?.plan?.enable_chatgpt === 'on';
   }
   
-  // Don't render if user doesn't have access
-  if (!canUseChatGPT) {
+  // Don't render if user doesn't have access or AI is disabled globally
+  if (!isChatgptEnabledGlobally || !canUseChatGPT) {
     return null;
   }
 

@@ -141,6 +141,12 @@ class DomainResolver
         } elseif ($segments[0] === 'checkout') {
             // Checkout page
             return app(\App\Http\Controllers\ThemeController::class)->checkout($request);
+        } elseif ($segments[0] === 'shipping-methods') {
+            // Shipping methods API (used by Buy Now quick checkout popup)
+            return app(\App\Http\Controllers\ThemeController::class)->getShippingMethods($request);
+        } elseif ($segments[0] === 'payment-methods') {
+            // Payment methods API (used by Buy Now quick checkout popup)
+            return app(\App\Http\Controllers\ThemeController::class)->getPaymentMethodsApi($request);
         } elseif ($segments[0] === 'blog') {
             if (isset($segments[2]) && $segments[1] === 'post') {
                 // Product detail page (/products/123)

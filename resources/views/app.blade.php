@@ -49,6 +49,24 @@
         @viteReactRefresh
         @vite(['resources/js/app.tsx'])
         @inertiaHead
+
+        {{-- Inject store custom head HTML --}}
+        @php
+            $resolvedStore = request()->attributes->get('resolved_store');
+            if (!$resolvedStore) {
+                $storeSlug = request()->route('storeSlug') ?? null;
+                if ($storeSlug) {
+                    $resolvedStore = \App\Models\Store::where('slug', $storeSlug)->first();
+                }
+            }
+            if ($resolvedStore) {
+                $storeConfig = \App\Models\StoreConfiguration::getConfiguration($resolvedStore->id);
+                $customHeadCode = $storeConfig['custom_head_code'] ?? '';
+            }
+        @endphp
+        @if(isset($customHeadCode) && $customHeadCode)
+            {!! $customHeadCode !!}
+        @endif
     </head>
     <body class="font-sans antialiased">
         @inertia

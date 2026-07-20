@@ -461,6 +461,26 @@ export default function StoreSettings({ store, settings }: Props) {
               </div>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('Custom Head Code')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <Label htmlFor="custom_head_code">{t('Custom Head HTML/JS/CSS')}</Label>
+                <p className="text-sm text-muted-foreground">{t('Add custom HTML code directly into the <head> tag (Google Analytics, scripts, Meta tags...)')}</p>
+                <Textarea
+                  id="custom_head_code"
+                  placeholder={t('Enter your custom HTML/JS/CSS code here...')}
+                  value={formData.custom_head_code || ''}
+                  onChange={(e) => updateSetting('custom_head_code', e.target.value)}
+                  rows={10}
+                  className="font-mono text-sm"
+                />
+              </div>
+            </CardContent>
+          </Card>
           
           <Card>
             <CardHeader>

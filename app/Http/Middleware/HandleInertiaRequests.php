@@ -270,8 +270,13 @@ class HandleInertiaRequests extends Middleware
         }
         
         try {
-            // Get store currency settings
-            $companySettings = settings($userId, $storeId);
+            // Get store currency settings with fallback to user-wide settings
+            $userSettings = settings($userId);
+            $storeSettings = settings($userId, $storeId);
+            $companySettings = array_merge(
+                is_array($userSettings) ? $userSettings : [],
+                is_array($storeSettings) ? $storeSettings : []
+            );
             
             // Get currency code from settings
             $currencyCode = $companySettings['defaultCurrency'] ?? 'XOF';

@@ -44,6 +44,7 @@ class StoreConfiguration extends Model
             'favicon' => '',
             'custom_css' => '',
             'custom_javascript' => '',
+            'custom_head_code' => '',
             'facebook_pixel' => '',
             'google_analytics' => '',
             'tiktok_pixel' => '',

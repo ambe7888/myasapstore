@@ -610,11 +610,16 @@ if (! function_exists('getEnabledPaymentMethods')) {
         $user = $userId ? User::find($userId) : auth()->user();
         $isSuperAdmin = $user && $user->isSuperAdmin();
         
-        // COD, WhatsApp, Telegram only for company/store checkout, not for plan purchases
         if ($isSuperAdmin && $storeId === null) {
             $methods = ['paypal', 'paystack', 'bank', 'cinetpay'];
         } else {
-            $methods = ['cod', 'paypal', 'paystack', 'bank', 'cinetpay', 'whatsapp', 'telegram'];
+            $methods = [
+                'cod', 'paypal', 'paystack', 'bank', 'cinetpay', 'whatsapp', 'telegram',
+                'stripe', 'razorpay', 'mercadopago', 'flutterwave', 'paytabs', 'skrill',
+                'coingate', 'payfast', 'tap', 'xendit', 'paytr', 'mollie', 'toyyibpay',
+                'cashfree', 'iyzipay', 'benefit', 'ozow', 'easebuzz', 'khalti',
+                'authorizenet', 'fedapay', 'payhere', 'paymentwall'
+            ];
         }
         
         $enabled = [];

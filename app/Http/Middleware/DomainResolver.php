@@ -60,6 +60,7 @@ class DomainResolver
                 }
             }
         }
+        }
         
         // Check store status via configuration
         if ($store) {

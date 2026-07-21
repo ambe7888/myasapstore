@@ -108,14 +108,22 @@ export default function QuickCheckoutModal({
       setLoadingPayments(true);
       axios.get(generateApiUrl('store.payment-methods', store))
         .then(response => {
-          setPaymentMethods(response.data);
-          if (response.data.length > 0) {
-            setPaymentMethod(response.data[0].id);
+          const methods = response.data || [];
+          if (methods.length > 0) {
+            setPaymentMethods(methods);
+            setPaymentMethod(methods[0].id);
+          } else {
+            const fallback = [{ id: 'cod', name: '💵 Paiement à la livraison' }];
+            setPaymentMethods(fallback);
+            setPaymentMethod('cod');
           }
           setLoadingPayments(false);
         })
         .catch(err => {
           console.error("Error loading payment methods:", err);
+          const fallback = [{ id: 'cod', name: '💵 Paiement à la livraison' }];
+          setPaymentMethods(fallback);
+          setPaymentMethod('cod');
           setLoadingPayments(false);
         });
     }

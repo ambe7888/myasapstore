@@ -413,10 +413,10 @@ function CarsProductDetailInner({
 
                 {/* Description */}
                 <div className="mb-8">
-                  <p className="text-gray-700 leading-relaxed">
-                    {product.description?.replace(/<[^>]*>/g, '').substring(0, 300)}
-                    {product.description && product.description.replace(/<[^>]*>/g, '').length > 300 ? '...' : ''}
-                  </p>
+                  <div 
+                    className="text-gray-700 leading-relaxed prose prose-gray max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                  />
                 </div>
 
 

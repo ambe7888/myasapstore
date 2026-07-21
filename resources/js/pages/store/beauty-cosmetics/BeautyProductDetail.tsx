@@ -305,10 +305,10 @@ function BeautyProductDetailContent({
 
                   {/* Description */}
                   <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5">
-                    <p className="text-gray-700 leading-relaxed text-sm">
-                      {product.description?.replace(/<[^>]*>/g, '').substring(0, 250)}
-                      {product.description && product.description.replace(/<[^>]*>/g, '').length > 250 ? '...' : ''}
-                    </p>
+                    <div 
+                      className="text-gray-700 leading-relaxed text-sm prose prose-gray max-w-none"
+                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                    />
                   </div>
 
                   {/* Stock Status */}

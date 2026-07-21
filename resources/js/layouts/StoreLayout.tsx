@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Head } from '@inertiajs/react';
 import Header from '@/components/store/Header';
 import storeTheme from '@/config/store-theme';
 import { CartProvider } from '@/contexts/CartContext';
@@ -462,6 +463,23 @@ function StoreLayoutContent({
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Inject pixels via Head so browser extensions detect them */}
+      {store?.facebook_pixel && (
+        <Head>
+          <script id="fb-pixel-meta">{`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '${store.facebook_pixel}');
+            fbq('track', 'PageView');
+          `}</script>
+        </Head>
+      )}
       <Header 
         storeName={storeName}
         logo={logo}

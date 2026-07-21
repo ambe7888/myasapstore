@@ -288,10 +288,10 @@ function FurnitureProductDetailContent({
 
                 <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
                   <h3 className="text-lg font-bold text-slate-900 mb-3">À propos de cet article</h3>
-                  <p className="text-lg text-slate-700 leading-relaxed">
-                    {product.description?.replace(/<[^>]*>/g, '').substring(0, 200)}
-                    {product.description && product.description.replace(/<[^>]*>/g, '').length > 200 ? '...' : ''}
-                  </p>
+                  <div 
+                    className="text-base text-slate-700 leading-relaxed prose prose-slate max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                  />
                 </div>
 
                 {hasVariants && (

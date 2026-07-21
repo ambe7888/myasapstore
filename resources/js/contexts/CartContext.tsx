@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from '@/components/custom-toast';
 
 interface CartItem {
   id: number;
@@ -114,10 +115,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
         variants
       });
       
+      // Success toast notification
+      toast.success(`✅ ${product.name || 'Article'} ajouté au panier !`, {
+        duration: 3000,
+      });
+
       // Trigger Facebook Pixel AddToCart event
       if (typeof window !== 'undefined' && (window as any).fbq) {
         try {
-          const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+          const currency = (window as any).page?.props?.storeCurrency?.code || 'XOF';
           (window as any).fbq('track', 'AddToCart', {
             content_name: product.name,
             content_ids: [product.id.toString()],
@@ -131,7 +137,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
       }
 
       await refreshCart();
-    } catch (error) {
+    } catch (error: any) {
+      const errMsg = error?.response?.data?.message || 'Erreur lors de l\'ajout au panier.';
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

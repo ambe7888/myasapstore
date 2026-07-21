@@ -288,8 +288,10 @@ function WatchesProductDetail({
                     <div>
                       <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">About This Timepiece</h3>
                       <p className="text-slate-600 font-light leading-relaxed text-sm">
-                        {product.description?.replace(/<[^>]*>/g, '').substring(0, 150)}
-                        {product.description && product.description.replace(/<[^>]*>/g, '').length > 150 ? '...' : ''}
+                        <div 
+                          className="text-sm text-slate-600 leading-relaxed prose prose-slate max-w-none"
+                          dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                        />
                       </p>
                     </div>
 

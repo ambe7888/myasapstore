@@ -262,10 +262,10 @@ function JewelryProductDetailContent({
                   
                   {/* Description */}
                   <div className="prose prose-gray max-w-none mb-8">
-                    <p className="text-gray-600 font-light leading-relaxed">
-                      {product.description?.replace(/<[^>]*>/g, '').substring(0, 200)}
-                      {product.description && product.description.replace(/<[^>]*>/g, '').length > 200 ? '...' : ''}
-                    </p>
+                    <div 
+                      className="text-gray-600 font-light leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                    />
                   </div>
                   
                   {/* Stock Status */}

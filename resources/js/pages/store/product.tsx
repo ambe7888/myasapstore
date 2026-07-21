@@ -421,10 +421,10 @@ export default function ProductDetail({
 
                 {/* Short Description */}
                 <div className="mb-6">
-                  <p className="text-gray-600">
-                    {product.description?.replace(/<[^>]*>/g, '').substring(0, 200)}
-                    {product.description && product.description.replace(/<[^>]*>/g, '').length > 200 ? '...' : ''}
-                  </p>
+                  <div 
+                    className="text-gray-600 prose prose-gray max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                  />
                 </div>
 
                 {/* Stock Status */}

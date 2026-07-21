@@ -84,8 +84,22 @@ class HandleInertiaRequests extends Middleware
             // Filter out sensitive keys before sharing with frontend
             $globalSettings = $this->filterSensitiveSettings($globalSettings);
             
-            // Get store-specific currency settings for authenticated users
-            $storeCurrency = $this->getStoreCurrencySettings($request);
+            // Resolve store globally
+            $store = $this->resolveStore($request);
+            
+            // Get store-specific currency settings
+            $storeCurrency = $this->getStoreCurrencySettings($request, $store);
+        }
+        
+        try {
+            \Log::info('Store currency in Inertia share:', [
+                'host' => $request->getHost(),
+                'storeCurrency' => $storeCurrency ?? null,
+                'resolved_store_attr' => $request->attributes->get('resolved_store') ? $request->attributes->get('resolved_store')->id : null,
+                'resolved_store_local' => $store ? $store->id : null,
+            ]);
+        } catch (\Exception $e) {
+            // Ignore log errors
         }
         
         return [
@@ -170,6 +184,7 @@ class HandleInertiaRequests extends Middleware
             'globalSettings' => $globalSettings,
             'superadminSettings' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? array_merge(defaultSettings(), getSuperadminSettings()) : defaultSettings(),
             'storeCurrency' => $storeCurrency,
+            'store' => $store ? $this->formatSharedStore($store) : null,
             'dynamicTitleText' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? getSetting('titleText', config('app.name', 'StoreGo')) : config('app.name', 'StoreGo'),
             'referralSettings' => [
                 'is_enabled' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? ReferralSetting::isEnabled() : false,
@@ -227,23 +242,10 @@ class HandleInertiaRequests extends Middleware
     }
     
     /**
-     * Get currency settings from company settings for the current user
+     * Resolve store from request attributes, route parameters, or domain host
      */
-    private function getStoreCurrencySettings(Request $request): array
+    private function resolveStore(Request $request)
     {
-        $user = $request->user();
-        
-        // Default currency settings
-        $defaultCurrency = [
-            'code' => 'XOF',
-            'symbol' => 'FCFA',
-            'name' => 'Franc CFA (XOF)',
-            'position' => 'after',
-            'decimals' => 0,
-            'decimal_separator' => '.',
-            'thousands_separator' => ' '
-        ];
-        
         $store = $request->attributes->get('resolved_store');
         if (!$store) {
             $storeSlug = $request->route('storeSlug') ?? null;
@@ -284,6 +286,65 @@ class HandleInertiaRequests extends Middleware
                             }
                         }
                     }
+                }
+            }
+        }
+        return $store;
+    }
+
+    /**
+     * Format store config and attributes to share globally with the frontend StoreLayout
+     */
+    private function formatSharedStore($store): array
+    {
+        $config = \App\Models\StoreConfiguration::getConfiguration($store->id);
+        
+        return [
+            'id' => $store->id,
+            'name' => $store->name,
+            'slug' => $store->slug,
+            'logo' => $store->logo,
+            'theme' => $store->theme,
+            'primary_color' => $config['primary_color'] ?? '',
+            'button_radius' => $config['button_radius'] ?? '0.625rem',
+            'button_color_add_to_cart' => $config['button_color_add_to_cart'] ?? '',
+            'button_color_buy_now' => $config['button_color_buy_now'] ?? '',
+            'text_title_color' => $config['text_title_color'] ?? '',
+            'text_button_color' => $config['text_button_color'] ?? '',
+            'site_bg_color' => $config['site_bg_color'] ?? '',
+            'custom_css' => $config['custom_css'] ?? '',
+            'custom_javascript' => $config['custom_javascript'] ?? '',
+            'facebook_pixel' => $config['facebook_pixel'] ?? '',
+            'google_analytics' => $config['google_analytics'] ?? '',
+            'tiktok_pixel' => $config['tiktok_pixel'] ?? '',
+            'snapchat_pixel' => $config['snapchat_pixel'] ?? '',
+        ];
+    }
+
+    /**
+     * Get currency settings from company settings for the current user
+     */
+    private function getStoreCurrencySettings(Request $request, $store = null): array
+    {
+        $user = $request->user();
+        
+        // Default currency settings
+        $defaultCurrency = [
+            'code' => 'XOF',
+            'symbol' => 'FCFA',
+            'name' => 'Franc CFA (XOF)',
+            'position' => 'after',
+            'decimals' => 0,
+            'decimal_separator' => '.',
+            'thousands_separator' => ' '
+        ];
+        
+        if (!$store) {
+            $store = $request->attributes->get('resolved_store');
+            if (!$store) {
+                $storeSlug = $request->route('storeSlug') ?? null;
+                if ($storeSlug) {
+                    $store = Store::where('slug', $storeSlug)->first();
                 }
             }
         }

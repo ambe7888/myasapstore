@@ -4,7 +4,7 @@ import Header from '@/components/store/Header';
 import storeTheme from '@/config/store-theme';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { StoreContentProvider, useStoreContent } from '@/contexts/StoreContentContext';
 import { getThemeComponents } from '@/config/theme-registry';
 import { useStoreFavicon } from '@/hooks/use-store-favicon';
@@ -44,6 +44,9 @@ function StoreLayoutContent({
   theme,
   store
 }: Omit<StoreLayoutProps, 'storeId' | 'storeContent'> & { store?: any }) {
+  const { props } = usePage<any>();
+  const activeStore = store || props.store;
+
   // Set store-specific favicon
   useStoreFavicon();
   
@@ -52,29 +55,29 @@ function StoreLayoutContent({
   
   // Dynamic pageview tracking on client-side routing
   useEffect(() => {
-    if (!store) return;
-    if (!store.facebook_pixel && !store.google_analytics && !store.tiktok_pixel && !store.snapchat_pixel) return;
+    if (!activeStore) return;
+    if (!activeStore.facebook_pixel && !activeStore.google_analytics && !activeStore.tiktok_pixel && !activeStore.snapchat_pixel) return;
 
     const unregister = router.on('success', (event) => {
       // 1. Facebook PageView
-      if (store.facebook_pixel && (window as any).fbq) {
+      if (activeStore.facebook_pixel && (window as any).fbq) {
         (window as any).fbq('track', 'PageView');
       }
 
       // 2. Google Analytics PageView
-      if (store.google_analytics && (window as any).gtag) {
-        (window as any).gtag('config', store.google_analytics, {
+      if (activeStore.google_analytics && (window as any).gtag) {
+        (window as any).gtag('config', activeStore.google_analytics, {
           page_path: event.detail.page.url
         });
       }
 
       // 3. TikTok PageView
-      if (store.tiktok_pixel && (window as any).ttq) {
+      if (activeStore.tiktok_pixel && (window as any).ttq) {
         (window as any).ttq.page();
       }
 
       // 4. Snapchat PageView
-      if (store.snapchat_pixel && (window as any).snaptr) {
+      if (activeStore.snapchat_pixel && (window as any).snaptr) {
         (window as any).snaptr('track', 'PAGE_VIEW');
       }
     });
@@ -82,11 +85,11 @@ function StoreLayoutContent({
     return () => {
       unregister();
     };
-  }, [store?.facebook_pixel, store?.google_analytics, store?.tiktok_pixel, store?.snapchat_pixel]);
+  }, [activeStore?.facebook_pixel, activeStore?.google_analytics, activeStore?.tiktok_pixel, activeStore?.snapchat_pixel]);
 
   // Inject custom CSS and JavaScript
   useEffect(() => {
-    if (!store) return;
+    if (!activeStore) return;
     
     // Inject custom CSS
     const existingStyle = document.getElementById('store-custom-css');
@@ -332,15 +335,15 @@ function StoreLayoutContent({
       `;
     }
     
-    if (store?.custom_css) {
-      cssContent += store.custom_css;
+    if (activeStore?.custom_css) {
+      cssContent += activeStore.custom_css;
     }
     
     style.textContent = cssContent;
     document.head.appendChild(style);
     
     // Inject custom JavaScript
-    if (store.custom_javascript) {
+    if (activeStore?.custom_javascript) {
       const existingScript = document.getElementById('store-custom-js');
       if (existingScript) {
         existingScript.remove();
@@ -348,12 +351,12 @@ function StoreLayoutContent({
       
       const script = document.createElement('script');
       script.id = 'store-custom-js';
-      script.textContent = store.custom_javascript;
+      script.textContent = activeStore.custom_javascript;
       document.head.appendChild(script);
     }
     
     // Facebook Pixel
-    if (store?.facebook_pixel) {
+    if (activeStore?.facebook_pixel) {
       const fbScript = document.createElement('script');
       fbScript.id = 'store-fb-pixel';
       fbScript.innerHTML = `
@@ -365,18 +368,18 @@ function StoreLayoutContent({
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '${store.facebook_pixel}');
+        fbq('init', '${activeStore.facebook_pixel}');
         fbq('track', 'PageView');
       `;
       document.head.appendChild(fbScript);
     }
 
     // Google Analytics
-    if (store?.google_analytics) {
+    if (activeStore?.google_analytics) {
       const gaScript = document.createElement('script');
       gaScript.id = 'store-ga-script';
       gaScript.async = true;
-      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${store.google_analytics}`;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${activeStore.google_analytics}`;
       document.head.appendChild(gaScript);
 
       const gaInit = document.createElement('script');
@@ -385,19 +388,19 @@ function StoreLayoutContent({
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '${store.google_analytics}');
+        gtag('config', '${activeStore.google_analytics}');
       `;
       document.head.appendChild(gaInit);
     }
 
     // TikTok Pixel
-    if (store?.tiktok_pixel) {
+    if (activeStore?.tiktok_pixel) {
       const ttScript = document.createElement('script');
       ttScript.id = 'store-tt-pixel';
       ttScript.innerHTML = `
         !function (w, d, t) {
           w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
-          ttq.load('${store.tiktok_pixel}');
+          ttq.load('${activeStore.tiktok_pixel}');
           ttq.page();
         }(window, document, 'ttq');
       `;
@@ -405,7 +408,7 @@ function StoreLayoutContent({
     }
 
     // Snapchat Pixel
-    if (store?.snapchat_pixel) {
+    if (activeStore?.snapchat_pixel) {
       const snapScript = document.createElement('script');
       snapScript.id = 'store-snap-pixel';
       snapScript.innerHTML = `
@@ -415,7 +418,7 @@ function StoreLayoutContent({
         r.src=n;var u=t.getElementsByTagName(s)[0];
         u.parentNode.insertBefore(r,u);})(window,document,
         'https://sc-static.net/scevent.min.js');
-        snaptr('init', '${store.snapchat_pixel}');
+        snaptr('init', '${activeStore.snapchat_pixel}');
         snaptr('track', 'PAGE_VIEW');
       `;
       document.head.appendChild(snapScript);
@@ -440,21 +443,21 @@ function StoreLayoutContent({
       if (snapPixel) snapPixel.remove();
     };
   }, [
-    store?.custom_css, 
-    store?.custom_javascript, 
-    store?.facebook_pixel, 
-    store?.google_analytics, 
-    store?.tiktok_pixel, 
-    store?.snapchat_pixel,
+    activeStore?.custom_css, 
+    activeStore?.custom_javascript, 
+    activeStore?.facebook_pixel, 
+    activeStore?.google_analytics, 
+    activeStore?.tiktok_pixel, 
+    activeStore?.snapchat_pixel,
     content?.show_sections?.breadcrumb,
     content?.show_sections?.page_header,
-    store?.primary_color,
-    store?.button_radius,
-    store?.button_color_add_to_cart,
-    store?.button_color_buy_now,
-    store?.text_button_color,
-    store?.text_title_color,
-    store?.site_bg_color
+    activeStore?.primary_color,
+    activeStore?.button_radius,
+    activeStore?.button_color_add_to_cart,
+    activeStore?.button_color_buy_now,
+    activeStore?.text_button_color,
+    activeStore?.text_title_color,
+    activeStore?.site_bg_color
   ]);
   
   // Get theme-specific footer component
@@ -463,23 +466,6 @@ function StoreLayoutContent({
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Inject pixels via Head so browser extensions detect them */}
-      {store?.facebook_pixel && (
-        <Head>
-          <script id="fb-pixel-meta">{`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${store.facebook_pixel}');
-            fbq('track', 'PageView');
-          `}</script>
-        </Head>
-      )}
       <Header 
         storeName={storeName}
         logo={logo}
@@ -523,13 +509,17 @@ export default function StoreLayout({
   theme = 'default',
   store
 }: StoreLayoutProps) {
+  const { props } = usePage<any>();
+  const activeStore = store || props.store;
+  const activeStoreId = activeStore?.id || storeId;
+
   return (
-    <PWAProvider store={store}>
-      <CartProvider storeId={storeId} isLoggedIn={isLoggedIn}>
+    <PWAProvider store={activeStore}>
+      <CartProvider storeId={activeStoreId} isLoggedIn={isLoggedIn}>
         <WishlistProvider>
           <StoreContentProvider 
             initialContent={storeContent}
-            storeId={storeId}
+            storeId={activeStoreId}
           >
             <StoreLayoutContent
               storeName={storeName}
@@ -541,7 +531,7 @@ export default function StoreLayout({
               customPages={customPages}
               customFooter={customFooter}
               theme={theme}
-              store={store}
+              store={activeStore}
             >
               {children}
             </StoreLayoutContent>

@@ -86,6 +86,10 @@ class HandleInertiaRequests extends Middleware
             
             // Resolve store globally
             $store = $this->resolveStore($request);
+            if ($store && !$request->attributes->has('resolved_store')) {
+                $request->attributes->set('resolved_store', $store);
+                $request->attributes->set('store_theme', $store->theme);
+            }
             
             // Get store-specific currency settings
             $storeCurrency = $this->getStoreCurrencySettings($request, $store);

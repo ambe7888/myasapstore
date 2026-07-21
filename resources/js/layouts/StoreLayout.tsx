@@ -357,6 +357,13 @@ function StoreLayoutContent({
     
     // Facebook Pixel
     if (activeStore?.facebook_pixel) {
+      const pixelId = activeStore.facebook_pixel;
+      if (!(window as any)._fbq_initialized_pixels) {
+        (window as any)._fbq_initialized_pixels = new Set();
+      }
+      
+      const isAlreadyInitialized = (window as any)._fbq_initialized_pixels.has(pixelId) || typeof (window as any).fbq === 'function';
+      
       const fbScript = document.createElement('script');
       fbScript.id = 'store-fb-pixel';
       fbScript.innerHTML = `
@@ -368,10 +375,11 @@ function StoreLayoutContent({
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '${activeStore.facebook_pixel}');
+        ${!isAlreadyInitialized ? `fbq('init', '${pixelId}');` : ''}
         fbq('track', 'PageView');
       `;
       document.head.appendChild(fbScript);
+      (window as any)._fbq_initialized_pixels.add(pixelId);
     }
 
     // Google Analytics

@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [
             CheckInstallation::class,
-            \App\Http\Middleware\DomainResolver::class,
             HandleCors::class,
             HandleAppearance::class,
             ShareGlobalSettings::class,
@@ -32,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
             DemoModeMiddleware::class,
             \App\Http\Middleware\SecurityHeadersMiddleware::class,
+            \App\Http\Middleware\DomainResolver::class,
         ]);
         
         $middleware->api(append: [

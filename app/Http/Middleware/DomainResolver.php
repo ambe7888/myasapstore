@@ -24,11 +24,12 @@ class DomainResolver
             return $next($request);
         }
         
-        $host = $request->getHost();
-        $store = null;
+        $store = $request->attributes->get('resolved_store');
         
-        // Clean incoming host (remove protocol, www, ports, slashes)
-        $cleanHost = Store::sanitizeDomain($host);
+        if (!$store) {
+            $host = $request->getHost();
+            // Clean incoming host (remove protocol, www, ports, slashes)
+            $cleanHost = Store::sanitizeDomain($host);
         
         if ($cleanHost) {
             $store = Store::where('custom_domain', $cleanHost)

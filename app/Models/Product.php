@@ -82,7 +82,12 @@ class Product extends Model
     public function getVariantsAttribute($value)
     {
         if (empty($value)) return [];
-        return json_decode($value, true);
+        if (is_array($value)) return $value;
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+        return [];
     }
     
     /**
@@ -99,7 +104,12 @@ class Product extends Model
     public function getCustomFieldsAttribute($value)
     {
         if (empty($value)) return [];
-        return json_decode($value, true);
+        if (is_array($value)) return $value;
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+        return [];
     }
     
     /**

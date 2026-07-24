@@ -31,7 +31,9 @@ export default function AddToCartButton({ product, store, className = '', isShow
     Object.keys(product.variants).length > 0
   );
   
-  const hasSelectedVariants = product.variants && !Array.isArray(product.variants) && Object.keys(product.variants).length > 0 && Object.values(product.variants).every(v => v !== null && v !== undefined && v !== '');
+  const isMandatory = store?.require_variant_selection !== false;
+  
+  const hasSelectedVariants = !isMandatory || (product.variants && !Array.isArray(product.variants) && Object.keys(product.variants).length > 0 && Object.values(product.variants).every(v => v !== null && v !== undefined && v !== ''));
   
   const isOutOfStock = product.is_active === false || (product.stock !== undefined && product.stock !== null && Number(product.stock) <= 0);
 

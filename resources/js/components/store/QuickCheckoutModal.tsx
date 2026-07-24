@@ -5,6 +5,7 @@ import { useCart } from '@/contexts/CartContext';
 import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { useCurrencyFormatter, useStoreCurrency } from '@/hooks/use-store-currency';
 import { getProductCoverImage } from '@/utils/image-helper';
+import { isCustomInputFields } from '@/utils/helpers';
 import axios from 'axios';
 
 interface QuickCheckoutModalProps {
@@ -47,25 +48,61 @@ export default function QuickCheckoutModal({
 
   const hasVariants = productVariants && productVariants.length > 0;
 
+  // Parse custom fields safely
+  const customFields = React.useMemo(() => {
+    if (!product || !product.custom_fields) return [];
+    const raw = product.custom_fields;
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === 'object') {
+      return Object.entries(raw).map(([key, value]) => ({ name: key, value }));
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+      if (typeof parsed === 'object') {
+        return Object.entries(parsed).map(([key, value]) => ({ name: key, value }));
+      }
+    } catch (e) {}
+    return [];
+  }, [product]);
+
+  const [customFieldInputs, setCustomFieldInputs] = useState<Record<string, string>>({});
+
   // Selected variants state - re-init when product changes
   const [selectedVariants, setSelectedVariants] = useState<{ [key: string]: string }>({});
   
   // Re-initialize selected variants when product/modal opens
   React.useEffect(() => {
-    if (isOpen && productVariants && productVariants.length > 0) {
-      const initial: { [key: string]: string } = {};
-      const preSelected = propSelectedVariants || (product?.variants && !Array.isArray(product.variants) && typeof product.variants === 'object' ? product.variants : null);
+    if (isOpen) {
+      if (productVariants && productVariants.length > 0) {
+        const initial: { [key: string]: string } = {};
+        const preSelected = propSelectedVariants || (product?.variants && !Array.isArray(product.variants) && typeof product.variants === 'object' ? product.variants : null);
+        const isMandatory = store?.require_variant_selection !== false;
 
-      productVariants.forEach((v: any) => {
-        if (preSelected && preSelected[v.name]) {
-          initial[v.name] = preSelected[v.name];
-        } else if (v.values && v.values.length > 0) {
-          initial[v.name] = v.values[0];
+        productVariants.forEach((v: any) => {
+          if (preSelected && preSelected[v.name]) {
+            initial[v.name] = preSelected[v.name];
+          } else if (!isMandatory && v.values && v.values.length > 0) {
+            initial[v.name] = v.values[0];
+          } else {
+            initial[v.name] = '';
+          }
+        });
+        setSelectedVariants(initial);
+      } else {
+        setSelectedVariants({});
+      }
+
+      const initialInputs: Record<string, string> = {};
+      customFields.forEach((field: any) => {
+        const { isInput } = isCustomInputFields(field.value);
+        if (isInput) {
+          initialInputs[field.name] = '';
         }
       });
-      setSelectedVariants(initial);
+      setCustomFieldInputs(initialInputs);
     }
-  }, [isOpen, product?.id, propSelectedVariants, productVariants]);
+  }, [isOpen, product?.id, propSelectedVariants, productVariants, customFields, store?.require_variant_selection]);
 
   const [quantity, setQuantity] = useState(initialQuantity);
   const [loading, setLoading] = useState(false);
@@ -155,19 +192,43 @@ export default function QuickCheckoutModal({
       return;
     }
 
+    // Validate variants selection if mandatory
+    if (store?.require_variant_selection !== false && hasVariants) {
+      for (const variant of productVariants) {
+        if (!selectedVariants[variant.name]) {
+          setError(`Veuillez sélectionner une option pour "${variant.name}".`);
+          return;
+        }
+      }
+    }
+
+    // Validate custom input fields
+    for (const field of customFields) {
+      const { isInput, isRequired } = isCustomInputFields(field.value);
+      if (isInput && isRequired && !customFieldInputs[field.name]?.trim()) {
+        setError(`Le champ "${field.name}" est obligatoire.`);
+        return;
+      }
+    }
+
+    const mergedVariants = {
+      ...(hasVariants ? selectedVariants : {}),
+      ...customFieldInputs
+    };
+
     setLoading(true);
     setError(null);
 
     try {
       // Step 1: Ensure product is added to cart
-      await addToCart(product, hasVariants ? selectedVariants : null, quantity);
+      await addToCart(product, mergedVariants, quantity);
 
       // Step 2: Submit order to store.order.place endpoint
       const orderPayload = {
         store_id: store?.id,
         product_id: product.id,
         quantity: quantity,
-        variants: hasVariants ? selectedVariants : null,
+        variants: mergedVariants,
         customer_first_name: firstName,
         customer_last_name: lastName || '',
         customer_email: email.trim() || `${phone.replace(/\D/g, '') || 'client'}@store.local`,
@@ -303,12 +364,43 @@ export default function QuickCheckoutModal({
                         className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
                         style={{ borderRadius: store?.button_radius || '0.75rem' }}
                       >
+                        {store?.require_variant_selection !== false && (
+                          <option value="">{`-- Choisir ${variant.name} --`}</option>
+                        )}
                         {variant.values.map((val: string) => (
                           <option key={val} value={val}>{val}</option>
                         ))}
                       </select>
                     </div>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* Custom Input Fields */}
+            {customFields.some(f => isCustomInputFields(f.value).isInput) && (
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3 mb-2">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Informations requises :</span>
+                <div className="space-y-3">
+                  {customFields.map((field: any) => {
+                    const { isInput, isRequired } = isCustomInputFields(field.value);
+                    if (!isInput) return null;
+                    return (
+                      <div key={field.name} className="flex flex-col gap-1">
+                        <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                          {field.name} {isRequired && <span className="text-rose-500">*</span>}
+                        </label>
+                        <input
+                          type="text"
+                          value={customFieldInputs[field.name] || ''}
+                          onChange={(e) => setCustomFieldInputs(prev => ({ ...prev, [field.name]: e.target.value }))}
+                          placeholder={`Saisir ${field.name}...`}
+                          className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none animate-none"
+                          style={{ borderRadius: store?.button_radius || '0.75rem' }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}

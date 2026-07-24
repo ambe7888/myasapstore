@@ -126,6 +126,16 @@ export default function StoreSettings({ store, settings }: Props) {
                   onCheckedChange={(checked) => updateSetting('maintenance_mode', checked)}
                 />
               </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>{t('Variant Selection Mandatory')}</Label>
+                  <p className="text-sm text-muted-foreground">{t('Require customer to select product variants before ordering')}</p>
+                </div>
+                <Switch 
+                  checked={formData.require_variant_selection !== false}
+                  onCheckedChange={(checked) => updateSetting('require_variant_selection', checked)}
+                />
+              </div>
             </CardContent>
           </Card>
 

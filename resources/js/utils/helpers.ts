@@ -133,6 +133,21 @@ const getCompanyCurrencySymbol = getCurrencySymbol;
 
 
 
+export function isCustomInputFields(fieldValue: any): { isInput: boolean; isRequired: boolean } {
+  if (!fieldValue || typeof fieldValue !== 'string') return { isInput: false, isRequired: false };
+  const val = fieldValue.trim().toLowerCase();
+  const mandatoryKeywords = ['[saisie_obligatoire]', '[obligatoire]', '[required]', '[saisie]'];
+  const optionalKeywords = ['[saisie_facultative]', '[facultatif]', '[optional]'];
+  
+  if (mandatoryKeywords.includes(val)) {
+    return { isInput: true, isRequired: true };
+  }
+  if (optionalKeywords.includes(val)) {
+    return { isInput: true, isRequired: false };
+  }
+  return { isInput: false, isRequired: false };
+}
+
 export {
   formatCurrency,
   getCurrencySymbol,

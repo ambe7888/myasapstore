@@ -10,6 +10,7 @@ import { getImageUrl } from '@/utils/image-helper';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
+import { isCustomInputFields } from '@/utils/helpers';
 import { toast } from '@/components/custom-toast';
 import FurnitureProductCard from '@/components/store/furniture-interior/FurnitureProductCard';
 
@@ -44,6 +45,7 @@ function FurnitureProductDetailContent({
   
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+  const [customFieldInputs, setCustomFieldInputs] = useState<Record<string, string>>({});
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('specifications');
   const [reviewRating, setReviewRating] = useState(0);
@@ -87,6 +89,21 @@ function FurnitureProductDetailContent({
   })();
 
   const hasVariants = productVariants && productVariants.length > 0;
+
+  // Re-initialize selected variants when product opens
+  React.useEffect(() => {
+    if (productVariants && productVariants.length > 0) {
+      const initial: { [key: string]: string } = {};
+      const isMandatory = store?.require_variant_selection !== false;
+
+      productVariants.forEach((v: any) => {
+        if (!isMandatory && v.values && v.values.length > 0) {
+          initial[v.name] = v.values[0];
+        }
+      });
+      setSelectedVariants(initial);
+    }
+  }, [product?.id, store?.require_variant_selection]);
 
   // Parse images from comma-separated string
   const productImages = (() => {
@@ -145,18 +162,36 @@ function FurnitureProductDetailContent({
     }
   })();
 
-  const hasCustomFields = customFields && customFields.length > 0;
+  const buyerInputFields = customFields.filter(f => isCustomInputFields(f.value).isInput);
+  const hasBuyerInputFields = buyerInputFields.length > 0;
+  const staticCustomFields = customFields.filter(f => !isCustomInputFields(f.value).isInput);
+  const hasCustomFields = staticCustomFields.length > 0;
   
-  const allVariantsSelected = !hasVariants ||
+  const allVariantsSelected = store?.require_variant_selection === false || !hasVariants ||
     (productVariants && productVariants.every(variant => selectedVariants[variant.name]));
+
+  const mergedVariants = {
+    ...(hasVariants ? selectedVariants : {}),
+    ...customFieldInputs
+  };
 
   const handleAddToCart = async () => {
     if (isOutOfStock) return;
-    if (hasVariants && !allVariantsSelected) {
+    if (store?.require_variant_selection !== false && hasVariants && !allVariantsSelected) {
       alert('Veuillez sélectionner toutes les options');
       return;
     }
-    await addToCart(product, hasVariants ? selectedVariants : null, 1);
+
+    // Validate custom input fields
+    for (const field of buyerInputFields) {
+      const { isRequired } = isCustomInputFields(field.value);
+      if (isRequired && !customFieldInputs[field.name]?.trim()) {
+        alert(`Le champ "${field.name}" est obligatoire.`);
+        return;
+      }
+    }
+
+    await addToCart(product, mergedVariants, 1);
   };
 
   const handleWishlistToggle = async () => {
@@ -314,13 +349,38 @@ function FurnitureProductDetailContent({
                   </div>
                 )}
 
+                {hasBuyerInputFields && (
+                  <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
+                    <h3 className="text-xl font-bold text-slate-900 mb-4">Informations personnalisées</h3>
+                    <div className="space-y-4">
+                      {buyerInputFields.map((field) => {
+                        const { isRequired } = isCustomInputFields(field.value);
+                        return (
+                          <div key={field.name} className="flex flex-col gap-2">
+                            <label className="text-base font-bold text-slate-900">
+                              {field.name} {isRequired && <span className="text-red-500">*</span>}
+                            </label>
+                            <input
+                              type="text"
+                              value={customFieldInputs[field.name] || ''}
+                              onChange={(e) => setCustomFieldInputs(prev => ({ ...prev, [field.name]: e.target.value }))}
+                              placeholder={`Saisir ${field.name}...`}
+                              className="w-full px-4 py-2 border-2 border-amber-200 focus:border-amber-500 rounded-xl text-base outline-none transition-all duration-300"
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
                   <div className="w-full">
                     <div ref={buttonsRef} className="flex flex-wrap gap-4 items-center w-full mb-4">
                       <div className="flex-1">
                         <AddToCartButton
                           product={{
                             ...product,
-                            variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null
+                            variants: mergedVariants
                           }}
                           storeSlug={store.slug}
                           store={store}
@@ -329,7 +389,7 @@ function FurnitureProductDetailContent({
                         />
                       </div>
                       <div className="flex-1">
-                        <BuyNowButton product={product} selectedVariants={selectedVariants} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl" quantity={quantity} />
+                        <BuyNowButton product={product} selectedVariants={mergedVariants} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl" quantity={quantity} />
                       </div>
                       
                       <button
@@ -360,6 +420,9 @@ function FurnitureProductDetailContent({
                                     onChange={(e) => handleVariantChange(variant.name, e.target.value)}
                                     className="px-2 py-0.5 text-[10px] rounded border border-amber-300 bg-white text-slate-800 outline-none"
                                   >
+                                    {store?.require_variant_selection !== false && (
+                                      <option value="">-- Choisir --</option>
+                                    )}
                                     {variant.values.map((val) => (
                                       <option key={val} value={val}>{val}</option>
                                     ))}
@@ -375,7 +438,7 @@ function FurnitureProductDetailContent({
                             <AddToCartButton
                               product={{
                                 ...product,
-                                variants: selectedVariants
+                                variants: mergedVariants
                               }}
                               storeSlug={store.slug}
                               store={store}
@@ -386,7 +449,7 @@ function FurnitureProductDetailContent({
                           <div className="flex-1">
                             <BuyNowButton
                               product={product}
-                              selectedVariants={selectedVariants}
+                              selectedVariants={mergedVariants}
                               store={store}
                               className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-xl"
                               quantity={quantity}
@@ -498,7 +561,7 @@ function FurnitureProductDetailContent({
                       </div>
                       <div className="bg-amber-50 border border-amber-200 rounded-lg overflow-hidden">
                         <div className="divide-y divide-amber-100">
-                          {customFields.map((field, index) => (
+                          {staticCustomFields.map((field, index) => (
                             <div key={index} className="px-6 py-4 hover:bg-amber-100 transition-colors">
                               <div className="flex flex-col sm:flex-row sm:items-center">
                                 <dt className="text-sm font-bold text-amber-900 sm:w-1/3 mb-1 sm:mb-0">

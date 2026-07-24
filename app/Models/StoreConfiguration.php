@@ -58,6 +58,7 @@ class StoreConfiguration extends Model
             'text_title_color' => '',
             'text_button_color' => '',
             'site_bg_color' => '',
+            'require_variant_selection' => true,
         ];
         
         // Convert string boolean values to actual booleans

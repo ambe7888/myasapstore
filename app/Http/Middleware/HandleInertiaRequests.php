@@ -322,6 +322,7 @@ class HandleInertiaRequests extends Middleware
             'google_analytics' => $config['google_analytics'] ?? '',
             'tiktok_pixel' => $config['tiktok_pixel'] ?? '',
             'snapchat_pixel' => $config['snapchat_pixel'] ?? '',
+            'require_variant_selection' => (bool)($config['require_variant_selection'] ?? true),
         ];
     }
 

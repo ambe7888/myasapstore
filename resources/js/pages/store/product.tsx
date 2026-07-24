@@ -13,6 +13,7 @@ import { getImageUrl } from '@/utils/image-helper';
 import { useCart } from '@/contexts/CartContext';
 import AddToCartButton from '@/components/store/AddToCartButton';
 import { formatCurrency } from '@/utils/currency-formatter';
+import { isCustomInputFields } from '@/utils/helpers';
 import { toast } from '@/components/custom-toast';
 
 interface ProductVariant {
@@ -83,6 +84,7 @@ export default function ProductDetail({
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+  const [customFieldInputs, setCustomFieldInputs] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState('description');
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewTitle, setReviewTitle] = useState('');
@@ -94,6 +96,57 @@ export default function ProductDetail({
   const [totalReviews, setTotalReviews] = useState(product.total_reviews || 0);
   const [averageRating, setAverageRating] = useState(product.average_rating || 0);
   const buttonsRef = React.useRef<HTMLDivElement>(null);
+
+  // Parse variants safely
+  const productVariants = React.useMemo(() => {
+    if (!product || !product.variants) return [];
+    if (Array.isArray(product.variants)) return product.variants;
+    try {
+      return JSON.parse(product.variants);
+    } catch (error) {
+      return [];
+    }
+  }, [product]);
+
+  const hasVariants = productVariants && productVariants.length > 0;
+
+  // Parse custom fields safely
+  const customFields = React.useMemo(() => {
+    if (!product || !product.custom_fields) return [];
+    if (Array.isArray(product.custom_fields)) return product.custom_fields;
+    if (typeof product.custom_fields === 'object') {
+      return Object.entries(product.custom_fields).map(([key, value]) => ({
+        name: key,
+        value: value
+      }));
+    }
+    try {
+      const parsed = JSON.parse(product.custom_fields);
+      if (Array.isArray(parsed)) return parsed;
+      if (typeof parsed === 'object') {
+        return Object.entries(parsed).map(([key, value]) => ({
+          name: key,
+          value: value
+        }));
+      }
+    } catch (e) {}
+    return [];
+  }, [product]);
+
+  // Re-initialize selected variants when product opens
+  React.useEffect(() => {
+    if (productVariants && productVariants.length > 0) {
+      const initial: { [key: string]: string } = {};
+      const isMandatory = store?.require_variant_selection !== false;
+
+      productVariants.forEach((v: any) => {
+        if (!isMandatory && v.values && v.values.length > 0) {
+          initial[v.name] = v.values[0];
+        }
+      });
+      setSelectedVariants(initial);
+    }
+  }, [product?.id, store?.require_variant_selection]);
   
   // Get theme-specific components
   const actualTheme = store?.theme || theme;
@@ -224,22 +277,19 @@ export default function ProductDetail({
 
   const isOnSale = product.sale_price && product.sale_price < product.price;
   const isInStock = product.stock > 0 && product.is_active;
-  // Parse variants safely
-  const productVariants = (() => {
-    if (!product.variants) return [];
-    if (Array.isArray(product.variants)) return product.variants;
-    try {
-      return JSON.parse(product.variants);
-    } catch (error) {
-      return [];
-    }
-  })();
-
-  const hasVariants = productVariants && productVariants.length > 0;
+  const buyerInputFields = customFields.filter(f => isCustomInputFields(f.value).isInput);
+  const hasBuyerInputFields = buyerInputFields.length > 0;
+  const staticCustomFields = customFields.filter(f => !isCustomInputFields(f.value).isInput);
+  const hasCustomFields = staticCustomFields.length > 0;
 
   // Check if all required variants are selected
-  const allVariantsSelected = !hasVariants ||
+  const allVariantsSelected = store?.require_variant_selection === false || !hasVariants ||
     (productVariants && productVariants.every(variant => selectedVariants[variant.name]));
+
+  const mergedVariants = {
+    ...(hasVariants ? selectedVariants : {}),
+    ...customFieldInputs
+  };
 
   const handleQuantityChange = (value: number) => {
     if (value < 1) return;
@@ -255,18 +305,31 @@ export default function ProductDetail({
   };
 
   const handleAddToCart = async () => {
-    if (!isInStock || !allVariantsSelected) return;
+    if (!isInStock) return;
+    
+    if (store?.require_variant_selection !== false && !allVariantsSelected) {
+      alert('Veuillez sélectionner toutes les options avant l\'ajout au panier.');
+      return;
+    }
+
+    // Validate custom input fields
+    for (const field of buyerInputFields) {
+      const { isRequired } = isCustomInputFields(field.value);
+      if (isRequired && !customFieldInputs[field.name]?.trim()) {
+        alert(`Le champ "${field.name}" est obligatoire.`);
+        return;
+      }
+    }
 
     setIsAddingToCart(true);
     try {
       for (let i = 0; i < quantity; i++) {
-        await addToCart(product, hasVariants ? selectedVariants : null);
+        await addToCart(product, mergedVariants);
       }
-      // Show success message
-      alert('Product added to cart successfully!');
+      toast.success('Produit ajouté au panier avec succès !');
     } catch (error) {
       console.error('Failed to add to cart:', error);
-      alert('Failed to add product to cart. Please try again.');
+      toast.error('Erreur lors de l\'ajout au panier. Veuillez réessayer.');
     } finally {
       setIsAddingToCart(false);
     }
@@ -276,33 +339,6 @@ export default function ProductDetail({
     // Here you would implement the actual add to wishlist functionality
     console.log('Adding to wishlist:', product);
   };
-
-  // Parse custom fields safely
-  const customFields = (() => {
-    if (!product.custom_fields) return [];
-    if (Array.isArray(product.custom_fields)) return product.custom_fields;
-    if (typeof product.custom_fields === 'object') {
-      return Object.entries(product.custom_fields).map(([key, value]) => ({
-        name: key,
-        value: value
-      }));
-    }
-    try {
-      const parsed = JSON.parse(product.custom_fields);
-      if (Array.isArray(parsed)) return parsed;
-      if (typeof parsed === 'object') {
-        return Object.entries(parsed).map(([key, value]) => ({
-          name: key,
-          value: value
-        }));
-      }
-      return [];
-    } catch (error) {
-      return [];
-    }
-  })();
-
-  const hasCustomFields = customFields && customFields.length > 0;
 
   // Enhanced image URL helper
   const getProductImageUrl = (path: string): string => {
@@ -474,6 +510,29 @@ export default function ProductDetail({
                   </div>
                 )}
 
+                {/* Custom fields */}
+                {hasBuyerInputFields && (
+                  <div className="mb-6 space-y-4">
+                    {buyerInputFields.map((field) => {
+                      const { isRequired } = isCustomInputFields(field.value);
+                      return (
+                        <div key={field.name} className="flex flex-col gap-1">
+                          <label className="text-sm font-medium">
+                            {field.name} {isRequired && <span className="text-red-500">*</span>}
+                          </label>
+                          <input
+                            type="text"
+                            value={customFieldInputs[field.name] || ''}
+                            onChange={(e) => setCustomFieldInputs(prev => ({ ...prev, [field.name]: e.target.value }))}
+                            placeholder={`Saisir ${field.name}...`}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm outline-none focus:border-primary"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
                 {/* Quantity */}
                 <div className="mb-6">
                   <h3 className="text-sm font-medium mb-2">Quantité</h3>
@@ -505,7 +564,7 @@ export default function ProductDetail({
                 <div ref={buttonsRef} className="flex flex-wrap gap-4 mb-8 items-center w-full">
                   <div className="flex-1">
                     <AddToCartButton
-                      product={{...product, variants: hasVariants ? (allVariantsSelected ? selectedVariants : productVariants) : null}}
+                      product={{...product, variants: mergedVariants}}
                       storeSlug={storeSlug}
                       store={store}
                       className="w-full h-12 rounded-lg text-sm font-semibold transition-all duration-300 bg-primary text-white hover:bg-blue-700 flex items-center justify-center"
@@ -515,7 +574,7 @@ export default function ProductDetail({
                   <div className="flex-1">
                     <BuyNowButton
                       product={product}
-                      selectedVariants={selectedVariants}
+                      selectedVariants={mergedVariants}
                       store={store}
                       className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
                       quantity={quantity}
@@ -553,6 +612,9 @@ export default function ProductDetail({
                                 onChange={(e) => handleVariantChange(variant.name, e.target.value)}
                                 className="px-2 py-0.5 text-[10px] rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-900 text-gray-800 dark:text-white outline-none"
                               >
+                                {store?.require_variant_selection !== false && (
+                                  <option value="">-- Choisir --</option>
+                                )}
                                 {variant.values.map((val) => (
                                   <option key={val} value={val}>{val}</option>
                                 ))}
@@ -566,7 +628,7 @@ export default function ProductDetail({
                     <div className="flex gap-2 w-full">
                       <div className="flex-1">
                         <AddToCartButton
-                          product={{...product, variants: selectedVariants}}
+                          product={{...product, variants: mergedVariants}}
                           storeSlug={storeSlug}
                           store={store}
                           className="w-full h-12 rounded-lg text-sm font-semibold transition-all duration-300 bg-primary text-white hover:bg-blue-700 flex items-center justify-center"
@@ -576,7 +638,7 @@ export default function ProductDetail({
                       <div className="flex-1">
                         <BuyNowButton
                           product={product}
-                          selectedVariants={selectedVariants}
+                          selectedVariants={mergedVariants}
                           store={store}
                           className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
                           quantity={quantity}
@@ -662,7 +724,7 @@ export default function ProductDetail({
                         </div>
                         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                           <div className="divide-y divide-gray-200">
-                            {customFields.map((field, index) => (
+                            {staticCustomFields.map((field, index) => (
                               <div key={index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
                                 <div className="flex flex-col sm:flex-row sm:items-center">
                                   <dt className="text-sm font-medium text-gray-900 sm:w-1/3 mb-1 sm:mb-0">

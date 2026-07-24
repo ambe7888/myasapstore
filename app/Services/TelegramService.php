@@ -57,7 +57,15 @@ class TelegramService
             // Handle variants - could be array, JSON, or string
             $variants = $item->product_variants;
             if (is_array($variants) && !empty($variants)) {
-                $variant = implode(', ', $variants);
+                $variantParts = [];
+                foreach ($variants as $k => $v) {
+                    if (is_numeric($k)) {
+                        $variantParts[] = $v;
+                    } else {
+                        $variantParts[] = "$k: $v";
+                    }
+                }
+                $variant = implode(', ', $variantParts);
             } elseif (is_string($variants) && $variants && $variants !== '[]' && $variants !== 'null') {
                 $variant = $variants;
             } else {

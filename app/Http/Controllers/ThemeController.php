@@ -1217,6 +1217,7 @@ class ThemeController extends Controller
                             'price' => (float) $item->unit_price,
                             'quantity' => $item->quantity,
                             'image' => $item->product->cover_image ?? '/placeholder.jpg',
+                            'variants' => $item->product_variants,
                         ];
                     })->toArray(),
                     'shipping_address' => [
@@ -1311,6 +1312,7 @@ class ThemeController extends Controller
                             'price' => $item->unit_price,
                             'quantity' => $item->quantity,
                             'image' => $item->product->cover_image ?? '/placeholder.jpg',
+                            'variants' => $item->product_variants,
                         ];
                     })->toArray(),
                     'shipping_address' => [

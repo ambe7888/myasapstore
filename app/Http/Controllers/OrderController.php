@@ -103,6 +103,7 @@ class OrderController extends BaseController
                     'quantity' => $item->quantity,
                     'price' => (float) $item->unit_price,
                     'image' => $item->product->cover_image ?? '/placeholder.jpg',
+                    'variants' => $item->product_variants,
                 ];
             }),
             'summary' => [

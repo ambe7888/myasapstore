@@ -286,14 +286,6 @@ function FurnitureProductDetailContent({
                   )}
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">À propos de cet article</h3>
-                  <div 
-                    className="text-base text-slate-700 leading-relaxed prose prose-slate max-w-none"
-                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                  />
-                </div>
-
                 {hasVariants && (
                   <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
                     <h3 className="text-xl font-bold text-slate-900 mb-4">Choisir les options</h3>
@@ -405,6 +397,14 @@ function FurnitureProductDetailContent({
                       </div>
                     </StickyBottomBar>
                   </div>
+
+                <div className="bg-white rounded-2xl p-6 border-2 border-amber-100">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">À propos de cet article</h3>
+                  <div 
+                    className="text-base text-slate-700 leading-relaxed prose prose-slate max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                  />
+                </div>
               </div>
             </div>
 

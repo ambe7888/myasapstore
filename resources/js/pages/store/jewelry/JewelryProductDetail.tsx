@@ -344,7 +344,7 @@ function JewelryProductDetailContent({
                         />
                       </div>
                       <div className="flex-1">
-                        <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                        <BuyNowButton product={product} selectedVariants={selectedVariants} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                       </div>
                       
                       <button
@@ -375,7 +375,7 @@ function JewelryProductDetailContent({
                           />
                         </div>
                         <div className="flex-1">
-                          <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
+                          <BuyNowButton product={product} selectedVariants={selectedVariants} store={store} className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center" quantity={quantity} />
                         </div>
                       </div>
                     </StickyBottomBar>

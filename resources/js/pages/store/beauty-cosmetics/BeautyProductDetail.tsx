@@ -392,7 +392,7 @@ function BeautyProductDetailContent({
                         />
                       </div>
                       <div className="flex-1">
-                        <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                        <BuyNowButton product={product} selectedVariants={selectedVariants} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
                       </div>
                       <button 
                         onClick={async () => await toggleWishlist(product.id)}
@@ -425,7 +425,7 @@ function BeautyProductDetailContent({
                           />
                         </div>
                         <div className="flex-1">
-                          <BuyNowButton product={{...product, variants: hasVariants ? selectedVariants : product.variants}} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
+                          <BuyNowButton product={product} selectedVariants={selectedVariants} store={store} className="w-full h-12 bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-lg flex items-center justify-center rounded-full" quantity={quantity} />
                         </div>
                       </div>
                     </StickyBottomBar>

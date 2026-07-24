@@ -11,6 +11,7 @@ interface QuickCheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
   product: any;
+  selectedVariants?: Record<string, string>;
   store: any;
   initialQuantity?: number;
 }
@@ -19,6 +20,7 @@ export default function QuickCheckoutModal({
   isOpen,
   onClose,
   product,
+  selectedVariants: propSelectedVariants,
   store,
   initialQuantity = 1
 }: QuickCheckoutModalProps) {
@@ -28,14 +30,20 @@ export default function QuickCheckoutModal({
   
   // Parse variants safely
   const productVariants = React.useMemo(() => {
-    if (!product || !product.variants) return [];
-    if (Array.isArray(product.variants)) return product.variants;
-    try {
-      return JSON.parse(product.variants);
-    } catch (error) {
-      return [];
+    if (!product) return [];
+    const raw = product.original_variants || product.raw_variants || product.product_variants || product.variants;
+    if (!raw) return [];
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === 'string') {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      } catch (error) {
+        return [];
+      }
     }
-  }, [product?.variants]);
+    return [];
+  }, [product]);
 
   const hasVariants = productVariants && productVariants.length > 0;
 
@@ -46,26 +54,18 @@ export default function QuickCheckoutModal({
   React.useEffect(() => {
     if (isOpen && productVariants && productVariants.length > 0) {
       const initial: { [key: string]: string } = {};
-      // If product.variants is an object (already selected), use those values
-      if (product?.variants && !Array.isArray(product.variants) && typeof product.variants === 'object') {
-        const variantObj = product.variants;
-        productVariants.forEach((v: any) => {
-          if (variantObj[v.name]) {
-            initial[v.name] = variantObj[v.name];
-          } else if (v.values && v.values.length > 0) {
-            initial[v.name] = v.values[0];
-          }
-        });
-      } else {
-        productVariants.forEach((v: any) => {
-          if (v.values && v.values.length > 0) {
-            initial[v.name] = v.values[0];
-          }
-        });
-      }
+      const preSelected = propSelectedVariants || (product?.variants && !Array.isArray(product.variants) && typeof product.variants === 'object' ? product.variants : null);
+
+      productVariants.forEach((v: any) => {
+        if (preSelected && preSelected[v.name]) {
+          initial[v.name] = preSelected[v.name];
+        } else if (v.values && v.values.length > 0) {
+          initial[v.name] = v.values[0];
+        }
+      });
       setSelectedVariants(initial);
     }
-  }, [isOpen, product?.id]);
+  }, [isOpen, product?.id, propSelectedVariants, productVariants]);
 
   const [quantity, setQuantity] = useState(initialQuantity);
   const [loading, setLoading] = useState(false);

@@ -514,7 +514,8 @@ export default function ProductDetail({
                   </div>
                   <div className="flex-1">
                     <BuyNowButton
-                      product={{...product, variants: hasVariants ? selectedVariants : product.variants}}
+                      product={product}
+                      selectedVariants={selectedVariants}
                       store={store}
                       className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
                       quantity={quantity}
@@ -574,7 +575,8 @@ export default function ProductDetail({
                       </div>
                       <div className="flex-1">
                         <BuyNowButton
-                          product={{...product, variants: selectedVariants}}
+                          product={product}
+                          selectedVariants={selectedVariants}
                           store={store}
                           className="w-full h-12 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all shadow-md flex items-center justify-center"
                           quantity={quantity}

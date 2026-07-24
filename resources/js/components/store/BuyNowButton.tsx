@@ -14,13 +14,14 @@ interface BuyNowButtonProps {
     stock: number;
     is_active: boolean;
   };
+  selectedVariants?: Record<string, string>;
   store: any;
   className?: string;
   isShowOption?: boolean;
   quantity?: number;
 }
 
-export default function BuyNowButton({ product, store, className = '', isShowOption=true, quantity=1 }: BuyNowButtonProps) {
+export default function BuyNowButton({ product, selectedVariants, store, className = '', isShowOption=true, quantity=1 }: BuyNowButtonProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -62,6 +63,7 @@ export default function BuyNowButton({ product, store, className = '', isShowOpt
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         product={product}
+        selectedVariants={selectedVariants}
         store={store}
         initialQuantity={quantity}
       />

@@ -69,8 +69,10 @@ class AuthController extends Controller
         if ($store->theme === 'beauty-cosmetics') $loginPage = 'store/beauty-cosmetics/BeautyLogin';
         if ($store->theme === 'jewelry') $loginPage = 'store/jewelry/JewelryLogin';
         if ($store->theme === 'watches') $loginPage = 'store/watches/WatchesLogin';
+        if ($store->theme === 'furniture-interior') $loginPage = 'store/furniture-interior/FurnitureLogin';
         if ($store->theme === 'cars-automotive') $loginPage = 'store/cars-automotive/CarsLogin';
         if ($store->theme === 'baby-kids') $loginPage = 'store/baby-kids/BabyKidsLogin';
+        if ($store->theme === 'perfume-fragrances') $loginPage = 'store/perfume-fragrances/PerfumeLogin';
         
         $configuration = \App\Models\StoreConfiguration::getConfiguration($store->id);
         $isCustomDomain = request() && request()->attributes->has('resolved_store') ?? false;
@@ -175,8 +177,10 @@ class AuthController extends Controller
         if ($store->theme === 'beauty-cosmetics') $registerPage = 'store/beauty-cosmetics/BeautyRegister';
         if ($store->theme === 'jewelry') $registerPage = 'store/jewelry/JewelryRegister';
         if ($store->theme === 'watches') $registerPage = 'store/watches/WatchesRegister';
+        if ($store->theme === 'furniture-interior') $registerPage = 'store/furniture-interior/FurnitureRegister';
         if ($store->theme === 'cars-automotive') $registerPage = 'store/cars-automotive/CarsRegister';
         if ($store->theme === 'baby-kids') $registerPage = 'store/baby-kids/BabyKidsRegister';
+        if ($store->theme === 'perfume-fragrances') $registerPage = 'store/perfume-fragrances/PerfumeRegister';
         
         $configuration = \App\Models\StoreConfiguration::getConfiguration($store->id);
         
@@ -462,8 +466,10 @@ class AuthController extends Controller
         if ($store->theme === 'beauty-cosmetics') $forgotPasswordPage = 'store/beauty-cosmetics/BeautyForgotPassword';
         if ($store->theme === 'jewelry') $forgotPasswordPage = 'store/jewelry/JewelryForgotPassword';
         if ($store->theme === 'watches') $forgotPasswordPage = 'store/watches/WatchesForgotPassword';
+        if ($store->theme === 'furniture-interior') $forgotPasswordPage = 'store/furniture-interior/FurnitureForgotPassword';
         if ($store->theme === 'cars-automotive') $forgotPasswordPage = 'store/cars-automotive/CarsForgotPassword';
         if ($store->theme === 'baby-kids') $forgotPasswordPage = 'store/baby-kids/BabyKidsForgotPassword';
+        if ($store->theme === 'perfume-fragrances') $forgotPasswordPage = 'store/perfume-fragrances/PerfumeForgotPassword';
         
         return inertia($forgotPasswordPage, [
             'store' => [
@@ -508,8 +514,10 @@ class AuthController extends Controller
         if ($store->theme === 'beauty-cosmetics') $resetPasswordPage = 'store/beauty-cosmetics/BeautyResetPassword';
         if ($store->theme === 'jewelry') $resetPasswordPage = 'store/jewelry/JewelryResetPassword';
         if ($store->theme === 'watches') $resetPasswordPage = 'store/watches/WatchesResetPassword';
+        if ($store->theme === 'furniture-interior') $resetPasswordPage = 'store/furniture-interior/FurnitureResetPassword';
         if ($store->theme === 'cars-automotive') $resetPasswordPage = 'store/cars-automotive/CarsResetPassword';
         if ($store->theme === 'baby-kids') $resetPasswordPage = 'store/baby-kids/BabyKidsResetPassword';
+        if ($store->theme === 'perfume-fragrances') $resetPasswordPage = 'store/perfume-fragrances/PerfumeResetPassword';
         
         return inertia($resetPasswordPage, [
             'store' => [

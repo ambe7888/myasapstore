@@ -1,5 +1,14 @@
 export const generateStoreUrl = (routeName: string, store: any, params: any = {}) => {
-  if (store?.enable_custom_domain || store?.enable_custom_subdomain) {
+  const currentHost = typeof window !== 'undefined' ? window.location.host.toLowerCase() : '';
+  const cleanHost = currentHost.replace(/^www\./, '').split(':')[0];
+
+  const isCustomDomain =
+    store?.enable_custom_domain ||
+    store?.enable_custom_subdomain ||
+    (cleanHost && store?.custom_domain && cleanHost === store.custom_domain.toLowerCase().replace(/^www\./, '').split(':')[0]) ||
+    (cleanHost && store?.custom_subdomain && cleanHost === store.custom_subdomain.toLowerCase().replace(/^www\./, '').split(':')[0]);
+
+  if (isCustomDomain) {
     return route(routeName, params);
   }
   return route(routeName, { storeSlug: store?.slug, ...params });

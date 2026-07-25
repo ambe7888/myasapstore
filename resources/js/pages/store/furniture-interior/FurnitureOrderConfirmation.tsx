@@ -5,6 +5,7 @@ import { generateStoreUrl } from '@/utils/store-url-helper';
 import { CheckCircle, Package, Truck, Calendar, MapPin, CreditCard, Home, MessageCircle } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
 import { formatCurrency } from '@/utils/currency-formatter';
+import ItemVariants from '@/components/store/ItemVariants';
 
 interface OrderItem {
   id: number;
@@ -272,7 +273,8 @@ export default function FurnitureOrderConfirmation({
                             </div>
                             <div className="flex-1">
                               <div className="text-lg font-bold text-slate-900">{item.name}</div>
-                              <div className="text-sm text-slate-600">Quantité : {item.quantity}</div>
+                              <ItemVariants variants={(item as any).variants || (item as any).product_variants} />
+                              <div className="text-sm text-slate-600 mt-1">Quantité : {item.quantity}</div>
                               <div className="text-sm text-slate-600">Prix : {formatCurrency(item.price, storeSettings, currencies)}</div>
                             </div>
                             <div className="text-xl font-bold text-amber-800">

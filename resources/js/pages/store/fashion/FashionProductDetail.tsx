@@ -276,14 +276,6 @@ function FashionProductDetail({
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <div className="prose prose-gray max-w-none">
-                    <div 
-                      className="text-gray-600 font-light leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                    />
-                  </div>
-
                   {/* Stock Status */}
                   <div className="flex items-center">
                     {isInStock ? (

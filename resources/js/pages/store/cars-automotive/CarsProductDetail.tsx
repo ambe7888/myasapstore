@@ -411,16 +411,6 @@ function CarsProductDetailInner({
 
                 </div>
 
-                {/* Description */}
-                <div className="mb-8">
-                  <div 
-                    className="text-gray-700 leading-relaxed prose prose-gray max-w-none"
-                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                  />
-                </div>
-
-
-
                 {/* Variants */}
                 {hasVariants && productVariants && (
                   <div className="space-y-6 mb-8">

@@ -260,14 +260,6 @@ function JewelryProductDetailContent({
                     )}
                   </div>
                   
-                  {/* Description */}
-                  <div className="prose prose-gray max-w-none mb-8">
-                    <div 
-                      className="text-gray-600 font-light leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                    />
-                  </div>
-                  
                   {/* Stock Status */}
                   <div className="flex items-center mb-6">
                     {isInStock ? (

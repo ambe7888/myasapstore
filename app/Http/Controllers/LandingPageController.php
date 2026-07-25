@@ -26,11 +26,20 @@ class LandingPageController extends Controller
                 ->first();
         }
         
-        // Check for store custom domain
+        // Check for store custom domain or custom subdomain
         if (!$store) {
-            $store = Store::where('custom_domain', rtrim(preg_replace('/^https?:\/\//', '', $host), '/'))
-                ->where('is_active', true)
-                ->first();
+            $cleanHost = Store::sanitizeDomain($host);
+            if ($cleanHost) {
+                $store = Store::where('custom_domain', $cleanHost)
+                    ->where('is_active', true)
+                    ->first();
+
+                if (!$store) {
+                    $store = Store::where('custom_subdomain', $cleanHost)
+                        ->where('is_active', true)
+                        ->first();
+                }
+            }
         }
 
         if ($store) {

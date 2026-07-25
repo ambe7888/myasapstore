@@ -6,6 +6,7 @@ import { ChevronRight, CheckCircle, Package, Truck, Calendar, MapPin, CreditCard
 import { getImageUrl } from '@/utils/image-helper';
 import { getThemeComponents } from '@/config/theme-registry';
 import { formatCurrency } from '@/utils/currency-formatter';
+import ItemVariants from '@/components/store/ItemVariants';
 
 
 interface OrderItem {
@@ -355,6 +356,7 @@ export default function OrderConfirmation({
                                     </div>
                                     <div className="ml-4">
                                       <div className="text-sm font-medium text-gray-900">{item.name}</div>
+                                      <ItemVariants variants={(item as any).variants || (item as any).product_variants} />
                                     </div>
                                   </div>
                                 </td>

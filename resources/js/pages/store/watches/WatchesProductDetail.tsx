@@ -284,17 +284,6 @@ function WatchesProductDetail({
 
                   {/* Product Details */}
                   <div className="space-y-6">
-                    {/* Description */}
-                    <div>
-                      <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">About This Timepiece</h3>
-                      <p className="text-slate-600 font-light leading-relaxed text-sm">
-                        <div 
-                          className="text-sm text-slate-600 leading-relaxed prose prose-slate max-w-none"
-                          dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                        />
-                      </p>
-                    </div>
-
                     {/* Stock Status */}
                     <div>
                       <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">Availability</h3>
@@ -436,6 +425,17 @@ function WatchesProductDetail({
                         </div>
                       </StickyBottomBar>
                     </div>
+
+                    {/* Description */}
+                    {product.description && (
+                      <div className="pt-4 border-t border-slate-200">
+                        <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">About This Timepiece</h3>
+                        <div 
+                          className="text-sm text-slate-600 leading-relaxed prose prose-slate max-w-none"
+                          dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                        />
+                      </div>
+                    )}
 
                     {/* Quick Info */}
                     <div className="bg-slate-50 p-4 space-y-2 text-xs">

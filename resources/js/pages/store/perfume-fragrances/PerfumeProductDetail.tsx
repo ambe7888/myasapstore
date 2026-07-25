@@ -275,17 +275,6 @@ function PerfumeProductDetailContent({
                   )}
                 </div>
 
-                {/* Description */}
-                {product.description && (
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-3 uppercase tracking-wider">About This Fragrance</h3>
-                    <div 
-                      className="text-gray-600 leading-relaxed prose prose-gray max-w-none"
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </div>
-                )}
-
                 {/* Variants */}
                 {(() => {
                   let variants = null;

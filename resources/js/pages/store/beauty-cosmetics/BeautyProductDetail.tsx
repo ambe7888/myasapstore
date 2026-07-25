@@ -303,14 +303,6 @@ function BeautyProductDetailContent({
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5">
-                    <div 
-                      className="text-gray-700 leading-relaxed text-sm prose prose-gray max-w-none"
-                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                    />
-                  </div>
-
                   {/* Stock Status */}
                   <div className="flex items-center">
                     {isInStock ? (

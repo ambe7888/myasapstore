@@ -455,14 +455,6 @@ export default function ProductDetail({
                   )}
                 </div>
 
-                {/* Short Description */}
-                <div className="mb-6">
-                  <div 
-                    className="text-gray-600 prose prose-gray max-w-none"
-                    dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                  />
-                </div>
-
                 {/* Stock Status */}
                 <div className="mb-6 flex items-center">
                   {isInStock ? (

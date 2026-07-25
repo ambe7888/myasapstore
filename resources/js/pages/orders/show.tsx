@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import { formatCurrency } from '@/utils/helpers';
+import ItemVariants from '@/components/store/ItemVariants';
 import { usePermissions } from '@/hooks/usePermissions';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -210,15 +211,7 @@ export default function ShowOrder({ order }: OrderShowProps) {
                     <h4 className="font-medium">{item.name}</h4>
                     <p className="text-sm text-muted-foreground">{t('SKU: {{sku}}', { sku: item.sku })}</p>
                     <p className="text-sm text-muted-foreground">{t('Quantity: {{quantity}}', { quantity: item.quantity })}</p>
-                    {item.variants && typeof item.variants === 'object' && Object.keys(item.variants).length > 0 && (
-                      <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground bg-slate-50 dark:bg-slate-800/40 p-2 rounded border border-slate-100 dark:border-slate-800">
-                        {Object.entries(item.variants).map(([key, val]) => (
-                          <span key={key}>
-                            <span className="font-bold text-slate-700 dark:text-slate-300">{key}</span>: {String(val)}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    <ItemVariants variants={(item as any).variants || (item as any).product_variants} className="mt-2 text-xs" />
                   </div>
                   <div className="text-right">
                     <p className="font-medium">{formatCurrency(item.price)}</p>

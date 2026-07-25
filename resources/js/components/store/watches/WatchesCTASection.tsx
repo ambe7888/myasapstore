@@ -1,4 +1,6 @@
 import React from 'react';
+import { usePage } from '@inertiajs/react';
+import { formatCustomLink } from '@/utils/store-url-helper';
 import { Settings, Star, Gift, Users, Truck, RefreshCw, CreditCard, HeadphonesIcon, Shield, Clock, Award, Gem } from 'lucide-react';
 
 interface WatchesCTASectionProps {
@@ -58,7 +60,7 @@ export default function WatchesCTASection({ content, ctaBoxes, bottomSection }: 
             {bottomSection?.description?.value || bottomSection?.description || bottomSection?.subtitle?.value || bottomSection?.subtitle || 'Experience personalized service and exclusive access to the world\'s finest timepieces.'}
           </p>
           <a
-            href={bottomSection?.button_link?.value || bottomSection?.button_link || '/contact'}
+            href={formatCustomLink(bottomSection?.button_link?.value || bottomSection?.button_link, store, '/contact')}
             className="inline-flex items-center px-8 py-3 bg-amber-500 text-slate-900 font-medium tracking-wider uppercase text-sm hover:bg-amber-400 transition-colors duration-300"
           >
             {bottomSection?.button_text?.value || bottomSection?.button_text || 'Get Started'}

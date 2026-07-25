@@ -1,7 +1,7 @@
 import React from 'react';
 import { Settings, Phone, Truck, Award, ArrowRight } from 'lucide-react';
 import { usePage } from '@inertiajs/react';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface CTABox {
   icon: string;
@@ -101,14 +101,14 @@ export default function CarsCTASection({ content, ctaBoxes }: CarsCTASectionProp
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
-              href={ctaContent.primary_button_link?.value || ctaContent.primary_button_link || generateStoreUrl('store.products', store)}
+              href={formatCustomLink(ctaContent.primary_button_link?.value || ctaContent.primary_button_link, store, generateStoreUrl('store.products', store))}
               className="inline-flex items-center px-10 py-4 bg-white text-red-600 hover:bg-gray-900 hover:text-white font-bold tracking-wider uppercase transition-colors"
             >
               {ctaContent.primary_button_text?.value || ctaContent.primary_button_text || 'Shop Performance Parts'}
               <ArrowRight className="h-5 w-5 ml-3" />
             </a>
             <a
-              href={ctaContent.secondary_button_link?.value || ctaContent.secondary_button_link || '/contact'}
+              href={formatCustomLink(ctaContent.secondary_button_link?.value || ctaContent.secondary_button_link, store, '/contact')}
               className="inline-flex items-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-black font-bold tracking-wider uppercase transition-colors"
             >
               {ctaContent.secondary_button_text?.value || ctaContent.secondary_button_text || 'Get Expert Consultation'}

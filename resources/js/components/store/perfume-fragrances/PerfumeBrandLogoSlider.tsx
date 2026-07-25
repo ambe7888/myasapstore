@@ -1,5 +1,6 @@
 import React from 'react';
 import { getImageUrl } from '@/utils/image-helper';
+import { formatCustomLink } from '@/utils/store-url-helper';
 
 interface PerfumeBrandLogoSliderProps {
   content?: any;
@@ -84,7 +85,7 @@ export default function PerfumeBrandLogoSlider({ content }: PerfumeBrandLogoSlid
               {content?.bottom_description || 'We work with hundreds of fragrance brands. Contact us for special requests.'}
             </p>
             <a
-              href={content?.bottom_button_link || '/contact'}
+              href={formatCustomLink(content?.bottom_button_link, store, '/contact')}
               className="inline-flex items-center px-6 py-3 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
             >
               {content?.bottom_button_text || 'Contact Us'}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface ElectronicsHeroSectionProps {
   content?: any;
@@ -10,6 +10,7 @@ interface ElectronicsHeroSectionProps {
 export default function ElectronicsHeroSection({ content }: ElectronicsHeroSectionProps) {
   const { props } = usePage();
   const store = props.store;
+  const baseUrl = props.base_url;
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
@@ -17,35 +18,31 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 rounded-full blur-3xl"></div>
+    <section className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24 overflow-hidden">
+      {/* Circuit Pattern Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
       </div>
+      
+      {/* Glowing Orbs */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0">
-        <div className="w-full h-full" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="text-white">
-            {/* Badge */}
-            <div className={`mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide uppercase shadow-lg">
-                {content?.badge_text || 'Latest Tech 2024'}
+          <div className="space-y-8">
+            {/* Tech Badge */}
+            <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold px-4 py-2 rounded-full">
+                <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></div>
+                {content?.badge_text || 'Latest Technology 2024'}
               </span>
             </div>
             
             {/* Title */}
-            <h1 className={`text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Power Your Digital Life'}
+            <h1 className={`text-4xl lg:text-6xl font-bold leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {content?.title || 'Next-Gen Technology for Modern Life'}
             </h1>
             
             {/* Subtitle */}
@@ -56,7 +53,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${props.baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
               >
                 <span>{content?.button_text || 'Shop Tech'}</span>
@@ -65,7 +62,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
                 </svg>
               </a>
               <a 
-                href={content?.secondary_button_link ? `${props.baseUrl || ''}${content.secondary_button_link}` : '/catalog'}
+                href={formatCustomLink(content?.secondary_button_link, store, '/catalog')}
                 className="group border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.secondary_button_text || 'View Catalog'}</span>

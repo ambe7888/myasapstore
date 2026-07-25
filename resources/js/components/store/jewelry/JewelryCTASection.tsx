@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { formatCustomLink } from '@/utils/store-url-helper';
 
 interface JewelryCTASectionProps {
   content?: any;
@@ -91,15 +92,15 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
           <p className="text-lg text-stone-600 font-light mb-8 max-w-2xl mx-auto">
             {bottomSection?.description?.value || bottomSection?.description || 'Our dedicated team of jewelry experts is here to provide personalized service and ensure your complete satisfaction.'}
           </p>
-          <Link
-            href={bottomSection?.button_link?.value || bottomSection?.button_link || '#'}
+          <a
+            href={formatCustomLink(bottomSection?.button_link?.value || bottomSection?.button_link, store, '#')}
             className="inline-flex items-center bg-yellow-600 text-white px-10 py-4 font-medium uppercase text-sm hover:bg-yellow-700 transition-colors duration-300"
           >
             <span>{bottomSection?.button_text?.value || bottomSection?.button_text || 'Contact Our Experts'}</span>
             <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

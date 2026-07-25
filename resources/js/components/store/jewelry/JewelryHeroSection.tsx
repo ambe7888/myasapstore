@@ -43,18 +43,18 @@ export default function JewelryHeroSection({ content }: JewelryHeroSectionProps)
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+            <a 
+              href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
               className="bg-yellow-600 text-white px-8 py-4 uppercase text-sm font-medium tracking-wide hover:bg-yellow-700 transition-colors"
             >
               {content?.button_text || 'Explore Collection'}
-            </Link>
-            <Link 
-              href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
+            </a>
+            <a 
+              href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}
               className="border-2 border-yellow-600 text-yellow-600 px-8 py-4 uppercase text-sm font-medium tracking-wide hover:bg-yellow-600 hover:text-white transition-colors"
             >
               {content?.secondary_button_text || 'Book Consultation'}
-            </Link>
+            </a>
           </div>
           
           <div className="w-16 h-px bg-yellow-600 mx-auto mt-8"></div>

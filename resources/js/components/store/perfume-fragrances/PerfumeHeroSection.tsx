@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface PerfumeHeroSectionProps {
   content?: any;
@@ -10,7 +10,6 @@ interface PerfumeHeroSectionProps {
 export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps) {
   const { props } = usePage();
   const store = props.store;
-  const baseUrl = props.base_url;
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
@@ -18,48 +17,42 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-purple-50 to-white overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-purple-100 rounded-full opacity-20 -translate-y-36 translate-x-36"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-100 rounded-full opacity-15 translate-y-48 -translate-x-48"></div>
+    <section className="relative min-h-screen bg-stone-50 overflow-hidden flex items-center">
+      {/* Background Decorative Circles */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-100/40 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl"></div>
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col lg:flex-row items-center min-h-screen gap-12">
-          
+      <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="flex-1 text-center lg:text-left space-y-8">
+          <div className="text-center lg:text-left space-y-8">
             {/* Badge */}
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-purple-200">
-                <div className="w-2 h-2 bg-amber-500 rounded-full mr-2"></div>
-                <span className="text-purple-800 text-sm font-medium">
-                  {content?.badge_text || 'Signature Collection 2024'}
-                </span>
-              </div>
+              <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
+                {content?.badge_text || 'Haute Parfumerie'}
+              </span>
             </div>
             
             {/* Title */}
-            <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium text-purple-800 leading-tight">
-                {content?.title || 'Discover Your Signature Scent'}
-              </h1>
-            </div>
+            <h1 className={`text-4xl lg:text-6xl font-light text-gray-900 leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {content?.title || 'Discover Your Signature Scent'}
+            </h1>
             
             {/* Subtitle */}
-            <p className={`text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <p className={`text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {content?.subtitle || 'Immerse yourself in our curated collection of luxury fragrances, where each bottle tells a unique story of elegance and sophistication.'}
             </p>
             
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="bg-purple-800 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 text-center"
               >
                 {content?.button_text || 'Explore Fragrances'}
               </a>
               <a 
-                href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}
                 className="border-2 border-purple-800 text-purple-800 px-8 py-4 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors duration-300 text-center"
               >
                 {content?.secondary_button_text || 'Fragrance Guide'}

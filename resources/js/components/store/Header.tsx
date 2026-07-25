@@ -13,7 +13,7 @@ import storeTheme from '@/config/store-theme';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 
 interface HeaderProps {
@@ -142,13 +142,13 @@ function Header({
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {menuItems.map((item) => (
-              <Link 
+              <a 
                 key={item.name}
-                href={item.href}
+                href={formatCustomLink(item.href, store)}
                 className={`text-gray-700 ${getHoverColor()} font-medium`}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
 
           </nav>
@@ -248,13 +248,13 @@ function Header({
         <div className="md:hidden bg-white border-t border-gray-200">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {menuItems.map((item) => (
-              <Link 
+              <a 
                 key={item.name}
-                href={item.href}
+                href={formatCustomLink(item.href, store)}
                 className={`block px-3 py-2 text-base font-medium text-gray-700 ${getHoverColor()} hover:bg-gray-50 rounded-md`}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
             
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import storeTheme from '@/config/store-theme';
 import { getImageUrl } from '@/utils/image-helper';
+import { formatCustomLink } from '@/utils/store-url-helper';
 
 interface HeroSectionProps {
   content?: any;
@@ -12,6 +13,7 @@ interface HeroSectionProps {
   secondaryButtonText?: string;
   secondaryButtonLink?: string;
   baseUrl?: string;
+  store?: any;
 }
 
 export default function HeroSection({
@@ -23,14 +25,16 @@ export default function HeroSection({
   image,
   secondaryButtonText = "View Collections",
   secondaryButtonLink = "/collections",
-  baseUrl
+  baseUrl,
+  store
 }: HeroSectionProps) {
   // Use dynamic content if available, otherwise fallback to props or static config
   const heroTitle = content?.title || title || storeTheme.homepage.heroSection.title;
   const heroSubtitle = content?.subtitle || subtitle || storeTheme.homepage.heroSection.subtitle;
   const heroButtonText = content?.button_text || buttonText || storeTheme.homepage.heroSection.buttonText;
   const rawButtonLink = content?.button_link || buttonLink || storeTheme.homepage.heroSection.buttonLink;
-  const heroButtonLink = baseUrl ? `${baseUrl}${rawButtonLink}` : rawButtonLink;
+  const heroButtonLink = formatCustomLink(rawButtonLink, store, '/products');
+  const heroSecondaryButtonLink = formatCustomLink(content?.secondary_button_link || secondaryButtonLink, store, '/collections');
   const heroImage = content?.image || image || storeTheme.homepage.heroSection.image;
   // Animation states
   const [isVisible, setIsVisible] = useState(false);
@@ -99,7 +103,7 @@ export default function HeroSection({
                 </svg>
               </a>
               <a 
-                href={baseUrl ? `${baseUrl}${content?.secondary_button_link || secondaryButtonLink}` : (content?.secondary_button_link || secondaryButtonLink)} 
+                href={heroSecondaryButtonLink} 
                 className="border border-gray-300 text-gray-700 px-8 py-3 rounded-full font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors"
               >
                 {content?.secondary_button_text || secondaryButtonText}

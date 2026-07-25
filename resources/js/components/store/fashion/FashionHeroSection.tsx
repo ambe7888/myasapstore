@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface FashionHeroSectionProps {
   content?: any;
@@ -10,6 +10,7 @@ interface FashionHeroSectionProps {
 export default function FashionHeroSection({ content }: FashionHeroSectionProps) {
   const { props } = usePage();
   const store = props.store;
+  const baseUrl = props.base_url;
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
@@ -17,28 +18,39 @@ export default function FashionHeroSection({ content }: FashionHeroSectionProps)
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center overflow-hidden bg-white">
-      {/* Split Layout */}
-      <div className="flex w-full h-full">
-        {/* Left Content */}
-        <div className="w-1/2 flex items-center justify-center bg-white relative">
-          {/* Geometric Background */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-black/5 transform rotate-45 translate-x-32 -translate-y-32"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/3 transform rotate-45 -translate-x-16 translate-y-16"></div>
-          </div>
-          
-          <div className="max-w-lg px-12 relative z-10">
-            {/* Badge */}
-            <div className={`mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="bg-black text-white px-4 py-1 text-xs font-medium tracking-widest uppercase">
-                {content?.badge_text || 'Spring Collection 2024'}
+    <section className="relative min-h-[90vh] bg-white overflow-hidden flex items-center">
+      {/* Background Image Container */}
+      <div className="absolute inset-0 z-0">
+        <div className="relative w-full h-full">
+          <img 
+            src={getImageUrl(content?.image || '/storage/media/4/home-banner-fashion.png')}
+            alt="Fashion Collection" 
+            className="w-full h-full object-cover object-center"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&h=1080&fit=crop&crop=center';
+            }}
+          />
+          {/* Subtle Overlay */}
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]"></div>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent"></div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10 py-20">
+        <div className="max-w-2xl">
+          {/* Main Content Card */}
+          <div className="bg-white/80 backdrop-blur-md p-8 md:p-12 border border-gray-100/50 shadow-2xl">
+            {/* Minimalist Sub-brand */}
+            <div className={`mb-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="text-xs font-light tracking-[0.3em] uppercase text-gray-500 block">
+                {content?.badge_text || 'Haute Couture 2024'}
               </span>
             </div>
             
             {/* Title */}
-            <h1 className={`text-7xl font-thin text-black mb-8 leading-none tracking-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Define Your Style'}
+            <h1 className={`text-4xl md:text-6xl font-extralight tracking-tight text-black mb-8 leading-[1.1] transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {content?.title || 'Elegance in Every Detail'}
             </h1>
             
             {/* Subtitle */}
@@ -49,7 +61,7 @@ export default function FashionHeroSection({ content }: FashionHeroSectionProps)
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${props.baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-black text-white px-12 py-5 font-light tracking-widest uppercase text-xs hover:bg-gray-900 transition-all duration-500 inline-flex items-center justify-center min-w-[200px]"
               >
                 <span>{content?.button_text || 'Shop Now'}</span>
@@ -58,7 +70,7 @@ export default function FashionHeroSection({ content }: FashionHeroSectionProps)
                 </svg>
               </a>
               <a 
-                href={content?.secondary_button_link ? `${props.baseUrl || ''}${content.secondary_button_link}` : '/lookbook'}
+                href={formatCustomLink(content?.secondary_button_link, store, '/lookbook')}
                 className="group border-2 border-black text-black px-12 py-5 font-light tracking-widest uppercase text-xs hover:bg-black hover:text-white transition-all duration-500 inline-flex items-center justify-center min-w-[200px] relative overflow-hidden"
               >
                 <span className="relative z-10">{content?.secondary_button_text || 'View Lookbook'}</span>

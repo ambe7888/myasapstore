@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePage } from '@inertiajs/react';
+import { formatCustomLink } from '@/utils/store-url-helper';
 import { getImageUrl } from '../../../utils/image-helper';
 
 interface BrandLogo {
@@ -64,7 +65,7 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
               {brandContent.bottom_description || 'We work with hundreds of automotive brands. Contact us for special orders.'}
             </p>
             <a
-              href={brandContent.bottom_button_link || '/contact'}
+              href={formatCustomLink(brandContent.bottom_button_link, store, '/contact')}
               className="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
             >
               {brandContent.bottom_button_text || 'Contact Us'}

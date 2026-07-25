@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { formatCustomLink } from '@/utils/store-url-helper';
 
 interface PerfumeCTASectionProps {
   content?: any;
@@ -134,22 +135,22 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href={bottomSection?.primary_button_link?.value || bottomSection?.primary_button_link || content?.primary_button_link || '/consultation'}
+                <a
+                  href={formatCustomLink(bottomSection?.primary_button_link?.value || bottomSection?.primary_button_link || content?.primary_button_link, store, '/consultation')}
                   className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
                 >
                   <span>{bottomSection?.primary_button_text?.value || bottomSection?.primary_button_text || content?.primary_button_text || 'Book Consultation'}</span>
                   <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
-                </Link>
+                </a>
                 
-                <Link
-                  href={bottomSection?.secondary_button_link?.value || bottomSection?.secondary_button_link || content?.secondary_button_link || '/fragrance-quiz'}
+                <a
+                  href={formatCustomLink(bottomSection?.secondary_button_link?.value || bottomSection?.secondary_button_link || content?.secondary_button_link, store, '/fragrance-quiz')}
                   className="inline-flex items-center px-8 py-4 border-2 border-purple-800 text-purple-800 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors duration-300"
                 >
                   <span>{bottomSection?.secondary_button_text?.value || bottomSection?.secondary_button_text || content?.secondary_button_text || 'Take Fragrance Quiz'}</span>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

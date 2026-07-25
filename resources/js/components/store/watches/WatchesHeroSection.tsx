@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
-import { generateStoreUrl } from '@/utils/store-url-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface WatchesHeroSectionProps {
   content?: any;
@@ -10,7 +10,6 @@ interface WatchesHeroSectionProps {
 export default function WatchesHeroSection({ content }: WatchesHeroSectionProps) {
   const { props } = usePage();
   const store = props.store;
-  const baseUrl = props.base_url;
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
@@ -18,34 +17,32 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center overflow-hidden bg-slate-900">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img 
-          src={getImageUrl(content?.image || '/storage/media/61/home-banner-watches.png')}
-          alt="Luxury Watches" 
-          className="w-full h-full object-cover object-center"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = 'https://placehold.co/1920x1080/1e293b/ffffff?text=Luxury+Timepieces';
-          }}
-        />
-        <div className="absolute inset-0 bg-slate-900/60"></div>
+    <section className="relative min-h-[90vh] bg-slate-900 text-white overflow-hidden flex items-center">
+      {/* Background Image Container */}
+      <div className="absolute inset-0 z-0">
+        <div className="relative w-full h-full">
+          <img 
+            src={getImageUrl(content?.image || '/storage/media/24/home-banner-watches.png')}
+            alt="Luxury Watches" 
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+        </div>
       </div>
-      
-      {/* Content */}
-      <div className="relative z-10 w-full">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
+
+      <div className="container mx-auto px-4 relative z-10 py-20">
+        <div className="max-w-3xl">
+          <div className="space-y-8">
             {/* Badge */}
-            <div className={`mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
+            <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="inline-block border border-amber-500/50 bg-amber-500/10 text-amber-400 text-xs font-medium tracking-[0.2em] uppercase px-4 py-2">
                 {content?.badge_text || 'Swiss Precision 2024'}
               </span>
             </div>
             
             {/* Title */}
-            <h1 className={`text-8xl font-light text-white mb-8 leading-none tracking-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Master Time'}
+            <h1 className={`text-5xl lg:text-7xl font-extralight tracking-tight text-white leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {content?.title || 'Precision Timepieces & Luxury Horology'}
             </h1>
             
             {/* Subtitle */}
@@ -56,7 +53,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-6 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-amber-500 text-slate-900 px-10 py-4 font-medium tracking-wider uppercase text-sm hover:bg-amber-400 transition-all duration-300 inline-flex items-center justify-center min-w-[220px]"
               >
                 <span>{content?.button_text || 'Explore Collection'}</span>
@@ -65,7 +62,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
                 </svg>
               </a>
               <a 
-                href={content?.secondary_button_link ? `${baseUrl || ''}${content.secondary_button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}
                 className="group border-2 border-white text-white px-10 py-4 font-medium tracking-wider uppercase text-sm hover:bg-white hover:text-slate-900 transition-all duration-300 inline-flex items-center justify-center min-w-[220px]"
               >
                 <span>{content?.secondary_button_text || 'Watch Guide'}</span>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatCustomLink } from '@/utils/store-url-helper';
 
 interface FurnitureCTASectionProps {
   content?: any;
@@ -96,7 +97,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <a
-                  href={ctaBottom?.primary_button_link || '#consultation'}
+                  href={formatCustomLink(ctaBottom?.primary_button_link, store, '#consultation')}
                   className="bg-yellow-800 text-white px-12 py-5 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 inline-flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 hover:scale-105 text-lg"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +106,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
                   {ctaBottom?.primary_button_text || 'Book Free Consultation'}
                 </a>
                 <a
-                  href={ctaBottom?.secondary_button_link || '#portfolio'}
+                  href={formatCustomLink(ctaBottom?.secondary_button_link, store, '#portfolio')}
                   className="border-3 border-yellow-700 text-yellow-800 px-12 py-5 rounded-2xl font-bold hover:bg-yellow-800 hover:text-white hover:border-yellow-800 transition-all duration-300 inline-flex items-center justify-center gap-3 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105 text-lg"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

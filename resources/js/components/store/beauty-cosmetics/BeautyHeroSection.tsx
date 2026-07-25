@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 import { getImageUrl } from '@/utils/image-helper';
+import { generateStoreUrl, formatCustomLink } from '@/utils/store-url-helper';
 
 interface BeautyHeroSectionProps {
   content?: any;
@@ -44,7 +45,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
             {/* Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
-                href={content?.button_link ? `${props.baseUrl || ''}${content.button_link}` : generateStoreUrl('store.products', store)}
+                href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-rose-600 text-white px-8 py-4 rounded-full font-medium hover:bg-rose-700 transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.button_text || 'Shop Collection'}</span>
@@ -53,7 +54,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
                 </svg>
               </a>
               <a 
-                href={content?.secondary_button_link ? `${props.baseUrl || ''}${content.secondary_button_link}` : '/beauty-guide'}
+                href={formatCustomLink(content?.secondary_button_link, store, '/beauty-guide')}
                 className="group border-2 border-rose-600 text-rose-600 px-8 py-4 rounded-full font-medium hover:bg-rose-600 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.secondary_button_text || 'Beauty Guide'}</span>

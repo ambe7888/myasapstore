@@ -17,7 +17,7 @@ use App\Http\Controllers\Store\PayTabsController;
 use App\Http\Controllers\Store\CashfreeController;
 use App\Http\Controllers\Store\CoinGateController;
 use App\Http\Controllers\Store\TapController;
-
+use App\Http\Controllers\Store\FacebookCatalogController;
 
 // PWA routes (outside middleware to avoid conflicts)
 Route::get('store/{storeSlug}/manifest.json', [PWAController::class, 'manifest'])->name('store.pwa.manifest');
@@ -25,6 +25,7 @@ Route::get('store/{storeSlug}/service-worker', [PWAController::class, 'serviceWo
 
 // Direct routes for custom domain access
 Route::middleware(['domain.resolver'])->group(function () {
+    Route::get('/facebook-catalog.xml', [FacebookCatalogController::class, 'feed']);
     Route::post('customer/profile/update', [ProfileController::class, 'updateProfile']);
     Route::post('customer/profile/password', [ProfileController::class, 'updatePassword']);
     Route::any( '/customer-logout', [AuthController::class, 'logout'])->name('store.logout');
@@ -38,7 +39,7 @@ Route::middleware(['domain.resolver'])->group(function () {
 // Store frontend routes with store prefix
 Route::prefix('{storeSlug?}')->middleware('store.status')->group(function () {
     // Main store routes
-    
+    Route::get('/facebook-catalog.xml', [FacebookCatalogController::class, 'feed'])->name('store.facebook-catalog');
     Route::get('/product-list', [ThemeController::class, 'products'])->name('store.products');
     Route::get('/product/{id}', [ThemeController::class, 'product'])->name('store.product');
     Route::get('/category/{slug}', [ThemeController::class, 'category'])->name('store.category');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageTemplate } from '@/components/page-template';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Copy, Check, Rss, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -20,6 +20,19 @@ interface Props {
 export default function StoreSettings({ store, settings }: Props) {
   const { t } = useTranslation();
   const [formData, setFormData] = useState(settings || {});
+  const [copiedFeed, setCopiedFeed] = useState(false);
+
+  const getFacebookCatalogFeedUrl = () => {
+    if (typeof window === 'undefined') return '';
+    if (store?.enable_custom_domain && store?.custom_domain) {
+      return `https://${store.custom_domain}/facebook-catalog.xml`;
+    }
+    if (store?.enable_custom_subdomain && store?.custom_subdomain) {
+      const host = window.location.host;
+      return `https://${store.custom_subdomain}.${host}/facebook-catalog.xml`;
+    }
+    return `${window.location.origin}/store/${store?.slug}/facebook-catalog.xml`;
+  };
 
   const handleSave = () => {
     router.put(route('stores.settings.update', store.id), {
@@ -426,6 +439,53 @@ export default function StoreSettings({ store, settings }: Props) {
                   value={formData.facebook_capi_token || ''}
                   onChange={(e) => updateSetting('facebook_capi_token', e.target.value)}
                 />
+              </div>
+
+              {/* Facebook & Instagram Catalog Auto-Sync Feed XML */}
+              <div className="space-y-3 p-4 bg-slate-50 border border-slate-200 rounded-lg dark:bg-slate-900/50 dark:border-slate-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Rss className="h-5 w-5 text-blue-600" />
+                    <span className="font-semibold text-sm">{t('Flux Catalogue Facebook & Instagram (Auto-Sync)')}</span>
+                  </div>
+                  <span className="text-xs bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300 px-2 py-0.5 rounded-full font-medium">
+                    {t('Actif XML RSS')}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {t('Copiez ce lien et collez-le dans Facebook Commerce Manager (Gestionnaire de ventes > Source de données > Importation programmée) pour synchroniser automatiquement vos produits, prix et stocks.')}
+                </p>
+                <div className="flex items-center space-x-2">
+                  <Input
+                    readOnly
+                    value={getFacebookCatalogFeedUrl()}
+                    className="font-mono text-xs bg-white dark:bg-slate-950"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+                        navigator.clipboard.writeText(getFacebookCatalogFeedUrl());
+                      }
+                      setCopiedFeed(true);
+                      setTimeout(() => setCopiedFeed(false), 2000);
+                    }}
+                  >
+                    {copiedFeed ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                    <span className="ml-1 text-xs">{copiedFeed ? t('Copié !') : t('Copier')}</span>
+                  </Button>
+                  <a
+                    href={getFacebookCatalogFeedUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 border rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                    title={t('Ouvrir le flux XML')}
+                  >
+                    <ExternalLink className="h-4 w-4 text-slate-600" />
+                  </a>
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="tiktok_pixel">{t('TikTok Pixel ID')}</Label>

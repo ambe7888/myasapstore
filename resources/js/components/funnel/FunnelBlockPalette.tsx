@@ -65,8 +65,15 @@ export default function FunnelBlockPalette({ blockTypes, onAdd }: Props) {
                 <button
                   key={type}
                   type="button"
+                  draggable={true}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData('text/plain', type);
+                    e.dataTransfer.setData('application/funnel-block-type', type);
+                    e.dataTransfer.effectAllowed = 'copy';
+                  }}
                   onClick={() => onAdd(type)}
-                  className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700 transition-all text-slate-600 group"
+                  className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700 transition-all text-slate-600 group cursor-grab active:cursor-grabbing select-none"
+                  title={t('Cliquer pour ajouter ou glisser-déposer')}
                 >
                   <Icon className="h-5 w-5 text-slate-400 group-hover:text-violet-500 transition-colors" />
                   <span className="text-[11px] font-medium text-center leading-tight">{t(label)}</span>

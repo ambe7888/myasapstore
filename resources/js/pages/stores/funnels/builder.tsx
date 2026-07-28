@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Save, Eye, EyeOff, Globe, ArrowLeft, Plus, Trash2,
   ChevronUp, ChevronDown, Settings, BarChart2, Copy,
-  ExternalLink, CheckCircle, AlertCircle, Smartphone, Monitor
+  ExternalLink, CheckCircle, AlertCircle, Smartphone, Monitor, GripVertical
 } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import FunnelBlockEditor from '@/components/funnel/FunnelBlockEditor';
@@ -69,6 +69,48 @@ export default function FunnelBuilder({ store, funnel: initialFunnel, product, b
   const [saved, setSaved]             = useState(false);
   const [publishing, setPublishing]   = useState(false);
   const autoSaveRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ─── Drag & Drop states ──────────────────────────────────────────────────
+  const [draggedBlockIndex, setDraggedBlockIndex] = useState<number | null>(null);
+  const [dropTargetIndex, setDropTargetIndex]     = useState<number | null>(null);
+  const [dropPosition, setDropPosition]           = useState<'above' | 'below'>('below');
+
+  const insertBlockAt = (type: string, targetIndex: number, position: 'above' | 'below') => {
+    const newBlock: Block = {
+      type,
+      sort_order: 0,
+      is_visible: true,
+      settings: {},
+      _tempId: generateTempId(),
+    };
+
+    const newBlocks = [...blocks];
+    const insertIdx = position === 'above' ? targetIndex : targetIndex + 1;
+    newBlocks.splice(insertIdx, 0, newBlock);
+
+    const reordered = newBlocks.map((b, i) => ({ ...b, sort_order: i + 1 }));
+    setBlocks(reordered);
+    setSelectedBlockId(newBlock._tempId!);
+    scheduleAutoSave(reordered);
+  };
+
+  const reorderBlockTo = (fromIndex: number, targetIndex: number, position: 'above' | 'below') => {
+    if (fromIndex === targetIndex) return;
+
+    const newBlocks = [...blocks];
+    const [moved] = newBlocks.splice(fromIndex, 1);
+    
+    let insertIdx = position === 'above' ? targetIndex : targetIndex + 1;
+    if (fromIndex < targetIndex) {
+      insertIdx -= 1;
+    }
+
+    newBlocks.splice(insertIdx, 0, moved);
+
+    const reordered = newBlocks.map((b, i) => ({ ...b, sort_order: i + 1 }));
+    setBlocks(reordered);
+    scheduleAutoSave(reordered);
+  };
 
   // ─── Block actions ────────────────────────────────────────────────────────
 
@@ -391,74 +433,183 @@ export default function FunnelBuilder({ store, funnel: initialFunnel, product, b
         {/* CENTER — Block List + Preview */}
         <div className="flex-1 overflow-y-auto flex flex-col items-center py-6 px-4 bg-slate-100">
           <div
-            className="w-full shadow-xl rounded-xl overflow-hidden transition-all duration-300 bg-white"
+            className="w-full shadow-xl rounded-xl overflow-hidden transition-all duration-300 bg-white min-h-[300px]"
             style={{
               maxWidth: previewMode === 'mobile' ? '390px' : (funnel.settings?.max_width || '800px'),
             }}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              const paletteType = e.dataTransfer.getData('application/funnel-block-type');
+              if (paletteType && blocks.length === 0) {
+                addBlock(paletteType);
+              }
+              setDraggedBlockIndex(null);
+              setDropTargetIndex(null);
+            }}
           >
             {blocks.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 text-center text-slate-400">
-                <Plus className="h-10 w-10 mb-3 opacity-30" />
-                <p className="text-sm font-medium">{t('Click a block type on the left to add it here')}</p>
+              <div
+                className="flex flex-col items-center justify-center py-20 text-center text-slate-400 border-2 border-dashed border-slate-200 m-4 rounded-xl hover:border-violet-400 transition-colors"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const paletteType = e.dataTransfer.getData('application/funnel-block-type');
+                  if (paletteType) {
+                    addBlock(paletteType);
+                  }
+                }}
+              >
+                <Plus className="h-10 w-10 mb-3 opacity-40 text-violet-500 animate-bounce" />
+                <p className="text-sm font-semibold text-slate-700 mb-1">{t('Déposez vos blocs ici')}</p>
+                <p className="text-xs text-slate-400 max-w-xs">{t('Glissez un bloc depuis la palette à gauche ou cliquez dessus pour commencer')}</p>
               </div>
             ) : (
-              blocks.map((block) => (
-                <div
-                  key={block._tempId}
-                  onClick={() => setSelectedBlockId(block._tempId!)}
-                  className={`relative group cursor-pointer transition-all ${
-                    selectedBlockId === block._tempId
-                      ? 'ring-2 ring-violet-500 ring-inset'
-                      : 'hover:ring-1 hover:ring-violet-300 hover:ring-inset'
-                  } ${!block.is_visible ? 'opacity-40' : ''}`}
-                >
-                  {/* Block controls overlay */}
-                  <div className={`absolute top-2 right-2 z-10 flex gap-1 transition-opacity ${selectedBlockId === block._tempId ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); moveBlock(block._tempId!, 'up'); }}
-                      className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-violet-600 hover:shadow-lg transition-all"
-                    >
-                      <ChevronUp className="h-3.5 w-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); moveBlock(block._tempId!, 'down'); }}
-                      className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-violet-600 hover:shadow-lg transition-all"
-                    >
-                      <ChevronDown className="h-3.5 w-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); toggleBlockVisibility(block._tempId!); }}
-                      className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-blue-600 hover:shadow-lg transition-all"
-                    >
-                      {block.is_visible ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); deleteBlock(block._tempId!); }}
-                      className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-red-500 hover:shadow-lg transition-all"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
+              blocks.map((block, index) => {
+                const isBeingDragged = draggedBlockIndex === index;
+                const isTarget = dropTargetIndex === index;
+                const showIndicatorAbove = isTarget && dropPosition === 'above';
+                const showIndicatorBelow = isTarget && dropPosition === 'below';
 
-                  {/* Block type label */}
-                  {selectedBlockId === block._tempId && (
-                    <div className="absolute top-2 left-2 z-10 text-xs font-semibold bg-violet-600 text-white px-2 py-0.5 rounded-md shadow">
-                      {block_types[block.type]?.label || block.type}
+                return (
+                  <React.Fragment key={block._tempId}>
+                    {/* Drop Indicator Above */}
+                    {showIndicatorAbove && (
+                      <div className="relative z-30 h-1 bg-violet-600 shadow-md shadow-violet-500/50 animate-pulse my-0.5 rounded-full mx-2 flex items-center justify-center">
+                        <span className="absolute -top-2 bg-violet-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                          {t('Insérer ici')}
+                        </span>
+                      </div>
+                    )}
+
+                    <div
+                      draggable={true}
+                      onDragStart={(e) => {
+                        setDraggedBlockIndex(index);
+                        e.dataTransfer.setData('text/plain', index.toString());
+                        e.dataTransfer.setData('application/funnel-block-reorder', index.toString());
+                        e.dataTransfer.effectAllowed = 'move';
+                      }}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const offset = e.clientY - rect.top;
+                        const pos = offset < rect.height / 2 ? 'above' : 'below';
+                        setDropTargetIndex(index);
+                        setDropPosition(pos);
+                      }}
+                      onDragLeave={(e) => {
+                        e.stopPropagation();
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const paletteType = e.dataTransfer.getData('application/funnel-block-type');
+                        const reorderIdxStr = e.dataTransfer.getData('application/funnel-block-reorder');
+
+                        if (paletteType) {
+                          insertBlockAt(paletteType, index, dropPosition);
+                        } else if (reorderIdxStr || draggedBlockIndex !== null) {
+                          const fromIdx = reorderIdxStr ? parseInt(reorderIdxStr, 10) : draggedBlockIndex!;
+                          if (!isNaN(fromIdx)) {
+                            reorderBlockTo(fromIdx, index, dropPosition);
+                          }
+                        }
+
+                        setDraggedBlockIndex(null);
+                        setDropTargetIndex(null);
+                      }}
+                      onDragEnd={() => {
+                        setDraggedBlockIndex(null);
+                        setDropTargetIndex(null);
+                      }}
+                      onClick={() => setSelectedBlockId(block._tempId!)}
+                      className={`relative group cursor-pointer transition-all ${
+                        selectedBlockId === block._tempId
+                          ? 'ring-2 ring-violet-500 ring-inset'
+                          : 'hover:ring-1 hover:ring-violet-300 hover:ring-inset'
+                      } ${!block.is_visible ? 'opacity-40' : ''} ${
+                        isBeingDragged ? 'opacity-30 scale-98 border-2 border-dashed border-violet-400' : ''
+                      }`}
+                    >
+                      {/* Block controls overlay */}
+                      <div className={`absolute top-2 right-2 z-20 flex gap-1 transition-opacity ${selectedBlockId === block._tempId ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                        {/* Drag Handle */}
+                        <div
+                          className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-violet-600 hover:shadow-lg transition-all cursor-grab active:cursor-grabbing flex items-center justify-center"
+                          title={t('Glisser pour déplacer')}
+                        >
+                          <GripVertical className="h-3.5 w-3.5" />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); moveBlock(block._tempId!, 'up'); }}
+                          className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-violet-600 hover:shadow-lg transition-all"
+                          title={t('Monter')}
+                        >
+                          <ChevronUp className="h-3.5 w-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); moveBlock(block._tempId!, 'down'); }}
+                          className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-violet-600 hover:shadow-lg transition-all"
+                          title={t('Descendre')}
+                        >
+                          <ChevronDown className="h-3.5 w-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); toggleBlockVisibility(block._tempId!); }}
+                          className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-blue-600 hover:shadow-lg transition-all"
+                          title={block.is_visible ? t('Masquer') : t('Afficher')}
+                        >
+                          {block.is_visible ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); deleteBlock(block._tempId!); }}
+                          className="p-1 bg-white rounded-md shadow-md text-slate-500 hover:text-red-500 hover:shadow-lg transition-all"
+                          title={t('Supprimer')}
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+
+                      {/* Block type label & Drag Badge */}
+                      <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5">
+                        <div
+                          className="p-1 bg-violet-600 text-white rounded-md shadow cursor-grab active:cursor-grabbing flex items-center justify-center hover:bg-violet-700 transition-colors"
+                          title={t('Glisser pour déplacer')}
+                        >
+                          <GripVertical className="h-3.5 w-3.5" />
+                        </div>
+                        {selectedBlockId === block._tempId && (
+                          <div className="text-xs font-semibold bg-violet-600 text-white px-2 py-0.5 rounded-md shadow">
+                            {block_types[block.type]?.label || block.type}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Block preview */}
+                      <FunnelBlockPreview
+                        block={block}
+                        product={product}
+                        isMobile={previewMode === 'mobile'}
+                      />
                     </div>
-                  )}
 
-                  {/* Block preview */}
-                  <FunnelBlockPreview
-                    block={block}
-                    product={product}
-                    isMobile={previewMode === 'mobile'}
-                  />
-                </div>
-              ))
+                    {/* Drop Indicator Below */}
+                    {showIndicatorBelow && (
+                      <div className="relative z-30 h-1 bg-violet-600 shadow-md shadow-violet-500/50 animate-pulse my-0.5 rounded-full mx-2 flex items-center justify-center">
+                        <span className="absolute -top-2 bg-violet-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                          {t('Insérer ici')}
+                        </span>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })
             )}
           </div>
         </div>

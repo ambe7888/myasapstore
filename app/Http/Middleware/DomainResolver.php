@@ -130,6 +130,9 @@ class DomainResolver
         if (empty($path) || $path === '/') {
             // Home page
             return app(\App\Http\Controllers\ThemeController::class)->home($request);
+        } elseif ($segments[0] === 'facebook-catalog.xml') {
+            // Facebook / Google Catalog XML Feed
+            return app(\App\Http\Controllers\Store\FacebookCatalogController::class)->feed($request);
         } elseif ($segments[0] === 'products' || $segments[0] === 'product-list') {
             if (isset($segments[1]) && $segments[1] === 'product' && isset($segments[2]) && is_numeric($segments[2])) {
                 // Product detail page (/products/product/123 -> /product/123)

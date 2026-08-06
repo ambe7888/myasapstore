@@ -245,8 +245,8 @@ export function CrudTable({
   };
 
   return (
-    <div className="border-collapse">
-      <Table>
+    <div className="w-full max-w-full overflow-x-auto rounded-lg border border-gray-200">
+      <Table className="min-w-[600px] sm:min-w-full">
         <TableHeader>
           <TableRow className="bg-gray-50 border-b">
             <TableHead className="w-12 py-2.5 font-semibold">#</TableHead>

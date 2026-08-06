@@ -65,7 +65,7 @@ export function PageTemplate({
         </div>
         
         {/* Content */}
-        <div className={noPadding ? "" : "rounded-xl border p-6"}>
+        <div className={noPadding ? "min-w-0 w-full max-w-full overflow-x-auto" : "rounded-xl border border-gray-200 p-4 sm:p-6 bg-white shadow-xs min-w-0 w-full max-w-full overflow-x-auto"}>
           {children}
         </div>
       </div>

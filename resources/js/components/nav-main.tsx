@@ -9,7 +9,8 @@ const STORAGE_KEY = 'nav_expanded_items';
 
 export function NavMain({ items = [], position }: { items: NavItem[]; position: 'left' | 'right' }) {
     const page = usePage();
-    const { state } = useSidebar();
+    const { state, isMobile } = useSidebar();
+    const isExpanded = isMobile || state !== "collapsed";
     const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
     
     // Reset and update expanded state when URL changes
@@ -129,7 +130,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                     >
                                         <div className={`flex items-center gap-2 ${position === 'right' ? 'justify-end text-right' : 'justify-start text-left'}`}>
                                             <span>{child.title}</span>
-                                            {state !== "collapsed" && (
+                                            {isExpanded && (
                                                 expandedItems[`${level}-${child.title}`] ? 
                                                     <ChevronDown className="h-3 w-3 ml-auto" /> : 
                                                     <ChevronRight className="h-3 w-3 ml-auto" />
@@ -180,17 +181,17 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                         <div className={`flex items-center gap-2 w-full ${position === 'right' ? 'justify-end text-right' : 'justify-start text-left'}`}>
                                             {position === 'right' ? (
                                                 <>
-                                                    <span>{state !== "collapsed" ? item.title : ""}</span>
+                                                    <span>{isExpanded ? item.title : ""}</span>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
-                                                    {state !== "collapsed" && (
+                                                    {isExpanded && (
                                                         expandedItems[item.title] ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />
                                                     )}
                                                 </>
                                             ) : (
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
-                                                    {state !== "collapsed" && <span>{item.title}</span>}
-                                                    {state !== "collapsed" && (
+                                                    {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && (
                                                         expandedItems[item.title] ? <ChevronDown className="h-3 w-3 ml-auto" /> : <ChevronRight className="h-3 w-3 ml-auto" />
                                                     )}
                                                 </>
@@ -200,7 +201,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                 </SidebarMenuItem>
                                 
                                 {/* Child items */}
-                                {state !== "collapsed" && expandedItems[item.title] && renderSubMenu(item.children)}
+                                {isExpanded && expandedItems[item.title] && renderSubMenu(item.children)}
                             </>
                         ) : (
                             // Regular item without children
@@ -215,13 +216,13 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                         >
                                             {position === 'right' ? (
                                                 <>
-                                                    {state !== "collapsed" && <span>{item.title}</span>}
+                                                    {isExpanded && <span>{item.title}</span>}
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                 </>
                                             ) : (
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
-                                                    {state !== "collapsed" && <span>{item.title}</span>}
+                                                    {isExpanded && <span>{item.title}</span>}
                                                 </>
                                             )}
                                         </a>
@@ -233,13 +234,13 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                         >
                                             {position === 'right' ? (
                                                 <>
-                                                    {state !== "collapsed" && <span>{item.title}</span>}
+                                                    {isExpanded && <span>{item.title}</span>}
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                 </>
                                             ) : (
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
-                                                    {state !== "collapsed" && <span>{item.title}</span>}
+                                                    {isExpanded && <span>{item.title}</span>}
                                                 </>
                                             )}
                                         </Link>

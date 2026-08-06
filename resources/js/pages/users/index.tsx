@@ -17,6 +17,7 @@ import { Permission } from '@/components/Permission';
 import { CrudTable } from '@/components/CrudTable';
 import { CrudFormModal } from '@/components/CrudFormModal';
 import { CrudDeleteModal } from '@/components/CrudDeleteModal';
+import { Pagination } from '@/components/pagination';
 import { toast } from '@/components/custom-toast';
 import { useInitials } from '@/hooks/use-initials';
 import { useTranslation } from 'react-i18next';
@@ -509,32 +510,14 @@ export default function Users() {
           />
 
           {/* Pagination section */}
-          <div className="p-4 border-t flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              {t("Showing")} <span className="font-medium">{users?.from || 0}</span> {t("to")} <span className="font-medium">{users?.to || 0}</span> {t("of")} <span className="font-medium">{users?.total || 0}</span> {t("users")}
-            </div>
-            
-            <div className="flex gap-1">
-              {users?.links?.map((link: any, i: number) => {
-                // Check if the link is "Next" or "Previous" to use text instead of icon
-                const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-                const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-                
-                return (
-                  <Button
-                    key={i}
-                    variant={link.active ? 'default' : 'outline'}
-                    size={isTextLink ? "sm" : "icon"}
-                    className={isTextLink ? "px-3" : "h-8 w-8"}
-                    disabled={!link.url}
-                    onClick={() => link.url && router.get(link.url)}
-                  >
-                    {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
+          <Pagination
+            links={users?.links}
+            from={users?.from}
+            to={users?.to}
+            total={users?.total}
+            entityName="utilisateurs"
+            className="mt-4"
+          />
         </div>
       ) : (
         <div>
@@ -658,31 +641,14 @@ export default function Users() {
           </div>
           
           {/* Pagination for grid view */}
-          <div className="mt-6 bg-white p-4 rounded-lg shadow flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              {t("Showing")} <span className="font-medium">{users?.from || 0}</span> {t("to")} <span className="font-medium">{users?.to || 0}</span> {t("of")} <span className="font-medium">{users?.total || 0}</span> {t("users")}
-            </div>
-            
-            <div className="flex gap-1">
-              {users?.links?.map((link: any, i: number) => {
-                const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-                const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-                
-                return (
-                  <Button
-                    key={i}
-                    variant={link.active ? 'default' : 'outline'}
-                    size={isTextLink ? "sm" : "icon"}
-                    className={isTextLink ? "px-3" : "h-8 w-8"}
-                    disabled={!link.url}
-                    onClick={() => link.url && router.get(link.url)}
-                  >
-                    {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
+          <Pagination
+            links={users?.links}
+            from={users?.from}
+            to={users?.to}
+            total={users?.total}
+            entityName="utilisateurs"
+            className="mt-6"
+          />
         </div>
       )}
 

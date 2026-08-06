@@ -228,7 +228,7 @@ export default function LandingPageSettings() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3 space-y-6">
             {/* Tab Navigation */}
-            <div className="flex border-b border-gray-200 mb-8">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 border-b border-gray-200 dark:border-gray-700 scrollbar-none">
               {[
                 { key: 'setup', label: t('Setup'), sections: ['general', 'order', 'advanced'] },
                 { key: 'layout', label: t('Layout'), sections: ['header', 'hero', 'footer'] },
@@ -242,13 +242,12 @@ export default function LandingPageSettings() {
                     setActiveTab(tab.key as any);
                     setActiveSection(tab.sections[0] as any);
                   }}
-                  className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === tab.key
-                      ? 'border-transparent text-white dark:text-white'
-                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                  className={`px-4 py-2.5 font-medium text-xs sm:text-sm rounded-lg whitespace-nowrap transition-all duration-150 shrink-0 ${activeTab === tab.key
+                      ? 'text-white shadow-xs font-semibold'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   style={activeTab === tab.key ? {
-                    backgroundColor: brandColor,
-                    borderBottomColor: brandColor
+                    backgroundColor: brandColor
                   } : {}}
                 >
                   {tab.label}
@@ -257,7 +256,7 @@ export default function LandingPageSettings() {
             </div>
 
             {/* Section Navigation within Tab */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
               {(() => {
                 const tabSections = {
                   setup: [{ key: 'general', label: t('General') }, { key: 'order', label: t('Order') }, { key: 'advanced', label: t('Advanced') }],
@@ -272,7 +271,7 @@ export default function LandingPageSettings() {
                     variant={activeSection === section.key ? "default" : "outline"}
                     size="sm"
                     onClick={() => setActiveSection(section.key as any)}
-                    className={activeSection === section.key ? 'text-white dark:text-white border-0' : 'dark:text-gray-300 dark:border-gray-700'}
+                    className={`shrink-0 whitespace-nowrap text-xs ${activeSection === section.key ? 'text-white dark:text-white border-0 font-medium' : 'dark:text-gray-300 dark:border-gray-700'}`}
                     style={activeSection === section.key ? {
                       backgroundColor: brandColor
                     } : {}}

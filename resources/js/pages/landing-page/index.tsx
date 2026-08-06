@@ -109,45 +109,36 @@ interface PageProps {
 }
 
 export default function LandingPage() {
-  const props = usePage<PageProps>().props || {};
-  const { 
-    plans = [], 
-    testimonials = [], 
-    faqs = [], 
-    customPages = [], 
-    settings = { company_name: '', contact_email: '', contact_phone: '', contact_address: '' }, 
-    featuredStores = [], 
-    flash 
-  } = props;
+  const { plans, testimonials, faqs, customPages = [], settings, featuredStores = [], flash } = usePage<PageProps>().props;
   const { i18n } = useTranslation();
 
   useFavicon();
   // Get brand colors - prioritize superadmin landing page colors over brand context
   const { themeColor, customColor } = useBrand();
-  const configColors = settings?.config_sections?.colors;
+  const configColors = settings.config_sections?.colors;
   // Use landing page colors first, then fall back to brand context
   const primaryColor = configColors?.primary || (themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]) || '#10b77f';
   const secondaryColor = configColors?.secondary || '#059669';
   const accentColor = configColors?.accent || '#065f46';
   const page = usePage<SharedData>();
-  const auth = page.props?.auth || { user: null, lang: 'fr' };
+  const { auth } = page.props;
 
   // Initialize language from user preference
   React.useEffect(() => {
-    if (auth?.lang && auth.lang !== i18n.language) {
+    if (auth.lang && auth.lang !== i18n.language) {
       i18n.changeLanguage(auth.lang);
     }
-  }, [auth?.lang, i18n]);
+  }, [auth.lang, i18n]);
 
   // Get title from brand context (superadmin settings) first, then SEO, then fallback
   const { titleText } = useBrand();
-  const seo = settings?.config_sections?.seo;
+  const seo = settings.config_sections?.seo;
   const pageTitle = titleText || seo?.meta_title || 'StoreGo - Build Your Online Store';
   const metaDescription = seo?.meta_description || 'Create beautiful, professional online stores with StoreGo. Everything you need to start selling online.';
 
   // Custom CSS
   React.useEffect(() => {
-    const customCss = settings?.config_sections?.custom_css;
+    const customCss = settings.config_sections?.custom_css;
     if (customCss) {
       const styleId = 'landing-custom-css';
       let styleElement = document.getElementById(styleId);
@@ -158,11 +149,11 @@ export default function LandingPage() {
       }
       styleElement.textContent = customCss;
     }
-  }, [settings?.config_sections?.custom_css]);
+  }, [settings.config_sections?.custom_css]);
 
   // Custom JS
   React.useEffect(() => {
-    const customJs = settings?.config_sections?.custom_js;
+    const customJs = settings.config_sections?.custom_js;
     if (customJs) {
       const scriptId = 'landing-custom-js';
       let scriptElement = document.getElementById(scriptId);
@@ -174,20 +165,20 @@ export default function LandingPage() {
       scriptElement.textContent = customJs;
       document.body.appendChild(scriptElement);
     }
-  }, [settings?.config_sections?.custom_js]);
+  }, [settings.config_sections?.custom_js]);
 
   // Get section data helper
   const getSectionData = (key: string) => {
-    return settings?.config_sections?.sections?.find(section => section.key === key) || {};
+    return settings.config_sections?.sections?.find(section => section.key === key) || {};
   };
 
   // Get section visibility
   const isSectionVisible = (key: string) => {
-    return settings?.config_sections?.section_visibility?.[key] !== false;
+    return settings.config_sections?.section_visibility?.[key] !== false;
   };
 
   // Get section order or use default
-  const sectionOrder = settings?.config_sections?.section_order || [
+  const sectionOrder = settings.config_sections?.section_order || [
     'header', 'hero', 'features', 'screenshots', 'why_choose_us', 'templates', 'about',
     'team', 'testimonials', 'featured_stores', 'plans', 'faq', 'newsletter', 'contact', 'footer'
   ];

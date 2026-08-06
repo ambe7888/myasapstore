@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { ArrowRight, Sparkles, ShoppingBag, Store as StoreIcon, ShieldCheck, Zap, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, TrendingUp, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -28,12 +28,18 @@ export default function HeroSection({ settings, sectionData, brandColor = '#0596
   const { t } = useTranslation();
   const [imageError, setImageError] = React.useState(false);
   const heroImage = sectionData.image ? getImageUrl(sectionData.image) : null;
+  
+  // Get colors from settings
+  const colors = settings?.config_sections?.colors || { primary: brandColor, secondary: '#059669', accent: '#065f46' };
+  const primaryColor = colors.primary || brandColor;
+  const secondaryColor = colors.secondary || '#059669';
+  const accentColor = colors.accent || '#065f46';
 
   return (
-    <section id="hero" className="pt-28 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-emerald-50/30 to-white relative overflow-hidden">
-      {/* Background Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-200/25 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute top-10 right-10 w-96 h-96 bg-teal-200/20 rounded-full blur-[90px] pointer-events-none"></div>
+    <section id="hero" className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-gradient-to-b from-slate-50 via-emerald-50/20 to-white relative overflow-hidden">
+      {/* Subtle Ambient Background Orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-emerald-200/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-10 right-10 w-96 h-96 bg-teal-200/15 rounded-full blur-[90px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">

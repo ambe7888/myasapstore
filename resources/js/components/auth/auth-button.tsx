@@ -18,17 +18,18 @@ export default function AuthButton({
     ...props
 }: AuthButtonProps) {
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : (THEME_COLORS[themeColor as keyof typeof THEME_COLORS] || '#059669');
+    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
     return (
         <button
             {...props}
             type={props.type || 'submit'}
-            className={`w-full text-sm text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-emerald-600/20 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 flex justify-center items-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
+            className={`w-full mt-4 text-sm text-white font-medium py-2.5 rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex justify-center items-center ${className}`}
             tabIndex={tabIndex}
             disabled={processing || disabled}
+            style={{ backgroundColor: primaryColor }}
         >
-            {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-            <span>{children}</span>
+            {processing && <LoaderCircle className="h-4 w-4 animate-spin mr-2" />}
+            {children}
         </button>
     );
 }

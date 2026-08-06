@@ -59,11 +59,18 @@ class CompanyController extends Controller
         
         // Transform data for frontend
         $companies->getCollection()->transform(function ($company) {
+            $phone = $company->phone;
+            if (empty($phone)) {
+                $store = \App\Models\Store::where('user_id', $company->id)->first();
+                if ($store && !empty($store->phone)) {
+                    $phone = $store->phone;
+                }
+            }
             return [
                 'id' => $company->id,
                 'name' => $company->name,
                 'email' => $company->email,
-                'phone' => $company->phone,
+                'phone' => $phone,
                 'status' => $company->status,
                 'created_at' => $company->created_at,
                 'plan_name' => $company->plan ? $company->plan->name : __('No Plan'),

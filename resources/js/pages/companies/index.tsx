@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Filter, Search, Plus, Eye, Edit, Trash2, KeyRound, Lock, Unlock, LayoutGrid, List, ExternalLink, Info, ArrowUpRight, CreditCard } from 'lucide-react';
+import { Filter, Search, Plus, Eye, Edit, Trash2, KeyRound, Lock, Unlock, LayoutGrid, List, ExternalLink, Info, ArrowUpRight, CreditCard, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from '@/components/custom-toast';
 import { useInitials } from '@/hooks/use-initials';
 import { useTranslation } from 'react-i18next';
@@ -54,6 +54,15 @@ export default function Companies() {
            (endDate ? 1 : 0);
   };
   
+  // Define page actions
+  const pageActions = [
+    {
+      label: t('Add Company'),
+      icon: <Plus className="h-4 w-4 mr-2" />,
+      variant: 'default',
+      onClick: () => handleAddNew()
+    }
+  ];  
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     applyFilters();
@@ -328,16 +337,6 @@ export default function Companies() {
     });
   };
 
-  // Define page actions
-  const pageActions = [
-    {
-      label: 'Add Company',
-      icon: <Plus className="h-4 w-4 mr-2" />,
-      variant: 'default',
-      onClick: () => handleAddNew()
-    }
-  ];
-
   const breadcrumbs = [
     { title: t('Dashboard'), href: route('dashboard') },
     { title: t('Companies') }
@@ -569,7 +568,7 @@ export default function Companies() {
               <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
                 <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Téléphone")}</span>
                 <span className="font-mono text-gray-700 truncate block mt-0.5">
-                  {company.phone || '-'}
+                  {company.phone && company.phone !== '-' ? company.phone : <span className="text-gray-400 font-sans italic text-[11px]">{t("Non renseigné")}</span>}
                 </span>
               </div>
               <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
@@ -835,7 +834,7 @@ export default function Companies() {
                   <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
                     <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Téléphone")}</span>
                     <span className="font-mono text-gray-700 truncate block mt-0.5">
-                      {company.phone || '-'}
+                      {company.phone && company.phone !== '-' ? company.phone : <span className="text-gray-400 font-sans italic text-[11px]">{t("Non renseigné")}</span>}
                     </span>
                   </div>
                   <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
@@ -925,34 +924,62 @@ export default function Companies() {
           {t("Affichage de")} <span className="font-semibold text-gray-900">{companies?.from || 0}</span> {t("à")} <span className="font-semibold text-gray-900">{companies?.to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{companies?.total || 0}</span> {t("entreprises")}
         </div>
         
-        <div className="flex flex-wrap justify-center gap-1.5">
+        <div className="flex flex-wrap justify-center items-center gap-1.5">
           {companies?.links?.map((link: any, i: number) => {
             const rawLabel = link.label || '';
             const isPrevious = rawLabel.includes('Previous') || rawLabel.includes('previous') || rawLabel.includes('prev') || rawLabel.includes('&laquo;');
             const isNext = rawLabel.includes('Next') || rawLabel.includes('next') || rawLabel.includes('&raquo;');
             
-            let displayText = rawLabel.replace(/&laquo;\s*/g, '').replace(/\s*&raquo;/g, '');
-            if (isPrevious) displayText = '‹ Précédent';
-            else if (isNext) displayText = 'Suivant ›';
+            if (isPrevious) {
+              return (
+                <Button
+                  key={i}
+                  variant="outline"
+                  size="sm"
+                  className="h-8 px-2.5 text-xs bg-white text-gray-700 border-gray-200 hover:bg-gray-50 flex items-center gap-1 font-medium"
+                  disabled={!link.url}
+                  onClick={() => link.url && router.get(link.url)}
+                  title={t("Précédent")}
+                >
+                  <ChevronLeft className="h-4 w-4 shrink-0" />
+                  <span className="hidden sm:inline">{t("Précédent")}</span>
+                </Button>
+              );
+            }
 
-            const isTextLink = isPrevious || isNext;
-            
+            if (isNext) {
+              return (
+                <Button
+                  key={i}
+                  variant="outline"
+                  size="sm"
+                  className="h-8 px-2.5 text-xs bg-white text-gray-700 border-gray-200 hover:bg-gray-50 flex items-center gap-1 font-medium"
+                  disabled={!link.url}
+                  onClick={() => link.url && router.get(link.url)}
+                  title={t("Suivant")}
+                >
+                  <span className="hidden sm:inline">{t("Suivant")}</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Button>
+              );
+            }
+
+            const pageNum = rawLabel.replace(/&laquo;\s*/g, '').replace(/\s*&raquo;/g, '');
+
             return (
               <Button
                 key={i}
                 variant={link.active ? 'default' : 'outline'}
-                size={isTextLink ? "sm" : "icon"}
+                size="sm"
                 className={
-                  isTextLink 
-                    ? "px-3 text-xs h-8 bg-white text-gray-700 border-gray-200 hover:bg-gray-50 font-medium" 
-                    : link.active 
-                    ? "h-8 w-8 text-xs bg-emerald-600 text-white border-emerald-600 font-bold shadow-xs" 
-                    : "h-8 w-8 text-xs border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                  link.active 
+                    ? "h-8 min-w-[32px] px-2 text-xs bg-emerald-600 text-white border-emerald-600 font-bold shadow-xs" 
+                    : "h-8 min-w-[32px] px-2 text-xs border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-medium"
                 }
                 disabled={!link.url}
                 onClick={() => link.url && router.get(link.url)}
               >
-                {displayText}
+                {pageNum}
               </Button>
             );
           })}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Sparkles, ShoppingBag, Store as StoreIcon, ShieldCheck, Zap, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -24,149 +24,188 @@ interface HeroSectionProps {
   };
 }
 
-export default function HeroSection({ settings, sectionData, brandColor = '#3b82f6' }: HeroSectionProps) {
+export default function HeroSection({ settings, sectionData, brandColor = '#059669' }: HeroSectionProps) {
   const { t } = useTranslation();
   const [imageError, setImageError] = React.useState(false);
   const heroImage = sectionData.image ? getImageUrl(sectionData.image) : null;
-  
-  // Get colors from settings
-  const colors = settings?.config_sections?.colors || { primary: brandColor, secondary: '#059669', accent: '#065f46' };
-  const primaryColor = colors.primary || brandColor;
-  const secondaryColor = colors.secondary || '#059669';
-  const accentColor = colors.accent || '#065f46';
 
   return (
-    <section id="hero" className="pt-16 bg-gray-50 min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="text-center lg:text-left space-y-6 sm:space-y-8">
-            {sectionData.announcement_text && (
-              <div 
-                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border"
-                style={{ 
-                  backgroundColor: `${accentColor}15`, 
-                  color: accentColor,
-                  borderColor: `${accentColor}30`
-                }}
-              >
-                {sectionData.announcement_text}
-              </div>
-            )}
+    <section id="hero" className="pt-28 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-slate-50 via-emerald-50/30 to-white relative overflow-hidden">
+      {/* Background Glow Orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-200/25 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-10 right-10 w-96 h-96 bg-teal-200/20 rounded-full blur-[90px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Hero Content (7 cols) */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight" role="banner" aria-label="Main heading">
-              {sectionData.title || 'Launch Your Online Store in Minutes'}
+            {/* Top Announcement Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100/80 border border-emerald-200/90 text-emerald-800 text-xs sm:text-sm font-semibold shadow-xs">
+              <Sparkles className="w-4 h-4 text-emerald-600 animate-pulse shrink-0" />
+              <span>{sectionData.announcement_text || t("⚡ La plateforme e-commerce tout-en-un #1 pour Tunnels de Vente et Boutiques")}</span>
+            </div>
+            
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+              {sectionData.title || (
+                <>
+                  Lancez votre boutique & vos <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 bg-clip-text text-transparent">Tunnels de Vente</span> en 2 min
+                </>
+              )}
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">
-              {sectionData.subtitle || 'Create, customize, and manage multiple online stores with our powerful e-commerce platform.'}
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg lg:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed mx-auto lg:mx-0">
+              {sectionData.subtitle || t("Créez des boutiques haute conversion avec 10 thèmes HD intégrés, tunnels de vente drag & drop, gestion des commandes Cash on Delivery et intégration WhatsApp automatique.")}
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 justify-center lg:justify-start pt-2">
               <Link
                 href={route('register')}
-                className="text-white px-8 py-4 rounded-lg transition-colors font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90"
-                style={{ backgroundColor: primaryColor }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = secondaryColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = primaryColor}
-                aria-label="Start free trial - Register for StoreGo"
+                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-xl shadow-emerald-600/25 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2.5"
               >
-                {sectionData.primary_button_text || t('Start Free Trial')}
+                <span>{sectionData.primary_button_text || t('Créer ma boutique gratuitement')}</span>
                 <ArrowRight size={18} />
               </Link>
-              <Link
-                href={route('login')}
-                className="border px-8 py-4 rounded-lg transition-colors font-semibold text-base flex items-center justify-center gap-2 hover:bg-gray-50"
-                style={{ borderColor: primaryColor, color: primaryColor }}
-                aria-label="Login to existing StoreGo account"
+
+              <a
+                href="#templates"
+                className="bg-white/90 backdrop-blur-md hover:bg-white text-slate-800 font-bold text-base px-8 py-4 rounded-2xl border border-slate-200 shadow-sm transition-all hover:border-emerald-300 flex items-center justify-center gap-2"
               >
-                <Play size={18} />
-                {sectionData.secondary_button_text || 'Login'}
-              </Link>
+                <StoreIcon size={18} className="text-emerald-600" />
+                <span>{sectionData.secondary_button_text || t('Explorer les 10 thèmes')}</span>
+              </a>
             </div>
 
+            {/* Quick Feature Bullet Points */}
+            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-full border border-slate-200/80 shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>{t("Pas de carte bancaire requise")}</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-full border border-slate-200/80 shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>{t("Configuration en 2 minutes")}</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/80 px-3 py-1.5 rounded-full border border-slate-200/80 shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>{t("Domaine Personnalisé Gratuit")}</span>
+              </div>
+            </div>
+
+            {/* Stats Row */}
             {sectionData.stats && sectionData.stats.length > 0 && (
-              <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 sm:gap-6 lg:gap-8 pt-8 sm:pt-12">
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/60 max-w-xl mx-auto lg:mx-0">
                 {sectionData.stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div 
-                      className="text-3xl md:text-4xl font-bold"
-                      style={{ color: index === 0 ? primaryColor : index === 1 ? secondaryColor : accentColor }}
-                    >
+                  <div key={index} className="text-center lg:text-left">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                       {stat.value}
                     </div>
-                    <div className="text-gray-600 font-medium text-sm">{stat.label}</div>
+                    <div className="text-slate-500 font-medium text-xs mt-0.5">{stat.label}</div>
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Right Content - Hero Image or Card */}
-          <div className="relative">
-            {heroImage && sectionData.image && !imageError ? (
-              <div className="relative">
-                <img 
-                  src={heroImage} 
-                  alt="Hero" 
-                  className="w-full h-auto rounded-2xl shadow-xl"
-                  onError={() => setImageError(true)}
-                />
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm mx-auto border border-gray-200">
-                <div className="text-center space-y-6">
-                  <div className="relative">
-                    <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
-                      <span className="text-white text-2xl">🏪</span>
-                    </div>
-                    <div 
-                      className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-3 border-white"
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      <div className="w-2 h-2 bg-white rounded-full mx-auto mt-1.5"></div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {sectionData.card?.name || t('Sample Store')}
-                    </h3>
-                    <p className="text-gray-900 font-semibold">
-                      {sectionData.card?.title || t('Premium Theme')}
-                    </p>
-                    <p className="text-gray-500">
-                      {sectionData.card?.company || t('Multi-Store Platform')}
-                    </p>
-                  </div>
-                  
-                  <div className="flex justify-center gap-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">🛒</span>
-                    </div>
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">🎨</span>
-                    </div>
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">📱</span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6 bg-gray-50 rounded-xl border">
-                    <div className="w-24 h-24 bg-white rounded-lg mx-auto flex items-center justify-center shadow-sm border">
-                      <div className="w-16 h-16 rounded flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
-                        <span className="text-white text-xs font-bold">{t("STORE")}</span>
-                      </div>
-                    </div>
-                  </div>
+          {/* Right Hero Bento Mockup (5 cols) */}
+          <div className="lg:col-span-5 relative mt-6 lg:mt-0">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              
+              {/* Floating Sales Alert Pill */}
+              <div className="absolute -top-5 -right-3 z-30 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-xl border border-slate-800 flex items-center gap-3 text-xs animate-bounce" style={{ animationDuration: '3s' }}>
+                <div className="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-[11px]">{t("Nouvelle Commande !")}</div>
+                  <div className="text-[10px] text-emerald-400 font-semibold">+ 45 000 FCFA • Tunnels de vente</div>
                 </div>
               </div>
-            )}
-            
-            {/* Simple Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-gray-200 rounded-full opacity-50"></div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gray-300 rounded-full opacity-40"></div>
+
+              {/* Floating Visitors Badge */}
+              <div className="absolute -bottom-5 -left-3 z-30 bg-emerald-600 text-white px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-bold">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                </span>
+                <span>🔥 148 visiteurs en direct</span>
+              </div>
+
+              {/* Main Card Container */}
+              <div className="bg-white rounded-3xl p-6 sm:p-7 shadow-2xl shadow-emerald-950/10 border border-emerald-100/90 relative z-20">
+                {/* Store Header Preview */}
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-emerald-600/20">
+                      AS
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm">Mon E-Shop Express</h4>
+                      <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        ● Boutique En Ligne Active
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right text-xs">
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">Ventes aujourd'hui</span>
+                    <span className="font-extrabold text-slate-900 text-sm">345 000 FCFA</span>
+                  </div>
+                </div>
+
+                {/* Hero Showcase Graphic */}
+                {heroImage && !imageError ? (
+                  <div className="rounded-2xl overflow-hidden shadow-inner border border-slate-100 relative group">
+                    <img 
+                      src={heroImage} 
+                      alt="Aperçu Boutique" 
+                      className="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      onError={() => setImageError(true)}
+                    />
+                  </div>
+                ) : (
+                  <div className="bg-gradient-to-br from-slate-50 via-emerald-50/50 to-teal-50/30 rounded-2xl p-5 border border-emerald-100/80 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-800">10 Thèmes Prêts à l'Emploi</span>
+                      <span className="text-[10px] font-semibold text-emerald-700 bg-white px-2 py-0.5 rounded-md border border-emerald-100">100% Modifiables</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="bg-white p-2 rounded-xl border border-slate-200/80 shadow-2xs text-center space-y-1">
+                        <div className="w-full h-12 bg-rose-50 rounded-lg flex items-center justify-center text-lg">👗</div>
+                        <span className="text-[10px] font-bold text-slate-700 block truncate">Mode</span>
+                      </div>
+                      <div className="bg-white p-2 rounded-xl border border-slate-200/80 shadow-2xs text-center space-y-1">
+                        <div className="w-full h-12 bg-sky-50 rounded-lg flex items-center justify-center text-lg">📱</div>
+                        <span className="text-[10px] font-bold text-slate-700 block truncate">High-Tech</span>
+                      </div>
+                      <div className="bg-white p-2 rounded-xl border border-slate-200/80 shadow-2xs text-center space-y-1">
+                        <div className="w-full h-12 bg-amber-50 rounded-lg flex items-center justify-center text-lg">💄</div>
+                        <span className="text-[10px] font-bold text-slate-700 block truncate">Beauté</span>
+                      </div>
+                    </div>
+
+                    <div className="bg-white p-3.5 rounded-xl border border-emerald-200 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
+                          <Zap className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900">Tunnel de Vente Express</div>
+                          <div className="text-[10px] text-slate-500">Validation en 1-clic avec WhatsApp</div>
+                        </div>
+                      </div>
+                      <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Actif</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>

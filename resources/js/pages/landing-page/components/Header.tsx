@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useBrand } from '@/contexts/BrandContext';
 
@@ -20,15 +20,11 @@ interface HeaderProps {
   user?: any;
 }
 
-export default function Header({ settings, sectionData, customPages = [], brandColor = '#3b82f6', user }: HeaderProps) {
+export default function Header({ settings, sectionData, customPages = [], brandColor = '#059669', user }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
-  // Get colors from settings
-  const colors = settings?.config_sections?.colors || { primary: brandColor, secondary: '#059669', accent: '#065f46' };
-  const primaryColor = colors.primary || brandColor;
-  const secondaryColor = colors.secondary || '#059669';
-  const accentColor = colors.accent || '#065f46';
+  const { t } = useTranslation();
+  const { logoDark } = useBrand();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,238 +34,147 @@ export default function Header({ settings, sectionData, customPages = [], brandC
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const menuItems = customPages.map(page => ({
-    name: page.title,
-    href: route('custom-page.show', page.slug)
-  }));
-  const { t } = useTranslation();
-  const isTransparent = sectionData?.transparent;
-  const backgroundColor = sectionData?.background_color || '#ffffff';
-  
-  const getHeaderClasses = () => {
-    if (isTransparent) {
-      return isScrolled 
-        ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/50'
-        : 'bg-transparent';
-    }
-    return isScrolled 
-      ? 'shadow-lg border-b border-gray-200/50'
-      : '';
-  };
-
-  const getHeaderStyle = () => {
-    if (isTransparent) return {};
-    return { backgroundColor };
-  };
+  const menuItems = [
+    { name: t("Thèmes"), href: "#templates" },
+    { name: t("Fonctionnalités"), href: "#features" },
+    { name: t("Tarifs"), href: "#plans" },
+    { name: t("Avis"), href: "#testimonials" },
+    { name: t("FAQ"), href: "#faq" },
+    ...customPages.map(page => ({
+      name: page.title,
+      href: route('custom-page.show', page.slug)
+    }))
+  ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getHeaderClasses()}`}
-      style={getHeaderStyle()}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="fixed top-4 left-4 right-4 z-50 max-w-6xl mx-auto">
+      <div className={`bg-white/90 backdrop-blur-xl border border-emerald-100/90 shadow-xl shadow-emerald-950/5 rounded-full px-5 py-2.5 sm:px-6 transition-all duration-300 ${
+        isScrolled ? 'border-emerald-200 shadow-2xl shadow-emerald-950/10' : ''
+      }`}>
+        <div className="flex justify-between items-center h-11">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link 
-              href={route("home")} 
-              className="flex items-center transition-colors"
-            >
-              {(() => {
-                const { logoLight, logoDark } = useBrand();
-                const isDark = document.documentElement.classList.contains('dark');
-                const currentLogo = isDark ? logoLight : logoDark;
-                const displayUrl = currentLogo ? (
-                  currentLogo.startsWith('http') ? currentLogo : 
-                  currentLogo.startsWith('/storage/') ? `${window.appSettings?.baseUrl || window.location.origin}${currentLogo}` :
-                  currentLogo.startsWith('/') ? `${window.appSettings?.baseUrl || window.location.origin}${currentLogo}` : currentLogo
-                ) : '';
-                
-                return displayUrl ? (
-                  <img
-                    src={displayUrl}
-                    alt={settings.company_name}
-                    className="h-7 w-auto xl:max-w-[180px] sm:max-w-[130px] max-w-[100px] object-scale-down  transition-all duration-200"
-                  />
-                ) : (
-                  <span 
-                    className="text-2xl font-bold text-gray-900 transition-colors"
-                    onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                    onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                  >
-                    {settings.company_name}
+            <a href="/" className="flex items-center gap-2 group">
+              {logoDark ? (
+                <img
+                  src={logoDark}
+                  alt={settings?.company_name || 'MyStoreAsap'}
+                  className="h-7 w-auto object-contain"
+                />
+              ) : (
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-bold shadow-xs">
+                    <ShoppingBag className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-lg font-bold tracking-tight text-slate-900">
+                    MyStore<span className="text-emerald-600">Asap</span>
                   </span>
-                );
-              })()} 
-            </Link>
+                </div>
+              )}
+            </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center xl:space-x-8 space-x-4" role="navigation" aria-label="Main navigation">
-
+          <nav className="hidden lg:flex items-center space-x-6">
             {menuItems.map((item) => (
-              <Link
+              <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 text-sm font-medium transition-colors relative group"
-                style={{ '--hover-color': primaryColor } as React.CSSProperties}
-                onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                className="text-slate-600 hover:text-emerald-600 text-xs font-semibold tracking-wide transition-colors"
               >
                 {item.name}
-                <span 
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all group-hover:w-full" 
-                  style={{ backgroundColor: primaryColor }}
-                  aria-hidden="true"
-                ></span>
-              </Link>
+              </a>
             ))}
           </nav>
 
           {/* Auth Buttons */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             {user ? (
               <Link
                 href={route('dashboard')}
-                className="px-6 py-2.5 rounded-lg text-sm font-semibold transition-colors border"
-                style={{ 
-                  backgroundColor: primaryColor, 
-                  color: 'white',
-                  borderColor: primaryColor
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = secondaryColor;
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = primaryColor;
-                  e.currentTarget.style.color = 'white';
-                }}
+                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md shadow-emerald-600/20 transition-all hover:scale-105 flex items-center gap-1.5"
               >
-                {t("Dashboard")}
+                <span>{t("Tableau de bord")}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             ) : (
               <>
                 <Link
                   href={route('login')}
-                  className="text-gray-600 text-sm font-medium transition-colors"
-                  onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                  onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                  className="text-slate-700 hover:text-emerald-700 text-xs font-semibold px-4 py-2 rounded-full hover:bg-emerald-50/60 transition-colors"
                 >
-                  {t("Login")}
+                  {t("Se connecter")}
                 </Link>
                 <Link
                   href={route('register')}
-                  className="px-6 py-2.5 rounded-lg text-sm font-semibold transition-colors border"
-                  style={{ 
-                    backgroundColor: primaryColor, 
-                    color: 'white',
-                    borderColor: primaryColor
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = secondaryColor;
-                    e.currentTarget.style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = primaryColor;
-                    e.currentTarget.style.color = 'white';
-                  }}
+                  className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md shadow-emerald-600/20 transition-all hover:scale-105 flex items-center gap-1.5"
                 >
-                  {t("Get Started")}
+                  <span>{t("Créer ma boutique")}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </>
             )}
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-2">
+            <Link
+              href={route('register')}
+              className="bg-emerald-600 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow-xs"
+            >
+              {t("Créer")}
+            </Link>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
-              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
+              className="p-1.5 text-slate-700 hover:text-emerald-600 rounded-full hover:bg-emerald-50 transition-colors"
+              aria-label="Toggle Navigation"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200" id="mobile-menu">
-            <div 
-              className="px-4 py-6 space-y-4"
-              style={isTransparent ? { backgroundColor: 'white' } : { backgroundColor }}
-            >
-
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block text-gray-600 hover:text-gray-900 text-base font-medium transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-4 space-y-3 border-t border-gray-200">
-                {user ? (
-                  <Link
-                    href={route('dashboard')}
-                    className="block w-full text-center py-2.5 rounded-lg text-sm font-semibold transition-colors border"
-                    style={{ 
-                      backgroundColor: primaryColor, 
-                      color: 'white',
-                      borderColor: primaryColor
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = secondaryColor;
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = primaryColor;
-                      e.currentTarget.style.color = 'white';
-                    }}
-                  >
-                    {t("Dashboard")}
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href={route('login')}
-                      className="block w-full text-center text-gray-600 py-2.5 text-sm font-medium transition-colors"
-                      onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {t("Login")}
-                    </Link>
-                    <Link
-                      href={route('register')}
-                      className="block w-full text-center py-2.5 rounded-lg text-sm font-semibold transition-colors border"
-                      style={{ 
-                        backgroundColor: primaryColor, 
-                        color: 'white',
-                        borderColor: primaryColor
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = secondaryColor;
-                        e.currentTarget.style.color = 'white';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = primaryColor;
-                        e.currentTarget.style.color = 'white';
-                      }}
-                    >
-                      {t("Get Started")}
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMenuOpen && (
+        <div className="lg:hidden mt-2 bg-white/95 backdrop-blur-2xl border border-emerald-100 shadow-2xl rounded-2xl p-5 space-y-3 animate-in fade-in slide-in-from-top-3">
+          {menuItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="block text-slate-700 hover:text-emerald-600 text-sm font-medium py-1.5 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+          <div className="pt-3 space-y-2 border-t border-slate-100">
+            {user ? (
+              <Link
+                href={route('dashboard')}
+                className="block w-full text-center bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20"
+              >
+                {t("Tableau de bord")}
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href={route('login')}
+                  className="block w-full text-center text-slate-700 py-2 rounded-xl text-xs font-semibold border border-slate-200"
+                >
+                  {t("Se connecter")}
+                </Link>
+                <Link
+                  href={route('register')}
+                  className="block w-full text-center bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20"
+                >
+                  {t("Créer ma boutique gratuitement")}
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }

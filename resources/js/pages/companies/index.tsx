@@ -390,90 +390,77 @@ export default function Companies() {
       noPadding
     >
       {/* Search and filters section */}
-      <div className="bg-white rounded-lg shadow mb-4">
-        <div className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <form onSubmit={handleSearch} className="flex gap-2">
-                <div className="relative w-64">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder={t("Search companies...")}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-9"
-                  />
-                </div>
-                <Button type="submit" size="sm">
-                  <Search className="h-4 w-4 mr-1.5" />
-                  {t("Search")}
-                </Button>
-              </form>
-              
-              <div className="ml-2">
-                <Button 
-                  variant={hasActiveFilters() ? "default" : "outline"}
-                  size="sm" 
-                  className="h-8 px-2 py-1"
-                  onClick={() => setShowFilters(!showFilters)}
-                >
-                  <Filter className="h-3.5 w-3.5 mr-1.5" />
-                  {showFilters ? 'Hide Filters' : 'Filters'}
-                  {hasActiveFilters() && (
-                    <span className="ml-1 bg-primary-foreground text-primary rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                      {activeFilterCount()}
-                    </span>
-                  )}
-                </Button>
+      <div className="bg-white rounded-xl shadow-xs border border-gray-100 mb-4 p-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
+            <form onSubmit={handleSearch} className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="relative flex-1 sm:w-72">
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder={t("Rechercher une entreprise, un nom, un email...")}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 h-9 text-xs sm:text-sm bg-gray-50/50 border-gray-200 focus:bg-white"
+                />
               </div>
+              <Button type="submit" size="sm" className="h-9 px-3 shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Search className="h-4 w-4 sm:mr-1.5" />
+                <span className="hidden sm:inline text-xs font-medium">{t("Rechercher")}</span>
+              </Button>
+            </form>
+            
+            <Button 
+              variant={hasActiveFilters() ? "default" : "outline"}
+              size="sm" 
+              className="h-9 px-3 shrink-0 text-xs flex items-center justify-center gap-1.5"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <Filter className="h-3.5 w-3.5 text-gray-500" />
+              <span>{showFilters ? t('Masquer les filtres') : t('Filtres')}</span>
+              {hasActiveFilters() && (
+                <span className="ml-1 bg-emerald-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold">
+                  {activeFilterCount()}
+                </span>
+              )}
+            </Button>
+          </div>
+          
+          <div className="flex items-center justify-between sm:justify-end gap-3 w-full md:w-auto pt-2 md:pt-0 border-t border-gray-100 md:border-t-0">
+            <div className="border border-gray-200 rounded-lg p-0.5 flex items-center bg-gray-50">
+              <Button 
+                size="sm" 
+                variant={activeView === 'list' ? "default" : "ghost"}
+                className={`h-7 px-2.5 text-xs font-medium flex items-center gap-1.5 ${activeView === 'list' ? 'bg-white text-gray-900 shadow-xs' : 'text-gray-500'}`}
+                onClick={() => setActiveView('list')}
+              >
+                <List className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">{t("Tableau")}</span>
+              </Button>
+              <Button 
+                size="sm" 
+                variant={activeView === 'grid' ? "default" : "ghost"}
+                className={`h-7 px-2.5 text-xs font-medium flex items-center gap-1.5 ${activeView === 'grid' ? 'bg-white text-gray-900 shadow-xs' : 'text-gray-500'}`}
+                onClick={() => setActiveView('grid')}
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">{t("Grille")}</span>
+              </Button>
             </div>
             
-            <div className="flex items-center gap-2">
-              <div className="border rounded-md p-0.5 mr-2">
-                <Button 
-                  size="sm" 
-                  variant={activeView === 'list' ? "default" : "ghost"}
-                  className="h-7 px-2"
-                  onClick={() => setActiveView('list')}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant={activeView === 'grid' ? "default" : "ghost"}
-                  className="h-7 px-2"
-                  onClick={() => setActiveView('grid')}
-                >
-                  <LayoutGrid className="h-4 w-4" />
-                </Button>
-              </div>
-              
-              <Label className="text-xs text-muted-foreground">{t("Per Page:")}</Label>
+            <div className="flex items-center gap-1.5">
+              <Label className="text-xs text-gray-500 whitespace-nowrap">{t("Par page:")}</Label>
               <Select 
                 value={pageFilters.per_page?.toString() || "10"} 
                 onValueChange={(value) => {
                   const params: any = { page: 1, per_page: parseInt(value) };
-                  
-                  if (searchTerm) {
-                    params.search = searchTerm;
-                  }
-                  
-                  if (selectedStatus !== 'all') {
-                    params.status = selectedStatus;
-                  }
-                  
-                  if (startDate) {
-                    params.start_date = startDate.toISOString().split('T')[0];
-                  }
-                  
-                  if (endDate) {
-                    params.end_date = endDate.toISOString().split('T')[0];
-                  }
-                  
+                  if (searchTerm) params.search = searchTerm;
+                  if (selectedStatus !== 'all') params.status = selectedStatus;
+                  if (startDate) params.start_date = startDate.toISOString().split('T')[0];
+                  if (endDate) params.end_date = endDate.toISOString().split('T')[0];
                   router.get(route('companies.index'), params, { preserveState: true, preserveScroll: true });
                 }}
               >
-                <SelectTrigger className="w-16 h-8">
+                <SelectTrigger className="w-16 h-8 text-xs bg-white border-gray-200">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -485,421 +472,479 @@ export default function Companies() {
               </Select>
             </div>
           </div>
-          
-          {showFilters && (
-            <div className="w-full mt-3 p-4 bg-gray-50 border rounded-md">
-              <div className="flex flex-wrap gap-4 items-end">
-                <div className="space-y-2">
-                  <Label>{t("Status")}</Label>
-                  <Select 
-                    value={selectedStatus} 
-                    onValueChange={handleStatusFilter}
-                  >
-                    <SelectTrigger className="w-40">
-                      <SelectValue placeholder={t("All Status")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">{t("All Status")}</SelectItem>
-                      <SelectItem value="active">{t("Active")}</SelectItem>
-                      <SelectItem value="inactive">{t("Inactive")}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+        </div>
+        
+        {showFilters && (
+          <div className="w-full mt-3 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+            <div className="flex flex-wrap gap-4 items-end">
+              <div className="space-y-1.5 flex-1 min-w-[140px]">
+                <Label className="text-xs font-medium text-gray-700">{t("Statut")}</Label>
+                <Select 
+                  value={selectedStatus} 
+                  onValueChange={handleStatusFilter}
+                >
+                  <SelectTrigger className="w-full h-9 text-xs bg-white">
+                    <SelectValue placeholder={t("Tous les statuts")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t("Tous les statuts")}</SelectItem>
+                    <SelectItem value="active">{t("Actif")}</SelectItem>
+                    <SelectItem value="inactive">{t("Inactif")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-1.5 flex-1 min-w-[140px]">
+                <Label className="text-xs font-medium text-gray-700">{t("Date de début")}</Label>
+                <DatePicker
+                  selected={startDate}
+                  onSelect={setStartDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
+              
+              <div className="space-y-1.5 flex-1 min-w-[140px]">
+                <Label className="text-xs font-medium text-gray-700">{t("Date de fin")}</Label>
+                <DatePicker
+                  selected={endDate}
+                  onSelect={setEndDate}
+                  onChange={(date) => setEndDate(date)}
+                />
+              </div>
+              
+              <div className="flex gap-2 w-full sm:w-auto">
+                <Button 
+                  variant="default" 
+                  size="sm"
+                  className="h-9 text-xs flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700"
+                  onClick={applyFilters}
+                >
+                  {t("Appliquer")}
+                </Button>
                 
-                <div className="space-y-2">
-                  <Label>{t("Start Date")}</Label>
-                  <DatePicker
-                    selected={startDate}
-                    onSelect={setStartDate}
-                    onChange={(date) => {
-                      setStartDate(date);
-                    }}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label>{t("End Date")}</Label>
-                  <DatePicker
-                    selected={endDate}
-                    onSelect={setEndDate}
-                    onChange={(date) => {
-                      setEndDate(date);
-                    }}
-                  />
-                </div>
-                
-                <div className="flex gap-2">
-                  <Button 
-                    variant="default" 
-                    size="sm"
-                    className="h-9"
-                    onClick={applyFilters}
-                  >
-                    {t("Apply Filters")}
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="h-9"
-                    onClick={handleResetFilters}
-                    disabled={!hasActiveFilters()}
-                  >
-                    {t("Reset Filters")}
-                  </Button>
-                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="h-9 text-xs flex-1 sm:flex-none"
+                  onClick={handleResetFilters}
+                  disabled={!hasActiveFilters()}
+                >
+                  {t("Réinitialiser")}
+                </Button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Content section */}
-      {activeView === 'list' ? (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b bg-gray-50">
-                  {columns.map((column) => (
-                    <th 
-                      key={column.key} 
-                      className="px-4 py-3 text-left font-medium text-gray-500"
-                      onClick={() => column.sortable && handleSort(column.key)}
-                    >
-                      <div className="flex items-center">
-                        {column.label}
-                        {column.sortable && (
-                          <span className="ml-1">
-                            {pageFilters.sort_field === column.key ? (
-                              pageFilters.sort_direction === 'asc' ? '↑' : '↓'
-                            ) : ''}
-                          </span>
-                        )}
-                      </div>
-                    </th>
-                  ))}
-                  <th className="px-4 py-3 text-right font-medium text-gray-500">
-                    {t("Actions")}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {companies?.data?.map((company: any) => (
-                  <tr key={company.id} className="border-b hover:bg-gray-50">
-                    {columns.map((column) => (
-                      <td key={`${company.id}-${column.key}`} className="px-4 py-3">
-                        {column.render ? column.render(company[column.key], company) : company[column.key]}
-                      </td>
-                    ))}
-                    <td className="px-4 py-3 text-right">
-                      <div className="flex justify-end gap-1">
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('login-as', company)}
-                              className="text-blue-500 hover:text-blue-700"
-                            >
-                              <ArrowUpRight className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Login as Company")}</TooltipContent>
-                        </Tooltip>
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('company-info', company)}
-                              className="text-blue-500 hover:text-blue-700"
-                            >
-                              <Info className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Company Info")}</TooltipContent>
-                        </Tooltip>
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('upgrade-plan', company)}
-                              className="text-amber-500 hover:text-amber-700"
-                            >
-                              <CreditCard className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Upgrade Plan")}</TooltipContent>
-                        </Tooltip>
-                        
+      {/* 1. Mobile Cards View (Always rendered on mobile screens < 768px for supreme mobile UX) */}
+      <div className="block md:hidden space-y-3 mb-6">
+        {companies?.data?.map((company: any) => (
+          <Card key={`mobile-${company.id}`} className="bg-white border border-gray-200 rounded-xl p-4 shadow-xs">
+            {/* Header: Avatar + Info + Status */}
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="h-11 w-11 shrink-0 rounded-full bg-emerald-600 text-white font-bold text-sm flex items-center justify-center shadow-xs">
+                  {getInitials(company.name)}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-900 text-sm truncate">{company.name}</h3>
+                  <p className="text-xs text-gray-500 truncate">{company.email}</p>
+                </div>
+              </div>
 
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('reset-password', company)}
-                              className="text-blue-500 hover:text-blue-700"
-                            >
-                              <KeyRound className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Reset Password")}</TooltipContent>
-                        </Tooltip>
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('toggle-status', company)}
-                              className="text-amber-500 hover:text-amber-700"
-                            >
-                              {company.status === 'active' ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{company.status === 'active' ? t("Disable Login") : t("Enable Login")}</TooltipContent>
-                        </Tooltip>
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              onClick={() => handleAction('edit', company)}
-                              className="text-amber-500 hover:text-amber-700"
-                            >
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Edit")}</TooltipContent>
-                        </Tooltip>
-                        
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button 
-                              variant="ghost" 
-                              size="icon"
-                              className="text-red-500 hover:text-red-700"
-                              onClick={() => handleAction('delete', company)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{t("Delete")}</TooltipContent>
-                        </Tooltip>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                
-                {(!companies?.data || companies.data.length === 0) && (
-                  <tr>
-                    <td colSpan={columns.length + 1} className="px-4 py-8 text-center text-gray-500">
-                      {t("No companies found")}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination section */}
-          <div className="p-4 border-t flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              {t("Showing")} <span className="font-medium">{companies?.from || 0}</span> {t("to")} <span className="font-medium">{companies?.to || 0}</span> {t("of")} <span className="font-medium">{companies?.total || 0}</span> {t("companies")}
+              <span className={`shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${
+                company.status === 'active' 
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                  : 'bg-amber-50 text-amber-700 border border-amber-200'
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${company.status === 'active' ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+                {company.status === 'active' ? t('Actif') : t('Inactif')}
+              </span>
             </div>
-            
-            <div className="flex gap-1">
-              {companies?.links?.map((link: any, i: number) => {
-                // Check if the link is "Next" or "Previous" to use text instead of icon
-                const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-                const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-                
-                return (
-                  <Button
-                    key={i}
-                    variant={link.active ? 'default' : 'outline'}
-                    size={isTextLink ? "sm" : "icon"}
-                    className={isTextLink ? "px-3" : "h-8 w-8"}
-                    disabled={!link.url}
-                    onClick={() => link.url && router.get(link.url)}
-                  >
-                    {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
+
+            {/* Grid stats info */}
+            <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+              <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
+                <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Téléphone")}</span>
+                <span className="font-mono text-gray-700 truncate block mt-0.5">
+                  {company.phone || '-'}
+                </span>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
+                <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Forfait")}</span>
+                <span className="font-semibold text-emerald-700 capitalize truncate block mt-0.5">
+                  {company.plan_name || 'Free'}
+                </span>
+              </div>
+            </div>
+
+            <div className="text-[11px] text-gray-400 mb-3 flex items-center justify-between">
+              <span>{t("Créé le")}:</span>
+              <span className="font-medium text-gray-600">
+                {window.appSettings?.formatDateTime(company.created_at, false) || new Date(company.created_at).toLocaleDateString()}
+              </span>
+            </div>
+
+            {/* Action buttons */}
+            <div className="pt-2 border-t border-gray-100 flex items-center gap-2">
+              <Button 
+                size="sm"
+                onClick={() => handleAction('login-as', company)}
+                className="flex-1 h-8 text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 rounded-lg"
+              >
+                <ArrowUpRight className="h-3.5 w-3.5" />
+                <span>{t("Se connecter")}</span>
+              </Button>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs text-gray-600 border-gray-200 rounded-lg">
+                    <span>{t("Actions")}</span>
                   </Button>
-                );
-              })}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 z-50">
+                  <DropdownMenuItem onClick={() => handleAction('company-info', company)}>
+                    <Info className="h-4 w-4 mr-2 text-blue-500" />
+                    <span>{t("Informations")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleAction('upgrade-plan', company)}>
+                    <CreditCard className="h-4 w-4 mr-2 text-amber-500" />
+                    <span>{t("Changer le forfait")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleAction('reset-password', company)}>
+                    <KeyRound className="h-4 w-4 mr-2 text-blue-500" />
+                    <span>{t("Réinitialiser MDP")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleAction('toggle-status', company)}>
+                    {company.status === 'active' ? (
+                      <>
+                        <Lock className="h-4 w-4 mr-2 text-amber-500" />
+                        <span>{t("Désactiver le compte")}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Unlock className="h-4 w-4 mr-2 text-emerald-500" />
+                        <span>{t("Activer le compte")}</span>
+                      </>
+                    )}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleAction('edit', company)}>
+                    <Edit className="h-4 w-4 mr-2 text-indigo-500" />
+                    <span>{t("Modifier")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => handleAction('delete', company)} className="text-red-600">
+                    <Trash2 className="h-4 w-4 mr-2 text-red-500" />
+                    <span>{t("Supprimer")}</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </Card>
+        ))}
+
+        {(!companies?.data || companies.data.length === 0) && (
+          <div className="p-8 text-center bg-white rounded-xl border border-gray-200 text-gray-500 text-sm">
+            {t("Aucune entreprise trouvée")}
+          </div>
+        )}
+      </div>
+
+      {/* 2. Desktop View (Tableau or Grid based on activeView state) */}
+      <div className="hidden md:block">
+        {activeView === 'list' ? (
+          <div className="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-gray-50/80">
+                    {columns.map((column) => (
+                      <th 
+                        key={column.key} 
+                        className="px-4 py-3.5 text-left font-semibold text-gray-700"
+                        onClick={() => column.sortable && handleSort(column.key)}
+                      >
+                        <div className="flex items-center gap-1 cursor-pointer">
+                          {column.label}
+                          {column.sortable && (
+                            <span className="text-gray-400 text-xs">
+                              {pageFilters.sort_field === column.key ? (
+                                pageFilters.sort_direction === 'asc' ? '↑' : '↓'
+                              ) : ''}
+                            </span>
+                          )}
+                        </div>
+                      </th>
+                    ))}
+                    <th className="px-4 py-3.5 text-right font-semibold text-gray-700">
+                      {t("Actions")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {companies?.data?.map((company: any) => (
+                    <tr key={company.id} className="hover:bg-gray-50/60 transition-colors">
+                      {columns.map((column) => (
+                        <td key={`${company.id}-${column.key}`} className="px-4 py-3.5">
+                          {column.render ? column.render(company[column.key], company) : company[column.key]}
+                        </td>
+                      ))}
+                      <td className="px-4 py-3.5 text-right">
+                        <div className="flex justify-end gap-1">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('login-as', company)}
+                                className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 h-8 w-8"
+                              >
+                                <ArrowUpRight className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Login as Company")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('company-info', company)}
+                                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-8 w-8"
+                              >
+                                <Info className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Company Info")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('upgrade-plan', company)}
+                                className="text-amber-600 hover:text-amber-700 hover:bg-amber-50 h-8 w-8"
+                              >
+                                <CreditCard className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Upgrade Plan")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('reset-password', company)}
+                                className="text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 h-8 w-8"
+                              >
+                                <KeyRound className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Reset Password")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('toggle-status', company)}
+                                className="text-amber-600 hover:text-amber-700 hover:bg-amber-50 h-8 w-8"
+                              >
+                                {company.status === 'active' ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{company.status === 'active' ? t("Disable Login") : t("Enable Login")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={() => handleAction('edit', company)}
+                                className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-8 w-8"
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Edit")}</TooltipContent>
+                          </Tooltip>
+                          
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                size="icon"
+                                className="text-rose-600 hover:text-rose-700 hover:bg-rose-50 h-8 w-8"
+                                onClick={() => handleAction('delete', company)}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>{t("Delete")}</TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  
+                  {(!companies?.data || companies.data.length === 0) && (
+                    <tr>
+                      <td colSpan={columns.length + 1} className="px-4 py-8 text-center text-gray-500">
+                        {t("No companies found")}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          {/* Grid View */}
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {companies?.data?.map((company: any) => (
-              <Card key={company.id} className="bg-white border border-gray-300 rounded-lg shadow">
-                {/* Header */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-start space-x-4">
-                      <div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-700">
-                        {getInitials(company.name)}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-bold text-gray-900 mb-1">{company.name}</h3>
-                        <p className="text-xs text-gray-600 mb-1">{company.email}</p>
-                        {company.phone && <p className="text-xs font-mono text-gray-500 mb-2">📞 {company.phone}</p>}
-                        <div className="flex items-center">
-                          <div className={`h-2 w-2 rounded-full mr-2 ${
-                            company.status === 'active' ? 'bg-gray-800' : 'bg-gray-400'
-                          }`}></div>
-                          <span className="text-sm font-medium text-gray-700">
-                            {company.status === 'active' ? t('Active') : t('Inactive')}
-                          </span>
-                        </div>
-                      </div>
+              <Card key={`desktop-grid-${company.id}`} className="bg-white border border-gray-200 rounded-xl p-4 shadow-xs hover:shadow-md transition-shadow">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="h-11 w-11 shrink-0 rounded-full bg-emerald-600 text-white font-bold text-sm flex items-center justify-center shadow-xs">
+                      {getInitials(company.name)}
                     </div>
-                    
-                    {/* Actions dropdown */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-gray-400 hover:text-gray-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="12" cy="12" r="1"></circle>
-                            <circle cx="12" cy="5" r="1"></circle>
-                            <circle cx="12" cy="19" r="1"></circle>
-                          </svg>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48 z-50" sideOffset={5}>
-                        <DropdownMenuItem onClick={() => handleAction('login-as', company)}>
-                          <ArrowUpRight className="h-4 w-4 mr-2" />
-                          <span>{t("Login as Company")}</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleAction('company-info', company)}>
-                          <Info className="h-4 w-4 mr-2" />
-                          <span>{t("Company Info")}</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleAction('upgrade-plan', company)}>
-                          <CreditCard className="h-4 w-4 mr-2" />
-                          <span>{t("Upgrade Plan")}</span>
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem onClick={() => handleAction('reset-password', company)}>
-                          <KeyRound className="h-4 w-4 mr-2" />
-                          <span>{t("Reset Password")}</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleAction('toggle-status', company)}>
-                          {company.status === 'active' ? 
-                            <Lock className="h-4 w-4 mr-2" /> : 
-                            <Unlock className="h-4 w-4 mr-2" />
-                          }
-                          <span>{company.status === 'active' ? t("Disable Login") : t("Enable Login")}</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => handleAction('edit', company)} className="text-amber-600">
-                          <Edit className="h-4 w-4 mr-2" />
-                          <span>{t("Edit")}</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleAction('delete', company)} className="text-rose-600">
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          <span>{t("Delete")}</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                  
-                  {/* Plan info */}
-                  <div className="border border-gray-200 rounded-md p-3 mb-4">
-                    <div className="flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-gray-500 mr-2" />
-                      <span className="text-sm font-semibold text-gray-800">{company.plan_name}</span>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-gray-900 text-sm truncate">{company.name}</h3>
+                      <p className="text-xs text-gray-500 truncate">{company.email}</p>
                     </div>
-                    {company.plan_expiry_date && (
-                      <div className="text-xs text-gray-500 text-center mt-1">
-                        {t("Expires")}: {window.appSettings?.formatDateTime(company.plan_expiry_date, false) || new Date(company.plan_expiry_date).toLocaleDateString()}
-                      </div>
-                    )}
                   </div>
-                
 
-                
-                  {/* Action buttons */}
-                  <div className="flex gap-2">
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => handleAction('edit', company)}
-                      className="flex-1 h-9 text-sm border-gray-300"
-                    >
-                      <Edit className="h-4 w-4 mr-2" />
-                      {t("Edit")}
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => handleAction('company-info', company)}
-                      className="flex-1 h-9 text-sm border-gray-300"
-                    >
-                      <Eye className="h-4 w-4 mr-2" />
-                      {t("View")}
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => handleAction('delete', company)}
-                      className="flex-1 h-9 text-sm text-gray-700 border-gray-300"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      {t("Delete")}
-                    </Button>
+                  <span className={`shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${
+                    company.status === 'active' 
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                      : 'bg-amber-50 text-amber-700 border border-amber-200'
+                  }`}>
+                    <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${company.status === 'active' ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+                    {company.status === 'active' ? t('Actif') : t('Inactif')}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+                  <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
+                    <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Téléphone")}</span>
+                    <span className="font-mono text-gray-700 truncate block mt-0.5">
+                      {company.phone || '-'}
+                    </span>
                   </div>
+                  <div className="bg-gray-50 p-2 rounded-lg border border-gray-100">
+                    <span className="text-gray-400 block text-[10px] uppercase font-semibold">{t("Forfait")}</span>
+                    <span className="font-semibold text-emerald-700 capitalize truncate block mt-0.5">
+                      {company.plan_name || 'Free'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="text-[11px] text-gray-400 mb-3 flex items-center justify-between">
+                  <span>{t("Créé le")}:</span>
+                  <span className="font-medium text-gray-600">
+                    {window.appSettings?.formatDateTime(company.created_at, false) || new Date(company.created_at).toLocaleDateString()}
+                  </span>
+                </div>
+
+                <div className="pt-2 border-t border-gray-100 flex items-center gap-2">
+                  <Button 
+                    size="sm"
+                    onClick={() => handleAction('login-as', company)}
+                    className="flex-1 h-8 text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 rounded-lg"
+                  >
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                    <span>{t("Se connecter")}</span>
+                  </Button>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs text-gray-600 border-gray-200 rounded-lg">
+                        <span>{t("Actions")}</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48 z-50">
+                      <DropdownMenuItem onClick={() => handleAction('company-info', company)}>
+                        <Info className="h-4 w-4 mr-2 text-blue-500" />
+                        <span>{t("Informations")}</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleAction('upgrade-plan', company)}>
+                        <CreditCard className="h-4 w-4 mr-2 text-amber-500" />
+                        <span>{t("Changer le forfait")}</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleAction('reset-password', company)}>
+                        <KeyRound className="h-4 w-4 mr-2 text-blue-500" />
+                        <span>{t("Réinitialiser MDP")}</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleAction('toggle-status', company)}>
+                        {company.status === 'active' ? (
+                          <>
+                            <Lock className="h-4 w-4 mr-2 text-amber-500" />
+                            <span>{t("Désactiver le compte")}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Unlock className="h-4 w-4 mr-2 text-emerald-500" />
+                            <span>{t("Activer le compte")}</span>
+                          </>
+                        )}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleAction('edit', company)}>
+                        <Edit className="h-4 w-4 mr-2 text-indigo-500" />
+                        <span>{t("Modifier")}</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleAction('delete', company)} className="text-red-600">
+                        <Trash2 className="h-4 w-4 mr-2 text-red-500" />
+                        <span>{t("Supprimer")}</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </Card>
             ))}
-            
+
             {(!companies?.data || companies.data.length === 0) && (
-              <div className="col-span-full p-8 text-center text-gray-500">
-                {t("No companies found")}
+              <div className="col-span-full p-8 text-center bg-white rounded-xl border border-gray-200 text-gray-500 text-sm">
+                {t("Aucune entreprise trouvée")}
               </div>
             )}
           </div>
-          
-          {/* Pagination for grid view */}
-          <div className="mt-6 bg-white p-4 rounded-lg shadow flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              {t("Showing")} <span className="font-medium">{companies?.from || 0}</span> {t("to")} <span className="font-medium">{companies?.to || 0}</span> {t("of")} <span className="font-medium">{companies?.total || 0}</span> {t("companies")}
-            </div>
-            
-            <div className="flex gap-1">
-              {companies?.links?.map((link: any, i: number) => {
-                const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-                const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-                
-                return (
-                  <Button
-                    key={i}
-                    variant={link.active ? 'default' : 'outline'}
-                    size={isTextLink ? "sm" : "icon"}
-                    className={isTextLink ? "px-3" : "h-8 w-8"}
-                    disabled={!link.url}
-                    onClick={() => link.url && router.get(link.url)}
-                  >
-                    {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
+        )}
+      </div>
+
+      {/* Shared Pagination section */}
+      <div className="mt-4 p-4 bg-white border border-gray-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <div className="text-xs text-gray-500 text-center sm:text-left">
+          {t("Affichage de")} <span className="font-semibold text-gray-900">{companies?.from || 0}</span> {t("à")} <span className="font-semibold text-gray-900">{companies?.to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{companies?.total || 0}</span> {t("entreprises")}
         </div>
-      )}
+        
+        <div className="flex flex-wrap justify-center gap-1">
+          {companies?.links?.map((link: any, i: number) => {
+            const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
+            const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
+            
+            return (
+              <Button
+                key={i}
+                variant={link.active ? 'default' : 'outline'}
+                size={isTextLink ? "sm" : "icon"}
+                className={isTextLink ? "px-3 text-xs h-8 bg-emerald-600 text-white border-emerald-600" : link.active ? "h-8 w-8 text-xs bg-emerald-600 text-white border-emerald-600" : "h-8 w-8 text-xs border-gray-200"}
+                disabled={!link.url}
+                onClick={() => link.url && router.get(link.url)}
+              >
+                {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
+              </Button>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Form Modal */}
       <CrudFormModal

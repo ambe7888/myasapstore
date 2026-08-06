@@ -280,6 +280,45 @@ class LandingPageSetting extends Model
             ]);
         }
         
+        if ($settings && isset($settings->config_sections['sections'])) {
+            $configSections = $settings->config_sections;
+            $updated = false;
+            foreach ($configSections['sections'] as &$sec) {
+                if (($sec['key'] ?? '') === 'templates') {
+                    $templatesList = $sec['templates_list'] ?? [];
+                    $hasOldNames = false;
+                    foreach ($templatesList as $t) {
+                        $name = $t['name'] ?? '';
+                        if (in_array($name, ['freelancer', 'doctor', 'restaurant', 'realestate', 'lawfirm', 'cafe', 'salon', 'construction', 'tech-startup'])) {
+                            $hasOldNames = true;
+                            break;
+                        }
+                    }
+                    if ($hasOldNames || empty($templatesList)) {
+                        $sec['title'] = 'Explorez nos thèmes de boutiques e-commerce';
+                        $sec['subtitle'] = 'Choisissez parmi nos thèmes professionnels prêts à l\'emploi, spécialement conçus pour sublimer vos produits et maximiser vos ventes.';
+                        $sec['templates_list'] = [
+                            ['name' => 'fashion', 'label' => 'Mode & Habillement', 'category' => 'Mode', 'image' => '/storage/placeholder/themes/fashion.webp'],
+                            ['name' => 'electronics', 'label' => 'Électronique & High-Tech', 'category' => 'High-Tech', 'image' => '/storage/placeholder/themes/electronics.webp'],
+                            ['name' => 'beauty-cosmetics', 'label' => 'Beauté & Cosmétiques', 'category' => 'Beauté', 'image' => '/storage/placeholder/themes/beauty-cosmetics.webp'],
+                            ['name' => 'jewelry', 'label' => 'Bijouterie & Joaillerie', 'category' => 'Luxe', 'image' => '/storage/placeholder/themes/jewelry.webp'],
+                            ['name' => 'watches', 'label' => 'Horlogerie & Montres', 'category' => 'Luxe', 'image' => '/storage/placeholder/themes/watches.webp'],
+                            ['name' => 'furniture-interior', 'label' => 'Meubles & Intérieur', 'category' => 'Maison', 'image' => '/storage/placeholder/themes/furniture-interior.webp'],
+                            ['name' => 'cars-automotive', 'label' => 'Automobile & Accessoires', 'category' => 'Auto', 'image' => '/storage/placeholder/themes/cars-automotive.webp'],
+                            ['name' => 'baby-kids', 'label' => 'Bébé & Enfants', 'category' => 'Enfants', 'image' => '/storage/placeholder/themes/baby-kids.webp'],
+                            ['name' => 'perfume-fragrances', 'label' => 'Parfumerie & Fragrances', 'category' => 'Beauté', 'image' => '/storage/placeholder/themes/perfume-fragrances.webp'],
+                            ['name' => 'home-accessories', 'label' => 'Maison & Décoration', 'category' => 'Maison', 'image' => '/storage/placeholder/themes/home-accessories.webp']
+                        ];
+                        $updated = true;
+                    }
+                }
+            }
+            if ($updated) {
+                $settings->config_sections = $configSections;
+                $settings->save();
+            }
+        }
+        
         return $settings;
     }
 }

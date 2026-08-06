@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class MediaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
             $user = auth()->user();
@@ -28,28 +28,26 @@ class MediaController extends Controller
             
             $mediaItems = MediaItem::with('media')->latest()->get();
             
-            $media = $mediaItems->flatMap(function ($item) use ($user) {
+            $scope = $request->query('scope', 'default');
+            
+            $media = $mediaItems->flatMap(function ($item) use ($user, $scope) {
                 $mediaQuery = $item->getMedia('images');
                 
-                // SuperAdmin can see all media
-                if ($user->type === 'superadmin') {
-                    // No user_id filter for superadmin
+                // Show all media across all users ONLY if scope=all is explicitly requested by superadmin
+                if ($scope === 'all' && ($user->type === 'superadmin' || $user->hasPermissionTo('manage-any-media'))) {
+                    // No user_id filter
                 }
-                // Users with manage-any-media can see all media
-                elseif ($user->hasPermissionTo('manage-any-media')) {
-                    // No user_id filter for manage-any-media
-                }
-                // Others can only see their own media or their company's media
+                // By default, each user (including SuperAdmin) sees their own media or company media
                 else {
                     if ($user->type === 'company') {
-                        // Company users can see media from their users
+                        // Company users can see media from their team users and themselves
                         $userIds = \App\Models\User::where('created_by', $user->id)
                             ->orWhere('id', $user->id)
                             ->pluck('id')
                             ->toArray();
                         $mediaQuery = $mediaQuery->whereIn('user_id', $userIds);
                     } else {
-                        // Regular users can only see their own media
+                        // Regular users & SuperAdmin by default only see media uploaded by themselves
                         $mediaQuery = $mediaQuery->where('user_id', $user->id);
                     }
                 }

@@ -32,140 +32,162 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
   // Get colors from settings
   const colors = settings?.config_sections?.colors || { primary: brandColor, secondary: '#059669', accent: '#065f46' };
   const primaryColor = colors.primary || brandColor;
-  const secondaryColor = colors.secondary || '#059669';
-  const accentColor = colors.accent || '#065f46';
 
   return (
-    <section id="hero" className="pt-16 bg-gray-50 min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+    <section id="hero" className="pt-24 sm:pt-28 pb-16 sm:pb-24 bg-slate-950 text-white relative overflow-hidden flex items-center min-h-[90vh]">
+      {/* Background Glow Accents */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-emerald-500/15 rounded-full blur-[120px] opacity-70"></div>
+        <div className="absolute top-1/2 -right-20 w-[400px] h-[400px] bg-teal-500/15 rounded-full blur-[100px] opacity-60"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-30"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-6 sm:space-y-8">
-            {sectionData.announcement_text && (
-              <div 
-                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border"
-                style={{ 
-                  backgroundColor: `${accentColor}15`, 
-                  color: accentColor,
-                  borderColor: `${accentColor}30`
-                }}
-              >
-                {sectionData.announcement_text}
-              </div>
-            )}
+            {/* Announcement Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-emerald-950/80 border border-emerald-800/80 text-emerald-300 shadow-sm backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>{sectionData.announcement_text || t('⚡ Plateforme E-commerce & Tunnels de Vente')}</span>
+            </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight" role="banner" aria-label="Main heading">
-              {sectionData.title || 'Launch Your Online Store in Minutes'}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]" role="banner">
+              {sectionData.title ? (
+                sectionData.title
+              ) : (
+                <>
+                  Créez vos <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Boutiques & Tunnels</span> en quelques minutes
+                </>
+              )}
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">
-              {sectionData.subtitle || 'Create, customize, and manage multiple online stores with our powerful e-commerce platform.'}
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+              {sectionData.subtitle || 'Concevez vos boutiques en ligne professionnelles, déployez vos tunnels de vente à haute conversion et recevez vos commandes directement par WhatsApp & Paiement à la livraison.'}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3.5 justify-center lg:justify-start pt-2">
               <Link
                 href={route('register')}
-                className="text-white px-8 py-4 rounded-lg transition-colors font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90"
-                style={{ backgroundColor: primaryColor }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = secondaryColor}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = primaryColor}
-                aria-label="Start free trial - Register for StoreGo"
+                className="px-7 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-base shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2.5"
               >
-                {sectionData.primary_button_text || t('Start Free Trial')}
+                <span>{sectionData.primary_button_text || t('Créer ma boutique gratuite')}</span>
                 <ArrowRight size={18} />
               </Link>
-              <Link
-                href={route('login')}
-                className="border px-8 py-4 rounded-lg transition-colors font-semibold text-base flex items-center justify-center gap-2 hover:bg-gray-50"
-                style={{ borderColor: primaryColor, color: primaryColor }}
-                aria-label="Login to existing StoreGo account"
+
+              <a
+                href="#templates"
+                className="px-7 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-slate-200 font-semibold text-base shadow-sm transition-all flex items-center justify-center gap-2.5 backdrop-blur-sm"
               >
-                <Play size={18} />
-                {sectionData.secondary_button_text || 'Login'}
-              </Link>
+                <Play size={16} className="fill-slate-200 text-slate-200" />
+                <span>{sectionData.secondary_button_text || t('Explorer les thèmes (10)')}</span>
+              </a>
             </div>
 
-            {sectionData.stats && sectionData.stats.length > 0 && (
-              <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 sm:gap-6 lg:gap-8 pt-8 sm:pt-12">
+            {/* Quick Stats Banner */}
+            {sectionData.stats && sectionData.stats.length > 0 ? (
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80">
                 {sectionData.stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div 
-                      className="text-3xl md:text-4xl font-bold"
-                      style={{ color: index === 0 ? primaryColor : index === 1 ? secondaryColor : accentColor }}
-                    >
+                  <div key={index} className="text-center lg:text-left">
+                    <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                       {stat.value}
                     </div>
-                    <div className="text-gray-600 font-medium text-sm">{stat.label}</div>
+                    <div className="text-slate-400 text-xs font-medium mt-0.5">{stat.label}</div>
                   </div>
                 ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 text-center lg:text-left">
+                <div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">10+</div>
+                  <div className="text-slate-400 text-xs font-medium mt-0.5">{t("Thèmes Niche")}</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-teal-400">100%</div>
+                  <div className="text-slate-400 text-xs font-medium mt-0.5">{t("Mobile Responsive")}</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400">⚡ 1 Click</div>
+                  <div className="text-slate-400 text-xs font-medium mt-0.5">{t("WhatsApp & COD")}</div>
+                </div>
               </div>
             )}
           </div>
 
-          {/* Right Content - Hero Image or Card */}
-          <div className="relative">
+          {/* Right Content - Modern SaaS Preview Card */}
+          <div className="relative lg:ml-4">
             {heroImage && sectionData.image && !imageError ? (
-              <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl shadow-emerald-500/10">
                 <img 
                   src={heroImage} 
                   alt="Hero" 
-                  className="w-full h-auto rounded-2xl shadow-xl"
+                  className="w-full h-auto object-cover"
                   onError={() => setImageError(true)}
                 />
               </div>
             ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm mx-auto border border-gray-200">
-                <div className="text-center space-y-6">
-                  <div className="relative">
-                    <div className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
-                      <span className="text-white text-2xl">🏪</span>
-                    </div>
-                    <div 
-                      className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-3 border-white"
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      <div className="w-2 h-2 bg-white rounded-full mx-auto mt-1.5"></div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">
-                      {sectionData.card?.name || t('Sample Store')}
-                    </h3>
-                    <p className="text-gray-900 font-semibold">
-                      {sectionData.card?.title || t('Premium Theme')}
-                    </p>
-                    <p className="text-gray-500">
-                      {sectionData.card?.company || t('Multi-Store Platform')}
-                    </p>
-                  </div>
-                  
-                  <div className="flex justify-center gap-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">🛒</span>
-                    </div>
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">🎨</span>
-                    </div>
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border">
-                      <span className="text-gray-600 text-sm">📱</span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6 bg-gray-50 rounded-xl border">
-                    <div className="w-24 h-24 bg-white rounded-lg mx-auto flex items-center justify-center shadow-sm border">
-                      <div className="w-16 h-16 rounded flex items-center justify-center" style={{ backgroundColor: primaryColor }}>
-                        <span className="text-white text-xs font-bold">{t("STORE")}</span>
+              <div className="relative mx-auto max-w-md">
+                {/* Floating Glow Card */}
+                <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative z-10 space-y-6">
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-emerald-600/30">
+                        🛍️
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-white text-base">CuirMall Store</h3>
+                        <p className="text-xs text-emerald-400 font-medium">Boutique Active & En ligne</p>
                       </div>
                     </div>
+                    <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                      Vérifié
+                    </span>
+                  </div>
+
+                  {/* Feature Pills */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-left">
+                      <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 block">{t("Tunnel de vente")}</span>
+                      <span className="text-xs font-bold text-white mt-1 block">Drag & Drop Builder</span>
+                    </div>
+                    <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-left">
+                      <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 block">{t("Commande Directe")}</span>
+                      <span className="text-xs font-bold text-emerald-400 mt-1 block">WhatsApp Express</span>
+                    </div>
+                  </div>
+
+                  {/* Themes preview row */}
+                  <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800 space-y-3">
+                    <div className="flex items-center justify-between text-xs text-slate-300">
+                      <span className="font-medium">Thèmes prêts à l'emploi</span>
+                      <span className="text-emerald-400 font-bold">10 Thèmes Pro</span>
+                    </div>
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                      {['Mode & Habillement', 'High-Tech', 'Beauté', 'Montres'].map((tName, idx) => (
+                        <span key={idx} className="px-2.5 py-1 rounded-lg bg-slate-800 text-[11px] text-slate-200 font-medium whitespace-nowrap border border-slate-700">
+                          {tName}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Demo Conversion Metric */}
+                  <div className="flex items-center justify-between p-3.5 bg-gradient-to-r from-emerald-950/60 to-teal-950/40 rounded-xl border border-emerald-800/60">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base">🚀</span>
+                      <span className="text-xs font-semibold text-white">Taux de conversion moyen</span>
+                    </div>
+                    <span className="text-sm font-extrabold text-emerald-400">+34%</span>
                   </div>
                 </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-emerald-500/20 rounded-full blur-xl pointer-events-none"></div>
+                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-teal-500/20 rounded-full blur-xl pointer-events-none"></div>
               </div>
             )}
-            
-            {/* Simple Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-gray-200 rounded-full opacity-50"></div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gray-300 rounded-full opacity-40"></div>
           </div>
         </div>
       </div>

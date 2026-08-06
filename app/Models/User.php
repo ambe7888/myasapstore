@@ -34,6 +34,8 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
+        'phone',
+        'country_code',
         'type',
         'avatar',
         'lang',

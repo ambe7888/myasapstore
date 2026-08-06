@@ -6,7 +6,9 @@ $d = json_decode(file_get_contents($p), true);
 $d['pagination.previous'] = 'Précédent';
 $d['pagination.next'] = 'Suivant';
 $d['pagination.prev'] = 'Précédent';
-$d['pagination.next'] = 'Suivant';
+$d['Add Company'] = 'Créer une entreprise';
+$d['Add company'] = 'Créer une entreprise';
+$d['Add New Company'] = 'Créer une entreprise';
 
 file_put_contents($p, json_encode($d, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-echo "Pagination keys added to fr.json successfully!\n";
+echo "Translations updated in fr.json successfully!\n";

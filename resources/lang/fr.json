@@ -102,7 +102,7 @@
     "Add Field": "Ajouter un champ",
     "Add Item": "Ajouter un article",
     "Add New City": "Ajouter une nouvelle ville",
-    "Add New Company": "Ajouter une nouvelle entreprise",
+    "Add New Company": "Créer une entreprise",
     "Add New Country": "Ajouter un nouveau pays",
     "Add New State": "Ajouter un nouvel état",
     "Add New User": "Ajouter un nouvel utilisateur",
@@ -2738,5 +2738,7 @@
     "🛍️ Order {order_no} from {store_name}\nCustomer: {customer_name}\nTotal: {final_total}\n\nItems:\n{item_variable}": "🛍️ Commande {order_no} sur {store_name}\nClient : {customer_name}\nTotal : {final_total}\n\nArticles :\n{item_variable}",
     "pagination.previous": "Précédent",
     "pagination.next": "Suivant",
-    "pagination.prev": "Précédent"
+    "pagination.prev": "Précédent",
+    "Add Company": "Créer une entreprise",
+    "Add company": "Créer une entreprise"
 }

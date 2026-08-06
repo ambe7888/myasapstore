@@ -57,7 +57,7 @@ export default function Companies() {
   // Define page actions
   const pageActions = [
     {
-      label: t('Add Company'),
+      label: t('Créer une entreprise'),
       icon: <Plus className="h-4 w-4 mr-2" />,
       variant: 'default',
       onClick: () => handleAddNew()

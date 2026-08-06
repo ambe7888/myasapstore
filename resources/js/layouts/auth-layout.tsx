@@ -39,92 +39,93 @@ export default function AuthLayout({
     }, []);
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-900 dark:text-slate-100 relative overflow-hidden transition-colors duration-300 flex flex-col justify-between">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
             <Head>
                 <title>{title}</title>
                 {favicon && <link rel="icon" href={favicon} />}
             </Head>
 
-            {/* Ambient Background Gradient & Mesh */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl opacity-60"></div>
-                <div className="absolute top-1/3 -right-20 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl opacity-50"></div>
-                <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl opacity-60"></div>
-                <div className="absolute inset-0 bg-slate-950/90 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+            {/* Enhanced Background Design */}
+            <div className="absolute inset-0 z-0">
+                {/* Base Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-gray-50 to-stone-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-300"></div>
+
+
+
+                {/* Elegant Pattern Overlay */}
+                <div className="absolute inset-0 opacity-70" style={{
+                    backgroundImage: `radial-gradient(circle at 30% 70%, ${primaryColor} 1px, transparent 1px)`,
+                    backgroundSize: '80px 80px'
+                }}></div>
             </div>
 
-            {/* Top Bar with Home Link & Language Switcher */}
-            <header className="relative z-20 w-full max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-                <a href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors group">
-                    <span className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-slate-700">←</span>
-                    <span>{t("Retour à l'accueil")}</span>
-                </a>
-                <div className="flex items-center gap-3">
-                    <LanguageSwitcher />
-                </div>
-            </header>
+            {/* Language Dropdown */}
+            <div className="absolute top-6 right-6 z-20 md:block hidden">
+                <LanguageSwitcher />
+            </div>
 
-            {/* Main Auth Container */}
-            <main className="flex items-center justify-center p-4 sm:p-6 relative z-10 my-auto">
+            <div className="flex items-center justify-center min-h-screen p-6 relative z-10">
                 <div
-                    className={`w-full max-w-md transition-all duration-700 ${
-                        mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'
-                    }`}
+                    className={`w-full max-w-md transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                        }`}
                 >
-                    {/* Brand Logo Header */}
-                    <div className="text-center mb-6">
-                        <a href="/" className="inline-block transition-transform hover:scale-105">
+                    {/* Logo */}
+                    <div className="text-center mb-8">
+                        <div className="relative inline-block px-6 rounded-xl">
                             {currentLogo ? (
-                                <img src={currentLogo} alt="Logo" className="w-auto h-8 sm:h-9 mx-auto object-contain drop-shadow-md" />
+                                <img src={currentLogo} alt="Logo" className="w-auto h-6 sm:h-7 mx-auto object-contain" />
                             ) : (
-                                <div className="inline-flex items-center gap-2">
-                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-emerald-500/20">
-                                        M
-                                    </div>
-                                    <h2 className="text-2xl font-extrabold tracking-tight text-white">
-                                        MyStore<span className="text-emerald-400">Asap</span>
-                                    </h2>
+                                <h2 className="text-2xl font-bold" style={{ color: primaryColor }}>StoreGo</h2>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Main Card */}
+                    <div className="relative">
+                        {/* Corner accents */}
+                        <div
+                            className="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 rounded-tl-md transition-colors duration-300"
+                            style={{ borderColor: primaryColor }}
+                        ></div>
+                        <div
+                            className="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 rounded-br-md transition-colors duration-300"
+                            style={{ borderColor: primaryColor }}
+                        ></div>
+
+                        <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg lg:p-8 p-4 lg:pt-5 shadow-sm">
+                            {/* Header */}
+                            <div className="text-center mb-6">
+                                <h1 className="md:text-2xl text-xl font-semibold text-gray-900 mb-1.5 tracking-wide">{title}</h1>
+
+                                <div className="w-12 h-px mx-auto mb-2.5" style={{ backgroundColor: primaryColor }}></div>
+
+                                {description && (
+                                    <p className="text-gray-600 text-sm">{description}</p>
+                                )}
+                            </div>
+
+                            {status && (
+                                <div className={`mb-5 text-center text-sm font-medium ${statusType === 'success'
+                                    ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                                    : 'text-rose-700 bg-rose-50 border-rose-200'
+                                    } p-3 rounded-md border`}>
+                                    {status}
                                 </div>
                             )}
-                        </a>
+
+                            {/* Content */}
+                            {children}
+                        </div>
                     </div>
 
-                    {/* Main Card with Glassmorphism */}
-                    <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden">
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-40 h-24 bg-emerald-500/10 blur-xl rounded-full pointer-events-none"></div>
-
-                        {/* Title & Description */}
-                        <div className="text-center mb-6">
-                            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{title}</h1>
-                            {description && (
-                                <p className="text-slate-400 text-xs sm:text-sm mt-1.5 leading-relaxed">{description}</p>
-                            )}
-                            <div className="w-10 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-400 mx-auto mt-3 rounded-full"></div>
+                    {/* Footer */}
+                    <div className="text-center mt-6">
+                        <div className="inline-flex items-center space-x-2 bg-white dark:bg-slate-800/80 backdrop-blur-sm rounded-md px-4 py-2 border border-gray-200 dark:border-slate-700">
+                            <p className="text-sm text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} {appearance === 'dark' ? 'StoreGo' : 'StoreGo'} SaaS</p>
                         </div>
-
-                        {/* Status Message */}
-                        {status && (
-                            <div className={`mb-5 text-center text-xs sm:text-sm font-medium ${
-                                statusType === 'success'
-                                    ? 'text-emerald-400 bg-emerald-950/60 border-emerald-800/80'
-                                    : 'text-rose-400 bg-rose-950/60 border-rose-800/80'
-                            } p-3 rounded-xl border backdrop-blur-sm animate-in fade-in`}>
-                                {status}
-                            </div>
-                        )}
-
-                        {/* Form Content */}
-                        {children}
                     </div>
                 </div>
-            </main>
-
-            {/* Footer */}
-            <footer className="relative z-20 py-4 text-center">
-                <p className="text-xs text-slate-500">
-                    © {new Date().getFullYear()} MyStoreAsap SaaS. Tous droits réservés.
-                </p>
-            </footer>
+            </div>
         </div>
     );
 }

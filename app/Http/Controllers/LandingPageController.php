@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\LandingPageSetting;
 use App\Models\LandingPageCustomPage;
 use App\Models\Store;
+use Illuminate\Support\Facades\Cache;
 
 class LandingPageController extends Controller
 {
@@ -56,7 +57,9 @@ class LandingPageController extends Controller
             return redirect()->route('login');
         }
         
-        $landingSettings = LandingPageSetting::getSettings();
+        $landingSettings = Cache::remember('landing_settings_data', 3600, function () {
+            return LandingPageSetting::getSettings();
+        });
         
         $plans = Plan::where('is_plan_enable', 'on')->get()->map(function ($plan) {
             $features = [];

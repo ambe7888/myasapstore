@@ -21,6 +21,13 @@ class LandingPageSetting extends Model
         'config_sections' => 'array'
     ];
 
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('landing_settings_data');
+        });
+    }
+
     public static function getSettings()
     {
         $settings = self::first();

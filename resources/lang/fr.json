@@ -2735,5 +2735,8 @@
     "{{count}} Selected": "{{count}} Sélectionné(s)",
     "• {product_name} ({variant_name}) x{quantity} = {item_total}": "• {product_name} ({variant_name}) x{quantity} = {item_total}",
     "🚀 New: Advanced Analytics Dashboard": "🚀 Nouveau : Tableau de bord analytique avancé",
-    "🛍️ Order {order_no} from {store_name}\nCustomer: {customer_name}\nTotal: {final_total}\n\nItems:\n{item_variable}": "🛍️ Commande {order_no} sur {store_name}\nClient : {customer_name}\nTotal : {final_total}\n\nArticles :\n{item_variable}"
+    "🛍️ Order {order_no} from {store_name}\nCustomer: {customer_name}\nTotal: {final_total}\n\nItems:\n{item_variable}": "🛍️ Commande {order_no} sur {store_name}\nClient : {customer_name}\nTotal : {final_total}\n\nArticles :\n{item_variable}",
+    "pagination.previous": "Précédent",
+    "pagination.next": "Suivant",
+    "pagination.prev": "Précédent"
 }

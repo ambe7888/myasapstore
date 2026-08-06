@@ -19,6 +19,7 @@ interface DatePickerProps {
   onChange?: (date: Date | undefined) => void
   placeholder?: string
   disabled?: boolean
+  className?: string
 }
 
 export function DatePicker({
@@ -27,6 +28,7 @@ export function DatePicker({
   onChange,
   placeholder = "Pick a date",
   disabled = false,
+  className = "",
 }: DatePickerProps) {
   const [date, setDate] = React.useState<string>(selected ? format(selected, 'yyyy-MM-dd') : '');
   
@@ -52,13 +54,13 @@ export function DatePicker({
   }, [selected]);
 
   return (
-    <div className="relative">
-      <CalendarIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+    <div className={cn("relative w-full min-w-0", className)}>
+      <CalendarIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400 pointer-events-none z-10" />
       <Input
         type="date"
         value={date}
         onChange={handleDateChange}
-        className="pl-9 w-[240px]"
+        className="pl-9 pr-2 w-full h-9 text-xs bg-white border-gray-200 focus:bg-white [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
         disabled={disabled}
       />
     </div>

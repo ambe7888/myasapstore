@@ -925,21 +925,34 @@ export default function Companies() {
           {t("Affichage de")} <span className="font-semibold text-gray-900">{companies?.from || 0}</span> {t("à")} <span className="font-semibold text-gray-900">{companies?.to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{companies?.total || 0}</span> {t("entreprises")}
         </div>
         
-        <div className="flex flex-wrap justify-center gap-1">
+        <div className="flex flex-wrap justify-center gap-1.5">
           {companies?.links?.map((link: any, i: number) => {
-            const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-            const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
+            const rawLabel = link.label || '';
+            const isPrevious = rawLabel.includes('Previous') || rawLabel.includes('previous') || rawLabel.includes('prev') || rawLabel.includes('&laquo;');
+            const isNext = rawLabel.includes('Next') || rawLabel.includes('next') || rawLabel.includes('&raquo;');
+            
+            let displayText = rawLabel.replace(/&laquo;\s*/g, '').replace(/\s*&raquo;/g, '');
+            if (isPrevious) displayText = '‹ Précédent';
+            else if (isNext) displayText = 'Suivant ›';
+
+            const isTextLink = isPrevious || isNext;
             
             return (
               <Button
                 key={i}
                 variant={link.active ? 'default' : 'outline'}
                 size={isTextLink ? "sm" : "icon"}
-                className={isTextLink ? "px-3 text-xs h-8 bg-emerald-600 text-white border-emerald-600" : link.active ? "h-8 w-8 text-xs bg-emerald-600 text-white border-emerald-600" : "h-8 w-8 text-xs border-gray-200"}
+                className={
+                  isTextLink 
+                    ? "px-3 text-xs h-8 bg-white text-gray-700 border-gray-200 hover:bg-gray-50 font-medium" 
+                    : link.active 
+                    ? "h-8 w-8 text-xs bg-emerald-600 text-white border-emerald-600 font-bold shadow-xs" 
+                    : "h-8 w-8 text-xs border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                }
                 disabled={!link.url}
                 onClick={() => link.url && router.get(link.url)}
               >
-                {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
+                {displayText}
               </Button>
             );
           })}

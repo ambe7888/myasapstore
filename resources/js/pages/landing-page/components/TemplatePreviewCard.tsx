@@ -1,20 +1,15 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Eye } from 'lucide-react';
-// Simple template data for Storego
-const getBusinessTemplate = (name: string) => {
-  return {
-    defaultData: {
-      header: { name: name.replace(/-/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }
-    }
-  };
-};
-
+import { getStoreThemes } from '@/data/storeThemes';
+import { getImageUrl } from '@/utils/image-helper';
 
 interface TemplatePreviewCardProps {
   template: {
     name: string;
-    category: string;
+    label?: string;
+    category?: string;
+    image?: string;
   };
   isSelected?: boolean;
   onClick?: () => void;
@@ -25,66 +20,61 @@ export default function TemplatePreviewCard({
   template,
   isSelected = false,
   onClick,
-  previewButtonText = 'Preview Template'
+  previewButtonText = 'Aperçu'
 }: TemplatePreviewCardProps) {
-  const templateData = getBusinessTemplate(template.name);
+  const allThemes = getStoreThemes();
+  const themeObj = allThemes.find(t => t.id === template.name) || {
+    id: template.name,
+    name: template.label || template.name.replace(/-/g, ' ').toUpperCase(),
+    thumbnail: getImageUrl(template.image || `/storage/placeholder/themes/${template.name}.webp`),
+    description: '',
+    category: template.category || 'Général'
+  };
 
-
-  // Format template name for display
-  const displayName = template.name ? template.name.replace(/-/g, ' ') : '';
-  const capitalizedName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+  const imageUrl = themeObj.thumbnail || getImageUrl(`/storage/placeholder/themes/${template.name}.webp`);
 
   return (
-    <>
-      <div
-        className={`border rounded-lg overflow-hidden cursor-pointer transition-all ${isSelected ? 'ring-2 ring-green-500' : 'hover:border-gray-400'}`}
-        onClick={onClick}
-      >
-        <div className="h-32 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden relative">
-          {/* Template preview */}
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center p-2">
-              <div className="w-10 h-10 mx-auto mb-1 rounded-full bg-white shadow-sm flex items-center justify-center">
-                <span className="text-base font-semibold" style={{ color: '#10b77f' }}>{template.name.charAt(0).toUpperCase()}</span>
-              </div>
-              <h4 className="text-xs font-medium capitalize mb-1 truncate">{template.name.replace(/-/g, ' ')}</h4>
-              <span className="inline-block px-1.5 py-0.5 rounded-full text-[10px] capitalize"
-                style={{ backgroundColor: '#10b77f15', color: '#10b77f' }}>
-                {template.category}
-              </span>
+    <div
+      className={`border rounded-lg overflow-hidden cursor-pointer transition-all bg-white ${
+        isSelected ? 'ring-2 ring-violet-600 border-violet-600 shadow-md' : 'hover:border-slate-400 hover:shadow'
+      }`}
+      onClick={onClick}
+    >
+      <div className="h-36 bg-slate-100 overflow-hidden relative group">
+        <img
+          src={imageUrl}
+          alt={themeObj.name}
+          loading="lazy"
+          className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            if (target.src.endsWith('.webp')) {
+              target.src = target.src.replace('.webp', '.png');
+            } else {
+              target.src = `https://placehold.co/400x250?text=${encodeURIComponent(themeObj.name)}`;
+            }
+          }}
+        />
+        {isSelected && (
+          <div className="absolute inset-0 flex items-center justify-center bg-violet-600/30 z-10">
+            <div className="rounded-full bg-violet-600 p-1.5 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
             </div>
           </div>
-
-          {/* Preview button overlay */}
-          <div
-            className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 hover:opacity-100"
-            onClick={(e) => {
-              e.stopPropagation();
-
-              // Simple preview alert for Storego
-              alert(`Preview: ${templateData?.defaultData?.header?.name || template.name}`);
-            }}
-          >
-            <Button size="sm" variant="secondary" className="text-xs bg-white hover:bg-gray-100 shadow-sm">
-              <Eye className="h-3 w-3 mr-1" />
-              {previewButtonText}
-            </Button>
-          </div>
-        </div>
-        <div className="p-3">
-          <div className="flex items-center justify-between">
-            <h4 className="font-medium capitalize">{capitalizedName}</h4>
-            {isSelected && (
-              <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </div>
-            )}
-          </div>
-          <p className="text-xs text-gray-500 capitalize">{template.category}</p>
+        )}
+      </div>
+      <div className="p-3">
+        <div className="flex items-center justify-between gap-1">
+          <h4 className="font-medium text-xs text-slate-900 truncate">{themeObj.name}</h4>
+          {(template.category || (themeObj as any).category) && (
+            <span className="inline-block px-1.5 py-0.5 rounded-full text-[10px] bg-violet-50 text-violet-700 font-medium capitalize flex-shrink-0">
+              {template.category || (themeObj as any).category}
+            </span>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

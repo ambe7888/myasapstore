@@ -34,6 +34,12 @@ Route::middleware(['domain.resolver'])->group(function () {
     Route::get('/customer-order/success/{orderNumber}', [ThemeController::class, 'orderConfirmation'])->name('order.success'); 
 
     Route::post('/customer-cashfree/verify-payment', [CashfreeController::class, 'verifyPayment'])->name('store.cashfree.verify-payment');
+
+    // Funnel Custom Domain Routes
+    Route::get('/funnel/{slug}', [\App\Http\Controllers\FunnelPublicController::class, 'showCustomDomain'])->name('store.funnel.custom')->where('slug', '[a-z0-9\-]+');
+    Route::post('/funnel/{funnelId}/track-view', [\App\Http\Controllers\FunnelPublicController::class, 'trackView']);
+    Route::post('/funnel/{funnelId}/track-click', [\App\Http\Controllers\FunnelPublicController::class, 'trackClick']);
+    Route::post('/funnel/{funnelId}/track-order', [\App\Http\Controllers\FunnelPublicController::class, 'trackOrder']);
 });
 
 // Store frontend routes with store prefix

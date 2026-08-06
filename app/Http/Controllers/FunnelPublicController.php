@@ -15,7 +15,25 @@ class FunnelPublicController extends Controller
      */
     public function show(Request $request, string $storeSlug, string $slug)
     {
-        $store = Store::where('slug', $storeSlug)->firstOrFail();
+        $store = Store::where('slug', $storeSlug)->first();
+        
+        if (!$store) {
+            $store = $request->attributes->get('resolved_store');
+        }
+        
+        if (!$store) {
+            $cleanHost = Store::sanitizeDomain($request->getHost());
+            if ($cleanHost) {
+                $store = Store::where('custom_domain', $cleanHost)
+                    ->orWhere('custom_subdomain', $cleanHost)
+                    ->first();
+            }
+        }
+        
+        if (!$store) {
+            abort(404, 'Store not found');
+        }
+
         return $this->renderFunnel($request, $store, $slug);
     }
 
@@ -25,7 +43,19 @@ class FunnelPublicController extends Controller
     public function showCustomDomain(Request $request, string $slug)
     {
         $store = $request->attributes->get('resolved_store');
-        if (!$store) abort(404, 'Store not found');
+
+        if (!$store) {
+            $cleanHost = Store::sanitizeDomain($request->getHost());
+            if ($cleanHost) {
+                $store = Store::where('custom_domain', $cleanHost)
+                    ->orWhere('custom_subdomain', $cleanHost)
+                    ->first();
+            }
+        }
+
+        if (!$store) {
+            abort(404, 'Store not found');
+        }
 
         return $this->renderFunnel($request, $store, $slug);
     }
@@ -35,7 +65,7 @@ class FunnelPublicController extends Controller
      */
     public function trackView(Request $request, int $funnelId)
     {
-        $funnel = ProductFunnel::where('status', 'published')->find($funnelId);
+        $funnel = ProductFunnel::find($funnelId);
         if ($funnel) {
             $funnel->increment('views_count');
         }
@@ -48,7 +78,7 @@ class FunnelPublicController extends Controller
      */
     public function trackClick(Request $request, int $funnelId)
     {
-        $funnel = ProductFunnel::where('status', 'published')->find($funnelId);
+        $funnel = ProductFunnel::find($funnelId);
         if ($funnel) {
             $funnel->increment('clicks_count');
         }
@@ -61,7 +91,7 @@ class FunnelPublicController extends Controller
      */
     public function trackOrder(Request $request, int $funnelId)
     {
-        $funnel = ProductFunnel::where('status', 'published')->find($funnelId);
+        $funnel = ProductFunnel::find($funnelId);
         if ($funnel) {
             $funnel->increment('orders_count');
         }
@@ -73,11 +103,21 @@ class FunnelPublicController extends Controller
 
     private function renderFunnel(Request $request, $store, string $slug)
     {
-        $funnel = ProductFunnel::where('store_id', $store->id)
-            ->where('slug', $slug)
-            ->where('status', 'published')
-            ->with(['product', 'blocks' => fn($q) => $q->where('is_visible', true)->orderBy('sort_order')])
-            ->firstOrFail();
+        $user = auth()->user();
+        $isOwner = $user && ($user->id === $store->user_id || $user->type === 'superadmin');
+
+        $query = ProductFunnel::where('store_id', $store->id)->where('slug', $slug);
+        
+        if (!$isOwner) {
+            $query->where('status', 'published');
+        }
+
+        $funnel = $query->with(['product', 'blocks' => fn($q) => $q->where('is_visible', true)->orderBy('sort_order')])
+            ->first();
+
+        if (!$funnel) {
+            abort(404, 'Funnel not found or not published');
+        }
 
         $product = $funnel->product;
 

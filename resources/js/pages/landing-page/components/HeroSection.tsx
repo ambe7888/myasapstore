@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { ArrowRight, Play, Sparkles, TrendingUp, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, TrendingUp, ShieldCheck, CheckCircle2, Store } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -81,7 +81,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#0596
                 href="#templates"
                 className="bg-white/90 backdrop-blur-md hover:bg-white text-slate-800 font-bold text-base px-8 py-4 rounded-2xl border border-slate-200 shadow-sm transition-all hover:border-emerald-300 flex items-center justify-center gap-2"
               >
-                <StoreIcon size={18} className="text-emerald-600" />
+                <Store size={18} className="text-emerald-600" />
                 <span>{sectionData.secondary_button_text || t('Explorer les 10 thèmes')}</span>
               </a>
             </div>

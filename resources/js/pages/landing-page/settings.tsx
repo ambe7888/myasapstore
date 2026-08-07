@@ -414,7 +414,7 @@ export default function LandingPageSettings() {
 
                     <div className="mt-4">
                       <Label>{t('Color Presets')}</Label>
-                      <div className="grid grid-cols-5 gap-3 mt-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-3">
                         {[
                           { name: 'Green', primary: '#10b77f', secondary: '#059669', accent: '#065f46' },
                           { name: 'Blue', primary: '#3b82f6', secondary: '#1d4ed8', accent: '#1e3a8a' },

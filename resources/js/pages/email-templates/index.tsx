@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Search, Eye } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Pagination } from '@/components/pagination'
 
 interface EmailTemplate {
     id: number
@@ -152,31 +153,14 @@ export default function EmailTemplatesIndex() {
                 </div>
 
                 {/* Pagination section */}
-                <div className="p-4 border-t flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">
-                        {t("Showing")} <span className="font-medium">{templates?.from || 0}</span> {t("to")} <span className="font-medium">{templates?.to || 0}</span> {t("of")} <span className="font-medium">{templates?.total || 0}</span> {t("templates")}
-                    </div>
-                    
-                    <div className="flex gap-1">
-                        {templates?.links?.map((link: any, i: number) => {
-                            const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;"
-                            const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "")
-                            
-                            return (
-                                <Button
-                                    key={i}
-                                    variant={link.active ? 'default' : 'outline'}
-                                    size={isTextLink ? "sm" : "icon"}
-                                    className={isTextLink ? "px-3" : "h-8 w-8"}
-                                    disabled={!link.url}
-                                    onClick={() => link.url && router.get(link.url)}
-                                >
-                                    {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                                </Button>
-                            )
-                        })}
-                    </div>
-                </div>
+                <Pagination
+                    links={templates?.links}
+                    from={templates?.from}
+                    to={templates?.to}
+                    total={templates?.total}
+                    entityName="modèles email"
+                    className="mt-2 border-t rounded-none border-x-0 border-b-0"
+                />
             </div>
         </PageTemplate>
     )

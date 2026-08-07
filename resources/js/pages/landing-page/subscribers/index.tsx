@@ -11,6 +11,7 @@ import { toast } from '@/components/custom-toast';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { CrudDeleteModal } from '@/components/CrudDeleteModal';
+import { Pagination } from '@/components/pagination';
 
 export default function NewsletterSubscribers() {
   const { t } = useTranslation();
@@ -425,31 +426,14 @@ export default function NewsletterSubscribers() {
         </div>
 
         {/* Pagination */}
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t("Showing")} <span className="font-medium">{newsletters?.from || 0}</span> {t("to")} <span className="font-medium">{newsletters?.to || 0}</span> {t("of")} <span className="font-medium">{newsletters?.total || 0}</span> {t("subscribers")}
-          </div>
-          
-          <div className="flex gap-1">
-            {newsletters?.links?.map((link: any, i: number) => {
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={i}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={newsletters?.links}
+          from={newsletters?.from}
+          to={newsletters?.to}
+          total={newsletters?.total}
+          entityName="abonnés"
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
 
       <CrudDeleteModal

@@ -16,6 +16,7 @@ import { toast } from '@/components/custom-toast';
 import { CrudConfig } from '@/types/crud';
 import { BreadcrumbItem } from '@/types';
 import { useTranslation } from 'react-i18next';
+import { Pagination } from './pagination';
 
 export interface CrudButton {
   label: string;
@@ -553,32 +554,14 @@ export function PageCrudWrapper({
         />
 
         {/* Pagination section */}
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t("Showing")} <span className="font-medium">{data.from || 0}</span> {t("to")} <span className="font-medium">{data.to || 0}</span> {t("of")} <span className="font-medium">{data.total}</span> {entity.name}
-          </div>
-          
-          <div className="flex gap-1">
-            {data.links?.map((link: any, i: number) => {
-              // Check if the link is "Next" or "Previous" to use text instead of icon
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={`pagination-${i}-${link.label}`}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={data.links}
+          from={data.from}
+          to={data.to}
+          total={data.total}
+          entityName={entity.name}
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
 
       <CrudFormModal

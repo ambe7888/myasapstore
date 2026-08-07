@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Search, Trash2, Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { CrudDeleteModal } from '@/components/CrudDeleteModal';
+import { Pagination } from '@/components/pagination';
 import { toast } from '@/components/custom-toast';
 
 export default function ContactsIndex() {
@@ -265,31 +266,14 @@ export default function ContactsIndex() {
         </div>
         
         {/* Pagination */}
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t("Showing")} <span className="font-medium">{contacts?.from || 0}</span> {t("to")} <span className="font-medium">{contacts?.to || 0}</span> {t("of")} <span className="font-medium">{contacts?.total || 0}</span> {t("contacts")}
-          </div>
-          
-          <div className="flex gap-1">
-            {contacts?.links?.map((link: any, i: number) => {
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={i}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={contacts?.links}
+          from={contacts?.from}
+          to={contacts?.to}
+          total={contacts?.total}
+          entityName="contacts"
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
 
       <CrudDeleteModal

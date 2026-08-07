@@ -12,17 +12,17 @@ export function SettingsSection({ title, description, children, action }: Settin
   return (
     <Card className="mb-6">
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="text-lg font-medium">{title}</CardTitle>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <CardTitle className="text-base sm:text-lg font-medium">{title}</CardTitle>
             {description && (
-              <CardDescription className="mt-1.5">
+              <CardDescription className="mt-1 text-xs sm:text-sm">
                 {description}
               </CardDescription>
             )}
           </div>
           {action && (
-            <div>
+            <div className="shrink-0 flex items-center gap-2">
               {action}
             </div>
           )}

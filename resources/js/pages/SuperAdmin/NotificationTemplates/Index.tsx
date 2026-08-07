@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Badge } from '@/components/ui/badge'
-import { Search, Eye } from 'lucide-react'
+import { Search, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 interface NotificationTemplate {
@@ -158,28 +158,29 @@ export default function Index({ notifications }: Props) {
                 </div>
 
                 {/* Pagination section */}
-                <div className="p-4 border-t flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">
-                        {t("Showing")} <span className="font-medium">{startIndex + 1}</span> {t("to")} <span className="font-medium">{endIndex}</span> {t("of")} <span className="font-medium">{totalItems}</span> {t("templates")}
+                <div className="p-4 border-t flex flex-col sm:flex-row items-center justify-between gap-3 bg-white">
+                    <div className="text-xs text-gray-500">
+                        {t("Affichage de")} <span className="font-semibold text-gray-900">{totalItems > 0 ? startIndex + 1 : 0}</span> {t("à")} <span className="font-semibold text-gray-900">{endIndex}</span> {t("sur")} <span className="font-semibold text-gray-900">{totalItems}</span> {t("modèles")}
                     </div>
                     
-                    <div className="flex gap-1">
+                    <div className="flex flex-wrap items-center gap-1.5">
                         <Button
                             variant="outline"
                             size="sm"
-                            className="px-3"
+                            className="h-8 px-2.5 text-xs bg-white text-gray-700 border-gray-200 hover:bg-gray-50 flex items-center gap-1 font-medium"
                             disabled={currentPage === 1}
                             onClick={() => setCurrentPage(currentPage - 1)}
                         >
-                            Previous
+                            <ChevronLeft className="h-4 w-4 shrink-0" />
+                            <span className="hidden sm:inline">{t("Précédent")}</span>
                         </Button>
                         
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                             <Button
                                 key={page}
                                 variant={page === currentPage ? 'default' : 'outline'}
-                                size="icon"
-                                className="h-8 w-8"
+                                size="sm"
+                                className={page === currentPage ? "h-8 min-w-[32px] px-2 text-xs bg-emerald-600 text-white font-bold" : "h-8 min-w-[32px] px-2 text-xs border-gray-200"}
                                 onClick={() => setCurrentPage(page)}
                             >
                                 {page}
@@ -189,11 +190,12 @@ export default function Index({ notifications }: Props) {
                         <Button
                             variant="outline"
                             size="sm"
-                            className="px-3"
-                            disabled={currentPage === totalPages}
+                            className="h-8 px-2.5 text-xs bg-white text-gray-700 border-gray-200 hover:bg-gray-50 flex items-center gap-1 font-medium"
+                            disabled={currentPage === totalPages || totalPages === 0}
                             onClick={() => setCurrentPage(currentPage + 1)}
                         >
-                            Next
+                            <span className="hidden sm:inline">{t("Suivant")}</span>
+                            <ChevronRight className="h-4 w-4 shrink-0" />
                         </Button>
                     </div>
                 </div>

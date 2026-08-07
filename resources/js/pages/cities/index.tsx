@@ -10,6 +10,7 @@ import { Filter, Search, Plus, Edit, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { CrudDeleteModal } from '@/components/CrudDeleteModal';
+import { Pagination } from '@/components/pagination';
 import { CrudFormModal } from '@/components/CrudFormModal';
 import React, { useEffect, useState as useReactState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -189,7 +190,7 @@ export default function Cities() {
 
   const pageActions = [
     {
-      label: t('Add City'),
+      label: t('+ Ajouter une ville'),
       icon: <Plus className="h-4 w-4 mr-2" />,
       variant: 'default' as const,
       onClick: () => handleAddNew()
@@ -369,31 +370,14 @@ export default function Cities() {
         </div>
 
         {/* Pagination section */}
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t("Showing")} <span className="font-medium">{cities?.from || 0}</span> {t("to")} <span className="font-medium">{cities?.to || 0}</span> {t("of")} <span className="font-medium">{cities?.total || 0}</span> {t("cities")}
-          </div>
-          
-          <div className="flex gap-1">
-            {cities?.links?.map((link: any, i: number) => {
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={i}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={cities?.links}
+          from={cities?.from}
+          to={cities?.to}
+          total={cities?.total}
+          entityName="villes"
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
 
       {/* Custom City Form Modal */}

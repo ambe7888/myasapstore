@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { CrudDeleteModal } from '@/components/CrudDeleteModal';
 import { CrudFormModal } from '@/components/CrudFormModal';
+import { Pagination } from '@/components/pagination';
 
 interface Country {
   id: number;
@@ -129,7 +130,7 @@ export default function Countries() {
 
   const pageActions = [
     {
-      label: t('Add Country'),
+      label: t('+ Ajouter un pays'),
       icon: <Plus className="h-4 w-4 mr-2" />,
       variant: 'default' as const,
       onClick: () => handleAddNew()
@@ -309,31 +310,14 @@ export default function Countries() {
         </div>
 
         {/* Pagination section */}
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t("Showing")} <span className="font-medium">{countries?.from || 0}</span> {t("to")} <span className="font-medium">{countries?.to || 0}</span> {t("of")} <span className="font-medium">{countries?.total || 0}</span> {t("countries")}
-          </div>
-          
-          <div className="flex gap-1">
-            {countries?.links?.map((link: any, i: number) => {
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={i}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? label : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={countries?.links}
+          from={countries?.from}
+          to={countries?.to}
+          total={countries?.total}
+          entityName="pays"
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
 
       {/* Form Modal */}

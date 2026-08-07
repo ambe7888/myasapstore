@@ -28,7 +28,13 @@ export function Pagination({
   return (
     <div className={`p-4 bg-white border border-gray-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs ${className}`}>
       <div className="text-xs text-gray-500 text-center sm:text-left">
-        {t("Affichage de")} <span className="font-semibold text-gray-900">{from}</span> {t("à")} <span className="font-semibold text-gray-900">{to}</span> {t("sur")} <span className="font-semibold text-gray-900">{total}</span> {t(entityName)}
+        {total > 0 ? (
+          <>
+            {t("Affichage de")} <span className="font-semibold text-gray-900">{from || 1}</span> {t("à")} <span className="font-semibold text-gray-900">{to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{total}</span> {t(entityName)}
+          </>
+        ) : (
+          <span>{t("Aucun résultat pour")} {t(entityName)}</span>
+        )}
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-1.5">

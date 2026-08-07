@@ -144,101 +144,97 @@ export default function PlanOrdersPage() {
       breadcrumbs={breadcrumbs}
       noPadding
     >
-      <div className="bg-white rounded-lg shadow mb-4">
-        <div className="p-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
-                <div className="relative w-full sm:w-64">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder={t('Search plan orders...')}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-9"
-                  />
-                </div>
-                <Button type="submit" size="sm">
-                  <Search className="h-4 w-4 mr-1.5" />
-                  {t('Search')}
-                </Button>
-              </form>
-              
-              {planOrdersConfig.filters && planOrdersConfig.filters.length > 0 && (
-                <div>
-                  <Button 
-                    variant={hasActiveFilters() ? "default" : "outline"}
-                    size="sm" 
-                    className="h-8 px-2 py-1"
-                    onClick={() => setShowFilters(!showFilters)}
-                  >
-                    <Filter className="h-3.5 w-3.5 mr-1.5" />
-                    {showFilters ? t('Hide Filters') : t('Filters')}
-                  </Button>
-                </div>
-              )}
-            </div>
+      <div className="bg-white rounded-xl shadow-xs border border-gray-100 mb-4 p-4">
+        <div className="flex flex-col items-center justify-center gap-3 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full">
+            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center justify-center gap-2 w-full sm:w-auto">
+              <div className="relative w-full sm:w-80">
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder={t('Rechercher des commandes de forfaits...')}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 h-9 text-xs sm:text-sm bg-gray-50/50 border-gray-200 focus:bg-white text-center sm:text-left"
+                />
+              </div>
+              <Button type="submit" size="sm" className="h-9 px-4 w-full sm:w-auto shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white justify-center">
+                <Search className="h-4 w-4 mr-1.5" />
+                <span className="text-xs font-medium">{t('Rechercher')}</span>
+              </Button>
+            </form>
             
-            <div className="flex items-center gap-2 shrink-0">
-              <Label className="text-xs text-muted-foreground">{t('Per Page')}:</Label>
-              <Select 
-                value={pageFilters.per_page?.toString() || "10"} 
-                onValueChange={(value) => {
-                  const params: any = { page: 1, per_page: parseInt(value) };
-                  
-                  if (searchTerm) {
-                    params.search = searchTerm;
-                  }
-                  
-                  Object.entries(filterValues).forEach(([key, val]) => {
-                    if (val && val !== '') {
-                      params[key] = val;
-                    }
-                  });
-                  
-                  router.get(route('plan-orders.index'), params, { preserveState: true, preserveScroll: true });
-                }}
+            {planOrdersConfig.filters && planOrdersConfig.filters.length > 0 && (
+              <Button 
+                variant={hasActiveFilters() ? "default" : "outline"}
+                size="sm" 
+                className="h-9 px-4 w-full sm:w-auto shrink-0 text-xs flex items-center justify-center gap-1.5"
+                onClick={() => setShowFilters(!showFilters)}
               >
-                <SelectTrigger className="w-16 h-8">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="10">10</SelectItem>
-                  <SelectItem value="25">25</SelectItem>
-                  <SelectItem value="50">50</SelectItem>
-                  <SelectItem value="100">100</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+                <Filter className="h-3.5 w-3.5 text-gray-500" />
+                <span>{showFilters ? t('Masquer les filtres') : t('Filtres')}</span>
+              </Button>
+            )}
           </div>
           
-          {showFilters && planOrdersConfig.filters && planOrdersConfig.filters.length > 0 && (
-            <div className="w-full mt-3 p-4 bg-gray-50 border rounded-md">
-              <div className="flex flex-wrap gap-4 items-end">
-                {planOrdersConfig.filters.map((filter) => (
-                  <div key={filter.key} className="space-y-2">
-                    <Label>{t(filter.label)}</Label>
-                    <Select 
-                      value={filterValues[filter.key] || ''} 
-                      onValueChange={(value) => handleFilterChange(filter.key, value)}
-                    >
-                      <SelectTrigger className="w-40">
-                        <SelectValue placeholder={t(`All ${filter.label}`)} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {filter.options?.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {t(option.label)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className="flex items-center justify-center gap-2 w-full pt-2 border-t border-gray-100">
+            <Label className="text-xs text-gray-500 whitespace-nowrap">{t('Par page:')}</Label>
+            <Select 
+              value={pageFilters.per_page?.toString() || "10"} 
+              onValueChange={(value) => {
+                const params: any = { page: 1, per_page: parseInt(value) };
+                
+                if (searchTerm) {
+                  params.search = searchTerm;
+                }
+                
+                Object.entries(filterValues).forEach(([key, val]) => {
+                  if (val && val !== '') {
+                    params[key] = val;
+                  }
+                });
+                
+                router.get(route('plan-orders.index'), params, { preserveState: true, preserveScroll: true });
+              }}
+            >
+              <SelectTrigger className="w-16 h-8">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="25">25</SelectItem>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+        
+        {showFilters && planOrdersConfig.filters && planOrdersConfig.filters.length > 0 && (
+          <div className="w-full mt-3 p-4 bg-gray-50 border rounded-md">
+            <div className="flex flex-wrap gap-4 items-end">
+              {planOrdersConfig.filters.map((filter) => (
+                <div key={filter.key} className="space-y-2">
+                  <Label>{t(filter.label)}</Label>
+                  <Select 
+                    value={filterValues[filter.key] || ''} 
+                    onValueChange={(value) => handleFilterChange(filter.key, value)}
+                  >
+                    <SelectTrigger className="w-40">
+                      <SelectValue placeholder={t(`All ${filter.label}`)} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {filter.options?.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {t(option.label)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">

@@ -465,10 +465,10 @@ export default function StoreContentEdit({ store, settings, theme = 'default' }:
       ]}
     >
       <form onSubmit={handleSubmit}>
-        <Tabs defaultValue={tabs[0]?.key} className="w-full">
-          <TabsList className="flex w-full flex-wrap">
+        <Tabs defaultValue={tabs[0]?.key} className="w-full space-y-6">
+          <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none h-auto">
             {tabs.map(tab => (
-              <TabsTrigger key={tab.key} value={tab.key}>
+              <TabsTrigger key={tab.key} value={tab.key} className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">
                 {tab.label}
               </TabsTrigger>
             ))}

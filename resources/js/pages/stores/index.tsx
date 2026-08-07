@@ -134,65 +134,72 @@ export default function StoreManagement({ stores = [], aggregatedStats = {} }) {
             ) : (
               <div className="space-y-4">
               {stores.map((store) => (
-                <div key={store.id} className="flex items-center justify-between p-4 border rounded-lg">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Building2 className="h-6 w-6 text-primary" />
+                <div key={store.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-200 rounded-xl gap-4 bg-white hover:border-gray-300 transition-colors">
+                  <div className="flex items-start space-x-3 min-w-0">
+                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                      <Building2 className="h-5 w-5 text-primary" />
                     </div>
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold">{store.name}</h3>
-                        <Badge variant={store.config_status ? 'default' : 'secondary'}>
-                          {store.config_status ? t('Active') : t('Inactive')}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-semibold text-base text-gray-900 truncate">{store.name}</h3>
+                        <Badge variant={store.config_status ? 'default' : 'secondary'} className="text-[11px]">
+                          {store.config_status ? t('Actif') : t('Inactif')}
                         </Badge>
                         {store.is_default && (
-                          <Badge variant="outline" className="border-primary text-primary">
-                            {t('Default Store')}
+                          <Badge variant="outline" className="border-primary text-primary text-[11px]">
+                            {t('Boutique par défaut')}
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground mt-1 truncate">
                         {store.enable_custom_domain && store.custom_domain ? (
-                          <span className="text-green-600">{store.custom_domain} (Custom Domain)</span>
+                          <span className="text-emerald-600 font-medium">{store.custom_domain} ({t('Domaine personnalisé')})</span>
                         ) : store.enable_custom_subdomain && store.custom_subdomain ? (
-                          <span className="text-blue-600">{store.custom_subdomain} (Custom Subdomain)</span>
+                          <span className="text-blue-600 font-medium">{store.custom_subdomain} ({t('Sous-domaine')})</span>
                         ) : (
-                          t('No domain set')
+                          t('Aucun domaine configuré')
                         )}
                       </p>
-                      <div className="flex items-center space-x-4 mt-1">
-                        <span className="text-xs text-muted-foreground">{t('Theme: {{theme}}', { theme: store.theme })}</span>
-                        <span className="text-xs text-muted-foreground">{t('Created: {{date}}', { date: new Date(store.created_at).toLocaleDateString() })}</span>
-                        <span className="text-xs text-muted-foreground">{t('{{orders}} orders', { orders: store.total_orders || 0 })}</span>
-                        <span className="text-xs text-muted-foreground">{t('{{revenue}} revenue', { revenue: formatCurrency(parseFloat(store.total_revenue) || 0) })}</span>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs text-muted-foreground">
+                        <span>{t('Thème:')} <strong className="text-gray-700">{store.theme}</strong></span>
+                        <span>•</span>
+                        <span>{t('Commandes:')} <strong className="text-gray-700">{store.total_orders || 0}</strong></span>
+                        <span>•</span>
+                        <span>{t('Revenu:')} <strong className="text-gray-700">{formatCurrency(parseFloat(store.total_revenue) || 0)}</strong></span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="sm" onClick={() => {
+                  
+                  <div className="flex flex-wrap items-center gap-1.5 shrink-0 justify-start sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
+                    <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs flex items-center gap-1" onClick={() => {
                       const url = store.visit_store_url || generateStoreUrl('store.home', store);
                       if (url) window.open(url, '_blank');
-                    }} title={t('Visit Store')}>
-                      <Globe className="h-4 w-4" />
+                    }} title={t('Visiter la boutique')}>
+                      <Globe className="h-3.5 w-3.5" />
+                      <span className="inline sm:hidden md:inline text-xs">{t('Visiter')}</span>
                     </Button>
+                    
                     <Permission permission="view-stores">
-                      <Button variant="ghost" size="sm" onClick={() => router.visit(route('stores.show', store.id))}>
+                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => router.visit(route('stores.show', store.id))} title={t('Voir')}>
                         <Eye className="h-4 w-4" />
                       </Button>
                     </Permission>
+                    
                     <Permission permission="edit-stores">
-                      <Button variant="ghost" size="sm" onClick={() => router.visit(route('stores.edit', store.id))}>
+                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => router.visit(route('stores.edit', store.id))} title={t('Modifier')}>
                         <Edit className="h-4 w-4" />
                       </Button>
                     </Permission>
+                    
                     <Permission permission="manage-store-settings">
-                      <Button variant="ghost" size="sm" onClick={() => router.visit(route('stores.settings', store.id))}>
+                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => router.visit(route('stores.settings', store.id))} title={t('Paramètres')}>
                         <Settings className="h-4 w-4" />
                       </Button>
                     </Permission>
+                    
                     <Permission permission="delete-stores">
                       {!store.is_default && (
-                        <Button variant="ghost" size="sm" onClick={() => setStoreToDelete(store.id)}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50" onClick={() => setStoreToDelete(store.id)} title={t('Supprimer')}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       )}

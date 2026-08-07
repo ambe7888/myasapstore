@@ -44,6 +44,27 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
+  const formatStatusLabel = (status: string) => {
+    if (!status) return '';
+    const statusMap: Record<string, string> = {
+      pending: t('En attente'),
+      approved: t('Approuvé'),
+      completed: t('Terminé'),
+      cancelled: t('Annulé'),
+      paid: t('Payé'),
+      unpaid: t('Non payé'),
+      company: t('Entreprise'),
+      plan: t('Forfait'),
+      payment: t('Paiement'),
+      active: t('Actif'),
+      inactive: t('Inactif'),
+      delivered: t('Livré'),
+      shipped: t('Expédié'),
+      processing: t('En cours'),
+    };
+    return statusMap[status.toLowerCase()] || t(status);
+  };
+
   const { auth } = usePage().props as any;
   const permissions = auth?.permissions || [];
   const { themeColor, customColor } = useBrand();
@@ -437,7 +458,9 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
                     </div>
                     <div className="text-right">
                       <p className="font-medium">{formatCurrency(order.amount)}</p>
-                      <p className="text-sm text-muted-foreground">{order.status}</p>
+                      <p className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">
+                        {formatStatusLabel(order.status)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -461,7 +484,7 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
                       >
                         {product.name}
                       </Link>
-                      <p className="text-sm text-muted-foreground">{product.sold} sold</p>
+                      <p className="text-sm text-muted-foreground">{product.sold} {t('vendus')}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-medium">{formatCurrency(product.price)}</p>
@@ -473,28 +496,28 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
           </Card>
           
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <QrCode className="h-5 w-5" />
-                {t('Store QR Code')}
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center gap-2">
+                <QrCode className="h-5 w-5 text-emerald-600" />
+                {t('Code QR de la boutique')}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex flex-col items-center space-y-4">
-                <div className="bg-white p-4 rounded-lg">
-                  <QRCode value={currentStore?.qr_code_url || storeUrl} size={120} />
+            <CardContent className="flex flex-col items-center justify-center text-center">
+              <div className="flex flex-col items-center justify-center space-y-4 w-full">
+                <div className="bg-white p-4 rounded-xl shadow-xs border border-gray-100 flex items-center justify-center">
+                  <QRCode value={currentStore?.qr_code_url || storeUrl} size={130} />
                 </div>
-                <div className="text-center space-y-2">
-                  <p className="text-sm font-medium">{currentStore.name}</p>
-                  <p className="text-xs text-muted-foreground">{t('Scan to visit store')}</p>
+                <div className="text-center space-y-2 w-full">
+                  <p className="text-sm font-semibold text-gray-900">{currentStore.name}</p>
+                  <p className="text-xs text-muted-foreground">{t('Scannez pour visiter la boutique')}</p>
                   <Button 
                     variant="outline" 
                     size="sm" 
                     onClick={copyToClipboard}
-                    className="flex items-center gap-2"
+                    className="flex items-center justify-center gap-2 mx-auto"
                   >
-                    {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                    {copied ? t('Copied!') : t('Copy Link')}
+                    {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
+                    {copied ? t('Copié !') : t('Copier le lien')}
                   </Button>
                 </div>
               </div>

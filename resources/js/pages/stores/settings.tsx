@@ -106,11 +106,11 @@ export default function StoreSettings({ store, settings }: Props) {
       ]}
     >
       <Tabs defaultValue="general" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="general">{t('General')}</TabsTrigger>
-          <TabsTrigger value="appearance">{t('Appearance')}</TabsTrigger>
-          <TabsTrigger value="tracking">{t('Tracking & Analytics')}</TabsTrigger>
-          <TabsTrigger value="advanced">{t('Advanced')}</TabsTrigger>
+        <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none h-auto">
+          <TabsTrigger value="general" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Général')}</TabsTrigger>
+          <TabsTrigger value="appearance" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Apparence & Couleurs')}</TabsTrigger>
+          <TabsTrigger value="tracking" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Suivi & Analytique')}</TabsTrigger>
+          <TabsTrigger value="advanced" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Avancé')}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="general" className="space-y-6">

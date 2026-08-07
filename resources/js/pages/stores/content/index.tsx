@@ -57,32 +57,33 @@ export default function StoreContentIndex({ stores }: Props) {
           ) : (
             <div className="space-y-4">
               {stores.map((store) => (
-                <div key={store.id} className="flex items-center justify-between p-4 border rounded-lg">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Store className="h-6 w-6 text-primary" />
+                <div key={store.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-200 rounded-xl gap-4 bg-white hover:border-gray-300 transition-colors">
+                  <div className="flex items-start space-x-3 min-w-0">
+                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                      <Store className="h-5 w-5 text-primary" />
                     </div>
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold">{store.name}</h3>
-                        <Badge variant={store.config_status ? 'default' : 'secondary'}>
-                          {store.config_status ? t('Active') : t('Inactive')}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-semibold text-base text-gray-900 truncate">{store.name}</h3>
+                        <Badge variant={store.config_status ? 'default' : 'secondary'} className="text-[11px]">
+                          {store.config_status ? t('Actif') : t('Inactif')}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {store.description || t('No description available')}
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                        {store.description || t('Aucune description disponible')}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2 shrink-0 justify-start sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                     <Permission permission="edit-store-content">
                       <Button 
                         variant="default" 
                         size="sm" 
+                        className="h-9 px-3.5 text-xs flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white w-full sm:w-auto"
                         onClick={() => router.visit(route('stores.content.show', store.id))}
                       >
-                        <Settings className="h-4 w-4 mr-2" />
-                        {t('Manage Content')}
+                        <Settings className="h-3.5 w-3.5" />
+                        <span>{t('Gérer le contenu')}</span>
                       </Button>
                     </Permission>
                   </div>

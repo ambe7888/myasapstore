@@ -13,19 +13,19 @@ export default function StoreView({ store, stats }) {
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('stores.index'))
     },
     {
-      label: t('Edit'),
+      label: t('Modifier'),
       icon: <Edit className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('stores.edit', store.id))
     },
     {
-      label: t('Settings'),
+      label: t('Paramètres'),
       icon: <Settings className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('stores.settings', store.id))

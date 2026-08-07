@@ -152,29 +152,29 @@ export default function ContactsIndex() {
       noPadding
     >
       {/* Search and filters */}
-      <div className="bg-white rounded-lg shadow mb-4">
-        <div className="p-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
-                <div className="relative w-full sm:w-64">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder={t("Search contacts...")}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-9"
-                  />
-                </div>
-                <Button type="submit" size="sm">
-                  <Search className="h-4 w-4 mr-1.5" />
-                  {t("Search")}
-                </Button>
-              </form>
-            </div>
-            
-            <div className="flex items-center gap-2 shrink-0">
-              <Label className="text-xs text-muted-foreground">{t("Per Page:")}</Label>
+      <div className="bg-white rounded-xl shadow-xs border border-gray-100 mb-4 p-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
+            <form onSubmit={handleSearch} className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="relative flex-1 sm:w-72">
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder={t("Rechercher un contact...")}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 h-9 text-xs sm:text-sm bg-gray-50/50 border-gray-200 focus:bg-white"
+                />
+              </div>
+              <Button type="submit" size="sm" className="h-9 px-3 shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Search className="h-4 w-4 sm:mr-1.5" />
+                <span className="hidden sm:inline text-xs font-medium">{t("Rechercher")}</span>
+              </Button>
+            </form>
+          </div>
+          
+          <div className="flex items-center justify-between sm:justify-end gap-3 w-full md:w-auto pt-2 md:pt-0 border-t border-gray-100 md:border-t-0">
+            <div className="flex items-center gap-1.5">
+              <Label className="text-xs text-gray-500 whitespace-nowrap">{t("Par page:")}</Label>
               <Select 
                 value={pageFilters.per_page?.toString() || "10"} 
                 onValueChange={(value) => {

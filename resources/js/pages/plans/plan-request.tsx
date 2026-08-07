@@ -1,5 +1,6 @@
 import { PageTemplate } from '@/components/page-template';
 import { CrudTable } from '@/components/CrudTable';
+import { Pagination } from '@/components/pagination';
 import { planRequestsConfig } from '@/config/crud/plan-requests';
 import { useEffect, useState } from 'react';
 import { usePage, router } from '@inertiajs/react';
@@ -125,10 +126,10 @@ export default function PlanRequestsPage() {
     >
       <div className="bg-white rounded-lg shadow mb-4">
         <div className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <form onSubmit={handleSearch} className="flex gap-2">
-                <div className="relative w-64">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
+                <div className="relative w-full sm:w-64">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder={t('Search plan requests...')}
@@ -144,7 +145,7 @@ export default function PlanRequestsPage() {
               </form>
               
               {planRequestsConfig.filters && planRequestsConfig.filters.length > 0 && (
-                <div className="ml-2">
+                <div>
                   <Button 
                     variant={hasActiveFilters() ? "default" : "outline"}
                     size="sm" 
@@ -158,7 +159,7 @@ export default function PlanRequestsPage() {
               )}
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <Label className="text-xs text-muted-foreground">{t('Per Page')}:</Label>
               <Select 
                 value={pageFilters.per_page?.toString() || "10"} 
@@ -234,31 +235,14 @@ export default function PlanRequestsPage() {
           entityPermissions={planRequestsConfig.entity.permissions}
         />
 
-        <div className="p-4 border-t flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {t('Showing')} <span className="font-medium">{planRequests?.from || 0}</span> {t('to')} <span className="font-medium">{planRequests?.to || 0}</span> {t('of')} <span className="font-medium">{planRequests?.total || 0}</span> {t('plan requests')}
-          </div>
-          
-          <div className="flex gap-1">
-            {planRequests?.links?.map((link: any, i: number) => {
-              const isTextLink = link.label === "&laquo; Previous" || link.label === "Next &raquo;";
-              const label = link.label.replace("&laquo; ", "").replace(" &raquo;", "");
-              
-              return (
-                <Button
-                  key={i}
-                  variant={link.active ? 'default' : 'outline'}
-                  size={isTextLink ? "sm" : "icon"}
-                  className={isTextLink ? "px-3" : "h-8 w-8"}
-                  disabled={!link.url}
-                  onClick={() => link.url && router.get(link.url)}
-                >
-                  {isTextLink ? t(label) : <span dangerouslySetInnerHTML={{ __html: link.label }} />}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Pagination
+          links={planRequests?.links}
+          from={planRequests?.from}
+          to={planRequests?.to}
+          total={planRequests?.total}
+          entityName="demandes de forfait"
+          className="mt-2 border-t rounded-none border-x-0 border-b-0"
+        />
       </div>
     </PageTemplate>
   );

@@ -154,10 +154,10 @@ export default function ContactsIndex() {
       {/* Search and filters */}
       <div className="bg-white rounded-lg shadow mb-4">
         <div className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <form onSubmit={handleSearch} className="flex gap-2">
-                <div className="relative w-64">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
+                <div className="relative w-full sm:w-64">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder={t("Search contacts...")}
@@ -173,7 +173,7 @@ export default function ContactsIndex() {
               </form>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <Label className="text-xs text-muted-foreground">{t("Per Page:")}</Label>
               <Select 
                 value={pageFilters.per_page?.toString() || "10"} 

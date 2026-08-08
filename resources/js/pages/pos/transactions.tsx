@@ -14,54 +14,53 @@ import { usePermissions } from '@/hooks/usePermissions';
 
 export default function POSTransactions() {
   const { t } = useTranslation();
-  const { transactions, stats } = usePage().props as any;
+  const { transactions = [], stats = {} } = usePage().props as any;
 
   const [searchTerm, setSearchTerm] = useState('');
   const { hasPermission } = usePermissions();
   
   const filteredTransactions = useMemo(() => {
     if (!searchTerm) return transactions;
-    return transactions.filter(transaction => 
-      transaction.transaction_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      transaction.customer.toLowerCase().includes(searchTerm.toLowerCase())
+    return transactions.filter((transaction: any) => 
+      transaction.transaction_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.customer?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [transactions, searchTerm]);
 
   const pageActions = [
     {
-      label: t('Back to POS'),
+      label: t('Retour à la caisse'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('pos.index'))
     },
     {
-      label: t('Refresh'),
+      label: t('Actualiser'),
       icon: <RefreshCw className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.reload()
     }
   ];
-  
-  if (hasPermission('view-transactions-pos')) {
-    pageActions.push({
-      label: t('Export'),
-      icon: <Download className="h-4 w-4" />,
-      variant: 'outline' as const,
-      onClick: () => console.log('Export clicked')
-    });
-  }
 
-
+  const getStatusLabel = (status: string) => {
+    if (!status) return t('Terminé');
+    const s = status.toLowerCase();
+    if (s === 'completed') return t('Terminé');
+    if (s === 'refunded') return t('Remboursé');
+    if (s === 'partial refund' || s === 'partial_refund') return t('Remboursement partiel');
+    if (s === 'pending') return t('En attente');
+    return t(status);
+  };
 
   const getStatusVariant = (status: string) => {
-    switch (status.toLowerCase()) {
+    switch (status?.toLowerCase()) {
       case 'completed':
         return 'default';
       case 'refunded':
         return 'destructive';
       case 'partial refund':
       case 'partial_refund':
-        return 'warning';
+        return 'outline';
       default:
         return 'secondary';
     }
@@ -69,12 +68,13 @@ export default function POSTransactions() {
 
   return (
     <PageTemplate 
-      title={t('POS Transactions')}
+      title={t('Transactions du Point de Vente (POS)')}
+      description={t('Consultez et gérez le journal des ventes et des reçus de caisse')}
       url="/pos/transactions"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Point of Sale (POS)'), href: route('pos.index') },
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Point de Vente (POS)'), href: route('pos.index') },
         { title: t('Transactions') }
       ]}
     >
@@ -83,45 +83,45 @@ export default function POSTransactions() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Today\'s Sales')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Ventes aujourd\'hui')}</CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(stats.todaySales)}</div>
-              <p className="text-xs text-muted-foreground">{t('{{count}} transactions', { count: stats.todayCount })}</p>
+              <div className="text-2xl font-bold">{formatCurrency(stats?.todaySales || 0)}</div>
+              <p className="text-xs text-muted-foreground">{t('{{count}} transaction(s)', { count: stats?.todayCount || 0 })}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('This Week')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Cette semaine')}</CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(stats.weekSales)}</div>
-              <p className="text-xs text-muted-foreground">{t('{{count}} transactions', { count: stats.weekCount })}</p>
+              <div className="text-2xl font-bold">{formatCurrency(stats?.weekSales || 0)}</div>
+              <p className="text-xs text-muted-foreground">{t('{{count}} transaction(s)', { count: stats?.weekCount || 0 })}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Average Sale')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Vente moyenne')}</CardTitle>
               <Receipt className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(stats.averageSale)}</div>
-              <p className="text-xs text-muted-foreground">{t('Per transaction')}</p>
+              <div className="text-2xl font-bold">{formatCurrency(stats?.averageSale || 0)}</div>
+              <p className="text-xs text-muted-foreground">{t('Par transaction')}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Refunds')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Remboursements')}</CardTitle>
               <Receipt className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(stats.refundAmount)}</div>
-              <p className="text-xs text-muted-foreground">{t('{{count}} transactions', { count: stats.refundCount })}</p>
+              <div className="text-2xl font-bold">{formatCurrency(stats?.refundAmount || 0)}</div>
+              <p className="text-xs text-muted-foreground">{t('{{count}} transaction(s)', { count: stats?.refundCount || 0 })}</p>
             </CardContent>
           </Card>
         </div>
@@ -131,73 +131,114 @@ export default function POSTransactions() {
           <div className="relative flex-1">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder={t('Search transactions...')}
+              placeholder={t('Rechercher par N° de transaction ou nom de client...')}
               className="pl-8"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
-          <div className="flex gap-2">
-
-
           </div>
         </div>
 
         {/* Transactions List */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('Recent Transactions')}</CardTitle>
+            <CardTitle>{t('Historique des transactions de caisse')}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="rounded-md border">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-muted/50">
-                    <th className="p-3 text-left font-medium">{t('Transaction ID')}</th>
-                    <th className="p-3 text-left font-medium">{t('Date & Time')}</th>
-                    <th className="p-3 text-left font-medium">{t('Customer')}</th>
-                    <th className="p-3 text-left font-medium">{t('Items')}</th>
-                    <th className="p-3 text-right font-medium">{t('Total')}</th>
-                    <th className="p-3 text-center font-medium">{t('Status')}</th>
-                    <th className="p-3 text-center font-medium">{t('Actions')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredTransactions.map((transaction) => (
-                    <tr key={transaction.id} className="border-t">
-                      <td className="p-3 font-medium">{transaction.transaction_number}</td>
-                      <td className="p-3">
-                        <div className="flex flex-col">
-                          <span>{transaction.date}</span>
-                          <span className="text-xs text-muted-foreground">{transaction.time}</span>
-                        </div>
-                      </td>
-                      <td className="p-3">{transaction.customer}</td>
-                      <td className="p-3">{transaction.items}</td>
-                      <td className="p-3 text-right">{formatCurrency(transaction.total)}</td>
-                      <td className="p-3 text-center">
+          <CardContent className="space-y-4">
+            {filteredTransactions.length === 0 ? (
+              <div className="text-center py-10">
+                <Receipt className="h-12 w-12 mx-auto text-muted-foreground opacity-40 mb-2" />
+                <p className="text-sm text-muted-foreground">{t('Aucune transaction trouvée')}</p>
+              </div>
+            ) : (
+              <>
+                {/* Mobile & Tablet Card Layout */}
+                <div className="block md:hidden space-y-3">
+                  {filteredTransactions.map((transaction: any) => (
+                    <div key={transaction.id} className="p-4 border border-gray-200 rounded-xl bg-white space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-gray-900 text-sm">{transaction.transaction_number}</span>
                         <Badge variant={getStatusVariant(transaction.status)}>
-                          {transaction.status}
+                          {getStatusLabel(transaction.status)}
                         </Badge>
-                      </td>
-                      <td className="p-3 text-center">
-                        <div className="flex justify-center space-x-1">
-                          <Permission permission="view-transactions-pos">
-                            <Button 
-                              variant="ghost" 
-                              size="icon"
-                              onClick={() => router.visit(route('pos.receipt', transaction.id))}
-                            >
-                              <Receipt className="h-4 w-4" />
-                            </Button>
-                          </Permission>
-                        </div>
-                      </td>
-                    </tr>
+                      </div>
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <p>{t('Client :')} <strong className="text-gray-800">{transaction.customer}</strong></p>
+                        <p>{t('Date :')} {transaction.date} à {transaction.time}</p>
+                        <p>{t('Articles :')} {transaction.items}</p>
+                      </div>
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                        <span className="font-bold text-base text-gray-900">{formatCurrency(transaction.total)}</span>
+                        <Permission permission="view-transactions-pos">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            className="h-8 text-xs flex items-center gap-1"
+                            onClick={() => router.visit(route('pos.receipt', transaction.id))}
+                          >
+                            <Receipt className="h-3.5 w-3.5" />
+                            <span>{t('Reçu')}</span>
+                          </Button>
+                        </Permission>
+                      </div>
+                    </div>
                   ))}
-                </tbody>
-              </table>
-            </div>
+                </div>
+
+                {/* Desktop Table View */}
+                <div className="hidden md:block rounded-xl border border-gray-200 overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-gray-50 border-b border-gray-200">
+                        <th className="p-3 text-left font-semibold text-gray-700">{t('N° Transaction')}</th>
+                        <th className="p-3 text-left font-semibold text-gray-700">{t('Date & Heure')}</th>
+                        <th className="p-3 text-left font-semibold text-gray-700">{t('Client')}</th>
+                        <th className="p-3 text-left font-semibold text-gray-700">{t('Articles')}</th>
+                        <th className="p-3 text-right font-semibold text-gray-700">{t('Total')}</th>
+                        <th className="p-3 text-center font-semibold text-gray-700">{t('Statut')}</th>
+                        <th className="p-3 text-center font-semibold text-gray-700">{t('Actions')}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 bg-white">
+                      {filteredTransactions.map((transaction: any) => (
+                        <tr key={transaction.id} className="hover:bg-slate-50/50">
+                          <td className="p-3 font-semibold text-gray-900">{transaction.transaction_number}</td>
+                          <td className="p-3">
+                            <div className="flex flex-col">
+                              <span>{transaction.date}</span>
+                              <span className="text-xs text-muted-foreground">{transaction.time}</span>
+                            </div>
+                          </td>
+                          <td className="p-3 text-gray-700">{transaction.customer}</td>
+                          <td className="p-3 text-gray-700">{transaction.items}</td>
+                          <td className="p-3 text-right font-bold text-gray-900">{formatCurrency(transaction.total)}</td>
+                          <td className="p-3 text-center">
+                            <Badge variant={getStatusVariant(transaction.status)}>
+                              {getStatusLabel(transaction.status)}
+                            </Badge>
+                          </td>
+                          <td className="p-3 text-center">
+                            <div className="flex justify-center space-x-1">
+                              <Permission permission="view-transactions-pos">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900"
+                                  onClick={() => router.visit(route('pos.receipt', transaction.id))}
+                                  title={t('Voir le reçu')}
+                                >
+                                  <Receipt className="h-4 w-4" />
+                                </Button>
+                              </Permission>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

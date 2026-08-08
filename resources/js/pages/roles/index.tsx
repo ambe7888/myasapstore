@@ -73,9 +73,9 @@ export default function RolesPage() {
   }, [permissions, t]);
 
   const breadcrumbs = [
-    { title: t('Dashboard'), href: route('dashboard') },
-    { title: t('User Management'), href: route('roles.index') },
-    { title: t('Roles') }
+    { title: t('Tableau de bord'), href: route('dashboard') },
+    { title: t('Gestion de l\'équipe'), href: route('roles.index') },
+    { title: t('Rôles & Permissions') }
   ];
 
   return (

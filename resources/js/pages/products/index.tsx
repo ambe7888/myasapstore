@@ -228,25 +228,25 @@ export default function Products() {
 
         {/* Products List */}
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <div className="flex items-center space-x-4">
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4">
+            <div className="flex items-center space-x-3">
               <Checkbox 
-                checked={products.length > 0 && selectedProducts.length === products.length}
+                checked={products?.data?.length > 0 && selectedProducts.length === products.data.length}
                 onCheckedChange={toggleAll}
                 aria-label="Select all"
               />
-              <CardTitle>{t('Product Catalog')}</CardTitle>
+              <CardTitle className="text-base font-bold text-gray-900">{t('Catalogue de produits')}</CardTitle>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center w-full sm:w-auto">
               <Select 
                 value={filters?.category_id ? String(filters.category_id) : 'all'} 
                 onValueChange={handleCategoryFilterChange}
               >
-                <SelectTrigger className="w-[200px]">
-                  <SelectValue placeholder={t('All Categories')} />
+                <SelectTrigger className="w-full sm:w-[220px]">
+                  <SelectValue placeholder={t('Toutes les catégories')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{t('All Categories')}</SelectItem>
+                  <SelectItem value="all">{t('Toutes les catégories')}</SelectItem>
                   {categories?.map((category: any) => (
                     <SelectItem key={category.id} value={String(category.id)}>
                       {category.name}

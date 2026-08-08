@@ -19,45 +19,62 @@ class OrderController extends BaseController
     /**
      * Display a listing of orders.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $storeId = getCurrentStoreId($user);
         
-        // Get orders for current store
-        $orders = Order::where('store_id', $storeId)
-            ->with(['customer', 'items'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-            
-        // Calculate stats
-        $totalOrders = $orders->count();
-        $pendingOrders = $orders->where('status', 'pending')->count();
-        $totalRevenue = $orders->where('payment_status', 'paid')->sum('total_amount');
+        $baseQuery = Order::where('store_id', $storeId);
+
+        $totalOrders = (clone $baseQuery)->count();
+        $pendingOrders = (clone $baseQuery)->where('status', 'pending')->count();
+        $totalRevenue = (clone $baseQuery)->where('payment_status', 'paid')->sum('total_amount');
         $avgOrderValue = $totalOrders > 0 ? $totalRevenue / $totalOrders : 0;
-        
-        // Format orders for frontend
-        $formattedOrders = $orders->map(function ($order) {
+
+        $query = Order::where('store_id', $storeId)->with(['customer', 'items']);
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('order_number', 'like', "%{$search}%")
+                  ->orWhere('customer_first_name', 'like', "%{$search}%")
+                  ->orWhere('customer_last_name', 'like', "%{$search}%")
+                  ->orWhere('customer_email', 'like', "%{$search}%")
+                  ->orWhere('customer_phone', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $paginatedOrders = $query->orderBy('created_at', 'desc')->paginate($perPage)->withQueryString();
+
+        $paginatedOrders->getCollection()->transform(function ($order) {
             return [
                 'id' => $order->id,
                 'orderNumber' => $order->order_number,
-                'customer' => $order->customer_first_name . ' ' . $order->customer_last_name,
+                'customer' => trim($order->customer_first_name . ' ' . $order->customer_last_name),
                 'email' => $order->customer_email,
+                'phone' => $order->customer_phone,
                 'total' => (float) $order->total_amount,
-                'status' => ucfirst($order->status),
+                'status' => $order->status,
+                'payment_status' => $order->payment_status,
                 'items' => $order->items->count(),
-                'date' => $order->created_at->format('Y-m-d'),
+                'date' => $order->created_at->format('d/m/Y H:i'),
                 'paymentMethod' => $this->formatPaymentMethod($order->payment_method),
             ];
         });
-        
+
         return Inertia::render('orders/index', [
-            'orders' => $formattedOrders,
+            'orders' => $paginatedOrders,
+            'filters' => $request->only(['search', 'status']),
             'stats' => [
                 'totalOrders' => $totalOrders,
                 'pendingOrders' => $pendingOrders,
                 'totalRevenue' => $totalRevenue,
-                'avgOrderValue' => $avgOrderValue,
+                'avgOrderValue' => $avgOrderValue
             ]
         ]);
     }

@@ -49,30 +49,25 @@ export default function FunnelIndex({ store, funnels, can_create, max_funnels }:
     navigator.clipboard.writeText(url);
   };
 
+  const pageActions = [
+    ...(can_create ? [{
+      label: t('Nouveau tunnel'),
+      icon: <Plus className="h-4 w-4" />,
+      variant: 'default' as const,
+      onClick: () => router.visit(route('stores.funnels.create', store.id))
+    }] : [])
+  ];
+
   return (
     <PageTemplate
-      title={t('Product Funnels')}
-      subtitle={t('Create high-converting landing pages for your products')}
+      title={t('Tunnels de vente')}
+      description={t('Créez des pages d\'atterrissage (landing pages) à haute conversion pour vos produits')}
       breadcrumbs={[
-        { label: t('Stores'), href: route('stores.index') },
-        { label: store.name },
-        { label: t('Funnels') },
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: store.name, href: route('stores.index') },
+        { title: t('Tunnels de vente') },
       ]}
-      actions={
-        can_create ? (
-          <Link href={route('stores.funnels.create', store.id)}>
-            <Button className="gap-2">
-              <Plus className="h-4 w-4" />
-              {t('New Funnel')}
-            </Button>
-          </Link>
-        ) : (
-          <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-700">
-            <AlertCircle className="h-4 w-4 flex-shrink-0" />
-            {t('Plan limit reached ({{max}} funnels)', { max: max_funnels })}
-          </div>
-        )
-      }
+      actions={pageActions}
     >
       {funnels.length === 0 ? (
         /* Empty state */

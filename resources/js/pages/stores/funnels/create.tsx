@@ -46,24 +46,26 @@ export default function FunnelCreate({ store, products }: Props) {
     post(route('stores.funnels.store', store.id));
   };
 
+  const pageActions = [
+    {
+      label: t('Retour'),
+      icon: <ArrowLeft className="h-4 w-4" />,
+      variant: 'outline' as const,
+      onClick: () => router.visit(route('stores.funnels.index', store.id))
+    }
+  ];
+
   return (
     <PageTemplate
-      title={t('Create a Funnel')}
-      subtitle={t('Choose a product and set up your landing page')}
+      title={t('Créer un tunnel de vente')}
+      description={t('Choisissez un produit et configurez votre page d\'atterrissage')}
       breadcrumbs={[
-        { label: t('Stores'), href: route('stores.index') },
-        { label: store.name },
-        { label: t('Funnels'), href: route('stores.funnels.index', store.id) },
-        { label: t('New') },
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: store.name, href: route('stores.index') },
+        { title: t('Tunnels de vente'), href: route('stores.funnels.index', store.id) },
+        { title: t('Nouveau tunnel') },
       ]}
-      actions={
-        <Link href={route('stores.funnels.index', store.id)}>
-          <Button variant="outline" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            {t('Back')}
-          </Button>
-        </Link>
-      }
+      actions={pageActions}
     >
       <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
         {/* Step 1: Choose product */}

@@ -109,45 +109,51 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
 
     return (
         <AuthLayout
-            title={t("Log in to your account")}
-            description={t("Enter your email and password below to log in")}
+            title={t("Connectez-vous à votre compte")}
+            description={t("Entrez vos identifiants pour accéder à votre compte")}
             status={status}
         >
-            <form className="mt-6" onSubmit={submit}>
-                <div className="space-y-5">
+            <form className="mt-4" onSubmit={submit}>
+                <div className="space-y-4">
                     <div>
-                        <Label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1.5">{t("Email")}</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            placeholder={t("Enter your email")}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-offset-0 transition-colors placeholder-gray-400 bg-white"
-                            style={{ '--tw-ring-color': primaryColor, borderColor: 'rgb(209 213 219)' } as React.CSSProperties}
-                        />
+                        <Label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1">{t("Adresse e-mail")}</Label>
+                        <div className="relative">
+                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                ✉
+                            </span>
+                            <Input
+                                id="email"
+                                type="email"
+                                required
+                                autoFocus
+                                tabIndex={1}
+                                autoComplete="email"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                placeholder={t("company@example.com")}
+                                className="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
+                            />
+                        </div>
                         <InputError message={errors.email} />
                     </div>
 
                     <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                            <Label htmlFor="password" className="block text-sm font-medium text-gray-900">{t("Password")}</Label>
+                        <div className="flex items-center justify-between mb-1">
+                            <Label htmlFor="password" className="block text-xs font-semibold text-slate-700">{t("Mot de passe")}</Label>
                             {canResetPassword && (
                                 <TextLink
                                     href={route('password.request')}
-                                    className="text-sm font-medium hover:underline"
-                                    style={{ color: primaryColor }}
+                                    className="text-xs font-semibold text-[#00b87c] hover:underline"
                                     tabIndex={5}
                                 >
-                                    {t("Forgot password?")}
+                                    {t("Mot de passe oublié ?")}
                                 </TextLink>
                             )}
                         </div>
                         <div className="relative">
+                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                🔒
+                            </span>
                             <Input
                                 id="password"
                                 type={showPassword ? 'text' : 'password'}
@@ -156,32 +162,30 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                                 autoComplete="current-password"
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
-                                placeholder={t("Enter your password")}
-                                className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-offset-0 transition-colors placeholder-gray-400 bg-white"
-                                style={{ '--tw-ring-color': primaryColor, borderColor: 'rgb(209 213 219)' } as React.CSSProperties}
+                                placeholder={t("••••••••")}
+                                className="w-full pl-9 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
                             >
-                                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                             </button>
                         </div>
                         <InputError message={errors.password} />
                     </div>
 
-                    <div className="flex items-center !mt-4 !mb-5">
+                    <div className="flex items-center pt-1 pb-2">
                         <Checkbox
                             id="remember"
                             name="remember"
                             checked={data.remember}
                             onClick={() => setData('remember', !data.remember)}
                             tabIndex={3}
-                            className="w-[14px] h-[14px] border border-gray-300 rounded"
-                            style={{ '--tw-ring-color': primaryColor, color: primaryColor } as React.CSSProperties}
+                            className="w-4 h-4 border border-slate-300 rounded text-[#00b87c] focus:ring-[#00b87c]"
                         />
-                        <Label htmlFor="remember" className="ml-2 text-sm text-gray-600 font-normal">{t("Remember me")}</Label>
+                        <Label htmlFor="remember" className="ml-2 text-xs text-slate-600 font-medium cursor-pointer">{t("Se souvenir de moi")}</Label>
                     </div>
                 </div>
 
@@ -195,23 +199,24 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                     </div>
                 )}
 
-                <AuthButton
+                <button
+                    type="submit"
+                    disabled={processing}
                     tabIndex={4}
-                    processing={processing}
+                    className="w-full bg-[#00b87c] hover:bg-[#00a36d] text-white font-extrabold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all text-sm mt-2 disabled:opacity-50"
                 >
-                    {t("SIGN IN")}
-                </AuthButton>
+                    {processing ? t("Connexion en cours...") : t("Se connecter")}
+                </button>
 
-                <div className="text-center mt-5">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {t("Don't have an account?")}{' '}
+                <div className="text-center mt-5 pt-3 border-t border-slate-100">
+                    <p className="text-xs text-slate-500 font-medium">
+                        {t("Pas encore de compte ?")}{' '}
                         <TextLink
                             href={route('register')}
-                            className="font-medium hover:underline"
-                            style={{ color: primaryColor }}
+                            className="font-bold text-[#00b87c] hover:underline"
                             tabIndex={6}
                         >
-                            {t("Create one")}
+                            {t("Créer un compte gratuitement")}
                         </TextLink>
                     </p>
                 </div>

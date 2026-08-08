@@ -27,103 +27,116 @@ export default function AuthLayout({
     const { logoLight, logoDark, themeColor, customColor, favicon, themeMode } = useBrand();
     const { appearance } = useAppearance();
 
-    // Determine effective appearance
-    const isSystemDark = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = themeMode === 'dark' || (themeMode === 'system' && isSystemDark) || appearance === 'dark';
-
-    const currentLogo = isDark ? logoLight : logoDark;
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const currentLogo = logoDark || logoLight;
+    const primaryColor = themeColor === 'custom' ? customColor : (THEME_COLORS[themeColor as keyof typeof THEME_COLORS] || '#00b87c');
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-950 relative overflow-hidden transition-colors duration-300">
+        <div className="min-h-screen w-full bg-slate-50 flex flex-col lg:flex-row relative overflow-hidden font-sans">
             <Head>
                 <title>{title}</title>
                 {favicon && <link rel="icon" href={favicon} />}
             </Head>
 
-            {/* Enhanced Background Design */}
-            <div className="absolute inset-0 z-0">
-                {/* Base Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-gray-50 to-stone-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-300"></div>
+            {/* Left Column - Vibrant E-commerce Illustration Panel */}
+            <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#00b87c] via-[#00a870] to-[#059669] p-12 flex-col justify-between items-center relative overflow-hidden">
+                {/* Decorative background curves */}
+                <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
 
+                {/* Top Brand Logo on Left Panel */}
+                <div className="w-full flex justify-start z-10">
+                    <div className="bg-white/15 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
+                        {currentLogo ? (
+                            <img src={currentLogo} alt="Logo" className="h-7 w-auto object-contain brightness-200" />
+                        ) : (
+                            <span className="text-xl font-black text-white tracking-widest uppercase">MY STORE ASAP</span>
+                        )}
+                    </div>
+                </div>
 
+                {/* Center Image Illustration */}
+                <div className="my-auto z-10 w-full max-w-lg text-center p-4">
+                    <div className="relative transform hover:scale-[1.02] transition-transform duration-500 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 bg-slate-900">
+                        <img 
+                            src="/images/ecommerce-auth-bg.png" 
+                            alt="E-Commerce Hub Platform" 
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+                    <div className="mt-8 text-white space-y-2">
+                        <h2 className="text-2xl font-black tracking-tight">{t("Gérez votre E-Commerce en toute simplicité")}</h2>
+                        <p className="text-white/80 text-sm font-medium max-w-md mx-auto">
+                            {t("Boutiques en ligne, Tunnels de vente, Caisse POS et Paiements Mobile Money intégrés.")}
+                        </p>
+                    </div>
+                </div>
 
-                {/* Elegant Pattern Overlay */}
-                <div className="absolute inset-0 opacity-70" style={{
-                    backgroundImage: `radial-gradient(circle at 30% 70%, ${primaryColor} 1px, transparent 1px)`,
-                    backgroundSize: '80px 80px'
-                }}></div>
+                {/* Left Panel Footer */}
+                <div className="w-full text-center z-10 text-xs text-white/70 font-semibold">
+                    © 2026 My Store Asap. {t("Tous droits réservés.")}
+                </div>
             </div>
 
-            {/* Language Dropdown */}
-            <div className="absolute top-6 right-6 z-20 md:block hidden">
-                <LanguageSwitcher />
-            </div>
+            {/* Right Column - Auth Form Panel */}
+            <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-12 relative bg-[#f8fafc]">
+                
+                {/* Floating Top Right Language Switcher */}
+                <div className="flex justify-between items-center w-full z-20">
+                    <div className="lg:hidden">
+                        {currentLogo ? (
+                            <img src={currentLogo} alt="Logo" className="h-7 w-auto object-contain" />
+                        ) : (
+                            <span className="text-lg font-black text-[#00b87c] tracking-widest">MY STORE ASAP</span>
+                        )}
+                    </div>
+                    <div className="ml-auto bg-emerald-50/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
+                        <LanguageSwitcher />
+                    </div>
+                </div>
 
-            <div className="flex items-center justify-center min-h-screen p-6 relative z-10">
-                <div
-                    className={`w-full max-w-md transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                {/* Floating Center Card */}
+                <div className="my-auto max-w-md w-full mx-auto relative z-10 py-8">
+                    <div
+                        className={`bg-white rounded-2xl shadow-xl p-8 border border-slate-100 transition-all duration-500 ${
+                            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                         }`}
-                >
-                    {/* Logo */}
-                    <div className="text-center mb-8">
-                        <div className="relative inline-block px-6 rounded-xl">
-                            {currentLogo ? (
-                                <img src={currentLogo} alt="Logo" className="w-auto h-6 sm:h-7 mx-auto object-contain" />
-                            ) : (
-                                <h2 className="text-2xl font-bold" style={{ color: primaryColor }}>StoreGo</h2>
+                    >
+                        {/* Header Title & Subtitle */}
+                        <div className="text-center mb-6 space-y-2">
+                            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                {title || t("Connectez-vous à votre compte")}
+                            </h1>
+                            {description && (
+                                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                                    {description}
+                                </p>
                             )}
                         </div>
-                    </div>
 
-                    {/* Main Card */}
-                    <div className="relative">
-                        {/* Corner accents */}
-                        <div
-                            className="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 rounded-tl-md transition-colors duration-300"
-                            style={{ borderColor: primaryColor }}
-                        ></div>
-                        <div
-                            className="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 rounded-br-md transition-colors duration-300"
-                            style={{ borderColor: primaryColor }}
-                        ></div>
-
-                        <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg lg:p-8 p-4 lg:pt-5 shadow-sm">
-                            {/* Header */}
-                            <div className="text-center mb-6">
-                                <h1 className="md:text-2xl text-xl font-semibold text-gray-900 mb-1.5 tracking-wide">{title}</h1>
-
-                                <div className="w-12 h-px mx-auto mb-2.5" style={{ backgroundColor: primaryColor }}></div>
-
-                                {description && (
-                                    <p className="text-gray-600 text-sm">{description}</p>
-                                )}
-                            </div>
-
-                            {status && (
-                                <div className={`mb-5 text-center text-sm font-medium ${statusType === 'success'
+                        {/* Status Message */}
+                        {status && (
+                            <div className={`mb-5 text-center text-sm font-medium ${
+                                statusType === 'success'
                                     ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
                                     : 'text-rose-700 bg-rose-50 border-rose-200'
-                                    } p-3 rounded-md border`}>
-                                    {status}
-                                </div>
-                            )}
+                                } p-3 rounded-xl border`}
+                            >
+                                {status}
+                            </div>
+                        )}
 
-                            {/* Content */}
-                            {children}
-                        </div>
+                        {/* Form Content */}
+                        {children}
                     </div>
+                </div>
 
-                    {/* Footer */}
-                    <div className="text-center mt-6">
-                        <div className="inline-flex items-center space-x-2 bg-white dark:bg-slate-800/80 backdrop-blur-sm rounded-md px-4 py-2 border border-gray-200 dark:border-slate-700">
-                            <p className="text-sm text-gray-500 dark:text-gray-400">© 2026 My Store Asap. {t("Tous droits réservés.")}</p>
-                        </div>
-                    </div>
+                {/* Footer Copy */}
+                <div className="text-center text-xs text-slate-400 font-medium">
+                    © 2026 My Store Asap. {t("Tous droits réservés.")}
                 </div>
             </div>
         </div>

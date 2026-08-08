@@ -65,28 +65,29 @@ export default function Header({ settings, sectionData, customPages = [], brandC
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            {/* Logo */}
+            {/* Logo wrapped in white badge for high contrast */}
             <div className="flex-shrink-0">
               <Link 
                 href={route("home")} 
-                className="flex items-center gap-2 group"
+                className="flex items-center gap-2 group bg-white shadow-md border border-white/60 px-4 py-1.5 rounded-2xl transition-all group-hover:scale-105"
               >
                 {(() => {
-                  const { logoLight } = useBrand();
-                  const displayUrl = logoLight ? (
-                    logoLight.startsWith('http') ? logoLight : 
-                    logoLight.startsWith('/storage/') ? `${window.appSettings?.baseUrl || window.location.origin}${logoLight}` :
-                    logoLight.startsWith('/') ? `${window.appSettings?.baseUrl || window.location.origin}${logoLight}` : logoLight
+                  const { logoLight, logoDark } = useBrand();
+                  const currentLogo = logoDark || logoLight;
+                  const displayUrl = currentLogo ? (
+                    currentLogo.startsWith('http') ? currentLogo : 
+                    currentLogo.startsWith('/storage/') ? `${window.appSettings?.baseUrl || window.location.origin}${currentLogo}` :
+                    currentLogo.startsWith('/') ? `${window.appSettings?.baseUrl || window.location.origin}${currentLogo}` : currentLogo
                   ) : '';
                   
                   return displayUrl ? (
                     <img
                       src={displayUrl}
                       alt={settings.company_name}
-                      className="h-8 w-auto max-w-[180px] object-contain transition-transform group-hover:scale-105"
+                      className="h-7 w-auto max-w-[170px] object-contain"
                     />
                   ) : (
-                    <span className="text-2xl font-black text-white tracking-wider uppercase flex items-center gap-1.5">
+                    <span className="text-lg font-black text-[#00b87c] tracking-widest uppercase flex items-center gap-1.5">
                       <span>{settings.company_name || 'MY STORE ASAP'}</span>
                     </span>
                   );

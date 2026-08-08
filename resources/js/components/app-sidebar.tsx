@@ -282,7 +282,7 @@ export function AppSidebar() {
         // Shipping Management - Check plan feature access
         if (hasPermission(permissions, 'manage-shipping') && hasFeatureAccess('shipping_method')) {
             items.push({
-                title: t('Shipping Management'),
+                title: t("Zone d'expédition"),
                 href: route('shipping.index'),
                 icon: Truck,
             });
@@ -291,7 +291,7 @@ export function AppSidebar() {
         // Analytics & Reporting
         if (hasPermission(permissions, 'view-analytics') || hasPermission(permissions, 'manage-analytics')) {
             items.push({
-                title: t('Analytics & Reporting'),
+                title: t('Analytique & Rapports'),
                 href: route('analytics.index'),
                 icon: BarChart,
             });
@@ -300,7 +300,7 @@ export function AppSidebar() {
         // Blog System - Check plan feature access
         if (hasPermission(permissions, 'manage-blog') && hasFeatureAccess('blog')) {
             items.push({
-                title: t('Blog System'),
+                title: t('Articles & Blog'),
                 href: route('blog.index'),
                 icon: BookOpen,
             });
@@ -309,7 +309,7 @@ export function AppSidebar() {
         // POS System
         if (hasPermission(permissions, 'manage-pos')) {
             items.push({
-                title: t('POS System'),
+                title: t('Caisse & Point de vente (POS)'),
                 href: route('pos.index'),
                 icon: Smartphone,
             });
@@ -318,7 +318,7 @@ export function AppSidebar() {
         // Rating & Reviews
         if (hasPermission(permissions, 'manage-reviews')) {
             items.push({
-                title: t('Rating & Reviews'),
+                title: t('Avis & Notes'),
                 href: route('reviews.index'),
                 icon: Star,
             });
@@ -327,7 +327,7 @@ export function AppSidebar() {
         // Newsletter Subscribers
         if (hasPermission(permissions, 'manage-newsletter-subscribers')) {
             items.push({
-                title: t('Newsletter Subscribers'),
+                title: t('Abonnés Newsletter'),
                 href: route('newsletter-subscribers.index'),
                 icon: Megaphone,
             });
@@ -336,7 +336,7 @@ export function AppSidebar() {
         // Express Checkout
         if (hasPermission(permissions, 'view-express-checkout') || hasPermission(permissions, 'manage-express-checkout')) {
             items.push({
-                title: t('Express Checkout'),
+                title: t('Paiement express'),
                 href: route('express-checkout.index'),
                 icon: Zap,
             });
@@ -345,7 +345,7 @@ export function AppSidebar() {
         // Custom Pages - Check plan feature access
         if (hasPermission(permissions, 'manage-custom-pages') && hasFeatureAccess('custom_pages')) {
             items.push({
-                title: t('Custom Pages'),
+                title: t('Pages personnalisées'),
                 href: route('custom-pages.index'),
                 icon: FileType,
             });
@@ -356,13 +356,13 @@ export function AppSidebar() {
             const staffChildren = [];
             if (hasPermission(permissions, 'manage-users')) {
                 staffChildren.push({
-                    title: t('Users'),
+                    title: t('Utilisateurs'),
                     href: route('users.index')
                 });
             }
             if (hasPermission(permissions, 'manage-roles')) {
                 staffChildren.push({
-                    title: t('Roles'),
+                    title: t('Rôles & Permissions'),
                     href: route('roles.index')
                 });
             }

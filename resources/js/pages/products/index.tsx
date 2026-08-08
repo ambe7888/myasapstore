@@ -187,6 +187,44 @@ export default function Products() {
           </Card>
         </div>
 
+        {/* Bulk Action Toolbar - Positioned right after stats cards, above product catalog card */}
+        {selectedProducts.length > 0 && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-emerald-50/80 border border-emerald-200 rounded-xl text-center sm:text-left shadow-xs">
+            <span className="text-sm font-semibold text-emerald-950 w-full sm:w-auto">
+              {t('{{count}} produit(s) sélectionné(s)', { count: selectedProducts.length })}
+            </span>
+            
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 w-full sm:w-auto">
+              {hasPermission('edit-products') && (
+                <>
+                  <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1.5 bg-white border-emerald-300 hover:bg-emerald-100" onClick={() => handleBulkAction('activate')}>
+                    <Power className="h-3.5 w-3.5 text-emerald-600" />
+                    <span>{t('Activer')}</span>
+                  </Button>
+                  <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1.5 bg-white border-amber-300 hover:bg-amber-100" onClick={() => handleBulkAction('deactivate')}>
+                    <PowerOff className="h-3.5 w-3.5 text-amber-600" />
+                    <span>{t('Désactiver')}</span>
+                  </Button>
+                </>
+              )}
+              
+              {hasPermission('export-products') && (
+                <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1.5 bg-white border-gray-300" onClick={() => handleBulkAction('export')}>
+                  <Download className="h-3.5 w-3.5" />
+                  <span>{t('Exporter')}</span>
+                </Button>
+              )}
+              
+              {hasPermission('delete-products') && (
+                <Button variant="destructive" size="sm" className="h-8 text-xs flex items-center gap-1.5" onClick={() => handleBulkAction('delete')}>
+                  <Trash2 className="h-3.5 w-3.5" />
+                  <span>{t('Supprimer')}</span>
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Products List */}
         <Card>
           <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4">
@@ -309,44 +347,6 @@ export default function Products() {
                 ))
               )}
             </div>
-
-            {/* Bulk Action Toolbar - Positioned underneath cards and centered */}
-            {selectedProducts.length > 0 && (
-              <div className="flex flex-wrap items-center justify-center gap-2.5 p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mt-4 text-center shadow-xs">
-                <span className="text-xs font-semibold text-gray-700 w-full sm:w-auto">
-                  {t('{{count}} produit(s) sélectionné(s)', { count: selectedProducts.length })}
-                </span>
-                
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {hasPermission('edit-products') && (
-                    <>
-                      <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('activate')}>
-                        <Power className="h-3.5 w-3.5 text-emerald-600" />
-                        <span>{t('Activer')}</span>
-                      </Button>
-                      <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('deactivate')}>
-                        <PowerOff className="h-3.5 w-3.5 text-amber-600" />
-                        <span>{t('Désactiver')}</span>
-                      </Button>
-                    </>
-                  )}
-                  
-                  {hasPermission('export-products') && (
-                    <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('export')}>
-                      <Download className="h-3.5 w-3.5" />
-                      <span>{t('Exporter')}</span>
-                    </Button>
-                  )}
-                  
-                  {hasPermission('delete-products') && (
-                    <Button variant="destructive" size="sm" className="h-8 text-xs flex items-center gap-1" onClick={() => handleBulkAction('delete')}>
-                      <Trash2 className="h-3.5 w-3.5" />
-                      <span>{t('Supprimer')}</span>
-                    </Button>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Pagination Component */}
             {products?.links && (

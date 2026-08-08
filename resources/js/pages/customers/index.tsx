@@ -120,73 +120,71 @@ export default function Customers() {
           {/* Customers List */}
           <Card>
             <CardHeader>
-              <CardTitle>{t('Customer Directory')}</CardTitle>
+              <CardTitle>{t('Répertoire des clients')}</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {customers.length === 0 ? (
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                {(!customers || (Array.isArray(customers) ? customers.length === 0 : customers.data?.length === 0)) ? (
                   <div className="text-center py-12">
-                    <Users className="h-12 w-12 mx-auto text-muted-foreground opacity-50" />
-                    <h3 className="mt-4 text-lg font-medium">{t('No customers found')}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {t('Get started by adding your first customer.')}
+                    <Users className="h-12 w-12 mx-auto text-muted-foreground opacity-50 mb-3" />
+                    <h3 className="text-base font-medium">{t('Aucun client trouvé')}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {t('Commencez par ajouter votre premier client.')}
                     </p>
                     <Permission permission="create-customers">
                       <Button 
                         onClick={() => router.visit(route('customers.create'))} 
-                        className="mt-4"
+                        className="mt-4 text-xs"
                       >
-                        <Plus className="h-4 w-4 mr-2" />
-                        {t('Add Customer')}
+                        <Plus className="h-4 w-4 mr-1.5" />
+                        {t('Ajouter un client')}
                       </Button>
                     </Permission>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    {customers.map((customer) => (
-                      <div key={customer.id} className="flex items-center justify-between p-4 border rounded-lg">
-                        <div className="flex items-center space-x-4">
-                          <Avatar className="h-12 w-12">
+                  <div className="space-y-3">
+                    {(Array.isArray(customers) ? customers : (customers.data || [])).map((customer: any) => (
+                      <div key={customer.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-200 rounded-xl gap-4 bg-white hover:border-gray-300 transition-colors">
+                        <div className="flex items-center space-x-3 min-w-0 flex-1">
+                          <Avatar className="h-12 w-12 shrink-0 border border-gray-100">
                             <AvatarImage src={customer.avatar ? getImageUrl(customer.avatar) : ''} alt={customer.full_name} />
                             <AvatarFallback>{customer.initials}</AvatarFallback>
                           </Avatar>
-                          <div>
-                            <div className="flex items-center space-x-2">
-                              <h3 className="font-semibold">{customer.full_name}</h3>
-                              <Badge variant={customer.is_active ? 'default' : 'secondary'}>
-                                {customer.is_active ? t('Active') : t('Inactive')}
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="font-semibold text-gray-900 text-sm truncate">{customer.full_name}</h3>
+                              <Badge variant={customer.is_active ? 'default' : 'secondary'} className="text-[11px]">
+                                {customer.is_active ? t('Actif') : t('Inactif')}
                               </Badge>
                             </div>
-                            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                              <Mail className="h-3 w-3" />
-                              <span>{customer.email}</span>
+                            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mt-0.5">
+                              <span className="flex items-center gap-1"><Mail className="h-3 w-3" /> {customer.email}</span>
                               {customer.phone && (
-                                <>
-                                  <Phone className="h-3 w-3 ml-2" />
-                                  <span>{customer.phone}</span>
-                                </>
+                                <span className="flex items-center gap-1"><Phone className="h-3 w-3" /> {customer.phone}</span>
                               )}
                             </div>
-                            <div className="flex items-center space-x-4 mt-1">
-                              <span className="text-xs text-muted-foreground">{t('{{count}} orders', { count: customer.total_orders })}</span>
-                              <span className="text-xs text-muted-foreground">{t('{{amount}} spent', { amount: formatCurrency(customer.total_spent || 0) })}</span>
-                              <span className="text-xs text-muted-foreground">{t('Joined {{date}}', { date: new Date(customer.created_at).toLocaleDateString() })}</span>
+                            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-muted-foreground">
+                              <span>{t('Commandes :')} <strong className="text-gray-800">{customer.total_orders || 0}</strong></span>
+                              <span>•</span>
+                              <span>{t('Dépensé :')} <strong className="text-gray-800">{formatCurrency(customer.total_spent || 0)}</strong></span>
+                              <span>•</span>
+                              <span>{t('Inscrit le :')} {new Date(customer.created_at).toLocaleDateString()}</span>
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-1.5 shrink-0 justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                           <Permission permission="view-customers">
-                            <Button variant="ghost" size="sm" onClick={() => router.visit(route('customers.show', customer.id))}>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900" onClick={() => router.visit(route('customers.show', customer.id))} title={t('Voir')}>
                               <Eye className="h-4 w-4" />
                             </Button>
                           </Permission>
                           <Permission permission="edit-customers">
-                            <Button variant="ghost" size="sm" onClick={() => router.visit(route('customers.edit', customer.id))}>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900" onClick={() => router.visit(route('customers.edit', customer.id))} title={t('Modifier')}>
                               <Edit className="h-4 w-4" />
                             </Button>
                           </Permission>
                           <Permission permission="delete-customers">
-                            <Button variant="ghost" size="sm" onClick={() => handleDelete(customer)}>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50" onClick={() => handleDelete(customer)} title={t('Supprimer')}>
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </Permission>

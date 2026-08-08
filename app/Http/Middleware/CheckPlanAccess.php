@@ -33,6 +33,15 @@ class CheckPlanAccess
 
         // Check if user needs plan subscription
         if ($user->needsPlanSubscription()) {
+            $defaultPlan = Plan::where('is_free', 1)->first() ?? Plan::first();
+            if ($defaultPlan) {
+                $user->update([
+                    'plan_id' => $defaultPlan->id,
+                    'plan_is_active' => 1,
+                ]);
+                return $next($request);
+            }
+
             $message = __('Please subscribe to a plan to continue.');
             
             if ($user->isTrialExpired()) {

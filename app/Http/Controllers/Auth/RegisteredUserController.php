@@ -67,6 +67,9 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Assign default plan if available
+        $defaultPlan = Plan::where('is_free', 1)->first() ?? Plan::first();
+        
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
@@ -77,7 +80,10 @@ class RegisteredUserController extends Controller
             'is_active' => 1,
             'is_enable_login' => 1,
             'created_by' => 0,
-            'plan_is_active' => 0,
+            'plan_id' => $defaultPlan ? $defaultPlan->id : null,
+            'plan_is_active' => 1,
+            'is_trial' => ($defaultPlan && isset($defaultPlan->trial_days) && $defaultPlan->trial_days > 0) ? 1 : 0,
+            'trial_expire_date' => ($defaultPlan && isset($defaultPlan->trial_days) && $defaultPlan->trial_days > 0) ? now()->addDays($defaultPlan->trial_days) : null,
         ];
         
         // Handle referral code
@@ -92,6 +98,23 @@ class RegisteredUserController extends Controller
         }
         
         $user = User::create($userData);
+
+        // Create initial store for the seller
+        $storeSlug = \Illuminate\Support\Str::slug($request->store_name);
+        if (Store::where('slug', $storeSlug)->exists()) {
+            $storeSlug = $storeSlug . '-' . rand(100, 999);
+        }
+        
+        $store = Store::create([
+            'name' => $request->store_name,
+            'slug' => $storeSlug,
+            'email' => $request->email,
+            'created_by' => $user->id,
+            'theme' => 'fashion',
+            'is_active' => 1,
+        ]);
+        
+        $user->update(['current_store' => $store->id]);
 
         // Assign role and settings to the user
         defaultRoleAndSetting($user);

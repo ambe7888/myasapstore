@@ -58,9 +58,9 @@ export default function Header({ settings, sectionData, customPages = [], brandC
         style={{ backgroundColor: primaryColor }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            {/* Logo wrapped in white badge for high contrast */}
-            <div className="flex-shrink-0">
+          <div className="flex items-center justify-between lg:justify-between relative">
+            {/* Logo - Centered on Mobile */}
+            <div className="flex-1 lg:flex-initial flex justify-center lg:justify-start">
               <Link 
                 href={route("home")} 
                 className="flex items-center gap-2 group bg-white shadow-md border border-white/60 px-4 py-1.5 rounded-2xl transition-all group-hover:scale-105"
@@ -129,35 +129,36 @@ export default function Header({ settings, sectionData, customPages = [], brandC
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden">
+            {/* Mobile Menu Button - Positioned Right */}
+            <div className="lg:hidden absolute right-0">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                aria-label="Toggle Menu"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Navigation Dropdown */}
+          {/* Mobile Navigation Dropdown - Centered items and buttons */}
           {isMenuOpen && (
-            <div className="lg:hidden pt-4 pb-3 border-t border-white/20 mt-3 space-y-2">
+            <div className="lg:hidden pt-4 pb-3 border-t border-white/20 mt-3 space-y-3 text-center">
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block text-white hover:bg-white/10 px-3 py-2 rounded-md text-base font-medium transition-colors"
+                  className="block text-white hover:bg-white/10 px-3 py-2 rounded-md text-base font-bold transition-colors text-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-3 border-t border-white/20 flex flex-col gap-2">
+              <div className="pt-3 border-t border-white/20 flex flex-col items-center gap-2 max-w-xs mx-auto">
                 {user ? (
                   <Link
                     href={route('dashboard')}
-                    className="w-full text-center py-2.5 rounded-full text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-[#00b87c] transition-all"
+                    className="w-full text-center py-2.5 rounded-full text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-[#00b87c] transition-all shadow-sm"
                   >
                     {t("Tableau de bord")}
                   </Link>
@@ -165,13 +166,13 @@ export default function Header({ settings, sectionData, customPages = [], brandC
                   <>
                     <Link
                       href={route('login')}
-                      className="w-full text-center py-2 text-sm font-bold text-white border border-white/70 rounded-full hover:bg-white hover:text-[#00b87c] transition-all"
+                      className="w-full text-center py-2.5 text-sm font-bold text-white border border-white/70 rounded-full hover:bg-white hover:text-[#00b87c] transition-all"
                     >
                       {t("Connexion")}
                     </Link>
                     <Link
                       href={route('register')}
-                      className="w-full text-center py-2.5 text-sm font-bold text-white border-2 border-white rounded-full hover:bg-white hover:text-[#00b87c] transition-all"
+                      className="w-full text-center py-2.5 text-sm font-bold text-white border-2 border-white rounded-full hover:bg-white hover:text-[#00b87c] transition-all shadow-sm"
                     >
                       {t("Inscription")}
                     </Link>

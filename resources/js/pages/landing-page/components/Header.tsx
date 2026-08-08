@@ -107,26 +107,23 @@ export default function Header({ settings, sectionData, customPages = [], brandC
               {user ? (
                 <Link
                   href={route('dashboard')}
-                  className="px-5 py-2 rounded-full text-sm font-bold text-white border-2 border-white/80 hover:border-white hover:bg-white hover:text-[#00b87c] transition-all flex items-center gap-2 shadow-sm"
+                  className="px-5 py-2 rounded-full text-sm font-bold text-white border-2 border-white/80 hover:border-white hover:bg-white hover:text-[#00b87c] transition-all shadow-sm"
                 >
-                  <span>{t("Tableau de bord")}</span>
-                  <span className="text-xs">➔</span>
+                  {t("Tableau de bord")}
                 </Link>
               ) : (
                 <>
                   <Link
                     href={route('login')}
-                    className="px-4 py-2 rounded-full text-sm font-bold text-white border border-white/70 hover:border-white hover:bg-white hover:text-[#00b87c] transition-all flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-full text-sm font-bold text-white border border-white/70 hover:border-white hover:bg-white hover:text-[#00b87c] transition-all"
                   >
-                    <span>{t("Connexion")}</span>
-                    <span className="text-xs">➔</span>
+                    {t("Connexion")}
                   </Link>
                   <Link
                     href={route('register')}
-                    className="px-5 py-2 rounded-full text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-[#00b87c] transition-all flex items-center gap-1.5 shadow-sm"
+                    className="px-5 py-2 rounded-full text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-[#00b87c] transition-all shadow-sm"
                   >
-                    <span>{t("Inscription")}</span>
-                    <span className="text-xs">👤</span>
+                    {t("Inscription")}
                   </Link>
                 </>
               )}

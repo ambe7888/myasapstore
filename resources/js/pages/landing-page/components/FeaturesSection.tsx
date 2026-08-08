@@ -54,22 +54,25 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
   const sectionImage = getImageUrl(sectionData.image);
   const backgroundColor = sectionData.background_color || '#f9fafb';
   const columns = sectionData.columns || 3;
-  // Default features if none provided
+  // Default features with generated 3D vector illustrations
   const defaultFeatures = [
     {
-      icon: 'bar-chart',
-      title: 'Analytics & Insights',
-      description: 'Track views, clicks, and engagement metrics. Understand how your network interacts with your card.'
-    },
-    {
+      image: '/images/discover-1.png',
       icon: 'globe',
-      title: 'Custom Domains',
-      description: 'Use your own domain for a professional branded experience. Build trust with custom URLs.'
+      title: t('Boutiques En Ligne & Tunnels de Vente'),
+      description: t("Créez des boutiques en ligne captivantes et des tunnels de vente haute conversion pour maximiser vos commandes en quelques clics.")
     },
     {
-      icon: 'shield',
-      title: 'Secure & Private',
-      description: 'Enterprise-grade security with privacy controls. Your data is protected and under your control.'
+      image: '/images/discover-2.png',
+      icon: 'smartphone',
+      title: t('Caisse POS & Mobile Money Intégré'),
+      description: t("Encaissez vos clients facilement en ligne et en magasin via Wave, Orange Money, MTN, Moov, cartes bancaires et paiement à la livraison.")
+    },
+    {
+      image: '/images/discover-3.png',
+      icon: 'zap',
+      title: t('Commandes WhatsApp & Suivi Livraison'),
+      description: t("Recevez automatiquement vos commandes sur WhatsApp et gérez vos zones d'expédition et livreurs avec un suivi en temps réel.")
     }
   ];
 
@@ -78,14 +81,17 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
     : defaultFeatures;
 
   return (
-    <section id="features" className="py-12 sm:py-16 lg:py-20" style={{ backgroundColor }} ref={ref}>
+    <section id="features" className="py-12 sm:py-16 lg:py-20 bg-slate-50/80" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData.title || 'Powerful Features for Modern Networking'}
+        <div className={`text-center mb-10 sm:mb-14 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3.5 py-1 rounded-full text-xs font-black text-[#00b87c] tracking-widest uppercase mb-3">
+            <span>DÉCOUVRIR MY STORE ASAP</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            {sectionData.title || t('Découvrez les Fonctionnalités Clés de votre Plateforme')}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            {sectionData.description || 'Everything you need to create, share, and manage your digital business presence. Built for professionals who value efficiency and innovation.'}
+          <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
+            {sectionData.description || t('Tout ce dont vous avez besoin pour lancer, développer et automatiser vos ventes e-commerce rapidement et sans compétences techniques.')}
           </p>
         </div>
 
@@ -95,34 +101,38 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
           </div>
         )}
         
-        <div className={`grid grid-cols-1 ${columns >= 2 ? 'sm:grid-cols-2' : ''} ${columns >= 3 ? 'lg:grid-cols-3' : ''} ${columns >= 4 ? 'xl:grid-cols-4' : ''} gap-6 sm:gap-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {features.map((feature, index) => {
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {features.map((feature: any, index: number) => {
             const IconComponent = iconMap[feature.icon] || QrCode;
+            const cardImage = feature.image || (index === 0 ? '/images/discover-1.png' : index === 1 ? '/images/discover-2.png' : '/images/discover-3.png');
+
             return (
               <div
                 key={index}
-                className="bg-white p-8 rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200"
-                role="article"
-                aria-labelledby={`feature-${index}-title`}
+                className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
               >
-                <div 
-                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-6" 
-                  style={{ backgroundColor: `${index % 3 === 0 ? primaryColor : index % 3 === 1 ? secondaryColor : accentColor}15` }} 
-                  role="img" 
-                  aria-label={`${feature.title} icon`}
-                >
-                  <IconComponent 
-                    className="w-6 h-6" 
-                    style={{ color: index % 3 === 0 ? primaryColor : index % 3 === 1 ? secondaryColor : accentColor }} 
-                    aria-hidden="true" 
-                  />
+                <div>
+                  {/* Card Illustration */}
+                  <div className="mb-6 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm aspect-video relative group-hover:scale-[1.03] transition-transform duration-500">
+                    <img 
+                      src={cardImage} 
+                      alt={feature.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-3 tracking-tight group-hover:text-[#00b87c] transition-colors">
+                    {t(feature.title)}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                    {t(feature.description)}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4" id={`feature-${index}-title`}>
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
+
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#00b87c]">
+                  <span>{t("En savoir plus")}</span>
+                  <span>→</span>
+                </div>
               </div>
             );
           })}

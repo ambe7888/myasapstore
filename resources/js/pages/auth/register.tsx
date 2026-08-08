@@ -59,7 +59,7 @@ const COUNTRY_CODES = [
   { code: '+966', name: 'Arabie Saoudite (+966)', flag: '🇸🇦' },
 ];
 
-export default function Register({ referralCode, planId }: { referralCode?: string; planId?: string }) {
+export default function Register({ referralCode, planId, plans = [] }: { referralCode?: string; planId?: string; plans?: any[] }) {
     const { t } = useTranslation();
     const [recaptchaToken, setRecaptchaToken] = useState<string>('');
     const [showPassword, setShowPassword] = useState(false);
@@ -242,6 +242,25 @@ export default function Register({ referralCode, planId }: { referralCode?: stri
                         </div>
                         <InputError message={errors.password_confirmation} />
                     </div>
+
+                    {plans && plans.length > 0 && (
+                        <div>
+                            <Label htmlFor="plan_id" className="block text-xs font-semibold text-slate-700 mb-1">{t("Choisir un Plan d'abonnement")}</Label>
+                            <select
+                                id="plan_id"
+                                value={data.plan_id || (plans[0]?.id ? String(plans[0].id) : '')}
+                                onChange={(e) => setData('plan_id', e.target.value)}
+                                className="w-full px-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] bg-slate-50 focus:bg-white text-slate-900 font-bold cursor-pointer"
+                            >
+                                {plans.map((p: any) => (
+                                    <option key={p.id} value={p.id}>
+                                        {p.name} — {p.price === 0 ? t('Gratuit / Essai') : `${p.price} / ${p.duration === 'year' ? t('an') : t('mois')}`} {p.trial_days > 0 ? `(${p.trial_days} ${t('jours d\'essai offerts')})` : ''}
+                                    </option>
+                                ))}
+                            </select>
+                            <InputError message={errors.plan_id} />
+                        </div>
+                    )}
 
                     <div className="flex items-start pt-1 pb-1">
                         <Checkbox

@@ -25,15 +25,19 @@ class RegisteredUserController extends Controller
     public function create(Request $request): Response
     {
         $referralCode = $request->get('ref');
-        $encryptedPlanId = $request->get('plan');
+        $planParam = $request->get('plan') ?? $request->get('plan_id');
         $planId = null;
         $referrer = null;
         
         // Decrypt and validate plan ID
-        if ($encryptedPlanId) {
-            $planId = $this->decryptPlanId($encryptedPlanId);
+        if ($planParam) {
+            if (is_numeric($planParam)) {
+                $planId = (int)$planParam;
+            } else {
+                $planId = $this->decryptPlanId($planParam);
+            }
             if ($planId && !Plan::find($planId)) {
-                $planId = null; // Invalid plan ID
+                $planId = null;
             }
         }
         
@@ -42,10 +46,23 @@ class RegisteredUserController extends Controller
                 ->where('type', 'company')
                 ->first();
         }
+
+        $plans = Plan::all()->map(function($p) {
+            return [
+                'id' => $p->id,
+                'name' => $p->name,
+                'price' => (float)$p->price,
+                'duration' => $p->duration,
+                'description' => $p->description,
+                'is_free' => $p->is_free,
+                'trial_days' => $p->trial_days,
+            ];
+        });
         
         return Inertia::render('auth/register', [
             'referralCode' => $referralCode,
             'planId' => $planId,
+            'plans' => $plans,
             'referrer' => $referrer ? $referrer->name : null,
             'settings' => settings(),
         ]);
@@ -67,8 +84,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Assign default plan if available
-        $defaultPlan = Plan::where('is_free', 1)->first() ?? Plan::first();
+        // Selected plan or default plan
+        $selectedPlanId = $request->plan_id;
+        $selectedPlan = $selectedPlanId ? Plan::find($selectedPlanId) : null;
+        $chosenPlan = $selectedPlan ?? Plan::where('is_free', 1)->first() ?? Plan::first();
         
         $userData = [
             'name' => $request->name,
@@ -80,10 +99,10 @@ class RegisteredUserController extends Controller
             'is_active' => 1,
             'is_enable_login' => 1,
             'created_by' => 0,
-            'plan_id' => $defaultPlan ? $defaultPlan->id : null,
+            'plan_id' => $chosenPlan ? $chosenPlan->id : null,
             'plan_is_active' => 1,
-            'is_trial' => ($defaultPlan && isset($defaultPlan->trial_days) && $defaultPlan->trial_days > 0) ? 1 : 0,
-            'trial_expire_date' => ($defaultPlan && isset($defaultPlan->trial_days) && $defaultPlan->trial_days > 0) ? now()->addDays($defaultPlan->trial_days) : null,
+            'is_trial' => ($chosenPlan && isset($chosenPlan->trial_days) && $chosenPlan->trial_days > 0) ? 1 : 0,
+            'trial_expire_date' => ($chosenPlan && isset($chosenPlan->trial_days) && $chosenPlan->trial_days > 0) ? now()->addDays($chosenPlan->trial_days) : null,
         ];
         
         // Handle referral code
@@ -129,18 +148,16 @@ class RegisteredUserController extends Controller
         // Check if email verification is enabled
         $emailVerificationEnabled = getSetting('emailVerification', false);
         if ($emailVerificationEnabled) {
-            // Configure mail settings before sending verification email
             $this->configureMailSettings();
-            // Send verification email manually to avoid duplicate emails
             $user->sendEmailVerificationNotification();
             return redirect()->route('verification.notice');
         }
 
-        // Redirect to plans page with selected plan
-        $planId = $request->plan_id;
-        if ($planId) {
-            return redirect()->route('plans.index', ['selected' => $planId]);
+        // If paid plan chosen, redirect to plans subscription/checkout page
+        if ($chosenPlan && (float)$chosenPlan->price > 0) {
+            return redirect()->route('plans.index', ['selected' => $chosenPlan->id]);
         }
+
         return to_route('dashboard');
     }
     

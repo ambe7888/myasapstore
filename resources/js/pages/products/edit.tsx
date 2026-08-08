@@ -105,13 +105,13 @@ export default function EditProduct() {
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('products.index'))
     },
     {
-      label: t('Update Product'),
+      label: t('Mettre à jour'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: handleSubmit
@@ -120,24 +120,25 @@ export default function EditProduct() {
 
   return (
     <PageTemplate 
-      title={t('Edit Product')}
+      title={t('Modifier le produit')}
+      description={t('Modifiez les informations, le prix, le stock et les variantes du produit')}
       url="/products/edit"
       actions={pageActions}
       breadcrumbs={[
-        { title: 'Dashboard', href: route('dashboard') },
-        { title: 'Products', href: route('products.index') },
-        { title: 'Edit Product' }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Produits'), href: route('products.index') },
+        { title: t('Modifier le produit') }
       ]}
     >
       <div className="space-y-6">
-        <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="general">{t('General')}</TabsTrigger>
-            <TabsTrigger value="pricing">{t('Pricing')}</TabsTrigger>
-            <TabsTrigger value="inventory">{t('Inventory')}</TabsTrigger>
-            <TabsTrigger value="content">{t('Content')}</TabsTrigger>
-            <TabsTrigger value="variants">{t('Variants')}</TabsTrigger>
-            <TabsTrigger value="advanced">{t('Advanced')}</TabsTrigger>
+        <Tabs defaultValue="general" className="w-full space-y-6">
+          <TabsList className="flex w-full overflow-x-auto justify-start gap-1 p-1 bg-muted rounded-lg scrollbar-none h-auto">
+            <TabsTrigger value="general" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Informations générales')}</TabsTrigger>
+            <TabsTrigger value="pricing" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Prix & Tarification')}</TabsTrigger>
+            <TabsTrigger value="inventory" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Inventaire & Stock')}</TabsTrigger>
+            <TabsTrigger value="content" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Description & Médias')}</TabsTrigger>
+            <TabsTrigger value="variants" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Variantes')}</TabsTrigger>
+            <TabsTrigger value="advanced" className="shrink-0 text-xs sm:text-sm px-3 py-2 whitespace-nowrap">{t('Options avancées')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="general" className="space-y-4">

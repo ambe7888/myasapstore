@@ -84,6 +84,8 @@ export default function Products() {
     });
   };
 
+  const visibleProducts = Array.isArray(products) ? products : (products?.data || []);
+
   const toggleSelection = (id: number) => {
     setSelectedProducts(prev => 
       prev.includes(id) ? prev.filter(pId => pId !== id) : [...prev, id]
@@ -91,79 +93,38 @@ export default function Products() {
   };
 
   const toggleAll = () => {
-    if (selectedProducts.length === products.length && products.length > 0) {
+    if (selectedProducts.length === visibleProducts.length && visibleProducts.length > 0) {
       setSelectedProducts([]);
     } else {
-      setSelectedProducts(products.map((p: any) => p.id));
+      setSelectedProducts(visibleProducts.map((p: any) => p.id));
     }
   };
 
   const pageActions = [];
   
-  if (selectedProducts.length > 0) {
+  if (hasPermission('export-products')) {
     pageActions.push({
-      label: t('{{count}} Selected', { count: selectedProducts.length }),
-      variant: 'ghost' as const,
-      onClick: () => {}
+      label: t('Exporter tout'),
+      icon: <Download className="h-4 w-4" />,
+      variant: 'outline' as const,
+      onClick: () => window.open(route('products.export'), '_blank')
+    });
+  }
+  
+  if (hasPermission('create-products')) {
+    pageActions.push({
+      label: t('Importer'),
+      icon: <Upload className="h-4 w-4" />,
+      variant: 'outline' as const,
+      onClick: () => setIsImportModalOpen(true)
     });
     
-    if (hasPermission('edit-products')) {
-      pageActions.push({
-        label: t('Activate'),
-        icon: <Power className="h-4 w-4" />,
-        variant: 'outline' as const,
-        onClick: () => handleBulkAction('activate')
-      });
-      pageActions.push({
-        label: t('Deactivate'),
-        icon: <PowerOff className="h-4 w-4" />,
-        variant: 'outline' as const,
-        onClick: () => handleBulkAction('deactivate')
-      });
-    }
-    
-    if (hasPermission('export-products')) {
-      pageActions.push({
-        label: t('Export'),
-        icon: <Download className="h-4 w-4" />,
-        variant: 'outline' as const,
-        onClick: () => handleBulkAction('export')
-      });
-    }
-    
-    if (hasPermission('delete-products')) {
-      pageActions.push({
-        label: t('Delete'),
-        icon: <Trash2 className="h-4 w-4" />,
-        variant: 'destructive' as const,
-        onClick: () => handleBulkAction('delete')
-      });
-    }
-  } else {
-    if (hasPermission('export-products')) {
-      pageActions.push({
-        label: t('Export All'),
-        icon: <Download className="h-4 w-4" />,
-        variant: 'outline' as const,
-        onClick: () => window.open(route('products.export'), '_blank')
-      });
-    }
-    
-    if (hasPermission('create-products')) {
-      pageActions.push({
-        label: t('Import'),
-        icon: <Upload className="h-4 w-4" />,
-        variant: 'outline' as const,
-        onClick: () => setIsImportModalOpen(true)
-      });
-      
-      pageActions.push({
-        label: t('Create Product'),
-        icon: <Plus className="h-4 w-4" />,
-        variant: 'default' as const,
-        onClick: () => router.visit(route('products.create'))
-      });
-    }
+    pageActions.push({
+      label: t('Créer un produit'),
+      icon: <Plus className="h-4 w-4" />,
+      variant: 'default' as const,
+      onClick: () => router.visit(route('products.create'))
+    });
   }
 
   return (
@@ -348,6 +309,44 @@ export default function Products() {
                 ))
               )}
             </div>
+
+            {/* Bulk Action Toolbar - Positioned underneath cards and centered */}
+            {selectedProducts.length > 0 && (
+              <div className="flex flex-wrap items-center justify-center gap-2.5 p-3.5 bg-gray-50/90 border border-gray-200 rounded-xl mt-4 text-center shadow-xs">
+                <span className="text-xs font-semibold text-gray-700 w-full sm:w-auto">
+                  {t('{{count}} produit(s) sélectionné(s)', { count: selectedProducts.length })}
+                </span>
+                
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {hasPermission('edit-products') && (
+                    <>
+                      <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('activate')}>
+                        <Power className="h-3.5 w-3.5 text-emerald-600" />
+                        <span>{t('Activer')}</span>
+                      </Button>
+                      <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('deactivate')}>
+                        <PowerOff className="h-3.5 w-3.5 text-amber-600" />
+                        <span>{t('Désactiver')}</span>
+                      </Button>
+                    </>
+                  )}
+                  
+                  {hasPermission('export-products') && (
+                    <Button variant="outline" size="sm" className="h-8 text-xs flex items-center gap-1 bg-white border-gray-200" onClick={() => handleBulkAction('export')}>
+                      <Download className="h-3.5 w-3.5" />
+                      <span>{t('Exporter')}</span>
+                    </Button>
+                  )}
+                  
+                  {hasPermission('delete-products') && (
+                    <Button variant="destructive" size="sm" className="h-8 text-xs flex items-center gap-1" onClick={() => handleBulkAction('delete')}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                      <span>{t('Supprimer')}</span>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Pagination Component */}
             {products?.links && (

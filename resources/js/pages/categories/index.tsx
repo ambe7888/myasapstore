@@ -43,7 +43,7 @@ export default function Categories() {
   
   if (hasPermission('export-categories')) {
     pageActions.push({
-      label: t('Export'),
+      label: t('Exporter'),
       icon: <Download className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => window.open(route('categories.export'), '_blank')
@@ -52,14 +52,14 @@ export default function Categories() {
   
   if (hasPermission('create-categories')) {
     pageActions.push({
-      label: t('Import'),
+      label: t('Importer'),
       icon: <Upload className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => setIsImportModalOpen(true)
     });
     
     pageActions.push({
-      label: t('Create Category'),
+      label: t('Créer une catégorie'),
       icon: <Plus className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('categories.create'))
@@ -68,12 +68,13 @@ export default function Categories() {
 
   return (
     <PageTemplate 
-      title={t('Categories')}
+      title={t('Catégories de produits')}
+      description={t('Organisez et structurez vos produits par catégories et sous-catégories')}
       url="/categories"
       actions={pageActions}
       breadcrumbs={[
-        { title: 'Dashboard', href: route('dashboard') },
-        { title: 'Categories' }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Catégories') }
       ]}
     >
       <div className="space-y-4">
@@ -81,47 +82,47 @@ export default function Categories() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Total Categories')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Total catégories')}</CardTitle>
               <Folder className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.total}</div>
-              <p className="text-xs text-muted-foreground">{t('All categories')}</p>
+              <p className="text-xs text-muted-foreground">{t('Toutes les catégories')}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Active Categories')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Catégories actives')}</CardTitle>
               <Folder className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.active}</div>
               <p className="text-xs text-muted-foreground">
-                {t('{{percent}}% active rate', { percent: stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0 })}
+                {t('{{percent}}% de taux d\'activité', { percent: stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0 })}
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Parent Categories')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Catégories mères')}</CardTitle>
               <Folder className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.parent}</div>
-              <p className="text-xs text-muted-foreground">{t('Main categories')}</p>
+              <p className="text-xs text-muted-foreground">{t('Catégories principales')}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Sub Categories')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Sous-catégories')}</CardTitle>
               <Folder className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.sub}</div>
-              <p className="text-xs text-muted-foreground">{t('Child categories')}</p>
+              <p className="text-xs text-muted-foreground">{t('Catégories filles')}</p>
             </CardContent>
           </Card>
         </div>
@@ -129,22 +130,22 @@ export default function Categories() {
         {/* Categories List */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('Product Categories')}</CardTitle>
+            <CardTitle>{t('Liste des catégories')}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
               {categories.length === 0 ? (
                 <div className="text-center py-8">
-                  <Folder className="h-12 w-12 mx-auto text-muted-foreground opacity-50" />
-                  <p className="mt-2 text-muted-foreground">{t('No categories found')}</p>
+                  <Folder className="h-12 w-12 mx-auto text-muted-foreground opacity-50 mb-3" />
+                  <p className="text-muted-foreground text-sm">{t('Aucune catégorie trouvée')}</p>
                   <Permission permission="create-categories">
                     <Button 
                       variant="outline" 
-                      className="mt-4" 
+                      className="mt-4 text-xs" 
                       onClick={() => router.visit(route('categories.create'))}
                     >
-                      <Plus className="h-4 w-4 mr-2" />
-                      {t('Create your first category')}
+                      <Plus className="h-4 w-4 mr-1.5" />
+                      {t('Créer votre première catégorie')}
                     </Button>
                   </Permission>
                 </div>
@@ -152,13 +153,13 @@ export default function Categories() {
                 categories.map((category: any) => (
                   <div 
                     key={category.id} 
-                    className={`flex items-center justify-between p-4 border rounded-lg transition-all ${
-                      category.depth > 0 ? 'bg-slate-50/50 border-l-4 border-l-primary/40' : ''
+                    className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-200 rounded-xl gap-4 bg-white hover:border-gray-300 transition-colors ${
+                      category.depth > 0 ? 'bg-slate-50/50 border-l-4 border-l-primary/60' : ''
                     }`}
-                    style={{ marginLeft: `${(category.depth || 0) * 1.5}rem` }}
+                    style={{ marginLeft: `${Math.min((category.depth || 0) * 1, 3)}rem` }}
                   >
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden border">
+                    <div className="flex items-center space-x-3 min-w-0 flex-1">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden border border-gray-100 shrink-0 bg-gray-50 flex items-center justify-center">
                         {category.image ? (
                           <img
                             src={getImageUrl(category.image)}
@@ -166,37 +167,38 @@ export default function Categories() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-primary/10 flex items-center justify-center">
-                            <Folder className="h-6 w-6 text-primary" />
-                          </div>
+                          <Folder className="h-6 w-6 text-gray-400" />
                         )}
                       </div>
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold">{category.name}</h3>
-                          <Badge variant={category.is_active ? 'default' : 'secondary'}>
-                            {category.is_active ? t('Active') : t('Inactive')}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-semibold text-gray-900 text-sm truncate">{category.name}</h3>
+                          <Badge variant={category.is_active ? 'default' : 'secondary'} className="text-[11px]">
+                            {category.is_active ? t('Actif') : t('Inactif')}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">/{category.slug}</p>
-                        <div className="flex items-center space-x-4 mt-1">
-                          <span className="text-xs text-muted-foreground">
-                            {t('{{count}} products', { count: category.products_count || 0 })}
+                        <p className="text-xs text-muted-foreground font-mono mt-0.5">/{category.slug}</p>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-muted-foreground">
+                          <span className="font-medium text-gray-700">
+                            {t('{{count}} produit(s)', { count: category.products_count || 0 })}
                           </span>
                           {category.parent && (
-                            <span className="text-xs text-muted-foreground">
-                              {t('Parent: {{name}}', { name: category.parent.name })}
-                            </span>
+                            <>
+                              <span>•</span>
+                              <span>{t('Parent :')} <strong className="text-gray-700">{category.parent.name}</strong></span>
+                            </>
                           )}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center gap-1.5 shrink-0 justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                       <Permission permission="view-categories">
                         <Button 
                           variant="ghost" 
                           size="sm" 
+                          className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900"
                           onClick={() => router.visit(route('categories.show', category.id))}
+                          title={t('Voir')}
                         >
                           <Eye className="h-4 w-4" />
                         </Button>
@@ -205,7 +207,9 @@ export default function Categories() {
                         <Button 
                           variant="ghost" 
                           size="sm" 
+                          className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900"
                           onClick={() => router.visit(route('categories.edit', category.id))}
+                          title={t('Modifier')}
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -214,7 +218,9 @@ export default function Categories() {
                         <Button 
                           variant="ghost" 
                           size="sm" 
+                          className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
                           onClick={() => setCategoryToDelete(category.id)}
+                          title={t('Supprimer')}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>

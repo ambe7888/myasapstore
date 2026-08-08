@@ -58,6 +58,11 @@ use App\Http\Controllers\PaymentWallPaymentController;
 use App\Http\Controllers\SSPayPaymentController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\StoreContentController;
+use App\Http\Controllers\SeoController;
+
+// SEO Routes (Dynamic Sitemap & Robots.txt)
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('seo.sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('seo.robots');
 
 
 use Illuminate\Support\Facades\Route;

@@ -39,7 +39,70 @@
             }
         </style>
 
-        <title inertia>{{ getSetting('titleText', config('app.name', 'StoreGo')) }}</title>
+        @php
+            $resolvedStore = request()->attributes->get('resolved_store');
+            if (!$resolvedStore) {
+                $storeSlug = request()->route('storeSlug') ?? null;
+                if ($storeSlug) {
+                    $resolvedStore = \App\Models\Store::where('slug', $storeSlug)->first();
+                }
+            }
+            
+            $appName = config('app.name', 'My Store Asap');
+            $pageTitle = $resolvedStore ? ($resolvedStore->name . ' - ' . ($resolvedStore->tagline ?? 'Boutique en ligne')) : getSetting('titleText', $appName);
+            $seoDesc = $resolvedStore ? ($resolvedStore->seo_description ?? $resolvedStore->description ?? 'Bienvenue sur notre boutique en ligne. Découvrez notre sélection de produits de qualité et commandez facilement.') : getSetting('seo_description', 'Plateforme e-commerce tout-en-un pour créer votre boutique en ligne, vos tunnels de vente et gérer votre caisse rapidement.');
+            $seoKeywords = $resolvedStore ? ($resolvedStore->name . ', boutique en ligne, e-commerce, achat en ligne, produits') : getSetting('seo_keywords', 'e-commerce, boutique en ligne, tunnel de vente, caisse pos, vente en ligne, My Store Asap');
+            $canonicalUrl = $resolvedStore ? ($resolvedStore->enable_custom_domain && $resolvedStore->custom_domain ? 'https://' . $resolvedStore->custom_domain : url($resolvedStore->slug)) : url()->current();
+            $ogImage = $resolvedStore && $resolvedStore->logo ? asset('storage/' . $resolvedStore->logo) : asset('images/og-image.png');
+            $storeName = $resolvedStore ? $resolvedStore->name : $appName;
+        @endphp
+
+        <title inertia>{{ $pageTitle }}</title>
+        <meta name="description" content="{{ $seoDesc }}">
+        <meta name="keywords" content="{{ $seoKeywords }}">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <link rel="canonical" href="{{ $canonicalUrl }}" />
+
+        <!-- Open Graph / Facebook / WhatsApp -->
+        <meta property="og:type" content="{{ $resolvedStore ? 'website' : 'website' }}" />
+        <meta property="og:site_name" content="{{ $storeName }}" />
+        <meta property="og:title" content="{{ $pageTitle }}" />
+        <meta property="og:description" content="{{ $seoDesc }}" />
+        <meta property="og:url" content="{{ $canonicalUrl }}" />
+        <meta property="og:image" content="{{ $ogImage }}" />
+        <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="{{ $pageTitle }}" />
+        <meta name="twitter:description" content="{{ $seoDesc }}" />
+        <meta name="twitter:image" content="{{ $ogImage }}" />
+
+        <!-- Structured Data / Schema.org JSON-LD -->
+        @if($resolvedStore)
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "OnlineStore",
+          "name": "{{ $resolvedStore->name }}",
+          "url": "{{ $canonicalUrl }}",
+          "description": "{{ $seoDesc }}",
+          "logo": "{{ $ogImage }}"
+        }
+        </script>
+        @else
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "My Store Asap",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "url": "{{ url('/') }}",
+          "description": "{{ $seoDesc }}"
+        }
+        </script>
+        @endif
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -52,14 +115,7 @@
 
         {{-- Inject store custom head HTML --}}
         @php
-            $resolvedStore = request()->attributes->get('resolved_store');
-            if (!$resolvedStore) {
-                $storeSlug = request()->route('storeSlug') ?? null;
-                if ($storeSlug) {
-                    $resolvedStore = \App\Models\Store::where('slug', $storeSlug)->first();
-                }
-            }
-            if ($resolvedStore) {
+            if (isset($resolvedStore) && $resolvedStore) {
                 $storeConfig = \App\Models\StoreConfiguration::getConfiguration($resolvedStore->id);
                 $customHeadCode = $storeConfig['custom_head_code'] ?? '';
             }

@@ -284,7 +284,7 @@ export default function Footer({ settings, sectionData = {}, brandColor = '#3b82
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
             {/* Copyright */}
             <div className="text-gray-400 text-sm">
-              © {currentYear} {settings.company_name}. {t("All rights reserved.")}
+              © 2026 My Store Asap. {t("Tous droits réservés.")}
             </div>
 
             {/* Social Links */}

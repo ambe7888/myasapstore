@@ -51,7 +51,7 @@ export function PageTemplate({
             {description && <p className="text-xs text-muted-foreground mt-0.5">{description}</p>}
           </div>
           {actions && actions.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <div className="flex flex-wrap items-center justify-end gap-2 shrink-0 self-end sm:self-auto">
               {actions.map((action, index) => (
                 <Button 
                   key={index}

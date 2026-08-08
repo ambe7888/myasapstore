@@ -153,10 +153,66 @@ export function RolePermissionCheckboxGroup({
     return selectedCount > 0 && selectedCount < modulePermissionIds.length;
   };
   
+  const getModuleTitle = (module: string) => {
+    const map: Record<string, string> = {
+      products: 'Gestion des Produits',
+      categories: 'Catégories de Produits',
+      orders: 'Commandes & Ventes',
+      customers: 'Clients',
+      stores: 'Boutiques',
+      shipping: 'Zone d\'expédition',
+      roles: 'Rôles & Permissions',
+      users: 'Utilisateurs & Équipe',
+      coupons: 'Système de Coupons',
+      blog: 'Articles & Blog',
+      reviews: 'Avis & Notes',
+      analytics: 'Analytique & Rapports',
+      settings: 'Paramètres généraux',
+      pos: 'Caisse Point de Vente (POS)',
+      funnels: 'Tunnels de Vente',
+      'email-templates': 'Modèles d\'e-mails',
+      'notification-templates': 'Modèles de notifications',
+    };
+    return t(map[module.toLowerCase()] || module);
+  };
+
+  const getPermissionLabel = (permission: Permission) => {
+    const raw = permission.label || permission.name;
+    if (!raw) return '';
+    const s = raw.toLowerCase();
+    
+    // Direct matches
+    if (s.includes('manage-products') || s.includes('manage_products')) return t('Gérer les produits');
+    if (s.includes('view-products') || s.includes('view_products')) return t('Consulter les produits');
+    if (s.includes('create-products') || s.includes('create_products')) return t('Créer des produits');
+    if (s.includes('edit-products') || s.includes('edit_products')) return t('Modifier des produits');
+    if (s.includes('delete-products') || s.includes('delete_products')) return t('Supprimer des produits');
+    if (s.includes('export-products') || s.includes('export_products')) return t('Exporter les produits');
+    
+    if (s.includes('manage-orders') || s.includes('manage_orders')) return t('Gérer les commandes');
+    if (s.includes('view-orders') || s.includes('view_orders')) return t('Consulter les commandes');
+    if (s.includes('edit-orders') || s.includes('edit_orders')) return t('Modifier les commandes');
+
+    if (s.includes('manage-customers') || s.includes('manage_customers')) return t('Gérer les clients');
+    if (s.includes('manage-shipping') || s.includes('manage_shipping')) return t('Gérer la zone d\'expédition');
+    if (s.includes('manage-roles') || s.includes('manage_roles')) return t('Gérer les rôles & permissions');
+    if (s.includes('manage-users') || s.includes('manage_users')) return t('Gérer les utilisateurs');
+    if (s.includes('manage-stores') || s.includes('manage_stores')) return t('Gérer les boutiques');
+
+    // General pattern matching
+    if (s.startsWith('manage-')) return t('Gérer {{item}}', { item: s.replace('manage-', '') });
+    if (s.startsWith('view-')) return t('Voir {{item}}', { item: s.replace('view-', '') });
+    if (s.startsWith('create-')) return t('Créer {{item}}', { item: s.replace('create-', '') });
+    if (s.startsWith('edit-')) return t('Modifier {{item}}', { item: s.replace('edit-', '') });
+    if (s.startsWith('delete-')) return t('Supprimer {{item}}', { item: s.replace('delete-', '') });
+
+    return t(raw);
+  };
+
   return (
     <div className="space-y-6">
       {/* Select All Checkbox */}
-      <div className="border rounded shadow-sm p-3 bg-gray-50">
+      <div className="border rounded-xl shadow-xs p-3.5 bg-gray-50/80">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <IndeterminateCheckbox
@@ -164,22 +220,22 @@ export function RolePermissionCheckboxGroup({
               checked={isAllSelected}
               onCheckedChange={(checked) => handleSelectAll(checked === true)}
             />
-            <Label htmlFor="select-all-permissions-checkbox" className="font-medium">
-              {t("Select All Permissions")}
+            <Label htmlFor="select-all-permissions-checkbox" className="font-semibold text-gray-900 text-sm">
+              {t("Tout sélectionner")}
             </Label>
           </div>
-          <div className="text-xs text-gray-500">
-            {selected.length} {t("of")} {getAllPermissionIds().length} {t("selected")}
+          <div className="text-xs text-gray-500 font-medium">
+            {selected.length} {t("sur")} {getAllPermissionIds().length} {t("sélectionné(s)")}
           </div>
         </div>
       </div>
       
       {/* Module Permissions */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {Object.entries(filteredPermissions).map(([module, modulePermissions]) => (
-          <div key={module} className="border rounded shadow-sm">
+          <div key={module} className="border border-gray-200 rounded-xl shadow-xs overflow-hidden bg-white">
             {/* Module Header */}
-            <div className="flex items-center justify-between p-3 bg-gray-50 border-b">
+            <div className="flex items-center justify-between p-3.5 bg-gray-50/90 border-b border-gray-200">
               <div className="flex items-center space-x-2">
                 <IndeterminateCheckbox
                   id={`module-checkbox-${module.replace(/\s+/g, '-').toLowerCase()}`}
@@ -187,20 +243,20 @@ export function RolePermissionCheckboxGroup({
                   indeterminate={isModuleIndeterminate(module)}
                   onCheckedChange={(checked) => handleModuleChange(module, checked === true)}
                 />
-                <Label htmlFor={`module-checkbox-${module.replace(/\s+/g, '-').toLowerCase()}`} className="font-medium">
-                  {module}
+                <Label htmlFor={`module-checkbox-${module.replace(/\s+/g, '-').toLowerCase()}`} className="font-semibold text-gray-900 text-sm">
+                  {getModuleTitle(module)}
                 </Label>
               </div>
               <div className="text-xs text-gray-500">
-                {modulePermissions.filter(p => selected.includes(p.id.toString())).length} of {modulePermissions.length} {t("selected")}
+                {modulePermissions.filter(p => selected.includes(p.id.toString())).length} {t("sur")} {modulePermissions.length} {t("sélectionné(s)")}
               </div>
             </div>
             
             {/* Individual Permissions */}
-            <div className="p-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="p-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
                 {modulePermissions.map((permission) => (
-                  <div key={permission.id} className="flex items-center space-x-2">
+                  <div key={permission.id} className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50">
                     <Checkbox
                       id={`permission-checkbox-${permission.id.toString().replace(/\s+/g, '-').toLowerCase()}`}
                       checked={selected.includes(permission.id.toString()) || selected.includes(permission.name)}
@@ -208,8 +264,8 @@ export function RolePermissionCheckboxGroup({
                         handlePermissionChange(permission.id.toString(), checked === true)
                       }
                     />
-                    <Label htmlFor={`permission-checkbox-${permission.id.toString().replace(/\s+/g, '-').toLowerCase()}`} className="text-sm truncate">
-                      {permission.label}
+                    <Label htmlFor={`permission-checkbox-${permission.id.toString().replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium text-gray-700 truncate cursor-pointer">
+                      {getPermissionLabel(permission)}
                     </Label>
                   </div>
                 ))}

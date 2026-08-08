@@ -54,12 +54,59 @@ interface OrderShowProps {
 
 export default function ShowOrder({ order }: OrderShowProps) {
   const { t } = useTranslation();
-
   const { hasPermission } = usePermissions();
+
+  const getStatusLabel = (status: string) => {
+    if (!status) return t('Non spécifié');
+    const s = status.toLowerCase();
+    const map: Record<string, string> = {
+      pending: 'En attente',
+      processing: 'En cours',
+      shipped: 'Expédié',
+      delivered: 'Livré',
+      completed: 'Terminé',
+      cancelled: 'Annulé',
+      paid: 'Payé',
+      unpaid: 'Non payé',
+      refunded: 'Remboursé',
+      order_placed: 'Commande passée',
+      order_processing: 'En cours de traitement',
+      order_shipped: 'Commande expédiée',
+      order_delivered: 'Commande livrée',
+      order_cancelled: 'Commande annulée',
+    };
+    return t(map[s] || status);
+  };
+
+  const getPaymentMethodName = (method: string) => {
+    if (!method) return t('Paiement en ligne');
+    const m = method.toLowerCase();
+    if (m.includes('cash') || m.includes('cod')) return t('Paiement à la livraison');
+    if (m.includes('bank') || m.includes('transfer')) return t('Virement bancaire');
+    const map: Record<string, string> = {
+      cash_on_delivery: 'Paiement à la livraison',
+      bank_transfer: 'Virement bancaire',
+      stripe: 'Stripe',
+      paypal: 'PayPal',
+      razorpay: 'Razorpay',
+      paystack: 'Paystack',
+      flutterwave: 'Flutterwave',
+    };
+    return t(map[m] || method);
+  };
+
+  const getShippingMethodName = (method: string) => {
+    if (!method) return t('Standard');
+    const m = method.toLowerCase();
+    if (m.includes('flat')) return t('Tarif fixe');
+    if (m.includes('free')) return t('Livraison gratuite');
+    if (m.includes('pickup')) return t('Retrait en magasin');
+    return t(method);
+  };
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('orders.index'))
@@ -68,7 +115,7 @@ export default function ShowOrder({ order }: OrderShowProps) {
   
   if (hasPermission('edit-orders')) {
     pageActions.push({
-      label: t('Edit Order'),
+      label: t('Modifier la commande'),
       icon: <Edit className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('orders.edit', order.id))
@@ -77,13 +124,14 @@ export default function ShowOrder({ order }: OrderShowProps) {
 
   return (
     <PageTemplate 
-      title={t('Order Details')}
+      title={t('Détails de la commande')}
+      description={t('Consultez les articles, l\'adresse de livraison et l\'historique du statut')}
       url="/orders/show"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Order Management'), href: route('orders.index') },
-        { title: t('Order Details') }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Commandes'), href: route('orders.index') },
+        { title: t('Détails de la commande') }
       ]}
     >
       <div className="space-y-6">
@@ -91,27 +139,33 @@ export default function ShowOrder({ order }: OrderShowProps) {
           <Card className="md:col-span-2">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>{t('Order {{number}}', { number: order.orderNumber })}</CardTitle>
-                <Badge variant={order.status.toLowerCase() === 'completed' ? 'default' : 'secondary'}>{order.status}</Badge>
+                <CardTitle>{t('Commande N° {{number}}', { number: order.orderNumber })}</CardTitle>
+                <Badge variant={['completed', 'delivered', 'paid'].includes(order.status.toLowerCase()) ? 'default' : 'secondary'}>
+                  {getStatusLabel(order.status)}
+                </Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('Order Date')}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t('Date de commande')}</p>
                   <p>{order.date}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('Payment Method')}</p>
-                  <p>{order.paymentMethod}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t('Moyen de paiement')}</p>
+                  <p className="font-semibold text-gray-800">{getPaymentMethodName(order.paymentMethod)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('Payment Status')}</p>
-                  <Badge variant={order.paymentStatus.toLowerCase() === 'paid' ? 'default' : 'secondary'}>{order.paymentStatus}</Badge>
+                  <p className="text-sm font-medium text-muted-foreground">{t('Statut du paiement')}</p>
+                  <Badge variant={order.paymentStatus.toLowerCase() === 'paid' ? 'default' : 'secondary'}>
+                    {getStatusLabel(order.paymentStatus)}
+                  </Badge>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('Fulfillment Status')}</p>
-                  <Badge variant={order.status.toLowerCase() === 'delivered' ? 'default' : 'secondary'}>{order.status}</Badge>
+                  <p className="text-sm font-medium text-muted-foreground">{t('Statut de livraison')}</p>
+                  <Badge variant={order.status.toLowerCase() === 'delivered' ? 'default' : 'secondary'}>
+                    {getStatusLabel(order.status)}
+                  </Badge>
                 </div>
               </div>
             </CardContent>
@@ -119,30 +173,30 @@ export default function ShowOrder({ order }: OrderShowProps) {
 
           <Card>
             <CardHeader>
-              <CardTitle>{t('Order Summary')}</CardTitle>
+              <CardTitle>{t('Récapitulatif de la commande')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-sm">{t('Subtotal')}</span>
+                <span className="text-sm">{t('Sous-total')}</span>
                 <span>{formatCurrency(order.summary.subtotal)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm">{t('Shipping')}</span>
+                <span className="text-sm">{t('Frais de livraison')}</span>
                 <span>{formatCurrency(order.summary.shipping)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm">{t('Tax')}</span>
+                <span className="text-sm">{t('Taxes / TVA')}</span>
                 <span>{formatCurrency(order.summary.tax)}</span>
               </div>
               {order.summary.discount > 0 && (
                 <div className="flex justify-between text-green-600">
-                  <span className="text-sm">{t('Discount')}</span>
+                  <span className="text-sm">{t('Réduction')}</span>
                   <span>-{formatCurrency(order.summary.discount)}</span>
                 </div>
               )}
               <Separator />
               <div className="flex justify-between font-semibold">
-                <span>{t('Total')}</span>
+                <span>{t('Total général')}</span>
                 <span>{formatCurrency(order.summary.total)}</span>
               </div>
             </CardContent>
@@ -154,7 +208,7 @@ export default function ShowOrder({ order }: OrderShowProps) {
             <CardHeader>
               <div className="flex items-center space-x-2">
                 <User className="h-5 w-5" />
-                <CardTitle>{t('Customer Information')}</CardTitle>
+                <CardTitle>{t('Informations du client')}</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -172,7 +226,7 @@ export default function ShowOrder({ order }: OrderShowProps) {
             <CardHeader>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5" />
-                <CardTitle>{t('Shipping Address')}</CardTitle>
+                <CardTitle>{t('Adresse de livraison')}</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -190,33 +244,35 @@ export default function ShowOrder({ order }: OrderShowProps) {
           <CardHeader>
             <div className="flex items-center space-x-2">
               <Package className="h-5 w-5" />
-              <CardTitle>{t('Order Items')}</CardTitle>
+              <CardTitle>{t('Articles de la commande')}</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {order.items.map((item) => (
-                <div key={item.id} className="flex items-center space-x-4 p-4 border rounded-lg">
-                  <div className="w-16 h-16 rounded-lg overflow-hidden border">
-                    <img
-                      src={getImageUrl(item.image)}
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/placeholder.jpg';
-                      }}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
+                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-xl gap-4 bg-white">
+                  <div className="flex items-center space-x-3 min-w-0 flex-1">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden border shrink-0 bg-gray-50 flex items-center justify-center">
+                      <img
+                        src={getImageUrl(item.image)}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder.jpg';
+                        }}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-medium text-sm text-gray-900">{item.name}</h4>
+                      <p className="text-xs text-muted-foreground">{t('Réf (SKU) : {{sku}}', { sku: item.sku || 'N/A' })}</p>
+                      <p className="text-xs text-muted-foreground">{t('Quantité : {{quantity}}', { quantity: item.quantity })}</p>
+                      <ItemVariants variants={(item as any).variants || (item as any).product_variants} className="mt-1 text-xs" />
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-sm text-muted-foreground">{t('SKU: {{sku}}', { sku: item.sku })}</p>
-                    <p className="text-sm text-muted-foreground">{t('Quantity: {{quantity}}', { quantity: item.quantity })}</p>
-                    <ItemVariants variants={(item as any).variants || (item as any).product_variants} className="mt-2 text-xs" />
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatCurrency(item.price)}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {t('{{total}} total', { total: formatCurrency(item.price * item.quantity) })}
+                  <div className="text-right shrink-0">
+                    <p className="font-medium text-sm text-gray-900">{formatCurrency(item.price)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {t('Total : {{total}}', { total: formatCurrency(item.price * item.quantity) })}
                     </p>
                   </div>
                 </div>
@@ -229,45 +285,47 @@ export default function ShowOrder({ order }: OrderShowProps) {
           <CardHeader>
             <div className="flex items-center space-x-2">
               <Truck className="h-5 w-5" />
-              <CardTitle>{t('Shipping Information')}</CardTitle>
+              <CardTitle>{t('Informations d\'expédition')}</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-sm font-medium text-muted-foreground">{t('Shipping Method')}</span>
-              <span>{order.shippingMethod}</span>
+              <span className="text-sm font-medium text-muted-foreground">{t('Mode d\'expédition')}</span>
+              <span className="font-semibold text-gray-800">{getShippingMethodName(order.shippingMethod)}</span>
             </div>
             {order.trackingNumber && (
               <div className="flex justify-between">
-                <span className="text-sm font-medium text-muted-foreground">{t('Tracking Number')}</span>
+                <span className="text-sm font-medium text-muted-foreground">{t('Numéro de suivi')}</span>
                 <span className="font-mono">{order.trackingNumber}</span>
               </div>
             )}
             <div className="flex justify-between">
-              <span className="text-sm font-medium text-muted-foreground">{t('Shipping Status')}</span>
-              <Badge variant={order.status.toLowerCase() === 'delivered' ? 'default' : 'secondary'}>{order.status}</Badge>
+              <span className="text-sm font-medium text-muted-foreground">{t('Statut d\'expédition')}</span>
+              <Badge variant={['delivered', 'shipped'].includes(order.status.toLowerCase()) ? 'default' : 'secondary'}>
+                {getStatusLabel(order.status)}
+              </Badge>
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>{t('Order Timeline')}</CardTitle>
+            <CardTitle>{t('Historique des étapes de la commande')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {order.timeline?.map((timeline, index) => (
+              {(order as any).timeline?.map((timeline: any, index: number) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <div className={`w-3 h-3 rounded-full ${timeline.completed ? 'bg-green-500' : 'bg-gray-300'}`} />
+                  <div className={`w-3 h-3 rounded-full ${timeline.completed ? 'bg-emerald-500' : 'bg-gray-300'}`} />
                   <div className="flex-1">
-                    <p className="font-medium">{t(timeline.status)}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {timeline.date || t('Pending')}
+                    <p className="font-medium text-sm text-gray-900">{getStatusLabel(timeline.status)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {timeline.date || t('En attente')}
                     </p>
                   </div>
                 </div>
               )) || (
-                <p className="text-muted-foreground">{t('No timeline data available')}</p>
+                <p className="text-sm text-muted-foreground">{t('Aucun historique disponible')}</p>
               )}
             </div>
           </CardContent>

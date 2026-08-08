@@ -656,9 +656,9 @@ class LandingPageSeeder extends Seeder
             [
                 'title' => 'Politique de Remboursement',
                 'slug' => 'refund-policy',
-                'content' => "Nous accordons une grande importance à votre satisfaction. Voici les conditions d'éligibilité et la procédure de remboursement sur <b>My Store Asap</b>.<br><br><b>Garantie Satisfait ou Remboursé de 14 jours :</b> Si notre service ne répond pas à vos attentes lors des 14 premiers jours suivant votre souscription, vous pouvez demander le remboursement intégral de votre abonnement.<br><br><b>Modalités :</b> Contactez notre équipe support par e-mail avec vos identifiants pour enregistrer votre demande. Les remboursements sont traités sous 3 à 5 jours ouvrés sur le moyen de paiement d'origine.",
+                'content' => "Veuillez lire attentivement la présente politique de remboursement de <b>My Store Asap</b>.<br><br><b>Absence de Remboursement après Activation :</b> Une fois votre compte activé et l'accès à la plateforme et à vos boutiques mis à votre disposition, <b>aucun remboursement ne pourra être accordé</b>.<br><br><b>Paiements Fermes et Définitifs :</b> Toutes les souscriptions d'abonnement, les renouvellements ainsi que l'achat d'options complémentaires sont fermes et non remboursables. Vous pouvez néanmoins résilier votre abonnement à tout moment pour interrompre le renouvellement automatique à l'échéance de la période en cours.",
                 'meta_title' => 'Politique de Remboursement - My Store Asap',
-                'meta_description' => 'Découvrez les modalités et la garantie de remboursement applicables aux abonnements My Store Asap.',
+                'meta_description' => 'Consultez la politique de non-remboursement après activation de compte sur My Store Asap.',
                 'is_active' => true,
                 'sort_order' => 6
             ]

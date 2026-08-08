@@ -79,30 +79,31 @@
         <meta name="twitter:image" content="{{ $ogImage }}" />
 
         <!-- Structured Data / Schema.org JSON-LD -->
-        @if($resolvedStore)
+        @php
+            if ($resolvedStore) {
+                $schemaData = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'OnlineStore',
+                    'name' => $resolvedStore->name,
+                    'url' => $canonicalUrl,
+                    'description' => $seoDesc,
+                    'logo' => $ogImage,
+                ];
+            } else {
+                $schemaData = [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'SoftwareApplication',
+                    'name' => 'My Store Asap',
+                    'applicationCategory' => 'BusinessApplication',
+                    'operatingSystem' => 'All',
+                    'url' => url('/'),
+                    'description' => $seoDesc,
+                ];
+            }
+        @endphp
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "OnlineStore",
-          "name": "{{ $resolvedStore->name }}",
-          "url": "{{ $canonicalUrl }}",
-          "description": "{{ $seoDesc }}",
-          "logo": "{{ $ogImage }}"
-        }
+        {!! json_encode($schemaData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
-        @else
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "My Store Asap",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "All",
-          "url": "{{ url('/') }}",
-          "description": "{{ $seoDesc }}"
-        }
-        </script>
-        @endif
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />

@@ -50,7 +50,6 @@ export default function Header({ settings, sectionData, customPages = [], brandC
     <div className="w-full fixed top-0 left-0 right-0 z-50">
       {/* Top Announcement Bar */}
       <div className="bg-slate-900 text-white text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2 border-b border-slate-800">
-        <span className="bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Promo</span>
         <span>{announcementText}</span>
       </div>
 

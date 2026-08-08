@@ -47,15 +47,15 @@ export default function AuthLayout({
                 <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                {/* Top Brand Logo on Left Panel */}
+                {/* Top Brand Logo on Left Panel (Clickable to Landing Page) */}
                 <div className="w-full flex justify-start z-10">
-                    <div className="bg-white/15 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
+                    <Link href={route('home')} className="bg-white/15 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 hover:bg-white/25 transition-all">
                         {currentLogo ? (
                             <img src={currentLogo} alt="Logo" className="h-7 w-auto object-contain brightness-200" />
                         ) : (
                             <span className="text-xl font-black text-white tracking-widest uppercase">MY STORE ASAP</span>
                         )}
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Center Image Illustration */}
@@ -87,11 +87,13 @@ export default function AuthLayout({
                 {/* Floating Top Right Language Switcher */}
                 <div className="flex justify-between items-center w-full z-20">
                     <div className="lg:hidden">
-                        {currentLogo ? (
-                            <img src={currentLogo} alt="Logo" className="h-7 w-auto object-contain" />
-                        ) : (
-                            <span className="text-lg font-black text-[#00b87c] tracking-widest">MY STORE ASAP</span>
-                        )}
+                        <Link href={route('home')} className="inline-block">
+                            {currentLogo ? (
+                                <img src={currentLogo} alt="Logo" className="h-7 w-auto object-contain" />
+                            ) : (
+                                <span className="text-lg font-black text-[#00b87c] tracking-widest uppercase">MY STORE ASAP</span>
+                            )}
+                        </Link>
                     </div>
                     <div className="ml-auto bg-emerald-50/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm">
                         <LanguageSwitcher />

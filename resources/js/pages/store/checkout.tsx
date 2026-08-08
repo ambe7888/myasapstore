@@ -1303,8 +1303,8 @@ export default function Checkout({
                                 />
                               </div>
                               <label htmlFor="payment-cod" className="ml-3 flex flex-col cursor-pointer">
-                                <span className="block text-sm font-medium text-gray-900">Cash on Delivery</span>
-                                <span className="block text-sm text-gray-500">Pay when your order is delivered</span>
+                                <span className="block text-sm font-medium text-gray-900">{t('Paiement à la livraison')}</span>
+                                <span className="block text-sm text-gray-500">{t('Payez au moment de la livraison de votre commande')}</span>
                               </label>
                             </div>
                           )}
@@ -1323,8 +1323,8 @@ export default function Checkout({
                                 />
                               </div>
                               <label htmlFor="payment-whatsapp" className="ml-3 flex flex-col cursor-pointer">
-                                <span className="block text-sm font-medium text-gray-900">WhatsApp</span>
-                                <span className="block text-sm text-gray-500">Complete payment via WhatsApp</span>
+                                <span className="block text-sm font-medium text-gray-900">{t('Commande par WhatsApp')}</span>
+                                <span className="block text-sm text-gray-500">{t('Finalisez votre commande directement sur WhatsApp')}</span>
                               </label>
                             </div>
                           )}
@@ -1586,11 +1586,11 @@ export default function Checkout({
                         <div className="bg-gray-50 rounded-md p-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm font-medium text-gray-500">Moyen de paiement</p>
+                              <p className="text-sm font-medium text-gray-500">{t("Moyen de paiement")}</p>
                               <p className="text-sm text-gray-900 mt-1">
-                                {paymentMethod === 'cod' && 'Cash on Delivery'}
-                                {paymentMethod === 'whatsapp' && `WhatsApp Payment (${whatsappNumber})`}
-                                {paymentMethod === 'telegram' && 'Telegram Payment'}
+                                {paymentMethod === 'cod' && t('Paiement à la livraison')}
+                                {paymentMethod === 'whatsapp' && `${t('Paiement par WhatsApp')} (${whatsappNumber})`}
+                                {paymentMethod === 'telegram' && t('Paiement par Telegram')}
                               </p>
                             </div>
                             <div>

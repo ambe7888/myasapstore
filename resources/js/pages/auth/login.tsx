@@ -117,23 +117,18 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                 <div className="space-y-4">
                     <div>
                         <Label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1">{t("Adresse e-mail")}</Label>
-                        <div className="relative">
-                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                ✉
-                            </span>
-                            <Input
-                                id="email"
-                                type="email"
-                                required
-                                autoFocus
-                                tabIndex={1}
-                                autoComplete="email"
-                                value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
-                                placeholder={t("company@example.com")}
-                                className="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
-                            />
-                        </div>
+                        <Input
+                            id="email"
+                            type="email"
+                            required
+                            autoFocus
+                            tabIndex={1}
+                            autoComplete="email"
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
+                            placeholder={t("company@example.com")}
+                            className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
+                        />
                         <InputError message={errors.email} />
                     </div>
 
@@ -151,9 +146,6 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                             )}
                         </div>
                         <div className="relative">
-                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                🔒
-                            </span>
                             <Input
                                 id="password"
                                 type={showPassword ? 'text' : 'password'}
@@ -163,7 +155,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                                 placeholder={t("••••••••")}
-                                className="w-full pl-9 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
+                                className="w-full pl-3.5 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
                             />
                             <button
                                 type="button"

@@ -51,15 +51,14 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <AuthLayout
-            title={t("Forgot password")}
-            description={t("Enter your email to receive a password reset link")}
-            icon={<Mail className="h-6 w-6" />}
+            title={t("Mot de passe oublié ?")}
+            description={t("Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.")}
             status={status}
         >
-            <form className="mt-6" onSubmit={submit}>
-                <div className="space-y-5">
+            <form className="mt-4" onSubmit={submit}>
+                <div className="space-y-4">
                     <div>
-                        <Label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1.5">{t("Email address")}</Label>
+                        <Label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1">{t("Adresse e-mail")}</Label>
                         <Input
                             id="email"
                             type="email"
@@ -69,9 +68,8 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder={t("Enter your email")}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-offset-0 transition-colors placeholder-gray-400 bg-white"
-                            style={{ '--tw-ring-color': primaryColor, borderColor: 'rgb(209 213 219)' } as React.CSSProperties}
+                            placeholder={t("vendeur@example.com")}
+                            className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00b87c] transition-all placeholder-slate-400 bg-slate-50 focus:bg-white text-slate-900"
                         />
                         <InputError message={errors.email} />
                     </div>
@@ -87,24 +85,24 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </div>
                 )}
 
-                <AuthButton
+                <button
+                    type="submit"
+                    disabled={processing}
                     tabIndex={2}
-                    processing={processing}
-                    className="mt-2"
+                    className="w-full bg-[#00b87c] hover:bg-[#00a36d] text-white font-extrabold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all text-sm mt-4 disabled:opacity-50"
                 >
-                    {t("Email password reset link")}
-                </AuthButton>
+                    {processing ? t("Envoi en cours...") : t("Envoyer le lien de réinitialisation")}
+                </button>
 
-                <div className="text-center mt-5">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {t("Remember your password?")}{' '}
+                <div className="text-center mt-5 pt-3 border-t border-slate-100">
+                    <p className="text-xs text-slate-500 font-medium">
+                        {t("Vous vous souvenez de votre mot de passe ?")}{' '}
                         <TextLink
                             href={route('login')}
-                            className="font-medium hover:underline"
-                            style={{ color: primaryColor }}
+                            className="font-bold text-[#00b87c] hover:underline"
                             tabIndex={3}
                         >
-                            {t("Back to login")}
+                            {t("Retour à la connexion")}
                         </TextLink>
                     </p>
                 </div>

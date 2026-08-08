@@ -93,138 +93,14 @@ export default function HeroSection({ settings, sectionData, brandColor = '#00b8
 
           {/* Right Column - Dashboard Mockup Preview */}
           <div className="lg:col-span-6 relative">
-            {heroImage && sectionData.image && !imageError ? (
-              <div className="relative transform lg:rotate-1 hover:rotate-0 transition-transform duration-500 shadow-2xl rounded-2xl overflow-hidden border-4 border-white/30 bg-white">
-                <img 
-                  src={heroImage} 
-                  alt="Dashboard Preview" 
-                  className="w-full h-auto object-cover"
-                  onError={() => setImageError(true)}
-                />
-              </div>
-            ) : (
-              /* High-Fidelity Interactive Dashboard Mockup Preview */
-              <div className="relative transform lg:rotate-1 hover:rotate-0 transition-all duration-500 shadow-2xl rounded-2xl overflow-hidden border-4 border-white/40 bg-white text-slate-800 font-sans">
-                
-                {/* Mockup Top Header Bar */}
-                <div className="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="font-extrabold text-sm text-[#00b87c] tracking-wider uppercase">MY STORE ASAP</span>
-                    <span className="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">Hi, Admin 👋</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="bg-[#00b87c] text-white px-2 py-0.5 rounded font-bold">+ Quick Add</span>
-                    <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded border">GreenStore ▾</span>
-                  </div>
-                </div>
-
-                {/* Mockup Dashboard Content Grid */}
-                <div className="p-4 space-y-3 bg-slate-100/70 text-xs">
-                  
-                  {/* Stats Row 1 */}
-                  <div className="grid grid-cols-4 gap-2 text-[10px]">
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center font-bold">⏱</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Pending orders</div>
-                        <div className="font-extrabold text-xs text-slate-800">14</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-teal-100 text-[#00b87c] flex items-center justify-center font-bold">↺</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Order Return</div>
-                        <div className="font-extrabold text-xs text-slate-800">0</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">✓</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Confirmed Order</div>
-                        <div className="font-extrabold text-xs text-slate-800">0</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">✕</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Cancel Order</div>
-                        <div className="font-extrabold text-xs text-slate-800">0</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Stats Row 2 */}
-                  <div className="grid grid-cols-4 gap-2 text-[10px]">
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">🚚</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Order Shipped</div>
-                        <div className="font-extrabold text-xs text-slate-800">0</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center font-bold">📦</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Order Delivered</div>
-                        <div className="font-extrabold text-xs text-slate-800">3</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">🛒</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Total Orders</div>
-                        <div className="font-extrabold text-xs text-slate-800">19</div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-1.5">
-                      <div className="w-6 h-6 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center font-bold">👥</div>
-                      <div>
-                        <div className="text-slate-500 text-[9px]">Total Customers</div>
-                        <div className="font-extrabold text-xs text-slate-800">14</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Widget Preview Grid */}
-                  <div className="grid grid-cols-12 gap-2">
-                    <div className="col-span-8 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-2.5">
-                      <div className="w-20 h-16 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-2xl">
-                        🥦
-                      </div>
-                      <div className="space-y-0.5">
-                        <div className="font-bold text-slate-800 text-[11px]">Nature Growne - We care Always</div>
-                        <p className="text-[9px] text-slate-500">Gérez vos catégories et vos thèmes en 1 clic.</p>
-                        <div className="flex gap-1.5 pt-1">
-                          <span className="bg-[#00b87c] text-white text-[8px] px-2 py-0.5 rounded font-bold">Customize</span>
-                          <span className="bg-slate-100 text-slate-700 text-[8px] px-2 py-0.5 rounded border font-semibold">Manage Themes</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-span-4 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm space-y-1.5">
-                      <div className="font-extrabold text-slate-800 text-[10px]">Top Category</div>
-                      <div className="space-y-1 text-[9px]">
-                        <div className="flex justify-between items-center bg-slate-50 p-1 rounded border">
-                          <span className="font-semibold text-slate-700">Vegetables</span>
-                          <span className="font-bold text-[#00b87c]">$1,000.0</span>
-                        </div>
-                        <div className="flex justify-between items-center bg-slate-50 p-1 rounded border">
-                          <span className="font-semibold text-slate-700">Snacks</span>
-                          <span className="font-bold text-[#00b87c]">$150.0</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            )}
+            <div className="relative transform lg:rotate-1 hover:rotate-0 transition-transform duration-500 shadow-2xl rounded-2xl overflow-hidden border-4 border-white/30 bg-white">
+              <img 
+                src={heroImage && sectionData?.image && !imageError ? heroImage : "/images/hero-dashboard-preview.png"} 
+                alt="Dashboard Preview" 
+                className="w-full h-auto object-cover"
+                onError={() => setImageError(true)}
+              />
+            </div>
           </div>
 
         </div>

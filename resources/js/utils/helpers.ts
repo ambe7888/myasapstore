@@ -30,13 +30,14 @@ const formatCurrency = (amount: number | string, pageProps?: any): string => {
     // Try all possible settings sources
     const settings = (allProps as any).settings || (allProps as any).globalSettings || (allProps as any).superadminSettings || {};
     
-    const decimalPlaces = parseInt(settings.decimalFormat || '2');
+    // Omit trailing ,00 for whole integers
+    const effectiveDecimals = num % 1 === 0 ? 0 : parseInt(settings.decimalFormat || '2');
     const decimalSeparator = settings.decimalSeparator || '.';
-    const thousandsSeparator = settings.thousandsSeparator || ',';
+    const thousandsSeparator = settings.thousandsSeparator || ' ';
     const currencySymbolSpace = settings.currencySymbolSpace === '1' || settings.currencySymbolSpace === 'true' || settings.currencySymbolSpace === true;
     const currencySymbolPosition = settings.currencySymbolPosition || 'before';
     
-    const parts = Number(num).toFixed(decimalPlaces).split('.');
+    const parts = Number(num).toFixed(effectiveDecimals).split('.');
 
     if (thousandsSeparator !== 'none') {
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
@@ -57,7 +58,8 @@ const formatCurrency = (amount: number | string, pageProps?: any): string => {
       ? `${symbol}${space}${formattedNumber}`
       : `${formattedNumber}${space}${symbol}`;
   } catch (error) {
-    return `$${Number(amount).toFixed(2)}`;
+    const num = Number(amount) || 0;
+    return `$${num.toFixed(num % 1 === 0 ? 0 : 2)}`;
   }
 };
 
@@ -81,13 +83,13 @@ const formatSuperadminCurrency = (amount: number | string, pageProps?: any): str
     const globalSettings = (allProps as any)?.globalSettings || {};
     const settings = { ...globalSettings, ...superadminSettings };
     
-    const decimalPlaces = parseInt(settings.decimalFormat || '2');
+    const effectiveDecimals = num % 1 === 0 ? 0 : parseInt(settings.decimalFormat || '2');
     const decimalSeparator = settings.decimalSeparator || '.';
-    const thousandsSeparator = settings.thousandsSeparator || ',';
+    const thousandsSeparator = settings.thousandsSeparator || ' ';
     const currencySymbolSpace = settings.currencySymbolSpace === '1' || settings.currencySymbolSpace === 'true' || settings.currencySymbolSpace === true;
     const currencySymbolPosition = settings.currencySymbolPosition || 'before';
     
-    const parts = Number(num).toFixed(decimalPlaces).split('.');
+    const parts = Number(num).toFixed(effectiveDecimals).split('.');
 
     if (thousandsSeparator !== 'none') {
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);

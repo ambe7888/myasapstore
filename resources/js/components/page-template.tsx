@@ -45,10 +45,13 @@ export function PageTemplate({
       
       <div className="flex h-full flex-1 flex-col gap-4 p-4">
         {/* Header with action buttons */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">{title}</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+          <div className="min-w-0">
+            <h1 className="text-xl font-bold text-gray-900 leading-tight">{title}</h1>
+            {description && <p className="text-xs text-muted-foreground mt-0.5">{description}</p>}
+          </div>
           {actions && actions.length > 0 && (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
               {actions.map((action, index) => (
                 <Button 
                   key={index}

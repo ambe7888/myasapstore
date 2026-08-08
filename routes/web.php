@@ -362,7 +362,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('products', [\App\Http\Controllers\ProductController::class, 'store'])->middleware('permission:create-products')->name('products.store');
             Route::get('products/{id}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->middleware('permission:edit-products')->name('products.edit');
             Route::put('products/{id}', [\App\Http\Controllers\ProductController::class, 'update'])->middleware('permission:edit-products')->name('products.update');
-            Route::post('products/bulk', [\App\Http\Controllers\ProductController::class, 'bulkAction'])->middleware('permission:edit-products')->name('products.bulk');
+            Route::post('products/{id}/duplicate', [\App\Http\Controllers\ProductController::class, 'duplicate'])->middleware('permission:create-products')->name('products.duplicate');
             Route::delete('products/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->middleware('permission:delete-products')->name('products.destroy');
             Route::get('products/{id}', [\App\Http\Controllers\ProductController::class, 'show'])->middleware('permission:view-products')->name('products.show');
 

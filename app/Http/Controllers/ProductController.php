@@ -38,7 +38,8 @@ class ProductController extends BaseController
             $query->where('category_id', $request->category_id);
         }
         
-        $products = $query->latest()->get();
+        $perPage = $request->input('per_page', 10);
+        $products = $query->latest()->paginate($perPage)->withQueryString();
         
         // Get categories for the filter dropdown
         $categories = Category::where('store_id', $currentStoreId)
@@ -551,5 +552,25 @@ class ProductController extends BaseController
         } while (Product::where('sku', $sku)->exists());
 
         return $sku;
+    }
+
+    /**
+     * Duplicate a product.
+     */
+    public function duplicate($id)
+    {
+        $user = Auth::user();
+        $currentStoreId = getCurrentStoreId($user);
+
+        $product = Product::where('store_id', $currentStoreId)->findOrFail($id);
+        
+        $newProduct = $product->replicate();
+        $newProduct->name = $product->name . ' (' . __('Copie') . ')';
+        $newProduct->sku = $product->sku ? $product->sku . '-COPY-' . strtoupper(\Illuminate\Support\Str::random(4)) : null;
+        $newProduct->created_at = now();
+        $newProduct->updated_at = now();
+        $newProduct->save();
+
+        return redirect()->back()->with('success', __('Produit dupliqué avec succès.'));
     }
 }

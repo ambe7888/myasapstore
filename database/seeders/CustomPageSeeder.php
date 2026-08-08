@@ -120,82 +120,47 @@ class CustomPageSeeder extends Seeder
                 'meta_description' => 'Learn more about our store, our story, values, and commitment to quality products and customer service.',
             ],
             [
-                'title' => 'Privacy Policy',
+                'title' => 'Politique de Confidentialité',
                 'content' => '<div class="privacy-policy">
-                    <h1>Privacy Policy</h1>
-                    <p class="last-updated"><em>Last updated: January 2025</em></p>
+                    <h1>Politique de Confidentialité</h1>
+                    <p class="last-updated"><em>Dernière mise à jour : 2026</em></p>
                     
-                    <h2>Information We Collect</h2>
-                    <p>We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.</p>
+                    <h2>Informations Collectées</h2>
+                    <p>Nous collectons les informations nécessaires au traitement de vos commandes et à l\'amélioration de votre expérience d\'achat (Nom, e-mail, téléphone, adresse de livraison).</p>
                     
-                    <h3>Personal Information</h3>
-                    <ul>
-                        <li>Name and contact information</li>
-                        <li>Billing and shipping addresses</li>
-                        <li>Payment information</li>
-                        <li>Order history and preferences</li>
-                    </ul>
+                    <h2>Utilisation des Données</h2>
+                    <p>Vos données sont exclusivement utilisées pour honorer vos commandes, vous envoyer des mises à jour de livraison et assurer notre service client.</p>
                     
-                    <h2>How We Use Your Information</h2>
-                    <p>We use the information we collect to:</p>
-                    <ul>
-                        <li>Process and fulfill your orders</li>
-                        <li>Provide customer support</li>
-                        <li>Send you updates about your orders</li>
-                        <li>Improve our products and services</li>
-                        <li>Comply with legal obligations</li>
-                    </ul>
-                    
-                    <h2>Information Sharing</h2>
-                    <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.</p>
-                    
-                    <h2>Data Security</h2>
-                    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-                    
-                    <h2>Contact Us</h2>
-                    <p>If you have any questions about this Privacy Policy, please contact us at privacy@example.com</p>
+                    <h2>Sécurité des Données</h2>
+                    <p>Nous appliquons des mesures de sécurité rigoureuses pour protéger vos informations personnelles contre tout accès non autorisé.</p>
                 </div>',
                 'order' => 2,
                 'show_in_navigation' => false,
-                'meta_description' => 'Our comprehensive privacy policy explaining how we collect, use, and protect your personal information.',
+                'meta_description' => 'Politique de confidentialité expliquant la collecte et la protection de vos données personnelles.',
             ],
             [
-                'title' => 'Terms of Service',
+                'title' => 'Conditions Générales d\'Utilisation',
+                'slug' => 'terms-of-service',
                 'content' => '<div class="terms-of-service">
-                    <h1>Terms of Service</h1>
-                    <p class="last-updated"><em>Last updated: January 2025</em></p>
+                    <h1>Conditions Générales d\'Utilisation</h1>
+                    <p class="last-updated"><em>Dernière mise à jour : 2026</em></p>
                     
-                    <h2>Acceptance of Terms</h2>
-                    <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    <h2>Acceptation des Conditions</h2>
+                    <p>En naviguant et en passant commande sur notre boutique, vous acceptez pleinement les présentes conditions générales d\'utilisation et de vente.</p>
                     
-                    <h2>Use License</h2>
-                    <p>Permission is granted to temporarily download one copy of the materials on our website for personal, non-commercial transitory viewing only.</p>
-                    
-                    <h2>Disclaimer</h2>
-                    <p>The materials on our website are provided on an "as is" basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
-                    
-                    <h2>Limitations</h2>
-                    <p>In no event shall our company or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.</p>
-                    
-                    <h2>Accuracy of Materials</h2>
-                    <p>The materials appearing on our website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on its website are accurate, complete, or current.</p>
-                    
-                    <h2>Links</h2>
-                    <p>We have not reviewed all of the sites linked to our website and are not responsible for the contents of any such linked site.</p>
-                    
-                    <h2>Modifications</h2>
-                    <p>We may revise these terms of service at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+                    <h2>Commandes et Paiements</h2>
+                    <p>Les prix affichés sont fermes. Vous pouvez régler vos achats par paiement à la livraison, carte bancaire ou moyens de paiement mobiles autorisés.</p>
                 </div>',
                 'order' => 3,
                 'show_in_navigation' => false,
-                'meta_description' => 'Terms and conditions governing the use of our website and services.',
+                'meta_description' => 'Conditions générales régissant l\'utilisation de notre site et de nos services.',
             ],
             [
-                'title' => 'Contact Us',
+                'title' => 'Contactez-nous',
                 'content' => $this->getContactUsContent($store),
                 'order' => 4,
                 'show_in_navigation' => true,
-                'meta_description' => 'Contact information, office location, and ways to reach our support team for assistance.',
+                'meta_description' => 'Coordonnées et moyens de contacter notre service client.',
             ],
             [
                 'title' => 'FAQ',

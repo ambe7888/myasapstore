@@ -25,7 +25,10 @@ export default function Header({ settings, sectionData, customPages = [], brandC
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useTranslation();
   
-  const greenBg = '#00b87c';
+  // Get dynamic colors and text from landing page settings
+  const colors = settings?.config_sections?.colors || settings?.config_sections?.theme || {};
+  const primaryColor = colors.primary || colors.primary_color || brandColor || '#00b87c';
+  const announcementText = sectionData?.announcement_text || settings?.config_sections?.announcement_text || t("Offre spéciale : -70% de réduction ! Ne la manquez pas. L'offre se termine dans 72 heures.");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,16 +51,17 @@ export default function Header({ settings, sectionData, customPages = [], brandC
       {/* Top Announcement Bar */}
       <div className="bg-slate-900 text-white text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2 border-b border-slate-800">
         <span className="bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Promo</span>
-        <span>{t("Offre spéciale : -70% de réduction ! Ne la manquez pas. L'offre se termine dans 72 heures.")}</span>
+        <span>{announcementText}</span>
       </div>
 
       {/* Main Header Navbar */}
       <header 
         className={`transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#00a36d] shadow-lg py-3' 
-            : 'bg-[#00b87c] py-4'
+            ? 'shadow-lg py-3' 
+            : 'py-4'
         }`}
+        style={{ backgroundColor: primaryColor }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">

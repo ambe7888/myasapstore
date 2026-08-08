@@ -18,13 +18,21 @@ interface HeroSectionProps {
   };
 }
 
-export default function HeroSection({ settings, sectionData }: HeroSectionProps) {
+export default function HeroSection({ settings, sectionData, brandColor = '#00b87c' }: HeroSectionProps) {
   const { t } = useTranslation();
   const [imageError, setImageError] = React.useState(false);
-  const heroImage = sectionData.image ? getImageUrl(sectionData.image) : null;
+  const heroImage = sectionData?.image ? getImageUrl(sectionData.image) : null;
+
+  // Get dynamic colors from landing page settings
+  const colors = settings?.config_sections?.colors || settings?.config_sections?.theme || {};
+  const primaryColor = colors.primary || colors.primary_color || brandColor || '#00b87c';
 
   return (
-    <section id="hero" className="relative pt-32 pb-20 bg-gradient-to-b from-[#00b87c] via-[#00b87c] to-[#00a36d] text-white overflow-hidden min-h-[90vh] flex flex-col justify-between">
+    <section 
+      id="hero" 
+      className="relative pt-32 pb-20 text-white overflow-hidden min-h-[90vh] flex flex-col justify-between"
+      style={{ backgroundColor: primaryColor }}
+    >
       
       {/* Decorative Background Accents */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>

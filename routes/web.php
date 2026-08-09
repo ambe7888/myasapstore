@@ -794,12 +794,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Store switching route
     Route::post('switch-store', [\App\Http\Controllers\StoreSwitcherController::class, 'switchStore'])->name('switch-store');
     
-    // User language update route
-    Route::post('user/language', [\App\Http\Controllers\UserLanguageController::class, 'update'])->name('user.language.update');
     
+
     }); // End plan.access middleware group
 });
 
+// Language update route (Public)
+Route::post('user/language', [\App\Http\Controllers\UserLanguageController::class, 'update'])->name('user.language.update');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

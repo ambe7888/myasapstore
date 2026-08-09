@@ -159,11 +159,10 @@ class HandleInertiaRequests extends Middleware
                 // Get enabled addons (always fresh data)
                 $enabledAddons = [];
                 
-                // In demo mode, check session for temporary language preference
-                if (config('app.is_demo', false) && session('demo_language')) {
-                    $locale = session('demo_language');
+                if ($user && !empty($user->lang)) {
+                    $locale = $user->lang;
                 } else {
-                    $locale = $user->lang ?? $this->getSuperAdminLang();
+                    $locale = session('locale', $this->getSuperAdminLang());
                 }
                 return [
                     'user'        => $user,

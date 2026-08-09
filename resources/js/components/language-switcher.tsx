@@ -60,15 +60,14 @@ export const LanguageSwitcher: React.FC = () => {
                             key={language.code}
                             onClick={() => {
                                 i18n.changeLanguage(language.code);
-                                // Save language preference to database
-                                if (isAuthenticated) {
-                                    router.post(route('user.language.update'), {
-                                        language: language.code
-                                    }, {
-                                        preserveScroll: true,
-                                        preserveState: true
-                                    });
-                                }
+                                i18n.changeLanguage(language.code);
+                                // Save language preference to database or session
+                                router.post(route('user.language.update'), {
+                                    language: language.code
+                                }, {
+                                    preserveScroll: true,
+                                    preserveState: true
+                                });
                             }}
                             className="flex items-center gap-2"
                         >

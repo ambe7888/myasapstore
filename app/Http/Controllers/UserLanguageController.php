@@ -14,18 +14,21 @@ class UserLanguageController extends Controller
         ]);
 
         $user = Auth::user();
-        if ($user) {
-            // In demo mode, store language in session instead of database
-            if (config('app.is_demo', false)) {
-                session(['demo_language' => $request->language]);
-                return back();
-            }
-            
-            // Normal mode: update database
-            $user->update(['lang' => $request->language]);
+        
+        // In demo mode, always store in session
+        if (config('app.is_demo', false)) {
+            session(['locale' => $request->language]);
             return back();
         }
-
-        return back()->withErrors(['error' => 'Unauthorized']);
+        
+        if ($user) {
+            // Normal mode: update database
+            $user->update(['lang' => $request->language]);
+        }
+        
+        // Store in session for all users (including guests)
+        session(['locale' => $request->language]);
+        
+        return back();
     }
 }

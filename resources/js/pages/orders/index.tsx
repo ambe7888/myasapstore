@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PageTemplate } from '@/components/page-template';
 import { Plus, RefreshCw, Download, ShoppingCart, Eye, Edit, Trash2, Package } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -56,105 +56,6 @@ export default function Orders({ orders, stats }: OrdersProps) {
   };
 
   const orderList = Array.isArray(orders) ? orders : (orders?.data || []);
-
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  if (isMobile) {
-    return (
-      <div className="min-h-screen bg-[#f5f7fa] pb-24">
-        {/* Mobile Header */}
-        <div className="bg-white px-4 pt-5 pb-4 sticky top-0 z-30 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-black text-slate-900">{t('Commandes')}</h1>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="icon" className="w-9 h-9 bg-slate-50 text-slate-600 rounded-full" onClick={() => router.reload()}>
-                <RefreshCw size={18} />
-              </Button>
-            </div>
-          </div>
-          
-          {/* Quick Stats Row */}
-          <div className="flex items-center gap-3 overflow-x-auto pb-1 hide-scrollbar">
-            <div className="flex-shrink-0 bg-emerald-50 px-3 py-2 rounded-xl flex items-center gap-2">
-              <ShoppingCart size={16} className="text-emerald-600" />
-              <div>
-                <p className="text-[10px] text-emerald-600/70 font-semibold">{t('Total')}</p>
-                <p className="text-sm font-black text-emerald-700">{stats?.totalOrders || 0}</p>
-              </div>
-            </div>
-            <div className="flex-shrink-0 bg-amber-50 px-3 py-2 rounded-xl flex items-center gap-2">
-              <Package size={16} className="text-amber-600" />
-              <div>
-                <p className="text-[10px] text-amber-600/70 font-semibold">{t('En attente')}</p>
-                <p className="text-sm font-black text-amber-700">{stats?.pendingOrders || 0}</p>
-              </div>
-            </div>
-            <div className="flex-shrink-0 bg-blue-50 px-3 py-2 rounded-xl flex items-center gap-2">
-              <Download size={16} className="text-blue-600" />
-              <div>
-                <p className="text-[10px] text-blue-600/70 font-semibold">{t('Revenu')}</p>
-                <p className="text-sm font-black text-blue-700">{formatCurrency(stats?.totalRevenue || 0)}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Order List */}
-        <div className="px-3 pt-4">
-          {orderList.length > 0 ? orderList.map((order: any) => {
-            const statusInfo = formatStatus(order.status);
-            return (
-              <button 
-                key={order.id} 
-                onClick={() => router.visit(route('orders.show', order.id))}
-                className="w-full text-left bg-white p-4 rounded-2xl shadow-sm border border-slate-100 active:scale-[0.98] transition-transform relative overflow-hidden mb-3"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-black text-slate-900 text-sm">{order.orderNumber}</h3>
-                  <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${
-                      statusInfo.variant === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
-                      statusInfo.variant === 'amber' ? 'bg-amber-50 text-amber-600' :
-                      statusInfo.variant === 'blue' ? 'bg-blue-50 text-blue-600' :
-                      statusInfo.variant === 'red' ? 'bg-red-50 text-red-600' :
-                      'bg-slate-50 text-slate-600'
-                  }`}>
-                      {statusInfo.label}
-                  </span>
-                </div>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-700">{order.customer}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">{order.date}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg font-black text-[#00b87c]">{formatCurrency(order.total)}</p>
-                    <p className="text-[10px] font-bold text-slate-400 mt-0.5">{order.items || 0} {t('article(s)')}</p>
-                  </div>
-                </div>
-              </button>
-            );
-          }) : (
-            <div className="text-center py-12">
-              <ShoppingCart size={40} className="mx-auto text-slate-300 mb-3" />
-              <p className="text-slate-500 font-medium">{t('Aucune commande')}</p>
-            </div>
-          )}
-
-          {orders?.links && (
-            <div className="mt-4 pb-6">
-              <Pagination links={orders.links} from={orders.from} to={orders.to} total={orders.total} entityName="commandes" />
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <PageTemplate 

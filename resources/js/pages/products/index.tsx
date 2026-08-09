@@ -127,6 +127,111 @@ export default function Products() {
     });
   }
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-[#f5f7fa] pb-24">
+        {/* Mobile Header */}
+        <div className="bg-white px-4 pt-5 pb-4 sticky top-0 z-30 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-black text-slate-900">{t('Produits')}</h1>
+            <div className="flex gap-2">
+              <Button variant="ghost" size="icon" className="w-9 h-9 bg-slate-50 text-slate-600 rounded-full" onClick={() => router.reload()}>
+                <RefreshCw size={18} />
+              </Button>
+            </div>
+          </div>
+          
+          {/* Category Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 hide-scrollbar">
+            <button 
+              onClick={() => handleCategoryFilterChange('all')}
+              className={`flex-shrink-0 px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors ${!filters?.category_id || filters.category_id === 'all' ? 'bg-[#00b87c] text-white' : 'bg-slate-100 text-slate-600'}`}
+            >
+              {t('Tous')}
+            </button>
+            {categories?.map((cat: any) => (
+              <button 
+                key={cat.id}
+                onClick={() => handleCategoryFilterChange(String(cat.id))}
+                className={`flex-shrink-0 px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors ${filters?.category_id == cat.id ? 'bg-[#00b87c] text-white' : 'bg-slate-100 text-slate-600'}`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Product List */}
+        <div className="px-3 pt-4">
+          {visibleProducts.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3">
+              {visibleProducts.map((product: any) => (
+                <button 
+                  key={product.id} 
+                  onClick={() => router.visit(route('products.show', product.id))}
+                  className="bg-white rounded-2xl shadow-sm border border-slate-100 active:scale-[0.98] transition-transform overflow-hidden text-left flex flex-col"
+                >
+                  <div className="aspect-square bg-slate-50 relative">
+                    {product.cover_image ? (
+                      <img src={getImageUrl(product.cover_image)} alt={product.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center"><Package className="h-8 w-8 text-slate-300" /></div>
+                    )}
+                    <div className="absolute top-2 right-2">
+                      <span className={`text-[9px] font-black px-2 py-0.5 rounded-full text-white shadow-sm ${product.is_active ? 'bg-[#00b87c]' : 'bg-slate-400'}`}>
+                        {product.is_active ? t('Actif') : t('Inactif')}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-3 flex flex-col flex-1">
+                    <h3 className="font-bold text-slate-900 text-xs line-clamp-2 leading-tight mb-1">{product.name}</h3>
+                    <div className="mt-auto">
+                      <p className="text-sm font-black text-[#00b87c]">{formatCurrency(product.price)}</p>
+                      <div className="flex items-center justify-between mt-1 text-[10px] text-slate-400 font-medium">
+                        <span>{t('Stock:')} {product.quantity > 0 ? product.quantity : t('Rupture')}</span>
+                        <span>{product.sold || 0} {t('vendus')}</span>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <Package size={40} className="mx-auto text-slate-300 mb-3" />
+              <p className="text-slate-500 font-medium">{t('Aucun produit')}</p>
+            </div>
+          )}
+
+          {products?.links && (
+            <div className="mt-4 pb-6">
+              <Pagination links={products.links} from={products.from} to={products.to} total={products.total} entityName="produits" />
+            </div>
+          )}
+        </div>
+
+        {/* FAB Create Product */}
+        {hasPermission('create-products') && (
+          <button
+            onClick={() => router.visit(route('products.create'))}
+            className="fixed bottom-[80px] right-4 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+            style={{ background: 'linear-gradient(135deg, #00b87c, #00966a)', boxShadow: '0 6px 20px rgba(0,184,124,0.45)' }}
+          >
+            <Plus size={26} className="text-white" strokeWidth={2.5} />
+          </button>
+        )}
+      </div>
+    );
+  }
+
   return (
     <PageTemplate 
       title={t('Products')}

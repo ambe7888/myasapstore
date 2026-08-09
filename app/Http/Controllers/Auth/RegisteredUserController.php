@@ -153,8 +153,8 @@ class RegisteredUserController extends Controller
             return redirect()->route('verification.notice');
         }
 
-        // If paid plan chosen, redirect to plans subscription/checkout page
-        if ($chosenPlan && (float)$chosenPlan->price > 0) {
+        // If paid plan chosen and NO trial days, redirect to plans subscription/checkout page
+        if ($chosenPlan && (float)$chosenPlan->price > 0 && (!$chosenPlan->trial_days || (int)$chosenPlan->trial_days <= 0)) {
             return redirect()->route('plans.index', ['selected' => $chosenPlan->id]);
         }
 

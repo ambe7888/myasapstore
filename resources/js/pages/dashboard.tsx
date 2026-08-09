@@ -393,7 +393,7 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
                 <div className="text-2xl font-bold">{dashboardData.metrics.orders.toLocaleString()}</div>
                 <ShoppingCart className="h-4 w-4 text-muted-foreground" />
               </div>
-              <p className="text-xs text-muted-foreground">{currentStore.name}</p>
+              <p className="text-xs text-muted-foreground">{currentStore?.name || t('No Store')}</p>
             </CardContent>
           </Card>
           

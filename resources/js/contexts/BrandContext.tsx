@@ -8,24 +8,27 @@ interface BrandContextType extends BrandSettings {
 
 const BrandContext = createContext<BrandContextType | undefined>(undefined);
 
-export function BrandProvider({ children, globalSettings, user }: { children: ReactNode; globalSettings?: any; user?: any }) {
+export function BrandProvider({ children, globalSettings, superadminSettings, user }: { children: ReactNode; globalSettings?: any; superadminSettings?: any; user?: any }) {
   // Determine which settings to use based on user role and route
   const getEffectiveSettings = () => {
     const isPublicRoute = window.location.pathname.includes('/public/') || 
                          window.location.pathname === '/' || 
-                         window.location.pathname.includes('/auth/');
+                         window.location.pathname.includes('/auth/') || 
+                         window.location.pathname === '/login' ||
+                         window.location.pathname === '/register' ||
+                         window.location.pathname === '/forgot-password';
     
     // For public routes (landing page, auth pages), always use superadmin settings
     if (isPublicRoute) {
-      return globalSettings;
+      return superadminSettings || globalSettings;
     }
     
     // For authenticated routes, use user's own settings if company role
-    if (user?.role === 'company' && user?.globalSettings) {
-      return user.globalSettings;
+    if (user?.type === 'company') {
+      return globalSettings; // globalSettings from HandleInertiaRequests is already company settings!
     }
     
-    // Default to global settings (superadmin)
+    // Default to global settings
     return globalSettings;
   };
   

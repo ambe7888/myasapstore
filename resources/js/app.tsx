@@ -82,13 +82,14 @@ createInertiaApp({
         // Create a memoized render function to prevent unnecessary re-renders
         const renderApp = (appProps: any) => {
             const currentGlobalSettings = appProps.initialPage.props.globalSettings || {};
+            const superadminSettings = appProps.initialPage.props.superadminSettings || {};
             const user = appProps.initialPage.props.auth?.user;
             
             return (
                 <ModalStackProvider>
                     <LayoutProvider>
                         <SidebarProvider>
-                            <BrandProvider globalSettings={currentGlobalSettings} user={user}>
+                            <BrandProvider globalSettings={currentGlobalSettings} superadminSettings={superadminSettings} user={user}>
                                 <Suspense fallback={<div className="flex h-screen w-full items-center justify-center">Loading...</div>}>
                                     <App {...appProps} />
                                 </Suspense>

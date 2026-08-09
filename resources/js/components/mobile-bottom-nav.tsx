@@ -28,6 +28,15 @@ export function MobileBottomNav() {
     }
   };
 
+  // Safe route helper - returns '#' if route doesn't exist
+  const safeRoute = (name: string, params?: any) => {
+    try {
+      return route(name, params);
+    } catch {
+      return '#';
+    }
+  };
+
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-lg px-2 py-1.5 flex items-center justify-around">
       {/* 1. Menu (Toggle Sidebar) */}
@@ -42,7 +51,7 @@ export function MobileBottomNav() {
 
       {/* 2. Boutique */}
       <Link
-        href={route('stores.index')}
+        href={safeRoute('stores.index')}
         className={`flex flex-col items-center justify-center py-1 px-2 transition-all ${
           currentPath.includes('/stores') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
         }`}
@@ -53,7 +62,7 @@ export function MobileBottomNav() {
 
       {/* 3. Produit */}
       <Link
-        href={route('products.index')}
+        href={safeRoute('products.index')}
         className={`flex flex-col items-center justify-center py-1 px-2 transition-all ${
           currentPath.includes('/products') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
         }`}
@@ -64,7 +73,7 @@ export function MobileBottomNav() {
 
       {/* 4. Commande */}
       <Link
-        href={route('orders.index')}
+        href={safeRoute('orders.index')}
         className={`flex flex-col items-center justify-center py-1 px-2 transition-all ${
           currentPath.includes('/orders') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
         }`}
@@ -75,9 +84,9 @@ export function MobileBottomNav() {
 
       {/* 5. Compte */}
       <Link
-        href={route('profile.settings')}
+        href={safeRoute('profile')}
         className={`flex flex-col items-center justify-center py-1 px-2 transition-all ${
-          currentPath.includes('/profile') || currentPath.includes('/settings') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
+          currentPath.includes('/profile') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
         }`}
       >
         <User size={20} className="stroke-[2.2]" />

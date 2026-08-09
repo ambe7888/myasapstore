@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageTemplate, type PageAction } from '@/components/page-template';
-import { RefreshCw, BarChart3, Download, Building2, ShoppingCart, Users, DollarSign, Package, TrendingUp, QrCode, Copy, Check, CreditCard, FileText, Tag, Activity, ArrowRight, Sparkles } from 'lucide-react';
+import { RefreshCw, BarChart3, Download, Building2, ShoppingCart, Users, DollarSign, Package, TrendingUp, QrCode, Copy, Check, CreditCard, FileText, Tag, Activity, ArrowRight, Sparkles, Plus, Bell, ChevronRight, ExternalLink, Clock, Zap, Eye, Star } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ import QRCode from 'react-qr-code';
 import { formatCurrency } from '@/utils/helpers';
 import { useBrand } from '@/contexts/BrandContext';
 import { THEME_COLORS } from '@/hooks/use-appearance';
+
 
 interface Props {
   dashboardData: {
@@ -374,13 +375,250 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
     );
   }
 
+  // ─── Mobile Seller Dashboard (YouCan style) ───────────────────────
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const statusColors: Record<string, { bg: string; text: string }> = {
+    pending:    { bg: '#FEF3C7', text: '#D97706' },
+    approved:   { bg: '#D1FAE5', text: '#059669' },
+    completed:  { bg: '#D1FAE5', text: '#059669' },
+    delivered:  { bg: '#D1FAE5', text: '#059669' },
+    cancelled:  { bg: '#FEE2E2', text: '#DC2626' },
+    processing: { bg: '#DBEAFE', text: '#2563EB' },
+    shipped:    { bg: '#EDE9FE', text: '#7C3AED' },
+    paid:       { bg: '#D1FAE5', text: '#059669' },
+    unpaid:     { bg: '#FEE2E2', text: '#DC2626' },
+  };
+
+  if (!isSuperAdmin && currentStore && isMobile) {
+    const quickActions = [
+      { label: t('Ajouter produit'), icon: Package, href: route('products.create'), color: '#00b87c' },
+      { label: t('Voir commandes'), icon: ShoppingCart, href: route('orders.index'), color: '#3b82f6' },
+      { label: t('Ma boutique'), icon: ExternalLink, href: currentStore?.store_url || '#', external: true, color: '#8b5cf6' },
+      { label: t('Analytiques'), icon: BarChart3, href: permissions.includes('view-analytics') ? route('analytics.index') : '#', color: '#f59e0b' },
+    ];
+
+    const greeting = () => {
+      const h = new Date().getHours();
+      if (h < 12) return t('Bonjour');
+      if (h < 18) return t('Bon après-midi');
+      return t('Bonsoir');
+    };
+
+    return (
+      <div className="min-h-screen bg-[#f5f7fa]" style={{ paddingBottom: '80px' }}>
+
+        {/* ─── Header ──────────────────────────────────────── */}
+        <div
+          className="px-4 pt-4 pb-6 relative overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, #00b87c 0%, #00966a 100%)' }}
+        >
+          {/* Decorative circles */}
+          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
+          <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/10 rounded-full" />
+
+          <div className="flex items-center justify-between relative z-10">
+            <div>
+              <p className="text-white/70 text-xs font-medium">{greeting()},</p>
+              <h1 className="text-white font-black text-lg leading-tight">{auth?.user?.name || t('Vendeur')}</h1>
+              <p className="text-white/70 text-xs mt-0.5">{currentStore?.name}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center relative active:scale-90 transition-transform">
+                <Bell size={17} className="text-white" />
+                {(dashboardData.metrics.pendingOrders || 0) > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[9px] text-white font-black flex items-center justify-center">
+                    {dashboardData.metrics.pendingOrders}
+                  </span>
+                )}
+              </button>
+              <Link href={route('stores.index')} className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center active:scale-90 transition-transform">
+                <Building2 size={17} className="text-white" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Store URL copy bar */}
+          <button
+            onClick={copyToClipboard}
+            className="mt-4 relative z-10 w-full flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-3 py-2.5 active:scale-[0.98] transition-transform"
+          >
+            <div className="flex-1 min-w-0 text-left">
+              <p className="text-white/60 text-[10px] font-medium">{t('Lien de votre boutique')}</p>
+              <p className="text-white text-xs font-semibold truncate">{currentStore?.store_url || storeUrl}</p>
+            </div>
+            <div className="flex-shrink-0">
+              {copied ? <Check size={15} className="text-white" /> : <Copy size={15} className="text-white/70" />}
+            </div>
+          </button>
+        </div>
+
+        {/* ─── Stat Pills ──────────────────────────────────── */}
+        <div className="px-4 -mt-3">
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { label: t('Commandes'), value: dashboardData.metrics.orders || 0, icon: ShoppingCart, color: '#00b87c', bg: '#f0fdf9' },
+              { label: t('Revenus'), value: formatCurrency(dashboardData.metrics.revenue || 0), icon: DollarSign, color: '#3b82f6', bg: '#eff6ff', isString: true },
+              { label: t('Produits'), value: dashboardData.metrics.products || 0, icon: Package, color: '#8b5cf6', bg: '#f5f3ff' },
+              { label: t('Clients'), value: dashboardData.metrics.customers || 0, icon: Users, color: '#f59e0b', bg: '#fffbeb' },
+            ].map((stat, i) => (
+              <div key={i} className="bg-white rounded-2xl p-3.5 shadow-sm" style={{ border: '1px solid #f1f5f9' }}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: stat.bg }}>
+                    <stat.icon size={16} style={{ color: stat.color }} />
+                  </div>
+                  <ChevronRight size={14} className="text-slate-300" />
+                </div>
+                <p className="text-xl font-black text-slate-900">{stat.isString ? stat.value : (stat.value as number).toLocaleString()}</p>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Quick Actions ───────────────────────────────── */}
+        <div className="px-4 mt-4">
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{t('Actions rapides')}</p>
+          <div className="grid grid-cols-4 gap-2">
+            {quickActions.map((action, i) => (
+              <Link
+                key={i}
+                href={action.href}
+                {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform"
+              >
+                <div
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: action.color + '18' }}
+                >
+                  <action.icon size={20} style={{ color: action.color }} />
+                </div>
+                <span className="text-[10px] text-center font-semibold text-slate-600 leading-tight">{action.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Recent Orders ───────────────────────────────── */}
+        <div className="px-4 mt-5">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-black text-slate-900">{t('Commandes récentes')}</p>
+            <Link href={route('orders.index')} className="text-xs font-bold" style={{ color: '#00b87c' }}>
+              {t('Voir tout')} →
+            </Link>
+          </div>
+
+          <div className="space-y-2.5">
+            {(dashboardData.recentOrders || []).slice(0, 5).map((order, i) => {
+              const sc = statusColors[order.status?.toLowerCase()] || { bg: '#f1f5f9', text: '#64748b' };
+              return (
+                <Link
+                  key={i}
+                  href={route('orders.show', order.id)}
+                  className="flex items-center gap-3 bg-white rounded-2xl p-3.5 active:scale-[0.98] transition-transform"
+                  style={{ border: '1px solid #f1f5f9' }}
+                >
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: sc.bg }}>
+                    <ShoppingCart size={16} style={{ color: sc.text }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-slate-900 truncate">{order.order_number}</p>
+                    <p className="text-xs text-slate-500 truncate">{order.customer}</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-sm font-black text-slate-900">{formatCurrency(order.amount)}</p>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: sc.bg, color: sc.text }}>
+                      {formatStatusLabel(order.status)}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ─── Top Products ────────────────────────────────── */}
+        {dashboardData.topProducts && dashboardData.topProducts.length > 0 && (
+          <div className="px-4 mt-5">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-sm font-black text-slate-900">{t('Meilleurs produits')}</p>
+              <Link href={route('products.index')} className="text-xs font-bold" style={{ color: '#00b87c' }}>
+                {t('Voir tout')} →
+              </Link>
+            </div>
+            <div className="space-y-2">
+              {dashboardData.topProducts.slice(0, 3).map((product, i) => (
+                <Link
+                  key={i}
+                  href={route('products.show', product.id)}
+                  className="flex items-center gap-3 bg-white rounded-2xl p-3.5 active:scale-[0.98] transition-transform"
+                  style={{ border: '1px solid #f1f5f9' }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center flex-shrink-0">
+                    <Package size={16} className="text-violet-500" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-slate-900 truncate">{product.name}</p>
+                    <p className="text-xs text-slate-500">{product.sold} {t('vendus')}</p>
+                  </div>
+                  <p className="text-sm font-black text-slate-900 flex-shrink-0">{formatCurrency(product.price)}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ─── QR Code ─────────────────────────────────────── */}
+        <div className="px-4 mt-5 mb-4">
+          <div className="bg-white rounded-2xl p-4 flex items-center gap-4" style={{ border: '1px solid #f1f5f9' }}>
+            <div className="bg-white p-1.5 border border-slate-100 rounded-xl shadow-sm flex-shrink-0">
+              <QRCode value={currentStore?.qr_code_url || storeUrl || 'https://myasapstore.com'} size={72} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-sm text-slate-900">{t('QR de votre boutique')}</p>
+              <p className="text-xs text-slate-500 mt-0.5">{t('Partagez pour recevoir des commandes')}</p>
+              <button
+                onClick={copyToClipboard}
+                className="mt-2 flex items-center gap-1.5 text-xs font-bold py-1.5 px-3 rounded-xl active:scale-95 transition-transform"
+                style={{ backgroundColor: '#00b87c18', color: '#00b87c' }}
+              >
+                {copied ? <Check size={12} /> : <Copy size={12} />}
+                {copied ? t('Copié !') : t('Copier le lien')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── FAB — Add Product ───────────────────────────── */}
+        <Link
+          href={route('products.create')}
+          className="fixed bottom-[80px] right-4 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+          style={{
+            background: 'linear-gradient(135deg, #00b87c, #00966a)',
+            boxShadow: '0 6px 20px rgba(0,184,124,0.45)',
+          }}
+        >
+          <Plus size={26} className="text-white" strokeWidth={2.5} />
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <PageTemplate 
+    <PageTemplate
       title={t('Dashboard')}
       description={t('Store dashboard and analytics')}
       url="/dashboard"
       actions={pageActions}
     >
+
       <div className="space-y-4">
         {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

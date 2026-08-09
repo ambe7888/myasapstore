@@ -109,7 +109,34 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <script src="{{ asset('js/jquery.min.js') }}"></script>
 
+        <!-- PWA Manifest & App Meta Tags -->
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#00b87c">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="MyStoreAsap">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="My Store Asap">
+        <link rel="apple-touch-icon" href="/images/pwa/icon-192x192.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/pwa/icon-152x152.png">
+
+        <!-- PWA Service Worker Registration -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+                        .then(function(reg) {
+                            console.log('[PWA] Service Worker registered:', reg.scope);
+                        })
+                        .catch(function(err) {
+                            console.log('[PWA] Service Worker registration failed:', err);
+                        });
+                });
+            }
+        </script>
+
         @routes
+
         @viteReactRefresh
         @vite(['resources/js/app.tsx'])
         @inertiaHead

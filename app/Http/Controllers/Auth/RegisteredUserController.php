@@ -47,15 +47,15 @@ class RegisteredUserController extends Controller
                 ->first();
         }
 
-        $plans = Plan::all()->map(function($p) {
+        $plans = Plan::where('is_plan_enable', 'on')->get()->map(function($p) {
             return [
                 'id' => $p->id,
                 'name' => $p->name,
                 'price' => (float)$p->price,
                 'duration' => $p->duration,
                 'description' => $p->description,
-                'is_free' => $p->is_free,
-                'trial_days' => $p->trial_days,
+                'is_free' => $p->price == 0,
+                'trial_days' => (int)$p->trial_day,
             ];
         });
         
@@ -87,7 +87,7 @@ class RegisteredUserController extends Controller
         // Selected plan or default plan
         $selectedPlanId = $request->plan_id;
         $selectedPlan = $selectedPlanId ? Plan::find($selectedPlanId) : null;
-        $chosenPlan = $selectedPlan ?? Plan::where('is_free', 1)->first() ?? Plan::first();
+        $chosenPlan = $selectedPlan ?? Plan::where('price', 0)->first() ?? Plan::first();
         
         $userData = [
             'name' => $request->name,
@@ -101,8 +101,8 @@ class RegisteredUserController extends Controller
             'created_by' => 0,
             'plan_id' => $chosenPlan ? $chosenPlan->id : null,
             'plan_is_active' => 1,
-            'is_trial' => ($chosenPlan && isset($chosenPlan->trial_days) && $chosenPlan->trial_days > 0) ? 1 : 0,
-            'trial_expire_date' => ($chosenPlan && isset($chosenPlan->trial_days) && $chosenPlan->trial_days > 0) ? now()->addDays($chosenPlan->trial_days) : null,
+            'is_trial' => ($chosenPlan && isset($chosenPlan->trial_day) && $chosenPlan->trial_day > 0) ? 1 : 0,
+            'trial_expire_date' => ($chosenPlan && isset($chosenPlan->trial_day) && $chosenPlan->trial_day > 0) ? now()->addDays($chosenPlan->trial_day) : null,
         ];
         
         // Handle referral code

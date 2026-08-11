@@ -77,7 +77,7 @@ export default function Register({ referralCode, planId, plans = [] }: { referra
         password: '',
         password_confirmation: '',
         terms: false,
-        plan_id: planId,
+        plan_id: planId ? String(planId) : (plans && plans.length > 0 ? String(plans[0].id) : ''),
         referral_code: referralCode,
     });
 

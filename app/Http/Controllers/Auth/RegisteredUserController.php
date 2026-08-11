@@ -129,6 +129,7 @@ class RegisteredUserController extends Controller
             'name' => $request->store_name,
             'slug' => $storeSlug,
             'email' => $request->email,
+            'user_id' => $user->id,
             'created_by' => $user->id,
             'theme' => 'fashion',
             'is_active' => 1,

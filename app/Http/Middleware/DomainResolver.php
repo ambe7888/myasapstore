@@ -267,6 +267,18 @@ class DomainResolver
             } else {
                 return app(\App\Http\Controllers\Store\TapController::class)->processPayment($request);
             }
+        } elseif ($segments[0] === 'funnel' && isset($segments[1])) {
+            $funnelIdOrSlug = $segments[1];
+            if (isset($segments[2]) && in_array($segments[2], ['track-view', 'track-click', 'track-order']) && $request->isMethod('POST')) {
+                if ($segments[2] === 'track-view') return app(\App\Http\Controllers\FunnelPublicController::class)->trackView($request, $funnelIdOrSlug);
+                if ($segments[2] === 'track-click') return app(\App\Http\Controllers\FunnelPublicController::class)->trackClick($request, $funnelIdOrSlug);
+                if ($segments[2] === 'track-order') return app(\App\Http\Controllers\FunnelPublicController::class)->trackOrder($request, $funnelIdOrSlug);
+            } else {
+                if ($request->route()) {
+                    $request->route()->setParameter('slug', $funnelIdOrSlug);
+                }
+                return app(\App\Http\Controllers\FunnelPublicController::class)->showCustomDomain($request, $funnelIdOrSlug);
+            }
         } else {
             // Try to find a custom page with this slug
             $pageSlug = filter_var($segments[0], FILTER_SANITIZE_STRING);

@@ -26,19 +26,19 @@ class RegisteredUserController extends Controller
     public function create(Request $request): Response
     {
         $referralCode = $request->get('ref');
-        $planParam = $request->get('plan') ?? $request->get('plan_id');
+        $encryptedPlanId = $request->get('plan') ?? $request->get('plan_id');
         $planId = null;
         $referrer = null;
         
         // Decrypt and validate plan ID
-        if ($planParam) {
-            if (is_numeric($planParam)) {
-                $planId = (int)$planParam;
+        if ($encryptedPlanId) {
+            if (is_numeric($encryptedPlanId)) {
+                $planId = (int)$encryptedPlanId;
             } else {
-                $planId = $this->decryptPlanId($planParam);
+                $planId = $this->decryptPlanId($encryptedPlanId);
             }
             if ($planId && !Plan::find($planId)) {
-                $planId = null;
+                $planId = null; // Invalid plan ID
             }
         }
         
@@ -47,23 +47,10 @@ class RegisteredUserController extends Controller
                 ->where('type', 'company')
                 ->first();
         }
-
-        $plans = Plan::where('is_plan_enable', 'on')->get()->map(function($p) {
-            return [
-                'id' => $p->id,
-                'name' => $p->name,
-                'price' => (float)$p->price,
-                'duration' => $p->duration,
-                'description' => $p->description,
-                'is_free' => $p->price == 0,
-                'trial_days' => (int)$p->trial_day,
-            ];
-        });
         
         return Inertia::render('auth/register', [
             'referralCode' => $referralCode,
             'planId' => $planId,
-            'plans' => $plans,
             'referrer' => $referrer ? $referrer->name : null,
             'settings' => settings(),
         ]);
@@ -85,10 +72,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Selected plan or default plan
-        $selectedPlanId = $request->plan_id;
-        $selectedPlan = $selectedPlanId ? Plan::find($selectedPlanId) : null;
-        $chosenPlan = $selectedPlan ?? Plan::where('price', 0)->first() ?? Plan::first();
+        // Assign default free plan or first available plan
+        $defaultPlan = Plan::where('price', 0)->first() ?? Plan::first();
         
         $userData = [
             'name' => $request->name,
@@ -100,10 +85,10 @@ class RegisteredUserController extends Controller
             'is_active' => 1,
             'is_enable_login' => 1,
             'created_by' => 0,
-            'plan_id' => $chosenPlan ? $chosenPlan->id : null,
+            'plan_id' => $defaultPlan ? $defaultPlan->id : null,
             'plan_is_active' => 1,
-            'is_trial' => ($chosenPlan && isset($chosenPlan->trial_day) && $chosenPlan->trial_day > 0) ? 1 : 0,
-            'trial_expire_date' => ($chosenPlan && isset($chosenPlan->trial_day) && $chosenPlan->trial_day > 0) ? now()->addDays($chosenPlan->trial_day) : null,
+            'is_trial' => ($defaultPlan && isset($defaultPlan->trial_day) && $defaultPlan->trial_day > 0) ? 1 : 0,
+            'trial_expire_date' => ($defaultPlan && isset($defaultPlan->trial_day) && $defaultPlan->trial_day > 0) ? now()->addDays($defaultPlan->trial_day) : null,
         ];
         
         // Handle referral code
@@ -119,8 +104,23 @@ class RegisteredUserController extends Controller
         
         $user = User::create($userData);
 
-        // The Store is automatically created by the User::created event in the User model.
-        // We just need to make sure the user's role and settings are applied.
+        // Create initial store for the seller
+        $storeSlug = \Illuminate\Support\Str::slug($request->store_name);
+        if (Store::where('slug', $storeSlug)->exists()) {
+            $storeSlug = $storeSlug . '-' . rand(100, 999);
+        }
+        
+        $store = Store::create([
+            'name' => $request->store_name,
+            'slug' => $storeSlug,
+            'email' => $request->email,
+            'user_id' => $user->id,
+            'created_by' => $user->id,
+            'theme' => 'fashion',
+            'is_active' => 1,
+        ]);
+        
+        $user->update(['current_store' => $store->id]);
 
         // Assign role and settings to the user
         defaultRoleAndSetting($user);
@@ -140,11 +140,12 @@ class RegisteredUserController extends Controller
             return redirect()->route('verification.notice');
         }
 
-        // If paid plan chosen and NO trial days, redirect to plans subscription/checkout page
-        if ($chosenPlan && (float)$chosenPlan->price > 0 && (!$chosenPlan->trial_day || (int)$chosenPlan->trial_day <= 0)) {
-            return redirect()->route('plans.index', ['selected' => $chosenPlan->id]);
+        // Redirect to plans page if a plan was pre-selected via URL, otherwise dashboard
+        $planId = $request->plan_id;
+        if ($planId) {
+            return redirect()->route('plans.index', ['selected' => $planId]);
         }
-
+        
         return to_route('dashboard');
     }
     

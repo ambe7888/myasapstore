@@ -24,6 +24,8 @@ export default function EditCategory() {
     is_active: true
   });
 
+  const [processing, setProcessing] = useState(false);
+
   // Initialize form data from category prop
   useEffect(() => {
     if (category) {
@@ -57,9 +59,13 @@ export default function EditCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.put(route('categories.update', category.id), formData);
+  const handleSubmit = (e?: FormEvent) => {
+    if (e) e.preventDefault();
+    if (processing) return;
+    setProcessing(true);
+    router.put(route('categories.update', category.id), formData, {
+      onFinish: () => setProcessing(false)
+    });
   };
 
   const pageActions = [
@@ -70,10 +76,11 @@ export default function EditCategory() {
       onClick: () => router.visit(route('categories.index'))
     },
     {
-      label: t('Update Category'),
+      label: processing ? t('Updating...') : t('Update Category'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
-      onClick: handleSubmit
+      onClick: () => handleSubmit(),
+      disabled: processing
     }
   ];
 

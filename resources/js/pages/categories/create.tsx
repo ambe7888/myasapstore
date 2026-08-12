@@ -24,6 +24,8 @@ export default function CreateCategory() {
     is_active: true
   });
 
+  const [processing, setProcessing] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -43,9 +45,13 @@ export default function CreateCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.post(route('categories.store'), formData);
+  const handleSubmit = (e?: FormEvent) => {
+    if (e) e.preventDefault();
+    if (processing) return;
+    setProcessing(true);
+    router.post(route('categories.store'), formData, {
+      onFinish: () => setProcessing(false)
+    });
   };
 
   const pageActions = [
@@ -56,10 +62,11 @@ export default function CreateCategory() {
       onClick: () => router.visit(route('categories.index'))
     },
     {
-      label: t('Save Category'),
+      label: processing ? t('Saving...') : t('Save Category'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
-      onClick: handleSubmit
+      onClick: () => handleSubmit(),
+      disabled: processing
     }
   ];
 

@@ -13,6 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { router, usePage } from '@inertiajs/react';
 import MediaPicker from '@/components/MediaPicker';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import axios from 'axios';
 
 export default function CreateProduct() {
   const { t } = useTranslation();
@@ -36,6 +38,29 @@ export default function CreateProduct() {
   });
   const [customFields, setCustomFields] = useState([{ name: '', value: '' }]);
   const [variants, setVariants] = useState([{ name: '', values: [''] }]);
+  const [processing, setProcessing] = useState(false);
+  const [localCategories, setLocalCategories] = useState(categories || []);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [isCreatingCategory, setIsCreatingCategory] = useState(false);
+
+  const handleQuickAddCategory = async () => {
+    if (!newCategoryName.trim()) return;
+    setIsCreatingCategory(true);
+    try {
+      const response = await axios.post(route('categories.store'), { name: newCategoryName }, { headers: { 'Accept': 'application/json' } });
+      if (response.data.success) {
+        setLocalCategories([...localCategories, response.data.category]);
+        setFormData({ ...formData, category_id: String(response.data.category.id) });
+        setIsCategoryModalOpen(false);
+        setNewCategoryName('');
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsCreatingCategory(false);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
@@ -60,6 +85,8 @@ export default function CreateProduct() {
   };
 
   const handleSubmit = () => {
+    if (processing) return;
+    setProcessing(true);
     // Convert variants and custom fields to the format expected by the backend
     const productData = {
       ...formData,
@@ -67,7 +94,9 @@ export default function CreateProduct() {
       custom_fields: customFields.filter(f => f.name.trim() !== '')
     };
     
-    router.post(route('products.store'), productData);
+    router.post(route('products.store'), productData, {
+      onFinish: () => setProcessing(false)
+    });
   };
 
   const pageActions = [
@@ -78,10 +107,11 @@ export default function CreateProduct() {
       onClick: () => router.visit(route('products.index'))
     },
     {
-      label: t('Enregistrer'),
+      label: processing ? t('Enregistrement...') : t('Enregistrer'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
-      onClick: handleSubmit
+      onClick: handleSubmit,
+      disabled: processing
     }
   ];
 
@@ -139,21 +169,26 @@ export default function CreateProduct() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="category_id">{t('Category *')}</Label>
-                    <Select 
-                      value={formData.category_id} 
-                      onValueChange={(value) => handleSelectChange('category_id', value)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder={t('Select category')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories?.map((category: any) => (
-                          <SelectItem key={category.id} value={String(category.id)}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex gap-2">
+                      <Select 
+                        value={formData.category_id} 
+                        onValueChange={(value) => handleSelectChange('category_id', value)}
+                      >
+                        <SelectTrigger className="flex-1">
+                          <SelectValue placeholder={t('Select category')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {localCategories?.map((category: any) => (
+                            <SelectItem key={category.id} value={String(category.id)}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Button type="button" variant="outline" size="icon" onClick={() => setIsCategoryModalOpen(true)} title={t('Créer une catégorie')}>
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                   <div>
                     <Label htmlFor="tax_id">{t('Product Tax')}</Label>
@@ -439,6 +474,31 @@ export default function CreateProduct() {
           </TabsContent>
         </Tabs>
       </div>
+      
+      <Dialog open={isCategoryModalOpen} onOpenChange={setIsCategoryModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('Créer une nouvelle catégorie')}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label>{t('Nom de la catégorie')}</Label>
+              <Input 
+                value={newCategoryName} 
+                onChange={(e) => setNewCategoryName(e.target.value)} 
+                placeholder={t('Ex: Vêtements')} 
+                autoFocus 
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsCategoryModalOpen(false)}>{t('Annuler')}</Button>
+            <Button onClick={handleQuickAddCategory} disabled={!newCategoryName.trim() || isCreatingCategory}>
+              {isCreatingCategory ? t('Création...') : t('Créer et sélectionner')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </PageTemplate>
   );
 }

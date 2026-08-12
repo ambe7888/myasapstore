@@ -10,6 +10,7 @@ export interface PageAction {
   icon?: ReactNode;
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export interface PageTemplateProps {
@@ -58,6 +59,7 @@ export function PageTemplate({
                   variant={action.variant || 'outline'} 
                   size="sm"
                   onClick={action.onClick}
+                  disabled={action.disabled}
                 >
                   {action.icon}
                   {action.label}

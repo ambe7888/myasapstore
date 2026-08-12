@@ -112,6 +112,13 @@ class CategoryController extends BaseController
         $category->is_active = $request->has('is_active') ? $request->is_active : true;
         $category->save();
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'category' => $category
+            ]);
+        }
+
         return redirect()->route('categories.index')->with('success', __('Category created successfully'));
     }
 

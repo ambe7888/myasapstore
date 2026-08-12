@@ -91,6 +91,17 @@ class ProductController extends BaseController
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
+        if (!$currentStoreId || !\App\Models\Store::where('id', $currentStoreId)->exists()) {
+            return redirect()->back()->with('error', __('No active store found. Please create or select a store first.'));
+        }
+
+        if ($request->category_id === 'none' || empty($request->category_id)) {
+            $request->merge(['category_id' => null]);
+        }
+        if ($request->tax_id === 'none' || empty($request->tax_id)) {
+            $request->merge(['tax_id' => null]);
+        }
+        
         // Check if user can add more products to this store
         $productCheck = $user->canAddProductToStore($currentStoreId);
         if (!$productCheck['allowed']) {
@@ -214,6 +225,17 @@ class ProductController extends BaseController
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
+        
+        if (!$currentStoreId || !\App\Models\Store::where('id', $currentStoreId)->exists()) {
+            return redirect()->back()->with('error', __('No active store found. Please create or select a store first.'));
+        }
+
+        if ($request->category_id === 'none' || empty($request->category_id)) {
+            $request->merge(['category_id' => null]);
+        }
+        if ($request->tax_id === 'none' || empty($request->tax_id)) {
+            $request->merge(['tax_id' => null]);
+        }
         
         $product = Product::where('store_id', $currentStoreId)->findOrFail($id);
         

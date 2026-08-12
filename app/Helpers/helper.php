@@ -170,9 +170,10 @@ if (! function_exists('getSetting')) {
         $settings = [];
         
         // For company users, check current store settings first
-        if ($user && $user->type === 'company' && $user->current_store) {
+        $currentStoreId = $user ? getCurrentStoreId($user) : null;
+        if ($user && $user->type === 'company' && $currentStoreId) {
             $settings = Setting::where('user_id', $user_id)
-                              ->where('store_id', $user->current_store)
+                              ->where('store_id', $currentStoreId)
                               ->pluck('value', 'key')
                               ->toArray();
         }
@@ -1309,12 +1310,22 @@ if (! function_exists('getCurrentStoreId')) {
             }
         }
         
-        // Fall back to database current_store
+        // Fall back to database current_store (with DB verification)
         if ($user->current_store) {
-            return $user->current_store;
+            $storeQuery = \App\Models\Store::where('id', $user->current_store);
+            if ($user->type === 'company') {
+                $storeQuery->where('user_id', $user->id);
+            } elseif ($user->type === 'user' && $user->created_by) {
+                $storeQuery->where(function ($q) use ($user) {
+                    $q->where('user_id', $user->id)->orWhere('user_id', $user->created_by);
+                });
+            }
+            if ($storeQuery->exists()) {
+                return $user->current_store;
+            }
         }
         
-        // Auto-fix: if current_store is null, but user has stores, pick the first one
+        // Auto-fix: if current_store is null or points to a non-existent store, pick the first valid store
         if ($user->type === 'company') {
             $firstStore = \App\Models\Store::where('user_id', $user->id)->first();
             if ($firstStore) {
@@ -1322,9 +1333,31 @@ if (! function_exists('getCurrentStoreId')) {
                 \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $firstStore->id]);
                 $user->current_store = $firstStore->id;
                 return $firstStore->id;
+            } else {
+                // Auto-create default store if company user has 0 stores
+                $storeName = $user->name ? $user->name . "'s Store" : 'Ma Boutique';
+                $store = \App\Models\Store::create([
+                    'name' => $storeName,
+                    'slug' => \App\Models\Store::generateUniqueSlug($storeName),
+                    'description' => 'Bienvenue dans la boutique ' . $storeName,
+                    'theme' => 'home-accessories',
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                    'phone' => $user->phone ?? null,
+                ]);
+                \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $store->id]);
+                $user->current_store = $store->id;
+                return $store->id;
             }
         } elseif ($user->type === 'user' && $user->created_by) {
             $firstStore = \App\Models\Store::where('user_id', $user->created_by)->first();
+            if ($firstStore) {
+                \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $firstStore->id]);
+                $user->current_store = $firstStore->id;
+                return $firstStore->id;
+            }
+        } else {
+            $firstStore = \App\Models\Store::where('user_id', $user->id)->first();
             if ($firstStore) {
                 \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $firstStore->id]);
                 $user->current_store = $firstStore->id;

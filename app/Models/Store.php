@@ -238,5 +238,11 @@ class Store extends BaseModel
                 self::generatePWAManifest($store);
             }
         });
+
+        static::deleted(function ($store) {
+            \Illuminate\Support\Facades\DB::table('users')
+                ->where('current_store', $store->id)
+                ->update(['current_store' => null]);
+        });
     }
 }

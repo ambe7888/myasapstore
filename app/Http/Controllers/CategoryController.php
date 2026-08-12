@@ -85,6 +85,17 @@ class CategoryController extends BaseController
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
+        if (!$currentStoreId || !\App\Models\Store::where('id', $currentStoreId)->exists()) {
+            if ($request->wantsJson()) {
+                return response()->json(['error' => __('No active store found. Please create or select a store first.')], 400);
+            }
+            return redirect()->back()->with('error', __('No active store found. Please create or select a store first.'));
+        }
+
+        if ($request->parent_id === 'none' || empty($request->parent_id)) {
+            $request->merge(['parent_id' => null]);
+        }
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -203,6 +214,14 @@ class CategoryController extends BaseController
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
+        
+        if (!$currentStoreId || !\App\Models\Store::where('id', $currentStoreId)->exists()) {
+            return redirect()->back()->with('error', __('No active store found. Please create or select a store first.'));
+        }
+
+        if ($request->parent_id === 'none' || empty($request->parent_id)) {
+            $request->merge(['parent_id' => null]);
+        }
         
         $category = Category::where('store_id', $currentStoreId)->findOrFail($id);
         

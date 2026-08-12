@@ -184,7 +184,7 @@ export default function EditStore({ store, availableThemes, planPermissions, ser
                 <CardTitle>{t('Domain Configuration')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                {planPermissions?.enable_custdomain && (
+                {(planPermissions?.enable_custdomain !== false) && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
@@ -221,7 +221,7 @@ export default function EditStore({ store, availableThemes, planPermissions, ser
                   </div>
                 )}
                 
-                {planPermissions?.enable_custsubdomain && (
+                {(planPermissions?.enable_custsubdomain !== false) && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div>

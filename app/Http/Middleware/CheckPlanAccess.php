@@ -76,7 +76,7 @@ class CheckPlanAccess
      */
     public static function checkStoreLimit($user)
     {
-        $plan = $user->plan;
+        $plan = $user->getCurrentPlan();
         if (!$plan) {
             return ['allowed' => false, 'message' => __('No active plan found.')];
         }
@@ -102,7 +102,7 @@ class CheckPlanAccess
      */
     public static function checkUserLimit($user, $storeId)
     {
-        $plan = $user->plan;
+        $plan = $user->getCurrentPlan();
         if (!$plan) {
             return ['allowed' => false, 'message' => __('No active plan found.')];
         }
@@ -130,7 +130,7 @@ class CheckPlanAccess
      */
     public static function checkProductLimit($user, $storeId)
     {
-        $plan = $user->plan;
+        $plan = $user->getCurrentPlan();
         if (!$plan) {
             return ['allowed' => false, 'message' => __('No active plan found.')];
         }
@@ -160,7 +160,7 @@ class CheckPlanAccess
      */
     public static function checkFeatureAccess($user, $feature)
     {
-        $plan = $user->plan;
+        $plan = $user->getCurrentPlan();
         if (!$plan) {
             return ['allowed' => false, 'message' => __('No active plan found.')];
         }

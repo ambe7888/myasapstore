@@ -315,9 +315,9 @@ class StoreController extends BaseController
         // Get plan permissions for domain features
         $plan = $planUser->getCurrentPlan();
         $planPermissions = [
-            'enable_custdomain' => $plan->enable_custdomain === 'on',
-            'enable_custsubdomain' => $plan->enable_custsubdomain === 'on',
-            'pwa_business' => $plan->pwa_business === 'on',
+            'enable_custdomain' => !$plan || $plan->enable_custdomain !== 'off',
+            'enable_custsubdomain' => !$plan || $plan->enable_custsubdomain !== 'off',
+            'pwa_business' => !$plan || $plan->pwa_business !== 'off',
         ];
         
         // Get server IP address

@@ -147,7 +147,7 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
             return $this->plan;
         }
         
-        return Plan::getDefaultPlan();
+        return Plan::getDefaultPlan() ?? Plan::where('price', 0)->first() ?? Plan::first();
     }
     
     /**

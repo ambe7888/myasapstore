@@ -134,9 +134,9 @@ export default function StoreManagement({ stores = [], aggregatedStats = {} }) {
             ) : (
               <div className="space-y-4">
               {stores.map((store) => (
-                <div key={store.id} className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-xs transition-shadow hover:shadow-sm space-y-4">
-                  {/* Top Store Info Section */}
-                  <div className="flex items-start space-x-3">
+                <div key={store.id} className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm transition-shadow hover:shadow-md flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  {/* Store Info Section */}
+                  <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center shrink-0">
                       <Building2 className="h-6 w-6 text-emerald-600" />
                     </div>
@@ -146,58 +146,56 @@ export default function StoreManagement({ stores = [], aggregatedStats = {} }) {
                         <h3 className="font-bold text-base text-gray-900 truncate">{store.name}</h3>
                       </div>
                       
-                      <div className="mt-1">
+                      <div className="mt-1 flex flex-wrap items-center gap-2">
                         <Badge variant={store.config_status ? 'default' : 'secondary'} className={`text-xs px-2.5 py-0.5 rounded-md font-normal border-0 ${store.config_status ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-600'}`}>
                           {store.config_status ? t('Actif') : t('Inactif')}
                         </Badge>
                         {store.is_default && (
-                          <Badge variant="outline" className="ml-1.5 text-xs px-2 py-0.5 border-emerald-500 text-emerald-600">
+                          <Badge variant="outline" className="text-xs px-2 py-0.5 border-emerald-500 text-emerald-600">
                             {t('Par défaut')}
                           </Badge>
                         )}
+                        
+                        <span className="text-xs text-gray-500">
+                          {store.enable_custom_domain && store.custom_domain ? (
+                            <span className="text-emerald-600 font-medium">{store.custom_domain}</span>
+                          ) : store.enable_custom_subdomain && store.custom_subdomain ? (
+                            <span className="text-blue-600 font-medium">{store.custom_subdomain}</span>
+                          ) : (
+                            t('Aucun domaine défini')
+                          )}
+                        </span>
                       </div>
                       
-                      <p className="text-xs text-gray-400 mt-1.5">
-                        {store.enable_custom_domain && store.custom_domain ? (
-                          <span className="text-emerald-600 font-medium">{store.custom_domain}</span>
-                        ) : store.enable_custom_subdomain && store.custom_subdomain ? (
-                          <span className="text-blue-600 font-medium">{store.custom_subdomain}</span>
-                        ) : (
-                          t('Aucun domaine défini')
-                        )}
-                      </p>
-                      
-                      <div className="flex flex-wrap items-center gap-1 mt-1.5 text-xs text-gray-400">
+                      <div className="flex flex-wrap items-center gap-2 mt-2 text-xs text-gray-500">
                         <span>{t('Thème :')} {store.theme}</span>
-                        <span>·</span>
+                        <span className="hidden sm:inline">·</span>
                         <span>{t('Créé le :')} {new Date(store.created_at).toLocaleDateString()}</span>
-                        <span>·</span>
+                        <span className="hidden sm:inline">·</span>
                         <span>{store.total_orders || 0} {t('commandes')}</span>
-                        <span>·</span>
+                        <span className="hidden sm:inline">·</span>
                         <span>{formatCurrency(parseFloat(store.total_revenue) || 0)} {t('revenu')}</span>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Action Section */}
-                  <div className="pt-3 border-t border-gray-100 space-y-3">
-                    {/* Primary Button */}
+                  {/* Action Section - Right aligned on desktop */}
+                  <div className="flex flex-col sm:flex-row items-center gap-2 mt-4 md:mt-0 pt-4 md:pt-0 border-t md:border-t-0 border-gray-100 w-full md:w-auto shrink-0">
                     <Button 
                       variant="outline" 
-                      className="w-full h-10 border-gray-200 rounded-xl bg-white text-gray-800 text-sm font-medium hover:bg-gray-50 flex items-center justify-center gap-2 shadow-2xs"
+                      className="w-full sm:w-auto h-10 border-gray-200 rounded-xl bg-white text-gray-800 text-sm font-medium hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm"
                       onClick={() => {
                         const url = store.visit_store_url || generateStoreUrl('store.home', store);
                         if (url) window.open(url, '_blank');
                       }}
                     >
                       <Globe className="h-4 w-4 text-gray-700" />
-                      <span>{t('Voir la boutique')}</span>
+                      <span className="md:hidden lg:inline">{t('Voir')}</span>
                     </Button>
                     
-                    {/* Icon Actions Bar */}
-                    <div className="flex items-center justify-around text-gray-500 pt-1">
+                    <div className="flex items-center justify-center gap-1 w-full sm:w-auto">
                       <Permission permission="view-stores">
-                        <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100 rounded-lg text-gray-700" onClick={() => router.visit(route('stores.show', store.id))} title={t('Voir')}>
+                        <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100 rounded-lg text-gray-700" onClick={() => router.visit(route('stores.show', store.id))} title={t('Voir détails')}>
                           <Eye className="h-4 w-4" />
                         </Button>
                       </Permission>

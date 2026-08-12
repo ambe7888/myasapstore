@@ -1310,7 +1310,29 @@ if (! function_exists('getCurrentStoreId')) {
         }
         
         // Fall back to database current_store
-        return $user->current_store;
+        if ($user->current_store) {
+            return $user->current_store;
+        }
+        
+        // Auto-fix: if current_store is null, but user has stores, pick the first one
+        if ($user->type === 'company') {
+            $firstStore = \App\Models\Store::where('user_id', $user->id)->first();
+            if ($firstStore) {
+                // We use DB::table to avoid triggering any model events that might cause loops
+                \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $firstStore->id]);
+                $user->current_store = $firstStore->id;
+                return $firstStore->id;
+            }
+        } elseif ($user->type === 'user' && $user->created_by) {
+            $firstStore = \App\Models\Store::where('user_id', $user->created_by)->first();
+            if ($firstStore) {
+                \Illuminate\Support\Facades\DB::table('users')->where('id', $user->id)->update(['current_store' => $firstStore->id]);
+                $user->current_store = $firstStore->id;
+                return $firstStore->id;
+            }
+        }
+        
+        return null;
     }
 }
 

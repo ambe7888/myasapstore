@@ -119,23 +119,8 @@ class RegisteredUserController extends Controller
         
         $user = User::create($userData);
 
-        // Create initial store for the seller
-        $storeSlug = \Illuminate\Support\Str::slug($request->store_name);
-        if (Store::where('slug', $storeSlug)->exists()) {
-            $storeSlug = $storeSlug . '-' . rand(100, 999);
-        }
-        
-        $store = Store::create([
-            'name' => $request->store_name,
-            'slug' => $storeSlug,
-            'email' => $request->email,
-            'user_id' => $user->id,
-            'created_by' => $user->id,
-            'theme' => 'fashion',
-            'is_active' => 1,
-        ]);
-        
-        $user->update(['current_store' => $store->id]);
+        // The Store is automatically created by the User::created event in the User model.
+        // We just need to make sure the user's role and settings are applied.
 
         // Assign role and settings to the user
         defaultRoleAndSetting($user);

@@ -15,6 +15,7 @@ class Plan extends Model
         'max_stores',
         'max_users_per_store',
         'max_products_per_store',
+        'max_funnels',
         'themes',
         'enable_custdomain',
         'enable_custsubdomain',

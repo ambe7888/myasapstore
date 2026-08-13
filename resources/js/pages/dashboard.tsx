@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageTemplate, type PageAction } from '@/components/page-template';
-import { RefreshCw, BarChart3, Download, Building2, ShoppingCart, Users, DollarSign, Package, TrendingUp, QrCode, Copy, Check, CreditCard, FileText, Tag, Activity, ArrowRight, Sparkles } from 'lucide-react';
+import { RefreshCw, BarChart3, Download, Building2, ShoppingCart, Users, DollarSign, Package, TrendingUp, QrCode, Copy, Check, CreditCard, FileText, Tag, Activity, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
@@ -510,15 +510,26 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
                 <div className="text-center space-y-2 w-full">
                   <p className="text-sm font-semibold text-gray-900">{currentStore.name}</p>
                   <p className="text-xs text-muted-foreground">{t('Scannez pour visiter la boutique')}</p>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={copyToClipboard}
-                    className="flex items-center justify-center gap-2 mx-auto"
-                  >
-                    {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
-                    {copied ? t('Copié !') : t('Copier le lien')}
-                  </Button>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 w-full max-w-[250px] mx-auto">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={copyToClipboard}
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
+                      {copied ? t('Copié !') : t('Copier')}
+                    </Button>
+                    <Button 
+                      variant="default" 
+                      size="sm" 
+                      onClick={() => window.open(currentStore?.qr_code_url || storeUrl, '_blank')}
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      {t('Visiter')}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </CardContent>

@@ -24,6 +24,7 @@ export interface NavItem {
     permission?: string;
     children?: NavItem[];
     target?: string;
+    badge?: number | string;
 }
 
 export interface BreadcrumbItem {

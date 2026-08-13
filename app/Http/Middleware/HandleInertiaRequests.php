@@ -164,13 +164,31 @@ class HandleInertiaRequests extends Middleware
                 } else {
                     $locale = session('locale', $this->getSuperAdminLang());
                 }
+                $pendingOrdersCount = 0;
+                $newRegistrationsCount = 0;
+                
+                if ($user) {
+                    if (in_array($user->type, ['company'])) {
+                        if ($user->current_store) {
+                            $pendingOrdersCount = \App\Models\Order::where('store_id', $user->current_store)
+                                ->where('status', 'pending')->count();
+                        }
+                    } elseif (in_array($user->type, ['superadmin', 'admin'])) {
+                        // Users registered today
+                        $newRegistrationsCount = \App\Models\User::where('type', 'company')
+                            ->whereDate('created_at', \Carbon\Carbon::today())->count();
+                    }
+                }
+
                 return [
                     'user'        => $user,
                     'roles'       => $request->user()?->roles->pluck('name'),
                     'permissions' => $request->user()?->getAllPermissions()->pluck('name'),
                     'enabledAddons' => $enabledAddons,
                     'lang' => $locale,
-                    'stores' => $stores
+                    'stores' => $stores,
+                    'pendingOrdersCount' => $pendingOrdersCount,
+                    'newRegistrationsCount' => $newRegistrationsCount
                 ];
             },
             'isImpersonating' => session('impersonated_by') ? true : false,

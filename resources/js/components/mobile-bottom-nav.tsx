@@ -78,7 +78,14 @@ export function MobileBottomNav() {
           currentPath.includes('/orders') ? 'text-[#00b87c] font-black' : 'text-slate-600 hover:text-[#00b87c]'
         }`}
       >
-        <ShoppingCart size={20} className="stroke-[2.2]" />
+        <div className="relative">
+          <ShoppingCart size={20} className="stroke-[2.2]" />
+          {auth.pendingOrdersCount > 0 && (
+            <span className="absolute -top-1.5 -right-2.5 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white shadow-sm min-w-4 text-center">
+              {auth.pendingOrdersCount}
+            </span>
+          )}
+        </div>
         <span className="text-[10px] font-bold mt-0.5">{t("Commande")}</span>
       </Link>
 

@@ -50,6 +50,7 @@ export function AppSidebar() {
             title: t('Companies'),
             href: route('companies.index'),
             icon: Briefcase,
+            badge: auth.newRegistrationsCount > 0 ? auth.newRegistrationsCount : undefined,
         },
         {
             title: t('Media Library'),
@@ -256,6 +257,7 @@ export function AppSidebar() {
                 title: t('Order Management'),
                 href: route('orders.index'),
                 icon: ShoppingCart,
+                badge: auth.pendingOrdersCount > 0 ? auth.pendingOrdersCount : undefined,
             });
         }
 

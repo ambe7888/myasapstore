@@ -182,6 +182,11 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                             {position === 'right' ? (
                                                 <>
                                                     <span>{isExpanded ? item.title : ""}</span>
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center mr-1">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && (
                                                         expandedItems[item.title] ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />
@@ -191,8 +196,13 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                     {isExpanded && (
-                                                        expandedItems[item.title] ? <ChevronDown className="h-3 w-3 ml-auto" /> : <ChevronRight className="h-3 w-3 ml-auto" />
+                                                        expandedItems[item.title] ? <ChevronDown className={`h-3 w-3 ${item.badge === undefined || item.badge === 0 ? 'ml-auto' : 'ml-1'}`} /> : <ChevronRight className={`h-3 w-3 ${item.badge === undefined || item.badge === 0 ? 'ml-auto' : 'ml-1'}`} />
                                                     )}
                                                 </>
                                             )}
@@ -217,12 +227,22 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                             {position === 'right' ? (
                                                 <>
                                                     {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center mr-1">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                 </>
                                             ) : (
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                 </>
                                             )}
                                         </a>
@@ -235,12 +255,22 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                             {position === 'right' ? (
                                                 <>
                                                     {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center mr-1">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                 </>
                                             ) : (
                                                 <>
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
+                                                    {isExpanded && item.badge !== undefined && item.badge !== 0 && (
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
                                                 </>
                                             )}
                                         </Link>

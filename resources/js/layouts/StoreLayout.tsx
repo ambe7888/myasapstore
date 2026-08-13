@@ -261,6 +261,30 @@ function StoreLayoutContent({
           color: var(--btn-text-color) !important;
         }
       `;
+    } else if (activeTheme === 'default') {
+      themeCss = `
+        /* Default Theme Specific Overrides */
+        .bg-primary, .bg-primary-500, .bg-primary-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-primary:hover, .hover\\:bg-primary-600:hover, .hover\\:bg-primary-700:hover {
+          background-color: var(--primary-hover-color) !important;
+          border-color: var(--primary-hover-color) !important;
+        }
+        .text-primary, .text-primary-500, .text-primary-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-primary-50, .bg-primary\\/5, .bg-primary\\/10 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-primary-200, .border-primary\\/20, .border-primary {
+          border-color: var(--theme-color) !important;
+        }
+        a.bg-primary, button.bg-primary, a.text-primary:hover, button.text-primary:hover {
+          color: var(--btn-text-color) !important;
+        }
+      `;
     }
 
     // Only apply theme color overrides if user explicitly set a custom primary color (non-empty string)

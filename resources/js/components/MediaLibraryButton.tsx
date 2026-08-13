@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/components/custom-toast';
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { Search, Image as ImageIcon, Check } from 'lucide-react';
 
 interface MediaItem {
@@ -29,6 +30,7 @@ export default function MediaLibraryButton({
   buttonText = "Browse Media",
   selectedUrl 
 }: MediaLibraryButtonProps) {
+  const { t } = useTranslation();
   const { csrf_token } = usePage().props as any;
   const [isOpen, setIsOpen] = useState(false);
   const [media, setMedia] = useState<MediaItem[]>([]);
@@ -91,7 +93,7 @@ export default function MediaLibraryButton({
     
     onSelect(getRelativePath(url));
     setIsOpen(false);
-    toast.success('Image selected successfully');
+    toast.success(t('Image sélectionnée avec succès'));
   };
 
   const filteredMedia = media.filter(item =>
@@ -103,7 +105,7 @@ export default function MediaLibraryButton({
     <>
       <Button type="button" variant="outline" size="sm" onClick={handleOpen}>
         <ImageIcon className="h-4 w-4 mr-2" />
-        {buttonText}
+        {buttonText === "Browse Media" ? t('Parcourir les médias') : buttonText}
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -111,7 +113,7 @@ export default function MediaLibraryButton({
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <ImageIcon className="h-5 w-5" />
-              Select Image from Media Library
+              {t('Sélectionner une image depuis la médiathèque')}
             </DialogTitle>
           </DialogHeader>
           
@@ -120,7 +122,7 @@ export default function MediaLibraryButton({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="Search images..."
+                placeholder={t("Rechercher des images...")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -132,13 +134,13 @@ export default function MediaLibraryButton({
               {loading ? (
                 <div className="text-center py-12">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                  <p className="text-muted-foreground">Loading media...</p>
+                  <p className="text-muted-foreground">{t('Chargement des médias...')}</p>
                 </div>
               ) : filteredMedia.length === 0 ? (
                 <div className="text-center py-12">
                   <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
-                    {searchTerm ? 'No images found' : 'No media files available'}
+                    {searchTerm ? t('Aucune image trouvée') : t('Aucun fichier média disponible')}
                   </p>
                 </div>
               ) : (

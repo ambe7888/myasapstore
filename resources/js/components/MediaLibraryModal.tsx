@@ -6,6 +6,7 @@ import { Badge } from './ui/badge';
 import { toast } from '@/components/custom-toast';
 import { Upload, X, Image as ImageIcon, Search, Plus, Check } from 'lucide-react';
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { hasPermission } from '@/utils/authorization';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -35,6 +36,7 @@ export default function MediaLibraryModal({
   onSelect, 
   multiple = false 
 }: MediaLibraryModalProps) {
+  const { t } = useTranslation();
   const { auth } = usePage().props as any;
   const permissions = auth?.permissions || [];
   const canCreateMedia = hasPermission(permissions, 'create-media');
@@ -225,7 +227,7 @@ export default function MediaLibraryModal({
         <DialogHeader className="pb-4 flex-shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <ImageIcon className="h-5 w-5" />
-            Media Library
+            {t('Médiathèque')}
             {filteredMedia.length > 0 && (
               <Badge variant="secondary" className="ml-2">
                 {filteredMedia.length}
@@ -240,7 +242,7 @@ export default function MediaLibraryModal({
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="Search media files..."
+                placeholder={t("Rechercher des fichiers médias...")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -265,7 +267,7 @@ export default function MediaLibraryModal({
                   size="sm"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  {uploading ? 'Uploading...' : 'Upload'}
+                  {uploading ? t('Téléchargement...') : t('Télécharger')}
                 </Button>
               </div>
             )}
@@ -274,11 +276,11 @@ export default function MediaLibraryModal({
           {/* Stats and Selection Info */}
           <div className="flex items-center justify-between text-sm text-muted-foreground bg-muted/30 px-3 py-2 rounded-md flex-shrink-0 mb-4">
             <span>
-              {filteredMedia.length} files • Page {currentPage} of {totalPages || 1}
+              {filteredMedia.length} {t('fichiers')} • {t('Page')} {currentPage} {t('sur')} {totalPages || 1}
             </span>
             {multiple && selectedItems.length > 0 && (
               <Badge variant="default" className="text-xs">
-                {selectedItems.length} selected
+                {selectedItems.length} {t('sélectionné(s)')}
               </Badge>
             )}
           </div>
@@ -289,7 +291,7 @@ export default function MediaLibraryModal({
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                  <p className="text-muted-foreground">Loading media...</p>
+                  <p className="text-muted-foreground">{t('Chargement des médias...')}</p>
                 </div>
               </div>
             ) : filteredMedia.length === 0 ? (
@@ -308,14 +310,14 @@ export default function MediaLibraryModal({
                   </div>
                   
                   <div className="space-y-3 mb-6">
-                    <h3 className="text-lg font-semibold">No media files found</h3>
+                    <h3 className="text-lg font-semibold">{t('Aucun fichier média trouvé')}</h3>
                     {searchTerm && (
                       <p className="text-sm text-muted-foreground">
-                        No results for <span className="font-medium text-foreground">"${searchTerm}"</span>
+                        {t('Aucun résultat pour')} <span className="font-medium text-foreground">"{searchTerm}"</span>
                       </p>
                     )}
                     <p className="text-sm text-muted-foreground">
-                      {searchTerm ? 'Try a different search term or upload new images' : 'Upload images to get started'}
+                      {searchTerm ? t('Essayez un terme différent ou téléchargez de nouvelles images') : t('Téléchargez des images pour commencer')}
                     </p>
                   </div>
                   
@@ -326,7 +328,7 @@ export default function MediaLibraryModal({
                       disabled={uploading}
                     >
                       <Plus className="h-4 w-4 mr-2" />
-                      Upload Images
+                      {t('Télécharger des images')}
                     </Button>
                   )}
                 </div>
@@ -384,7 +386,7 @@ export default function MediaLibraryModal({
           {totalPages > 1 && (
             <div className="flex items-center justify-between pt-3 border-t flex-shrink-0">
               <div className="text-sm text-muted-foreground">
-                Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredMedia.length)} of {filteredMedia.length} files
+                {t('Affichage de')} {startIndex + 1} {t('à')} {Math.min(startIndex + itemsPerPage, filteredMedia.length)} {t('sur')} {filteredMedia.length} {t('fichiers')}
               </div>
               <div className="flex gap-1">
                 <Button
@@ -393,7 +395,7 @@ export default function MediaLibraryModal({
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 >
-                  Previous
+                  {t('Précédent')}
                 </Button>
                 {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
                   let page;
@@ -425,7 +427,7 @@ export default function MediaLibraryModal({
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 >
-                  Next
+                  {t('Suivant')}
                 </Button>
               </div>
             </div>
@@ -434,17 +436,17 @@ export default function MediaLibraryModal({
           {/* Actions */}
           <div className="flex justify-between items-center pt-4 border-t flex-shrink-0">
             <Button variant="outline" onClick={onClose}>
-              Cancel
+              {t('Annuler')}
             </Button>
             <div className="flex gap-2">
               {multiple && selectedItems.length > 0 && (
                 <Button variant="outline" onClick={() => setSelectedItems([])} size="sm">
-                  Clear
+                  {t('Effacer')}
                 </Button>
               )}
               {multiple && selectedItems.length > 0 && (
                 <Button onClick={handleConfirmSelection}>
-                  Select {selectedItems.length} item{selectedItems.length > 1 ? 's' : ''}
+                  {t('Sélectionner')} {selectedItems.length} {t('élément(s)')}
                 </Button>
               )}
             </div>

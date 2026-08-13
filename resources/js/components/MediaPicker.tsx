@@ -5,6 +5,7 @@ import { Label } from './ui/label';
 import MediaLibraryModal from './MediaLibraryModal';
 import { Image as ImageIcon, X } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
+import { useTranslation } from 'react-i18next';
 
 interface MediaPickerProps {
   label?: string;
@@ -20,10 +21,13 @@ export default function MediaPicker({
   value = '', 
   onChange, 
   multiple = false,
-  placeholder = 'Select image...',
+  placeholder,
   showPreview = true
 }: MediaPickerProps) {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const displayPlaceholder = placeholder || t('Select image...');
 
   const handleSelect = (selectedUrl: string) => {
     // Convert absolute URL to relative path before storing
@@ -71,7 +75,7 @@ export default function MediaPicker({
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
+          placeholder={displayPlaceholder}
           readOnly={multiple}
         />
         <Button
@@ -80,7 +84,7 @@ export default function MediaPicker({
           onClick={() => setIsModalOpen(true)}
         >
           <ImageIcon className="h-4 w-4 mr-2" />
-          Browse
+          {t('Parcourir')}
         </Button>
         {value && (
           <Button

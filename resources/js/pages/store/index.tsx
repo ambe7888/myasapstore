@@ -58,7 +58,7 @@ export default function StoreHomepage({ store = {}, storeContent = {}, storeSett
             {content.show_sections?.categories !== false && <CategorySection categories={categories} content={content.categories} />}
             {content.show_sections?.featured_products !== false && <FeaturedProductsSection products={featuredProducts} content={content.featured_products} storeSettings={storeSettings} currencies={currencies} />}
             {InfoBoxesSection && content.show_sections?.info_boxes !== false && <InfoBoxesSection content={content.info_boxes} storeSettings={storeSettings} currencies={currencies} />}
-            {CTASection && (content.show_sections?.cta_boxes !== false || content.show_sections?.cta_bottom !== false) && (
+            {CTASection && content.show_sections?.cta_section !== false && (content.show_sections?.cta_boxes !== false || content.show_sections?.cta_bottom !== false) && (
               <CTASection 
                 content={content.cta_section} 
                 ctaBoxes={content.show_sections?.cta_boxes !== false ? (content.cta_section?.cta_boxes || content.cta_boxes) : []} 

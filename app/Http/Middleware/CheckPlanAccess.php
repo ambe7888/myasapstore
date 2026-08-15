@@ -207,11 +207,13 @@ class CheckPlanAccess
         switch ($type) {
             case 'store':
                 $maxStores = $plan->max_stores ?? 0;
-                $activeStores = \App\Models\StoreConfiguration::where('key', 'store_status')
+                $query = \App\Models\StoreConfiguration::where('key', 'store_status')
                     ->where('value', 'true')
-                    ->whereHas('store', fn($q) => $q->where('user_id', $user->id))
-                    ->count();
-                return $activeStores < $maxStores;
+                    ->whereHas('store', fn($q) => $q->where('user_id', $user->id));
+                if ($excludeId) {
+                    $query->where('store_id', '!=', $excludeId);
+                }
+                return $query->count() < $maxStores;
                 
             case 'user':
                 $maxUsers = $plan->max_users_per_store ?? 0;

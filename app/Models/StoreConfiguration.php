@@ -17,7 +17,7 @@ class StoreConfiguration extends Model
                 $store = \App\Models\Store::with('user')->find($config->store_id);
                 if ($store?->user?->type === 'company') {
                     $canActivate = \App\Http\Middleware\CheckPlanAccess::canActivateResource(
-                        $store->user, 'store'
+                        $store->user, 'store', $config->store_id, $config->store_id
                     );
                     if (!$canActivate) {
                         throw new \Exception('Cannot activate store. Plan limit exceeded.');

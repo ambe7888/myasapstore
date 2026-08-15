@@ -175,23 +175,32 @@ function StoreLayoutContent({
     } else if (activeTheme === 'baby-kids') {
       themeCss = `
         /* Baby & Kids Theme Specific Overrides */
-        .bg-pink-500, .bg-pink-600 {
+        .bg-pink-300, .bg-pink-400, .bg-pink-500, .bg-pink-600 {
           background-color: var(--theme-color) !important;
           border-color: var(--theme-color) !important;
         }
-        .hover\\:bg-pink-600:hover, .hover\\:bg-pink-700:hover {
+        .hover\\:bg-pink-500:hover, .hover\\:bg-pink-600:hover, .hover\\:bg-pink-700:hover {
           background-color: var(--primary-hover-color) !important;
         }
-        .text-pink-500, .text-pink-600 {
+        .text-pink-400, .text-pink-500, .text-pink-600 {
           color: var(--theme-color) !important;
         }
-        .bg-pink-50 {
+        .hover\\:text-pink-500:hover, .hover\\:text-pink-600:hover {
+          color: var(--primary-hover-color) !important;
+        }
+        .bg-pink-50, .bg-pink-100, .bg-pink-200 {
           background-color: var(--bg-light-color) !important;
         }
-        .border-pink-200 {
-          border-color: var(--border-light-color) !important;
+        .border-pink-200, .border-pink-300, .border-pink-400, .border-pink-500 {
+          border-color: var(--theme-color) !important;
         }
-        a.bg-pink-500, button.bg-pink-500, a.bg-pink-600, button.bg-pink-600 {
+        .focus\\:border-pink-500:focus {
+          border-color: var(--theme-color) !important;
+        }
+        .focus\\:ring-pink-200:focus, .ring-pink-200 {
+          --tw-ring-color: var(--theme-color) !important;
+        }
+        a.bg-pink-500, button.bg-pink-500, a.bg-pink-600, button.bg-pink-600, .text-white.bg-pink-500 {
           color: var(--btn-text-color) !important;
         }
       `;

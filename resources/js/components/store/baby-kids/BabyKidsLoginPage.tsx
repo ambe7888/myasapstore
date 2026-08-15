@@ -53,23 +53,23 @@ export default function BabyKidsLoginPage({
         theme={store.theme}
       >
         
-        <div className="min-h-screen bg-storePrimary-50 flex items-center justify-center p-4 relative overflow-hidden store-page-header">
+        <div className="min-h-screen bg-pink-50 flex items-center justify-center p-4 relative overflow-hidden store-page-header">
           {/* Background Decorations */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-20 w-12 h-12 bg-storePrimary-200 rounded-full opacity-40 animate-pulse"></div>
+            <div className="absolute top-20 left-20 w-12 h-12 bg-pink-200 rounded-full opacity-40 animate-pulse"></div>
             <div className="absolute top-40 right-32 w-8 h-8 bg-blue-200 rounded-full opacity-50 animate-bounce"></div>
             <div className="absolute bottom-32 left-40 w-16 h-16 bg-yellow-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute bottom-20 right-20 w-6 h-6 bg-green-200 rounded-full opacity-40 animate-bounce" style={{ animationDelay: '0.5s' }}></div>
           </div>
 
           <div className="w-full max-w-md relative z-10">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border-4 border-storePrimary-400 relative">
+            <div className="bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-400 relative">
               {/* Top Decoration */}
-              <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-storePrimary-400 rounded-b-full"></div>
+              <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-pink-400 rounded-b-full"></div>
               
               {/* Header */}
               <div className="text-center mb-8 pt-2">
-                <div className="w-24 h-24 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <div className="w-24 h-24 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
                   <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                   </svg>
@@ -88,8 +88,8 @@ export default function BabyKidsLoginPage({
                     type="email"
                     value={data.email}
                     onChange={(e) => setData('email', e.target.value)}
-                    className={`w-full px-6 py-4 border-3 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 ${
-                      errors.email ? 'border-red-400 bg-red-50' : 'border-storePrimary-300 focus:border-storePrimary-500 bg-storePrimary-50'
+                    className={`w-full px-6 py-4 border-3 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-pink-200 transition-all duration-300 ${
+                      errors.email ? 'border-red-400 bg-red-50' : 'border-pink-300 focus:border-pink-500 bg-pink-50'
                     }`}
                     placeholder="your.email@example.com"
                     required
@@ -107,7 +107,7 @@ export default function BabyKidsLoginPage({
                     </label>
                     <Link
                       href={generateStoreUrl('store.forgot-password', store)}
-                      className="text-sm text-storePrimary-500 hover:text-storePrimary-600 font-bold underline"
+                      className="text-sm text-pink-500 hover:text-pink-600 font-bold underline"
                     >
                       Forgot?
                     </Link>
@@ -117,8 +117,8 @@ export default function BabyKidsLoginPage({
                       type={showPassword ? 'text' : 'password'}
                       value={data.password}
                       onChange={(e) => setData('password', e.target.value)}
-                      className={`w-full px-6 py-4 pr-16 border-3 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 ${
-                        errors.password ? 'border-red-400 bg-red-50' : 'border-storePrimary-300 focus:border-storePrimary-500 bg-storePrimary-50'
+                      className={`w-full px-6 py-4 pr-16 border-3 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-pink-200 transition-all duration-300 ${
+                        errors.password ? 'border-red-400 bg-red-50' : 'border-pink-300 focus:border-pink-500 bg-pink-50'
                       }`}
                       placeholder="••••••••"
                       required
@@ -126,7 +126,7 @@ export default function BabyKidsLoginPage({
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-storePrimary-500 transition-colors p-1"
+                      className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-pink-500 transition-colors p-1"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                         {showPassword ? (
@@ -143,13 +143,13 @@ export default function BabyKidsLoginPage({
                 </div>
                 
                 {/* Remember Me */}
-                <div className="flex items-center bg-storePrimary-50 p-4 rounded-2xl">
+                <div className="flex items-center bg-pink-50 p-4 rounded-2xl">
                   <input
                     id="remember"
                     type="checkbox"
                     checked={data.remember}
                     onChange={(e) => setData('remember', e.target.checked)}
-                    className="h-5 w-5 text-storePrimary-500 focus:ring-storePrimary-400 border-2 border-storePrimary-300 rounded"
+                    className="h-5 w-5 text-pink-500 focus:ring-pink-400 border-2 border-pink-300 rounded"
                   />
                   <label htmlFor="remember" className="ml-3 text-gray-700 font-semibold">
                     Remember me for next time
@@ -160,19 +160,19 @@ export default function BabyKidsLoginPage({
                 <button
                   type="submit"
                   disabled={processing}
-                  className="w-full bg-storePrimary-500 text-white py-5 rounded-2xl font-bold text-xl hover:bg-storePrimary-600 focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 shadow-xl disabled:opacity-50 transform hover:scale-105"
+                  className="w-full bg-pink-500 text-white py-5 rounded-2xl font-bold text-xl hover:bg-pink-600 focus:ring-4 focus:ring-pink-200 transition-all duration-300 shadow-xl disabled:opacity-50 transform hover:scale-105"
                 >
                   {processing ? 'Signing In...' : 'Sign In'}
                 </button>
               </form>
               
               {/* Register Link */}
-              <div className="mt-8 text-center bg-storePrimary-50 p-4 rounded-2xl">
+              <div className="mt-8 text-center bg-pink-50 p-4 rounded-2xl">
                 <p className="text-gray-600 text-lg">
                   New to our family?{' '}
                   <Link
                     href={generateStoreUrl('store.register', store)}
-                    className="font-bold text-storePrimary-500 hover:text-storePrimary-600 transition-colors underline"
+                    className="font-bold text-pink-500 hover:text-pink-600 transition-colors underline"
                   >
                     Create Account
                   </Link>
@@ -180,7 +180,7 @@ export default function BabyKidsLoginPage({
               </div>
               
               {/* Bottom Decoration */}
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-storePrimary-400 rounded-t-full"></div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-pink-400 rounded-t-full"></div>
             </div>
           </div>
         </div>

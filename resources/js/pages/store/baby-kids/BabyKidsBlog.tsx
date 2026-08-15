@@ -69,10 +69,10 @@ export default function BabyKidsBlog({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-20 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-20 relative overflow-hidden store-page-header">
           {/* Playful Background */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -81,7 +81,7 @@ export default function BabyKidsBlog({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Parenting Articles</h1>
-              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Helpful tips, advice, and inspiration for raising happy, healthy children
               </p>
@@ -97,8 +97,8 @@ export default function BabyKidsBlog({
                 {posts.map((post) => (
                   <article key={post.id} className="group relative">
                     {/* Card with Shadow */}
-                    <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                    <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                    <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 overflow-hidden hover:shadow-xl transition-all duration-300">
                       {/* Featured Image */}
                       <a href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}>
                         <div className="h-48 overflow-hidden">
@@ -117,14 +117,14 @@ export default function BabyKidsBlog({
                       <div className="p-6">
                         {/* Category */}
                         {post.category && (
-                          <span className="bg-storePrimary-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-3">
+                          <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-3">
                             {post.category.name}
                           </span>
                         )}
 
                         {/* Title */}
                         <a href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}>
-                          <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-storePrimary-600 transition-colors duration-300 line-clamp-2">
+                          <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2">
                             {post.title}
                           </h3>
                         </a>
@@ -155,7 +155,7 @@ export default function BabyKidsBlog({
                         {/* Read More */}
                         <a
                           href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
-                          className="inline-flex items-center text-storePrimary-500 font-bold hover:text-storePrimary-600 transition-colors duration-300"
+                          className="inline-flex items-center text-pink-500 font-bold hover:text-pink-600 transition-colors duration-300"
                         >
                           Read More
                           <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -171,9 +171,9 @@ export default function BabyKidsBlog({
               /* Empty State */
               <div className="text-center py-16">
                 <div className="relative inline-block">
-                  <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 p-12">
-                    <div className="w-20 h-20 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-12">
+                    <div className="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
                       <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
                       </svg>

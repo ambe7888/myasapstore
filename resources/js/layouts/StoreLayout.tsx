@@ -100,6 +100,25 @@ function StoreLayoutContent({
     const style = document.createElement('style');
     style.id = 'store-custom-css';
     
+    // Theme color classes override based on the active theme preset
+    // These maps specify which Tailwind classes are used by each store theme
+    const themeColorClasses: Record<string, { prefix: string; shades: number[] }> = {
+      'furniture-interior': { prefix: 'amber', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'cars-automotive':    { prefix: 'red',   shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'beauty-cosmetics':   { prefix: 'rose',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'baby-kids':          { prefix: 'pink',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'perfume-fragrances': { prefix: 'purple',shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'electronics':        { prefix: 'blue',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'fashion':            { prefix: 'slate', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'watches':            { prefix: 'slate', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'jewelry':            { prefix: 'amber', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      'default':            { prefix: 'indigo',shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+    };
+
+    const currentTheme = theme || 'default';
+    const themeClasses = themeColorClasses[currentTheme] || themeColorClasses['default'];
+    const selectedPreset = activeStore?.primary_color;
+
     let cssContent = `
       :root {
         ${store?.button_radius ? `--radius: ${store.button_radius};` : ''}
@@ -108,57 +127,48 @@ function StoreLayoutContent({
     `;
 
     if (store?.text_button_color) {
-      cssContent += `
-        :root {
-          --btn-text-color: ${store.text_button_color};
-        }
-      `;
+      cssContent += `:root { --btn-text-color: ${store.text_button_color}; }`;
     }
-
     if (store?.text_title_color) {
-      cssContent += `
-        h1, h2, h3, h4, h5, h6 {
-          color: ${store.text_title_color} !important;
-        }
-      `;
+      cssContent += `h1, h2, h3, h4, h5, h6 { color: ${store.text_title_color} !important; }`;
     }
-
     if (store?.site_bg_color) {
-      cssContent += `
-        body, .min-h-screen, main {
-          background-color: ${store.site_bg_color} !important;
-        }
-      `;
+      cssContent += `body, .min-h-screen, main { background-color: ${store.site_bg_color} !important; }`;
     }
-
     if (store?.button_radius) {
-      cssContent += `
-        .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
-          border-radius: var(--radius) !important;
-        }
-      `;
+      cssContent += `.rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl { border-radius: var(--radius) !important; }`;
     }
-    
     if (content.show_sections?.breadcrumb === false) {
-      cssContent += `
-        .store-breadcrumb {
-          display: none !important;
-        }
-      `;
+      cssContent += `.store-breadcrumb { display: none !important; }`;
     }
-
     if (content.show_sections?.page_header === false) {
-      cssContent += `
-        .store-page-header {
-          display: none !important;
-        }
-      `;
+      cssContent += `.store-page-header { display: none !important; }`;
     }
-    
     if (activeStore?.custom_css) {
       cssContent += activeStore.custom_css;
     }
     
+    // Only inject overrides when vendor picked a non-default color
+    if (selectedPreset && selectedPreset !== themeClasses.prefix) {
+      const colorRules = themeClasses.shades.map(shade => {
+        const varVal = `var(--color-store-primary-${shade})`;
+        return `
+          .bg-${themeClasses.prefix}-${shade} { background-color: ${varVal} !important; }
+          .text-${themeClasses.prefix}-${shade} { color: ${varVal} !important; }
+          .border-${themeClasses.prefix}-${shade} { border-color: ${varVal} !important; }
+          .ring-${themeClasses.prefix}-${shade} { --tw-ring-color: ${varVal} !important; }
+          .from-${themeClasses.prefix}-${shade} { --tw-gradient-from: ${varVal} !important; }
+          .to-${themeClasses.prefix}-${shade} { --tw-gradient-to: ${varVal} !important; }
+          .hover\\:bg-${themeClasses.prefix}-${shade}:hover { background-color: ${varVal} !important; }
+          .hover\\:text-${themeClasses.prefix}-${shade}:hover { color: ${varVal} !important; }
+          .hover\\:border-${themeClasses.prefix}-${shade}:hover { border-color: ${varVal} !important; }
+          .focus\\:border-${themeClasses.prefix}-${shade}:focus { border-color: ${varVal} !important; }
+          .focus\\:ring-${themeClasses.prefix}-${shade}:focus { --tw-ring-color: ${varVal} !important; }
+        `;
+      }).join('');
+      cssContent += colorRules;
+    }
+
     style.textContent = cssContent;
     document.head.appendChild(style);
     

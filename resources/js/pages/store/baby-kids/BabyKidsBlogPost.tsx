@@ -75,10 +75,10 @@ export default function BabyKidsBlogPost({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-16 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
           {/* Playful Background */}
           <div className="absolute inset-0">
-            <div className="absolute top-10 left-10 w-12 h-12 bg-storePrimary-200 rounded-full opacity-30 animate-pulse"></div>
+            <div className="absolute top-10 left-10 w-12 h-12 bg-pink-200 rounded-full opacity-30 animate-pulse"></div>
             <div className="absolute top-20 right-20 w-8 h-8 bg-blue-200 rounded-full opacity-40 animate-bounce"></div>
             <div className="absolute bottom-16 left-32 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute bottom-10 right-16 w-6 h-6 bg-green-200 rounded-full opacity-35 animate-bounce" style={{ animationDelay: '0.5s' }}></div>
@@ -91,7 +91,7 @@ export default function BabyKidsBlogPost({
               {/* Meta Info */}
               <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
                 {post.category && (
-                  <span className="bg-storePrimary-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <span className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                     {post.category.name}
                   </span>
                 )}
@@ -119,8 +119,8 @@ export default function BabyKidsBlogPost({
         {/* Featured Image */}
         {post.featured_image && (
           <div className="relative">
-            <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-300 rounded-3xl opacity-30"></div>
-            <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 mx-6 lg:mx-12 -mt-8 overflow-hidden">
+            <div className="absolute top-4 left-4 w-full h-full bg-pink-300 rounded-3xl opacity-30"></div>
+            <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 mx-6 lg:mx-12 -mt-8 overflow-hidden">
               <img 
                 src={getImageUrl(post.featured_image)}
                 alt={post.title}
@@ -139,8 +139,8 @@ export default function BabyKidsBlogPost({
             <div className="max-w-4xl mx-auto">
               {/* Content Card */}
               <div className="relative mb-12">
-                <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 p-8 lg:p-12">
+                <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-8 lg:p-12">
                   <div 
                     className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: post.content }}

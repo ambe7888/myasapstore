@@ -83,10 +83,10 @@ export default function BabyKidsProfile({
         theme="baby-kids"
       >
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-20 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-20 relative overflow-hidden store-page-header">
           {/* Playful Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -95,7 +95,7 @@ export default function BabyKidsProfile({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">My Profile</h1>
-              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full"></div>
+              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full"></div>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function BabyKidsProfile({
                 {/* Profile Card */}
                 <div className="lg:col-span-1">
                   <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-                    <div className="w-20 h-20 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <User className="h-10 w-10 text-white" />
                     </div>
                     
@@ -139,7 +139,7 @@ export default function BabyKidsProfile({
                       {!isEditing ? (
                         <button
                           onClick={() => setIsEditing(true)}
-                          className="bg-storePrimary-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-storePrimary-600 transition-colors flex items-center space-x-2"
+                          className="bg-pink-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-pink-600 transition-colors flex items-center space-x-2"
                         >
                           <Edit3 className="h-4 w-4" />
                           <span>Edit</span>
@@ -170,7 +170,7 @@ export default function BabyKidsProfile({
                                 placeholder="Enter your first name"
                                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                   isEditing 
-                                    ? 'border-storePrimary-300 focus:border-storePrimary-500 bg-white' 
+                                    ? 'border-pink-300 focus:border-pink-500 bg-white' 
                                     : 'border-gray-200 bg-gray-50'
                                 }`}
                               />
@@ -191,7 +191,7 @@ export default function BabyKidsProfile({
                                 placeholder="Enter your last name"
                                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                   isEditing 
-                                    ? 'border-storePrimary-300 focus:border-storePrimary-500 bg-white' 
+                                    ? 'border-pink-300 focus:border-pink-500 bg-white' 
                                     : 'border-gray-200 bg-gray-50'
                                 }`}
                               />
@@ -277,7 +277,7 @@ export default function BabyKidsProfile({
                               placeholder="Your city"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
-                                  ? 'border-gray-300 focus:border-storePrimary-500 bg-white' 
+                                  ? 'border-gray-300 focus:border-pink-500 bg-white' 
                                   : 'border-gray-200 bg-gray-50'
                               }`}
                             />
@@ -297,7 +297,7 @@ export default function BabyKidsProfile({
                               placeholder="Your state"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
-                                  ? 'border-gray-300 focus:border-storePrimary-500 bg-white' 
+                                  ? 'border-gray-300 focus:border-pink-500 bg-white' 
                                   : 'border-gray-200 bg-gray-50'
                               }`}
                             />
@@ -317,7 +317,7 @@ export default function BabyKidsProfile({
                               placeholder="12345"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
-                                  ? 'border-gray-300 focus:border-storePrimary-500 bg-white' 
+                                  ? 'border-gray-300 focus:border-pink-500 bg-white' 
                                   : 'border-gray-200 bg-gray-50'
                               }`}
                             />
@@ -337,7 +337,7 @@ export default function BabyKidsProfile({
                               placeholder="Your country"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
-                                  ? 'border-gray-300 focus:border-storePrimary-500 bg-white' 
+                                  ? 'border-gray-300 focus:border-pink-500 bg-white' 
                                   : 'border-gray-200 bg-gray-50'
                               }`}
                             />
@@ -350,7 +350,7 @@ export default function BabyKidsProfile({
                             <button
                               type="submit"
                               disabled={processing}
-                              className="bg-storePrimary-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-storePrimary-600 transition-colors flex items-center space-x-2 disabled:opacity-50"
+                              className="bg-pink-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-pink-600 transition-colors flex items-center space-x-2 disabled:opacity-50"
                             >
                               <Save className="h-4 w-4" />
                               <span>{processing ? 'Saving...' : 'Save Changes'}</span>

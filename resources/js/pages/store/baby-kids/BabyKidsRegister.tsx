@@ -53,15 +53,15 @@ export default function BabyKidsRegister({
         storeContent={storeContent}
         customFooter={<BabyKidsFooter storeName={store.name} logo={store.logo} content={storeContent.footer} />}
       >
-        <div className="min-h-screen bg-storePrimary-50 relative overflow-hidden store-page-header">
+        <div className="min-h-screen bg-pink-50 relative overflow-hidden store-page-header">
           {/* Playful Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-20 w-16 h-16 bg-storePrimary-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
+            <div className="absolute top-20 left-20 w-16 h-16 bg-pink-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
             <div className="absolute top-40 right-32 w-12 h-12 bg-blue-300 rounded-full opacity-50 animate-float-delayed"></div>
             <div className="absolute bottom-32 left-40 w-20 h-20 bg-yellow-300 rounded-lg opacity-35 animate-float-slow transform -rotate-6"></div>
             <div className="absolute bottom-20 right-20 w-14 h-14 bg-green-300 rounded-full opacity-45 animate-bounce"></div>
             <div className="absolute top-1/3 left-1/4 w-8 h-8 bg-purple-300 rounded-lg opacity-30 animate-pulse transform rotate-45"></div>
-            <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-storePrimary-400 rounded-full opacity-60 animate-ping"></div>
+            <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-pink-400 rounded-full opacity-60 animate-ping"></div>
             <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-70 animate-pulse"></div>
           </div>
 
@@ -69,7 +69,7 @@ export default function BabyKidsRegister({
             <div className="max-w-lg w-full">
               {/* Playful Header */}
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
+                <div className="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
                   <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                   </svg>
@@ -81,10 +81,10 @@ export default function BabyKidsRegister({
               {/* Block Card Design */}
               <div className="relative">
                 {/* Shadow Block */}
-                <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-storePrimary-300 opacity-40"></div>
+                <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-pink-300 opacity-40"></div>
                 
                 {/* Main Block */}
-                <div className="relative bg-white rounded-2xl shadow-xl border-4 border-storePrimary-400 p-8">
+                <div className="relative bg-white rounded-2xl shadow-xl border-4 border-pink-400 p-8">
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name Fields */}
@@ -138,7 +138,7 @@ export default function BabyKidsRegister({
                   {/* Email */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-3 flex items-center">
-                      <div className="w-5 h-5 bg-storePrimary-400 rounded-full mr-2 flex items-center justify-center">
+                      <div className="w-5 h-5 bg-pink-400 rounded-full mr-2 flex items-center justify-center">
                         <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                           <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -149,8 +149,8 @@ export default function BabyKidsRegister({
                       type="email"
                       value={data.email}
                       onChange={(e) => setData('email', e.target.value)}
-                      className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-storePrimary-200 focus:border-storePrimary-400 focus:outline-none transition-all duration-300 text-lg ${
-                        errors.email ? 'border-red-300 bg-red-50' : 'border-storePrimary-200 bg-storePrimary-50/50'
+                      className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-pink-200 focus:border-pink-400 focus:outline-none transition-all duration-300 text-lg ${
+                        errors.email ? 'border-red-300 bg-red-50' : 'border-pink-200 bg-pink-50/50'
                       }`}
                       placeholder="Enter your email"
                       required
@@ -255,16 +255,16 @@ export default function BabyKidsRegister({
                       type="checkbox"
                       checked={data.terms}
                       onChange={(e) => setData('terms', e.target.checked)}
-                      className="h-5 w-5 text-storePrimary-500 focus:ring-storePrimary-400 border-2 border-storePrimary-300 rounded-lg mt-1"
+                      className="h-5 w-5 text-pink-500 focus:ring-pink-400 border-2 border-pink-300 rounded-lg mt-1"
                       required
                     />
                     <label htmlFor="terms" className="ml-3 block text-sm font-bold text-gray-700">
                       I agree to the{' '}
-                      <Link href="/terms" className="text-storePrimary-500 hover:text-storePrimary-600">
+                      <Link href="/terms" className="text-pink-500 hover:text-pink-600">
                         Terms of Service
                       </Link>{' '}
                       and{' '}
-                      <Link href="/privacy" className="text-storePrimary-500 hover:text-storePrimary-600">
+                      <Link href="/privacy" className="text-pink-500 hover:text-pink-600">
                         Privacy Policy
                       </Link>
                     </label>
@@ -277,7 +277,7 @@ export default function BabyKidsRegister({
                   <button
                     type="submit"
                     disabled={processing}
-                    className="w-full bg-storePrimary-500 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-storePrimary-600 focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-pink-500 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-pink-600 focus:ring-4 focus:ring-pink-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {processing ? (
                       <div className="flex items-center justify-center space-x-2">
@@ -301,7 +301,7 @@ export default function BabyKidsRegister({
                     Already have an account?{' '}
                     <Link
                       href={generateStoreUrl('store.login', store)}
-                      className="text-storePrimary-500 hover:text-storePrimary-600 font-bold transition-colors duration-300"
+                      className="text-pink-500 hover:text-pink-600 font-bold transition-colors duration-300"
                     >
                       Sign In
                     </Link>

@@ -389,9 +389,9 @@ export default function BabyKidsCheckout({
         theme="baby-kids"
       >
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-16 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
           </div>
@@ -399,7 +399,7 @@ export default function BabyKidsCheckout({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Passer à la caisse</h1>
-              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
                 Complete your order for your little ones
               </p>
@@ -420,25 +420,25 @@ export default function BabyKidsCheckout({
                   <div key={step.id} className="flex items-center">
                     <div className="flex flex-col items-center">
                       <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isCompleted ? 'bg-storePrimary-500 text-white' : 
-                        isActive ? 'bg-storePrimary-100 border-4 border-storePrimary-500' : 
+                        isCompleted ? 'bg-pink-500 text-white' : 
+                        isActive ? 'bg-pink-100 border-4 border-pink-500' : 
                         'bg-gray-100 border-4 border-gray-300'
                       }`}>
                         {isCompleted ? (
                           <Check className="h-6 w-6 text-white" />
                         ) : (
-                          <Icon className={`h-6 w-6 ${isActive ? 'text-storePrimary-500' : 'text-gray-400'}`} />
+                          <Icon className={`h-6 w-6 ${isActive ? 'text-pink-500' : 'text-gray-400'}`} />
                         )}
                       </div>
                       <span className={`mt-3 text-sm font-bold ${
-                        isActive ? 'text-storePrimary-600' : isCompleted ? 'text-storePrimary-500' : 'text-gray-400'
+                        isActive ? 'text-pink-600' : isCompleted ? 'text-pink-500' : 'text-gray-400'
                       }`}>
                         {step.name}
                       </span>
                     </div>
                     {stepIdx < steps.length - 1 && (
                       <div className={`w-16 h-1 mx-4 rounded-full ${
-                        isCompleted ? 'bg-storePrimary-500' : 'bg-gray-300'
+                        isCompleted ? 'bg-pink-500' : 'bg-gray-300'
                       }`}></div>
                     )}
                   </div>
@@ -451,10 +451,10 @@ export default function BabyKidsCheckout({
               <div className="lg:col-span-2">
                 {currentStep === 'shipping' && (
                   <div className="relative">
-                    <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                    <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 p-8">
+                    <div className="absolute top-4 left-4 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                    <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 p-8">
                       <div className="flex items-center mb-6">
-                        <Package className="h-6 w-6 text-storePrimary-500 mr-3" />
+                        <Package className="h-6 w-6 text-pink-500 mr-3" />
                         <h2 className="text-2xl font-bold text-gray-800">Shipping Information</h2>
                       </div>
                       
@@ -467,7 +467,7 @@ export default function BabyKidsCheckout({
                               value={shippingFirstName}
                               onChange={(e) => setShippingFirstName(e.target.value)}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingFirstName ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingFirstName ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             />
                             {shippingErrors.shippingFirstName && (
@@ -481,7 +481,7 @@ export default function BabyKidsCheckout({
                               value={shippingLastName}
                               onChange={(e) => setShippingLastName(e.target.value)}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingLastName ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingLastName ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             />
                             {shippingErrors.shippingLastName && (
@@ -498,7 +498,7 @@ export default function BabyKidsCheckout({
                               value={shippingEmail}
                               onChange={(e) => setShippingEmail(e.target.value)}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingEmail ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingEmail ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             />
                             {shippingErrors.shippingEmail && (
@@ -512,7 +512,7 @@ export default function BabyKidsCheckout({
                               value={shippingPhone}
                               onChange={(e) => setShippingPhone(e.target.value)}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingPhone ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingPhone ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             />
                             {shippingErrors.shippingPhone && (
@@ -527,7 +527,7 @@ export default function BabyKidsCheckout({
                             <select
                               value={shippingCountry}
                               onChange={(e) => handleShippingCountryChange(e.target.value)}
-                              className="w-full px-4 py-3 border-2 border-storePrimary-300 rounded-2xl focus:outline-none focus:border-storePrimary-500"
+                              className="w-full px-4 py-3 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500"
                             >
                               <option value="">Sélectionner le pays</option>
                               {countries?.map((country: any) => (
@@ -544,7 +544,7 @@ export default function BabyKidsCheckout({
                               onChange={(e) => handleShippingStateChange(e.target.value)}
                               disabled={!shippingCountry || loadingStates}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingState ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingState ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             >
                               <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
@@ -572,7 +572,7 @@ export default function BabyKidsCheckout({
                               }}
                               disabled={!shippingState || loadingCities}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingCity ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingCity ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             >
                               <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
@@ -593,7 +593,7 @@ export default function BabyKidsCheckout({
                               value={shippingZip}
                               onChange={(e) => setShippingZip(e.target.value)}
                               className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                shippingErrors.shippingZip ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                shippingErrors.shippingZip ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             />
                             {shippingErrors.shippingZip && (
@@ -615,7 +615,7 @@ export default function BabyKidsCheckout({
                                 
                                 return (
                                   <div key={method.id} className={`relative border-2 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
-                                    selectedShippingId === method.id ? 'border-storePrimary-500 bg-storePrimary-50' : 'border-storePrimary-300 hover:border-storePrimary-400'
+                                    selectedShippingId === method.id ? 'border-pink-500 bg-pink-50' : 'border-pink-300 hover:border-pink-400'
                                   }`}>
                                     <div className="flex items-center">
                                       <input
@@ -624,7 +624,7 @@ export default function BabyKidsCheckout({
                                         type="radio"
                                         checked={selectedShippingId === method.id}
                                         onChange={() => setSelectedShippingId(method.id)}
-                                        className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300"
+                                        className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                       />
                                       <label htmlFor={`shipping-${method.id}`} className="ml-4 flex-1 cursor-pointer">
                                         <div className="flex justify-between items-center">
@@ -634,7 +634,7 @@ export default function BabyKidsCheckout({
                                               {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
                                             </span>
                                           </div>
-                                          <span className="text-lg font-bold text-storePrimary-500">
+                                          <span className="text-lg font-bold text-pink-500">
                                             {shippingCost === 0 ? 'Gratuit' : formatCurrency(shippingCost, storeSettings, currencies)}
                                           </span>
                                         </div>
@@ -656,7 +656,7 @@ export default function BabyKidsCheckout({
                             value={shippingStreet}
                             onChange={(e) => setShippingStreet(e.target.value)}
                             className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                              shippingErrors.shippingStreet ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                             }`}
                           />
                           {shippingErrors.shippingStreet && (
@@ -685,14 +685,14 @@ export default function BabyKidsCheckout({
                             value={orderNotes}
                             onChange={(e) => setOrderNotes(e.target.value)}
                             placeholder="Special instructions for your order"
-                            className="w-full px-4 py-3 border-2 border-storePrimary-300 rounded-2xl focus:outline-none focus:border-storePrimary-500"
+                            className="w-full px-4 py-3 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500"
                           />
                         </div>
 
                         <div className="flex justify-end">
                           <button
                             type="submit"
-                            className="bg-storePrimary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-storePrimary-600 transition-colors"
+                            className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors"
                           >
                             Continue to Review
                           </button>
@@ -722,8 +722,8 @@ export default function BabyKidsCheckout({
                               const itemTotal = itemPrice * item.quantity;
                               
                               return (
-                                <div key={item.id} className="flex items-center space-x-4 p-4 bg-storePrimary-50 rounded-2xl border-2 border-storePrimary-200">
-                                  <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 border-storePrimary-300">
+                                <div key={item.id} className="flex items-center space-x-4 p-4 bg-pink-50 rounded-2xl border-2 border-pink-200">
+                                  <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 border-pink-300">
                                     <img
                                       src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name)}`}
                                       alt={item.name}
@@ -735,7 +735,7 @@ export default function BabyKidsCheckout({
                                     <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                                     <p className="text-sm text-gray-600">Category: {item.category.name}</p>
                                   </div>
-                                  <div className="text-lg font-bold text-storePrimary-500">
+                                  <div className="text-lg font-bold text-pink-500">
                                     {formatCurrency(itemTotal, storeSettings, currencies)}
                                   </div>
                                 </div>
@@ -748,23 +748,23 @@ export default function BabyKidsCheckout({
                         <div>
                           <h3 className="text-lg font-bold text-gray-800 mb-4">Shipping Information</h3>
                           
-                          <div className="bg-storePrimary-50 p-6 rounded-2xl border-2 border-storePrimary-200">
+                          <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <p className="text-sm font-bold text-storePrimary-600 mb-2">Contact Details</p>
+                                <p className="text-sm font-bold text-pink-600 mb-2">Contact Details</p>
                                 <p className="text-gray-800">{shippingFirstName} {shippingLastName}</p>
                                 <p className="text-gray-800">{shippingEmail}</p>
                                 <p className="text-gray-800">{shippingPhone}</p>
                               </div>
                               <div>
-                                <p className="text-sm font-bold text-storePrimary-600 mb-2">Adresse de livraison</p>
+                                <p className="text-sm font-bold text-pink-600 mb-2">Adresse de livraison</p>
                                 <p className="text-gray-800">{shippingStreet}</p>
                                 <p className="text-gray-800">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                                 <p className="text-gray-800">{selectedCountryName}</p>
                               </div>
                             </div>
-                            <div className="mt-6 pt-6 border-t-2 border-storePrimary-300">
-                              <p className="text-sm font-bold text-storePrimary-600 mb-2">Méthode de livraison</p>
+                            <div className="mt-6 pt-6 border-t-2 border-pink-300">
+                              <p className="text-sm font-bold text-pink-600 mb-2">Méthode de livraison</p>
                               <p className="text-gray-800">
                                 {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
                               </p>
@@ -777,7 +777,7 @@ export default function BabyKidsCheckout({
                           <div>
                             <h3 className="text-lg font-bold text-gray-800 mb-4">Notes de commande</h3>
                             
-                            <div className="bg-storePrimary-50 p-6 rounded-2xl border-2 border-storePrimary-200">
+                            <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                               <p className="text-gray-800">{orderNotes}</p>
                             </div>
                           </div>
@@ -788,14 +788,14 @@ export default function BabyKidsCheckout({
                         <button
                           type="button"
                           onClick={() => setCurrentStep('shipping')}
-                          className="border-2 border-storePrimary-500 text-storePrimary-500 px-6 py-3 rounded-full font-bold hover:bg-storePrimary-500 hover:text-white transition-colors"
+                          className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
                         >
                           Back to Shipping
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
-                          className="bg-storePrimary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-storePrimary-600 transition-colors"
+                          className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors"
                         >
                           Continue to Payment
                         </button>
@@ -824,7 +824,7 @@ export default function BabyKidsCheckout({
                               type="checkbox"
                               checked={sameAsShipping}
                               onChange={(e) => setSameAsShipping(e.target.checked)}
-                              className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300 rounded"
+                              className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300 rounded"
                             />
                             <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-gray-800 font-medium">
                               Same as shipping address
@@ -832,7 +832,7 @@ export default function BabyKidsCheckout({
                           </div>
                           
                           {!sameAsShipping && (
-                            <div className="bg-storePrimary-50 p-6 rounded-2xl border-2 border-storePrimary-200">
+                            <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                               <p className="text-sm text-gray-600">Le formulaire d'adresse de facturation s'affichera ici.</p>
                             </div>
                           )}
@@ -846,7 +846,7 @@ export default function BabyKidsCheckout({
                             {/* Cash on Delivery - Only show if enabled */}
                             {enabledPaymentMethods.cod && (
                               <div className={`relative border-2 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
-                                paymentMethod === 'cod' ? 'border-storePrimary-500 bg-storePrimary-50' : 'border-storePrimary-300 hover:border-storePrimary-400'
+                                paymentMethod === 'cod' ? 'border-pink-500 bg-pink-50' : 'border-pink-300 hover:border-pink-400'
                               }`}>
                                 <div className="flex items-center">
                                   <input
@@ -855,7 +855,7 @@ export default function BabyKidsCheckout({
                                     type="radio"
                                     checked={paymentMethod === 'cod'}
                                     onChange={() => setPaymentMethod('cod')}
-                                    className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300"
+                                    className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                   />
                                   <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-sm font-bold text-gray-800">Cash on Delivery</span>
@@ -868,7 +868,7 @@ export default function BabyKidsCheckout({
                             {/* WhatsApp Payment */}
                             {enabledPaymentMethods.whatsapp && (
                               <div className={`relative border-2 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
-                                paymentMethod === 'whatsapp' ? 'border-storePrimary-500 bg-storePrimary-50' : 'border-storePrimary-300 hover:border-storePrimary-400'
+                                paymentMethod === 'whatsapp' ? 'border-pink-500 bg-pink-50' : 'border-pink-300 hover:border-pink-400'
                               }`}>
                                 <div className="flex items-center">
                                   <input
@@ -877,7 +877,7 @@ export default function BabyKidsCheckout({
                                     type="radio"
                                     checked={paymentMethod === 'whatsapp'}
                                     onChange={() => setPaymentMethod('whatsapp')}
-                                    className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300"
+                                    className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                   />
                                   <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-sm font-bold text-gray-800">WhatsApp</span>
@@ -890,7 +890,7 @@ export default function BabyKidsCheckout({
                             {/* Telegram Payment */}
                             {enabledPaymentMethods.telegram && (
                               <div className={`relative border-2 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
-                                paymentMethod === 'telegram' ? 'border-storePrimary-500 bg-storePrimary-50' : 'border-storePrimary-300 hover:border-storePrimary-400'
+                                paymentMethod === 'telegram' ? 'border-pink-500 bg-pink-50' : 'border-pink-300 hover:border-pink-400'
                               }`}>
                                 <div className="flex items-center">
                                   <input
@@ -899,7 +899,7 @@ export default function BabyKidsCheckout({
                                     type="radio"
                                     checked={paymentMethod === 'telegram'}
                                     onChange={() => setPaymentMethod('telegram')}
-                                    className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300"
+                                    className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                   />
                                   <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-sm font-bold text-gray-800">Telegram</span>
@@ -943,7 +943,7 @@ export default function BabyKidsCheckout({
                               
                               return (
                                 <div key={method} className={`relative border-2 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
-                                  paymentMethod === method ? 'border-storePrimary-500 bg-storePrimary-50' : 'border-storePrimary-300 hover:border-storePrimary-400'
+                                  paymentMethod === method ? 'border-pink-500 bg-pink-50' : 'border-pink-300 hover:border-pink-400'
                                 }`}>
                                   <div className="flex items-center">
                                     <input
@@ -952,7 +952,7 @@ export default function BabyKidsCheckout({
                                       type="radio"
                                       checked={paymentMethod === method}
                                       onChange={() => setPaymentMethod(method)}
-                                      className="h-4 w-4 text-storePrimary-500 focus:ring-storePrimary-500 border-storePrimary-300"
+                                      className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                     />
                                     <label htmlFor={`payment-${method}`} className="ml-4 flex-1 cursor-pointer">
                                       <span className="block text-sm font-bold text-gray-800">
@@ -966,9 +966,9 @@ export default function BabyKidsCheckout({
                                   
                                   {/* Bank Transfer Details */}
                                   {method === 'bank' && paymentMethod === 'bank' && config.details && (
-                                    <div className="mt-4 p-4 bg-storePrimary-50 border-2 border-storePrimary-200 rounded-2xl">
-                                      <h4 className="text-sm font-bold text-storePrimary-800 mb-2">Bank Transfer Details</h4>
-                                      <div className="text-sm text-storePrimary-700 whitespace-pre-line">
+                                    <div className="mt-4 p-4 bg-pink-50 border-2 border-pink-200 rounded-2xl">
+                                      <h4 className="text-sm font-bold text-pink-800 mb-2">Bank Transfer Details</h4>
+                                      <div className="text-sm text-pink-700 whitespace-pre-line">
                                         {config.details}
                                       </div>
                                     </div>
@@ -992,7 +992,7 @@ export default function BabyKidsCheckout({
                                 onChange={handleWhatsAppNumberChange}
                                 placeholder="+1234567890"
                                 className={`w-full px-4 py-3 border-2 rounded-2xl focus:outline-none transition-colors ${
-                                  paymentErrors.whatsappNumber ? 'border-red-500' : 'border-storePrimary-300 focus:border-storePrimary-500'
+                                  paymentErrors.whatsappNumber ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                                 }`}
                               />
                               <p className="mt-2 text-sm text-gray-600">
@@ -1010,14 +1010,14 @@ export default function BabyKidsCheckout({
                         <button
                           type="button"
                           onClick={() => setCurrentStep('review')}
-                          className="border-2 border-storePrimary-500 text-storePrimary-500 px-6 py-3 rounded-full font-bold hover:bg-storePrimary-500 hover:text-white transition-colors"
+                          className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
                         >
                           Back to Review
                         </button>
                         <button
                           type="button"
                           onClick={handlePlaceOrder}
-                          className="bg-storePrimary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-storePrimary-600 transition-colors flex items-center gap-3"
+                          className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors flex items-center gap-3"
                         >
                           <Lock className="w-5 h-5" />Passer la commande</button>
                       </div>

@@ -173,9 +173,9 @@ function BabyKidsProductDetailContent({
         theme={store.theme}
       >
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-16 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -184,7 +184,7 @@ function BabyKidsProductDetailContent({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             {/* Breadcrumbs */}
             <nav className="flex items-center space-x-2 text-sm mb-8 store-breadcrumb">
-              <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-storePrimary-600 transition-colors">
+              <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-pink-600 transition-colors">
                 Home
               </a>
               <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -192,7 +192,7 @@ function BabyKidsProductDetailContent({
               </svg>
               {product.category && (
                 <>
-                  <Link href={generateStoreUrl('store.products', store) + '?category=' + product.category.id} className="text-gray-500 hover:text-storePrimary-500 transition-colors">{product.category.name}</Link>
+                  <Link href={generateStoreUrl('store.products', store) + '?category=' + product.category.id} className="text-gray-500 hover:text-pink-500 transition-colors">{product.category.name}</Link>
                   <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
@@ -203,7 +203,7 @@ function BabyKidsProductDetailContent({
             
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">{product.name}</h1>
-              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
                 Perfect for your little ones
               </p>
@@ -217,8 +217,8 @@ function BabyKidsProductDetailContent({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Product Images */}
               <div className="relative">
-                <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 overflow-hidden">
+                <div className="absolute top-4 left-4 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 overflow-hidden">
                   {/* Main Image */}
                   <div className="aspect-square overflow-hidden">
                     <img
@@ -233,14 +233,14 @@ function BabyKidsProductDetailContent({
                   
                   {/* Image Thumbnails */}
                   {images.length > 1 && (
-                    <div className="p-4 bg-storePrimary-50">
+                    <div className="p-4 bg-pink-50">
                       <div className="flex space-x-3 overflow-x-auto">
                         {images.map((image, index) => (
                           <button
                             key={index}
                             onClick={() => setSelectedImage(index)}
                             className={`flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
-                              selectedImage === index ? 'border-storePrimary-500' : 'border-storePrimary-200'
+                              selectedImage === index ? 'border-pink-500' : 'border-pink-200'
                             }`}
                           >
                             <img
@@ -263,7 +263,7 @@ function BabyKidsProductDetailContent({
               <div className="bg-white p-8">
                   {/* Category */}
                   {product.category && (
-                    <span className="bg-storePrimary-500 text-white px-4 py-2 rounded-full text-sm font-bold inline-block mb-4">
+                    <span className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold inline-block mb-4">
                       {product.category.name}
                     </span>
                   )}
@@ -350,8 +350,8 @@ function BabyKidsProductDetailContent({
                                   onClick={() => handleVariantChange(variant.name, value)}
                                   className={`px-4 py-2 rounded-full border-2 font-semibold transition-all ${
                                     selectedVariants[variant.name] === value
-                                      ? 'border-storePrimary-500 bg-storePrimary-500 text-white'
-                                      : 'border-storePrimary-300 text-storePrimary-500 hover:border-storePrimary-500'
+                                      ? 'border-pink-500 bg-pink-500 text-white'
+                                      : 'border-pink-300 text-pink-500 hover:border-pink-500'
                                   }`}
                                 >
                                   {value}
@@ -370,7 +370,7 @@ function BabyKidsProductDetailContent({
                     <div className="flex items-center space-x-3">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="w-10 h-10 bg-storePrimary-100 text-storePrimary-500 rounded-full font-bold hover:bg-storePrimary-200 transition-colors"
+                        className="w-10 h-10 bg-pink-100 text-pink-500 rounded-full font-bold hover:bg-pink-200 transition-colors"
                       >
                         -
                       </button>
@@ -379,7 +379,7 @@ function BabyKidsProductDetailContent({
                       </span>
                       <button
                         onClick={() => setQuantity(quantity + 1)}
-                        className="w-10 h-10 bg-storePrimary-100 text-storePrimary-500 rounded-full font-bold hover:bg-storePrimary-200 transition-colors"
+                        className="w-10 h-10 bg-pink-100 text-pink-500 rounded-full font-bold hover:bg-pink-200 transition-colors"
                       >
                         +
                       </button>
@@ -397,7 +397,7 @@ function BabyKidsProductDetailContent({
                           }}
                           storeSlug={store.slug}
                           store={store}
-                          className="w-full h-12 py-3 rounded-full font-bold text-lg bg-storePrimary-500 text-white hover:bg-storePrimary-600 transition-all duration-300 shadow-lg flex items-center justify-center"
+                          className="w-full h-12 py-3 rounded-full font-bold text-lg bg-pink-500 text-white hover:bg-pink-600 transition-all duration-300 shadow-lg flex items-center justify-center"
                           isShowOption={false}
                         />
                       </div>
@@ -407,8 +407,8 @@ function BabyKidsProductDetailContent({
                         disabled={wishlistLoading}
                         className={`h-12 px-6 rounded-full font-bold transition-all duration-300 shadow-lg flex items-center justify-center space-x-2 ${
                           isProductInWishlist
-                            ? 'bg-storePrimary-500 text-white'
-                            : 'border-2 border-storePrimary-500 text-storePrimary-500 hover:bg-storePrimary-500 hover:text-white'
+                            ? 'bg-pink-500 text-white'
+                            : 'border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white'
                         } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                       >
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -428,7 +428,7 @@ function BabyKidsProductDetailContent({
                             }}
                             storeSlug={store.slug}
                             store={store}
-                            className="w-full h-12 py-3 rounded-full font-bold text-lg bg-storePrimary-500 text-white hover:bg-storePrimary-600 transition-all duration-300 shadow-lg flex items-center justify-center"
+                            className="w-full h-12 py-3 rounded-full font-bold text-lg bg-pink-500 text-white hover:bg-pink-600 transition-all duration-300 shadow-lg flex items-center justify-center"
                             isShowOption={false}
                           />
                         </div>
@@ -441,20 +441,20 @@ function BabyKidsProductDetailContent({
 
             {/* Product Tabs */}
             <div className="mt-16 relative">
-              <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-              <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 overflow-hidden">
+              <div className="absolute top-4 left-4 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+              <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 overflow-hidden">
                 {/* Tab Headers */}
                 <div className="p-6">
                   <h2 className="text-2xl font-bold text-gray-800">Product Information</h2>
                 </div>
                 
-                <div className="flex border-b border-storePrimary-200">
+                <div className="flex border-b border-pink-200">
                   <button
                     onClick={() => setActiveTab('description')}
                     className={`px-6 py-4 font-bold transition-colors ${
                       activeTab === 'description'
-                        ? 'bg-storePrimary-100 text-storePrimary-600 border-b-4 border-storePrimary-500'
-                        : 'text-gray-600 hover:text-storePrimary-600 hover:bg-storePrimary-50'
+                        ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
+                        : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                     }`}
                   >Description</button>
                   {product.specifications && (
@@ -462,8 +462,8 @@ function BabyKidsProductDetailContent({
                       onClick={() => setActiveTab('specifications')}
                       className={`px-6 py-4 font-bold transition-colors ${
                         activeTab === 'specifications'
-                          ? 'bg-storePrimary-100 text-storePrimary-600 border-b-4 border-storePrimary-500'
-                          : 'text-gray-600 hover:text-storePrimary-600 hover:bg-storePrimary-50'
+                          ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
+                          : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                       }`}
                     >
                       Specifications
@@ -474,8 +474,8 @@ function BabyKidsProductDetailContent({
                       onClick={() => setActiveTab('details')}
                       className={`px-6 py-4 font-bold transition-colors ${
                         activeTab === 'details'
-                          ? 'bg-storePrimary-100 text-storePrimary-600 border-b-4 border-storePrimary-500'
-                          : 'text-gray-600 hover:text-storePrimary-600 hover:bg-storePrimary-50'
+                          ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
+                          : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                       }`}
                     >
                       Details
@@ -486,8 +486,8 @@ function BabyKidsProductDetailContent({
                       onClick={() => setActiveTab('advanced')}
                       className={`px-6 py-4 font-bold transition-colors ${
                         activeTab === 'advanced'
-                          ? 'bg-storePrimary-100 text-storePrimary-600 border-b-4 border-storePrimary-500'
-                          : 'text-gray-600 hover:text-storePrimary-600 hover:bg-storePrimary-50'
+                          ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
+                          : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                       }`}
                     >
                       Advanced
@@ -497,8 +497,8 @@ function BabyKidsProductDetailContent({
                     onClick={() => setActiveTab('reviews')}
                     className={`px-6 py-4 font-bold transition-colors ${
                       activeTab === 'reviews'
-                        ? 'bg-storePrimary-100 text-storePrimary-600 border-b-4 border-storePrimary-500'
-                        : 'text-gray-600 hover:text-storePrimary-600 hover:bg-storePrimary-50'
+                        ? 'bg-pink-100 text-pink-600 border-b-4 border-pink-500'
+                        : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                     }`}
                   >
                     Reviews ({totalReviews || 0})
@@ -534,12 +534,12 @@ function BabyKidsProductDetailContent({
                         <h3 className="text-xl font-bold text-gray-900 mb-2">Advanced Product Information</h3>
                         <p className="text-gray-600 mb-6">Baby & kids product specifications and custom attributes</p>
                       </div>
-                      <div className="bg-storePrimary-50 border border-storePrimary-200 rounded-2xl overflow-hidden">
-                        <div className="divide-y divide-storePrimary-100">
+                      <div className="bg-pink-50 border border-pink-200 rounded-2xl overflow-hidden">
+                        <div className="divide-y divide-pink-100">
                           {customFields.map((field, index) => (
-                            <div key={index} className="px-6 py-4 hover:bg-storePrimary-100 transition-colors">
+                            <div key={index} className="px-6 py-4 hover:bg-pink-100 transition-colors">
                               <div className="flex flex-col sm:flex-row sm:items-center">
-                                <dt className="text-sm font-bold text-storePrimary-900 sm:w-1/3 mb-1 sm:mb-0">
+                                <dt className="text-sm font-bold text-pink-900 sm:w-1/3 mb-1 sm:mb-0">
                                   {field.name || field.label || `Field ${index + 1}`}
                                 </dt>
                                 <dd className="text-sm text-gray-700 sm:w-2/3">
@@ -575,7 +575,7 @@ function BabyKidsProductDetailContent({
                             }
                             setShowReviewModal(true);
                           }}
-                          className="px-6 py-3 bg-storePrimary-500 text-white rounded-2xl hover:bg-storePrimary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-storePrimary-500 font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                          className="px-6 py-3 bg-pink-500 text-white rounded-2xl hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
                           Write a Review
                         </button>
@@ -583,10 +583,10 @@ function BabyKidsProductDetailContent({
                       {productReviews && productReviews.length > 0 ? (
                         <div className="space-y-4 max-h-80 overflow-y-auto">
                           {/* Rating Summary */}
-                          <div className="bg-storePrimary-50 rounded-2xl p-6 border-2 border-storePrimary-200">
+                          <div className="bg-pink-50 rounded-2xl p-6 border-2 border-pink-200">
                             <div className="flex items-center gap-6">
                               <div className="text-center">
-                                <div className="text-4xl font-bold text-storePrimary-600">{Number(averageRating || product.average_rating || product.rating || 0).toFixed(1)}</div>
+                                <div className="text-4xl font-bold text-pink-600">{Number(averageRating || product.average_rating || product.rating || 0).toFixed(1)}</div>
                                 <div className="flex items-center justify-center gap-1 mb-2">
                                   {[...Array(5)].map((_, i) => {
                                     const rating = averageRating || 0;
@@ -604,11 +604,11 @@ function BabyKidsProductDetailContent({
 
                           {/* Reviews List */}
                           {productReviews.map((review) => (
-                              <div key={review.id} className="bg-white rounded-2xl p-6 border-2 border-storePrimary-200">
+                              <div key={review.id} className="bg-white rounded-2xl p-6 border-2 border-pink-200">
                                 <div className="flex items-center mb-4">
                                   <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-storePrimary-200 rounded-full flex items-center justify-center">
-                                      <span className="text-storePrimary-600 font-bold">{review.customer_name?.charAt(0) || 'U'}</span>
+                                    <div className="w-10 h-10 bg-pink-200 rounded-full flex items-center justify-center">
+                                      <span className="text-pink-600 font-bold">{review.customer_name?.charAt(0) || 'U'}</span>
                                     </div>
                                     <div>
                                       <div className="font-bold text-gray-800">{review.customer_name || 'Anonymous'}</div>
@@ -628,8 +628,8 @@ function BabyKidsProductDetailContent({
                                 )}
                                 <p className="text-gray-700">{review.content}</p>
                                 {review.store_response && (
-                                  <div className="bg-storePrimary-50 border-l-4 border-storePrimary-500 p-4 mt-4">
-                                    <div className="font-bold text-storePrimary-600 mb-2">Store Response:</div>
+                                  <div className="bg-pink-50 border-l-4 border-pink-500 p-4 mt-4">
+                                    <div className="font-bold text-pink-600 mb-2">Store Response:</div>
                                     <p className="text-gray-700">{review.store_response}</p>
                                   </div>
                                 )}
@@ -638,8 +638,8 @@ function BabyKidsProductDetailContent({
                         </div>
                       ) : (
                         <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-storePrimary-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-storePrimary-500" fill="currentColor" viewBox="0 0 20 20">
+                          <div className="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-8 h-8 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
                           </div>
@@ -657,7 +657,7 @@ function BabyKidsProductDetailContent({
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="bg-storePrimary-50 py-16">
+          <div className="bg-pink-50 py-16">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-gray-800 mb-4">You Might Also Love</h2>
@@ -694,8 +694,8 @@ function BabyKidsProductDetailContent({
               <div className="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div className="absolute inset-0 bg-gray-500 opacity-75" onClick={() => setShowReviewModal(false)}></div>
               </div>
-              <div className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-storePrimary-100">
-                <div className="bg-gradient-to-br from-storePrimary-50 to-storePrimary-100 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
+              <div className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-pink-100">
+                <div className="bg-gradient-to-br from-pink-50 to-pink-100 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                       <h3 className="text-2xl font-bold text-slate-900 mb-6">Write a Review</h3>
@@ -765,17 +765,17 @@ function BabyKidsProductDetailContent({
                         </div>
                         <div>
                           <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
-                          <input type="text" id="review-title" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-storePrimary-500 focus:border-storePrimary-500" placeholder="Give your review a title" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required />
+                          <input type="text" id="review-title" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Give your review a title" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required />
                         </div>
                         <div>
                           <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
-                          <textarea id="review-content" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-storePrimary-500 focus:border-storePrimary-500" placeholder="Write your review here" value={reviewContent} onChange={(e) => setReviewContent(e.target.value)} required></textarea>
+                          <textarea id="review-content" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Write your review here" value={reviewContent} onChange={(e) => setReviewContent(e.target.value)} required></textarea>
                         </div>
                         <div className="mt-8 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
-                          <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-storePrimary-500 text-base font-bold text-white hover:bg-storePrimary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-storePrimary-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                          <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-pink-500 text-base font-bold text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
                             {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
                           </button>
-                          <button type="button" className="mt-3 w-full inline-flex justify-center rounded-2xl border-2 border-storePrimary-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-storePrimary-50 hover:border-storePrimary-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-storePrimary-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" onClick={() => setShowReviewModal(false)}>
+                          <button type="button" className="mt-3 w-full inline-flex justify-center rounded-2xl border-2 border-pink-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-pink-50 hover:border-pink-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" onClick={() => setShowReviewModal(false)}>
                             Cancel
                           </button>
                         </div>

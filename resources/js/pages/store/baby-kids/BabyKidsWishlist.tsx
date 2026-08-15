@@ -84,10 +84,10 @@ function BabyKidsWishlistContent({
     return (
       <>
         {/* Hero Section */}
-        <div className="bg-storePrimary-50 py-16 relative overflow-hidden store-page-header">
+        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
           {/* Playful Background */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -96,7 +96,7 @@ function BabyKidsWishlistContent({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">My Wishlist</h1>
-              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
                 Your favorite items for your little ones
               </p>
@@ -120,8 +120,8 @@ function BabyKidsWishlistContent({
                   {items.map((item) => (
                     <div key={item.id} className="group relative">
                       {/* Toy Block Style Card */}
-                      <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                      <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 overflow-hidden hover:shadow-2xl transition-all duration-300">
+                      <div className="absolute top-4 left-4 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                      <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 overflow-hidden hover:shadow-2xl transition-all duration-300">
                         <div className="flex flex-col md:flex-row">
                           {/* Product Image */}
                           <div className="relative w-full md:w-48 h-48 overflow-hidden">
@@ -157,13 +157,13 @@ function BabyKidsWishlistContent({
                           {/* Content */}
                           <div className="flex-1 p-6">
                             {/* Category */}
-                            <span className="bg-storePrimary-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-3">
+                            <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-3">
                               {item.category.name}
                             </span>
 
                             {/* Title */}
                             <a href={generateStoreUrl('store.product', store, { id: item.product_id || item.id })}>
-                              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-storePrimary-600 transition-colors duration-300 line-clamp-2">
+                              <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2">
                                 {item.name}
                               </h3>
                             </a>
@@ -182,7 +182,7 @@ function BabyKidsWishlistContent({
                             </div>
 
                             {/* Price and Button */}
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-storePrimary-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-pink-200">
                               <div className="flex items-center space-x-2">
                                 {item.sale_price ? (
                                   <>
@@ -203,7 +203,7 @@ function BabyKidsWishlistContent({
                               <button
                                 onClick={() => handleAddToCart(item)}
                                 disabled={item.stock <= 0}
-                                className="bg-storePrimary-500 text-white px-6 py-3 rounded-full font-bold hover:bg-storePrimary-600 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                                className="bg-pink-500 text-white px-6 py-3 rounded-full font-bold hover:bg-pink-600 transition-all duration-300 shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                               >
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
@@ -222,9 +222,9 @@ function BabyKidsWishlistContent({
               /* Empty State */
               <div className="text-center py-16">
                 <div className="relative inline-block">
-                  <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
-                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 p-12">
-                    <div className="w-20 h-20 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
+                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-12">
+                    <div className="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
                       <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                       </svg>
@@ -235,7 +235,7 @@ function BabyKidsWishlistContent({
                     </p>
                     <a
                       href={generateStoreUrl('store.products', store)}
-                      className="inline-flex items-center bg-storePrimary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-storePrimary-600 transition-colors shadow-lg"
+                      className="inline-flex items-center bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors shadow-lg"
                     >
                       Start Shopping
                     </a>
@@ -248,7 +248,7 @@ function BabyKidsWishlistContent({
 
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
-          <div className="bg-storePrimary-50 py-16">
+          <div className="bg-pink-50 py-16">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-gray-800 mb-4">You Might Also Love</h2>
@@ -284,7 +284,7 @@ function BabyKidsWishlistContent({
               <div className="text-center">
                 <a
                   href={generateStoreUrl('store.products', store)}
-                  className="inline-flex items-center bg-storePrimary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-storePrimary-600 transition-colors shadow-lg"
+                  className="inline-flex items-center bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors shadow-lg"
                 >
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />

@@ -150,23 +150,17 @@ function StoreLayoutContent({
     
     // Only inject overrides when vendor picked a non-default color
     if (selectedPreset && selectedPreset !== themeClasses.prefix) {
-      const colorRules = themeClasses.shades.map(shade => {
-        const varVal = `var(--color-store-primary-${shade})`;
-        return `
-          .bg-${themeClasses.prefix}-${shade} { background-color: ${varVal} !important; }
-          .text-${themeClasses.prefix}-${shade} { color: ${varVal} !important; }
-          .border-${themeClasses.prefix}-${shade} { border-color: ${varVal} !important; }
-          .ring-${themeClasses.prefix}-${shade} { --tw-ring-color: ${varVal} !important; }
-          .from-${themeClasses.prefix}-${shade} { --tw-gradient-from: ${varVal} !important; }
-          .to-${themeClasses.prefix}-${shade} { --tw-gradient-to: ${varVal} !important; }
-          .hover\\:bg-${themeClasses.prefix}-${shade}:hover { background-color: ${varVal} !important; }
-          .hover\\:text-${themeClasses.prefix}-${shade}:hover { color: ${varVal} !important; }
-          .hover\\:border-${themeClasses.prefix}-${shade}:hover { border-color: ${varVal} !important; }
-          .focus\\:border-${themeClasses.prefix}-${shade}:focus { border-color: ${varVal} !important; }
-          .focus\\:ring-${themeClasses.prefix}-${shade}:focus { --tw-ring-color: ${varVal} !important; }
-        `;
-      }).join('');
-      cssContent += colorRules;
+      // Tailwind v4 uses CSS variables like --color-pink-500 natively.
+      // We remap the theme's primary color family to the selected preset's CSS vars.
+      const overrideRules = themeClasses.shades.map(shade => {
+        return `--color-${themeClasses.prefix}-${shade}: var(--color-store-primary-${shade});`;
+      }).join('\n          ');
+      
+      cssContent += `
+        [data-theme="${selectedPreset}"] {
+          ${overrideRules}
+        }
+      `;
     }
 
     style.textContent = cssContent;

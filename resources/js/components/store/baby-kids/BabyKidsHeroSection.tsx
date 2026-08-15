@@ -27,17 +27,17 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
         </svg>
         
         {/* Gradient Overlay */}
-        <div className="absolute top-0 left-0 w-full h-full bg-pink-50 opacity-40"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-storePrimary-50 opacity-40"></div>
         
         {/* Baby Blocks & Toys */}
-        <div className="absolute top-20 left-20 w-16 h-16 bg-pink-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
+        <div className="absolute top-20 left-20 w-16 h-16 bg-storePrimary-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
         <div className="absolute top-40 right-32 w-12 h-12 bg-blue-300 rounded-full opacity-50 animate-float-delayed"></div>
         <div className="absolute bottom-32 left-40 w-20 h-20 bg-yellow-300 rounded-lg opacity-35 animate-float-slow transform -rotate-6"></div>
         <div className="absolute bottom-20 right-20 w-14 h-14 bg-green-300 rounded-full opacity-45 animate-bounce"></div>
         <div className="absolute top-1/3 left-1/4 w-8 h-8 bg-purple-300 rounded-lg opacity-30 animate-pulse transform rotate-45"></div>
         
         {/* Small Decorative Dots */}
-        <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-pink-400 rounded-full opacity-60 animate-ping"></div>
+        <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-storePrimary-400 rounded-full opacity-60 animate-ping"></div>
         <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-70 animate-pulse"></div>
         <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-yellow-400 rounded-full opacity-50 animate-bounce"></div>
         <div className="absolute top-3/4 left-1/4 w-2 h-2 bg-green-400 rounded-full opacity-60 animate-ping" style={{ animationDelay: '1s' }}></div>
@@ -48,9 +48,9 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
         <div className="text-center mb-16">
           {/* Badge */}
           <div className={`mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-flex items-center bg-pink-500 text-white px-8 py-4 rounded-full text-lg font-bold shadow-2xl">
+            <div className="inline-flex items-center bg-storePrimary-500 text-white px-8 py-4 rounded-full text-lg font-bold shadow-2xl">
               <div className="w-6 h-6 bg-white rounded-full mr-3 flex items-center justify-center">
-                <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-storePrimary-500 rounded-full animate-pulse"></div>
               </div>
               {content?.badge_text || 'New Arrivals 2024'}
             </div>
@@ -93,7 +93,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
               <div className="absolute bottom-4 left-4 right-4">
                 <a 
                   href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
-                  className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold hover:bg-pink-600 transition-colors duration-300 shadow-xl flex items-center justify-center"
+                  className="w-full bg-storePrimary-500 text-white py-3 rounded-2xl font-bold hover:bg-storePrimary-600 transition-colors duration-300 shadow-xl flex items-center justify-center"
                 >
                   <span>{content?.button_text || 'Shop Now'}</span>
                   <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

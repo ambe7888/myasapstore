@@ -57,10 +57,10 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
       {/* Toy Block Style Card */}
       <div className="relative">
         {/* Shadow Layer */}
-        <div className="absolute top-3 left-3 w-full h-full bg-pink-300 rounded-3xl opacity-50"></div>
+        <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-300 rounded-3xl opacity-50"></div>
         
         {/* Main Card */}
-        <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 overflow-hidden transition-all duration-300 group-hover:-translate-y-3 group-hover:shadow-2xl">
+        <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 overflow-hidden transition-all duration-300 group-hover:-translate-y-3 group-hover:shadow-2xl">
           {/* Product Image */}
           <div className="relative aspect-square overflow-hidden">
             <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
@@ -91,7 +91,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
             )}
             
             {/* Action Buttons */}
-            <div className={`absolute inset-0 bg-pink-500/20 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`absolute inset-0 bg-storePrimary-500/20 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
               <div className="flex space-x-3">
                 <button
                   onClick={async (e) => {
@@ -102,8 +102,8 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
                   disabled={wishlistLoading}
                   className={`p-3 rounded-full transition-all duration-300 shadow-lg transform hover:scale-110 ${
                     isProductInWishlist 
-                      ? 'bg-pink-500 text-white' 
-                      : 'bg-white text-pink-500 hover:bg-pink-500 hover:text-white'
+                      ? 'bg-storePrimary-500 text-white' 
+                      : 'bg-white text-storePrimary-500 hover:bg-storePrimary-500 hover:text-white'
                   } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -112,7 +112,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
                 </button>
                 <Link
                   href={generateStoreUrl('store.product', store,  { id: product.id })}
-                  className="p-3 bg-white rounded-full text-pink-500 hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-110"
+                  className="p-3 bg-white rounded-full text-storePrimary-500 hover:bg-storePrimary-500 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-110"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -126,7 +126,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
           {/* Product Info */}
           <div className="p-6">
             <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
-              <h3 className="font-bold text-gray-800 mb-3 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2 text-lg">
+              <h3 className="font-bold text-gray-800 mb-3 group-hover:text-storePrimary-600 transition-colors duration-300 line-clamp-2 text-lg">
                 {product.name}
               </h3>
             </Link>

@@ -64,7 +64,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
     <section className="py-20 bg-yellow-50 relative overflow-hidden">
       {/* Playful Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
         <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -90,7 +90,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
             >
               {/* Icon Container */}
               <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 ${
-                index % 4 === 0 ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                index % 4 === 0 ? 'bg-gradient-to-br from-storePrimary-400 to-storePrimary-500' :
                 index % 4 === 1 ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
                 index % 4 === 2 ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
                 'bg-gradient-to-br from-green-400 to-green-500'
@@ -100,7 +100,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
 
               {/* Content */}
               <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-pink-500 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-storePrimary-500 transition-colors duration-300">
                   {box.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -109,11 +109,11 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
               </div>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-400/10 to-blue-400/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-storePrimary-400/10 to-blue-400/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
               {/* Decorative Corner */}
               <div className={`absolute top-4 right-4 w-3 h-3 rounded-full ${
-                index % 4 === 0 ? 'bg-pink-300' :
+                index % 4 === 0 ? 'bg-storePrimary-300' :
                 index % 4 === 1 ? 'bg-blue-300' :
                 index % 4 === 2 ? 'bg-yellow-300' :
                 'bg-green-300'
@@ -135,7 +135,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={generateStoreUrl('store.products', store)}
-                className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-storePrimary-500 text-white font-semibold rounded-full hover:bg-storePrimary-600 transition-all duration-300 shadow-lg"
               >
                 <span>{content?.primary_button_text || 'Start Shopping'}</span>
                 <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -145,7 +145,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
               
               <Link
                 href="/size-guide"
-                className="inline-flex items-center px-8 py-4 border-2 border-pink-400 text-pink-500 font-semibold rounded-full hover:bg-pink-400 hover:text-white transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 border-2 border-storePrimary-400 text-storePrimary-500 font-semibold rounded-full hover:bg-storePrimary-400 hover:text-white transition-all duration-300"
               >
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />

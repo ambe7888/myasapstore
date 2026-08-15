@@ -47,21 +47,21 @@ export default function BabyKidsForgotPassword({
         storeContent={storeContent}
         customFooter={<BabyKidsFooter storeName={store.name} logo={store.logo} content={storeContent.footer} />}
       >
-        <div className="min-h-screen bg-pink-50 relative overflow-hidden store-page-header">
+        <div className="min-h-screen bg-storePrimary-50 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-20 w-16 h-16 bg-pink-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
+            <div className="absolute top-20 left-20 w-16 h-16 bg-storePrimary-300 rounded-lg opacity-40 animate-float transform rotate-12"></div>
             <div className="absolute top-40 right-32 w-12 h-12 bg-blue-300 rounded-full opacity-50 animate-float-delayed"></div>
             <div className="absolute bottom-32 left-40 w-20 h-20 bg-yellow-300 rounded-lg opacity-35 animate-float-slow transform -rotate-6"></div>
             <div className="absolute bottom-20 right-20 w-14 h-14 bg-green-300 rounded-full opacity-45 animate-bounce"></div>
             <div className="absolute top-1/3 left-1/4 w-8 h-8 bg-purple-300 rounded-lg opacity-30 animate-pulse transform rotate-45"></div>
-            <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-pink-400 rounded-full opacity-60 animate-ping"></div>
+            <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-storePrimary-400 rounded-full opacity-60 animate-ping"></div>
             <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-70 animate-pulse"></div>
           </div>
 
           <div className="flex items-center justify-center min-h-screen py-12 px-4 relative z-10">
             <div className="max-w-md w-full">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
+                <div className="w-20 h-20 bg-storePrimary-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
                   <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clipRule="evenodd" />
                   </svg>
@@ -84,9 +84,9 @@ export default function BabyKidsForgotPassword({
               )}
 
               <div className="relative">
-                <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-pink-300 opacity-40"></div>
+                <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-storePrimary-300 opacity-40"></div>
                 
-                <div className="relative bg-white rounded-2xl shadow-xl border-4 border-pink-400 p-8">
+                <div className="relative bg-white rounded-2xl shadow-xl border-4 border-storePrimary-400 p-8">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                       <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-3 flex items-center">
@@ -120,7 +120,7 @@ export default function BabyKidsForgotPassword({
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full bg-pink-500 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-pink-600 focus:ring-4 focus:ring-pink-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-storePrimary-500 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-storePrimary-600 focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {processing ? (
                         <div className="flex items-center justify-center space-x-2">

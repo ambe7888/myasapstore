@@ -100,225 +100,12 @@ function StoreLayoutContent({
     const style = document.createElement('style');
     style.id = 'store-custom-css';
     
-    let themeCss = '';
-    const activeTheme = theme || 'default';
-    
-    if (activeTheme === 'furniture-interior') {
-      themeCss = `
-        /* Furniture Theme Specific Overrides */
-        .bg-yellow-800, .bg-amber-800, .bg-amber-700, .bg-amber-900 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-yellow-900:hover, .hover\\:bg-amber-800:hover, .hover\\:bg-amber-900:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-yellow-800, .text-amber-800, .text-yellow-700, .text-amber-700, .text-amber-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-amber-50, .bg-yellow-50, .bg-yellow-100, .bg-amber-100 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-yellow-200, .border-amber-200, .border-amber-100 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-yellow-800, button.bg-yellow-800, a.bg-amber-700, button.bg-amber-700 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'cars-automotive') {
-      themeCss = `
-        /* Cars Theme Specific Overrides */
-        .bg-red-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-red-700:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-red-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-red-50 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-red-200 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-red-600, button.bg-red-600 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'beauty-cosmetics') {
-      themeCss = `
-        /* Beauty Theme Specific Overrides */
-        .bg-rose-500, .bg-rose-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-rose-600:hover, .hover\\:bg-rose-700:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-rose-500, .text-rose-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-rose-50 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-rose-200 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-rose-500, button.bg-rose-500, a.bg-rose-600, button.bg-rose-600 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'baby-kids') {
-      themeCss = `
-        /* Baby & Kids Theme Specific Overrides */
-        .bg-pink-300, .bg-pink-400, .bg-pink-500, .bg-pink-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-pink-500:hover, .hover\\:bg-pink-600:hover, .hover\\:bg-pink-700:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-pink-400, .text-pink-500, .text-pink-600 {
-          color: var(--theme-color) !important;
-        }
-        .hover\\:text-pink-500:hover, .hover\\:text-pink-600:hover {
-          color: var(--primary-hover-color) !important;
-        }
-        .bg-pink-50, .bg-pink-100, .bg-pink-200 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-pink-200, .border-pink-300, .border-pink-400, .border-pink-500 {
-          border-color: var(--theme-color) !important;
-        }
-        .focus\\:border-pink-500:focus {
-          border-color: var(--theme-color) !important;
-        }
-        .focus\\:ring-pink-200:focus, .ring-pink-200 {
-          --tw-ring-color: var(--theme-color) !important;
-        }
-        a.bg-pink-500, button.bg-pink-500, a.bg-pink-600, button.bg-pink-600, .text-white.bg-pink-500 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'perfume-fragrances') {
-      themeCss = `
-        /* Perfume Theme Specific Overrides */
-        .bg-purple-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-purple-700:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-purple-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-purple-50 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-purple-200 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-purple-600, button.bg-purple-600 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'electronics') {
-      themeCss = `
-        /* Electronics Theme Specific Overrides */
-        .bg-blue-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-blue-700:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .text-blue-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-blue-50 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-blue-200 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-blue-600, button.bg-blue-600 {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'fashion' || activeTheme === 'watches') {
-      themeCss = `
-        /* Dark/Fashion/Watches Theme Specific Overrides */
-        .bg-slate-900, .bg-black {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-slate-800:hover, .hover\\:bg-gray-900:hover {
-          background-color: var(--primary-hover-color) !important;
-        }
-        .bg-slate-50, .bg-gray-50 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-slate-200, .border-gray-200 {
-          border-color: var(--border-light-color) !important;
-        }
-        a.bg-slate-900, button.bg-slate-900, a.bg-black, button.bg-black {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    } else if (activeTheme === 'default') {
-      themeCss = `
-        /* Default Theme Specific Overrides */
-        .bg-primary, .bg-primary-500, .bg-primary-600 {
-          background-color: var(--theme-color) !important;
-          border-color: var(--theme-color) !important;
-        }
-        .hover\\:bg-primary:hover, .hover\\:bg-primary-600:hover, .hover\\:bg-primary-700:hover {
-          background-color: var(--primary-hover-color) !important;
-          border-color: var(--primary-hover-color) !important;
-        }
-        .text-primary, .text-primary-500, .text-primary-600 {
-          color: var(--theme-color) !important;
-        }
-        .bg-primary-50, .bg-primary\\/5, .bg-primary\\/10 {
-          background-color: var(--bg-light-color) !important;
-        }
-        .border-primary-200, .border-primary\\/20, .border-primary {
-          border-color: var(--theme-color) !important;
-        }
-        a.bg-primary, button.bg-primary, a.text-primary:hover, button.text-primary:hover {
-          color: var(--btn-text-color) !important;
-        }
-      `;
-    }
-
-    // Only apply theme color overrides if user explicitly set a custom primary color (non-empty string)
-    const hasCustomPrimaryColor = !!(store?.primary_color && store.primary_color.trim() !== '');
-
     let cssContent = `
       :root {
-        ${hasCustomPrimaryColor ? `--theme-color: ${store.primary_color};` : ''}
         ${store?.button_radius ? `--radius: ${store.button_radius};` : ''}
-        --btn-add-to-cart-color: ${store?.button_color_add_to_cart || (hasCustomPrimaryColor ? store!.primary_color : 'var(--theme-color, #4f46e5)')};
         --btn-buy-now-color: ${store?.button_color_buy_now || '#16a34a'};
       }
     `;
-
-    // Apply theme-specific color overrides ONLY when user set a custom color
-    if (hasCustomPrimaryColor) {
-      cssContent += `
-        :root {
-          --primary-hover-color: color-mix(in srgb, var(--theme-color) 85%, black);
-          --bg-light-color: color-mix(in srgb, var(--theme-color) 6%, white);
-          --border-light-color: color-mix(in srgb, var(--theme-color) 15%, white);
-        }
-        ${themeCss}
-      `;
-    }
 
     if (store?.text_button_color) {
       cssContent += `
@@ -501,12 +288,28 @@ function StoreLayoutContent({
     activeStore?.site_bg_color
   ]);
   
-  // Get theme-specific footer component
   const components = getThemeComponents(theme || 'default');
   const ThemeFooter = components.Footer;
 
+  const getDefaultThemePreset = (themeName: string) => {
+    switch (themeName) {
+      case 'furniture-interior': return 'amber';
+      case 'cars-automotive': return 'red';
+      case 'beauty-cosmetics': return 'rose';
+      case 'baby-kids': return 'pink';
+      case 'perfume-fragrances': return 'violet';
+      case 'electronics': return 'blue';
+      case 'fashion': return 'slate';
+      case 'watches': return 'slate';
+      case 'jewelry': return 'amber';
+      default: return 'indigo';
+    }
+  };
+
+  const activeThemePreset = activeStore?.primary_color || getDefaultThemePreset(theme || 'default');
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" data-theme={activeThemePreset}>
       <Header 
         storeName={storeName}
         logo={logo}

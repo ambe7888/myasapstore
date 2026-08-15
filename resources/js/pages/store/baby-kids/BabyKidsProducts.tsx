@@ -83,8 +83,8 @@ function WishlistButton({ productId }: { productId: number }) {
       onClick={() => toggleWishlist(productId)}
       className={`p-3 rounded-full transition-all duration-300 shadow-lg transform hover:scale-110 ${
         isInWishlist(productId) 
-          ? 'bg-pink-500 text-white' 
-          : 'bg-white text-pink-500 hover:bg-pink-500 hover:text-white border-2 border-pink-300'
+          ? 'bg-storePrimary-500 text-white' 
+          : 'bg-white text-storePrimary-500 hover:bg-storePrimary-500 hover:text-white border-2 border-storePrimary-300'
       }`}
     >
       <Heart className="w-4 h-4" fill="currentColor" />
@@ -191,20 +191,20 @@ export default function BabyKidsProducts({
         theme={store.theme}
       >
         {/* Breadcrumb */}
-        <div className="bg-pink-50 py-4 border-b border-pink-200 store-breadcrumb">
+        <div className="bg-storePrimary-50 py-4 border-b border-storePrimary-200 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-pink-600 hover:text-pink-700">{t("Home")}</Link>
-              <span className="mx-2 text-pink-400">/</span>
+              <Link href={generateStoreUrl('store.home', store)} className="text-storePrimary-600 hover:text-storePrimary-700">{t("Home")}</Link>
+              <span className="mx-2 text-storePrimary-400">/</span>
               <span className="text-gray-900 font-medium">Baby & Kids</span>
             </div>
           </div>
         </div>
 
         {/* Page Header */}
-        <div className="bg-pink-50 py-20 relative overflow-hidden store-page-header">
+        <div className="bg-storePrimary-50 py-20 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
             
         <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse store-page-header" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
@@ -214,7 +214,7 @@ export default function BabyKidsProducts({
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Baby & Kids Collection</h1>
-              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Adorable, comfortable, and safe clothing for your precious little ones
               </p>
@@ -228,13 +228,13 @@ export default function BabyKidsProducts({
               {/* Sidebar Filters */}
               <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                 <div className="relative">
-                  <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
-                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-6 sticky top-24">
+                  <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
+                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 p-6 sticky top-24">
                     <div className="flex items-center justify-between mb-6">
                       <h3 className="text-lg font-bold text-gray-800">Filter Options</h3>
                       <button
                         onClick={clearFilters}
-                        className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+                        className="text-sm text-storePrimary-600 hover:text-storePrimary-700 font-medium"
                       >
                         {t("Clear All")}
                       </button>
@@ -244,14 +244,14 @@ export default function BabyKidsProducts({
                     <div className="mb-6">
                       <label className="block text-sm font-medium text-gray-700 mb-2">{t("Search")}</label>
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-pink-400" />
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-storePrimary-400" />
                         <input
                           type="text"
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
                           placeholder="Search baby items..."
-                          className="w-full pl-10 pr-4 py-2 border-2 border-pink-200 rounded-xl focus:outline-none focus:border-pink-400"
+                          className="w-full pl-10 pr-4 py-2 border-2 border-storePrimary-200 rounded-xl focus:outline-none focus:border-storePrimary-400"
                         />
                       </div>
                     </div>
@@ -272,11 +272,11 @@ export default function BabyKidsProducts({
                                   setSelectedCategories(selectedCategories.filter(id => id !== category.id.toString()));
                                 }
                               }}
-                              className="mr-2 text-pink-500 focus:ring-pink-400 rounded"
+                              className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400 rounded"
                             />
                             <span className="text-sm text-gray-700">{category.name}</span>
                             {category.products_count && (
-                              <span className="ml-auto text-xs text-gray-500 bg-pink-100 px-2 py-1 rounded-full">({category.products_count})</span>
+                              <span className="ml-auto text-xs text-gray-500 bg-storePrimary-100 px-2 py-1 rounded-full">({category.products_count})</span>
                             )}
                           </label>
                         ))}
@@ -292,7 +292,7 @@ export default function BabyKidsProducts({
                           value={priceRange.min}
                           onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
                           placeholder={t("Min")}
-                          className="w-full px-3 py-2 border-2 border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-400"
+                          className="w-full px-3 py-2 border-2 border-storePrimary-200 rounded-xl text-sm focus:outline-none focus:border-storePrimary-400"
                         />
                         <span className="text-gray-500">-</span>
                         <input
@@ -300,7 +300,7 @@ export default function BabyKidsProducts({
                           value={priceRange.max}
                           onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
                           placeholder={t("Max")}
-                          className="w-full px-3 py-2 border-2 border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-400"
+                          className="w-full px-3 py-2 border-2 border-storePrimary-200 rounded-xl text-sm focus:outline-none focus:border-storePrimary-400"
                         />
                       </div>
                     </div>
@@ -322,11 +322,11 @@ export default function BabyKidsProducts({
                                     setSelectedBrands(selectedBrands.filter(id => id !== brand.id.toString()));
                                   }
                                 }}
-                                className="mr-2 text-pink-500 focus:ring-pink-400 rounded"
+                                className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400 rounded"
                               />
                               <span className="text-sm text-gray-700">{brand.name}</span>
                               {brand.products_count && (
-                                <span className="ml-auto text-xs text-gray-500 bg-pink-100 px-2 py-1 rounded-full">({brand.products_count})</span>
+                                <span className="ml-auto text-xs text-gray-500 bg-storePrimary-100 px-2 py-1 rounded-full">({brand.products_count})</span>
                               )}
                             </label>
                           ))}
@@ -345,7 +345,7 @@ export default function BabyKidsProducts({
                               name="rating"
                               checked={selectedRating === rating}
                               onChange={() => setSelectedRating(rating)}
-                              className="mr-2 text-pink-500 focus:ring-pink-400"
+                              className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400"
                             />
                             <div className="flex items-center">
                               {[1, 2, 3, 4, 5].map((star) => (
@@ -371,7 +371,7 @@ export default function BabyKidsProducts({
                             name="availability"
                             checked={availability === 'all'}
                             onChange={() => setAvailability('all')}
-                            className="mr-2 text-pink-500 focus:ring-pink-400"
+                            className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400"
                           />
                           <span className="text-sm text-gray-700">All Items</span>
                         </label>
@@ -381,7 +381,7 @@ export default function BabyKidsProducts({
                             name="availability"
                             checked={availability === 'in_stock'}
                             onChange={() => setAvailability('in_stock')}
-                            className="mr-2 text-pink-500 focus:ring-pink-400"
+                            className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400"
                           />
                           <span className="text-sm text-gray-700">{t("In Stock")}</span>
                         </label>
@@ -391,7 +391,7 @@ export default function BabyKidsProducts({
                             name="availability"
                             checked={availability === 'out_of_stock'}
                             onChange={() => setAvailability('out_of_stock')}
-                            className="mr-2 text-pink-500 focus:ring-pink-400"
+                            className="mr-2 text-storePrimary-500 focus:ring-storePrimary-400"
                           />
                           <span className="text-sm text-gray-700">{t("Out of Stock")}</span>
                         </label>
@@ -400,7 +400,7 @@ export default function BabyKidsProducts({
 
                     <button
                       onClick={applyFilters}
-                      className="w-full bg-pink-500 text-white py-3 px-6 rounded-full font-bold hover:bg-pink-600 transition-colors shadow-lg"
+                      className="w-full bg-storePrimary-500 text-white py-3 px-6 rounded-full font-bold hover:bg-storePrimary-600 transition-colors shadow-lg"
                     >
                       {t("Apply Filters")}
                     </button>
@@ -412,13 +412,13 @@ export default function BabyKidsProducts({
               <div className="lg:w-3/4">
                 {/* Toolbar */}
                 <div className="relative mb-8">
-                  <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
-                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-6">
+                  <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
+                  <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 p-6">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <button
                           onClick={() => setShowFilters(!showFilters)}
-                          className="lg:hidden flex items-center px-3 py-2 border-2 border-pink-300 rounded-xl hover:bg-pink-50"
+                          className="lg:hidden flex items-center px-3 py-2 border-2 border-storePrimary-300 rounded-xl hover:bg-storePrimary-50"
                         >
                           <Filter className="h-4 w-4 mr-2" />
                           Filters
@@ -427,13 +427,13 @@ export default function BabyKidsProducts({
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setViewMode('grid')}
-                            className={`p-2 rounded-xl ${viewMode === 'grid' ? 'bg-pink-500 text-white' : 'bg-pink-100 text-pink-600'}`}
+                            className={`p-2 rounded-xl ${viewMode === 'grid' ? 'bg-storePrimary-500 text-white' : 'bg-storePrimary-100 text-storePrimary-600'}`}
                           >
                             <Grid className="h-4 w-4" />
                           </button>
                           <button
                             onClick={() => setViewMode('list')}
-                            className={`p-2 rounded-xl ${viewMode === 'list' ? 'bg-pink-500 text-white' : 'bg-pink-100 text-pink-600'}`}
+                            className={`p-2 rounded-xl ${viewMode === 'list' ? 'bg-storePrimary-500 text-white' : 'bg-storePrimary-100 text-storePrimary-600'}`}
                           >
                             <List className="h-4 w-4" />
                           </button>
@@ -464,7 +464,7 @@ export default function BabyKidsProducts({
                                 preserveScroll: true
                               });
                             }}
-                            className="border-2 border-pink-200 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-pink-400"
+                            className="border-2 border-storePrimary-200 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-storePrimary-400"
                           >
                             <option value="popularity">{t("Most Popular")}</option>
                             <option value="newest">{t("New Arrivals")}</option>
@@ -498,7 +498,7 @@ export default function BabyKidsProducts({
                                 preserveScroll: true
                               });
                             }}
-                            className="border-2 border-pink-200 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-pink-400"
+                            className="border-2 border-storePrimary-200 rounded-xl px-3 py-1 text-sm focus:outline-none focus:border-storePrimary-400"
                           >
                             <option value={12}>12</option>
                             <option value={24}>24</option>
@@ -522,10 +522,10 @@ export default function BabyKidsProducts({
                     {products.map((product) => (
                       viewMode === 'list' ? (
                         <div key={product.id} className="relative">
-                          <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
-                          <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 overflow-hidden">
+                          <div className="absolute top-3 left-3 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
+                          <div className="relative bg-white rounded-3xl shadow-lg border-2 border-storePrimary-300 overflow-hidden">
                             <div className="flex p-4">
-                              <Link href={generateStoreUrl('store.product', store, { id: product.id })} className="w-24 h-24 flex-shrink-0 relative overflow-hidden rounded-2xl bg-pink-50">
+                              <Link href={generateStoreUrl('store.product', store, { id: product.id })} className="w-24 h-24 flex-shrink-0 relative overflow-hidden rounded-2xl bg-storePrimary-50">
                                 <img 
                                   src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/fef7f7/ec4899?text=${encodeURIComponent(product.name)}`}
                                   alt={product.name}
@@ -541,12 +541,12 @@ export default function BabyKidsProducts({
                                 <div className="flex justify-between items-start h-full">
                                   <div className="flex-1">
                                     <div className="mb-1">
-                                      <span className="text-xs font-medium text-pink-600 bg-pink-100 px-2 py-1 rounded-full">
+                                      <span className="text-xs font-medium text-storePrimary-600 bg-storePrimary-100 px-2 py-1 rounded-full">
                                         {product.category?.name || 'Baby & Kids'}
                                       </span>
                                     </div>
                                     <Link href={generateStoreUrl('store.product', store, { id: product.id })}>
-                                      <h3 className="text-sm font-bold text-gray-800 mb-2 hover:text-pink-600 transition-colors line-clamp-1">{product.name}</h3>
+                                      <h3 className="text-sm font-bold text-gray-800 mb-2 hover:text-storePrimary-600 transition-colors line-clamp-1">{product.name}</h3>
                                     </Link>
                                     {(product.average_rating || product.rating || product.total_reviews || product.reviews_count) && (
                                       <div className="flex items-center mb-2">
@@ -585,7 +585,7 @@ export default function BabyKidsProducts({
                                       <AddToCartButton
                                         product={product}
                                         storeSlug={storeSlug}
-                                        className="w-10 h-10 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center p-0 text-[0px] [&>svg]:mr-0 shadow-lg"
+                                        className="w-10 h-10 bg-storePrimary-500 hover:bg-storePrimary-600 text-white rounded-full flex items-center justify-center p-0 text-[0px] [&>svg]:mr-0 shadow-lg"
                                       />
                                     </div>
                                     <WishlistButton productId={product.id} />
@@ -608,13 +608,13 @@ export default function BabyKidsProducts({
                 ) : (
                   <div className="text-center py-16">
                     <div className="text-gray-500 mb-6">
-                      <Baby className="h-16 w-16 mx-auto mb-6 opacity-50 text-pink-400" />
+                      <Baby className="h-16 w-16 mx-auto mb-6 opacity-50 text-storePrimary-400" />
                       <h3 className="text-xl font-bold mb-3 text-gray-700">No baby items found</h3>
                       <p className="text-gray-600">Try adjusting your filters to discover more adorable items</p>
                     </div>
                     <button
                       onClick={clearFilters}
-                      className="bg-pink-500 text-white px-6 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors shadow-lg"
+                      className="bg-storePrimary-500 text-white px-6 py-3 rounded-full font-bold hover:bg-storePrimary-600 transition-colors shadow-lg"
                     >
                       {t("Clear all filters")}
                     </button>
@@ -628,7 +628,7 @@ export default function BabyKidsProducts({
                       <button
                         onClick={() => goToPage(pagination.current_page - 1)}
                         disabled={pagination.current_page === 1}
-                        className="px-4 py-2 border-2 border-pink-200 rounded-xl text-sm hover:bg-pink-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border-2 border-storePrimary-200 rounded-xl text-sm hover:bg-storePrimary-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Previous
                       </button>
@@ -641,8 +641,8 @@ export default function BabyKidsProducts({
                             onClick={() => goToPage(page)}
                             className={`px-4 py-2 border-2 rounded-xl text-sm ${
                               page === pagination.current_page
-                                ? 'bg-pink-500 text-white border-pink-500'
-                                : 'border-pink-200 hover:bg-pink-50'
+                                ? 'bg-storePrimary-500 text-white border-storePrimary-500'
+                                : 'border-storePrimary-200 hover:bg-storePrimary-50'
                             }`}
                           >
                             {page}
@@ -653,7 +653,7 @@ export default function BabyKidsProducts({
                       <button
                         onClick={() => goToPage(pagination.current_page + 1)}
                         disabled={pagination.current_page === pagination.last_page}
-                        className="px-4 py-2 border-2 border-pink-200 rounded-xl text-sm hover:bg-pink-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border-2 border-storePrimary-200 rounded-xl text-sm hover:bg-storePrimary-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Next
                       </button>

@@ -88,9 +88,9 @@ const { props } = usePage();
         theme="baby-kids"
       >
         {/* Hero Section */}
-        <div className="bg-pink-50 py-16 relative overflow-hidden store-page-header">
+        <div className="bg-storePrimary-50 py-16 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -102,7 +102,7 @@ const { props } = usePage();
                 <Check className="h-12 w-12 text-white" />
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Commande Confirmée!</h1>
-              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
+              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 mb-4">
                 Thank you for your order! Your little ones will love their new items.
               </p>
@@ -115,9 +115,9 @@ const { props } = usePage();
 
         {/* WhatsApp Auto Redirect */}
         {whatsappRedirectUrl && (order?.payment_method === 'whatsapp' || order?.payment_method === 'WhatsApp') && (
-          <div className="bg-pink-50 py-16 relative overflow-hidden">
+          <div className="bg-storePrimary-50 py-16 relative overflow-hidden">
             <div className="absolute inset-0">
-              <div className="absolute top-10 left-10 w-24 h-24 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+              <div className="absolute top-10 left-10 w-24 h-24 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
               <div className="absolute bottom-10 right-10 w-16 h-16 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
               <div className="absolute top-1/2 right-1/4 w-12 h-12 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             </div>
@@ -128,7 +128,7 @@ const { props } = usePage();
                   <MessageCircle className="h-8 w-8 text-white animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">Ouverture de WhatsApp...</h3>
-                <div className="w-16 h-1 bg-pink-400 mx-auto rounded-full mb-4"></div>
+                <div className="w-16 h-1 bg-storePrimary-400 mx-auto rounded-full mb-4"></div>
                 <p className="text-lg text-gray-600 mb-3">
                   La confirmation de votre commande s'ouvrira sur WhatsApp automatically for your little ones!
                 </p>
@@ -148,7 +148,7 @@ const { props } = usePage();
                   </button>
                   <button
                     onClick={() => setShowWhatsappPrompt(false)}
-                    className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
+                    className="border-2 border-storePrimary-500 text-storePrimary-500 px-6 py-3 rounded-full font-bold hover:bg-storePrimary-500 hover:text-white transition-colors"
                   >
                     Passer
                   </button>
@@ -165,18 +165,18 @@ const { props } = usePage();
               {/* Order Information */}
               <div className="lg:col-span-2">
                 <div className="relative">
-                  <div className="absolute top-4 left-4 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
-                  <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 p-8">
+                  <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-200 rounded-3xl opacity-30"></div>
+                  <div className="relative bg-white rounded-3xl shadow-xl border-4 border-storePrimary-400 p-8">
                     <div className="flex items-center mb-6">
-                      <Package className="h-6 w-6 text-pink-500 mr-3" />
+                      <Package className="h-6 w-6 text-storePrimary-500 mr-3" />
                       <h2 className="text-2xl font-bold text-gray-800">Détails de la commande</h2>
                     </div>
                     
                     {/* Order Items */}
                     <div className="space-y-4 mb-8">
                       {order.items?.map((item: any) => (
-                        <div key={item.id} className="flex items-center space-x-4 p-4 bg-pink-50 rounded-2xl">
-                          <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl border-2 border-pink-200">
+                        <div key={item.id} className="flex items-center space-x-4 p-4 bg-storePrimary-50 rounded-2xl">
+                          <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl border-2 border-storePrimary-200">
                             <img
                               src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
                               alt={item.product?.name || item.name || 'Produit'}
@@ -190,7 +190,7 @@ const { props } = usePage();
                             <h3 className="font-bold text-gray-800">{item.product?.name || item.name}</h3>
                             <p className="text-gray-600">Qty: {item.quantity}</p>
                           </div>
-                          <div className="text-lg font-bold text-pink-500">
+                          <div className="text-lg font-bold text-storePrimary-500">
                             {formatCurrency(parseFloat(item.price || 0) * parseInt(item.quantity || 0), storeSettings, currencies)}
                           </div>
                         </div>
@@ -201,23 +201,23 @@ const { props } = usePage();
                     <div className="mb-8">
                       <h3 className="text-lg font-bold text-gray-800 mb-4">Informations de livraison</h3>
                       
-                      <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
+                      <div className="bg-storePrimary-50 p-6 rounded-2xl border-2 border-storePrimary-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Contact Details</p>
+                            <p className="text-sm font-bold text-storePrimary-600 mb-2">Contact Details</p>
                             <p className="text-gray-800">{order.customer_first_name || ''} {order.customer_last_name || ''}</p>
                             <p className="text-gray-800">{order.customer_email || ''}</p>
                             <p className="text-gray-800">{order.customer_phone || ''}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Livraison Address</p>
+                            <p className="text-sm font-bold text-storePrimary-600 mb-2">Livraison Address</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.street || '' : order.shipping_address || ''}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? `${order.shipping_address?.city || ''}, ${order.shipping_address?.state || ''} ${order.shipping_address?.zip || ''}` : `${order.shipping_city || ''}, ${order.shipping_state || ''} ${order.shipping_postal_code || ''}`}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.country || '' : order.shipping_country || ''}</p>
                           </div>
                         </div>
-                        <div className="mt-6 pt-6 border-t-2 border-pink-300">
-                          <p className="text-sm font-bold text-pink-600 mb-2">Livraison Method</p>
+                        <div className="mt-6 pt-6 border-t-2 border-storePrimary-300">
+                          <p className="text-sm font-bold text-storePrimary-600 mb-2">Livraison Method</p>
                           <p className="text-gray-800">{order.shipping_method || 'Standard Livraison'}</p>
                         </div>
                       </div>
@@ -227,14 +227,14 @@ const { props } = usePage();
                     <div className="mb-8">
                       <h3 className="text-lg font-bold text-gray-800 mb-4">Paiement Information</h3>
                       
-                      <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
+                      <div className="bg-storePrimary-50 p-6 rounded-2xl border-2 border-storePrimary-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Moyen de paiement</p>
+                            <p className="text-sm font-bold text-storePrimary-600 mb-2">Moyen de paiement</p>
                             <p className="text-gray-800 capitalize">{order.payment_method || ''}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Billing Address</p>
+                            <p className="text-sm font-bold text-storePrimary-600 mb-2">Billing Address</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? order.billing_address?.street || '' : order.billing_address || ''}</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? `${order.billing_address?.city || ''}, ${order.billing_address?.state || ''} ${order.billing_address?.zip || ''}` : `${order.billing_city || ''}, ${order.billing_state || ''} ${order.billing_postal_code || ''}`}</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? order.billing_address?.country || '' : order.billing_country || ''}</p>
@@ -244,7 +244,7 @@ const { props } = usePage();
                     </div>
 
                     {/* Order Summary */}
-                    <div className="border-t-2 border-pink-200 pt-6">
+                    <div className="border-t-2 border-storePrimary-200 pt-6">
                       <div className="space-y-3">
                         <div className="flex justify-between text-gray-600">
                           <span>Sous-total</span>
@@ -264,9 +264,9 @@ const { props } = usePage();
                           <span>Taxe</span>
                           <span>{formatCurrency(parseFloat(order.tax || 0), storeSettings, currencies)}</span>
                         </div>
-                        <div className="flex justify-between text-xl font-bold text-gray-800 pt-3 border-t-2 border-pink-400">
+                        <div className="flex justify-between text-xl font-bold text-gray-800 pt-3 border-t-2 border-storePrimary-400">
                           <span>Total</span>
-                          <span className="text-pink-500">{formatCurrency(parseFloat(order.total || 0), storeSettings, currencies)}</span>
+                          <span className="text-storePrimary-500">{formatCurrency(parseFloat(order.total || 0), storeSettings, currencies)}</span>
                         </div>
                       </div>
                     </div>
@@ -314,7 +314,7 @@ const { props } = usePage();
                   <div className="mb-6">
                     <Link
                       href={generateStoreUrl('store.products', store)}
-                      className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold text-center hover:bg-pink-600 transition-colors block"
+                      className="w-full bg-storePrimary-500 text-white py-3 rounded-2xl font-bold text-center hover:bg-storePrimary-600 transition-colors block"
                     >Continuer vos achats</Link>
                   </div>
 

@@ -83,9 +83,9 @@ export default function BabyKidsOrderDetail({
         theme="baby-kids"
       >
         {/* Hero Section */}
-        <div className="bg-pink-50 py-20 relative overflow-hidden store-page-header">
+        <div className="bg-storePrimary-50 py-20 relative overflow-hidden store-page-header">
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
             <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
             <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -95,13 +95,13 @@ export default function BabyKidsOrderDetail({
             <div className="text-center">
               <Link
                 href={generateStoreUrl('store.my-orders', store)}
-                className="inline-flex items-center space-x-2 text-pink-600 hover:text-pink-700 mb-6 transition-colors"
+                className="inline-flex items-center space-x-2 text-storePrimary-600 hover:text-storePrimary-700 mb-6 transition-colors"
               >
                 <ArrowLeft className="h-5 w-5" />
                 <span>Back to Orders</span>
               </Link>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Order Details</h1>
-              <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full"></div>
+              <div className="w-24 h-1 bg-storePrimary-400 mx-auto rounded-full"></div>
             </div>
           </div>
         </div>
@@ -112,14 +112,14 @@ export default function BabyKidsOrderDetail({
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                 {/* Invoice Header */}
-                <div className="bg-pink-500 text-white p-8">
+                <div className="bg-storePrimary-500 text-white p-8">
                   <div className="flex justify-between items-start">
                     <div>
                       <h1 className="text-3xl font-bold mb-2">ORDER INVOICE</h1>
-                      <p className="text-pink-100">Order #{order.id}</p>
+                      <p className="text-storePrimary-100">Order #{order.id}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-pink-100">Date</p>
+                      <p className="text-storePrimary-100">Date</p>
                       <p className="font-semibold">{new Date(order.date).toLocaleDateString('en-US', { 
                         year: 'numeric',
                         month: 'long', 
@@ -190,7 +190,7 @@ export default function BabyKidsOrderDetail({
                   {/* Shipping Address */}
                   <div>
                     <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center">
-                      <MapPin className="h-5 w-5 mr-2 text-pink-500" />
+                      <MapPin className="h-5 w-5 mr-2 text-storePrimary-500" />
                       Shipping Address
                     </h3>
                     <div className="bg-white p-4 rounded-lg">
@@ -206,12 +206,12 @@ export default function BabyKidsOrderDetail({
                     <h3 className="text-lg font-bold text-gray-800 mb-3">Payment & Shipping</h3>
                     <div className="bg-white p-4 rounded-lg space-y-3">
                       <div className="flex items-center space-x-2">
-                        <CreditCard className="h-4 w-4 text-pink-500" />
+                        <CreditCard className="h-4 w-4 text-storePrimary-500" />
                         <span className="text-sm text-gray-600">Payment:</span>
                         <span className="font-medium">{order.payment_method}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Truck className="h-4 w-4 text-pink-500" />
+                        <Truck className="h-4 w-4 text-storePrimary-500" />
                         <span className="text-sm text-gray-600">Shipping:</span>
                         <span className="font-medium">{order.shipping_method}</span>
                       </div>

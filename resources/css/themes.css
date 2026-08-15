@@ -1,0 +1,440 @@
+[data-theme="slate"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.554 0.046 257.417);
+  --btn-add-to-cart-color: oklch(0.446 0.043 257.281);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="gray"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.551 0.027 264.364);
+  --btn-add-to-cart-color: oklch(0.446 0.03 256.802);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="zinc"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.552 0.016 285.938);
+  --btn-add-to-cart-color: oklch(0.442 0.017 285.786);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="neutral"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.556 0 0);
+  --btn-add-to-cart-color: oklch(0.439 0 0);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="stone"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.553 0.013 58.071);
+  --btn-add-to-cart-color: oklch(0.444 0.011 73.639);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="red"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.637 0.237 25.331);
+  --btn-add-to-cart-color: oklch(0.577 0.245 27.325);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="orange"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.705 0.213 47.604);
+  --btn-add-to-cart-color: oklch(0.646 0.222 41.116);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="amber"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.769 0.188 70.08);
+  --btn-add-to-cart-color: oklch(0.666 0.179 58.318);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="yellow"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.795 0.184 86.047);
+  --btn-add-to-cart-color: oklch(0.681 0.162 75.834);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="lime"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.768 0.233 130.85);
+  --btn-add-to-cart-color: oklch(0.648 0.2 131.684);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="green"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.723 0.219 149.579);
+  --btn-add-to-cart-color: oklch(0.627 0.194 149.214);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="emerald"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.696 0.17 162.48);
+  --btn-add-to-cart-color: oklch(0.596 0.145 163.225);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="teal"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.704 0.14 182.503);
+  --btn-add-to-cart-color: oklch(0.6 0.118 184.704);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="cyan"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.715 0.143 215.221);
+  --btn-add-to-cart-color: oklch(0.609 0.126 221.723);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="sky"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.685 0.169 237.323);
+  --btn-add-to-cart-color: oklch(0.588 0.158 241.966);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="blue"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.623 0.214 259.815);
+  --btn-add-to-cart-color: oklch(0.546 0.245 262.881);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="indigo"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.585 0.233 277.117);
+  --btn-add-to-cart-color: oklch(0.511 0.262 276.966);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="violet"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.606 0.25 292.717);
+  --btn-add-to-cart-color: oklch(0.541 0.281 293.009);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="purple"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.627 0.265 303.9);
+  --btn-add-to-cart-color: oklch(0.558 0.288 302.321);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="fuchsia"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.667 0.295 322.15);
+  --btn-add-to-cart-color: oklch(0.591 0.293 322.896);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="pink"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.656 0.241 354.308);
+  --btn-add-to-cart-color: oklch(0.592 0.249 0.584);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+
+[data-theme="rose"] {
+  --color-store-primary-50: null;
+  --color-store-primary-100: null;
+  --color-store-primary-200: null;
+  --color-store-primary-300: null;
+  --color-store-primary-400: null;
+  --color-store-primary-500: null;
+  --color-store-primary-600: null;
+  --color-store-primary-700: null;
+  --color-store-primary-800: null;
+  --color-store-primary-900: null;
+  --color-store-primary-950: null;
+  --theme-color: oklch(0.645 0.246 16.439);
+  --btn-add-to-cart-color: oklch(0.586 0.253 17.585);
+  --btn-buy-now-color: oklch(0.627 0.194 149.214);
+  --primary-hover-color: rgb(var(--color-store-primary-600));
+  --bg-light-color: rgb(var(--color-store-primary-50));
+  --border-light-color: rgb(var(--color-store-primary-200));
+}
+

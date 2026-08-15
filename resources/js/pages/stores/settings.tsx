@@ -17,6 +17,31 @@ interface Props {
   settings: any;
 }
 
+const PREDEFINED_COLORS = [
+  { name: 'slate', label: 'Slate', color: '#64748b' },
+  { name: 'gray', label: 'Gray', color: '#6b7280' },
+  { name: 'zinc', label: 'Zinc', color: '#71717a' },
+  { name: 'neutral', label: 'Neutral', color: '#737373' },
+  { name: 'stone', label: 'Stone', color: '#78716c' },
+  { name: 'red', label: 'Red', color: '#ef4444' },
+  { name: 'orange', label: 'Orange', color: '#f97316' },
+  { name: 'amber', label: 'Amber', color: '#f59e0b' },
+  { name: 'yellow', label: 'Yellow', color: '#eab308' },
+  { name: 'lime', label: 'Lime', color: '#84cc16' },
+  { name: 'green', label: 'Green', color: '#22c55e' },
+  { name: 'emerald', label: 'Emerald', color: '#10b981' },
+  { name: 'teal', label: 'Teal', color: '#14b8a6' },
+  { name: 'cyan', label: 'Cyan', color: '#06b6d4' },
+  { name: 'sky', label: 'Sky', color: '#0ea5e9' },
+  { name: 'blue', label: 'Blue', color: '#3b82f6' },
+  { name: 'indigo', label: 'Indigo', color: '#6366f1' },
+  { name: 'violet', label: 'Violet', color: '#8b5cf6' },
+  { name: 'purple', label: 'Purple', color: '#a855f7' },
+  { name: 'fuchsia', label: 'Fuchsia', color: '#d946ef' },
+  { name: 'pink', label: 'Pink', color: '#ec4899' },
+  { name: 'rose', label: 'Rose', color: '#f43f5e' },
+];
+
 export default function StoreSettings({ store, settings }: Props) {
   const { t } = useTranslation();
   const [formData, setFormData] = useState(settings || {});
@@ -201,35 +226,45 @@ export default function StoreSettings({ store, settings }: Props) {
             <CardContent className="space-y-6">
 
               {/* Primary / Theme Color */}
-              <div className="space-y-2">
-                <Label htmlFor="primary_color">{t('Theme / Primary Color')}</Label>
-                <p className="text-xs text-muted-foreground">
-                  {t('Default for this theme')}: <code className="bg-muted px-1 rounded">{getDefaultThemeColor()}</code>
-                </p>
-                <div className="flex gap-2 items-center">
-                  <Input
-                    type="color"
-                    id="primary_color"
-                    className="w-16 h-10 p-1"
-                    value={formData.primary_color || getDefaultThemeColor()}
-                    onChange={(e) => updateSetting('primary_color', e.target.value)}
-                  />
-                  <Input
-                    type="text"
-                    className="w-36"
-                    placeholder={getDefaultThemeColor()}
-                    value={formData.primary_color || ''}
-                    onChange={(e) => updateSetting('primary_color', e.target.value)}
-                  />
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="primary_color">{t('Theme / Primary Color')}</Label>
+                  <p className="text-xs text-muted-foreground">
+                    {t('Default for this theme')}: <code className="bg-muted px-1 rounded">{getDefaultThemeColor()}</code>
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-11 gap-3">
+                  {PREDEFINED_COLORS.map((preset) => (
+                    <button
+                      key={preset.name}
+                      type="button"
+                      title={preset.label}
+                      onClick={() => updateSetting('primary_color', preset.name)}
+                      className={`w-8 h-8 rounded-full border-2 transition-all ${
+                        formData.primary_color === preset.name
+                          ? 'border-primary ring-2 ring-primary ring-offset-2 scale-110'
+                          : 'border-transparent hover:scale-110'
+                      }`}
+                      style={{ backgroundColor: preset.color }}
+                      aria-label={preset.label}
+                    />
+                  ))}
+                </div>
+                
+                <div className="flex justify-between items-center text-xs">
+                  <span className="text-muted-foreground">
+                    {formData.primary_color ? t(`Selected: ${PREDEFINED_COLORS.find(p => p.name === formData.primary_color)?.label || formData.primary_color}`) : t('Using default theme color')}
+                  </span>
                   {formData.primary_color && (
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
                       onClick={() => updateSetting('primary_color', '')}
-                      className="text-xs text-muted-foreground"
+                      className="text-xs text-muted-foreground h-auto p-0"
                     >
-                      {t('Clear')}
+                      {t('Clear Selection')}
                     </Button>
                   )}
                 </div>

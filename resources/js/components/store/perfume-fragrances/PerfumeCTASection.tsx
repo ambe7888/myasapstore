@@ -57,14 +57,14 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-6 py-3 bg-white border border-storePrimary-200 rounded-full mb-8">
-            <svg className="w-5 h-5 text-storePrimary-800 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <div className="inline-flex items-center px-6 py-3 bg-white border border-purple-200 rounded-full mb-8">
+            <svg className="w-5 h-5 text-purple-800 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd" />
             </svg>
-            <span className="text-storePrimary-800 font-medium text-sm">{content?.badge_text || 'Premium Services'}</span>
+            <span className="text-purple-800 font-medium text-sm">{content?.badge_text || 'Premium Services'}</span>
           </div>
           
-          <h2 className="text-4xl lg:text-5xl font-light text-storePrimary-800 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
             {content?.title || 'Luxury Experience'}
           </h2>
           
@@ -78,15 +78,15 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
           {boxes.map((box, index) => (
             <div
               key={index}
-              className="group relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-storePrimary-100 hover:border-storePrimary-200 transform hover:-translate-y-2"
+              className="group relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-purple-100 hover:border-purple-200 transform hover:-translate-y-2"
             >
               {/* Background Decoration */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-storePrimary-100 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-purple-100 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               {/* Icon */}
               <div className="relative z-10 mb-6">
-                <div className="w-16 h-16 bg-storePrimary-100 rounded-2xl flex items-center justify-center group-hover:bg-storePrimary-200 transition-colors duration-300">
-                  <div className="w-8 h-8 text-storePrimary-800">
+                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center group-hover:bg-purple-200 transition-colors duration-300">
+                  <div className="w-8 h-8 text-purple-800">
                     {getIcon(box.icon)}
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
               
               {/* Content */}
               <div className="relative z-10">
-                <h3 className="text-xl font-medium text-gray-900 mb-3 group-hover:text-storePrimary-800 transition-colors duration-300">
+                <h3 className="text-xl font-medium text-gray-900 mb-3 group-hover:text-purple-800 transition-colors duration-300">
                   {box.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">
@@ -104,7 +104,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
                 {/* CTA Link */}
                 <Link
                   href={box.link || '#'}
-                  className="inline-flex items-center text-storePrimary-800 font-medium text-sm group-hover:text-storePrimary-900 transition-colors duration-300"
+                  className="inline-flex items-center text-purple-800 font-medium text-sm group-hover:text-purple-900 transition-colors duration-300"
                 >
                   <span>{box.button_text || 'Learn More'}</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
@@ -114,17 +114,17 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
               </div>
               
               {/* Decorative Line */}
-              <div className="absolute bottom-0 left-8 right-8 h-px bg-storePrimary-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-8 right-8 h-px bg-purple-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           ))}
         </div>
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <div className="bg-storePrimary-50 rounded-3xl p-12 relative overflow-hidden">
+          <div className="bg-purple-50 rounded-3xl p-12 relative overflow-hidden">
             {/* Background Decorations */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-storePrimary-200/30 rounded-full blur-xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-200/30 rounded-full blur-xl"></div>
             
             <div className="relative z-10">
               <h3 className="text-3xl font-light text-gray-900 mb-4">
@@ -137,7 +137,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href={formatCustomLink(bottomSection?.primary_button_link?.value || bottomSection?.primary_button_link || content?.primary_button_link, store, '/consultation')}
-                  className="inline-flex items-center px-8 py-4 bg-storePrimary-800 text-white rounded-full font-medium hover:bg-storePrimary-900 transition-colors duration-300"
+                  className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
                 >
                   <span>{bottomSection?.primary_button_text?.value || bottomSection?.primary_button_text || content?.primary_button_text || 'Book Consultation'}</span>
                   <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -147,7 +147,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
                 
                 <a
                   href={formatCustomLink(bottomSection?.secondary_button_link?.value || bottomSection?.secondary_button_link || content?.secondary_button_link, store, '/fragrance-quiz')}
-                  className="inline-flex items-center px-8 py-4 border-2 border-storePrimary-800 text-storePrimary-800 rounded-full font-medium hover:bg-storePrimary-800 hover:text-white transition-colors duration-300"
+                  className="inline-flex items-center px-8 py-4 border-2 border-purple-800 text-purple-800 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors duration-300"
                 >
                   <span>{bottomSection?.secondary_button_text?.value || bottomSection?.secondary_button_text || content?.secondary_button_text || 'Take Fragrance Quiz'}</span>
                 </a>

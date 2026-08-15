@@ -67,7 +67,7 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
 
               {/* Category Info */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-storePrimary-600 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                   {category.name}
                 </h3>
                 
@@ -78,7 +78,7 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
                 )}
 
                 {/* Hover Arrow */}
-                <div className="flex items-center text-storePrimary-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
+                <div className="flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
                   <span className="text-sm font-semibold mr-2">Explore</span>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -87,10 +87,10 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
               </div>
 
               {/* Tech Border Effect */}
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-storePrimary-500/50 rounded-2xl transition-all duration-300"></div>
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/50 rounded-2xl transition-all duration-300"></div>
               
               {/* Corner Accent */}
-              <div className="absolute top-4 right-4 w-3 h-3 bg-storePrimary-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute top-4 right-4 w-3 h-3 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
           ))}
         </div>
@@ -99,7 +99,7 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
         <div className="text-center mt-12">
           <a
             href={generateStoreUrl('store.products', store)}
-            className="inline-flex items-center px-8 py-4 bg-storePrimary-600 text-white font-semibold rounded-lg hover:bg-storePrimary-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <span>View All Categories</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

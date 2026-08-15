@@ -61,7 +61,7 @@ export default function BeautyBrandLogoSlider({ content }: BeautyBrandLogoSlider
             { number: '98%', label: 'Satisfaction Rate' }
           ]).map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-3xl font-light text-storePrimary-600 mb-2">{stat.number}</div>
+              <div className="text-3xl font-light text-rose-600 mb-2">{stat.number}</div>
               <div className="text-sm text-gray-600">{stat.label}</div>
             </div>
           ))}

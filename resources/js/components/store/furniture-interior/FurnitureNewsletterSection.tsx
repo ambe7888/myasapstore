@@ -54,16 +54,16 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
   };
 
   return (
-    <section className="py-20 lg:py-28 bg-storePrimary-50">
+    <section className="py-20 lg:py-28 bg-amber-50">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-2xl shadow-storePrimary-200/50 overflow-hidden border-2 border-storePrimary-200 hover:shadow-3xl transition-all duration-500">
+          <div className="bg-white rounded-3xl shadow-2xl shadow-amber-200/50 overflow-hidden border-2 border-amber-200 hover:shadow-3xl transition-all duration-500">
             <div className="grid lg:grid-cols-2">
               {/* Left Content */}
-              <div className="p-8 lg:p-16 bg-storePrimary-100">
-                <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border-2 border-storePrimary-300 px-6 py-3 rounded-full mb-8 hover:scale-105 transition-transform duration-300">
-                  <div className="w-2 h-2 bg-storePrimary-600 rounded-full"></div>
-                  <span className="text-sm font-bold text-storePrimary-800 tracking-wider uppercase">Newsletter</span>
+              <div className="p-8 lg:p-16 bg-amber-100">
+                <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border-2 border-amber-300 px-6 py-3 rounded-full mb-8 hover:scale-105 transition-transform duration-300">
+                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+                  <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Newsletter</span>
                 </div>
                 
                 <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-8 tracking-tight">
@@ -81,7 +81,7 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                     { text: 'Exclusive member offers' }
                   ]).map((benefit, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-storePrimary-600 rounded-full flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-amber-600 rounded-full flex-shrink-0"></div>
                       <span className="text-slate-700 font-medium">{benefit.text}</span>
                     </div>
                   ))}
@@ -93,8 +93,8 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                 {!isSubscribed ? (
                   <form onSubmit={handleSubmit} className="w-full space-y-6">
                     <div className="text-center mb-10">
-                      <div className="w-20 h-20 bg-storePrimary-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <svg className="w-10 h-10 text-storePrimary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-20 h-20 bg-amber-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <svg className="w-10 h-10 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       </div>
@@ -107,7 +107,7 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder={content?.placeholder_text || 'your@email.com'}
-                        className="w-full px-8 py-5 border-2 border-storePrimary-200 rounded-2xl focus:ring-4 focus:ring-storePrimary-500/20 focus:border-storePrimary-500 transition-all duration-300 bg-white text-slate-900 font-medium text-lg hover:border-storePrimary-300"
+                        className="w-full px-8 py-5 border-2 border-amber-200 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all duration-300 bg-white text-slate-900 font-medium text-lg hover:border-amber-300"
                         required
                       />
                     </div>

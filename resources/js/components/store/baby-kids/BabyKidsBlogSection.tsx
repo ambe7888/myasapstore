@@ -47,7 +47,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
             {/* Left Featured Post */}
             <div>
               {posts.length > 0 ? (
-                <article className="group relative bg-storePrimary-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <article className="group relative bg-pink-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                   <a href={generateStoreUrl('store.blog.show', store, {slug: posts[0].slug})}>
                     <img
                       src={getImageUrl(posts[0].featured_image || posts[0].image)}
@@ -58,11 +58,11 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                       }}
                     />
                   </a>
-                  <div className="bg-storePrimary-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
+                  <div className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
                     Featured
                   </div>
                   <a href={generateStoreUrl('store.blog.show', store, {slug: posts[0].slug})}>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-storePrimary-600 transition-colors duration-300">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors duration-300">
                       {posts[0].title}
                     </h3>
                   </a>
@@ -73,23 +73,23 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                     <span className="text-sm text-gray-500">{formatDate(posts[0].created_at)}</span>
                     <a
                       href={generateStoreUrl('store.blog.show', store, {slug: posts[0].slug})}
-                      className="text-storePrimary-500 font-semibold hover:text-storePrimary-600 transition-colors duration-300"
+                      className="text-pink-500 font-semibold hover:text-pink-600 transition-colors duration-300"
                     >
                       {content?.read_more_text || 'Read More'} →
                     </a>
                   </div>
                 </article>
               ) : (
-                <article className="group relative bg-storePrimary-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <article className="group relative bg-pink-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                   <img
                     src="https://placehold.co/400x300/fef7f7/ec4899?text=Featured+Post"
                     alt="Featured Post"
                     className="w-full h-48 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300 mb-6"
                   />
-                  <div className="bg-storePrimary-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
+                  <div className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
                     Featured
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-storePrimary-600 transition-colors duration-300">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors duration-300">
                     Essential Baby Care Tips for New Parents
                   </h3>
                   <p className="text-gray-600 mb-4">
@@ -97,7 +97,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500">Mar 15</span>
-                    <div className="text-storePrimary-500 font-semibold">
+                    <div className="text-pink-500 font-semibold">
                       Read More →
                     </div>
                   </div>
@@ -108,7 +108,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
             {/* Right Small Posts */}
             <div className="space-y-6">
               {posts.length > 1 ? posts.slice(1, 3).map((post, index) => (
-                <article key={post.id} className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-storePrimary-200">
+                <article key={post.id} className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-pink-200">
                   <a href={generateStoreUrl('store.blog.show', store, {slug: post.slug})}>
                     <img
                       src={getImageUrl(post.featured_image || post.image)}
@@ -120,7 +120,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                     />
                   </a>
                   <a href={generateStoreUrl('store.blog.show', store, {slug: post.slug})}>
-                    <h4 className="font-bold text-gray-800 mb-2 group-hover:text-storePrimary-600 transition-colors duration-300 line-clamp-2">
+                    <h4 className="font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h4>
                   </a>
@@ -128,7 +128,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                     <span className="text-gray-500">{formatDate(post.created_at)}</span>
                     <a
                       href={generateStoreUrl('store.blog.show', store, {slug: post.slug})}
-                      className="text-storePrimary-500 font-semibold hover:text-storePrimary-600 transition-colors duration-300"
+                      className="text-pink-500 font-semibold hover:text-pink-600 transition-colors duration-300"
                     >
                       {content?.read_text || 'Read'} →
                     </a>
@@ -136,18 +136,18 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                 </article>
               )) : (
                 [...Array(2)].map((_, index) => (
-                  <article key={index} className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-storePrimary-200">
+                  <article key={index} className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-pink-200">
                     <img
                       src={`https://placehold.co/300x200/fef7f7/ec4899?text=Article+${index + 2}`}
                       alt={`Parenting Article ${index + 2}`}
                       className="w-full h-32 object-cover rounded-xl mb-4 group-hover:scale-105 transition-transform duration-300"
                     />
-                    <h4 className="font-bold text-gray-800 mb-2 group-hover:text-storePrimary-600 transition-colors duration-300">
+                    <h4 className="font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300">
                       {index === 0 ? 'Choosing Safe Clothes for Toddlers' : 'Building Your Baby\'s Wardrobe'}
                     </h4>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-gray-500">Mar {10 + index}</span>
-                      <div className="text-storePrimary-500 font-semibold">
+                      <div className="text-pink-500 font-semibold">
                         Read →
                       </div>
                     </div>
@@ -162,7 +162,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
         <div className="text-center mt-16">
           <a
             href={generateStoreUrl('store.blog', store)}
-            className="inline-flex items-center px-8 py-4 bg-storePrimary-500 text-white font-semibold rounded-full hover:bg-storePrimary-600 transition-all duration-300 shadow-lg"
+            className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
           >
             <span>{content?.view_all_text || 'View All Articles'}</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

@@ -45,7 +45,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
   const productUrl = generateStoreUrl('store.product', store,  { id: product.id });
 
   return (
-    <div className="group bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 hover:border-storePrimary-600">
+    <div className="group bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 hover:border-red-600">
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         <Link href={productUrl} className="block w-full h-full">
@@ -69,7 +69,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
             </span>
           )}
           {hasDiscount && (
-            <span className="bg-storePrimary-600 text-white px-3 py-1 text-xs font-bold tracking-wider uppercase">
+            <span className="bg-red-600 text-white px-3 py-1 text-xs font-bold tracking-wider uppercase">
               -{discountPercentage}% OFF
             </span>
           )}
@@ -89,7 +89,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
               await toggleWishlist(product.id);
             }}
             disabled={wishlistLoading}
-            className={`w-10 h-10 ${isProductInWishlist ? 'bg-storePrimary-600' : 'bg-gray-600'} hover:bg-black text-white flex items-center justify-center transition-colors ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`w-10 h-10 ${isProductInWishlist ? 'bg-red-600' : 'bg-gray-600'} hover:bg-black text-white flex items-center justify-center transition-colors ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             <Heart className={`h-4 w-4 ${isProductInWishlist ? 'fill-white' : ''}`} />
           </button>
@@ -99,7 +99,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
               e.stopPropagation();
               router.visit(generateStoreUrl('store.product', store,  { id: product.id }));
             }}
-            className="w-10 h-10 bg-storePrimary-600 hover:bg-black text-white flex items-center justify-center transition-colors"
+            className="w-10 h-10 bg-red-600 hover:bg-black text-white flex items-center justify-center transition-colors"
           >
             <Eye className="h-4 w-4" />
           </button>
@@ -107,11 +107,11 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
       </div>
 
       {/* Product Info */}
-      <div className="p-6 border-l-4 border-storePrimary-600">
+      <div className="p-6 border-l-4 border-red-600">
         {/* Category & Rating */}
         <div className="flex items-center justify-between mb-3">
           {product.category && (
-            <span className="text-xs font-bold tracking-widest uppercase text-storePrimary-600">
+            <span className="text-xs font-bold tracking-widest uppercase text-red-600">
               {product.category.name}
             </span>
           )}
@@ -126,8 +126,8 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
         </div>
 
         {/* Product Name */}
-        <h3 className="text-lg font-bold text-black mb-3 group-hover:text-storePrimary-600 transition-colors line-clamp-2">
-          <Link href={productUrl} className="hover:text-storePrimary-600 cursor-pointer">
+        <h3 className="text-lg font-bold text-black mb-3 group-hover:text-red-600 transition-colors line-clamp-2">
+          <Link href={productUrl} className="hover:text-red-600 cursor-pointer">
             {product.name}
           </Link>
         </h3>
@@ -136,7 +136,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
         <div className="flex items-center gap-3 mb-4">
           {hasDiscount ? (
             <>
-              <span className="text-xl font-bold text-storePrimary-600">
+              <span className="text-xl font-bold text-red-600">
                 {format(product.sale_price!)}
               </span>
               <span className="text-sm text-gray-500 line-through">
@@ -153,7 +153,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
         {/* Stock & Buttons */}
         <div className="flex flex-col gap-2 mt-3">
           <div className="flex items-center">
-            <div className={`w-2 h-2 rounded-full mr-2 ${isInStock ? 'bg-green-500' : 'bg-storePrimary-500'}`}></div>
+            <div className={`w-2 h-2 rounded-full mr-2 ${isInStock ? 'bg-green-500' : 'bg-red-500'}`}></div>
             <span className="text-xs font-bold tracking-wider uppercase text-gray-600">
               {isInStock ? `${product.stock} In Stock` : 'Out of Stock'}
             </span>

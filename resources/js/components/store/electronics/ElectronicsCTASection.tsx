@@ -71,7 +71,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
             <div className="mt-8">
               <a 
                 href={ctaButtonLink} 
-                className="inline-flex items-center px-8 py-4 bg-storePrimary-600 text-white font-semibold rounded-full hover:bg-storePrimary-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 {ctaButtonText}
                 <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -90,7 +90,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
               className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
             >
               {/* Background Gradient */}
-              <div className="absolute inset-0 bg-storePrimary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               {/* Tech Pattern */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -101,12 +101,12 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
 
               <div className="relative z-10">
                 {/* Icon */}
-                <div className="w-16 h-16 bg-storePrimary-600 rounded-2xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
                   {getIcon(box.icon)}
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-storePrimary-600 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
                   {box.title}
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
@@ -114,7 +114,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
                 </p>
 
                 {/* Arrow */}
-                <div className="flex items-center text-storePrimary-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
+                <div className="flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
                   <span className="text-sm font-semibold mr-2">Explore</span>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -123,10 +123,10 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
               </div>
 
               {/* Hover Border */}
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-storePrimary-500/30 rounded-2xl transition-all duration-300"></div>
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/30 rounded-2xl transition-all duration-300"></div>
               
               {/* Corner Accent */}
-              <div className="absolute top-4 right-4 w-3 h-3 bg-storePrimary-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute top-4 right-4 w-3 h-3 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           ))}
         </div>

@@ -15,7 +15,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
 
 
   return (
-    <footer className="bg-storePrimary-800 text-white">
+    <footer className="bg-purple-800 text-white">
       <div className="container mx-auto px-4">
         
         {/* Main Footer Content */}
@@ -39,7 +39,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                 )}
               </div>
               
-              <p className="text-storePrimary-100 leading-relaxed max-w-md">
+              <p className="text-purple-100 leading-relaxed max-w-md">
                 {content?.description || 'Your premier destination for luxury fragrances and perfumes. Curating the world\'s finest scents from prestigious houses and emerging artisan perfumers.'}
               </p>
               
@@ -51,7 +51,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                     href={social.url || '#'}
                     target={social.url ? '_blank' : '_self'}
                     rel={social.url ? 'noopener noreferrer' : undefined}
-                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-storePrimary-200 hover:text-white hover:bg-amber-400 transition-all duration-300"
+                    className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-purple-200 hover:text-white hover:bg-amber-400 transition-all duration-300"
                     aria-label={social.platform}
                   >
                     <SocialIcon platform={social.platform} size={20} />
@@ -75,7 +75,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-storePrimary-200 hover:text-amber-400 transition-colors duration-300"
+                      className="text-purple-200 hover:text-amber-400 transition-colors duration-300"
                     >
                       {link.name}
                     </Link>
@@ -99,7 +99,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-storePrimary-200 hover:text-amber-400 transition-colors duration-300"
+                      className="text-purple-200 hover:text-amber-400 transition-colors duration-300"
                     >
                       {link.name}
                     </Link>
@@ -116,7 +116,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   <svg className="w-5 h-5 text-amber-400 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-storePrimary-200 leading-relaxed">
+                  <p className="text-purple-200 leading-relaxed">
                     {content?.contact?.address?.value || content?.contact?.address || '456 Perfume Boulevard, Scent District, NY 10019'}
                   </p>
                 </div>
@@ -127,7 +127,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   </svg>
                   <a
                     href={`tel:${content?.contact?.phone?.value || content?.contact?.phone || '+1 (555) 372-3687'}`}
-                    className="text-storePrimary-200 hover:text-amber-400 transition-colors duration-300"
+                    className="text-purple-200 hover:text-amber-400 transition-colors duration-300"
                   >
                     {content?.contact?.phone?.value || content?.contact?.phone || '+1 (555) 372-3687'}
                   </a>
@@ -140,7 +140,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   </svg>
                   <a
                     href={`mailto:${content?.contact?.email?.value || content?.contact?.email || 'hello@fragrancehouse.com'}`}
-                    className="text-storePrimary-200 hover:text-amber-400 transition-colors duration-300"
+                    className="text-purple-200 hover:text-amber-400 transition-colors duration-300"
                   >
                     {content?.contact?.email?.value || content?.contact?.email || 'hello@fragrancehouse.com'}
                   </a>
@@ -151,9 +151,9 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-storePrimary-700 py-8">
+        <div className="border-t border-purple-700 py-8">
           <div className="text-center">
-            <p className="text-storePrimary-200">
+            <p className="text-purple-200">
               {content?.copyright_text?.replace('{year}', currentYear.toString()).replace('{store_name}', storeName || 'Store') || 
                `© ${currentYear} ${storeName}. All rights reserved.`}
             </p>

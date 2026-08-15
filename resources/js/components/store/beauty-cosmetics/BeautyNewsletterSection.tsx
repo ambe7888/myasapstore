@@ -52,20 +52,20 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
   };
 
   return (
-    <section className="py-20 bg-storePrimary-50">
+    <section className="py-20 bg-rose-50">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-3xl p-12 lg:p-16 text-center relative overflow-hidden shadow-xl">
             {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-storePrimary-100/50 rounded-full -translate-y-16 translate-x-16"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-storePrimary-100/50 rounded-full translate-y-12 -translate-x-12"></div>
-            <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-storePrimary-200/60 rounded-full"></div>
-            <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-storePrimary-200/40 rounded-full"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-100/50 rounded-full -translate-y-16 translate-x-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-rose-100/50 rounded-full translate-y-12 -translate-x-12"></div>
+            <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-rose-200/60 rounded-full"></div>
+            <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-rose-200/40 rounded-full"></div>
             
             <div className="relative z-10">
               {/* Icon */}
-              <div className="w-16 h-16 bg-storePrimary-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <svg className="w-8 h-8 text-storePrimary-600" fill="currentColor" viewBox="0 0 20 20">
+              <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                <svg className="w-8 h-8 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
@@ -78,7 +78,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
               
               {/* Highlight */}
               {content?.highlight_text && (
-                <p className="text-storePrimary-600 font-semibold mb-6">
+                <p className="text-rose-600 font-semibold mb-6">
                   {content.highlight_text}
                 </p>
               )}
@@ -90,9 +90,9 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
 
               {/* Newsletter Form */}
               {isSubscribed ? (
-                <div className="max-w-md mx-auto mb-8 p-6 bg-storePrimary-100 rounded-2xl">
+                <div className="max-w-md mx-auto mb-8 p-6 bg-rose-100 rounded-2xl">
                   <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-storePrimary-600 mb-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rose-600 mb-4">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -110,14 +110,14 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder={content?.placeholder_text || 'Enter your email for beauty updates'}
-                        className="w-full px-6 py-4 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300"
+                        className="w-full px-6 py-4 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-rose-200 transition-all duration-300"
                         required
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 py-4 bg-storePrimary-600 text-white font-semibold rounded-full hover:bg-storePrimary-700 focus:outline-none focus:ring-4 focus:ring-storePrimary-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-8 py-4 bg-rose-600 text-white font-semibold rounded-full hover:bg-rose-700 focus:outline-none focus:ring-4 focus:ring-rose-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center">
@@ -155,7 +155,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                   { icon: '💌', title: 'New Arrivals', description: 'First to know about latest products' }
                 ]).map((benefit, index) => (
                   <div key={index} className="flex flex-col items-center text-center">
-                    <div className="w-12 h-12 bg-storePrimary-100 rounded-full flex items-center justify-center mb-3">
+                    <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-3">
                       <span className="text-xl">{benefit.icon}</span>
                     </div>
                     <h4 className="font-semibold text-gray-900 mb-1">{benefit.title}</h4>

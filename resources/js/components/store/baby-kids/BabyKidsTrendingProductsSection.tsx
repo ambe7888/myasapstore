@@ -75,7 +75,7 @@ export default function BabyKidsTrendingProductsSection({
         <div className="text-center mt-16">
           <Link
             href={generateStoreUrl('store.products', store)}
-            className="inline-flex items-center px-8 py-4 bg-storePrimary-500 text-white font-semibold rounded-full hover:bg-storePrimary-600 transition-all duration-300 shadow-lg"
+            className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
           >
             <span>View All Trending</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

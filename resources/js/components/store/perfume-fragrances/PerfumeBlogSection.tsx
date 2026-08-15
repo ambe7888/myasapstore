@@ -23,12 +23,12 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-6 py-3 bg-storePrimary-50 rounded-full mb-6">
+          <div className="inline-flex items-center px-6 py-3 bg-purple-50 rounded-full mb-6">
             <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-            <span className="text-storePrimary-800 text-sm font-medium">Latest Stories</span>
+            <span className="text-purple-800 text-sm font-medium">Latest Stories</span>
           </div>
           
-          <h2 className="text-4xl lg:text-5xl font-light text-storePrimary-800 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
             {content?.title || 'Fragrance Journal'}
           </h2>
           
@@ -71,9 +71,9 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
               };
               
               return (
-                <div key={index} className="text-center p-6 bg-stone-50 rounded-2xl hover:bg-storePrimary-50 transition-colors duration-300">
-                  <div className="w-16 h-16 bg-storePrimary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <div className="w-8 h-8 text-storePrimary-800">
+                <div key={index} className="text-center p-6 bg-stone-50 rounded-2xl hover:bg-purple-50 transition-colors duration-300">
+                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-8 h-8 text-purple-800">
                       {getIcon(category.icon)}
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                         <span>{posts[0].read_time || '5'} min read</span>
                       </div>
                       
-                      <h3 className="text-3xl font-light text-gray-900 group-hover:text-storePrimary-800 transition-colors duration-300">
+                      <h3 className="text-3xl font-light text-gray-900 group-hover:text-purple-800 transition-colors duration-300">
                         {posts[0].title}
                       </h3>
                       
@@ -124,7 +124,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                         {posts[0].excerpt || posts[0].content?.substring(0, 200) + '...'}
                       </p>
                       
-                      <div className="inline-flex items-center text-storePrimary-800 font-medium group-hover:text-storePrimary-900 transition-colors duration-300">
+                      <div className="inline-flex items-center text-purple-800 font-medium group-hover:text-purple-900 transition-colors duration-300">
                         <span>Read Article</span>
                         <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -145,7 +145,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                     href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                     className="group block"
                   >
-                    <div className="flex flex-col md:flex-row gap-6 p-6 bg-stone-50 rounded-2xl hover:bg-storePrimary-50 transition-colors duration-300">
+                    <div className="flex flex-col md:flex-row gap-6 p-6 bg-stone-50 rounded-2xl hover:bg-purple-50 transition-colors duration-300">
                       
                       {/* Image */}
                       <div className="md:w-48 flex-shrink-0">
@@ -167,12 +167,12 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                           {post.category && (
                             <>
                               <span>•</span>
-                              <span className="text-storePrimary-600">{post.category.name}</span>
+                              <span className="text-purple-600">{post.category.name}</span>
                             </>
                           )}
                         </div>
                         
-                        <h3 className="text-xl font-medium text-gray-900 group-hover:text-storePrimary-800 transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-xl font-medium text-gray-900 group-hover:text-purple-800 transition-colors duration-300 line-clamp-2">
                           {post.title}
                         </h3>
                         
@@ -180,7 +180,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                           {post.excerpt || post.content?.substring(0, 120) + '...'}
                         </p>
                         
-                        <div className="inline-flex items-center text-storePrimary-800 text-sm font-medium group-hover:text-storePrimary-900 transition-colors duration-300">
+                        <div className="inline-flex items-center text-purple-800 text-sm font-medium group-hover:text-purple-900 transition-colors duration-300">
                           <span>Continue Reading</span>
                           <svg className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -195,8 +195,8 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
           </div>
         ) : (
           <div className="text-center py-16">
-            <div className="w-24 h-24 bg-storePrimary-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-12 h-12 text-storePrimary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
@@ -211,7 +211,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
         <div className="text-center mt-16">
           <Link
             href={generateStoreUrl('store.blog', store)}
-            className="inline-flex items-center px-8 py-4 bg-storePrimary-800 text-white rounded-full font-medium hover:bg-storePrimary-900 transition-colors duration-300"
+            className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
           >
             <span>View All Articles</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

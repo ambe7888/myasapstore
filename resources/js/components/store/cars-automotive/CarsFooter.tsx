@@ -54,9 +54,9 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
     <footer className="bg-black text-white relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-storePrimary-600 rotate-45"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 border border-storePrimary-600 rotate-12"></div>
-        <div className="absolute top-1/2 left-1/3 w-16 h-16 border border-storePrimary-600 rotate-45"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 border border-red-600 rotate-45"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 border border-red-600 rotate-12"></div>
+        <div className="absolute top-1/2 left-1/3 w-16 h-16 border border-red-600 rotate-45"></div>
       </div>
 
       {/* Main Footer */}
@@ -69,9 +69,9 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 <img src={getImageUrl(logo)} alt={storeName} className="h-14 w-auto" />
               ) : (
                 <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-storePrimary-600 rotate-45"></div>
+                  <div className="w-3 h-3 bg-red-600 rotate-45"></div>
                   <h3 className="text-3xl font-black tracking-tight">{storeName}</h3>
-                  <div className="w-3 h-3 bg-storePrimary-600 rotate-45"></div>
+                  <div className="w-3 h-3 bg-red-600 rotate-45"></div>
                 </div>
               )}
             </div>
@@ -87,7 +87,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                   href={social.url || '#'}
                   target={social.url ? '_blank' : '_self'}
                   rel={social.url ? 'noopener noreferrer' : undefined}
-                  className="group w-12 h-12 bg-gray-900 hover:bg-storePrimary-600 border-2 border-gray-700 hover:border-storePrimary-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+                  className="group w-12 h-12 bg-gray-900 hover:bg-red-600 border-2 border-gray-700 hover:border-red-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                   aria-label={social.platform}
                 >
                   <SocialIcon platform={social.platform} size={20} className="group-hover:text-white" />
@@ -99,7 +99,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
           {/* Menu 1 */}
           <div>
             <div className="flex items-center mb-8">
-              <div className="w-1 h-8 bg-storePrimary-600 mr-4"></div>
+              <div className="w-1 h-8 bg-red-600 mr-4"></div>
               <h4 className="text-xl font-bold tracking-wider uppercase text-white">
                 {footerContent.menu1?.title || 'Customer Support'}
               </h4>
@@ -114,9 +114,9 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-storePrimary-600 transition-colors font-medium text-lg group flex items-center"
+                    className="text-gray-300 hover:text-red-600 transition-colors font-medium text-lg group flex items-center"
                   >
-                    <span className="w-2 h-2 bg-gray-600 group-hover:bg-storePrimary-600 mr-3 transition-colors"></span>
+                    <span className="w-2 h-2 bg-gray-600 group-hover:bg-red-600 mr-3 transition-colors"></span>
                     {link.name}
                   </a>
                 </li>
@@ -127,7 +127,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
           {/* Menu 2 */}
           <div>
             <div className="flex items-center mb-8">
-              <div className="w-1 h-8 bg-storePrimary-600 mr-4"></div>
+              <div className="w-1 h-8 bg-red-600 mr-4"></div>
               <h4 className="text-xl font-bold tracking-wider uppercase text-white">
                 {footerContent.menu2?.title || 'Company'}
               </h4>
@@ -142,9 +142,9 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-storePrimary-600 transition-colors font-medium text-lg group flex items-center"
+                    className="text-gray-300 hover:text-red-600 transition-colors font-medium text-lg group flex items-center"
                   >
-                    <span className="w-2 h-2 bg-gray-600 group-hover:bg-storePrimary-600 mr-3 transition-colors"></span>
+                    <span className="w-2 h-2 bg-gray-600 group-hover:bg-red-600 mr-3 transition-colors"></span>
                     {link.name}
                   </a>
                 </li>
@@ -155,29 +155,29 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
           {/* Contact Info */}
           <div>
             <div className="flex items-center mb-8">
-              <div className="w-1 h-8 bg-storePrimary-600 mr-4"></div>
+              <div className="w-1 h-8 bg-red-600 mr-4"></div>
               <h4 className="text-xl font-bold tracking-wider uppercase text-white">{footerContent.contact?.title || 'Get In Touch'}</h4>
             </div>
             
             <div className="space-y-4">
               {footerContent.contact?.address && (
                 <div className="flex items-start">
-                  <MapPin className="h-4 w-4 text-storePrimary-600 mr-3 mt-1" />
+                  <MapPin className="h-4 w-4 text-red-600 mr-3 mt-1" />
                   <span className="text-gray-300 text-sm">{footerContent.contact.address}</span>
                 </div>
               )}
               {footerContent.contact?.phone && (
                 <div className="flex items-center">
-                  <Phone className="h-4 w-4 text-storePrimary-600 mr-3" />
-                  <a href={`tel:${footerContent.contact.phone}`} className="text-gray-300 hover:text-storePrimary-400 text-sm">
+                  <Phone className="h-4 w-4 text-red-600 mr-3" />
+                  <a href={`tel:${footerContent.contact.phone}`} className="text-gray-300 hover:text-red-400 text-sm">
                     {footerContent.contact.phone}
                   </a>
                 </div>
               )}
               {footerContent.contact?.email && (
                 <div className="flex items-center">
-                  <Mail className="h-4 w-4 text-storePrimary-600 mr-3" />
-                  <a href={`mailto:${footerContent.contact.email}`} className="text-gray-300 hover:text-storePrimary-400 text-sm">
+                  <Mail className="h-4 w-4 text-red-600 mr-3" />
+                  <a href={`mailto:${footerContent.contact.email}`} className="text-gray-300 hover:text-red-400 text-sm">
                     {footerContent.contact.email}
                   </a>
                 </div>
@@ -185,7 +185,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
             </div>
 
             {/* Business Hours */}
-            <div className="mt-6 p-4 bg-gray-900 border-l-4 border-storePrimary-600">
+            <div className="mt-6 p-4 bg-gray-900 border-l-4 border-red-600">
               <h5 className="font-bold text-white mb-3 text-sm uppercase">
                 {footerContent.business_hours?.title || 'Service Hours'}
               </h5>
@@ -197,7 +197,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 ]).map((schedule, index) => (
                   <div key={index} className="flex justify-between text-xs">
                     <span className="text-gray-300">{schedule.days}</span>
-                    <span className={schedule.status === 'closed' ? 'text-gray-500' : 'text-storePrimary-400'}>
+                    <span className={schedule.status === 'closed' ? 'text-gray-500' : 'text-red-400'}>
                       {schedule.time}
                     </span>
                   </div>
@@ -223,7 +223,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
       </div>
 
       {/* Red accent line */}
-      <div className="h-2 bg-storePrimary-600"></div>
+      <div className="h-2 bg-red-600"></div>
     </footer>
   );
 }

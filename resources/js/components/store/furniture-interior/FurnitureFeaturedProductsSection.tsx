@@ -20,13 +20,13 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
   const store = props.store || {};
   
   return (
-    <section className="py-20 lg:py-28 bg-storePrimary-50">
+    <section className="py-20 lg:py-28 bg-amber-50">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-3 bg-storePrimary-100 border-2 border-storePrimary-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
-            <div className="w-2 h-2 bg-storePrimary-600 rounded-full"></div>
-            <span className="text-sm font-bold text-storePrimary-800 tracking-wider uppercase">Collection en vedette</span>
+          <div className="inline-flex items-center gap-3 bg-amber-100 border-2 border-amber-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
+            <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Collection en vedette</span>
           </div>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
             {content?.title || 'Coups de cœur'}

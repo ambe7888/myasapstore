@@ -73,7 +73,7 @@ export default function ElectronicsBlogSection({ posts, content }: ElectronicsBl
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-storePrimary-600 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
                   <a href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}>{post.title}</a>
                 </h3>
 
@@ -85,7 +85,7 @@ export default function ElectronicsBlogSection({ posts, content }: ElectronicsBl
 
                 <a
                   href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
-                  className="inline-flex items-center text-storePrimary-600 font-semibold hover:text-storePrimary-700 transition-colors duration-300"
+                  className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
                 >
                   <span>Read More</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">

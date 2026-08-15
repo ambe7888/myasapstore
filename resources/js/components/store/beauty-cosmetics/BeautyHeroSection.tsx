@@ -17,14 +17,14 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-storePrimary-50">
+    <section className="relative min-h-screen flex items-center bg-rose-50">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">
             {/* Badge */}
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="inline-flex items-center px-4 py-2 bg-white text-storePrimary-600 text-sm font-medium rounded-full shadow-sm">
+              <span className="inline-flex items-center px-4 py-2 bg-white text-rose-600 text-sm font-medium rounded-full shadow-sm">
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -46,7 +46,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
             <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
-                className="group bg-storePrimary-600 text-white px-8 py-4 rounded-full font-medium hover:bg-storePrimary-700 transition-all duration-300 inline-flex items-center justify-center"
+                className="group bg-rose-600 text-white px-8 py-4 rounded-full font-medium hover:bg-rose-700 transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.button_text || 'Shop Collection'}</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
@@ -55,7 +55,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
               </a>
               <a 
                 href={formatCustomLink(content?.secondary_button_link, store, '/beauty-guide')}
-                className="group border-2 border-storePrimary-600 text-storePrimary-600 px-8 py-4 rounded-full font-medium hover:bg-storePrimary-600 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
+                className="group border-2 border-rose-600 text-rose-600 px-8 py-4 rounded-full font-medium hover:bg-rose-600 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.secondary_button_text || 'Beauty Guide'}</span>
               </a>
@@ -76,15 +76,15 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
               
               {/* Decorative Elements */}
               <div className="absolute top-8 right-8 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full"></div>
-              <div className="absolute bottom-8 left-8 w-8 h-8 bg-storePrimary-400/60 rounded-full"></div>
+              <div className="absolute bottom-8 left-8 w-8 h-8 bg-rose-400/60 rounded-full"></div>
               <div className="absolute top-1/3 left-8 w-4 h-4 bg-white/40 rounded-full"></div>
             </div>
             
             {/* Floating Card */}
             <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl">
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-storePrimary-100 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-storePrimary-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
                   </svg>
                 </div>
@@ -105,19 +105,19 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
             { icon: 'shield', title: 'Safe & Pure', description: 'No harmful chemicals' }
           ]).map((box, index) => (
             <div key={index} className="flex items-center space-x-4 p-6 bg-white rounded-2xl shadow-sm">
-              <div className="w-12 h-12 bg-storePrimary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0">
                 {box.icon === 'sparkles' && (
-                  <svg className="w-6 h-6 text-storePrimary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd" />
                   </svg>
                 )}
                 {box.icon === 'heart' && (
-                  <svg className="w-6 h-6 text-storePrimary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                   </svg>
                 )}
                 {box.icon === 'shield' && (
-                  <svg className="w-6 h-6 text-storePrimary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 )}

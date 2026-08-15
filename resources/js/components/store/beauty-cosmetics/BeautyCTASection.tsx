@@ -50,7 +50,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-storePrimary-50 to-pink-50">
+    <section className="py-20 bg-gradient-to-br from-rose-50 to-pink-50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {boxes.map((box, index) => (
@@ -59,14 +59,14 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
               className="group bg-white rounded-3xl p-8 text-center shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
             >
               {/* Icon */}
-              <div className="w-16 h-16 bg-storePrimary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-storePrimary-200 transition-colors duration-300">
-                <div className="text-storePrimary-600">
+              <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-rose-200 transition-colors duration-300">
+                <div className="text-rose-600">
                   {getIcon(box.icon)}
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-storePrimary-600 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-rose-600 transition-colors duration-300">
                 {box.title}
               </h3>
 
@@ -77,7 +77,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
 
               {/* Hover Arrow */}
               <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="inline-flex items-center text-storePrimary-600 font-medium">
+                <div className="inline-flex items-center text-rose-600 font-medium">
                   <span className="text-sm">Learn More</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

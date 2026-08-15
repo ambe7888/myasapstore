@@ -38,7 +38,7 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {brandContent.description || 'We partner with the world\'s leading automotive manufacturers and performance brands'}
           </p>
-          <div className="w-24 h-1 bg-storePrimary-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
         </div>
 
         {/* Brand Logos */}
@@ -46,7 +46,7 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
           {logos.map((logo, index) => (
             <div
               key={index}
-              className="group bg-white p-6 hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 hover:border-storePrimary-600"
+              className="group bg-white p-6 hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 hover:border-red-600"
             >
               <img
                 src={logo.image ? getImageUrl(logo.image) : `https://placehold.co/150x80/f5f5f5/666666?text=Brand+${index + 1}`}
@@ -59,14 +59,14 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <div className="bg-white border-2 border-storePrimary-600 p-8 max-w-2xl mx-auto">
+          <div className="bg-white border-2 border-red-600 p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-black text-black mb-4">{brandContent.bottom_title || 'Can\'t Find Your Brand?'}</h3>
             <p className="text-gray-600 mb-6">
               {brandContent.bottom_description || 'We work with hundreds of automotive brands. Contact us for special orders.'}
             </p>
             <a
               href={formatCustomLink(brandContent.bottom_button_link, store, '/contact')}
-              className="inline-flex items-center px-8 py-4 bg-storePrimary-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
             >
               {brandContent.bottom_button_text || 'Contact Us'}
             </a>

@@ -100,82 +100,225 @@ function StoreLayoutContent({
     const style = document.createElement('style');
     style.id = 'store-custom-css';
     
+    let themeCss = '';
     const activeTheme = theme || 'default';
     
-    const defaultThemeColors: Record<string, string> = {
-      'baby-kids': '#ec4899', // pink-500
-      'beauty-cosmetics': '#f43f5e', // rose-500
-      'cars-automotive': '#ef4444', // red-500
-      'electronics': '#3b82f6', // blue-500
-      'furniture-interior': '#f59e0b', // amber-500
-      'jewelry': '#f59e0b', // amber-500
-      'perfume-fragrances': '#a855f7', // purple-500
-      'watches': '#0f172a', // slate-900
-      'fashion': '#0f172a', // slate-900
-      'default': '#4f46e5' // indigo-600
-    };
+    if (activeTheme === 'furniture-interior') {
+      themeCss = `
+        /* Furniture Theme Specific Overrides */
+        .bg-yellow-800, .bg-amber-800, .bg-amber-700, .bg-amber-900 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-yellow-900:hover, .hover\\:bg-amber-800:hover, .hover\\:bg-amber-900:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-yellow-800, .text-amber-800, .text-yellow-700, .text-amber-700, .text-amber-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-amber-50, .bg-yellow-50, .bg-yellow-100, .bg-amber-100 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-yellow-200, .border-amber-200, .border-amber-100 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-yellow-800, button.bg-yellow-800, a.bg-amber-700, button.bg-amber-700 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'cars-automotive') {
+      themeCss = `
+        /* Cars Theme Specific Overrides */
+        .bg-red-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-red-700:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-red-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-red-50 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-red-200 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-red-600, button.bg-red-600 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'beauty-cosmetics') {
+      themeCss = `
+        /* Beauty Theme Specific Overrides */
+        .bg-rose-500, .bg-rose-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-rose-600:hover, .hover\\:bg-rose-700:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-rose-500, .text-rose-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-rose-50 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-rose-200 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-rose-500, button.bg-rose-500, a.bg-rose-600, button.bg-rose-600 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'baby-kids') {
+      themeCss = `
+        /* Baby & Kids Theme Specific Overrides */
+        .bg-pink-300, .bg-pink-400, .bg-pink-500, .bg-pink-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-pink-500:hover, .hover\\:bg-pink-600:hover, .hover\\:bg-pink-700:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-pink-400, .text-pink-500, .text-pink-600 {
+          color: var(--theme-color) !important;
+        }
+        .hover\\:text-pink-500:hover, .hover\\:text-pink-600:hover {
+          color: var(--primary-hover-color) !important;
+        }
+        .bg-pink-50, .bg-pink-100, .bg-pink-200 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-pink-200, .border-pink-300, .border-pink-400, .border-pink-500 {
+          border-color: var(--theme-color) !important;
+        }
+        .focus\\:border-pink-500:focus {
+          border-color: var(--theme-color) !important;
+        }
+        .focus\\:ring-pink-200:focus, .ring-pink-200 {
+          --tw-ring-color: var(--theme-color) !important;
+        }
+        a.bg-pink-500, button.bg-pink-500, a.bg-pink-600, button.bg-pink-600, .text-white.bg-pink-500 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'perfume-fragrances') {
+      themeCss = `
+        /* Perfume Theme Specific Overrides */
+        .bg-purple-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-purple-700:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-purple-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-purple-50 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-purple-200 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-purple-600, button.bg-purple-600 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'electronics') {
+      themeCss = `
+        /* Electronics Theme Specific Overrides */
+        .bg-blue-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-blue-700:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .text-blue-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-blue-50 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-blue-200 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-blue-600, button.bg-blue-600 {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'fashion' || activeTheme === 'watches') {
+      themeCss = `
+        /* Dark/Fashion/Watches Theme Specific Overrides */
+        .bg-slate-900, .bg-black {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-slate-800:hover, .hover\\:bg-gray-900:hover {
+          background-color: var(--primary-hover-color) !important;
+        }
+        .bg-slate-50, .bg-gray-50 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-slate-200, .border-gray-200 {
+          border-color: var(--border-light-color) !important;
+        }
+        a.bg-slate-900, button.bg-slate-900, a.bg-black, button.bg-black {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    } else if (activeTheme === 'default') {
+      themeCss = `
+        /* Default Theme Specific Overrides */
+        .bg-primary, .bg-primary-500, .bg-primary-600 {
+          background-color: var(--theme-color) !important;
+          border-color: var(--theme-color) !important;
+        }
+        .hover\\:bg-primary:hover, .hover\\:bg-primary-600:hover, .hover\\:bg-primary-700:hover {
+          background-color: var(--primary-hover-color) !important;
+          border-color: var(--primary-hover-color) !important;
+        }
+        .text-primary, .text-primary-500, .text-primary-600 {
+          color: var(--theme-color) !important;
+        }
+        .bg-primary-50, .bg-primary\\/5, .bg-primary\\/10 {
+          background-color: var(--bg-light-color) !important;
+        }
+        .border-primary-200, .border-primary\\/20, .border-primary {
+          border-color: var(--theme-color) !important;
+        }
+        a.bg-primary, button.bg-primary, a.text-primary:hover, button.text-primary:hover {
+          color: var(--btn-text-color) !important;
+        }
+      `;
+    }
 
-    const activeThemeColor = store?.primary_color || defaultThemeColors[activeTheme] || '#4f46e5';
+    // Only apply theme color overrides if user explicitly set a custom primary color (non-empty string)
     const hasCustomPrimaryColor = !!(store?.primary_color && store.primary_color.trim() !== '');
-
-    // Convert hex to rgb object
-    const hexToRgb = (hex: string) => {
-      const result = /^#?([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : { r: 79, g: 70, b: 229 }; // default indigo
-    };
-
-    const baseRgb = hexToRgb(activeThemeColor);
-    const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
-    const palette: Record<number, string> = {};
-
-    shades.forEach(shade => {
-      let weight;
-      let mixR, mixG, mixB;
-      if (shade === 500) {
-        palette[shade] = `${baseRgb.r} ${baseRgb.g} ${baseRgb.b}`;
-        return;
-      } else if (shade < 500) {
-        weight = (500 - shade) / 500;
-        mixR = 255; mixG = 255; mixB = 255;
-        if (shade === 50) weight = 0.9;
-      } else {
-        weight = (shade - 500) / 500;
-        mixR = 0; mixG = 0; mixB = 0;
-        if (shade === 950) weight = 0.9;
-      }
-      const r = Math.round(baseRgb.r * (1 - weight) + mixR * weight);
-      const g = Math.round(baseRgb.g * (1 - weight) + mixG * weight);
-      const b = Math.round(baseRgb.b * (1 - weight) + mixB * weight);
-      palette[shade] = `${r} ${g} ${b}`;
-    });
 
     let cssContent = `
       :root {
-        --color-store-primary-50: ${palette[50]};
-        --color-store-primary-100: ${palette[100]};
-        --color-store-primary-200: ${palette[200]};
-        --color-store-primary-300: ${palette[300]};
-        --color-store-primary-400: ${palette[400]};
-        --color-store-primary-500: ${palette[500]};
-        --color-store-primary-600: ${palette[600]};
-        --color-store-primary-700: ${palette[700]};
-        --color-store-primary-800: ${palette[800]};
-        --color-store-primary-900: ${palette[900]};
-        --color-store-primary-950: ${palette[950]};
-        
         ${hasCustomPrimaryColor ? `--theme-color: ${store.primary_color};` : ''}
         ${store?.button_radius ? `--radius: ${store.button_radius};` : ''}
         --btn-add-to-cart-color: ${store?.button_color_add_to_cart || (hasCustomPrimaryColor ? store!.primary_color : 'var(--theme-color, #4f46e5)')};
         --btn-buy-now-color: ${store?.button_color_buy_now || '#16a34a'};
-        --primary-hover-color: rgb(${palette[600]});
-        --bg-light-color: rgb(${palette[50]});
-        --border-light-color: rgb(${palette[200]});
       }
     `;
+
+    // Apply theme-specific color overrides ONLY when user set a custom color
+    if (hasCustomPrimaryColor) {
+      cssContent += `
+        :root {
+          --primary-hover-color: color-mix(in srgb, var(--theme-color) 85%, black);
+          --bg-light-color: color-mix(in srgb, var(--theme-color) 6%, white);
+          --border-light-color: color-mix(in srgb, var(--theme-color) 15%, white);
+        }
+        ${themeCss}
+      `;
+    }
 
     if (store?.text_button_color) {
       cssContent += `

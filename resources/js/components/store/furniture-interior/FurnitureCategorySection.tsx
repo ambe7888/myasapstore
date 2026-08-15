@@ -16,9 +16,9 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
     <section className="py-20 lg:py-24 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-3 bg-storePrimary-100 border-2 border-storePrimary-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
-            <div className="w-2 h-2 bg-storePrimary-600 rounded-full"></div>
-            <span className="text-sm font-bold text-storePrimary-800 tracking-wider uppercase">Nos Collections</span>
+          <div className="inline-flex items-center gap-3 bg-amber-100 border-2 border-amber-300 px-6 py-3 rounded-full mb-6 hover:scale-105 transition-transform duration-300">
+            <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+            <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">Nos Collections</span>
           </div>
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
             {content?.title || 'Acheter par catégorie'}
@@ -35,7 +35,7 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
               href={category.href}
               className="group relative block"
             >
-              <div className="relative bg-white rounded-2xl shadow-lg shadow-storePrimary-200/50 hover:shadow-2xl hover:shadow-storePrimary-300/60 transition-all duration-300 transform hover:-translate-y-2">
+              <div className="relative bg-white rounded-2xl shadow-lg shadow-amber-200/50 hover:shadow-2xl hover:shadow-amber-300/60 transition-all duration-300 transform hover:-translate-y-2">
                 <div className="aspect-[4/5] relative rounded-lg overflow-hidden">
                   <img
                     src={getImageUrl(category.image) || `/storage/categories/${category.name.toLowerCase().replace(' ', '-')}.jpg`}
@@ -46,14 +46,14 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                     }}
                   />
                   
-                  <div className="absolute top-3 left-3 bg-storePrimary-800 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
+                  <div className="absolute top-3 left-3 bg-amber-800 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
                     {category.name}
                   </div>
                   
-                  <div className="absolute inset-0 bg-storePrimary-900/0 group-hover:bg-storePrimary-900/30 transition-colors duration-300 flex items-end">
+                  <div className="absolute inset-0 bg-amber-900/0 group-hover:bg-amber-900/30 transition-colors duration-300 flex items-end">
                     <div className="w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center">
-                        <span className="text-storePrimary-800 font-bold text-sm">Explore Collection</span>
+                        <span className="text-amber-800 font-bold text-sm">Explore Collection</span>
                       </div>
                     </div>
                   </div>
@@ -61,10 +61,10 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
               </div>
               
               <div className="text-center mt-3">
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-storePrimary-700 transition-colors duration-300">
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition-colors duration-300">
                   {category.name}
                 </h3>
-                <div className="w-6 h-0.5 bg-storePrimary-600 mx-auto mt-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                <div className="w-6 h-0.5 bg-amber-600 mx-auto mt-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               </div>
             </Link>
           )) : (
@@ -78,7 +78,7 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                 key={index}
                 className="group relative block cursor-pointer"
               >
-                <div className="relative bg-white rounded-2xl shadow-lg shadow-storePrimary-200/50 hover:shadow-2xl hover:shadow-storePrimary-300/60 transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative bg-white rounded-2xl shadow-lg shadow-amber-200/50 hover:shadow-2xl hover:shadow-amber-300/60 transition-all duration-300 transform hover:-translate-y-2">
                   <div className="aspect-[4/5] relative rounded-lg overflow-hidden">
                     <img
                       src={getImageUrl(category.image) || category.image}
@@ -89,14 +89,14 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                       }}
                     />
                     
-                    <div className="absolute top-3 left-3 bg-storePrimary-800 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
+                    <div className="absolute top-3 left-3 bg-amber-800 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md">
                       {category.name}
                     </div>
                     
-                    <div className="absolute inset-0 bg-storePrimary-900/0 group-hover:bg-storePrimary-900/30 transition-colors duration-300 flex items-end">
+                    <div className="absolute inset-0 bg-amber-900/0 group-hover:bg-amber-900/30 transition-colors duration-300 flex items-end">
                       <div className="w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                         <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <span className="text-storePrimary-800 font-bold text-sm">Explore Collection</span>
+                          <span className="text-amber-800 font-bold text-sm">Explore Collection</span>
                         </div>
                       </div>
                     </div>
@@ -104,10 +104,10 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                 </div>
                 
                 <div className="text-center mt-3">
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-storePrimary-700 transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition-colors duration-300">
                     {category.name}
                   </h3>
-                  <div className="w-6 h-0.5 bg-storePrimary-600 mx-auto mt-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                  <div className="w-6 h-0.5 bg-amber-600 mx-auto mt-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                 </div>
               </div>
             ))

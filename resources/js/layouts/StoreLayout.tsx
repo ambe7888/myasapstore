@@ -149,18 +149,30 @@ function StoreLayoutContent({
     }
     
     // Only inject overrides when vendor picked a non-default color
+    // Use scoped [data-theme] .class selectors (specificity 0,1,1) which always beat .class alone (0,0,1)
+    // --color-store-primary-* is set directly on the [data-theme] element and is a normal CSS property (inheritable)
     if (selectedPreset && selectedPreset !== themeClasses.prefix) {
-      // Tailwind v4 uses CSS variables like --color-pink-500 natively.
-      // We remap the theme's primary color family to the selected preset's CSS vars.
-      const overrideRules = themeClasses.shades.map(shade => {
-        return `--color-${themeClasses.prefix}-${shade}: var(--color-store-primary-${shade});`;
-      }).join('\n          ');
-      
-      cssContent += `
-        [data-theme="${selectedPreset}"] {
-          ${overrideRules}
-        }
-      `;
+      const p = themeClasses.prefix;
+      const t = selectedPreset;
+      const colorRules = themeClasses.shades.map(shade => {
+        const v = `var(--color-store-primary-${shade})`;
+        return `
+          [data-theme="${t}"] .bg-${p}-${shade} { background-color: ${v}; }
+          [data-theme="${t}"] .text-${p}-${shade} { color: ${v}; }
+          [data-theme="${t}"] .border-${p}-${shade} { border-color: ${v}; }
+          [data-theme="${t}"] .ring-${p}-${shade} { --tw-ring-color: ${v}; }
+          [data-theme="${t}"] .from-${p}-${shade} { --tw-gradient-from: ${v}; }
+          [data-theme="${t}"] .to-${p}-${shade} { --tw-gradient-to: ${v}; }
+          [data-theme="${t}"] .hover\\:bg-${p}-${shade}:hover { background-color: ${v}; }
+          [data-theme="${t}"] .hover\\:text-${p}-${shade}:hover { color: ${v}; }
+          [data-theme="${t}"] .hover\\:border-${p}-${shade}:hover { border-color: ${v}; }
+          [data-theme="${t}"] .focus\\:border-${p}-${shade}:focus { border-color: ${v}; }
+          [data-theme="${t}"] .focus\\:ring-${p}-${shade}:focus { --tw-ring-color: ${v}; }
+          [data-theme="${t}"] .bg-${p}-${shade}\\/20 { background-color: color-mix(in oklch, ${v} 20%, transparent); }
+          [data-theme="${t}"] .bg-${p}-${shade}\\/50 { background-color: color-mix(in oklch, ${v} 50%, transparent); }
+        `;
+      }).join('');
+      cssContent += colorRules;
     }
 
     style.textContent = cssContent;

@@ -47,7 +47,7 @@ export default function CarsRelatedProducts({
           </p>
           
           {/* Red accent line */}
-          <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-storePrimary-600 mx-auto mt-8"></div>
         </div>
 
         {/* Products Grid */}

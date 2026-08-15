@@ -106,7 +106,7 @@ export default function ElectronicsProductCard({
         {/* New Badge for recently added products */}
         {!isOnSale && (
           <div className="absolute top-4 left-4">
-            <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <span className="bg-storePrimary-600 text-white text-xs font-bold px-3 py-1 rounded-full">
               NEW
             </span>
           </div>
@@ -137,14 +137,14 @@ export default function ElectronicsProductCard({
         {product.category && (
           <Link 
             href={generateStoreUrl('store.products', store) + '?category=' + product.category.id} 
-            className="text-xs text-blue-600 uppercase tracking-wider font-semibold hover:text-blue-800 transition-colors"
+            className="text-xs text-storePrimary-600 uppercase tracking-wider font-semibold hover:text-storePrimary-800 transition-colors"
           >
             {product.category.name}
           </Link>
         )}
         
         <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
-          <h3 className="font-bold text-lg mt-2 mb-3 text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+          <h3 className="font-bold text-lg mt-2 mb-3 text-gray-900 hover:text-storePrimary-600 transition-colors line-clamp-2 leading-tight">
             {product.name}
           </h3>
         </Link>
@@ -172,7 +172,7 @@ export default function ElectronicsProductCard({
         <div className="mb-4">
           {isOnSale ? (
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-blue-600">{format(product.sale_price || 0)}</span>
+              <span className="text-2xl font-bold text-storePrimary-600">{format(product.sale_price || 0)}</span>
               <span className="text-lg text-gray-500 line-through">{format(product.price)}</span>
             </div>
           ) : (

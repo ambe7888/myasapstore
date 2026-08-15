@@ -50,9 +50,9 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
   };
 
   return (
-    <div className="group bg-white rounded-3xl shadow-lg shadow-amber-200/30 hover:shadow-2xl hover:shadow-amber-300/40 transition-all duration-500 overflow-hidden border border-amber-100 hover:border-amber-200 transform hover:-translate-y-2">
+    <div className="group bg-white rounded-3xl shadow-lg shadow-storePrimary-200/30 hover:shadow-2xl hover:shadow-storePrimary-300/40 transition-all duration-500 overflow-hidden border border-storePrimary-100 hover:border-storePrimary-200 transform hover:-translate-y-2">
       {/* Product Image */}
-      <div className="relative aspect-square overflow-hidden bg-amber-50">
+      <div className="relative aspect-square overflow-hidden bg-storePrimary-50">
         <Link href={generateStoreUrl('store.product', store,  { id: product.id })} className="block w-full h-full">
           <img
             src={getProductCoverImage(product, store)}
@@ -67,13 +67,13 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         </Link>
         
         {/* Wooden Frame Effect */}
-        <div className="absolute inset-0 border-4 border-amber-800/20 rounded-lg m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        <div className="absolute inset-0 border-4 border-storePrimary-800/20 rounded-lg m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         
         {/* Action Buttons */}
         <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
           <Link
             href={generateStoreUrl('store.product', store,  { id: product.id })}
-            className="w-10 h-10 rounded-xl bg-white/95 text-amber-700 hover:bg-amber-50 hover:scale-110 flex items-center justify-center transition-all duration-300 shadow-lg"
+            className="w-10 h-10 rounded-xl bg-white/95 text-storePrimary-700 hover:bg-storePrimary-50 hover:scale-110 flex items-center justify-center transition-all duration-300 shadow-lg"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -86,8 +86,8 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
             disabled={wishlistLoading}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg ${
               isProductInWishlist 
-                ? 'bg-amber-600 text-white scale-110' 
-                : 'bg-white/95 text-amber-700 hover:bg-amber-50 hover:scale-110'
+                ? 'bg-storePrimary-600 text-white scale-110' 
+                : 'bg-white/95 text-storePrimary-700 hover:bg-storePrimary-50 hover:scale-110'
             } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             <svg className="w-5 h-5" fill={isProductInWishlist ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -99,12 +99,12 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {product.is_featured && (
-            <span className="bg-amber-500 text-white px-2 py-1 text-xs font-bold rounded-lg shadow-md">
+            <span className="bg-storePrimary-500 text-white px-2 py-1 text-xs font-bold rounded-lg shadow-md">
               ⭐ En vedette
             </span>
           )}
           {product.variants && product.variants.length > 0 && (
-            <span className="bg-amber-800 text-amber-100 px-2 py-1 text-xs font-bold rounded-lg shadow-md">
+            <span className="bg-storePrimary-800 text-storePrimary-100 px-2 py-1 text-xs font-bold rounded-lg shadow-md">
               Multi-variantes
             </span>
           )}
@@ -121,7 +121,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         {/* Category & Rating Row */}
         <div className="flex items-center justify-between mb-2">
           {product.category && (
-            <span className="text-amber-700 text-xs font-bold uppercase tracking-wider bg-amber-100 px-2 py-1 rounded-full">
+            <span className="text-storePrimary-700 text-xs font-bold uppercase tracking-wider bg-storePrimary-100 px-2 py-1 rounded-full">
               {product.category.name}
             </span>
           )}
@@ -132,7 +132,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
                 {[...Array(5)].map((_, i) => {
                   const rating = product.average_rating || product.rating || 0;
                   return (
-                    <svg key={i} className={`w-3 h-3 ${i < Math.floor(Number(rating)) ? 'text-amber-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className={`w-3 h-3 ${i < Math.floor(Number(rating)) ? 'text-storePrimary-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   );
@@ -146,7 +146,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         {/* Product Name */}
         <Link
           href={generateStoreUrl('store.product', store,  { id: product.id })}
-          className="block group-hover:text-amber-800 transition-colors duration-300"
+          className="block group-hover:text-storePrimary-800 transition-colors duration-300"
         >
           <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 leading-tight">
             {product.name}
@@ -170,7 +170,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
                 </span>
               </div>
               <div className="flex items-baseline gap-2 flex-wrap">
-                <span className="text-2xl font-bold text-amber-800 whitespace-nowrap">
+                <span className="text-2xl font-bold text-storePrimary-800 whitespace-nowrap">
                   {formatPrice(product.sale_price)}
                 </span>
                 <span className="text-slate-400 line-through text-sm whitespace-nowrap">
@@ -179,7 +179,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
               </div>
             </div>
           ) : (
-            <span className="text-2xl font-bold text-amber-800 whitespace-nowrap">
+            <span className="text-2xl font-bold text-storePrimary-800 whitespace-nowrap">
               {formatPrice(product.price)}
             </span>
           )}

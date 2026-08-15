@@ -55,7 +55,7 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
     <section className="py-20 bg-yellow-50 relative overflow-hidden">
       {/* Playful Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-storePrimary-200 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-200 rounded-full opacity-25 animate-pulse" style={{ animationDelay: '2s' }}></div>
         <div className="absolute bottom-1/3 right-1/3 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -66,10 +66,10 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
           {/* Unique Toy Block Newsletter Card */}
           <div className="relative">
             {/* Shadow Layer */}
-            <div className="absolute top-4 left-4 w-full h-full bg-pink-300 rounded-3xl opacity-40"></div>
+            <div className="absolute top-4 left-4 w-full h-full bg-storePrimary-300 rounded-3xl opacity-40"></div>
             
             {/* Main Newsletter Card */}
-            <div className="relative bg-white rounded-3xl shadow-2xl border-4 border-pink-400 p-12 text-center">
+            <div className="relative bg-white rounded-3xl shadow-2xl border-4 border-storePrimary-400 p-12 text-center">
               {/* Decorative Corner Elements */}
               <div className="absolute -top-3 -left-3 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-white">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -101,13 +101,13 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={content?.placeholder_text || 'Enter your email'}
                       required
-                      className="w-full px-6 py-4 rounded-full border-3 border-pink-300 focus:border-pink-500 focus:outline-none text-gray-700 placeholder-gray-500 bg-pink-50 transition-all duration-300 text-lg"
+                      className="w-full px-6 py-4 rounded-full border-3 border-storePrimary-300 focus:border-storePrimary-500 focus:outline-none text-gray-700 placeholder-gray-500 bg-storePrimary-50 transition-all duration-300 text-lg"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-4 bg-pink-500 text-white font-bold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+                    className="px-8 py-4 bg-storePrimary-500 text-white font-bold rounded-full hover:bg-storePrimary-600 transition-all duration-300 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg"
                   >
                     {isSubmitting ? 'Subscribing...' : (content?.button_text || 'Subscribe')}
                   </button>
@@ -129,12 +129,12 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
                 ]).map((benefit: any, index: number) => (
                   <div key={index} className="text-center">
                     <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 ${
-                      index % 3 === 0 ? 'bg-pink-100' :
+                      index % 3 === 0 ? 'bg-storePrimary-100' :
                       index % 3 === 1 ? 'bg-blue-100' :
                       'bg-yellow-100'
                     }`}>
                       <svg className={`w-8 h-8 ${
-                        index % 3 === 0 ? 'text-pink-500' :
+                        index % 3 === 0 ? 'text-storePrimary-500' :
                         index % 3 === 1 ? 'text-blue-500' :
                         'text-yellow-500'
                       }`} fill="currentColor" viewBox="0 0 20 20">

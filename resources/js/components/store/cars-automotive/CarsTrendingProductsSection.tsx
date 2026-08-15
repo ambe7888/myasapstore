@@ -48,7 +48,7 @@ export default function CarsTrendingProductsSection({
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-6">
-            <TrendingUp className="h-8 w-8 text-red-600 mr-3" />
+            <TrendingUp className="h-8 w-8 text-storePrimary-600 mr-3" />
             <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-black">
               {trendingContent.title || 'Hot Sellers'}
             </h2>
@@ -58,7 +58,7 @@ export default function CarsTrendingProductsSection({
           </p>
           
           {/* Red accent line */}
-          <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-storePrimary-600 mx-auto mt-8"></div>
         </div>
 
         {/* Products Grid */}
@@ -90,7 +90,7 @@ export default function CarsTrendingProductsSection({
           <div className="text-center mt-12">
             <a
               href={generateStoreUrl('store.products', store)}
-              className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-black hover:bg-storePrimary-600 text-white font-bold tracking-wider uppercase transition-colors"
             >
               View All Trending
               <ChevronRight className="h-5 w-5 ml-2" />

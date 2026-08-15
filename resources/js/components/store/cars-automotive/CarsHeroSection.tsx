@@ -55,7 +55,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
           <div className="space-y-8">
             {/* Badge */}
             {heroContent.badge_text && (
-              <div className="inline-flex items-center px-6 py-3 bg-red-600 text-white text-sm font-bold tracking-wider uppercase">
+              <div className="inline-flex items-center px-6 py-3 bg-storePrimary-600 text-white text-sm font-bold tracking-wider uppercase">
                 {heroContent.badge_text}
               </div>
             )}
@@ -74,7 +74,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
             <div className="flex flex-col sm:flex-row gap-6 pt-4">
               <a
                 href={formatCustomLink(heroContent.button_link, store, generateStoreUrl('store.products', store))}
-                className="inline-flex items-center justify-center px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold tracking-wider uppercase transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center px-10 py-5 bg-storePrimary-600 hover:bg-storePrimary-700 text-white font-bold tracking-wider uppercase transition-all transform hover:scale-105"
               >
                 {heroContent.button_text || 'Shop Parts'}
               </a>
@@ -92,9 +92,9 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
             {heroContent.info_boxes?.map((box, index) => {
               const IconComponent = iconMap[box.icon as keyof typeof iconMap] || Zap;
               return (
-                <div key={index} className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors">
+                <div key={index} className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-storePrimary-600 transition-colors">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-storePrimary-600 rounded-full flex items-center justify-center">
                       <IconComponent className="h-8 w-8 text-white" />
                     </div>
                   </div>
@@ -107,9 +107,9 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
             }) || (
               // Default info boxes if none provided
               <>
-                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors">
+                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-storePrimary-600 transition-colors">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-storePrimary-600 rounded-full flex items-center justify-center">
                       <Zap className="h-8 w-8 text-white" />
                     </div>
                   </div>
@@ -118,9 +118,9 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
                     <p className="text-gray-300 text-lg">High-quality performance parts</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors">
+                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-storePrimary-600 transition-colors">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-storePrimary-600 rounded-full flex items-center justify-center">
                       <ShieldCheck className="h-8 w-8 text-white" />
                     </div>
                   </div>
@@ -129,9 +129,9 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
                     <p className="text-gray-300 text-lg">2-year comprehensive warranty</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors">
+                <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-storePrimary-600 transition-colors">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-storePrimary-600 rounded-full flex items-center justify-center">
                       <Wrench className="h-8 w-8 text-white" />
                     </div>
                   </div>
@@ -147,7 +147,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
       </div>
 
       {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-red-600"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-2 bg-storePrimary-600"></div>
     </section>
   );
 }

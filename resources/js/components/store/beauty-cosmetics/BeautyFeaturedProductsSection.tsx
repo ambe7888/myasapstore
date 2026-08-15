@@ -33,7 +33,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
   const featuredProducts = products.slice(0, 8);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-rose-50 to-pink-50">
+    <section className="py-20 bg-gradient-to-br from-storePrimary-50 to-pink-50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -54,7 +54,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
         ) : (
           <div className="text-center py-20">
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-              <svg className="w-12 h-12 text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-12 h-12 text-storePrimary-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
               </svg>
             </div>
@@ -67,7 +67,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
           <div className="text-center mt-12">
             <a 
               href={generateStoreUrl('store.products', store)} 
-              className="inline-flex items-center px-8 py-4 bg-white text-rose-600 font-semibold rounded-full shadow-lg hover:shadow-xl hover:bg-rose-600 hover:text-white transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 bg-white text-storePrimary-600 font-semibold rounded-full shadow-lg hover:shadow-xl hover:bg-storePrimary-600 hover:text-white transition-all duration-300"
             >
               <span>View All Products</span>
               <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

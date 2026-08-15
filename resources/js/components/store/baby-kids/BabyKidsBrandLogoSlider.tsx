@@ -24,16 +24,16 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
   ];
 
   return (
-    <section className="py-20 bg-pink-100 relative overflow-hidden">
+    <section className="py-20 bg-storePrimary-100 relative overflow-hidden">
       {/* Playful Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-200 rounded-full opacity-30 animate-float"></div>
-        <div className="absolute top-32 right-20 w-16 h-16 bg-pink-200 rounded-full opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-32 right-20 w-16 h-16 bg-storePrimary-200 rounded-full opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
         <div className="absolute bottom-20 left-32 w-12 h-12 bg-blue-200 rounded-full opacity-50 animate-float" style={{ animationDelay: '2s' }}></div>
         <div className="absolute bottom-32 right-16 w-24 h-24 bg-green-200 rounded-full opacity-20 animate-float" style={{ animationDelay: '0.5s' }}></div>
         
         {/* Cute Icons */}
-        <div className="absolute top-20 right-1/4 text-pink-300 opacity-60 animate-bounce">
+        <div className="absolute top-20 right-1/4 text-storePrimary-300 opacity-60 animate-bounce">
           <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
           </svg>
@@ -63,7 +63,7 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
                 className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
               >
                 <div className={`w-12 h-12 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white shadow-lg ${
-                  index % 4 === 0 ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                  index % 4 === 0 ? 'bg-gradient-to-br from-storePrimary-400 to-storePrimary-500' :
                   index % 4 === 1 ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
                   index % 4 === 2 ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
                   'bg-gradient-to-br from-green-400 to-green-500'
@@ -89,7 +89,7 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
                     </svg>
                   )}
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2 group-hover:text-pink-500 transition-colors duration-300">
+                <div className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2 group-hover:text-storePrimary-500 transition-colors duration-300">
                   {stat.number}
                 </div>
                 <div className="text-gray-600 font-medium">

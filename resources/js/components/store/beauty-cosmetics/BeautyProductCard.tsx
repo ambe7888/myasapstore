@@ -66,12 +66,12 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
       {/* Floating Badges */}
       <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
         {hasDiscount && (
-          <div className="bg-rose-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
+          <div className="bg-storePrimary-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
             -{discountPercentage}% OFF
           </div>
         )}
         {hasVariants && (
-          <div className="bg-rose-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm flex items-center gap-1">
+          <div className="bg-storePrimary-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm flex items-center gap-1">
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
               <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
             </svg>
@@ -88,7 +88,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
           await toggleWishlist(product.id);
         }}
         disabled={wishlistLoading}
-        className={`absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${isHovered ? 'opacity-100 scale-110' : 'opacity-0 scale-100'} hover:bg-white ${isProductInWishlist ? 'text-rose-500' : 'hover:text-rose-500'} ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${isHovered ? 'opacity-100 scale-110' : 'opacity-0 scale-100'} hover:bg-white ${isProductInWishlist ? 'text-storePrimary-500' : 'hover:text-storePrimary-500'} ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
       >
         <svg className="w-5 h-5" fill={isProductInWishlist ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -127,7 +127,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
               await addToCart(product);
             }}
             disabled={cartLoading || isOutOfStock}
-            className={`bg-white/90 backdrop-blur-md text-rose-600 px-6 py-3 rounded-full font-semibold shadow-xl hover:bg-white hover:shadow-2xl transition-all duration-300 flex items-center gap-2 ${cartLoading || isOutOfStock ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`bg-white/90 backdrop-blur-md text-storePrimary-600 px-6 py-3 rounded-full font-semibold shadow-xl hover:bg-white hover:shadow-2xl transition-all duration-300 flex items-center gap-2 ${cartLoading || isOutOfStock ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
@@ -141,14 +141,14 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
       <div className="p-5 bg-white/60 backdrop-blur-sm">
         {/* Category Tag */}
         {product.category && (
-          <span className="inline-block bg-rose-100 text-rose-600 px-2 py-1 rounded-full text-xs font-medium mb-2">
+          <span className="inline-block bg-storePrimary-100 text-storePrimary-600 px-2 py-1 rounded-full text-xs font-medium mb-2">
             {product.category.name}
           </span>
         )}
 
         {/* Product Name */}
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 leading-snug group-hover:text-rose-600 transition-colors duration-300">
-          <Link href={generateStoreUrl('store.product', store,  { id: product.id })} className="hover:text-rose-600 transition-colors">
+        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 leading-snug group-hover:text-storePrimary-600 transition-colors duration-300">
+          <Link href={generateStoreUrl('store.product', store,  { id: product.id })} className="hover:text-storePrimary-600 transition-colors">
             {product.name}
           </Link>
         </h3>
@@ -178,7 +178,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
         {/* Price with Modern Styling */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-rose-600">
+            <span className="text-xl font-bold text-storePrimary-600">
               {format(displayPrice)}
             </span>
             {hasDiscount && (
@@ -195,7 +195,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
               e.stopPropagation();
               router.visit(generateStoreUrl('store.product', store,  { id: product.id }));
             }}
-            className="w-8 h-8 bg-rose-50 hover:bg-rose-100 rounded-full flex items-center justify-center text-rose-600 transition-colors duration-200"
+            className="w-8 h-8 bg-storePrimary-50 hover:bg-storePrimary-100 rounded-full flex items-center justify-center text-storePrimary-600 transition-colors duration-200"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -224,7 +224,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
       </div>
 
       {/* Subtle Border */}
-      <div className={`absolute inset-0 rounded-2xl border-2 border-rose-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
+      <div className={`absolute inset-0 rounded-2xl border-2 border-storePrimary-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
     </div>
   );
 }

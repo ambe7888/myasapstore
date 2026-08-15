@@ -61,8 +61,8 @@ export default function CarsImageGallery({ images, selectedImage, onImageSelect 
               onClick={() => onImageSelect(index)}
               className={`aspect-square bg-gray-100 overflow-hidden border-2 transition-colors ${
                 selectedImage === index
-                  ? 'border-red-600'
-                  : 'border-gray-200 hover:border-red-600'
+                  ? 'border-storePrimary-600'
+                  : 'border-gray-200 hover:border-storePrimary-600'
               }`}
             >
               <img

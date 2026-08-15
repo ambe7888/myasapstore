@@ -57,7 +57,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
     <section className="py-20 bg-slate-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-storePrimary-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl"></div>
       </div>
@@ -72,7 +72,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Icon */}
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl mb-8">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-storePrimary-600 rounded-2xl mb-8">
             <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -85,7 +85,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
           </h2>
 
           {/* Subtitle */}
-          <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-storePrimary-100 mb-12 max-w-2xl mx-auto leading-relaxed">
             {content?.subtitle || 'Stay ahead with the latest tech news, product launches, and exclusive deals delivered to your inbox.'}
           </p>
 
@@ -99,11 +99,11 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={content?.placeholder_text || 'Enter your email for tech updates'}
-                    className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-storePrimary-200 focus:outline-none focus:ring-2 focus:ring-storePrimary-500 focus:border-transparent transition-all duration-300"
                     required
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-storePrimary-300" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
@@ -112,7 +112,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="px-8 py-4 bg-storePrimary-600 text-white font-semibold rounded-lg hover:bg-storePrimary-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -155,7 +155,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
           )}
 
           {/* Privacy Text */}
-          <p className="text-sm text-blue-200 mb-12">
+          <p className="text-sm text-storePrimary-200 mb-12">
             {content?.privacy_text || 'Unsubscribe anytime. Your privacy matters.'}
           </p>
 
@@ -181,7 +181,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-blue-200 text-sm">{feature.description}</p>
+                <p className="text-storePrimary-200 text-sm">{feature.description}</p>
               </div>
             ))}
           </div>

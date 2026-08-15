@@ -53,7 +53,7 @@ export default function CarsFeaturedProductsSection({
           </p>
           
           {/* Red accent line */}
-          <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-storePrimary-600 mx-auto mt-8"></div>
         </div>
 
         {/* Products Grid */}
@@ -87,7 +87,7 @@ export default function CarsFeaturedProductsSection({
           <div className="text-center mt-12">
             <a
               href={generateStoreUrl('store.products', store)}
-              className="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-storePrimary-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
             >
               View All Products
               <ChevronRight className="h-5 w-5 ml-2" />

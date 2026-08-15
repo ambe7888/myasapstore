@@ -23,15 +23,15 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
       {/* Room Showcase Layout */}
       <div className="min-h-screen flex flex-col">
         {/* Top Navigation Bar */}
-        <div className="bg-white/90 backdrop-blur-sm border-b border-amber-200 py-4">
+        <div className="bg-white/90 backdrop-blur-sm border-b border-storePrimary-200 py-4">
           <div className="container mx-auto px-6 flex items-center justify-between">
             <div className={`flex items-center gap-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <div className="w-10 h-10 bg-amber-800 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-storePrimary-800 rounded-xl flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                 </svg>
               </div>
-              <span className="text-sm font-bold text-amber-800 tracking-wider uppercase">
+              <span className="text-sm font-bold text-storePrimary-800 tracking-wider uppercase">
                 {content?.badge_text || 'Produits d\'excellence'}
               </span>
             </div>
@@ -42,7 +42,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                 { number: '100%', label: 'Garantie' }
               ]).map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-lg font-bold text-amber-800">{stat.number}</div>
+                  <div className="text-lg font-bold text-storePrimary-800">{stat.number}</div>
                   <div className="text-xs text-slate-600">{stat.label}</div>
                 </div>
               ))}
@@ -67,7 +67,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
 
                 {/* Room Types */}
                 <div className={`space-y-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h3 className="text-sm font-bold text-amber-800 uppercase tracking-wider mb-4">{content?.room_section?.title || 'Parcourir nos produits'}</h3>
+                  <h3 className="text-sm font-bold text-storePrimary-800 uppercase tracking-wider mb-4">{content?.room_section?.title || 'Parcourir nos produits'}</h3>
                   {(content?.room_section?.rooms || [
                     { name: 'Nouveautés' },
                     { name: 'Populaires' },
@@ -75,12 +75,12 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                     { name: 'Promotions' }
                   ]).map((room, index) => (
                     <div key={index} className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white transition-all duration-300 cursor-pointer group">
-                      <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-                        <svg className="w-4 h-4 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-8 h-8 bg-storePrimary-100 rounded-lg flex items-center justify-center group-hover:bg-storePrimary-200 transition-colors">
+                        <svg className="w-4 h-4 text-storePrimary-700" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <span className="text-slate-700 font-medium group-hover:text-amber-800 transition-colors">{room.name}</span>
+                      <span className="text-slate-700 font-medium group-hover:text-storePrimary-800 transition-colors">{room.name}</span>
                     </div>
                   ))}
                 </div>
@@ -114,7 +114,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                   {/* Furniture Catalog Layout */}
                   <div className="grid grid-cols-2 gap-4">
                     {/* Main Featured Image */}
-                    <div className="col-span-2 relative bg-white rounded-2xl p-4 shadow-lg border border-amber-200 hover:border-amber-300 transition-colors duration-200">
+                    <div className="col-span-2 relative bg-white rounded-2xl p-4 shadow-lg border border-storePrimary-200 hover:border-storePrimary-300 transition-colors duration-200">
                       <div className="relative aspect-[16/9] rounded-xl overflow-hidden">
                         <img 
                           src={getImageUrl(content?.image || '/storage/media/70/home-banner-furniture-interior.png')}
@@ -129,11 +129,11 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                   </div>
                   
                   {/* Catalog Info Panel */}
-                  <div className="mt-6 bg-white rounded-2xl p-6 shadow-xl border border-amber-200">
+                  <div className="mt-6 bg-white rounded-2xl p-6 shadow-xl border border-storePrimary-200">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                          <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-12 h-12 bg-storePrimary-100 rounded-xl flex items-center justify-center">
+                          <svg className="w-6 h-6 text-storePrimary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                           </svg>
                         </div>
@@ -157,8 +157,8 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                         { number: '12', label: 'Catégories' },
                         { number: '4.9★', label: 'Avis' }
                       ]).map((stat, index) => (
-                        <div key={index} className="text-center p-3 bg-amber-50 rounded-xl">
-                          <div className="text-2xl font-bold text-amber-800">{stat.number}</div>
+                        <div key={index} className="text-center p-3 bg-storePrimary-50 rounded-xl">
+                          <div className="text-2xl font-bold text-storePrimary-800">{stat.number}</div>
                           <div className="text-xs text-slate-600">{stat.label}</div>
                         </div>
                       ))}
@@ -166,7 +166,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                   </div>
                   
                   {/* Floating Badge */}
-                  <div className="absolute -top-3 -right-3 bg-amber-500 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg">
+                  <div className="absolute -top-3 -right-3 bg-storePrimary-500 text-white px-4 py-2 rounded-xl font-bold text-sm shadow-lg">
                     {content?.floating_badge || 'NOUVEAU'}
                   </div>
                 </div>

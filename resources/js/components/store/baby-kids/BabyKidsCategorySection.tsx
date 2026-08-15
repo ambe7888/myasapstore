@@ -37,10 +37,10 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                 {/* Stacked Block Design */}
                 <div className="relative">
                   {/* Shadow Block (Bottom) */}
-                  <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-pink-300 opacity-40"></div>
+                  <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-storePrimary-300 opacity-40"></div>
                   
                   {/* Main Block */}
-                  <div className="relative bg-white rounded-2xl shadow-xl border-4 border-pink-400 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
+                  <div className="relative bg-white rounded-2xl shadow-xl border-4 border-storePrimary-400 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
                     {/* Image Area */}
                     <div className="relative h-48 overflow-hidden rounded-t-xl">
                       <img
@@ -67,7 +67,7 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                     
                     {/* Content Area */}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-storePrimary-600 transition-colors duration-300">
                         {category.name}
                       </h3>
                       <p className="text-gray-600 text-sm mb-4">
@@ -76,7 +76,7 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                       
                       {/* Arrow Icon */}
                       <div className="flex justify-end">
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:rotate-12 bg-pink-400">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:rotate-12 bg-storePrimary-400">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
@@ -102,9 +102,9 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                   className="group block"
                 >
                   <div className="relative">
-                    <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-pink-300 opacity-40"></div>
+                    <div className="absolute top-2 left-2 w-full h-full rounded-2xl bg-storePrimary-300 opacity-40"></div>
                     
-                    <div className="relative bg-white rounded-2xl shadow-xl border-4 border-pink-400 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
+                    <div className="relative bg-white rounded-2xl shadow-xl border-4 border-storePrimary-400 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl">
                       <div className="relative h-48 overflow-hidden rounded-t-xl">
                         <img
                           src={`https://placehold.co/400x300/${
@@ -121,7 +121,7 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                       </div>
                       
                       <div className="p-6">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300">
+                        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-storePrimary-600 transition-colors duration-300">
                           {category.name}
                         </h3>
                         <p className="text-gray-600 text-sm mb-4">
@@ -129,7 +129,7 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
                         </p>
                         
                         <div className="flex justify-end">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:rotate-12 bg-pink-400">
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform duration-300 group-hover:rotate-12 bg-storePrimary-400">
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
@@ -148,7 +148,7 @@ export default function BabyKidsCategorySection({ categories = [], content }: Ba
         <div className="text-center mt-16">
           <Link
             href={generateStoreUrl('store.products', store)}
-            className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
+            className="inline-flex items-center px-8 py-4 bg-storePrimary-500 text-white font-semibold rounded-full hover:bg-storePrimary-600 transition-all duration-300 shadow-lg"
           >
             <span>{content?.view_all_text || 'View All Categories'}</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

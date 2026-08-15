@@ -17,7 +17,7 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light text-storePrimary-800 mb-6">
             {content?.title || 'Fragrance Families'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
@@ -46,10 +46,10 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
                   />
                   
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-purple-900/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-storePrimary-900/60 via-storePrimary-900/20 to-transparent"></div>
                   
                   {/* Product Count Badge */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-storePrimary-800 px-3 py-1 rounded-full text-sm font-medium">
                     {category.products_count || 0} Items
                   </div>
                   
@@ -63,7 +63,7 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2 group-hover:text-purple-800 transition-colors duration-300">
+                  <h3 className="text-xl font-medium text-gray-900 mb-2 group-hover:text-storePrimary-800 transition-colors duration-300">
                     {category.name}
                   </h3>
                   <p className="text-gray-600 text-sm">
@@ -79,7 +79,7 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
         <div className="text-center mt-16">
           <Link
             href={generateStoreUrl('store.products', store)}
-            className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
+            className="inline-flex items-center px-8 py-4 bg-storePrimary-800 text-white rounded-full font-medium hover:bg-storePrimary-900 transition-colors duration-300"
           >
             <span>View All Collections</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">

@@ -38,7 +38,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
     Math.round(((product.price - product.sale_price) / product.price) * 100) : 0;
 
   return (
-    <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-purple-100 hover:border-purple-300 transform hover:-translate-y-2">
+    <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-storePrimary-100 hover:border-storePrimary-300 transform hover:-translate-y-2">
       
       {/* Product Image */}
       <div className="relative aspect-[4/5] overflow-hidden">
@@ -68,7 +68,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
             </span>
           )}
           {product.variants && product.variants.length > 0 && (
-            <span className="bg-purple-800 text-white px-3 py-1 text-xs font-medium rounded-full">
+            <span className="bg-storePrimary-800 text-white px-3 py-1 text-xs font-medium rounded-full">
               Variants
             </span>
           )}
@@ -98,7 +98,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
         <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
           <Link
             href={generateStoreUrl('store.product', store,  { id: product.id })}
-            className="inline-flex items-center px-4 py-2 bg-white/95 backdrop-blur-sm text-purple-800 rounded-full text-sm font-medium hover:bg-white transition-colors duration-300 shadow-lg"
+            className="inline-flex items-center px-4 py-2 bg-white/95 backdrop-blur-sm text-storePrimary-800 rounded-full text-sm font-medium hover:bg-white transition-colors duration-300 shadow-lg"
           >
             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -113,14 +113,14 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
       <div className="p-5">
         {/* Brand */}
         {product.brand && (
-          <p className="text-purple-600 text-sm font-medium mb-2 uppercase tracking-wide">
+          <p className="text-storePrimary-600 text-sm font-medium mb-2 uppercase tracking-wide">
             {product.brand}
           </p>
         )}
 
         {/* Product Name */}
         <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
-          <h3 className="text-lg font-medium text-gray-900 mb-3 hover:text-purple-800 transition-colors duration-300 line-clamp-2">
+          <h3 className="text-lg font-medium text-gray-900 mb-3 hover:text-storePrimary-800 transition-colors duration-300 line-clamp-2">
             {product.name}
           </h3>
         </Link>
@@ -152,7 +152,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
           <div className="flex items-center space-x-2">
             {product.sale_price && product.sale_price < product.price ? (
               <>
-                <span className="text-xl font-semibold text-purple-800">
+                <span className="text-xl font-semibold text-storePrimary-800">
                   {format(product.sale_price)}
                 </span>
                 <span className="text-gray-500 line-through text-sm">
@@ -160,7 +160,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
                 </span>
               </>
             ) : (
-              <span className="text-xl font-semibold text-purple-800">
+              <span className="text-xl font-semibold text-storePrimary-800">
                 {format(product.price)}
               </span>
             )}

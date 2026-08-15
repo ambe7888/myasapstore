@@ -72,7 +72,7 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
                     
                     {/* Category Badge */}
                     {post.category && (
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-rose-600">
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-storePrimary-600">
                         {post.category.name}
                       </div>
                     )}
@@ -98,8 +98,8 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
                               className="w-8 h-8 rounded-full object-cover"
                             />
                           ) : (
-                            <div className="w-8 h-8 bg-rose-100 rounded-full flex items-center justify-center">
-                              <span className="text-xs font-medium text-rose-600">
+                            <div className="w-8 h-8 bg-storePrimary-100 rounded-full flex items-center justify-center">
+                              <span className="text-xs font-medium text-storePrimary-600">
                                 {post.author.name.charAt(0)}
                               </span>
                             </div>
@@ -112,7 +112,7 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-rose-600 transition-colors duration-300">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-storePrimary-600 transition-colors duration-300">
                       <Link href={generateStoreUrl('store.blog.show', store,  { slug: post.slug })}>
                         {post.title}
                       </Link>
@@ -128,7 +128,7 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
                     {/* Read More Link */}
                     <Link 
                       href={generateStoreUrl('store.blog.show', store,  { slug: post.slug })}
-                      className="inline-flex items-center text-rose-600 font-medium hover:text-rose-700 transition-colors duration-300"
+                      className="inline-flex items-center text-storePrimary-600 font-medium hover:text-storePrimary-700 transition-colors duration-300"
                     >
                       <span>Read Article</span>
                       <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
@@ -144,7 +144,7 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
             <div className="text-center mt-12">
               <Link 
                 href={generateStoreUrl('store.blog', store)} 
-                className="inline-flex items-center px-8 py-4 bg-rose-600 text-white font-semibold rounded-full hover:bg-rose-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 bg-storePrimary-600 text-white font-semibold rounded-full hover:bg-storePrimary-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>View All Articles</span>
                 <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -156,7 +156,7 @@ export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSec
         ) : (
           <div className="text-center py-20">
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-              <svg className="w-12 h-12 text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-12 h-12 text-storePrimary-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
               </svg>
             </div>

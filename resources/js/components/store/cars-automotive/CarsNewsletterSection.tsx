@@ -78,7 +78,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
           {/* Header */}
           <div className="mb-12">
             <div className="flex items-center justify-center mb-6">
-              <Mail className="h-8 w-8 text-red-600 mr-3" />
+              <Mail className="h-8 w-8 text-storePrimary-600 mr-3" />
               <h2 className="text-4xl lg:text-5xl font-black tracking-tight">
                 {newsletterContent.title || 'Auto Insider'}
               </h2>
@@ -98,14 +98,14 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={newsletterContent.placeholder_text || 'Enter your email for auto updates'}
-                    className="w-full px-6 py-4 bg-white text-black font-medium placeholder-gray-500 border-2 border-gray-300 focus:border-red-600 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-white text-black font-medium placeholder-gray-500 border-2 border-gray-300 focus:border-storePrimary-600 focus:outline-none transition-colors"
                     required
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="px-8 py-4 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-bold tracking-wider uppercase transition-colors flex items-center justify-center gap-2"
+                  className="px-8 py-4 bg-storePrimary-600 hover:bg-storePrimary-700 disabled:bg-storePrimary-400 text-white font-bold tracking-wider uppercase transition-colors flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <>
@@ -145,7 +145,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
               { number: '3', title: 'Expert Tips', description: 'Receive installation guides and maintenance advice from pros' }
             ]).map((feature, index) => (
               <div key={index} className="text-center">
-                <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-storePrimary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">{feature.number}</span>
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
@@ -157,7 +157,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
       </div>
 
       {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-storePrimary-600 via-storePrimary-500 to-storePrimary-600"></div>
     </section>
   );
 }

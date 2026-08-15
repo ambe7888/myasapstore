@@ -62,16 +62,16 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {boxes.map((box, index) => (
-            <div key={index} className="group text-center p-8 bg-white hover:bg-stone-50 transition-colors duration-300 border border-stone-200 hover:border-amber-300">
+            <div key={index} className="group text-center p-8 bg-white hover:bg-stone-50 transition-colors duration-300 border border-stone-200 hover:border-storePrimary-300">
               {/* Icon */}
-              <div className="w-16 h-16 bg-stone-100 group-hover:bg-amber-700 flex items-center justify-center mx-auto mb-6 transition-colors duration-300">
+              <div className="w-16 h-16 bg-stone-100 group-hover:bg-storePrimary-700 flex items-center justify-center mx-auto mb-6 transition-colors duration-300">
                 <div className="text-stone-600 group-hover:text-white transition-colors duration-300">
                   {getIcon(box.icon)}
                 </div>
               </div>
               
               {/* Content */}
-              <h3 className="text-xl font-light text-stone-900 mb-3 tracking-wide group-hover:text-amber-700 transition-colors duration-300">
+              <h3 className="text-xl font-light text-stone-900 mb-3 tracking-wide group-hover:text-storePrimary-700 transition-colors duration-300">
                 {box.title}
               </h3>
               <p className="text-stone-600 font-light text-sm leading-relaxed">
@@ -79,7 +79,7 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
               </p>
               
               {/* Hover Accent */}
-              <div className="w-8 h-px bg-amber-600 mx-auto mt-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className="w-8 h-px bg-storePrimary-600 mx-auto mt-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </div>
           ))}
         </div>

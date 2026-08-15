@@ -62,9 +62,9 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
           
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-purple-200">
+            <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-storePrimary-200">
               <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-              <span className="text-purple-800 text-sm font-medium">Newsletter</span>
+              <span className="text-storePrimary-800 text-sm font-medium">Newsletter</span>
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-light text-gray-900">
@@ -84,13 +84,13 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={content?.placeholder_text || 'Enter your email address'}
-                    className="flex-1 px-6 py-4 border border-purple-200 rounded-full focus:outline-none focus:border-purple-500 transition-colors duration-300"
+                    className="flex-1 px-6 py-4 border border-storePrimary-200 rounded-full focus:outline-none focus:border-storePrimary-500 transition-colors duration-300"
                     required
                   />
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 disabled:opacity-50 whitespace-nowrap"
+                    className="px-8 py-4 bg-storePrimary-800 text-white rounded-full font-medium hover:bg-storePrimary-900 transition-colors duration-300 disabled:opacity-50 whitespace-nowrap"
                   >
                     {isSubmitting ? 'Joining...' : (content?.button_text || 'Join Society')}
                   </button>
@@ -131,15 +131,15 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                   { "number": "500+", "label": "Premium Scents" },
                   { "number": "50+", "label": "Luxury Brands" }
                 ]).map((stat: any, index: number) => (
-                  <div key={index} className="bg-white p-6 rounded-2xl shadow-sm border border-purple-100 text-center">
-                    <div className="text-2xl font-light text-purple-800 mb-2">{stat.number}</div>
+                  <div key={index} className="bg-white p-6 rounded-2xl shadow-sm border border-storePrimary-100 text-center">
+                    <div className="text-2xl font-light text-storePrimary-800 mb-2">{stat.number}</div>
                     <div className="text-sm text-gray-600">{stat.label}</div>
                   </div>
                 ))}
               </div>
               
               {/* Main Feature Card */}
-              <div className="bg-purple-800 p-8 rounded-3xl text-white relative overflow-hidden">
+              <div className="bg-storePrimary-800 p-8 rounded-3xl text-white relative overflow-hidden">
                 <div className="relative z-10">
                   <div className="w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center mb-6">
                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -148,7 +148,7 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                     </svg>
                   </div>
                   <h3 className="text-xl font-medium mb-3">{content?.benefits_title || 'Member Benefits'}</h3>
-                  <ul className="space-y-2 text-purple-100">
+                  <ul className="space-y-2 text-storePrimary-100">
                     {(content?.benefits || [
                       { text: 'Early access to new releases' },
                       { text: 'Exclusive member discounts' },

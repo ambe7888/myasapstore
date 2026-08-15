@@ -18,14 +18,14 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-900 via-storePrimary-950 to-slate-900 text-white py-24 overflow-hidden">
       {/* Circuit Pattern Background */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
       </div>
       
       {/* Glowing Orbs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-storePrimary-500/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
       <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
 
       <div className="container mx-auto px-4">
@@ -34,8 +34,8 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
           <div className="space-y-8">
             {/* Tech Badge */}
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold px-4 py-2 rounded-full">
-                <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></div>
+              <span className="inline-flex items-center gap-2 bg-storePrimary-500/10 border border-storePrimary-500/20 text-storePrimary-400 text-sm font-semibold px-4 py-2 rounded-full">
+                <div className="w-2 h-2 rounded-full bg-storePrimary-400 animate-ping"></div>
                 {content?.badge_text || 'Latest Technology 2024'}
               </span>
             </div>
@@ -46,7 +46,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
             </h1>
             
             {/* Subtitle */}
-            <p className={`text-xl text-blue-100 mb-12 leading-relaxed max-w-lg transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <p className={`text-xl text-storePrimary-100 mb-12 leading-relaxed max-w-lg transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {content?.subtitle || 'Discover cutting-edge electronics and innovative gadgets that enhance your productivity and entertainment experience.'}
             </p>
             
@@ -54,7 +54,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
             <div className={`flex flex-col sm:flex-row gap-4 mb-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
-                className="group bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                className="group bg-storePrimary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-storePrimary-700 transition-all duration-300 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
               >
                 <span>{content?.button_text || 'Shop Tech'}</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
@@ -63,7 +63,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
               </a>
               <a 
                 href={formatCustomLink(content?.secondary_button_link, store, '/catalog')}
-                className="group border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
+                className="group border-2 border-storePrimary-400 text-storePrimary-400 px-8 py-4 rounded-lg font-semibold hover:bg-storePrimary-400 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
               >
                 <span>{content?.secondary_button_text || 'View Catalog'}</span>
               </a>
@@ -96,7 +96,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
                     )}
                   </div>
                   <h3 className="font-semibold text-sm mb-1">{box.title}</h3>
-                  <p className="text-blue-200 text-xs">{box.description}</p>
+                  <p className="text-storePrimary-200 text-xs">{box.description}</p>
                 </div>
               ))}
             </div>
@@ -115,12 +115,12 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
               />
               
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-blue-500 rounded-full opacity-80 animate-bounce"></div>
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-storePrimary-500 rounded-full opacity-80 animate-bounce"></div>
               <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-purple-500 rounded-lg opacity-70 animate-pulse"></div>
             </div>
             
             {/* Background Glow */}
-            <div className="absolute inset-0 bg-blue-500/20 rounded-2xl blur-xl transform scale-110"></div>
+            <div className="absolute inset-0 bg-storePrimary-500/20 rounded-2xl blur-xl transform scale-110"></div>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {categoryContent.description || 'Find the perfect parts and accessories for your vehicle.'}
           </p>
-          <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
+          <div className="w-24 h-1 bg-storePrimary-600 mx-auto mt-8"></div>
         </div>
 
         {/* Categories Grid - Horizontal Cards */}
@@ -46,7 +46,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
           {categories.map((category, index) => (
             <div
               key={category.id}
-              className={`group flex items-center bg-white border-l-4 border-red-600 hover:shadow-xl transition-all duration-300 overflow-hidden ${
+              className={`group flex items-center bg-white border-l-4 border-storePrimary-600 hover:shadow-xl transition-all duration-300 overflow-hidden ${
                 index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
               }`}
             >
@@ -63,7 +63,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
               <div className="flex-1 p-8">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-3xl font-black text-black mb-3 group-hover:text-red-600 transition-colors">
+                    <h3 className="text-3xl font-black text-black mb-3 group-hover:text-storePrimary-600 transition-colors">
                       {category.name}
                     </h3>
                     {category.products_count !== undefined && (
@@ -77,7 +77,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
                   </div>
                   
                   <div className="text-right">
-                    <a href={generateStoreUrl('store.products', store) + '?category=' + category.id} className="bg-red-600 hover:bg-black text-white px-6 py-3 font-bold tracking-wider uppercase transition-colors flex items-center">
+                    <a href={generateStoreUrl('store.products', store) + '?category=' + category.id} className="bg-storePrimary-600 hover:bg-black text-white px-6 py-3 font-bold tracking-wider uppercase transition-colors flex items-center">
                       Shop Now
                       <ChevronRight className="h-5 w-5 ml-2" />
                     </a>
@@ -92,7 +92,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
         <div className="text-center mt-12">
           <a
             href={generateStoreUrl('store.products', store)}
-            className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-black hover:bg-storePrimary-600 text-white font-bold tracking-wider uppercase transition-colors"
           >
             View All Categories
             <ChevronRight className="h-5 w-5 ml-2" />

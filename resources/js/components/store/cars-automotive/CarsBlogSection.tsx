@@ -70,7 +70,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
             {posts[0] && (
               <div className="mb-12">
                 <Link href={generateStoreUrl('store.blog.show', store, { slug: posts[0].slug })}>
-                  <article className="group relative bg-white border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
+                  <article className="group relative bg-white border-2 border-gray-200 hover:border-storePrimary-600 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
                   <div className="grid grid-cols-1 lg:grid-cols-2">
                     {/* Image */}
                     <div className="relative h-80 lg:h-96 overflow-hidden">
@@ -79,14 +79,14 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                         alt={posts[0].title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute top-6 left-6 bg-red-600 text-white px-4 py-2 font-bold text-sm">
+                      <div className="absolute top-6 left-6 bg-storePrimary-600 text-white px-4 py-2 font-bold text-sm">
                         FEATURED
                       </div>
                     </div>
                     
                     {/* Content */}
                     <div className="p-12 flex flex-col justify-center">
-                      <div className="flex items-center text-red-600 text-sm font-bold mb-4">
+                      <div className="flex items-center text-storePrimary-600 text-sm font-bold mb-4">
                         <Calendar className="h-4 w-4 mr-2" />
                         {formatDate(posts[0].created_at)}
                         {posts[0].author && (
@@ -98,7 +98,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                         )}
                       </div>
                       
-                      <h3 className="text-3xl font-black text-black mb-6 leading-tight group-hover:text-red-600 transition-colors">
+                      <h3 className="text-3xl font-black text-black mb-6 leading-tight group-hover:text-storePrimary-600 transition-colors">
                         {posts[0].title}
                       </h3>
                       
@@ -108,7 +108,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                         </p>
                       )}
                       
-                      <div className="flex items-center text-red-600 font-bold tracking-wider uppercase group-hover:translate-x-2 transition-transform">
+                      <div className="flex items-center text-storePrimary-600 font-bold tracking-wider uppercase group-hover:translate-x-2 transition-transform">
                         Read Full Story
                         <ArrowRight className="h-5 w-5 ml-3" />
                       </div>
@@ -123,7 +123,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {posts.slice(1, 5).map((post) => (
                 <Link key={post.id} href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}>
-                  <article className="group bg-white border border-gray-200 hover:border-red-600 hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer h-32">
+                  <article className="group bg-white border border-gray-200 hover:border-storePrimary-600 hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer h-32">
                   <div className="flex h-full">
                     {/* Image */}
                     <div className="w-32 h-32 flex-shrink-0 overflow-hidden bg-gray-100">
@@ -136,15 +136,15 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                     
                     {/* Content */}
                     <div className="flex-1 p-6">
-                      <div className="text-red-600 text-xs font-bold mb-2">
+                      <div className="text-storePrimary-600 text-xs font-bold mb-2">
                         {formatDate(post.created_at)}
                       </div>
                       
-                      <h4 className="text-lg font-black text-black mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
+                      <h4 className="text-lg font-black text-black mb-3 line-clamp-2 group-hover:text-storePrimary-600 transition-colors">
                         {post.title}
                       </h4>
                       
-                      <div className="flex items-center text-red-600 text-sm font-bold group-hover:translate-x-1 transition-transform">
+                      <div className="flex items-center text-storePrimary-600 text-sm font-bold group-hover:translate-x-1 transition-transform">
                         Read More
                         <ArrowRight className="h-3 w-3 ml-2" />
                       </div>
@@ -174,8 +174,8 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
           {categories.map((category, index) => {
             const IconComponent = iconMap[category.icon as keyof typeof iconMap] || Wrench;
             return (
-              <div key={index} className="text-center p-8 bg-white border-2 border-gray-200 hover:border-red-600 hover:bg-red-600 transition-all duration-300 cursor-pointer group">
-                <div className="w-16 h-16 bg-red-600 group-hover:bg-black rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+              <div key={index} className="text-center p-8 bg-white border-2 border-gray-200 hover:border-storePrimary-600 hover:bg-storePrimary-600 transition-all duration-300 cursor-pointer group">
+                <div className="w-16 h-16 bg-storePrimary-600 group-hover:bg-black rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-black text-black group-hover:text-white mb-2 transition-colors">{category.title}</h3>
@@ -190,7 +190,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
           <div className="text-center">
             <Link
               href={generateStoreUrl('store.blog', store)}
-              className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors transform hover:scale-105"
+              className="inline-flex items-center px-8 py-4 bg-black hover:bg-storePrimary-600 text-white font-bold tracking-wider uppercase transition-colors transform hover:scale-105"
             >
               View All Articles
               <ChevronRight className="h-5 w-5 ml-2" />

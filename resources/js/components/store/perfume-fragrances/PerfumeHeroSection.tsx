@@ -19,7 +19,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
   return (
     <section className="relative min-h-screen bg-stone-50 overflow-hidden flex items-center">
       {/* Background Decorative Circles */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-100/40 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-storePrimary-100/40 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
@@ -28,7 +28,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
           <div className="text-center lg:text-left space-y-8">
             {/* Badge */}
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-block bg-storePrimary-100 text-storePrimary-800 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full">
                 {content?.badge_text || 'Haute Parfumerie'}
               </span>
             </div>
@@ -47,13 +47,13 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
             <div className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <a 
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
-                className="bg-purple-800 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 text-center"
+                className="bg-storePrimary-800 text-white px-8 py-4 rounded-full font-medium hover:bg-storePrimary-900 transition-colors duration-300 text-center"
               >
                 {content?.button_text || 'Explore Fragrances'}
               </a>
               <a 
                 href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}
-                className="border-2 border-purple-800 text-purple-800 px-8 py-4 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-colors duration-300 text-center"
+                className="border-2 border-storePrimary-800 text-storePrimary-800 px-8 py-4 rounded-full font-medium hover:bg-storePrimary-800 hover:text-white transition-colors duration-300 text-center"
               >
                 {content?.secondary_button_text || 'Fragrance Guide'}
               </a>
@@ -65,7 +65,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
             {/* Main Image Container */}
             <div className="relative">
               {/* Background Shape */}
-              <div className="absolute inset-0 bg-purple-200 rounded-t-full transform rotate-12 scale-110 opacity-20"></div>
+              <div className="absolute inset-0 bg-storePrimary-200 rounded-t-full transform rotate-12 scale-110 opacity-20"></div>
               
               {/* Main Image */}
               <div className="relative bg-white p-8 rounded-t-full shadow-2xl">
@@ -86,7 +86,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
                 </svg>
               </div>
               
-              <div className="absolute -bottom-4 -left-4 bg-purple-800 text-white p-3 rounded-full shadow-lg">
+              <div className="absolute -bottom-4 -left-4 bg-storePrimary-800 text-white p-3 rounded-full shadow-lg">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                 </svg>

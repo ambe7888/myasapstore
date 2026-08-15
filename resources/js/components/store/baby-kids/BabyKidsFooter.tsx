@@ -17,10 +17,10 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
 
 
   return (
-    <footer className="bg-pink-100 relative overflow-hidden">
+    <footer className="bg-storePrimary-100 relative overflow-hidden">
       {/* Playful Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-pink-200 rounded-full opacity-20"></div>
+        <div className="absolute top-10 left-10 w-20 h-20 bg-storePrimary-200 rounded-full opacity-20"></div>
         <div className="absolute top-32 right-20 w-16 h-16 bg-blue-200 rounded-full opacity-30"></div>
         <div className="absolute bottom-20 left-32 w-24 h-24 bg-yellow-200 rounded-full opacity-15"></div>
         <div className="absolute bottom-32 right-16 w-12 h-12 bg-green-200 rounded-full opacity-25"></div>
@@ -37,7 +37,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                   <img src={getImageUrl(logo)} alt={storeName} className="h-12 w-auto" />
                 ) : (
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-blue-400 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-storePrimary-400 to-blue-400 rounded-full flex items-center justify-center">
                       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                       </svg>
@@ -59,7 +59,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                     target={social.url ? '_blank' : '_self'}
                     rel={social.url ? 'noopener noreferrer' : undefined}
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg ${
-                      index % 4 === 0 ? 'bg-pink-500 hover:bg-pink-600' :
+                      index % 4 === 0 ? 'bg-storePrimary-500 hover:bg-storePrimary-600' :
                       index % 4 === 1 ? 'bg-blue-500 hover:bg-blue-600' :
                       index % 4 === 2 ? 'bg-purple-500 hover:bg-purple-600' :
                       'bg-red-500 hover:bg-red-600'
@@ -75,7 +75,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
             {/* Customer Care */}
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                <div className="w-6 h-6 bg-pink-400 rounded-full mr-3 flex items-center justify-center">
+                <div className="w-6 h-6 bg-storePrimary-400 rounded-full mr-3 flex items-center justify-center">
                   <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
@@ -92,9 +92,9 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-pink-500 transition-colors duration-300 flex items-center group"
+                      className="text-gray-600 hover:text-storePrimary-500 transition-colors duration-300 flex items-center group"
                     >
-                      <svg className="w-3 h-3 mr-2 text-pink-400 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-3 h-3 mr-2 text-storePrimary-400 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
                       {link.name}
@@ -148,7 +148,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <div className="w-5 h-5 bg-pink-400 rounded-full flex items-center justify-center mt-1">
+                  <div className="w-5 h-5 bg-storePrimary-400 rounded-full flex items-center justify-center mt-1">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>

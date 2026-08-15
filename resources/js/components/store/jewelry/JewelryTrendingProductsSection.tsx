@@ -34,15 +34,15 @@ export default function JewelryTrendingProductsSection({ products = [], content,
         {/* Trending Stats */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="p-8 border border-stone-200">
-            <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat1_value || '95%'}</div>
+            <div className="text-3xl font-extralight text-storePrimary-700 mb-2">{stats?.stat1_value || '95%'}</div>
             <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat1_label || 'Customer Satisfaction'}</p>
           </div>
           <div className="p-8 border border-stone-200">
-            <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat2_value || '24/7'}</div>
+            <div className="text-3xl font-extralight text-storePrimary-700 mb-2">{stats?.stat2_value || '24/7'}</div>
             <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat2_label || 'Concierge Service'}</p>
           </div>
           <div className="p-8 border border-stone-200">
-            <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat3_value || '∞'}</div>
+            <div className="text-3xl font-extralight text-storePrimary-700 mb-2">{stats?.stat3_value || '∞'}</div>
             <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat3_label || 'Lifetime Warranty'}</p>
           </div>
         </div>

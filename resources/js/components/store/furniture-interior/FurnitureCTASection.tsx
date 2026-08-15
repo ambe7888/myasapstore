@@ -122,7 +122,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
         {/* Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-400/8 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-storePrimary-400/8 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
       </div>
     </section>

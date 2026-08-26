@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Store;
-use App\Models\StoreConfiguration;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class FacebookCatalogController extends Controller
 {
+    /**
+     * Fixed peg rate: 1 EUR = 655.957 XOF (set by the CFA franc's treaty with the euro,
+     * never fluctuates). Used to convert prices for Meta, which does not accept XOF.
+     */
+    private const XOF_TO_EUR_RATE = 655.957;
+
     /**
      * Generate Google/Meta Product Catalog XML Feed for Facebook Commerce Manager.
      */
@@ -36,8 +42,12 @@ class FacebookCatalogController extends Controller
         }
 
         // 2. Resolve Store Base URL & Currency
-        $config = StoreConfiguration::getConfiguration($store->id);
-        $currency = strtoupper($config['currency'] ?? 'MAD');
+        $currency = strtoupper($this->resolveStoreCurrency($store));
+
+        // Meta does not accept XOF (West African CFA franc) in catalog feeds, so
+        // convert to EUR using the fixed treaty peg for stores priced in XOF.
+        $convertXofToEur = ($currency === 'XOF');
+        $feedCurrency = $convertXofToEur ? 'EUR' : $currency;
 
         if ($store->enable_custom_domain && !empty($store->custom_domain)) {
             $baseUrl = 'https://' . $store->custom_domain;
@@ -109,11 +119,18 @@ class FacebookCatalogController extends Controller
                 ? (float)$product->sale_price
                 : (float)$product->price;
 
-            $formattedPrice = number_format($effectivePrice, 2, '.', '') . ' ' . $currency;
+            if ($convertXofToEur) {
+                $effectivePrice = $effectivePrice / self::XOF_TO_EUR_RATE;
+            }
+
+            $formattedPrice = number_format($effectivePrice, 2, '.', '') . ' ' . $feedCurrency;
             $item->addChild('g:price', $formattedPrice, 'http://base.google.com/ns/1.0');
 
             if ($product->sale_price && (float)$product->sale_price > 0 && (float)$product->sale_price < (float)$product->price) {
-                $formattedOriginalPrice = number_format((float)$product->price, 2, '.', '') . ' ' . $currency;
+                $originalPrice = $convertXofToEur
+                    ? (float)$product->price / self::XOF_TO_EUR_RATE
+                    : (float)$product->price;
+                $formattedOriginalPrice = number_format($originalPrice, 2, '.', '') . ' ' . $feedCurrency;
                 $domItem = dom_import_simplexml($item);
                 $domPriceNodes = $domItem->getElementsByTagNameNS('http://base.google.com/ns/1.0', 'price');
                 if ($domPriceNodes->length > 0) {
@@ -129,5 +146,25 @@ class FacebookCatalogController extends Controller
         }
 
         return response($xml->asXML(), 200)->header('Content-Type', 'text/xml; charset=utf-8');
+    }
+
+    /**
+     * Resolve the store's configured currency code (store settings, falling back
+     * to the owner's account-wide settings), the same way it is resolved for
+     * display elsewhere in the app (see HandleInertiaRequests::getStoreCurrencySettings).
+     */
+    private function resolveStoreCurrency(Store $store): string
+    {
+        $userSettings = settings($store->user_id);
+        $storeSettings = settings($store->user_id, $store->id);
+        $companySettings = array_merge(
+            is_array($userSettings) ? $userSettings : [],
+            is_array($storeSettings) ? $storeSettings : []
+        );
+
+        $currencyCode = $companySettings['defaultCurrency'] ?? 'XOF';
+        $currency = Currency::where('code', $currencyCode)->first();
+
+        return $currency->code ?? $currencyCode;
     }
 }

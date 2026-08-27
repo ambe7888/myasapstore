@@ -44,10 +44,9 @@ class FacebookCatalogController extends Controller
         // 2. Resolve Store Base URL & Currency
         $currency = strtoupper($this->resolveStoreCurrency($store));
 
-        // Meta does not accept XOF (West African CFA franc) in catalog feeds, so
-        // convert to EUR using the fixed treaty peg for stores priced in XOF.
-        $convertXofToEur = ($currency === 'XOF');
-        $feedCurrency = $convertXofToEur ? 'EUR' : $currency;
+        // Send prices in the store's native currency (including XOF for accounts that support it).
+        $feedCurrency = $currency;
+        $convertXofToEur = false;
 
         if ($store->enable_custom_domain && !empty($store->custom_domain)) {
             $baseUrl = 'https://' . $store->custom_domain;

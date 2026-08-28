@@ -31,7 +31,8 @@ export const PAYMENT_METHODS = {
   KHALTI: 'khalti',
   EASEBUZZ: 'easebuzz',
   OZOW: 'ozow',
-  CASHFREE: 'cashfree'
+  CASHFREE: 'cashfree',
+  MONEYFUSION: 'moneyfusion'
 } as const;
 
 export const PAYMENT_METHOD_LABELS = {
@@ -67,7 +68,8 @@ export const PAYMENT_METHOD_LABELS = {
   [PAYMENT_METHODS.KHALTI]: 'Khalti',
   [PAYMENT_METHODS.EASEBUZZ]: 'Easebuzz',
   [PAYMENT_METHODS.OZOW]: 'Ozow',
-  [PAYMENT_METHODS.CASHFREE]: 'Cashfree'
+  [PAYMENT_METHODS.CASHFREE]: 'Cashfree',
+  [PAYMENT_METHODS.MONEYFUSION]: 'Money Fusion (Mobile Money)'
 } as const;
 
 export const PAYMENT_METHOD_HELP_URLS = {
@@ -102,7 +104,8 @@ export const PAYMENT_METHOD_HELP_URLS = {
   [PAYMENT_METHODS.KHALTI]: 'https://docs.khalti.com/',
   [PAYMENT_METHODS.EASEBUZZ]: 'https://www.easebuzz.in/developer/',
   [PAYMENT_METHODS.OZOW]: 'https://developers.ozow.com/',
-  [PAYMENT_METHODS.CASHFREE]: 'https://docs.cashfree.com/'
+  [PAYMENT_METHODS.CASHFREE]: 'https://docs.cashfree.com/',
+  [PAYMENT_METHODS.MONEYFUSION]: 'https://moneyfusion.net'
 } as const;
 
 export const PAYMENT_MODES = {

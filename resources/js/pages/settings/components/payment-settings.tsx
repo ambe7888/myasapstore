@@ -144,6 +144,9 @@ interface PaymentSettings {
   payfast_merchant_key: string;
   payfast_passphrase: string;
   payfast_mode: 'sandbox' | 'live';
+  is_moneyfusion_enabled: boolean;
+  moneyfusion_url: string;
+  moneyfusion_token: string;
 }
 
 interface PaymentSettingsProps {
@@ -292,6 +295,9 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
     payfast_merchant_key: settings.payfast_merchant_key || '',
     payfast_passphrase: settings.payfast_passphrase || '',
     payfast_mode: settings.payfast_mode || 'sandbox',
+    is_moneyfusion_enabled: settings.is_moneyfusion_enabled === true || settings.is_moneyfusion_enabled === '1',
+    moneyfusion_url: settings.moneyfusion_url || '',
+    moneyfusion_token: settings.moneyfusion_token || '',
   });
 
 
@@ -305,6 +311,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
       { key: 'nepalste', name: t('Nepalste') },
       { key: 'paiement', name: t('Paiement Pro') },
       { key: 'cinetpay', name: t('CinetPay') },
+      { key: 'moneyfusion', name: t('Money Fusion (Mobile Money)') },
     ];
     
     // Only add WhatsApp and Telegram for company users
@@ -1357,6 +1364,38 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                     placeholder={t("Secret Key")}
                     isSecret
                     error={errors.cinetpay_secret_key}
+                  />
+                </div>
+              </PaymentMethodCard>
+              )}
+
+              {/* Money Fusion (Mobile Money) */}
+              {shouldShowMethod('moneyfusion') && (
+              <PaymentMethodCard
+                title={t("Money Fusion (Mobile Money)")}
+                icon={<Wallet className="h-5 w-5 text-emerald-600" />}
+                enabled={data.is_moneyfusion_enabled}
+                onToggle={(checked) => setData('is_moneyfusion_enabled', checked)}
+                helpUrl={PAYMENT_METHOD_HELP_URLS[PAYMENT_METHODS.MONEYFUSION]}
+                helpText={t("Obtenez vos identifiants API Money Fusion sur moneyfusion.net")}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <PaymentInputField
+                    id="moneyfusion_url"
+                    label={t("URL de paiement / Endpoint API")}
+                    value={data.moneyfusion_url}
+                    onChange={(value) => setData('moneyfusion_url', value)}
+                    placeholder="https://pay.moneyfusion.net/v1/pay"
+                    error={errors.moneyfusion_url}
+                  />
+                  <PaymentInputField
+                    id="moneyfusion_token"
+                    label={t("Token marchand / Clé API")}
+                    value={data.moneyfusion_token}
+                    onChange={(value) => setData('moneyfusion_token', value)}
+                    placeholder={t("Entrez votre Token Money Fusion")}
+                    isSecret
+                    error={errors.moneyfusion_token}
                   />
                 </div>
               </PaymentMethodCard>

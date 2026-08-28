@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { PageTemplate } from '@/components/page-template';
-import { Plus, RefreshCw, Download, ShoppingCart, Eye, Edit, Trash2, Package, CheckCircle2, Clock, Truck, XCircle, Tag, Check } from 'lucide-react';
+import { Plus, RefreshCw, Download, ShoppingCart, Eye, Edit, Trash2, Package, CheckCircle2, Clock, Truck, XCircle, Tag, Check, Filter } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +26,7 @@ export default function Orders({ orders, stats }: OrdersProps) {
   const { t } = useTranslation();
   const [orderToDelete, setOrderToDelete] = useState<number | null>(null);
   const [updatingOrderId, setUpdatingOrderId] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'pending' | 'processing' | 'shipped' | 'completed' | 'cancelled'>('all');
 
   const { hasPermission } = usePermissions();
   
@@ -119,6 +120,31 @@ export default function Orders({ orders, stats }: OrdersProps) {
 
   const orderList = Array.isArray(orders) ? orders : (orders?.data || []);
 
+  const counts = useMemo(() => {
+    return {
+      all: orderList.length,
+      pending: orderList.filter((o: any) => String(o.status || '').toLowerCase() === 'pending').length,
+      processing: orderList.filter((o: any) => String(o.status || '').toLowerCase() === 'processing').length,
+      shipped: orderList.filter((o: any) => String(o.status || '').toLowerCase() === 'shipped').length,
+      completed: orderList.filter((o: any) => {
+        const s = String(o.status || '').toLowerCase();
+        return s === 'completed' || s === 'delivered';
+      }).length,
+      cancelled: orderList.filter((o: any) => String(o.status || '').toLowerCase() === 'cancelled').length,
+    };
+  }, [orderList]);
+
+  const filteredOrders = useMemo(() => {
+    if (activeFilter === 'all') return orderList;
+    if (activeFilter === 'completed') {
+      return orderList.filter((o: any) => {
+        const s = String(o.status || '').toLowerCase();
+        return s === 'completed' || s === 'delivered';
+      });
+    }
+    return orderList.filter((o: any) => String(o.status || '').toLowerCase() === activeFilter);
+  }, [orderList, activeFilter]);
+
   return (
     <PageTemplate 
       title={t('Gestion des commandes')}
@@ -180,12 +206,47 @@ export default function Orders({ orders, stats }: OrdersProps) {
 
         {/* Orders List */}
         <Card>
-          <CardHeader>
+          <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pb-4">
             <CardTitle>{t('Liste des commandes')}</CardTitle>
+
+            {/* Filter Tabs Bar */}
+            <div className="flex flex-wrap items-center gap-1.5 bg-slate-100/70 p-1.5 rounded-xl border border-slate-200/60">
+              {[
+                { key: 'all', label: t('Toutes'), count: counts.all, icon: ShoppingCart },
+                { key: 'pending', label: t('En attente'), count: counts.pending, icon: Clock, badgeBg: 'bg-amber-200/80 text-amber-900' },
+                { key: 'processing', label: t('En cours'), count: counts.processing, icon: Package, badgeBg: 'bg-blue-200/80 text-blue-900' },
+                { key: 'shipped', label: t('Expédiées'), count: counts.shipped, icon: Truck, badgeBg: 'bg-indigo-200/80 text-indigo-900' },
+                { key: 'completed', label: t('Terminées'), count: counts.completed, icon: CheckCircle2, badgeBg: 'bg-emerald-200/80 text-emerald-900' },
+                { key: 'cancelled', label: t('Annulées'), count: counts.cancelled, icon: XCircle, badgeBg: 'bg-red-200/80 text-red-900' },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeFilter === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    onClick={() => setActiveFilter(tab.key as any)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                      isActive
+                        ? 'bg-white text-gray-900 shadow-sm font-semibold border border-gray-200/80'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+                    }`}
+                  >
+                    <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-primary' : 'text-gray-500'}`} />
+                    <span>{tab.label}</span>
+                    <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                      isActive ? 'bg-primary/10 text-primary' : (tab.badgeBg || 'bg-gray-200 text-gray-700')
+                    }`}>
+                      {tab.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-3">
-              {orderList.length > 0 ? orderList.map((order: any) => {
+              {filteredOrders.length > 0 ? filteredOrders.map((order: any) => {
                 const statusInfo = formatStatus(order.status);
                 const isCompleted = order.status === 'completed' || order.status === 'delivered';
                 const isUpdating = updatingOrderId === order.id;

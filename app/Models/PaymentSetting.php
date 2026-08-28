@@ -81,6 +81,8 @@ class PaymentSetting extends Model
             'ozow_api_key',
             'cashfree_secret_key',
             'cashfree_public_key',
+            'moneyfusion_token',
+            'moneyfusion_url',
             'telegram_bot_token',
             'twilio_sid',
             'twilio_token'
@@ -127,6 +129,7 @@ class PaymentSetting extends Model
             'is_easebuzz_enabled',
             'is_ozow_enabled',
             'is_cashfree_enabled',
+            'is_moneyfusion_enabled',
             'is_whatsapp_enabled',
             'is_telegram_enabled',
             'is_twilio_enabled'

@@ -540,7 +540,7 @@ export default function Checkout({
       );
     } else {
       // For redirect-based payments (Stripe, PayPal, etc.), use form submission
-      const redirectPaymentMethods = ['stripe', 'paypal', 'payfast', 'mercadopago', 'paystack', 'paytabs', 'coingate', 'tap'];
+      const redirectPaymentMethods = ['stripe', 'paypal', 'payfast', 'mercadopago', 'paystack', 'paytabs', 'coingate', 'tap', 'moneyfusion'];
       
       if (redirectPaymentMethods.includes(paymentMethod)) {
         // Create and submit a form for redirect-based payments
@@ -1378,7 +1378,8 @@ export default function Checkout({
                               fedapay: 'FedaPay',
                               payhere: 'PayHere',
                               cinetpay: 'CinetPay',
-                              paymentwall: 'PaymentWall'
+                              paymentwall: 'PaymentWall',
+                              moneyfusion: 'Money Fusion (Mobile Money)'
                             };
                             
                             return (

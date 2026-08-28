@@ -213,37 +213,15 @@ export default function Orders({ orders, stats }: OrdersProps) {
                         </div>
                       </div>
 
-                      {/* Right side: Interrupteur rapide + Status Selector + Action Buttons */}
-                      <div className="flex flex-wrap items-center gap-3 shrink-0 justify-end">
-                        {/* Interrupteur rapide (Validation directe) */}
+                      {/* Right side: Status Selector + Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2 shrink-0 justify-end">
+                        {/* Quick Status Select Dropdown */}
                         <Permission permission="edit-orders">
-                          <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
-                            <Switch 
-                              id={`status-toggle-${order.id}`}
-                              checked={isCompleted}
-                              disabled={isUpdating}
-                              onCheckedChange={(checked) => handleQuickStatusChange(order.id, checked)}
-                            />
-                            <label htmlFor={`status-toggle-${order.id}`} className="text-xs font-medium cursor-pointer select-none text-gray-700">
-                              {isCompleted ? (
-                                <span className="text-emerald-700 font-semibold flex items-center gap-1">
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
-                                  {t('Validée')}
-                                </span>
-                              ) : (
-                                <span className="text-gray-600 flex items-center gap-1">
-                                  {t('Terminer')}
-                                </span>
-                              )}
-                            </label>
-                          </div>
-
-                          {/* Quick Status Select Dropdown */}
                           <select
                             value={order.status}
                             disabled={isUpdating}
                             onChange={(e) => handleStatusSelect(order.id, e.target.value)}
-                            className="text-xs font-medium bg-gray-50 border border-gray-200 text-gray-700 rounded-lg px-2 py-1.5 focus:ring-1 focus:ring-primary focus:outline-none cursor-pointer"
+                            className="text-xs font-medium bg-gray-50 border border-gray-200 text-gray-700 rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-primary focus:outline-none cursor-pointer hover:bg-gray-100 transition-colors"
                           >
                             <option value="pending">{t('En attente')}</option>
                             <option value="processing">{t('En cours')}</option>

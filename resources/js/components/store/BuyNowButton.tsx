@@ -52,11 +52,11 @@ export default function BuyNowButton({ product, selectedVariants, store, classNa
     <>
       <button
         onClick={handleClick}
-        className={`flex items-center justify-center hover:brightness-95 transition-all ${className}`}
-        style={{ backgroundColor: store?.button_color_buy_now || 'var(--btn-buy-now-color, #16a34a)' }}
+        className={`inline-flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis px-1.5 sm:px-2.5 py-1.5 hover:brightness-95 transition-all text-[11px] sm:text-xs font-semibold leading-none ${className}`}
+        style={{ backgroundColor: store?.button_color_buy_now || 'var(--btn-buy-now-color, #ea580c)' }}
       >
-        <ShoppingBag className="h-4 w-4 mr-2" />
-        {store?.button_text_buy_now || t('Buy Now')}
+        <ShoppingBag className="h-3.5 w-3.5 mr-1 shrink-0" />
+        <span className="truncate">{store?.button_text_buy_now || t('Buy Now')}</span>
       </button>
 
       <QuickCheckoutModal

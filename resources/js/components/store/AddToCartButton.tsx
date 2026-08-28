@@ -68,18 +68,18 @@ export default function AddToCartButton({ product, store, className = '', isShow
     <button
       onClick={handleClick}
       disabled={loading}
-      className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
+      className={`inline-flex items-center justify-center whitespace-nowrap overflow-hidden text-ellipsis px-1.5 sm:px-2.5 py-1.5 ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all text-[11px] sm:text-xs font-semibold leading-none ${className}`}
       style={{ backgroundColor: store?.button_color_add_to_cart || resolveThemeColor(store?.primary_color) || 'var(--btn-add-to-cart-color, #4f46e5)' }}
     >
       {hasVariants && !hasSelectedVariants ? (
         <>
-          <Settings className="h-4 w-4 mr-2" />
-          {t('Select Options')}
+          <Settings className="h-3.5 w-3.5 mr-1 shrink-0" />
+          <span className="truncate">{t('Select Options')}</span>
         </>
       ) : (
         <>
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          {store?.button_text_add_to_cart || t('Add to Cart')}
+          <ShoppingCart className="h-3.5 w-3.5 mr-1 shrink-0" />
+          <span className="truncate">{store?.button_text_add_to_cart || t('Add to Cart')}</span>
         </>
       )}
     </button>

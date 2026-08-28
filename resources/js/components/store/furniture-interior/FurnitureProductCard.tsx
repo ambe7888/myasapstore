@@ -186,19 +186,19 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
         </div>
 
         {/* Add to Cart & Buy Now Buttons */}
-        <div className="flex gap-2 w-full mt-3">
-          <div className="flex-1">
+        <div className="flex gap-1.5 sm:gap-2 w-full mt-3">
+          <div className="flex-1 min-w-0">
             <AddToCartButton
               product={product}
               store={store}
-              className="w-full h-10 rounded-2xl text-xs font-semibold text-white flex items-center justify-center shadow-sm"
+              className="w-full h-9 sm:h-10 rounded-2xl text-[11px] sm:text-xs font-semibold text-white flex items-center justify-center px-1 shadow-sm"
             />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <BuyNowButton 
               product={product} 
               store={store} 
-              className="w-full h-10 text-white font-semibold rounded-2xl flex items-center justify-center text-xs shadow-sm" 
+              className="w-full h-9 sm:h-10 text-white font-semibold rounded-2xl flex items-center justify-center text-[11px] sm:text-xs shadow-sm px-1" 
             />
           </div>
         </div>

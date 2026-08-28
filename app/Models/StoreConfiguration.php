@@ -116,7 +116,7 @@ class StoreConfiguration extends Model
                     
                     // If current store was deactivated, throw exception
                     if ($userStore->id == $storeId) {
-                        throw new \Exception('Cannot activate store. Plan limit of ' . $maxStores . ' stores exceeded. Please upgrade your plan.');
+                        throw new \Exception(__('Cannot activate store. Plan limit of :max stores exceeded. Please upgrade your plan.', ['max' => $maxStores]));
                     }
                 }
             }

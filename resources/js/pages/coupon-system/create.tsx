@@ -78,7 +78,7 @@ export default function CreateCoupon() {
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('coupon-system.index'))
@@ -87,7 +87,7 @@ export default function CreateCoupon() {
   
   if (hasPermission('create-coupon-system')) {
     pageActions.push({
-      label: t('Save Coupon'),
+      label: t('Enregistrer le coupon'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: handleSubmit
@@ -96,21 +96,21 @@ export default function CreateCoupon() {
 
   return (
     <PageTemplate 
-      title={t('Create Coupon')}
+      title={t('Créer un coupon')}
       url="/coupon-system/create"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System'), href: route('coupon-system.index') },
-        { title: t('Create Coupon') }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Système de coupons'), href: route('coupon-system.index') },
+        { title: t('Créer un coupon') }
       ]}
     >
       <div className="space-y-6">
         <Tabs defaultValue="general" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="general">{t('General')}</TabsTrigger>
+            <TabsTrigger value="general">{t('Général')}</TabsTrigger>
             <TabsTrigger value="restrictions">{t('Restrictions')}</TabsTrigger>
-            <TabsTrigger value="usage">{t('Usage Limits')}</TabsTrigger>
+            <TabsTrigger value="usage">{t('Limites d\'utilisation')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="general" className="space-y-4">

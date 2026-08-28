@@ -32,7 +32,7 @@ export default function CouponSystem() {
   
   if (hasPermission('export-coupon-system')) {
     pageActions.push({
-      label: t('Export'),
+      label: t('Exporter'),
       icon: <Download className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => window.open(route('coupon-system.export'), '_blank')
@@ -41,7 +41,7 @@ export default function CouponSystem() {
   
   if (hasPermission('create-coupon-system')) {
     pageActions.push({
-      label: t('Create Coupon'),
+      label: t('Créer un coupon'),
       icon: <Plus className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('coupon-system.create'))
@@ -50,12 +50,12 @@ export default function CouponSystem() {
 
   return (
     <PageTemplate 
-      title={t('Coupon System')}
+      title={t('Système de coupons')}
       url="/coupon-system"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System') }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Système de coupons') }
       ]}
     >
       <div className="space-y-4">
@@ -63,47 +63,47 @@ export default function CouponSystem() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Total Coupons')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Total des coupons')}</CardTitle>
               <Percent className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.total || 0}</div>
-              <p className="text-xs text-muted-foreground">{t('All coupons')}</p>
+              <p className="text-xs text-muted-foreground">{t('Tous les coupons de la boutique')}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Active Coupons')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Coupons actifs')}</CardTitle>
               <Percent className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.active || 0}</div>
               <p className="text-xs text-muted-foreground">
-                {stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0}% {t('active rate')}
+                {stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0}% {t('actifs')}
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Percentage Coupons')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Coupons en pourcentage')}</CardTitle>
               <Percent className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.percentage || 0}</div>
-              <p className="text-xs text-muted-foreground">{t('Discount percentage')}</p>
+              <p className="text-xs text-muted-foreground">{t('Réduction en pourcentage')}</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{t('Fixed Amount Coupons')}</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('Coupons à montant fixe')}</CardTitle>
               <Percent className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stats.flat || 0}</div>
-              <p className="text-xs text-muted-foreground">{t('Fixed discount')}</p>
+              <p className="text-xs text-muted-foreground">{t('Réduction fixe')}</p>
             </CardContent>
           </Card>
         </div>
@@ -111,14 +111,14 @@ export default function CouponSystem() {
         {/* Coupons List */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('Store Coupons')}</CardTitle>
+            <CardTitle>{t('Liste des coupons')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {!coupons || !coupons.data || coupons.data.length === 0 ? (
                 <div className="text-center py-8">
                   <Percent className="h-12 w-12 mx-auto text-muted-foreground opacity-50" />
-                  <p className="mt-2 text-muted-foreground">{t('No coupons found')}</p>
+                  <p className="mt-2 text-muted-foreground">{t('Aucun coupon trouvé')}</p>
                   <Permission permission="create-coupon-system">
                     <Button 
                       variant="outline" 
@@ -126,7 +126,7 @@ export default function CouponSystem() {
                       onClick={() => router.visit(route('coupon-system.create'))}
                     >
                       <Plus className="h-4 w-4 mr-2" />
-                      {t('Create your first coupon')}
+                      {t('Créer votre premier coupon')}
                     </Button>
                   </Permission>
                 </div>
@@ -141,26 +141,30 @@ export default function CouponSystem() {
                         <div className="flex items-center space-x-2">
                           <h3 className="font-semibold">{coupon.name}</h3>
                           <Badge variant={coupon.status ? 'default' : 'secondary'}>
-                            {coupon.status ? t('Active') : t('Inactive')}
+                            {coupon.status ? t('Actif') : t('Inactif')}
                           </Badge>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <code className="text-sm bg-muted px-2 py-1 rounded">{coupon.code}</code>
-                          <Button variant="ghost" size="sm" onClick={() => navigator.clipboard.writeText(coupon.code)}>
-                            <Copy className="h-3 w-3" />
+                        <div className="flex items-center space-x-2 mt-1">
+                          <code className="text-sm font-bold bg-muted px-2 py-0.5 rounded text-primary">{coupon.code}</code>
+                          <Button variant="ghost" size="sm" onClick={() => {
+                            navigator.clipboard.writeText(coupon.code);
+                            toast.success(t('Code copié !'));
+                          }}>
+                            <Copy className="h-3.5 w-3.5" />
                           </Button>
                         </div>
-                        <div className="flex items-center space-x-4 mt-1">
-                          <span className="text-xs text-muted-foreground">
-                            {coupon.type === 'percentage' ? t('Percentage') : t('Fixed')}: 
-                            {coupon.type === 'percentage' ? `${coupon.discount_amount}%` : formatCurrency(coupon.discount_amount)}
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-xs text-muted-foreground">
+                          <span>
+                            {t('Réduction')}: <strong>
+                              {coupon.type === 'percentage' ? `${coupon.discount_amount}%` : formatCurrency(coupon.discount_amount)}
+                            </strong>
                           </span>
-                          <span className="text-xs text-muted-foreground">
-                            {t('Used')}: {coupon.used_count}/{coupon.use_limit_per_coupon || t('Unlimited')}
+                          <span>
+                            {t('Utilisations')}: {coupon.used_count}/{coupon.use_limit_per_coupon || t('Illimité')}
                           </span>
                           {coupon.expiry_date && (
-                            <span className="text-xs text-muted-foreground">
-                              {t('Expires')}: {new Date(coupon.expiry_date).toLocaleDateString()}
+                            <span>
+                              {t('Expire le')}: {new Date(coupon.expiry_date).toLocaleDateString()}
                             </span>
                           )}
                         </div>
@@ -168,18 +172,18 @@ export default function CouponSystem() {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Permission permission="view-coupon-system">
-                        <Button variant="ghost" size="sm" onClick={() => router.visit(route('store-coupons.show', coupon.id))}>
+                        <Button variant="ghost" size="sm" onClick={() => router.visit(route('store-coupons.show', coupon.id))} title={t('Voir')}>
                           <Eye className="h-4 w-4" />
                         </Button>
                       </Permission>
                       <Permission permission="edit-coupon-system">
-                        <Button variant="ghost" size="sm" onClick={() => router.visit(route('coupon-system.edit', coupon.id))}>
+                        <Button variant="ghost" size="sm" onClick={() => router.visit(route('coupon-system.edit', coupon.id))} title={t('Modifier')}>
                           <Edit className="h-4 w-4" />
                         </Button>
                       </Permission>
                       <Permission permission="toggle-status-coupon-system">
                         <Button 
-                          variant="ghost" 
+                          variant="outline" 
                           size="sm" 
                           onClick={() => {
                             router.post(route('store-coupons.toggle-status', coupon.id), {}, {
@@ -187,14 +191,16 @@ export default function CouponSystem() {
                             });
                           }}
                         >
-                          {coupon.status ? t('Disable') : t('Enable')}
+                          {coupon.status ? t('Désactiver') : t('Activer')}
                         </Button>
                       </Permission>
                       <Permission permission="delete-coupon-system">
                         <Button 
                           variant="ghost" 
-                          size="sm" 
+                          size="sm"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
                           onClick={() => setCouponToDelete(coupon.id)}
+                          title={t('Supprimer')}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -212,18 +218,14 @@ export default function CouponSystem() {
       <Dialog open={!!couponToDelete} onOpenChange={(open) => !open && setCouponToDelete(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('Delete Coupon')}</DialogTitle>
+            <DialogTitle>{t('Supprimer le coupon')}</DialogTitle>
             <DialogDescription>
-              {t('Are you sure you want to delete this coupon? This action cannot be undone.')}
+              {t('Êtes-vous sûr de vouloir supprimer ce coupon ? Cette action est irréversible.')}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setCouponToDelete(null)}>
-              {t('Cancel')}
-            </Button>
-            <Button variant="destructive" onClick={handleDelete}>
-              {t('Delete')}
-            </Button>
+            <Button variant="outline" onClick={() => setCouponToDelete(null)}>{t('Annuler')}</Button>
+            <Button variant="destructive" onClick={handleDelete}>{t('Supprimer')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

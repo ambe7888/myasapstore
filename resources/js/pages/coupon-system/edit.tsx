@@ -87,7 +87,7 @@ export default function EditCoupon() {
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('coupon-system.index'))
@@ -96,7 +96,7 @@ export default function EditCoupon() {
   
   if (hasPermission('edit-coupon-system')) {
     pageActions.push({
-      label: t('Update Coupon'),
+      label: t('Mettre à jour le coupon'),
       icon: <Save className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: handleSubmit
@@ -105,21 +105,21 @@ export default function EditCoupon() {
 
   return (
     <PageTemplate 
-      title={t('Edit Coupon')}
+      title={t('Modifier le coupon')}
       url="/coupon-system/edit"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System'), href: route('coupon-system.index') },
-        { title: t('Edit Coupon') }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Système de coupons'), href: route('coupon-system.index') },
+        { title: t('Modifier le coupon') }
       ]}
     >
       <div className="space-y-6">
         <Tabs defaultValue="general" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="general">{t('General')}</TabsTrigger>
+            <TabsTrigger value="general">{t('Général')}</TabsTrigger>
             <TabsTrigger value="restrictions">{t('Restrictions')}</TabsTrigger>
-            <TabsTrigger value="usage">{t('Usage Limits')}</TabsTrigger>
+            <TabsTrigger value="usage">{t('Limites d\'utilisation')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="general" className="space-y-4">

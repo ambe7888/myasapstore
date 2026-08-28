@@ -17,13 +17,13 @@ export default function ShowCoupon() {
 
   const pageActions = [
     {
-      label: t('Back'),
+      label: t('Retour'),
       icon: <ArrowLeft className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('coupon-system.index'))
     },
     {
-      label: t('Copy Code'),
+      label: t('Copier le code'),
       icon: <Copy className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => navigator.clipboard.writeText(coupon.code)
@@ -32,7 +32,7 @@ export default function ShowCoupon() {
   
   if (hasPermission('edit-coupon-system')) {
     pageActions.push({
-      label: t('Edit Coupon'),
+      label: t('Modifier le coupon'),
       icon: <Edit className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('coupon-system.edit', coupon.id))
@@ -41,13 +41,13 @@ export default function ShowCoupon() {
 
   return (
     <PageTemplate 
-      title={t('Coupon Details')}
+      title={t('Détails du coupon')}
       url="/coupon-system/show"
       actions={pageActions}
       breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System'), href: route('coupon-system.index') },
-        { title: t('Coupon Details') }
+        { title: t('Tableau de bord'), href: route('dashboard') },
+        { title: t('Système de coupons'), href: route('coupon-system.index') },
+        { title: t('Détails du coupon') }
       ]}
     >
       <div className="space-y-6">

@@ -14,13 +14,17 @@ class StoreConfiguration extends Model
         
         static::saving(function ($config) {
             if ($config->key === 'store_status' && $config->value === 'true') {
+                // If this store configuration already existed and was already active, skip re-verification
+                if ($config->exists && $config->getOriginal('value') === 'true') {
+                    return;
+                }
                 $store = \App\Models\Store::with('user')->find($config->store_id);
                 if ($store?->user?->type === 'company') {
                     $canActivate = \App\Http\Middleware\CheckPlanAccess::canActivateResource(
                         $store->user, 'store', $config->store_id, $config->store_id
                     );
                     if (!$canActivate) {
-                        throw new \Exception('Cannot activate store. Plan limit exceeded.');
+                        throw new \Exception(__('Cannot activate store. Plan limit exceeded.'));
                     }
                 }
             }

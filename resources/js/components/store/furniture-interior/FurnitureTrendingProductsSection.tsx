@@ -37,7 +37,7 @@ function FurnitureTrendingProductsSection({
 
         {/* Products Grid */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
             {products.slice(0, 8).map((product) => (
               <FurnitureProductCard
                 key={product.id}
@@ -49,7 +49,7 @@ function FurnitureTrendingProductsSection({
           </div>
         ) : (
           // Placeholder products when no data
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
             {Array.from({ length: 8 }).map((_, index) => (
               <div key={index} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-yellow-200 overflow-hidden">
                 <div className="aspect-square bg-gradient-to-br from-yellow-100 to-amber-100 flex items-center justify-center">

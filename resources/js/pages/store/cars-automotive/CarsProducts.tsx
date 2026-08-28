@@ -499,15 +499,14 @@ export default function CarsProducts({
                       </div>
                     </div>
                   </div>
-
-                  <div className="mt-4 text-sm text-gray-600 font-medium">
+                      <div className="mt-4 text-sm text-gray-600 font-medium">
                     {t('Showing {{from}}-{{to}} of {{total}} auto parts', { from: pagination.from, to: pagination.to, total: pagination.total })}</div>
                 </div>
 
                 {/* Products Grid/List */}
                 {products.length > 0 ? (
                   <div className={viewMode === 'grid' 
-                    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' 
+                    ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6' 
                     : 'space-y-4'
                   }>
                     {products.map((product) => (

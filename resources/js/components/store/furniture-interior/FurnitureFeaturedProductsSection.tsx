@@ -38,7 +38,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
 
         {/* Products Grid */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
             {products.slice(0, 8).map((product) => (
               <FurnitureProductCard
                 key={product.id}
@@ -50,7 +50,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
           </div>
         ) : (
           // Placeholder products when no data
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
             {Array.from({ length: 8 }).map((_, index) => (
               <div key={index} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden border border-yellow-200">
                 <div className="aspect-square bg-yellow-100 flex items-center justify-center">

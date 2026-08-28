@@ -463,16 +463,22 @@ class OrderController extends BaseController
      */
     private function formatPaymentMethod($paymentMethod)
     {
-        switch ($paymentMethod) {
+        $pm = strtolower(trim((string) $paymentMethod));
+        switch ($pm) {
             case 'cod':
-                return 'Cash on Delivery';
+            case 'cash_on_delivery':
+            case 'cash on delivery':
+                return __('Paiement à la livraison');
             case 'bank':
             case 'bank_transfer':
-                return 'Bank Transfer';
+            case 'bank transfer':
+                return __('Virement bancaire');
             case 'whatsapp':
                 return 'WhatsApp';
             case 'telegram':
                 return 'Telegram';
+            case 'card':
+                return __('Carte bancaire');
             default:
                 return ucfirst(str_replace('_', ' ', $paymentMethod));
         }

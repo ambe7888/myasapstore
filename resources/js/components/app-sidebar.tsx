@@ -284,7 +284,7 @@ export function AppSidebar() {
         // Shipping Management - Check plan feature access
         if (hasPermission(permissions, 'manage-shipping') && hasFeatureAccess('shipping_method')) {
             items.push({
-                title: t("Zone d'expédition"),
+                title: t("Zone de livraison"),
                 href: route('shipping.index'),
                 icon: Truck,
             });

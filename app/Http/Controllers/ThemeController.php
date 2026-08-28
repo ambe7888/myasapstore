@@ -1232,7 +1232,7 @@ class ThemeController extends Controller
                         'zip' => $orderData->shipping_postal_code,
                         'country' => \App\Models\Country::find($orderData->shipping_country)->name ?? $orderData->shipping_country,
                     ],
-                    'payment_method' => $orderData->payment_method === 'cod' ? 'Cash on Delivery' : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
+                    'payment_method' => $orderData->payment_method === 'cod' ? __('Paiement à la livraison') : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
                     'shipping_method' => $orderData->shippingMethod->name ?? '',
                 ];
         } else {
@@ -1335,7 +1335,7 @@ class ThemeController extends Controller
                         'zip' => $orderData->billing_postal_code,
                         'country' => \App\Models\Country::find($orderData->billing_country)->name ?? $orderData->billing_country,
                     ],
-                    'payment_method' => $orderData->payment_method === 'cod' ? 'Cash on Delivery' : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
+                    'payment_method' => $orderData->payment_method === 'cod' ? __('Paiement à la livraison') : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
                     'shipping_method' => $orderData->shippingMethod->name ?? '',
                     'coupon_code' => $orderData->coupon_code,
                 ];
@@ -1351,7 +1351,7 @@ class ThemeController extends Controller
                     'date' => $orderData->created_at->toISOString(),
                     'status' => ucfirst($orderData->status),
                     'total' => $orderData->total_amount,
-                    'payment_method' => $orderData->payment_method === 'cod' ? 'Cash on Delivery' : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
+                    'payment_method' => $orderData->payment_method === 'cod' ? __('Paiement à la livraison') : ($orderData->payment_method === 'whatsapp' ? 'WhatsApp' : ($orderData->payment_method === 'telegram' ? 'Telegram' : ucfirst(str_replace('_', ' ', $orderData->payment_method)))),
                     'shipping_address' => [
                         'name' => $orderData->customer_first_name . ' ' . $orderData->customer_last_name,
                         'street' => $orderData->shipping_address,

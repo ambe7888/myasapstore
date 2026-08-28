@@ -36,7 +36,7 @@ export default function Shipping() {
   
   if (hasPermission('export-shipping')) {
     pageActions.push({
-      label: t('Export'),
+      label: t('Exporter'),
       icon: <Download className="h-4 w-4" />,
       variant: 'outline' as const,
       onClick: () => window.open(route('shipping.export'), '_blank')
@@ -45,22 +45,36 @@ export default function Shipping() {
   
   if (hasPermission('create-shipping')) {
     pageActions.push({
-      label: t('Create Shipping'),
+      label: t('+ Ajouter un mode de livraison'),
       icon: <Plus className="h-4 w-4" />,
       variant: 'default' as const,
       onClick: () => router.visit(route('shipping.create'))
     });
   }
 
+  const formatType = (type: string) => {
+    const tStr = String(type || '').toLowerCase();
+    if (tStr.includes('flat')) return t('Tarif fixe');
+    if (tStr.includes('free')) return t('Livraison gratuite');
+    return tStr.replace('_', ' ').charAt(0).toUpperCase() + tStr.replace('_', ' ').slice(1);
+  };
+
+  const formatZone = (zone: string) => {
+    const zStr = String(zone || '').toLowerCase();
+    if (zStr === 'domestic') return t('Nationale');
+    if (zStr === 'international') return t('Internationale');
+    return zone || t('Toutes zones');
+  };
+
   return (
     <>
       <PageTemplate 
-        title={t('Shipping Management')}
+        title={t('Zone de livraison')}
         url="/shipping"
         actions={pageActions}
         breadcrumbs={[
-          { title: t('Dashboard'), href: route('dashboard') },
-          { title: t('Shipping Management') }
+          { title: t('Tableau de bord'), href: route('dashboard') },
+          { title: t('Zone de livraison') }
         ]}
       >
         <div className="space-y-4">
@@ -68,47 +82,47 @@ export default function Shipping() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t('Shipping Methods')}</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('Modes de livraison')}</CardTitle>
                 <Truck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stats.totalShippings}</div>
-                <p className="text-xs text-muted-foreground">{t('All shipping methods')}</p>
+                <p className="text-xs text-muted-foreground">{t('Toutes les méthodes de livraison')}</p>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t('Active Methods')}</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('Méthodes actives')}</CardTitle>
                 <Truck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stats.activeShippings}</div>
                 <p className="text-xs text-muted-foreground">
-                  {t('{{percent}}% active rate', { percent: stats.totalShippings > 0 ? Math.round((stats.activeShippings / stats.totalShippings) * 100) : 0 })}
+                  {t('{{percent}}% actives', { percent: stats.totalShippings > 0 ? Math.round((stats.activeShippings / stats.totalShippings) * 100) : 0 })}
                 </p>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t('Shipping Zones')}</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('Zones de livraison')}</CardTitle>
                 <Truck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stats.shippingZones}</div>
-                <p className="text-xs text-muted-foreground">{t('Coverage areas')}</p>
+                <p className="text-xs text-muted-foreground">{t('Zones de couverture')}</p>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{t('Avg. Shipping Cost')}</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('Coût moyen de livraison')}</CardTitle>
                 <Truck className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{formatCurrency(stats.avgShippingCost)}</div>
-                <p className="text-xs text-muted-foreground">Per order</p>
+                <p className="text-xs text-muted-foreground">{t('Par commande')}</p>
               </CardContent>
             </Card>
           </div>
@@ -116,16 +130,16 @@ export default function Shipping() {
           {/* Shipping Methods List */}
           <Card>
             <CardHeader>
-              <CardTitle>{t('Shipping Methods')}</CardTitle>
+              <CardTitle>{t('Modes de livraison')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {shippings.length === 0 ? (
                   <div className="text-center py-12">
                     <Truck className="h-12 w-12 mx-auto text-muted-foreground opacity-50" />
-                    <h3 className="mt-4 text-lg font-medium">{t('No shipping methods found')}</h3>
+                    <h3 className="mt-4 text-lg font-medium">{t('Aucun mode de livraison trouvé')}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      {t('Get started by creating your first shipping method.')}
+                      {t('Commencez par créer votre premier mode de livraison.')}
                     </p>
                     <Permission permission="create-shipping">
                       <Button 
@@ -133,7 +147,7 @@ export default function Shipping() {
                         className="mt-4"
                       >
                         <Plus className="h-4 w-4 mr-2" />
-                        {t('Create Shipping Method')}
+                        {t('Créer un mode de livraison')}
                       </Button>
                     </Permission>
                   </div>
@@ -149,15 +163,15 @@ export default function Shipping() {
                             <div className="flex items-center space-x-2">
                               <h3 className="font-semibold">{shipping.name}</h3>
                               <Badge variant={shipping.is_active ? 'default' : 'secondary'}>
-                                {shipping.is_active ? t('Active') : t('Inactive')}
+                                {shipping.is_active ? t('Actif') : t('Inactif')}
                               </Badge>
                             </div>
-                            <p className="text-sm text-muted-foreground">{shipping.type.replace('_', ' ').charAt(0).toUpperCase() + shipping.type.replace('_', ' ').slice(1)} • {shipping.zone_type || t('Any')}</p>
+                            <p className="text-sm text-muted-foreground">{formatType(shipping.type)} • {formatZone(shipping.zone_type)}</p>
                             <div className="flex items-center space-x-4 mt-1">
                               <span className="text-xs text-muted-foreground">
-                                {t('Cost')}: {shipping.type === 'free_shipping' ? t('Free') : formatCurrency(shipping.cost)}
+                                {t('Coût')}: {shipping.type === 'free_shipping' ? t('Gratuit') : formatCurrency(shipping.cost)}
                               </span>
-                              <span className="text-xs text-muted-foreground">{t('Delivery')}: {shipping.delivery_time || t('Not specified')}</span>
+                              <span className="text-xs text-muted-foreground">{t('Livraison')}: {shipping.delivery_time || t('Non spécifiée')}</span>
                             </div>
                           </div>
                         </div>

@@ -9,6 +9,7 @@ import { getImageUrl } from '@/utils/image-helper';
 import axios from 'axios';
 import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { useCurrencyFormatter } from '@/hooks/use-store-currency';
+import { resolveThemeColor } from '@/utils/theme-colors';
 
 interface Props {
   product: any;
@@ -151,7 +152,7 @@ export default function FunnelCheckoutPopup({
     }
   };
 
-  const themeColor = store?.primary_color || '#4f46e5';
+  const themeColor = resolveThemeColor(store?.primary_color) || '#4f46e5';
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">

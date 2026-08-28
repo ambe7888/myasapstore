@@ -62,6 +62,20 @@ class OrderController extends BaseController
                 'status' => $order->status,
                 'payment_status' => $order->payment_status,
                 'items' => $order->items->count(),
+                'itemsDetails' => $order->items->map(function ($item) {
+                    $variants = $item->product_variants;
+                    if (is_string($variants)) {
+                        $variants = json_decode($variants, true);
+                    }
+                    return [
+                        'id' => $item->id,
+                        'name' => $item->product_name,
+                        'sku' => $item->product_sku,
+                        'quantity' => $item->quantity,
+                        'price' => (float) ($item->unit_price ?? $item->product_price),
+                        'variants' => $variants,
+                    ];
+                }),
                 'date' => $order->created_at->format('d/m/Y H:i'),
                 'paymentMethod' => $this->formatPaymentMethod($order->payment_method),
             ];
@@ -175,6 +189,39 @@ class OrderController extends BaseController
     }
 
 
+
+    /**
+     * Quick status update for an order.
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $user = Auth::user();
+        $storeId = getCurrentStoreId($user);
+        
+        $order = Order::where('store_id', $storeId)
+            ->where('id', $id)
+            ->firstOrFail();
+
+        $request->validate([
+            'status' => 'required|string|in:pending,processing,shipped,completed,cancelled'
+        ]);
+
+        $oldStatus = $order->status;
+        $order->status = $request->status;
+
+        // Auto mark as paid if completed
+        if ($request->status === 'completed' && $order->payment_status !== 'paid') {
+            $order->payment_status = 'paid';
+        }
+
+        $order->save();
+
+        if ($oldStatus !== $request->status) {
+            event(new OrderStatusChanged($order, $oldStatus));
+        }
+
+        return redirect()->back()->with('success', __('Statut de la commande mis à jour avec succès.'));
+    }
 
     /**
      * Show the form for editing the specified order.

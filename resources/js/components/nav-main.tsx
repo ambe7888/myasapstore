@@ -197,7 +197,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
                                                     {isExpanded && item.badge !== undefined && item.badge !== 0 && (
-                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center shrink-0">
                                                             {item.badge}
                                                         </span>
                                                     )}
@@ -239,7 +239,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
                                                     {isExpanded && item.badge !== undefined && item.badge !== 0 && (
-                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center shrink-0">
                                                             {item.badge}
                                                         </span>
                                                     )}
@@ -267,7 +267,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
                                                     {item.icon && <item.icon className="h-4 w-4" />}
                                                     {isExpanded && <span>{item.title}</span>}
                                                     {isExpanded && item.badge !== undefined && item.badge !== 0 && (
-                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center">
+                                                        <span className="ml-auto bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-5 text-center shrink-0">
                                                             {item.badge}
                                                         </span>
                                                     )}

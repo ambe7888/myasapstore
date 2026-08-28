@@ -457,7 +457,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('permission:manage-orders')->group(function () {
             Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index'])->middleware('permission:view-orders')->name('orders.index');
             Route::get('orders/export', [\App\Http\Controllers\OrderController::class, 'export'])->middleware('permission:export-orders')->name('orders.export');
-
+            Route::patch('orders/{id}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus'])->middleware('permission:edit-orders')->name('orders.update-status');
             Route::get('orders/{id}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->middleware('permission:edit-orders')->name('orders.edit');
             Route::put('orders/{id}', [\App\Http\Controllers\OrderController::class, 'update'])->middleware('permission:edit-orders')->name('orders.update');
             Route::delete('orders/{id}', [\App\Http\Controllers\OrderController::class, 'destroy'])->middleware('permission:delete-orders')->name('orders.destroy');

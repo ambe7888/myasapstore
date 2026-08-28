@@ -6,6 +6,7 @@ import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { useCurrencyFormatter, useStoreCurrency } from '@/hooks/use-store-currency';
 import { getProductCoverImage } from '@/utils/image-helper';
 import { isCustomInputFields } from '@/utils/helpers';
+import { resolveThemeColor } from '@/utils/theme-colors';
 import axios from 'axios';
 
 interface QuickCheckoutModalProps {
@@ -315,7 +316,7 @@ export default function QuickCheckoutModal({
             <div className="flex-1 min-w-0">
               <h4 className="font-bold text-slate-900 dark:text-white text-sm truncate">{product.name}</h4>
               <div className="flex items-center gap-2 mt-1">
-                <span className="font-bold text-base" style={{ color: store?.primary_color || '#10b981' }}>
+                <span className="font-bold text-base" style={{ color: resolveThemeColor(store?.primary_color) || '#10b981' }}>
                   {format(unitPrice)}
                 </span>
                 {product.sale_price && product.sale_price < product.price && (
@@ -516,7 +517,7 @@ export default function QuickCheckoutModal({
             <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">Total à payer :</span>
-                <span className="text-xl font-black" style={{ color: store?.primary_color || '#10b981' }}>
+                <span className="text-xl font-black" style={{ color: resolveThemeColor(store?.primary_color) || '#10b981' }}>
                   {format(totalPrice)}
                 </span>
               </div>
@@ -526,7 +527,7 @@ export default function QuickCheckoutModal({
                 disabled={loading}
                 className="w-full py-3.5 px-6 active:scale-[0.98] text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg animate-none"
                 style={{
-                  backgroundColor: store?.button_color_buy_now || store?.primary_color || '#10b981',
+                  backgroundColor: store?.button_color_buy_now || resolveThemeColor(store?.primary_color) || '#10b981',
                   borderRadius: store?.button_radius || '1rem',
                   color: store?.text_button_color || '#ffffff'
                 }}

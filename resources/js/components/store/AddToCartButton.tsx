@@ -4,6 +4,7 @@ import { useCart } from '@/contexts/CartContext';
 import { router } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 import { useTranslation } from 'react-i18next';
+import { resolveThemeColor } from '@/utils/theme-colors';
 
 interface AddToCartButtonProps {
   product: {
@@ -68,7 +69,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
       onClick={handleClick}
       disabled={loading}
       className={`flex items-center justify-center ${loading ? 'opacity-50' : ''} hover:brightness-95 transition-all ${className}`}
-      style={{ backgroundColor: store?.button_color_add_to_cart || store?.primary_color || 'var(--btn-add-to-cart-color, #4f46e5)' }}
+      style={{ backgroundColor: store?.button_color_add_to_cart || resolveThemeColor(store?.primary_color) || 'var(--btn-add-to-cart-color, #4f46e5)' }}
     >
       {hasVariants && !hasSelectedVariants ? (
         <>

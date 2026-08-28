@@ -202,7 +202,7 @@ export default function ProductCard({
             ) : (
               <ShoppingCart className="h-3.5 w-3.5 mr-1 shrink-0" />
             )}
-            <span className="truncate">{hasVariants ? t('Select Options') : isInStock ? t('Add to Cart') : t('Out of Stock')}</span>
+            <span className="truncate">{hasVariants ? t('Options') : isInStock ? t('Add to Cart') : t('Out of Stock')}</span>
           </button>
         </div>
       </div>

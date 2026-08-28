@@ -74,7 +74,7 @@ export default function AddToCartButton({ product, store, className = '', isShow
       {hasVariants && !hasSelectedVariants ? (
         <>
           <Settings className="h-3.5 w-3.5 mr-1 shrink-0" />
-          <span className="truncate">{t('Select Options')}</span>
+          <span className="truncate">{t('Options')}</span>
         </>
       ) : (
         <>

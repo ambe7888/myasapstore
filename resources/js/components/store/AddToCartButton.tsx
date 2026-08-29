@@ -53,6 +53,10 @@ export default function AddToCartButton({ product, store, className = '', isShow
     await addToCart(product, {variants:product.variants}, quantity);
   };
 
+  if (store?.show_add_to_cart_button === false) {
+    return null;
+  }
+
   if (isOutOfStock) {
     return (
       <button 

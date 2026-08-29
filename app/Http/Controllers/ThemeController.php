@@ -62,6 +62,7 @@ class ThemeController extends Controller
                 'text_title_color' => $configuration['text_title_color'] ?? '',
                 'text_button_color' => $configuration['text_button_color'] ?? '',
                 'site_bg_color' => $configuration['site_bg_color'] ?? '',
+                'show_add_to_cart_button' => isset($configuration['show_add_to_cart_button']) ? ($configuration['show_add_to_cart_button'] === true || $configuration['show_add_to_cart_button'] === 'true' || $configuration['show_add_to_cart_button'] === 1 || $configuration['show_add_to_cart_button'] === '1') : true,
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -123,6 +124,7 @@ class ThemeController extends Controller
                 'text_title_color' => $configuration['text_title_color'] ?? '',
                 'text_button_color' => $configuration['text_button_color'] ?? '',
                 'site_bg_color' => $configuration['site_bg_color'] ?? '',
+                'show_add_to_cart_button' => isset($configuration['show_add_to_cart_button']) ? ($configuration['show_add_to_cart_button'] === true || $configuration['show_add_to_cart_button'] === 'true' || $configuration['show_add_to_cart_button'] === 1 || $configuration['show_add_to_cart_button'] === '1') : true,
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

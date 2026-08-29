@@ -411,17 +411,34 @@ export default function StoreSettings({ store, settings }: Props) {
                 </select>
               </div>
 
-              {/* Add to Cart Text */}
-              <div className="space-y-2">
-                <Label htmlFor="button_text_add_to_cart">{t('Add to Cart Text')}</Label>
-                <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
-                <Input
-                  id="button_text_add_to_cart"
-                  placeholder={t('Add to Cart')}
-                  value={formData.button_text_add_to_cart || ''}
-                  onChange={(e) => updateSetting('button_text_add_to_cart', e.target.value)}
+              {/* Toggle Show/Hide Add to Cart & Options Button */}
+              <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50/50">
+                <div className="space-y-0.5">
+                  <Label htmlFor="show_add_to_cart_button" className="text-base font-semibold">{t('Afficher le bouton "Ajouter au panier" / "Options"')}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t('Désactivez cette option pour masquer le bouton Ajouter au panier / Options sur les cartes produits de votre boutique')}
+                  </p>
+                </div>
+                <Switch
+                  id="show_add_to_cart_button"
+                  checked={formData.show_add_to_cart_button !== false}
+                  onCheckedChange={(checked) => updateSetting('show_add_to_cart_button', checked)}
                 />
               </div>
+
+              {/* Add to Cart Text */}
+              {formData.show_add_to_cart_button !== false && (
+                <div className="space-y-2">
+                  <Label htmlFor="button_text_add_to_cart">{t('Add to Cart Text')}</Label>
+                  <p className="text-sm text-muted-foreground">{t('Leave empty to use default text')}</p>
+                  <Input
+                    id="button_text_add_to_cart"
+                    placeholder={t('Add to Cart')}
+                    value={formData.button_text_add_to_cart || ''}
+                    onChange={(e) => updateSetting('button_text_add_to_cart', e.target.value)}
+                  />
+                </div>
+              )}
 
               {/* Buy Now Text */}
               <div className="space-y-2">

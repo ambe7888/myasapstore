@@ -216,13 +216,15 @@ export default function ProductCard({
         {/* Add to cart button */}
         <div className="mt-3">
           <div className="flex gap-1.5 sm:gap-2 w-full">
-            <div className="flex-1 min-w-0">
-              <AddToCartButton
-                product={{ id, name, price, sale_price, cover_image, variants, stock, is_active }}
-                store={store}
-                className="w-full h-9 sm:h-10 rounded-lg text-[11px] sm:text-xs font-semibold text-white flex items-center justify-center px-1"
-              />
-            </div>
+            {store?.show_add_to_cart_button !== false && (
+              <div className="flex-1 min-w-0">
+                <AddToCartButton
+                  product={{ id, name, price, sale_price, cover_image, variants, stock, is_active }}
+                  store={store}
+                  className="w-full h-9 sm:h-10 rounded-lg text-[11px] sm:text-xs font-semibold text-white flex items-center justify-center px-1"
+                />
+              </div>
+            )}
             <div className="flex-1 min-w-0">
               <BuyNowButton 
                 product={{ id, name, price, sale_price, cover_image, variants, stock, is_active }} 

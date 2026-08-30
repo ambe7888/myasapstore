@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { Search, Filter, Grid, List, Star, Heart, Baby, Gift, Users, Award } from 'lucide-react';
+import { Search, Filter, Grid, List, Star, Heart, Baby, Gift, Users, Award, Loader2 } from 'lucide-react';
+import { useProductListing } from '@/hooks/use-product-listing';
 import BabyKidsProductCard from '@/components/store/baby-kids/BabyKidsProductCard';
 import AddToCartButton from '@/components/store/AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -121,6 +122,14 @@ export default function BabyKidsProducts({
   const [availability, setAvailability] = useState(filters.availability || 'all');
   const [sortBy, setSortBy] = useState(filters.sort || 'popularity');
   const [perPage, setPerPage] = useState(filters.per_page || 12);
+
+  const listingMode = store?.product_listing_mode === 'infinite_scroll' ? 'infinite_scroll' : 'pagination';
+  const { items, loadingMore, hasMore, sentinelRef } = useProductListing(
+    products,
+    pagination,
+    listingMode,
+    generateStoreUrl('store.products', store)
+  );
 
   const applyFilters = () => {
     const params: Record<string, any> = {};
@@ -514,12 +523,12 @@ export default function BabyKidsProducts({
                 </div>
 
                 {/* Products Grid/List */}
-                {products.length > 0 ? (
-                  <div className={viewMode === 'grid' 
-                    ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6' 
+                {items.length > 0 ? (
+                  <div className={viewMode === 'grid'
+                    ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6'
                     : 'space-y-6'
                   }>
-                    {products.map((product) => (
+                    {items.map((product) => (
                       viewMode === 'list' ? (
                         <div key={product.id} className="relative">
                           <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
@@ -622,7 +631,7 @@ export default function BabyKidsProducts({
                 )}
 
                 {/* Pagination */}
-                {pagination.last_page > 1 && (
+                {listingMode === 'pagination' && pagination.last_page > 1 && (
                   <div className="mt-12 flex items-center justify-center">
                     <nav className="flex items-center space-x-2">
                       <button
@@ -658,6 +667,15 @@ export default function BabyKidsProducts({
                         Next
                       </button>
                     </nav>
+                  </div>
+                )}
+
+                {listingMode === 'infinite_scroll' && (
+                  <div ref={sentinelRef} className="mt-12 flex items-center justify-center h-10">
+                    {loadingMore && <Loader2 className="h-6 w-6 animate-spin text-pink-500" />}
+                    {!hasMore && items.length > 0 && (
+                      <span className="text-sm text-gray-400">{t('Vous avez tout vu')}</span>
+                    )}
                   </div>
                 )}
               </div>

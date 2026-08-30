@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
-import { Search, Filter, Grid, List, ChevronDown, X, Star, Heart } from 'lucide-react';
+import { Search, Filter, Grid, List, ChevronDown, X, Star, Heart, Loader2 } from 'lucide-react';
+import { useProductListing } from '@/hooks/use-product-listing';
 import ElectronicsProductCard from '@/components/store/electronics/ElectronicsProductCard';
 import AddToCartButton from '@/components/store/AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -125,6 +126,14 @@ export default function ElectronicsProducts({
   const [availability, setAvailability] = useState(filters.availability || 'all');
   const [sortBy, setSortBy] = useState(filters.sort || 'popularity');
   const [perPage, setPerPage] = useState(filters.per_page || 12);
+
+  const listingMode = store?.product_listing_mode === 'infinite_scroll' ? 'infinite_scroll' : 'pagination';
+  const { items, loadingMore, hasMore, sentinelRef } = useProductListing(
+    products,
+    pagination,
+    listingMode,
+    generateStoreUrl('store.products', store)
+  );
 
   // Apply filters function
   const applyFilters = () => {
@@ -514,12 +523,12 @@ export default function ElectronicsProducts({
               </div>
 
               {/* Products Grid/List */}
-              {products.length > 0 ? (
-                <div className={viewMode === 'grid' 
-                  ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6' 
+              {items.length > 0 ? (
+                <div className={viewMode === 'grid'
+                  ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6'
                   : 'space-y-4'
                 }>
-                  {products.map((product) => (
+                  {items.map((product) => (
                     viewMode === 'list' ? (
                       <div key={product.id} className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl shadow-xl overflow-hidden border-2 border-blue-100 hover:shadow-2xl hover:border-blue-300 transition-all duration-300 transform hover:-translate-y-1">
                         <div className="flex h-56">
@@ -626,7 +635,7 @@ export default function ElectronicsProducts({
               )}
 
               {/* Pagination */}
-              {pagination.last_page > 1 && (
+              {listingMode === 'pagination' && pagination.last_page > 1 && (
                 <div className="mt-8 flex items-center justify-center">
                   <nav className="flex items-center space-x-2">
                     <button
@@ -662,6 +671,15 @@ export default function ElectronicsProducts({
                       Next
                     </button>
                   </nav>
+                </div>
+              )}
+
+              {listingMode === 'infinite_scroll' && (
+                <div ref={sentinelRef} className="mt-8 flex items-center justify-center h-10">
+                  {loadingMore && <Loader2 className="h-6 w-6 animate-spin text-blue-600" />}
+                  {!hasMore && items.length > 0 && (
+                    <span className="text-sm text-gray-400">{t('Vous avez tout vu')}</span>
+                  )}
                 </div>
               )}
             </div>

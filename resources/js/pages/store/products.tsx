@@ -10,6 +10,8 @@ import AddToCartButton from '@/components/store/AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 import { getImageUrl } from '@/utils/image-helper';
+import { useProductListing } from '@/hooks/use-product-listing';
+import { Loader2 } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -120,6 +122,14 @@ export default function ProductListing({
   const [availability, setAvailability] = useState(filters.availability || 'all');
   const [sortBy, setSortBy] = useState(filters.sort || 'popularity');
   const [perPage, setPerPage] = useState(filters.per_page || 12);
+
+  const listingMode = store?.product_listing_mode === 'infinite_scroll' ? 'infinite_scroll' : 'pagination';
+  const { items, loadingMore, hasMore, sentinelRef } = useProductListing(
+    products,
+    pagination,
+    listingMode,
+    generateStoreUrl('store.products', store)
+  );
 
   // Apply filters function
   const applyFilters = () => {
@@ -513,12 +523,12 @@ export default function ProductListing({
               </div>
 
               {/* Products Grid/List */}
-              {products.length > 0 ? (
-                <div className={viewMode === 'grid' 
-                  ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6' 
+              {items.length > 0 ? (
+                <div className={viewMode === 'grid'
+                  ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6'
                   : 'space-y-4'
                 }>
-                  {products.map((product) => (
+                  {items.map((product) => (
                     viewMode === 'list' ? (
                       <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                         <div className="flex">
@@ -599,7 +609,7 @@ export default function ProductListing({
               )}
 
               {/* Pagination */}
-              {pagination.last_page > 1 && (
+              {listingMode === 'pagination' && pagination.last_page > 1 && (
                 <div className="mt-8 flex items-center justify-center">
                   <nav className="flex items-center space-x-2">
                     <button
@@ -609,7 +619,7 @@ export default function ProductListing({
                     >
                       Previous
                     </button>
-                    
+
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
                       const page = i + 1;
                       return (
@@ -626,7 +636,7 @@ export default function ProductListing({
                         </button>
                       );
                     })}
-                    
+
                     <button
                       onClick={() => goToPage(pagination.current_page + 1)}
                       disabled={pagination.current_page === pagination.last_page}
@@ -635,6 +645,16 @@ export default function ProductListing({
                       Next
                     </button>
                   </nav>
+                </div>
+              )}
+
+              {/* Infinite scroll trigger */}
+              {listingMode === 'infinite_scroll' && (
+                <div ref={sentinelRef} className="mt-8 flex items-center justify-center h-10">
+                  {loadingMore && <Loader2 className="h-6 w-6 animate-spin text-primary" />}
+                  {!hasMore && items.length > 0 && (
+                    <span className="text-sm text-gray-400">{t('Vous avez tout vu')}</span>
+                  )}
                 </div>
               )}
             </div>

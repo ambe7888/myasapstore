@@ -426,6 +426,44 @@ export default function StoreSettings({ store, settings }: Props) {
                 />
               </div>
 
+              {/* Product Listing Mode */}
+              <div className="space-y-2 p-4 border rounded-lg bg-gray-50/50">
+                <Label className="text-base font-semibold">{t('Affichage de la liste des produits')}</Label>
+                <p className="text-sm text-muted-foreground">
+                  {t('Choisissez comment les produits se chargent sur la page de votre boutique')}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => updateSetting('product_listing_mode', 'pagination')}
+                    className={`text-left p-3 rounded-lg border-2 transition-all ${
+                      (formData.product_listing_mode || 'pagination') === 'pagination'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="font-medium text-sm">{t('Pagination')}</div>
+                    <div className="text-xs text-muted-foreground mt-1">
+                      {t('Les produits sont répartis sur plusieurs pages numérotées')}
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateSetting('product_listing_mode', 'infinite_scroll')}
+                    className={`text-left p-3 rounded-lg border-2 transition-all ${
+                      formData.product_listing_mode === 'infinite_scroll'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="font-medium text-sm">{t('Défilement infini')}</div>
+                    <div className="text-xs text-muted-foreground mt-1">
+                      {t('Les produits suivants se chargent automatiquement en scrollant')}
+                    </div>
+                  </button>
+                </div>
+              </div>
+
               {/* Add to Cart Text */}
               {formData.show_add_to_cart_button !== false && (
                 <div className="space-y-2">

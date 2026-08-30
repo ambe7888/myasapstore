@@ -176,9 +176,10 @@ export default function BeautyProducts({
     });
     
     params.page = page;
-    
+
     router.visit(generateStoreUrl('store.products', store), {
       data: params,
+      only: ['products', 'pagination'],
       preserveState: true,
       preserveScroll: true
     });

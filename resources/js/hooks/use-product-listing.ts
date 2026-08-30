@@ -50,18 +50,36 @@ export function useProductListing(
     }
   }, [products]);
 
-  const hasMore = mode === 'infinite_scroll' && pagination.current_page < pagination.last_page;
+  const hasNextPage = pagination.current_page < pagination.last_page;
+  const hasMore = mode === 'infinite_scroll' && hasNextPage;
+
+  const nextPageParams = useCallback(() => {
+    const params: Record<string, any> = Object.fromEntries(new URLSearchParams(window.location.search));
+    params.page = String(pagination.current_page + 1);
+    return params;
+  }, [pagination.current_page]);
+
+  // Warm Inertia's request cache for the next page ahead of time — in
+  // 'infinite_scroll' mode this means the sentinel usually appends instantly
+  // instead of waiting on a network round trip; in 'pagination' mode it makes
+  // clicking "Next" feel instant too, since goToPage() hits the same cache.
+  useEffect(() => {
+    if (!hasNextPage) return;
+
+    router.prefetch(
+      requestUrl,
+      { method: 'get', data: nextPageParams(), only: ['products', 'pagination'], preserveState: true, preserveScroll: true },
+      { cacheFor: '30s' }
+    );
+  }, [hasNextPage, requestUrl, nextPageParams]);
 
   const loadMore = useCallback(() => {
     if (mode !== 'infinite_scroll' || loadingMore || !hasMore) return;
 
-    const params = Object.fromEntries(new URLSearchParams(window.location.search));
-    params.page = String(pagination.current_page + 1);
-
     isAppendingRef.current = true;
     setLoadingMore(true);
 
-    router.get(requestUrl, params, {
+    router.get(requestUrl, nextPageParams(), {
       only: ['products', 'pagination'],
       preserveState: true,
       preserveScroll: true,
@@ -71,7 +89,7 @@ export function useProductListing(
         setLoadingMore(false);
       },
     });
-  }, [mode, loadingMore, hasMore, requestUrl, pagination.current_page]);
+  }, [mode, loadingMore, hasMore, requestUrl, nextPageParams]);
 
   useEffect(() => {
     if (mode !== 'infinite_scroll') return;

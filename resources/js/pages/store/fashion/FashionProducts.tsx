@@ -176,9 +176,10 @@ export default function FashionProducts({
     });
     
     params.page = page;
-    
+
     router.visit(generateStoreUrl('store.products', store), {
       data: params,
+      only: ['products', 'pagination'],
       preserveState: true,
       preserveScroll: true
     });

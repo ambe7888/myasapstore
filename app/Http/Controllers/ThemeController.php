@@ -16,6 +16,7 @@ use App\Models\StoreSetting;
 use App\Models\StoreConfiguration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use App\Services\CartCalculationService;
 
@@ -955,8 +956,10 @@ class ThemeController extends Controller
         // Build query for products
         $query = Product::where('store_id', $store['id'])
             ->where('is_active', true)
-            ->with(['category', 'reviews']);
-        
+            ->with('category')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews');
+
         // Apply filters
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -1004,37 +1007,67 @@ class ThemeController extends Controller
                 $query->orderBy('price', 'desc');
                 break;
             case 'rating':
-                $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating', 'desc');
+                $query->orderBy('reviews_avg_rating', 'desc');
                 break;
             default: // popularity
                 $query->orderBy('created_at', 'desc');
                 break;
         }
-        
+
         // Pagination
         $perPage = $request->get('per_page', 12);
-        $products = $query->paginate($perPage);
-        
-        // Transform products data
-        $productsData = $products->getCollection()->map(function ($product) {
-            return [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'sale_price' => $product->sale_price,
-                'cover_image' => $product->cover_image,
-                'stock' => $product->stock,
-                'is_active' => $product->is_active,
-                'variants' => $product->variants,
-                'category' => [
-                    'id' => $product->category->id ?? null,
-                    'name' => $product->category->name ?? 'Uncategorized',
-                ],
-                'average_rating' => $product->reviews()->avg('rating') ?: 0,
-                'total_reviews' => $product->reviews()->count()
+
+        // Cache the (expensive, frequently-repeated) filtered/paginated product
+        // listing per store + filter combo. Invalidated by bumping the store's
+        // version counter (see ProductObserver) whenever a product changes; the
+        // short TTL below is a safety net for paths that bypass the observer.
+        $cacheVersion = Cache::get("products_listing_cache_version:{$store['id']}", 1);
+        $cacheKey = 'products_listing:' . $store['id'] . ':v' . $cacheVersion . ':' . md5(json_encode([
+            'search' => $request->search,
+            'category' => $request->category,
+            'min_price' => $request->min_price,
+            'max_price' => $request->max_price,
+            'rating' => $request->rating,
+            'availability' => $request->availability,
+            'sort' => $request->get('sort', 'popularity'),
+            'per_page' => $perPage,
+            'page' => $request->get('page', 1),
+        ]));
+
+        [$productsData, $paginationMeta] = Cache::remember($cacheKey, 120, function () use ($query, $perPage) {
+            $products = $query->paginate($perPage);
+
+            $productsData = $products->getCollection()->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'sale_price' => $product->sale_price,
+                    'cover_image' => $product->cover_image,
+                    'stock' => $product->stock,
+                    'is_active' => $product->is_active,
+                    'variants' => $product->variants,
+                    'category' => [
+                        'id' => $product->category->id ?? null,
+                        'name' => $product->category->name ?? 'Uncategorized',
+                    ],
+                    'average_rating' => $product->reviews_avg_rating ?: 0,
+                    'total_reviews' => $product->reviews_count,
+                ];
+            })->values()->all();
+
+            $paginationMeta = [
+                'current_page' => $products->currentPage(),
+                'last_page' => $products->lastPage(),
+                'per_page' => $products->perPage(),
+                'total' => $products->total(),
+                'from' => $products->firstItem() ?: 0,
+                'to' => $products->lastItem() ?: 0,
             ];
+
+            return [$productsData, $paginationMeta];
         });
-        
+
         // Get dynamic content from database
         $storeContent = StoreSetting::getSettings($store['id'], $store['theme']);
         
@@ -1085,14 +1118,7 @@ class ThemeController extends Controller
                 'sort' => $request->sort,
                 'per_page' => $perPage,
             ],
-            'pagination' => [
-                'current_page' => $products->currentPage(),
-                'last_page' => $products->lastPage(),
-                'per_page' => $products->perPage(),
-                'total' => $products->total(),
-                'from' => $products->firstItem() ?: 0,
-                'to' => $products->lastItem() ?: 0,
-            ],
+            'pagination' => $paginationMeta,
             'cartCount' => 3,
             'wishlistCount' => 5,
             ...$this->getCommonData()

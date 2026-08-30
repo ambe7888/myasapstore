@@ -170,9 +170,10 @@ export default function JewelryProducts({
     });
     
     params.page = page;
-    
+
     router.visit(generateStoreUrl('store.products', store), {
       data: params,
+      only: ['products', 'pagination'],
       preserveState: true,
       preserveScroll: true
     });

@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Product;
 use App\Observers\UserObserver;
 use App\Observers\PlanObserver;
+use App\Observers\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
         
         // Register the PlanObserver
         Plan::observe(PlanObserver::class);
-        
+
+        // Register the ProductObserver (invalidates the product listing cache)
+        Product::observe(ProductObserver::class);
+
 
 
         // Configure dynamic storage disks

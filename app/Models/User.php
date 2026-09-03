@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Lab404\Impersonate\Models\Impersonate;
 use App\Models\Plan;
 use App\Models\Referral;
@@ -17,7 +18,7 @@ use App\Services\MailConfigService;
 class User extends BaseAuthenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasRoles, HasFactory, Notifiable, Impersonate;
+    use HasApiTokens, HasRoles, HasFactory, Notifiable, Impersonate;
     
     /**
      * Static property to control store creation during seeding

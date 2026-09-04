@@ -49,7 +49,7 @@ class WebhookService
                 curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 10);
                 curl_setopt($curlHandle, CURLOPT_HTTPHEADER, [
                     'Content-Type: application/json',
-                    'User-Agent: StoreGo-SaaS-Webhook/1.0'
+                    'User-Agent: My Store Asap-SaaS-Webhook/1.0'
                 ]);
                 
                 curl_exec($curlHandle);

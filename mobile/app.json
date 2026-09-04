@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "StoreGo Seller",
-    "slug": "storego-seller",
-    "scheme": "storegoseller",
+    "name": "My Store Asap Seller",
+    "slug": "myasapstore-seller",
+    "scheme": "myasapstoreseller",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

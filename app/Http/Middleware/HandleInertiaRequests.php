@@ -206,7 +206,7 @@ class HandleInertiaRequests extends Middleware
             'superadminSettings' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? array_merge(defaultSettings(), getSuperadminSettings()) : defaultSettings(),
             'storeCurrency' => $storeCurrency,
             'store' => $store ? $this->formatSharedStore($store) : null,
-            'dynamicTitleText' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? getSetting('titleText', config('app.name', 'StoreGo')) : config('app.name', 'StoreGo'),
+            'dynamicTitleText' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? getSetting('titleText', config('app.name', 'My Store Asap')) : config('app.name', 'My Store Asap'),
             'referralSettings' => [
                 'is_enabled' => !$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed')) ? ReferralSetting::isEnabled() : false,
             ],

@@ -50,10 +50,10 @@ export default function NewsletterSection({ flash, settings, sectionData, brandC
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData?.title || t('Stay Updated with StoreGo')}
+            {sectionData?.title || t('Stay Updated with My Store Asap')}
           </h2>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed font-medium" id="newsletter-description">
-            {sectionData?.subtitle || t('Get the latest e-commerce tips, StoreGo updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.')}
+            {sectionData?.subtitle || t('Get the latest e-commerce tips, My Store Asap updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.')}
           </p>
 
           {flash?.success && (flash.success.includes('newsletter') || flash.success.includes('subscribing') || flash.success.includes('subscribe')) && (

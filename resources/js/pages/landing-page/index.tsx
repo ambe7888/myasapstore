@@ -133,8 +133,8 @@ export default function LandingPage() {
   // Get title from brand context (superadmin settings) first, then SEO, then fallback
   const { titleText } = useBrand();
   const seo = settings.config_sections?.seo;
-  const pageTitle = titleText || seo?.meta_title || 'StoreGo - Build Your Online Store';
-  const metaDescription = seo?.meta_description || 'Create beautiful, professional online stores with StoreGo. Everything you need to start selling online.';
+  const pageTitle = titleText || seo?.meta_title || 'My Store Asap - Build Your Online Store';
+  const metaDescription = seo?.meta_description || 'Create beautiful, professional online stores with My Store Asap. Everything you need to start selling online.';
 
   // Custom CSS
   React.useEffect(() => {

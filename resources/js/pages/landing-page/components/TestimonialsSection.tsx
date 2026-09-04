@@ -21,7 +21,7 @@ const DEFAULT_TESTIMONIALS = [
     name: 'Alex Thompson',
     role: 'Store Owner',
     company: 'Fashion Hub',
-    content: 'StoreGo has revolutionized how I manage my multiple online stores. The multi-store dashboard is a game-changer!',
+    content: 'My Store Asap has revolutionized how I manage my multiple online stores. The multi-store dashboard is a game-changer!',
     rating: 5
   },
   {
@@ -108,7 +108,7 @@ export default function TestimonialsSection({ testimonials, settings, sectionDat
             {sectionData?.title || t('What Our Clients Say')}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            {sectionData?.subtitle || t("Don't just take our word for it. Here's what merchants around the world are saying about StoreGo.")}
+            {sectionData?.subtitle || t("Don't just take our word for it. Here's what merchants around the world are saying about My Store Asap.")}
           </p>
         </div>
 

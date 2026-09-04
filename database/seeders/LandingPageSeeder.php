@@ -240,7 +240,7 @@ class LandingPageSeeder extends Seeder
                             ]
                         ],
                         'stats_title' => 'Trusted by Entrepreneurs Worldwide',
-                        'stats_subtitle' => 'Join thousands of successful merchants who chose StoreGo',
+                        'stats_subtitle' => 'Join thousands of successful merchants who chose My Store Asap',
                         'cta_title' => 'Ready to Launch Your Store?',
                         'cta_subtitle' => 'Start your 14-day free trial today - no credit card required'
                     ],
@@ -252,11 +252,11 @@ class LandingPageSeeder extends Seeder
                         'description' => 'Founded by SaaS and e-commerce experts, our platform is built to solve the real challenges of managing multiple online stores.',
                         'background_color' => '#f8fafc',
                         'layout' => 'image-right',
-                        'image' => '/storage/placeholder/about-storego.svg',
+                        'image' => '/storage/placeholder/about-mystoreasap.svg',
                         'image_position' => 'right',
                         'parallax' => false,
                         'story_title' => 'Revolutionizing Multi-Store E-commerce Since 2019',
-                        'story_content' => 'StoreGo emerged from the vision of experienced e-commerce professionals who recognized the growing need for unified multi-store management. What started as a solution for managing multiple online stores has evolved into a comprehensive platform serving over 25,000 entrepreneurs across 120+ countries. Our mission is to democratize e-commerce by providing powerful, intuitive tools that enable anyone to build, manage, and scale successful online businesses without technical barriers.',
+                        'story_content' => 'My Store Asap emerged from the vision of experienced e-commerce professionals who recognized the growing need for unified multi-store management. What started as a solution for managing multiple online stores has evolved into a comprehensive platform serving over 25,000 entrepreneurs across 120+ countries. Our mission is to democratize e-commerce by providing powerful, intuitive tools that enable anyone to build, manage, and scale successful online businesses without technical barriers.',
                         'stats' => [
                             ['label' => 'Store Themes', 'value' => '10+', 'color' => '#3b82f6'],
                             ['label' => 'Payment Gateways', 'value' => '30+', 'color' => '#10b77f'],
@@ -295,7 +295,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'team',
                         'title' => 'Meet Our Team',
-                        'subtitle' => 'Meet the passionate team behind StoreGo\'s success',
+                        'subtitle' => 'Meet the passionate team behind My Store Asap\'s success',
                         'description' => 'Our diverse team of e-commerce experts, engineers, and designers is dedicated to helping entrepreneurs build successful online businesses.',
                         'background_color' => '#f8fafc',
                         'layout' => 'grid',
@@ -308,7 +308,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/alex.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'alex@storego.com'
+                                'email' => 'alex@mystoreasap.com'
                             ],
                             [
                                 'name' => 'Sarah Kim',
@@ -317,7 +317,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/sarah.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'sarah@storego.com'
+                                'email' => 'sarah@mystoreasap.com'
                             ],
                             [
                                 'name' => 'David Wilson',
@@ -325,7 +325,7 @@ class LandingPageSeeder extends Seeder
                                 'bio' => 'Helping merchants grow their businesses since day one. 8+ years in customer success and e-commerce consulting.',
                                 'image' => '/storage/placeholder/team/david.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
-                                'email' => 'david@storego.com'
+                                'email' => 'david@mystoreasap.com'
                             ],
                             [
                                 'name' => 'Maria Garcia',
@@ -334,7 +334,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/maria.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'maria@storego.com'
+                                'email' => 'maria@mystoreasap.com'
                             ]
                         ],
                         'cta_title' => 'Join Our Growing Team',
@@ -360,7 +360,7 @@ class LandingPageSeeder extends Seeder
                         'key' => 'testimonials',
                         'title' => 'What Our Merchants Say',
                         'subtitle' => 'Join thousands of successful store owners',
-                        'description' => 'Don\'t just take our word for it. See what our successful merchants have to say about StoreGo.',
+                        'description' => 'Don\'t just take our word for it. See what our successful merchants have to say about My Store Asap.',
                         'background_color' => '#ffffff',
                         'layout' => 'carousel',
                         'autoplay' => true,
@@ -369,7 +369,7 @@ class LandingPageSeeder extends Seeder
                         'show_navigation' => true,
                         'show_trust_indicators' => true,
                         'trust_indicators' => [
-                            ['metric' => 'Customer Satisfaction', 'value' => '98.5%', 'description' => 'of merchants recommend StoreGo to others'],
+                            ['metric' => 'Customer Satisfaction', 'value' => '98.5%', 'description' => 'of merchants recommend My Store Asap to others'],
                             ['metric' => 'Average Rating', 'value' => '4.9/5', 'description' => 'based on 8,500+ verified reviews'],
                             ['metric' => 'Success Rate', 'value' => '94%', 'description' => 'of stores see growth in first 90 days'],
                             ['metric' => 'Revenue Growth', 'value' => '340%', 'description' => 'average increase in first year'],
@@ -388,7 +388,7 @@ class LandingPageSeeder extends Seeder
                                 'name' => 'Emma Thompson',
                                 'role' => 'Store Owner',
                                 'company' => 'Boutique Fashion Co.',
-                                'content' => 'StoreGo made it incredibly easy to launch my fashion store. The multi-store feature lets me manage different brands from one dashboard. Sales increased 400% in the first 6 months!',
+                                'content' => 'My Store Asap made it incredibly easy to launch my fashion store. The multi-store feature lets me manage different brands from one dashboard. Sales increased 400% in the first 6 months!',
                                 'rating' => 5,
                                 'avatar' => '/storage/placeholder/testimonials/emma.svg',
                                 'location' => 'London, UK'
@@ -416,7 +416,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'faq',
                         'title' => 'Frequently Asked Questions',
-                        'subtitle' => 'Everything you need to know about StoreGo',
+                        'subtitle' => 'Everything you need to know about My Store Asap',
                         'description' => 'Got questions? We\'ve got answers. Browse our most frequently asked questions below.',
                         'background_color' => '#f8fafc',
                         'layout' => 'accordion',
@@ -462,7 +462,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'newsletter',
                         'title' => 'Stay Updated',
-                        'subtitle' => 'Get the latest e-commerce tips and StoreGo updates',
+                        'subtitle' => 'Get the latest e-commerce tips and My Store Asap updates',
                         'description' => 'Join our newsletter and get exclusive insights, tips, and updates delivered to your inbox.',
                         'background_color' => '#3b82f6',
                         'text_color' => '#ffffff',
@@ -478,7 +478,7 @@ class LandingPageSeeder extends Seeder
                             [
                                 'icon' => '🚀',
                                 'title' => 'Early Access',
-                                'description' => 'Be first to try new StoreGo features and updates'
+                                'description' => 'Be first to try new My Store Asap features and updates'
                             ],
                             [
                                 'icon' => '💡',
@@ -504,7 +504,7 @@ class LandingPageSeeder extends Seeder
                         'form_title' => 'Send us a message',
                         'form_subtitle' => 'We\'ll get back to you within 4 hours',
                         'contact_methods' => [
-                            ['type' => 'email', 'value' => 'support@storego.com', 'label' => 'Email Support', 'description' => 'Get help via email'],
+                            ['type' => 'email', 'value' => 'support@mystoreasap.com', 'label' => 'Email Support', 'description' => 'Get help via email'],
                             ['type' => 'phone', 'value' => '+1 (555) 123-4567', 'label' => 'Phone Support', 'description' => 'Speak with our team'],
                             ['type' => 'chat', 'value' => 'Live Chat', 'label' => 'Live Chat', 'description' => 'Chat with us instantly']
                         ],
@@ -533,8 +533,8 @@ class LandingPageSeeder extends Seeder
                         'show_newsletter' => true,
                         'show_logo' => true,
                         'logo_position' => 'top',
-                        'description' => 'StoreGo is the leading multi-store e-commerce SaaS platform that empowers entrepreneurs to create, manage, and scale unlimited online stores from a single dashboard. Join thousands of successful merchants worldwide.',
-                        'newsletter_title' => 'Stay Connected with StoreGo',
+                        'description' => 'My Store Asap is the leading multi-store e-commerce SaaS platform that empowers entrepreneurs to create, manage, and scale unlimited online stores from a single dashboard. Join thousands of successful merchants worldwide.',
+                        'newsletter_title' => 'Stay Connected with My Store Asap',
                         'newsletter_subtitle' => 'Get exclusive e-commerce insights, platform updates, and growth strategies delivered to your inbox',
                         'links' => [
                             'product' => [
@@ -569,7 +569,7 @@ class LandingPageSeeder extends Seeder
                             ['name' => 'Facebook', 'icon' => 'Facebook', 'href' => 'https://www.facebook.com/'],
                             ['name' => 'Instagram', 'icon' => 'Instagram', 'href' => 'https://www.instagram.com/']
                         ],
-                        'copyright' => '© 2024 StoreGo. All rights reserved.',
+                        'copyright' => '© 2024 My Store Asap. All rights reserved.',
                         'bottom_text' => 'Built for entrepreneurs, by entrepreneurs. Trusted by 25,000+ merchants across 120+ countries worldwide. SOC 2 Type II compliant with 99.9% uptime guarantee.'
                     ]
                 ],
@@ -579,8 +579,8 @@ class LandingPageSeeder extends Seeder
                     'accent' => '#065f46'
                 ],
                 'seo' => [
-                    'meta_title' => 'StoreGo - Multi-Store E-commerce Platform | Launch Your Online Store',
-                    'meta_description' => 'Create and manage multiple online stores with StoreGo. 30+ payment gateways, beautiful themes, inventory management, and more. Start your free trial today.',
+                    'meta_title' => 'My Store Asap - Multi-Store E-commerce Platform | Launch Your Online Store',
+                    'meta_description' => 'Create and manage multiple online stores with My Store Asap. 30+ payment gateways, beautiful themes, inventory management, and more. Start your free trial today.',
                     'meta_keywords' => 'ecommerce platform, online store builder, multi-store management, sell online, ecommerce website, store builder'
                 ],
                 'section_order' => [

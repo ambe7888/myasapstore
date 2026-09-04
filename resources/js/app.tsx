@@ -37,7 +37,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
     }
 });
 
-const appName = import.meta.env.VITE_APP_NAME || 'StoreGo';
+const appName = import.meta.env.VITE_APP_NAME || 'My Store Asap';
 
 createInertiaApp({
     title: (title) => {

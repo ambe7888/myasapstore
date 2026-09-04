@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'system' => 'StoreGo SaaS',
+    'system' => 'My Store Asap SaaS',
     'system_version' => '8.3',
 ];

@@ -1125,8 +1125,8 @@ if (! function_exists('defaultSettings')) {
             'currencySymbolPosition' => 'after',
             
             // SEO Settings
-            'metaKeywords' => 'ecommerce, online store, shopping, multi-store, saas platform, storego',
-            'metaDescription' => 'StoreGo - A powerful SaaS platform for creating and managing multiple online stores with professional themes and complete e-commerce features.',
+            'metaKeywords' => 'ecommerce, online store, shopping, multi-store, saas platform, my store asap',
+            'metaDescription' => 'My Store Asap - A powerful SaaS platform for creating and managing multiple online stores with professional themes and complete e-commerce features.',
             'metaImage' => '/images/logos/logo-dark.png',
             
             // Cookie Settings

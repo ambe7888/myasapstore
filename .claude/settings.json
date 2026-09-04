@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(tasklist //FI \"IMAGENAME eq php.exe\")",
+      "Bash(ipconfig)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 6584 //F)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://10.38.28.10:8000/api/v1/plans -H \"Accept: application/json\")",
+      "Bash(tasklist //FI \"IMAGENAME eq node.exe\")",
+      "Bash(/c/xampp/mysql/bin/mysql.exe -u root myasapstore_dev -e \"SELECT id, name, email, type FROM users;\")",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -X POST http://10.38.28.10:8000/api/v1/auth/login -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"email\":\"seller_test1@example.com\",\"password\":\"password123\"}' --max-time 5)",
+      "Bash(curl -s -w \"\\\\nHTTP:%{http_code}\\\\n\" http://127.0.0.1:8000/api/v1/plans -H \"Accept: application/json\" --max-time 5)",
+      "Bash(taskkill //PID 6764 //F)",
+      "Bash(taskkill //PID 2688 //F)",
+      "Bash(/c/xampp/mysql/bin/mysql.exe -u root -e \"SELECT 1;\")",
+      "Bash(/c/xampp/mysql/bin/mysql.exe -u root -e \"SHOW PROCESSLIST;\")",
+      "Bash(curl -s -w \"\\\\nHTTP:%{http_code} TIME:%{time_total}\\\\n\" http://127.0.0.1:8000/api/v1/plans -H \"Accept: application/json\" --max-time 8)",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code} TIME:%{time_total}\\\\n' -X POST http://127.0.0.1:8000/api/v1/auth/login -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"email\":\"seller_test1@example.com\",\"password\":\"password123\"}' --max-time 15)",
+      "Bash(curl -s -w \"\\\\nHTTP:%{http_code} TIME:%{time_total}\\\\n\" http://10.38.28.10:8000/api/v1/plans -H \"Accept: application/json\" --max-time 8)",
+      "PowerShell(Get-NetConnectionProfile)",
+      "PowerShell(Get-NetFirewallProfile)",
+      "PowerShell(Get-NetFirewallProfile -Profile Private)",
+      "PowerShell(Get-NetFirewallProfile -Profile Public)",
+      "PowerShell(Test-NetConnection -ComputerName 10.38.28.10 -Port 8000 -InformationLevel Detailed)",
+      "Bash(curl -s -w \"\\\\nHTTP:%{http_code} TIME:%{time_total}\\\\n\" http://10.197.195.10:8000/api/v1/plans -H \"Accept: application/json\" --max-time 8)",
+      "Bash(sed -i 's/StoreGo/My Store Asap/g' storage/app/public/placeholder/team-working.svg storage/app/public/placeholder/hero-ecommerce.svg storage/app/public/placeholder/dashboard-preview.svg storage/app/public/placeholder/about-storego.svg)",
+      "Bash(sed -i 's/storego\\\\.com/mystoreasap.com/g' storage/app/public/placeholder/dashboard-preview.svg)",
+      "Bash(git mv *)",
+      "Bash(mv storage/app/public/placeholder/about-storego.svg storage/app/public/placeholder/about-mystoreasap.svg)",
+      "Bash(/c/xampp/mysql/bin/mysql.exe -u root myasapstore_dev -e \"SELECT value FROM settings WHERE \\\\`key\\\\`='metaKeywords' LIMIT 1;\")",
+      "Bash(npm run *)",
+      "Bash(taskkill //PID 3224 //F)"
+    ]
+  }
+}

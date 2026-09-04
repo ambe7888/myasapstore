@@ -32,12 +32,12 @@ export function getImageUrl(path: string): string {
   if (!baseUrl) {
     const { origin, pathname } = window.location;
     
-    // For paths like /product/storego/storego-saas-react-demo/...
+    // For paths like /product/vendor-name/app-name/...
     if (pathname.includes('/product/')) {
       const pathParts = pathname.split('/');
       const productIndex = pathParts.indexOf('product');
       if (productIndex >= 0 && pathParts.length > productIndex + 2) {
-        // Reconstruct base path: /product/storego/storego-saas-react-demo
+        // Reconstruct base path: /product/vendor-name/app-name
         const basePath = pathParts.slice(0, productIndex + 3).join('/');
         baseUrl = origin + basePath;
       }

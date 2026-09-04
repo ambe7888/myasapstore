@@ -37,8 +37,8 @@ export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
   logoDark: '/images/logos/logo-dark.png',
   logoLight: '/images/logos/logo-light.png',
   favicon: '/images/logos/favicon.png',
-  titleText: 'StoreGo',
-  footerText: '© 2025 StoreGo SaaS. Powered by WorkDo.',
+  titleText: 'My Store Asap',
+  footerText: '© 2025 My Store Asap SaaS. Powered by WorkDo.',
   themeColor: 'green',
   customColor: '#10b77f',
   sidebarVariant: 'inset',
@@ -452,7 +452,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                     name="titleText"
                     value={settings.titleText}
                     onChange={handleInputChange}
-                    placeholder="StoreGo"
+                    placeholder="My Store Asap"
                   />
                   <p className="text-xs text-muted-foreground">
                     {t("Application title displayed in the browser tab")}
@@ -466,7 +466,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                     name="footerText"
                     value={settings.footerText}
                     onChange={handleInputChange}
-                    placeholder="© 2025 StoreGo SaaS. Powered by WorkDo."
+                    placeholder="© 2025 My Store Asap SaaS. Powered by WorkDo."
                   />
                   <p className="text-xs text-muted-foreground">
                     {t("Text displayed in the footer")}

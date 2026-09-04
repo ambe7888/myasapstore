@@ -239,11 +239,11 @@ export default function Footer({ settings, sectionData = {}, brandColor = '#3b82
           </div>
         </div>
 
-        {/* Newsletter Section - Stay Connected with StoreGo */}
+        {/* Newsletter Section - Stay Connected with My Store Asap */}
         <div className="border-t border-gray-800 py-8 sm:py-12">
           <div className="text-center max-w-2xl mx-auto">
             <h3 className="text-xl font-bold text-white mb-4">
-              {sectionData.newsletter_title || t('Stay Connected with StoreGo')}
+              {sectionData.newsletter_title || t('Stay Connected with My Store Asap')}
             </h3>
             <p className="text-gray-400 mb-6">
               {sectionData.newsletter_subtitle || t('Join our newsletter for product updates and networking tips')}

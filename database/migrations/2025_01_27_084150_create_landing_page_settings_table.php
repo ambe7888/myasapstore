@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('landing_page_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name')->nullable()->default('StoreGo');
-            $table->string('contact_email')->nullable()->default('support@storego.com');
+            $table->string('company_name')->nullable()->default('My Store Asap');
+            $table->string('contact_email')->nullable()->default('support@mystoreasap.com');
             $table->string('contact_phone')->nullable()->default('+1 (555) 123-4567');
             $table->string('contact_address')->nullable()->default('San Francisco, CA');
             $table->json('config_sections')->nullable();

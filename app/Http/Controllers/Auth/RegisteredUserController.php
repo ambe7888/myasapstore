@@ -139,7 +139,7 @@ class RegisteredUserController extends Controller
     private function decryptPlanId($encryptedPlanId)
     {
         try {
-            $key = 'StoreGo2024';
+            $key = 'My Store Asap2024';
             $encrypted = base64_decode($encryptedPlanId);
             $decrypted = '';
             
@@ -174,7 +174,7 @@ class RegisteredUserController extends Controller
             'password' => getSetting('email_password', '', $userId, null),
             'encryption' => getSetting('email_encryption', 'tls', $userId, null),
             'fromAddress' => getSetting('email_from_address', 'noreply@example.com', $userId, null),
-            'fromName' => getSetting('email_from_name', 'StoreGo System', $userId, null)
+            'fromName' => getSetting('email_from_name', 'My Store Asap System', $userId, null)
         ];
         
         // Only configure if we have valid settings

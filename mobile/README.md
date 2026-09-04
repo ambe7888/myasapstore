@@ -1,6 +1,6 @@
-# StoreGo Seller (mobile)
+# My Store Asap Seller (mobile)
 
-Expo/React Native app for sellers to manage their StoreGo stores from their phone: login/register, switch between stores, manage products, manage orders, view subscription usage.
+Expo/React Native app for sellers to manage their My Store Asap stores from their phone: login/register, switch between stores, manage products, manage orders, view subscription usage.
 
 Talks to the Laravel backend's token-authenticated API at `routes/api.php` (`/api/v1/...`, Sanctum bearer tokens).
 

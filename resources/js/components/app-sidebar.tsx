@@ -524,7 +524,7 @@ export function AppSidebar() {
                                     />
                                 ) : (
                                     <div className="text-inherit font-semibold flex items-center text-lg tracking-tight">
-                                        StoreGo
+                                        My Store Asap
                                     </div>
                                 );
                             })()} 

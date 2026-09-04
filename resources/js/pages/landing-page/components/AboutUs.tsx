@@ -104,7 +104,7 @@ export default function AboutUs({ settings, sectionData, brandColor = '#3b82f6' 
               {sectionData.story_title || 'Revolutionizing Multi-Store E-commerce Since 2019'}
             </h3>
             <div className="text-gray-600 mb-8 leading-relaxed" dangerouslySetInnerHTML={{
-              __html: (sectionData.story_content || 'Founded by e-commerce experts and technology innovators, StoreGo was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.').replace(/\n/g, '</p><p className="mb-6">')
+              __html: (sectionData.story_content || 'Founded by e-commerce experts and technology innovators, My Store Asap was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.').replace(/\n/g, '</p><p className="mb-6">')
             }} />
             
             {stats.length > 0 && (

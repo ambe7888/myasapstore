@@ -12,6 +12,14 @@ deployment:
       --exclude='/storage/logs'
       --exclude='/storage/uploads'
       --exclude='/storage/framework'
+      --exclude='/storage/installed'
+      --exclude='/storage/*.key'
+      --exclude='/storage/pail'
+      --exclude='/public/storage'
+      --exclude='/public/hot'
+      --exclude='/bootstrap/ssr'
+      --exclude='/bootstrap/cache'
+      --exclude='/auth.json'
       --exclude='/.git'
       ./ $DEPLOYPATH/
     - /bin/chmod 755 $DEPLOYPATH

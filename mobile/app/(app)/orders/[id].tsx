@@ -67,34 +67,11 @@ export default function OrderDetailScreen() {
 
       <Section title="Articles">
         {order.items.map((item) => (
-          <View key={item.id} style={styles.item}>
-            <View style={styles.itemRow}>
-              <Text style={styles.text} numberOfLines={1}>{item.name} × {item.quantity}</Text>
-              <Text style={styles.text}>{(item.unit_price * item.quantity).toFixed(2)}</Text>
-            </View>
-            {item.sku ? <Text style={styles.textMuted}>SKU: {item.sku}</Text> : null}
-            {formatVariants(item.variants) ? (
-              <Text style={styles.textMuted}>{formatVariants(item.variants)}</Text>
-            ) : null}
+          <View key={item.id} style={styles.itemRow}>
+            <Text style={styles.text} numberOfLines={1}>{item.name} × {item.quantity}</Text>
+            <Text style={styles.text}>{(item.unit_price * item.quantity).toFixed(2)}</Text>
           </View>
         ))}
-      </Section>
-
-      <Section title="Paiement">
-        <View style={styles.itemRow}>
-          <Text style={styles.text}>Mode de paiement</Text>
-          <Text style={styles.text}>{order.payment_method ?? '—'}</Text>
-        </View>
-        <View style={styles.itemRow}>
-          <Text style={styles.text}>Statut du paiement</Text>
-          <Text style={styles.text}>{order.payment_status}</Text>
-        </View>
-      </Section>
-
-      <Section title="Livraison">
-        <Text style={styles.text}>{order.shipping_address ?? 'Adresse non renseignée'}</Text>
-        {order.shipping_method ? <Text style={styles.textMuted}>Méthode : {order.shipping_method}</Text> : null}
-        {order.tracking_number ? <Text style={styles.textMuted}>Suivi : {order.tracking_number}</Text> : null}
       </Section>
 
       <Section title="Résumé">
@@ -106,24 +83,6 @@ export default function OrderDetailScreen() {
       </Section>
     </ScrollView>
   );
-}
-
-function formatVariants(variants: unknown): string | null {
-  if (!variants) return null;
-
-  if (Array.isArray(variants)) {
-    const parts = variants
-      .map((v) => (v && typeof v === 'object' ? `${(v as any).name ?? (v as any).label}: ${(v as any).value}` : String(v)))
-      .filter(Boolean);
-    return parts.length ? parts.join(' · ') : null;
-  }
-
-  if (typeof variants === 'object') {
-    const parts = Object.entries(variants as Record<string, unknown>).map(([key, value]) => `${key}: ${value}`);
-    return parts.length ? parts.join(' · ') : null;
-  }
-
-  return null;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -163,6 +122,5 @@ const styles = StyleSheet.create({
   text: { fontSize: 14, color: colors.text, flexShrink: 1 },
   textMuted: { fontSize: 13, color: colors.muted, marginTop: 2 },
   bold: { fontWeight: '700' },
-  item: { paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: colors.background },
-  itemRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 2 },
+  itemRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6 },
 });

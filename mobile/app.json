@@ -7,22 +7,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
     "experiments": {
       "typedRoutes": true
     },
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-status-bar",
-      [
-        "expo-notifications",
-        {
-          "color": "#4f46e5"
-        }
-      ]
+      "expo-status-bar"
     ],
     "ios": {
       "supportsTablet": true

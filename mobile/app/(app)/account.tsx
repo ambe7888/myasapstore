@@ -1,25 +1,11 @@
-import { useState } from 'react';
-import Constants from 'expo-constants';
 import { logout } from '@/api/auth';
 import { Button } from '@/components/Button';
-import { unregisterCurrentDeviceToken } from '@/lib/push-notifications';
 import { useSession } from '@/lib/session';
-import { checkForUpdate } from '@/lib/updates';
 import { colors } from '@/theme';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
 export default function AccountScreen() {
   const { user, signOut } = useSession();
-  const [checkingUpdate, setCheckingUpdate] = useState(false);
-
-  const handleCheckForUpdate = async () => {
-    setCheckingUpdate(true);
-    const result = await checkForUpdate();
-    setCheckingUpdate(false);
-    if (!result.applied) {
-      Alert.alert('Mises à jour', result.message);
-    }
-  };
 
   const handleLogout = () => {
     Alert.alert('Se déconnecter', 'Voulez-vous vraiment vous déconnecter ?', [
@@ -29,7 +15,6 @@ export default function AccountScreen() {
         style: 'destructive',
         onPress: async () => {
           try {
-            await unregisterCurrentDeviceToken();
             await logout();
           } finally {
             signOut();
@@ -47,10 +32,7 @@ export default function AccountScreen() {
         <Text style={styles.phone}>{user?.phone}</Text>
       </View>
 
-      <Button title="Vérifier les mises à jour" variant="secondary" onPress={handleCheckForUpdate} loading={checkingUpdate} />
       <Button title="Se déconnecter" variant="danger" onPress={handleLogout} />
-
-      <Text style={styles.version}>Version {Constants.expoConfig?.version ?? '1.0.0'}</Text>
     </View>
   );
 }
@@ -61,5 +43,4 @@ const styles = StyleSheet.create({
   name: { fontSize: 18, fontWeight: '700', color: colors.text },
   email: { fontSize: 14, color: colors.muted, marginTop: 6 },
   phone: { fontSize: 14, color: colors.muted, marginTop: 2 },
-  version: { textAlign: 'center', color: colors.muted, fontSize: 12, marginTop: 4 },
 });

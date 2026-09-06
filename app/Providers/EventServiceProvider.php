@@ -15,7 +15,6 @@ use App\Listeners\SendOrderStatusChangedEmail;
 use App\Listeners\SendStoreCreatedEmail;
 use App\Listeners\SendUserCreatedEmail;
 use App\Listeners\SendNotificationSMS;
-use App\Listeners\SendOrderCreatedPushNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -35,7 +34,6 @@ class EventServiceProvider extends ServiceProvider
             SendOrderCreatedWhatsApp::class,
             SendNotificationSMS::class . '@handleOrderCreated',
             HandleWebhooks::class . '@handleOrderCreated',
-            SendOrderCreatedPushNotification::class,
         ],
         OrderStatusChanged::class => [
             SendOrderStatusChangedEmail::class,

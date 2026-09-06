@@ -31,9 +31,7 @@
       "Bash(mv storage/app/public/placeholder/about-storego.svg storage/app/public/placeholder/about-mystoreasap.svg)",
       "Bash(/c/xampp/mysql/bin/mysql.exe -u root myasapstore_dev -e \"SELECT value FROM settings WHERE \\\\`key\\\\`='metaKeywords' LIMIT 1;\")",
       "Bash(npm run *)",
-      "Bash(taskkill //PID 3224 //F)",
-      "Bash(grep \"\\\\.env$\")",
-      "WebSearch"
+      "Bash(taskkill //PID 3224 //F)"
     ]
   }
 }

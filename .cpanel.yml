@@ -3,7 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/mystorea/public_html
     - >
-      /bin/rsync -a --delete
+      /bin/rsync -rlt --delete
+      --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r
       --exclude='.env'
       --exclude='/vendor'
       --exclude='/node_modules'
@@ -13,3 +14,4 @@ deployment:
       --exclude='/storage/framework'
       --exclude='/.git'
       ./ $DEPLOYPATH/
+    - /bin/chmod 755 $DEPLOYPATH

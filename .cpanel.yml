@@ -21,5 +21,6 @@ deployment:
       --exclude='/bootstrap/cache'
       --exclude='/auth.json'
       --exclude='/.git'
+      --exclude='/storage/app/public'
       ./ $DEPLOYPATH/
     - /bin/chmod 755 $DEPLOYPATH

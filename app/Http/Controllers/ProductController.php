@@ -504,7 +504,11 @@ class ProductController extends BaseController
         
         $action = $request->action;
         $ids = $request->ids;
-        
+
+        if ($action === 'delete' && !$user->can('delete-products')) {
+            return redirect()->back()->with('error', __('You do not have permission to delete products.'));
+        }
+
         $products = Product::where('store_id', $currentStoreId)
             ->whereIn('id', $ids)
             ->get();

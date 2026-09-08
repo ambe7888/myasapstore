@@ -453,10 +453,10 @@ class ProductController extends BaseController
             'name' => $findColumn(['name', 'product name', 'nom']),
             'sku' => $findColumn(['sku', 'ugs']),
             'category' => $findColumn(['categories', 'category', 'catégories', 'catégorie']),
-            'price' => $findColumn(['regular price', 'price', 'tarif régulier', 'tarif normal', 'prix']),
+            'price' => $findColumn(['regular price', 'price', 'tarif régulier', 'tarif regulier', 'tarif normal', 'prix']),
             'salePrice' => $findColumn(['sale price', 'tarif promo', 'prix promo']),
             'stock' => $findColumn(['stock', 'stock quantity', 'quantity']),
-            'status' => $findColumn(['published', 'status', 'publié']),
+            'status' => $findColumn(['published', 'status', 'publié', 'publie']),
             'description' => $findColumn(['description', 'short description', 'description courte']),
             'images' => $findColumn(['images', 'image']),
         ];
@@ -523,6 +523,13 @@ class ProductController extends BaseController
                         ? null
                         : (float) filter_var($salePriceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $stock = (int) filter_var($stockStr, FILTER_SANITIZE_NUMBER_INT);
+        // Many WooCommerce stores never enable per-product stock tracking,
+        // so the export column is blank or 0 for every row — treat that as
+        // "unknown" rather than "out of stock" so imported products aren't
+        // unsellable by default.
+        if ($stock <= 0) {
+            $stock = 10;
+        }
 
         $status = in_array(strtolower($statusStr), ['0', 'no', 'false', 'inactive', 'draft', 'private'], true) ? 0 : 1;
 

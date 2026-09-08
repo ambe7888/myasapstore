@@ -363,6 +363,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->middleware('permission:view-products')->name('products.index');
             Route::get('products/export', [\App\Http\Controllers\ProductController::class, 'export'])->middleware('permission:export-products')->name('products.export');
             Route::post('products/import', [\App\Http\Controllers\ProductController::class, 'import'])->middleware('permission:create-products')->name('products.import');
+            Route::post('products/import/start', [\App\Http\Controllers\ProductController::class, 'importStart'])->middleware('permission:create-products')->name('products.import.start');
+            Route::post('products/import/chunk', [\App\Http\Controllers\ProductController::class, 'importChunk'])->middleware('permission:create-products')->name('products.import.chunk');
             Route::post('products/bulk', [\App\Http\Controllers\ProductController::class, 'bulkAction'])->middleware('permission:edit-products')->name('products.bulk');
             Route::get('products/create', [\App\Http\Controllers\ProductController::class, 'create'])->middleware('permission:create-products')->name('products.create');
             Route::post('products', [\App\Http\Controllers\ProductController::class, 'store'])->middleware('permission:create-products')->name('products.store');

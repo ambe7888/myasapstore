@@ -429,34 +429,11 @@ class ProductController extends BaseController
     }
 
     /**
-     * Import products from CSV.
+     * Resolve WooCommerce/generic CSV headers (with French aliases) to
+     * column indexes. Returns null if the required Name column is missing.
      */
-    public function import(\Illuminate\Http\Request $request)
+    private function resolveImportColumns(array $header): ?array
     {
-        // Downloading images for every row can take a while on shared
-        // hosting's default 30s limit — give it more room where allowed.
-        if (function_exists('set_time_limit')) {
-            @set_time_limit(300);
-        }
-
-        $request->validate([
-            'file' => 'required|file|mimes:csv,txt|max:20480',
-        ]);
-
-        $user = Auth::user();
-        $currentStoreId = getCurrentStoreId($user);
-
-        $file = $request->file('file');
-        $handle = fopen($file->path(), 'r');
-
-        $header = fgetcsv($handle);
-        if (!$header) {
-            return redirect()->back()->with('error', __('Invalid CSV file.'));
-        }
-
-        // Map by header name (case-insensitive) so exports from other
-        // platforms — e.g. WooCommerce's Products > Export CSV — work
-        // without reordering columns first.
         $headerMap = [];
         foreach ($header as $i => $label) {
             $headerMap[strtolower($this->normalizeImportText($label))] = $i;
@@ -471,166 +448,274 @@ class ProductController extends BaseController
             return null;
         };
 
-        // Aliases include French labels since WooCommerce exports headers
-        // in the site's own language (a very common case for this app's
-        // market).
-        $idCol = $findColumn(['id']);
-        $nameCol = $findColumn(['name', 'product name', 'nom']);
-        $skuCol = $findColumn(['sku', 'ugs']);
-        $categoryCol = $findColumn(['categories', 'category', 'catégories', 'catégorie']);
-        $priceCol = $findColumn(['regular price', 'price', 'tarif régulier', 'tarif normal', 'prix']);
-        $salePriceCol = $findColumn(['sale price', 'tarif promo', 'prix promo']);
-        $stockCol = $findColumn(['stock', 'stock quantity', 'quantity']);
-        $statusCol = $findColumn(['published', 'status', 'publié']);
-        $descriptionCol = $findColumn(['description', 'short description', 'description courte']);
-        $imagesCol = $findColumn(['images', 'image']);
+        $cols = [
+            'id' => $findColumn(['id']),
+            'name' => $findColumn(['name', 'product name', 'nom']),
+            'sku' => $findColumn(['sku', 'ugs']),
+            'category' => $findColumn(['categories', 'category', 'catégories', 'catégorie']),
+            'price' => $findColumn(['regular price', 'price', 'tarif régulier', 'tarif normal', 'prix']),
+            'salePrice' => $findColumn(['sale price', 'tarif promo', 'prix promo']),
+            'stock' => $findColumn(['stock', 'stock quantity', 'quantity']),
+            'status' => $findColumn(['published', 'status', 'publié']),
+            'description' => $findColumn(['description', 'short description', 'description courte']),
+            'images' => $findColumn(['images', 'image']),
+        ];
 
-        if ($nameCol === null) {
+        return $cols['name'] === null ? null : $cols;
+    }
+
+    /**
+     * Process a single CSV row into a created/updated product. Returns true
+     * if a product was created or updated, false if the row was skipped
+     * (blank name, or a WooCommerce trashed/duplicate marker).
+     */
+    private function processImportRow(array $row, array $cols, int $currentStoreId): bool
+    {
+        $get = fn (?int $col) => $col !== null ? $this->normalizeImportText($row[$col] ?? '') : '';
+
+        $name = $get($cols['name']);
+        if (empty($name)) return false;
+
+        // WooCommerce marks trashed/duplicate items with -1 in the
+        // Published column — these shouldn't reappear in the new store.
+        $rawStatus = $cols['status'] !== null ? trim((string) ($row[$cols['status']] ?? '')) : '';
+        if ($rawStatus === '-1') return false;
+
+        $sku = $get($cols['sku']);
+        if (strtolower($sku) === 'not set') $sku = '';
+
+        // WooCommerce exports frequently reuse the same Name across many
+        // distinct listings (e.g. a brand name used for every pair of
+        // shoes) with no SKU at all. Falling back to matching by Name
+        // would silently merge every same-named row into one product —
+        // use the source row's own ID instead, when present, so each
+        // row always maps to its own product.
+        $hasReliableId = !empty($sku);
+        if (empty($sku)) {
+            $wooId = $get($cols['id']);
+            if ($wooId !== '') {
+                $sku = 'WC-' . $wooId;
+                $hasReliableId = true;
+            }
+        }
+
+        $categoryName = $get($cols['category']);
+        // WooCommerce separates multiple categories with a comma and
+        // hierarchy with " > " — keep just the leaf of the first one.
+        if (str_contains($categoryName, ',')) {
+            $categoryName = trim(explode(',', $categoryName)[0]);
+        }
+        if (str_contains($categoryName, '>')) {
+            $parts = explode('>', $categoryName);
+            $categoryName = trim(end($parts));
+        }
+
+        $priceStr = $get($cols['price']) ?: '0';
+        $salePriceStr = $get($cols['salePrice']);
+        $stockStr = $get($cols['stock']) ?: '0';
+        $statusStr = $get($cols['status']) ?: 'active';
+        $description = $get($cols['description']);
+        $imagesRaw = $get($cols['images']);
+
+        // Clean numbers (extract float from string like "$1,234.56" -> 1234.56)
+        $price = (float) filter_var($priceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $salePrice = in_array(strtolower($salePriceStr), ['', 'not set'], true)
+                        ? null
+                        : (float) filter_var($salePriceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $stock = (int) filter_var($stockStr, FILTER_SANITIZE_NUMBER_INT);
+
+        $status = in_array(strtolower($statusStr), ['0', 'no', 'false', 'inactive', 'draft', 'private'], true) ? 0 : 1;
+
+        $categoryId = null;
+        if (!empty($categoryName) && strtolower($categoryName) !== 'uncategorized') {
+            $category = Category::firstOrCreate(
+                ['store_id' => $currentStoreId, 'name' => $categoryName],
+                ['slug' => Category::generateUniqueSlug($categoryName, $currentStoreId), 'is_active' => true]
+            );
+            $categoryId = $category->id;
+        }
+
+        // Download each image so it's hosted on this server, independent
+        // of the source site — stored the same way as a normal upload
+        // (comma-separated URLs, same convention the picker uses).
+        $coverImage = null;
+        $images = null;
+        if (!empty($imagesRaw)) {
+            $sourceUrls = array_values(array_filter(
+                array_map('trim', explode(',', $imagesRaw)),
+                fn ($url) => filter_var($url, FILTER_VALIDATE_URL)
+            ));
+            $importedUrls = [];
+            foreach ($sourceUrls as $sourceUrl) {
+                $importedUrl = $this->importImageFromUrl($sourceUrl);
+                if ($importedUrl) {
+                    $importedUrls[] = $importedUrl;
+                }
+            }
+            if (!empty($importedUrls)) {
+                $coverImage = $importedUrls[0];
+                if (count($importedUrls) > 1) {
+                    $images = implode(',', array_slice($importedUrls, 1));
+                }
+            }
+        }
+
+        // Find existing product: by SKU when we have a reliable one (real
+        // SKU or the row's own WooCommerce ID). Only fall back to
+        // matching by Name when the row has no reliable identifier at
+        // all — otherwise same-named rows (common in WooCommerce
+        // exports) would collapse into a single product.
+        $product = null;
+        if (!empty($sku)) {
+            $product = Product::where('store_id', $currentStoreId)
+                ->where('sku', $sku)
+                ->first();
+        }
+
+        if (!$product && !$hasReliableId) {
+            $product = Product::where('store_id', $currentStoreId)
+                ->where('name', trim($name))
+                ->first();
+        }
+
+        // If we still don't have an SKU, generate one now
+        if (empty($sku)) {
+            $sku = strtoupper(\Illuminate\Support\Str::random(8));
+        }
+
+        $fields = [
+            'name' => $name,
+            'category_id' => $categoryId,
+            'price' => $price,
+            'sale_price' => $salePrice,
+            'stock' => $stock,
+            'is_active' => $status,
+        ];
+        if ($description !== '') $fields['description'] = $description;
+        if ($coverImage !== null) $fields['cover_image'] = $coverImage;
+        if ($images !== null) $fields['images'] = $images;
+
+        if ($product) {
+            $product->update($fields);
+        } else {
+            $fields['store_id'] = $currentStoreId;
+            $fields['sku'] = $sku;
+            $fields['slug'] = \Illuminate\Support\Str::slug($name) . '-' . \Illuminate\Support\Str::random(4);
+            Product::create($fields);
+        }
+
+        return true;
+    }
+
+    /**
+     * Path (relative to the local disk) where a given import's temp CSV is
+     * stored. Prefixed with the uploading user's id so importChunk() can
+     * refuse to process a file it doesn't own.
+     */
+    private function importFilePath(int $userId, string $importId): string
+    {
+        return 'imports/' . $userId . '_' . $importId . '.csv';
+    }
+
+    /**
+     * Step 1 of the chunked import: store the uploaded CSV and report how
+     * many data rows it has, without processing any of them yet. Splitting
+     * this from the actual row processing (which can download dozens of
+     * images) avoids the request timing out on shared hosting, where the
+     * web server enforces its own connection timeout Laravel can't extend.
+     */
+    public function importStart(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:csv,txt|max:20480',
+        ]);
+
+        $user = Auth::user();
+        $file = $request->file('file');
+
+        $handle = fopen($file->path(), 'r');
+        $header = fgetcsv($handle);
+        if (!$header || $this->resolveImportColumns($header) === null) {
             fclose($handle);
-            return redirect()->back()->with('error', __('The CSV must have a "Name" column.'));
+            return response()->json(['message' => __('The CSV must have a "Name" column.')], 422);
         }
 
-        $successCount = 0;
-
+        $total = 0;
         while (($row = fgetcsv($handle)) !== false) {
-            $get = fn (?int $col) => $col !== null ? $this->normalizeImportText($row[$col] ?? '') : '';
-
-            $name = $get($nameCol);
-            if (empty($name)) continue;
-
-            // WooCommerce marks trashed/duplicate items with -1 in the
-            // Published column — these shouldn't reappear in the new store.
-            $rawStatus = $statusCol !== null ? trim((string) ($row[$statusCol] ?? '')) : '';
-            if ($rawStatus === '-1') continue;
-
-            $sku = $get($skuCol);
-            if (strtolower($sku) === 'not set') $sku = '';
-
-            // WooCommerce exports frequently reuse the same Name across many
-            // distinct listings (e.g. a brand name used for every pair of
-            // shoes) with no SKU at all. Falling back to matching by Name
-            // would silently merge every same-named row into one product —
-            // use the source row's own ID instead, when present, so each
-            // row always maps to its own product.
-            $hasReliableId = !empty($sku);
-            if (empty($sku)) {
-                $wooId = $get($idCol);
-                if ($wooId !== '') {
-                    $sku = 'WC-' . $wooId;
-                    $hasReliableId = true;
-                }
-            }
-
-            $categoryName = $get($categoryCol);
-            // WooCommerce separates multiple categories with a comma and
-            // hierarchy with " > " — keep just the leaf of the first one.
-            if (str_contains($categoryName, ',')) {
-                $categoryName = trim(explode(',', $categoryName)[0]);
-            }
-            if (str_contains($categoryName, '>')) {
-                $parts = explode('>', $categoryName);
-                $categoryName = trim(end($parts));
-            }
-
-            $priceStr = $get($priceCol) ?: '0';
-            $salePriceStr = $get($salePriceCol);
-            $stockStr = $get($stockCol) ?: '0';
-            $statusStr = $get($statusCol) ?: 'active';
-            $description = $get($descriptionCol);
-            $imagesRaw = $get($imagesCol);
-
-            // Clean numbers (extract float from string like "$1,234.56" -> 1234.56)
-            $price = (float) filter_var($priceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $salePrice = in_array(strtolower($salePriceStr), ['', 'not set'], true)
-                            ? null
-                            : (float) filter_var($salePriceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $stock = (int) filter_var($stockStr, FILTER_SANITIZE_NUMBER_INT);
-
-            $status = in_array(strtolower($statusStr), ['0', 'no', 'false', 'inactive', 'draft', 'private'], true) ? 0 : 1;
-
-            $categoryId = null;
-            if (!empty($categoryName) && strtolower($categoryName) !== 'uncategorized') {
-                $category = Category::firstOrCreate(
-                    ['store_id' => $currentStoreId, 'name' => $categoryName],
-                    ['slug' => Category::generateUniqueSlug($categoryName, $currentStoreId), 'is_active' => true]
-                );
-                $categoryId = $category->id;
-            }
-
-            // Download each image so it's hosted on this server, independent
-            // of the source site — stored the same way as a normal upload
-            // (comma-separated URLs, same convention the picker uses).
-            $coverImage = null;
-            $images = null;
-            if (!empty($imagesRaw)) {
-                $sourceUrls = array_values(array_filter(
-                    array_map('trim', explode(',', $imagesRaw)),
-                    fn ($url) => filter_var($url, FILTER_VALIDATE_URL)
-                ));
-                $importedUrls = [];
-                foreach ($sourceUrls as $sourceUrl) {
-                    $importedUrl = $this->importImageFromUrl($sourceUrl);
-                    if ($importedUrl) {
-                        $importedUrls[] = $importedUrl;
-                    }
-                }
-                if (!empty($importedUrls)) {
-                    $coverImage = $importedUrls[0];
-                    if (count($importedUrls) > 1) {
-                        $images = implode(',', array_slice($importedUrls, 1));
-                    }
-                }
-            }
-
-            // Find existing product: by SKU when we have a reliable one (real
-            // SKU or the row's own WooCommerce ID). Only fall back to
-            // matching by Name when the row has no reliable identifier at
-            // all — otherwise same-named rows (common in WooCommerce
-            // exports) would collapse into a single product.
-            $product = null;
-            if (!empty($sku)) {
-                $product = Product::where('store_id', $currentStoreId)
-                    ->where('sku', $sku)
-                    ->first();
-            }
-
-            if (!$product && !$hasReliableId) {
-                $product = Product::where('store_id', $currentStoreId)
-                    ->where('name', trim($name))
-                    ->first();
-            }
-
-            // If we still don't have an SKU, generate one now
-            if (empty($sku)) {
-                $sku = strtoupper(\Illuminate\Support\Str::random(8));
-            }
-
-            $fields = [
-                'name' => $name,
-                'category_id' => $categoryId,
-                'price' => $price,
-                'sale_price' => $salePrice,
-                'stock' => $stock,
-                'is_active' => $status,
-            ];
-            if ($description !== '') $fields['description'] = $description;
-            if ($coverImage !== null) $fields['cover_image'] = $coverImage;
-            if ($images !== null) $fields['images'] = $images;
-
-            if ($product) {
-                $product->update($fields);
-            } else {
-                $fields['store_id'] = $currentStoreId;
-                $fields['sku'] = $sku;
-                $fields['slug'] = \Illuminate\Support\Str::slug($name) . '-' . \Illuminate\Support\Str::random(4);
-                Product::create($fields);
-            }
-            $successCount++;
+            $total++;
         }
-
         fclose($handle);
 
-        return redirect()->back()->with('success', __(':count products imported successfully.', ['count' => $successCount]));
+        $importId = (string) \Illuminate\Support\Str::uuid();
+        \Illuminate\Support\Facades\Storage::disk('local')
+            ->putFileAs('imports', $file, $user->id . '_' . $importId . '.csv');
+
+        return response()->json([
+            'import_id' => $importId,
+            'total' => $total,
+        ]);
+    }
+
+    /**
+     * Step 2 of the chunked import: process a small batch of rows from the
+     * previously stored CSV and report progress. Called repeatedly by the
+     * frontend until done — each call stays well within any request
+     * timeout since it only downloads images for a handful of rows.
+     */
+    public function importChunk(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'import_id' => 'required|string',
+            'offset' => 'required|integer|min:0',
+            'limit' => 'nullable|integer|min:1|max:20',
+        ]);
+
+        $user = Auth::user();
+        $currentStoreId = getCurrentStoreId($user);
+        $limit = (int) ($request->input('limit') ?: 5);
+        $path = $this->importFilePath($user->id, $request->input('import_id'));
+        $disk = \Illuminate\Support\Facades\Storage::disk('local');
+
+        if (!$disk->exists($path)) {
+            return response()->json(['message' => __('Import session not found or expired.')], 404);
+        }
+
+        $handle = fopen($disk->path($path), 'r');
+        $header = fgetcsv($handle);
+        $cols = $header ? $this->resolveImportColumns($header) : null;
+
+        if ($cols === null) {
+            fclose($handle);
+            $disk->delete($path);
+            return response()->json(['message' => __('Invalid CSV file.')], 422);
+        }
+
+        $offset = (int) $request->input('offset');
+        for ($i = 0; $i < $offset; $i++) {
+            if (fgetcsv($handle) === false) break;
+        }
+
+        $rowsRead = 0;
+        $successCount = 0;
+        while ($rowsRead < $limit && ($row = fgetcsv($handle)) !== false) {
+            $rowsRead++;
+            if ($this->processImportRow($row, $cols, $currentStoreId)) {
+                $successCount++;
+            }
+        }
+
+        $done = $rowsRead < $limit;
+        fclose($handle);
+
+        if ($done) {
+            $disk->delete($path);
+        }
+
+        return response()->json([
+            'rows_read' => $rowsRead,
+            'success_count' => $successCount,
+            'done' => $done,
+        ]);
     }
     
     /**

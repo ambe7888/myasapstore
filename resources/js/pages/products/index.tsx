@@ -7,13 +7,17 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
-import { router, usePage, useForm } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
+import axios from 'axios';
 import { getImageUrl } from '@/utils/image-helper';
 import { Permission } from '@/components/Permission';
 import { usePermissions } from '@/hooks/usePermissions';
 import { formatCurrency } from '@/utils/helpers';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Pagination } from '@/components/pagination';
+import { toast } from '@/components/custom-toast';
+
+const IMPORT_CHUNK_SIZE = 5;
 
 export default function Products() {
   const { t } = useTranslation();
@@ -22,6 +26,9 @@ export default function Products() {
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isBulkDeleteModalOpen, setIsBulkDeleteModalOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importProgress, setImportProgress] = useState<{ processed: number; total: number } | null>(null);
 
   const { hasPermission } = usePermissions();
 
@@ -34,18 +41,51 @@ export default function Products() {
     router.get(route('products.index'), { category_id: filters?.category_id, per_page: perPage }, { preserveState: true, replace: true });
   };
 
-  const { data, setData, post, processing, errors, reset } = useForm({
-    file: null as File | null,
-  });
+  const resetImportState = () => {
+    setImportFile(null);
+    setImportError(null);
+    setImportProgress(null);
+  };
 
-  const handleImport = (e: React.FormEvent) => {
+  const handleImport = async (e: React.FormEvent) => {
     e.preventDefault();
-    post(route('products.import'), {
-      onSuccess: () => {
-        setIsImportModalOpen(false);
-        reset();
-      },
-    });
+    if (!importFile) return;
+
+    setImportError(null);
+
+    const formData = new FormData();
+    formData.append('file', importFile);
+
+    try {
+      const startResponse = await axios.post(route('products.import.start'), formData);
+      const { import_id: importId, total } = startResponse.data;
+
+      let processed = 0;
+      let successCount = 0;
+      setImportProgress({ processed: 0, total });
+
+      let done = total === 0;
+      while (!done) {
+        const chunkResponse = await axios.post(route('products.import.chunk'), {
+          import_id: importId,
+          offset: processed,
+          limit: IMPORT_CHUNK_SIZE,
+        });
+        const { rows_read: rowsRead, success_count: chunkSuccess, done: chunkDone } = chunkResponse.data;
+        processed += rowsRead;
+        successCount += chunkSuccess;
+        done = chunkDone;
+        setImportProgress({ processed, total });
+      }
+
+      toast.success(t('{{count}} produits importés avec succès.', { count: successCount }));
+      setIsImportModalOpen(false);
+      resetImportState();
+      router.reload();
+    } catch (error: any) {
+      setImportError(error?.response?.data?.message || t('Failed to import products.'));
+      setImportProgress(null);
+    }
   };
   
   const handleDelete = () => {
@@ -415,8 +455,9 @@ export default function Products() {
       
       {/* Import Modal */}
       <Dialog open={isImportModalOpen} onOpenChange={(open) => {
+        if (importProgress && !open) return; // don't allow closing mid-import
         setIsImportModalOpen(open);
-        if (!open) reset();
+        if (!open) resetImportState();
       }}>
         <DialogContent>
           <form onSubmit={handleImport}>
@@ -427,30 +468,55 @@ export default function Products() {
               </DialogDescription>
             </DialogHeader>
             <div className="py-4">
-              <input 
-                type="file" 
-                accept=".csv,.txt"
-                onChange={(e) => setData('file', e.target.files ? e.target.files[0] : null)}
-                className="w-full text-sm text-slate-500
-                  file:mr-4 file:py-2 file:px-4
-                  file:rounded-full file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-violet-50 file:text-violet-700
-                  hover:file:bg-violet-100"
-              />
-              {errors.file && <div className="text-sm text-red-500 mt-2">{errors.file}</div>}
-              
-              <div className="mt-4 p-4 bg-muted rounded-md text-xs">
-                <p className="font-semibold mb-2">{t('Expected CSV Format:')}</p>
-                <p className="mb-1 text-muted-foreground">Product Name, SKU, Category, Price, Sale Price, Stock, Variants, Status</p>
-                <p className="text-muted-foreground">{t('Note: First row is assumed to be headers and will be skipped.')}</p>
-              </div>
+              {importProgress ? (
+                <div className="space-y-2">
+                  <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-emerald-600 transition-all duration-300"
+                      style={{
+                        width: importProgress.total > 0
+                          ? `${Math.min(100, Math.round((importProgress.processed / importProgress.total) * 100))}%`
+                          : '100%',
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground text-center">
+                    {t('Importation en cours : {{processed}} / {{total}}', importProgress)}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="file"
+                    accept=".csv,.txt"
+                    onChange={(e) => setImportFile(e.target.files ? e.target.files[0] : null)}
+                    className="w-full text-sm text-slate-500
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-full file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-violet-50 file:text-violet-700
+                      hover:file:bg-violet-100"
+                  />
+                  {importError && <div className="text-sm text-red-500 mt-2">{importError}</div>}
+
+                  <div className="mt-4 p-4 bg-muted rounded-md text-xs">
+                    <p className="font-semibold mb-2">{t('Expected CSV Format:')}</p>
+                    <p className="mb-1 text-muted-foreground">Product Name, SKU, Category, Price, Sale Price, Stock, Variants, Status</p>
+                    <p className="text-muted-foreground">{t('Note: First row is assumed to be headers and will be skipped.')}</p>
+                  </div>
+                </>
+              )}
             </div>
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => { setIsImportModalOpen(false); reset(); }}>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={!!importProgress}
+                onClick={() => { setIsImportModalOpen(false); resetImportState(); }}
+              >
                 {t('Cancel')}
               </Button>
-              <Button type="submit" disabled={!data.file || processing}>
+              <Button type="submit" disabled={!importFile || !!importProgress}>
                 {t('Import')}
               </Button>
             </DialogFooter>

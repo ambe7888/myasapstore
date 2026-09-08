@@ -474,6 +474,7 @@ class ProductController extends BaseController
         // Aliases include French labels since WooCommerce exports headers
         // in the site's own language (a very common case for this app's
         // market).
+        $idCol = $findColumn(['id']);
         $nameCol = $findColumn(['name', 'product name', 'nom']);
         $skuCol = $findColumn(['sku', 'ugs']);
         $categoryCol = $findColumn(['categories', 'category', 'catégories', 'catégorie']);
@@ -504,6 +505,19 @@ class ProductController extends BaseController
 
             $sku = $get($skuCol);
             if (strtolower($sku) === 'not set') $sku = '';
+
+            // WooCommerce exports frequently reuse the same Name across many
+            // distinct listings (e.g. a brand name used for every pair of
+            // shoes) with no SKU at all. Falling back to matching by Name
+            // would silently merge every same-named row into one product —
+            // use the source row's own ID instead, when present, so each
+            // row always maps to its own product.
+            if (empty($sku)) {
+                $wooId = $get($idCol);
+                if ($wooId !== '') {
+                    $sku = 'WC-' . $wooId;
+                }
+            }
 
             $categoryName = $get($categoryCol);
             // WooCommerce separates multiple categories with a comma and

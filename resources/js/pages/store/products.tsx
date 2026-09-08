@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -169,6 +169,18 @@ export default function ProductListing({
     });
   };
 
+  // Auto-apply category/availability filters immediately on change, since
+  // requiring an extra "Apply Filters" click after checking a box reads as
+  // the filter simply not working.
+  const isFirstFilterRender = useRef(true);
+  useEffect(() => {
+    if (isFirstFilterRender.current) {
+      isFirstFilterRender.current = false;
+      return;
+    }
+    applyFilters();
+  }, [selectedCategories, availability]);
+
   // Pagination
   const goToPage = (page: number) => {
     const currentParams = new URLSearchParams(window.location.search);
@@ -225,9 +237,9 @@ export default function ProductListing({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">All Products</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("All Products")}</h1>
               <p className="text-white/80">
-                Discover our complete collection of quality products designed to transform your living space
+                {t("Discover our complete collection of quality products designed to transform your living space")}
               </p>
             </div>
           </div>
@@ -428,7 +440,7 @@ export default function ProductListing({
                       className="lg:hidden flex items-center px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
                     >
                       <Filter className="h-4 w-4 mr-2" />
-                      Filters
+                      {t("Filters")}
                     </button>
                     
                     <div className="flex items-center gap-2">

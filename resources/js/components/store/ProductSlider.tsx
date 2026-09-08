@@ -34,7 +34,7 @@ export default function ProductSlider({
   subtitle,
   products = [],
   viewAllLink = '/shop',
-  viewAllText = 'View All',
+  viewAllText = 'Voir tout',
   storeSettings = {},
   currencies = []
 }: ProductSliderProps) {

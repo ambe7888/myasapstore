@@ -38,7 +38,7 @@ export default function TrendingProductsSection({
       subtitle={content?.description || subtitle}
       products={trendingProducts}
       viewAllLink={generateStoreUrl('store.products', store)}
-      viewAllText="View All Products"
+      viewAllText="Voir tous les produits"
       storeSettings={storeSettings}
       currencies={currencies}
     />

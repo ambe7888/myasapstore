@@ -338,7 +338,7 @@ function WatchesProductDetail({
                           <div className="bg-amber-50 border border-amber-200 p-3">
                             <div className="flex items-center text-amber-800">
                               <Info className="h-4 w-4 mr-2" />
-                              <span className="text-sm font-medium">Please select all options to continue</span>
+                              <span className="text-sm font-medium">Veuillez sélectionner toutes les options to continue</span>
                             </div>
                           </div>
                         )}
@@ -667,7 +667,7 @@ function WatchesProductDetail({
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
                       if (reviewRating === 0) {
-                        toast.error('Please select a rating');
+                        toast.error('Veuillez sélectionner une note');
                         return;
                       }
 
@@ -690,7 +690,7 @@ function WatchesProductDetail({
                         const data = await response.json();
                         
                         if (data.success) {
-                          toast.success('Thank you for your review!', {
+                          toast.success('Merci pour votre avis !', {
                             description: 'Your review has been submitted successfully.'
                           });
                           
@@ -718,11 +718,11 @@ function WatchesProductDetail({
                           setReviewContent('');
                           setShowReviewModal(false);
                         } else {
-                          toast.error(data.message || 'Failed to submit review');
+                          toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
                         console.error('Error submitting review:', error);
-                        toast.error('Failed to submit review. Please try again.');
+                        toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
@@ -764,7 +764,7 @@ function WatchesProductDetail({
                           id="review-content"
                           rows={4}
                           className="w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white"
-                          placeholder="Write your review here"
+                          placeholder="Écrivez votre avis ici"
                           value={reviewContent}
                           onChange={(e) => setReviewContent(e.target.value)}
                           required

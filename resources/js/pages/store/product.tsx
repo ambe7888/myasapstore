@@ -819,7 +819,7 @@ export default function ProductDetail({
               subtitle="You might also like these products"
               products={relatedProducts}
               viewAllLink={generateStoreUrl('store.products', store)}
-              viewAllText="View All Products"
+              viewAllText="Voir tous les produits"
               storeSettings={storeSettings}
               currencies={currencies}
             />
@@ -846,7 +846,7 @@ export default function ProductDetail({
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
                       if (reviewRating === 0) {
-                        toast.error('Please select a rating');
+                        toast.error('Veuillez sélectionner une note');
                         return;
                       }
 
@@ -871,7 +871,7 @@ export default function ProductDetail({
                         const data = await response.json();
                         
                         if (data.success) {
-                          toast.success('Thank you for your review! Your review has been submitted successfully.');
+                          toast.success('Merci pour votre avis ! Votre avis a été envoyé avec succès.');
                           
                           // Add new review to state
                           const newReview = {
@@ -898,11 +898,11 @@ export default function ProductDetail({
                           setReviewContent('');
                           setShowReviewModal(false);
                         } else {
-                          toast.error(data.message || 'Failed to submit review');
+                          toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
                         console.error('Error submitting review:', error);
-                        toast.error('Failed to submit review. Please try again.');
+                        toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
@@ -947,7 +947,7 @@ export default function ProductDetail({
                           id="review-content"
                           rows={4}
                           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                          placeholder="Write your review here"
+                          placeholder="Écrivez votre avis ici"
                           value={reviewContent}
                           onChange={(e) => setReviewContent(e.target.value)}
                           required

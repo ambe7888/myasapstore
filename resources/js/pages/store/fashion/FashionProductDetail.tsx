@@ -581,7 +581,7 @@ function FashionProductDetail({
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
                       if (reviewRating === 0) {
-                        toast.error('Please select a rating');
+                        toast.error('Veuillez sélectionner une note');
                         return;
                       }
 
@@ -604,7 +604,7 @@ function FashionProductDetail({
                         const data = await response.json();
                         
                         if (data.success) {
-                          toast.success('Thank you for your review! Your review has been submitted successfully.');
+                          toast.success('Merci pour votre avis ! Votre avis a été envoyé avec succès.');
                           
                           // Add new review to state
                           const newReview = {
@@ -631,11 +631,11 @@ function FashionProductDetail({
                           setReviewContent('');
                           setShowReviewModal(false);
                         } else {
-                          toast.error(data.message || 'Failed to submit review');
+                          toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
                         console.error('Error submitting review:', error);
-                        toast.error('Failed to submit review. Please try again.');
+                        toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
@@ -677,7 +677,7 @@ function FashionProductDetail({
                           id="review-content"
                           rows={4}
                           className="w-full px-0 py-3 border-0 border-b border-gray-300 bg-transparent focus:outline-none focus:border-black font-light leading-relaxed resize-none transition-colors"
-                          placeholder="Write your review here"
+                          placeholder="Écrivez votre avis ici"
                           value={reviewContent}
                           onChange={(e) => setReviewContent(e.target.value)}
                           required

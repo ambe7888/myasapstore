@@ -740,7 +740,7 @@ function CarsProductDetailInner({
                       <form className="space-y-4" onSubmit={async (e) => {
                         e.preventDefault();
                         if (reviewRating === 0) {
-                          toast.error('Please select a rating');
+                          toast.error('Veuillez sélectionner une note');
                           return;
                         }
 
@@ -763,7 +763,7 @@ function CarsProductDetailInner({
                           const data = await response.json();
                           
                           if (data.success) {
-                            toast.success('Thank you for your review!', {
+                            toast.success('Merci pour votre avis !', {
                               description: 'Your review has been submitted successfully.'
                             });
                             
@@ -791,11 +791,11 @@ function CarsProductDetailInner({
                             setReviewContent('');
                             setShowReviewModal(false);
                           } else {
-                            toast.error(data.message || 'Failed to submit review');
+                            toast.error(data.message || "Échec de l'envoi de l'avis");
                           }
                         } catch (error) {
                           console.error('Error submitting review:', error);
-                          toast.error('Failed to submit review. Please try again.');
+                          toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                         } finally {
                           setIsSubmittingReview(false);
                         }
@@ -837,7 +837,7 @@ function CarsProductDetailInner({
                             id="review-content"
                             rows={4}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white"
-                            placeholder="Write your review here"
+                            placeholder="Écrivez votre avis ici"
                             value={reviewContent}
                             onChange={(e) => setReviewContent(e.target.value)}
                             required

@@ -34,7 +34,7 @@ export default function ProductGrid({
   columns = 4,
   showViewAll = false,
   viewAllLink = '/shop',
-  viewAllText = 'View All Products',
+  viewAllText = 'Voir tous les produits',
   className = ''
 }: ProductGridProps) {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);

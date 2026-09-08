@@ -92,7 +92,7 @@ export default function CarsTrendingProductsSection({
               href={generateStoreUrl('store.products', store)}
               className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors"
             >
-              View All Trending
+              Voir toutes les tendances
               <ChevronRight className="h-5 w-5 ml-2" />
             </a>
           </div>

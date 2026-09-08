@@ -682,7 +682,7 @@ function PerfumeProductDetailContent({
                       <form className="space-y-4" onSubmit={async (e) => {
                         e.preventDefault();
                         if (reviewRating === 0) {
-                          toast.error('Please select a rating');
+                          toast.error('Veuillez sélectionner une note');
                           return;
                         }
                         setIsSubmittingReview(true);
@@ -702,7 +702,7 @@ function PerfumeProductDetailContent({
                           });
                           const data = await response.json();
                           if (data.success) {
-                            toast.success('Thank you for your review!');
+                            toast.success('Merci pour votre avis !');
                             const newReview = {
                               id: Date.now(),
                               rating: reviewRating,
@@ -725,10 +725,10 @@ function PerfumeProductDetailContent({
                             setReviewContent('');
                             setShowReviewModal(false);
                           } else {
-                            toast.error(data.message || 'Failed to submit review');
+                            toast.error(data.message || "Échec de l'envoi de l'avis");
                           }
                         } catch (error) {
-                          toast.error('Failed to submit review. Please try again.');
+                          toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                         } finally {
                           setIsSubmittingReview(false);
                         }
@@ -749,7 +749,7 @@ function PerfumeProductDetailContent({
                         </div>
                         <div>
                           <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
-                          <textarea id="review-content" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" placeholder="Write your review here" value={reviewContent} onChange={(e) => setReviewContent(e.target.value)} required></textarea>
+                          <textarea id="review-content" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" placeholder="Écrivez votre avis ici" value={reviewContent} onChange={(e) => setReviewContent(e.target.value)} required></textarea>
                         </div>
                         <div className="mt-8 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
                           <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-purple-800 text-base font-bold text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">

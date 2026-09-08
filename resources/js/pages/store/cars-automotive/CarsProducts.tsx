@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -162,6 +162,18 @@ export default function CarsProducts({
       preserveScroll: true
     });
   };
+
+  // Auto-apply category/availability filters immediately on change, since
+  // requiring an extra "Apply Filters" click after checking a box reads as
+  // the filter simply not working.
+  const isFirstFilterRender = useRef(true);
+  useEffect(() => {
+    if (isFirstFilterRender.current) {
+      isFirstFilterRender.current = false;
+      return;
+    }
+    applyFilters();
+  }, [selectedCategories, availability]);
 
   const goToPage = (page: number) => {
     const currentParams = new URLSearchParams(window.location.search);

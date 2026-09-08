@@ -512,10 +512,12 @@ class ProductController extends BaseController
             // would silently merge every same-named row into one product —
             // use the source row's own ID instead, when present, so each
             // row always maps to its own product.
+            $hasReliableId = !empty($sku);
             if (empty($sku)) {
                 $wooId = $get($idCol);
                 if ($wooId !== '') {
                     $sku = 'WC-' . $wooId;
+                    $hasReliableId = true;
                 }
             }
 
@@ -580,7 +582,11 @@ class ProductController extends BaseController
                 }
             }
 
-            // Find existing product: first by SKU (if provided), then by Name
+            // Find existing product: by SKU when we have a reliable one (real
+            // SKU or the row's own WooCommerce ID). Only fall back to
+            // matching by Name when the row has no reliable identifier at
+            // all — otherwise same-named rows (common in WooCommerce
+            // exports) would collapse into a single product.
             $product = null;
             if (!empty($sku)) {
                 $product = Product::where('store_id', $currentStoreId)
@@ -588,7 +594,7 @@ class ProductController extends BaseController
                     ->first();
             }
 
-            if (!$product) {
+            if (!$product && !$hasReliableId) {
                 $product = Product::where('store_id', $currentStoreId)
                     ->where('name', trim($name))
                     ->first();

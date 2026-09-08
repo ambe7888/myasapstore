@@ -790,9 +790,9 @@ export default function Checkout({
                 {currentStep === 'shipping' && (
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="p-6 border-b border-gray-200">
-                      <h2 className="text-lg font-medium text-gray-900">Shipping Information</h2>
+                      <h2 className="text-lg font-medium text-gray-900">Informations de livraison</h2>
                       <p className="mt-1 text-sm text-gray-500">
-                        Enter your shipping details and choose a shipping method.
+                        Entrez vos informations de livraison et choisissez un mode de livraison.
                       </p>
                     </div>
                     
@@ -1073,7 +1073,7 @@ export default function Checkout({
                           rows={3}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Special instructions for delivery or any other notes"
+                          placeholder="Instructions spéciales pour la livraison ou autres remarques"
                           className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                         />
                       </div>
@@ -1095,9 +1095,9 @@ export default function Checkout({
                 {currentStep === 'payment' && (
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="p-6 border-b border-gray-200">
-                      <h2 className="text-lg font-medium text-gray-900">Payment Information</h2>
+                      <h2 className="text-lg font-medium text-gray-900">Informations de paiement</h2>
                       <p className="mt-1 text-sm text-gray-500">
-                        Choose your payment method and enter your billing details.
+                        Choisissez votre moyen de paiement et entrez vos informations de facturation.
                       </p>
                     </div>
                     
@@ -1303,8 +1303,8 @@ export default function Checkout({
                                 />
                               </div>
                               <label htmlFor="payment-cod" className="ml-3 flex flex-col cursor-pointer">
-                                <span className="block text-sm font-medium text-gray-900">{t('Paiement à la livraison')}</span>
-                                <span className="block text-sm text-gray-500">{t('Payez au moment de la livraison de votre commande')}</span>
+                                <span className="block text-sm font-medium text-gray-900">{'Paiement à la livraison'}</span>
+                                <span className="block text-sm text-gray-500">{'Payez au moment de la livraison de votre commande'}</span>
                               </label>
                             </div>
                           )}
@@ -1323,8 +1323,8 @@ export default function Checkout({
                                 />
                               </div>
                               <label htmlFor="payment-whatsapp" className="ml-3 flex flex-col cursor-pointer">
-                                <span className="block text-sm font-medium text-gray-900">{t('Commande par WhatsApp')}</span>
-                                <span className="block text-sm text-gray-500">{t('Finalisez votre commande directement sur WhatsApp')}</span>
+                                <span className="block text-sm font-medium text-gray-900">{'Commande par WhatsApp'}</span>
+                                <span className="block text-sm text-gray-500">{'Finalisez votre commande directement sur WhatsApp'}</span>
                               </label>
                             </div>
                           )}
@@ -1344,7 +1344,7 @@ export default function Checkout({
                               </div>
                               <label htmlFor="payment-telegram" className="ml-3 flex flex-col cursor-pointer">
                                 <span className="block text-sm font-medium text-gray-900">Telegram</span>
-                                <span className="block text-sm text-gray-500">Complete payment via Telegram</span>
+                                <span className="block text-sm text-gray-500">Paiement complet via Telegram</span>
                               </label>
                             </div>
                           )}
@@ -1408,7 +1408,7 @@ export default function Checkout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                                    <h4 className="text-sm font-medium text-blue-900 mb-2">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-medium text-blue-900 mb-2">Détails du virement bancaire</h4>
                                     <div className="text-sm text-blue-800 whitespace-pre-line">
                                       {config.details}
                                     </div>
@@ -1468,7 +1468,7 @@ export default function Checkout({
                           onClick={() => setCurrentStep('review')}
                           className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
-                          Back to Review
+                          Retour à la vérification
                         </button>
                         <button
                           type="button"
@@ -1488,7 +1488,7 @@ export default function Checkout({
                 {currentStep === 'review' && (
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="p-6 border-b border-gray-200">
-                      <h2 className="text-lg font-medium text-gray-900">Review Your Order</h2>
+                      <h2 className="text-lg font-medium text-gray-900">Vérifiez votre commande</h2>
                       <p className="mt-1 text-sm text-gray-500">
                         Please review your order details before placing your order.
                       </p>
@@ -1497,7 +1497,7 @@ export default function Checkout({
                     <div className="p-6">
                       {/* Order Items */}
                       <div className="mb-8">
-                        <h3 className="text-base font-medium text-gray-900 mb-4">Order Items</h3>
+                        <h3 className="text-base font-medium text-gray-900 mb-4">Articles de la commande</h3>
                         
                         <div className="overflow-hidden border border-gray-200 rounded-md">
                           <table className="min-w-full divide-y divide-gray-200">
@@ -1554,7 +1554,7 @@ export default function Checkout({
                       
                       {/* Shipping Information */}
                       <div className="mb-8">
-                        <h3 className="text-base font-medium text-gray-900 mb-4">Shipping Information</h3>
+                        <h3 className="text-base font-medium text-gray-900 mb-4">Informations de livraison</h3>
                         
                         <div className="bg-gray-50 rounded-md p-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1582,16 +1582,16 @@ export default function Checkout({
                       
                       {/* Payment Information */}
                       <div className="mb-8">
-                        <h3 className="text-base font-medium text-gray-900 mb-4">Payment Information</h3>
+                        <h3 className="text-base font-medium text-gray-900 mb-4">Informations de paiement</h3>
                         
                         <div className="bg-gray-50 rounded-md p-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm font-medium text-gray-500">{t("Moyen de paiement")}</p>
+                              <p className="text-sm font-medium text-gray-500">{"Moyen de paiement"}</p>
                               <p className="text-sm text-gray-900 mt-1">
-                                {paymentMethod === 'cod' && t('Paiement à la livraison')}
-                                {paymentMethod === 'whatsapp' && `${t('Paiement par WhatsApp')} (${whatsappNumber})`}
-                                {paymentMethod === 'telegram' && t('Paiement par Telegram')}
+                                {paymentMethod === 'cod' && 'Paiement à la livraison'}
+                                {paymentMethod === 'whatsapp' && `${'Paiement par WhatsApp'} (${whatsappNumber})`}
+                                {paymentMethod === 'telegram' && 'Paiement par Telegram'}
                               </p>
                             </div>
                             <div>
@@ -1635,14 +1635,14 @@ export default function Checkout({
                           onClick={() => setCurrentStep('shipping')}
                           className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
-                          Back to Shipping
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                           <ChevronRight className="ml-2 h-5 w-5" />
                         </button>
                       </div>
@@ -1788,7 +1788,7 @@ export default function Checkout({
                   {/* Secure Checkout */}
                   <div className="mt-6 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-gray-500 mr-1" />
-                    <p className="text-xs text-gray-500">Secure Checkout</p>
+                    <p className="text-xs text-gray-500">Paiement sécurisé</p>
                   </div>
                 </div>
               </div>

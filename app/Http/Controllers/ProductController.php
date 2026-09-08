@@ -380,10 +380,42 @@ class ProductController extends BaseController
     }
     
     /**
+     * Download a remote image (e.g. from a WooCommerce export) and host it
+     * on this server via the media library, the same way an uploaded image
+     * is stored. Returns null (without failing the whole import row) if the
+     * source URL can't be fetched.
+     */
+    private function importImageFromUrl(string $url): ?string
+    {
+        try {
+            \App\Services\DynamicStorageService::configureDynamicDisks();
+
+            $mediaItem = \App\Models\MediaItem::create([
+                'name' => basename(parse_url($url, PHP_URL_PATH) ?: '') ?: 'imported-image',
+            ]);
+
+            $media = $mediaItem->addMediaFromUrl($url)->toMediaCollection('images');
+            $media->user_id = Auth::id();
+            $media->save();
+
+            return $media->getUrl();
+        } catch (\Throwable $e) {
+            \Log::warning('Product import: could not fetch image from ' . $url . ': ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Import products from CSV.
      */
     public function import(\Illuminate\Http\Request $request)
     {
+        // Downloading images for every row can take a while on shared
+        // hosting's default 30s limit — give it more room where allowed.
+        if (function_exists('set_time_limit')) {
+            @set_time_limit(300);
+        }
+
         $request->validate([
             'file' => 'required|file|mimes:csv,txt|max:2048',
         ]);
@@ -478,19 +510,27 @@ class ProductController extends BaseController
                 $categoryId = $category->id;
             }
 
-            // Images are stored as full URLs (comma-separated for multiple),
-            // same as the picker's format — no need to download/re-host them.
+            // Download each image so it's hosted on this server, independent
+            // of the source site — stored the same way as a normal upload
+            // (comma-separated URLs, same convention the picker uses).
             $coverImage = null;
             $images = null;
             if (!empty($imagesRaw)) {
-                $urls = array_values(array_filter(
+                $sourceUrls = array_values(array_filter(
                     array_map('trim', explode(',', $imagesRaw)),
                     fn ($url) => filter_var($url, FILTER_VALIDATE_URL)
                 ));
-                if (!empty($urls)) {
-                    $coverImage = $urls[0];
-                    if (count($urls) > 1) {
-                        $images = implode(',', array_slice($urls, 1));
+                $importedUrls = [];
+                foreach ($sourceUrls as $sourceUrl) {
+                    $importedUrl = $this->importImageFromUrl($sourceUrl);
+                    if ($importedUrl) {
+                        $importedUrls[] = $importedUrl;
+                    }
+                }
+                if (!empty($importedUrls)) {
+                    $coverImage = $importedUrls[0];
+                    if (count($importedUrls) > 1) {
+                        $images = implode(',', array_slice($importedUrls, 1));
                     }
                 }
             }

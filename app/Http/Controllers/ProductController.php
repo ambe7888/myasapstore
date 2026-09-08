@@ -497,9 +497,10 @@ class ProductController extends BaseController
         $currentStoreId = getCurrentStoreId($user);
         
         $request->validate([
-            'action' => 'required|string|in:delete,activate,deactivate',
+            'action' => 'required|string|in:delete,activate,deactivate,move_category',
             'ids' => 'required|array',
-            'ids.*' => 'integer'
+            'ids.*' => 'integer',
+            'category_id' => 'required_if:action,move_category|nullable|integer',
         ]);
         
         $action = $request->action;
@@ -552,8 +553,22 @@ class ProductController extends BaseController
                 ->whereIn('id', $ids)
                 ->update(['is_active' => false]);
             return redirect()->back()->with('success', __('Selected products deactivated.'));
+        } elseif ($action === 'move_category') {
+            $category = \App\Models\Category::where('id', $request->category_id)
+                ->where('store_id', $currentStoreId)
+                ->first();
+
+            if (!$category) {
+                return redirect()->back()->with('error', __('Invalid category selected.'));
+            }
+
+            Product::where('store_id', $currentStoreId)
+                ->whereIn('id', $ids)
+                ->update(['category_id' => $category->id]);
+
+            return redirect()->back()->with('success', __(':count products moved to :category.', ['count' => $count, 'category' => $category->name]));
         }
-        
+
         return redirect()->back();
     }
 

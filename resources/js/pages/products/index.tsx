@@ -72,6 +72,18 @@ export default function Products() {
     });
   };
 
+  const handleBulkMoveCategory = (categoryId: string) => {
+    if (selectedProducts.length === 0 || !categoryId) return;
+
+    router.post(route('products.bulk'), {
+      action: 'move_category',
+      ids: selectedProducts,
+      category_id: categoryId
+    }, {
+      onSuccess: () => setSelectedProducts([])
+    });
+  };
+
   const executeBulkDelete = () => {
     router.post(route('products.bulk'), {
       action: 'delete',
@@ -205,6 +217,18 @@ export default function Products() {
                     <PowerOff className="h-3.5 w-3.5 text-amber-600" />
                     <span>{t('Désactiver')}</span>
                   </Button>
+                  <Select onValueChange={handleBulkMoveCategory}>
+                    <SelectTrigger className="h-8 w-[180px] text-xs bg-white border-blue-300">
+                      <SelectValue placeholder={t('Déplacer vers...')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories?.map((category: any) => (
+                        <SelectItem key={category.id} value={String(category.id)}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </>
               )}
               

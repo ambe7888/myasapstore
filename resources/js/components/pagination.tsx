@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface PaginationProps {
   links: any[];
@@ -11,6 +12,9 @@ interface PaginationProps {
   total?: number;
   entityName?: string;
   className?: string;
+  perPage?: number;
+  perPageOptions?: number[];
+  onPerPageChange?: (perPage: number) => void;
 }
 
 export function Pagination({
@@ -20,6 +24,9 @@ export function Pagination({
   total = 0,
   entityName = 'éléments',
   className = '',
+  perPage,
+  perPageOptions = [10, 25, 50, 100, 200],
+  onPerPageChange,
 }: PaginationProps) {
   const { t } = useTranslation();
 
@@ -27,13 +34,30 @@ export function Pagination({
 
   return (
     <div className={`p-4 bg-white border border-gray-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs ${className}`}>
-      <div className="text-xs text-gray-500 text-center sm:text-left">
-        {total > 0 ? (
-          <>
-            {t("Affichage de")} <span className="font-semibold text-gray-900">{from || 1}</span> {t("à")} <span className="font-semibold text-gray-900">{to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{total}</span> {t(entityName)}
-          </>
-        ) : (
-          <span>{t("Aucun résultat pour")} {t(entityName)}</span>
+      <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div className="text-xs text-gray-500">
+          {total > 0 ? (
+            <>
+              {t("Affichage de")} <span className="font-semibold text-gray-900">{from || 1}</span> {t("à")} <span className="font-semibold text-gray-900">{to || 0}</span> {t("sur")} <span className="font-semibold text-gray-900">{total}</span> {t(entityName)}
+            </>
+          ) : (
+            <span>{t("Aucun résultat pour")} {t(entityName)}</span>
+          )}
+        </div>
+
+        {onPerPageChange && (
+          <Select value={String(perPage || perPageOptions[0])} onValueChange={(value) => onPerPageChange(Number(value))}>
+            <SelectTrigger className="h-8 w-[110px] text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {perPageOptions.map((option) => (
+                <SelectItem key={option} value={String(option)}>
+                  {t('{{count}} / page', { count: option })}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         )}
       </div>
 

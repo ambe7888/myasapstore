@@ -38,7 +38,7 @@ class ProductController extends BaseController
             $query->where('category_id', $request->category_id);
         }
         
-        $perPage = $request->input('per_page', 10);
+        $perPage = min((int) $request->input('per_page', 10), 200);
         $products = $query->latest()->paginate($perPage)->withQueryString();
         
         // Get categories for the filter dropdown
@@ -49,7 +49,7 @@ class ProductController extends BaseController
         return Inertia::render('products/index', [
             'products' => $products,
             'categories' => $categories,
-            'filters' => $request->only(['category_id']),
+            'filters' => $request->only(['category_id', 'per_page']),
             'stats' => [
                 'total' => $totalProducts,
                 'active' => $activeProducts,

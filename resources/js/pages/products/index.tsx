@@ -27,7 +27,11 @@ export default function Products() {
 
   const handleCategoryFilterChange = (value: string) => {
     const categoryId = value === 'all' ? '' : value;
-    router.get(route('products.index'), { category_id: categoryId }, { preserveState: true, replace: true });
+    router.get(route('products.index'), { category_id: categoryId, per_page: products?.per_page }, { preserveState: true, replace: true });
+  };
+
+  const handlePerPageChange = (perPage: number) => {
+    router.get(route('products.index'), { category_id: filters?.category_id, per_page: perPage }, { preserveState: true, replace: true });
   };
 
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -381,6 +385,8 @@ export default function Products() {
                 total={products.total}
                 entityName="produits"
                 className="mt-4 border-t border-gray-100 rounded-none border-x-0 border-b-0"
+                perPage={products.per_page}
+                onPerPageChange={handlePerPageChange}
               />
             )}
           </CardContent>

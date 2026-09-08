@@ -399,40 +399,99 @@ class ProductController extends BaseController
             return redirect()->back()->with('error', __('Invalid CSV file.'));
         }
 
+        // Map by header name (case-insensitive) so exports from other
+        // platforms — e.g. WooCommerce's Products > Export CSV — work
+        // without reordering columns first.
+        $headerMap = [];
+        foreach ($header as $i => $label) {
+            $headerMap[strtolower(trim($label))] = $i;
+        }
+
+        $findColumn = function (array $aliases) use ($headerMap) {
+            foreach ($aliases as $alias) {
+                if (isset($headerMap[$alias])) {
+                    return $headerMap[$alias];
+                }
+            }
+            return null;
+        };
+
+        $nameCol = $findColumn(['name', 'product name']);
+        $skuCol = $findColumn(['sku']);
+        $categoryCol = $findColumn(['categories', 'category']);
+        $priceCol = $findColumn(['regular price', 'price']);
+        $salePriceCol = $findColumn(['sale price']);
+        $stockCol = $findColumn(['stock', 'stock quantity', 'quantity']);
+        $statusCol = $findColumn(['published', 'status']);
+        $descriptionCol = $findColumn(['description', 'short description']);
+        $imagesCol = $findColumn(['images', 'image']);
+
+        if ($nameCol === null) {
+            fclose($handle);
+            return redirect()->back()->with('error', __('The CSV must have a "Name" column.'));
+        }
+
         $successCount = 0;
-        $errorCount = 0;
 
         while (($row = fgetcsv($handle)) !== false) {
-            if (count($row) < 2) continue;
+            $get = fn (?int $col) => $col !== null ? trim((string) ($row[$col] ?? '')) : '';
 
-            $name = $row[0] ?? '';
+            $name = $get($nameCol);
             if (empty($name)) continue;
 
-            $sku = $row[1] ?? '';
-            if (strtolower(trim($sku)) === 'not set') $sku = '';
+            $sku = $get($skuCol);
+            if (strtolower($sku) === 'not set') $sku = '';
 
-            $categoryName = $row[2] ?? '';
-            $priceStr = $row[3] ?? '0';
-            $salePriceStr = $row[4] ?? '';
-            $stockStr = $row[5] ?? '0';
-            $statusStr = $row[7] ?? 'Active';
+            $categoryName = $get($categoryCol);
+            // WooCommerce separates multiple categories with a comma and
+            // hierarchy with " > " — keep just the leaf of the first one.
+            if (str_contains($categoryName, ',')) {
+                $categoryName = trim(explode(',', $categoryName)[0]);
+            }
+            if (str_contains($categoryName, '>')) {
+                $parts = explode('>', $categoryName);
+                $categoryName = trim(end($parts));
+            }
+
+            $priceStr = $get($priceCol) ?: '0';
+            $salePriceStr = $get($salePriceCol);
+            $stockStr = $get($stockCol) ?: '0';
+            $statusStr = $get($statusCol) ?: 'active';
+            $description = $get($descriptionCol);
+            $imagesRaw = $get($imagesCol);
 
             // Clean numbers (extract float from string like "$1,234.56" -> 1234.56)
             $price = (float) filter_var($priceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $salePrice = strtolower(trim($salePriceStr)) === 'not set' || empty($salePriceStr) 
-                            ? null 
+            $salePrice = in_array(strtolower($salePriceStr), ['', 'not set'], true)
+                            ? null
                             : (float) filter_var($salePriceStr, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $stock = (int) filter_var($stockStr, FILTER_SANITIZE_NUMBER_INT);
-            
-            $status = strtolower(trim($statusStr)) === 'inactive' ? 0 : 1;
+
+            $status = in_array(strtolower($statusStr), ['0', 'no', 'false', 'inactive', 'draft', 'private'], true) ? 0 : 1;
 
             $categoryId = null;
-            if (!empty($categoryName) && strtolower(trim($categoryName)) !== 'uncategorized') {
-                $category = Category::where('store_id', $currentStoreId)
-                    ->where('name', trim($categoryName))
-                    ->first();
-                if ($category) {
-                    $categoryId = $category->id;
+            if (!empty($categoryName) && strtolower($categoryName) !== 'uncategorized') {
+                $category = Category::firstOrCreate(
+                    ['store_id' => $currentStoreId, 'name' => $categoryName],
+                    ['slug' => Category::generateUniqueSlug($categoryName, $currentStoreId), 'is_active' => true]
+                );
+                $categoryId = $category->id;
+            }
+
+            // Images are stored as full URLs (comma-separated for multiple),
+            // same as the picker's format — no need to download/re-host them.
+            $coverImage = null;
+            $images = null;
+            if (!empty($imagesRaw)) {
+                $urls = array_values(array_filter(
+                    array_map('trim', explode(',', $imagesRaw)),
+                    fn ($url) => filter_var($url, FILTER_VALIDATE_URL)
+                ));
+                if (!empty($urls)) {
+                    $coverImage = $urls[0];
+                    if (count($urls) > 1) {
+                        $images = implode(',', array_slice($urls, 1));
+                    }
                 }
             }
 
@@ -443,7 +502,7 @@ class ProductController extends BaseController
                     ->where('sku', $sku)
                     ->first();
             }
-            
+
             if (!$product) {
                 $product = Product::where('store_id', $currentStoreId)
                     ->where('name', trim($name))
@@ -455,30 +514,25 @@ class ProductController extends BaseController
                 $sku = strtoupper(\Illuminate\Support\Str::random(8));
             }
 
+            $fields = [
+                'name' => $name,
+                'category_id' => $categoryId,
+                'price' => $price,
+                'sale_price' => $salePrice,
+                'stock' => $stock,
+                'is_active' => $status,
+            ];
+            if ($description !== '') $fields['description'] = $description;
+            if ($coverImage !== null) $fields['cover_image'] = $coverImage;
+            if ($images !== null) $fields['images'] = $images;
+
             if ($product) {
-                // Update
-                $product->update([
-                    'name' => $name,
-                    'category_id' => $categoryId,
-                    'price' => $price,
-                    'sale_price' => $salePrice,
-                    'stock' => $stock,
-                    'is_active' => $status,
-                ]);
+                $product->update($fields);
             } else {
-                // Create
-                $slug = \Illuminate\Support\Str::slug($name) . '-' . \Illuminate\Support\Str::random(4);
-                Product::create([
-                    'store_id' => $currentStoreId,
-                    'name' => $name,
-                    'slug' => $slug,
-                    'sku' => $sku,
-                    'category_id' => $categoryId,
-                    'price' => $price,
-                    'sale_price' => $salePrice,
-                    'stock' => $stock,
-                    'is_active' => $status,
-                ]);
+                $fields['store_id'] = $currentStoreId;
+                $fields['sku'] = $sku;
+                $fields['slug'] = \Illuminate\Support\Str::slug($name) . '-' . \Illuminate\Support\Str::random(4);
+                Product::create($fields);
             }
             $successCount++;
         }

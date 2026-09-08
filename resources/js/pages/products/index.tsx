@@ -417,7 +417,7 @@ export default function Products() {
             <DialogHeader>
               <DialogTitle>{t('Import Products')}</DialogTitle>
               <DialogDescription>
-                {t('Upload a CSV file to import products. Ensure the file has the correct headers.')}
+                {t('Upload a CSV file to import products. Compatible with WooCommerce product exports (Name, SKU, Categories, Regular price, Sale price, Stock, Images...).')}
               </DialogDescription>
             </DialogHeader>
             <div className="py-4">

@@ -118,7 +118,7 @@ class StorageConfigService
             
             return [
                 'disk' => $diskName,
-                'allowed_file_types' => $settings['storage_file_types'] ?? 'jpg,png,webp,gif',
+                'allowed_file_types' => $settings['storage_file_types'] ?? 'jpg,jpeg,png,webp,gif',
                 'max_file_size_kb' => (int)($settings['storage_max_upload_size'] ?? 2048),
                 's3' => [
                     'key' => $settings['aws_access_key_id'] ?? '',

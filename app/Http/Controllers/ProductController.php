@@ -380,6 +380,29 @@ class ProductController extends BaseController
     }
     
     /**
+     * Fix the "double UTF-8" mojibake that Excel/WooCommerce exports from
+     * non-English WordPress sites commonly produce (é becomes "Ã©", a
+     * leading BOM becomes "ï»¿", etc.), and strip a real BOM if present.
+     */
+    private function normalizeImportText($value): string
+    {
+        $value = (string) $value;
+
+        if (str_contains($value, 'Ã') || str_contains($value, 'â€') || str_contains($value, "\xEF\xBF\xBD")) {
+            $fixed = @mb_convert_encoding($value, 'ISO-8859-1', 'UTF-8');
+            if ($fixed !== false && $fixed !== '' && mb_check_encoding($fixed, 'UTF-8')) {
+                $value = $fixed;
+            }
+        }
+
+        if (str_starts_with($value, "\xEF\xBB\xBF")) {
+            $value = substr($value, 3);
+        }
+
+        return trim($value);
+    }
+
+    /**
      * Download a remote image (e.g. from a WooCommerce export) and host it
      * on this server via the media library, the same way an uploaded image
      * is stored. Returns null (without failing the whole import row) if the
@@ -417,7 +440,7 @@ class ProductController extends BaseController
         }
 
         $request->validate([
-            'file' => 'required|file|mimes:csv,txt|max:2048',
+            'file' => 'required|file|mimes:csv,txt|max:20480',
         ]);
 
         $user = Auth::user();
@@ -436,7 +459,7 @@ class ProductController extends BaseController
         // without reordering columns first.
         $headerMap = [];
         foreach ($header as $i => $label) {
-            $headerMap[strtolower(trim($label))] = $i;
+            $headerMap[strtolower($this->normalizeImportText($label))] = $i;
         }
 
         $findColumn = function (array $aliases) use ($headerMap) {
@@ -448,14 +471,17 @@ class ProductController extends BaseController
             return null;
         };
 
-        $nameCol = $findColumn(['name', 'product name']);
-        $skuCol = $findColumn(['sku']);
-        $categoryCol = $findColumn(['categories', 'category']);
-        $priceCol = $findColumn(['regular price', 'price']);
-        $salePriceCol = $findColumn(['sale price']);
+        // Aliases include French labels since WooCommerce exports headers
+        // in the site's own language (a very common case for this app's
+        // market).
+        $nameCol = $findColumn(['name', 'product name', 'nom']);
+        $skuCol = $findColumn(['sku', 'ugs']);
+        $categoryCol = $findColumn(['categories', 'category', 'catégories', 'catégorie']);
+        $priceCol = $findColumn(['regular price', 'price', 'tarif régulier', 'tarif normal', 'prix']);
+        $salePriceCol = $findColumn(['sale price', 'tarif promo', 'prix promo']);
         $stockCol = $findColumn(['stock', 'stock quantity', 'quantity']);
-        $statusCol = $findColumn(['published', 'status']);
-        $descriptionCol = $findColumn(['description', 'short description']);
+        $statusCol = $findColumn(['published', 'status', 'publié']);
+        $descriptionCol = $findColumn(['description', 'short description', 'description courte']);
         $imagesCol = $findColumn(['images', 'image']);
 
         if ($nameCol === null) {
@@ -466,10 +492,15 @@ class ProductController extends BaseController
         $successCount = 0;
 
         while (($row = fgetcsv($handle)) !== false) {
-            $get = fn (?int $col) => $col !== null ? trim((string) ($row[$col] ?? '')) : '';
+            $get = fn (?int $col) => $col !== null ? $this->normalizeImportText($row[$col] ?? '') : '';
 
             $name = $get($nameCol);
             if (empty($name)) continue;
+
+            // WooCommerce marks trashed/duplicate items with -1 in the
+            // Published column — these shouldn't reappear in the new store.
+            $rawStatus = $statusCol !== null ? trim((string) ($row[$statusCol] ?? '')) : '';
+            if ($rawStatus === '-1') continue;
 
             $sku = $get($skuCol);
             if (strtolower($sku) === 'not set') $sku = '';

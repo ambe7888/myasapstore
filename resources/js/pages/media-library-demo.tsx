@@ -9,7 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { usePage } from '@inertiajs/react';
-import { Upload, Search, X, Plus, Info, Copy, Download, MoreHorizontal, Image as ImageIcon, Calendar, HardDrive, BarChart3 } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Upload, Search, X, Plus, Info, Copy, Download, MoreHorizontal, Image as ImageIcon, Calendar, HardDrive, BarChart3, Trash2 } from 'lucide-react';
 
 interface MediaItem {
   id: number;
@@ -36,6 +37,9 @@ export default function MediaLibraryDemo() {
 
   const [infoModalOpen, setInfoModalOpen] = useState(false);
   const [selectedMediaInfo, setSelectedMediaInfo] = useState<MediaItem | null>(null);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [isBulkDeleteModalOpen, setIsBulkDeleteModalOpen] = useState(false);
+  const [bulkDeleting, setBulkDeleting] = useState(false);
   const itemsPerPage = 12;
 
   const fetchMedia = useCallback(async () => {
@@ -77,6 +81,7 @@ export default function MediaLibraryDemo() {
     );
     setFilteredMedia(filtered);
     setCurrentPage(1);
+    setSelectedIds([]);
   }, [searchTerm, media]);
 
 
@@ -163,6 +168,7 @@ export default function MediaLibraryDemo() {
       
       if (response.ok) {
         setMedia(prev => prev.filter(item => item.id !== id));
+        setSelectedIds(prev => prev.filter(sid => sid !== id));
         toast.success('Media deleted successfully');
       } else {
         toast.error('Failed to delete media');
@@ -170,6 +176,49 @@ export default function MediaLibraryDemo() {
     } catch (error) {
       toast.error('Error deleting media');
     }
+  };
+
+  const toggleSelection = (id: number) => {
+    setSelectedIds(prev => prev.includes(id) ? prev.filter(sid => sid !== id) : [...prev, id]);
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filteredMedia.length && filteredMedia.length > 0) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredMedia.map(item => item.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    setBulkDeleting(true);
+    try {
+      const response = await fetch(route('api.media.bulk-destroy'), {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrf_token,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({ ids: selectedIds }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        const deletedIds: number[] = result.deleted_ids || selectedIds;
+        setMedia(prev => prev.filter(item => !deletedIds.includes(item.id)));
+        setSelectedIds([]);
+        toast.success(result.message);
+      } else {
+        toast.error(result.message || 'Failed to delete selected media');
+      }
+    } catch (error) {
+      toast.error('Error deleting selected media');
+    }
+    setBulkDeleting(false);
+    setIsBulkDeleteModalOpen(false);
   };
 
   const handleCopyLink = (url: string) => {
@@ -284,6 +333,41 @@ export default function MediaLibraryDemo() {
           </CardContent>
         </Card>
 
+        {/* Bulk Selection Toolbar */}
+        {!loading && filteredMedia.length > 0 && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-emerald-50/80 border border-emerald-200 rounded-xl">
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={selectedIds.length === filteredMedia.length && filteredMedia.length > 0}
+                onCheckedChange={toggleSelectAll}
+                aria-label={t('Select all')}
+              />
+              <span className="text-sm font-medium text-emerald-950">
+                {selectedIds.length > 0
+                  ? t('{{count}} fichier(s) sélectionné(s)', { count: selectedIds.length })
+                  : t('Tout sélectionner')}
+              </span>
+            </div>
+
+            {selectedIds.length > 0 && (
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => setSelectedIds([])}>
+                  {t('Désélectionner')}
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="h-8 text-xs flex items-center gap-1.5"
+                  onClick={() => setIsBulkDeleteModalOpen(true)}
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                  {t('Supprimer la sélection')}
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Media Grid */}
         <Card>
           <CardContent className="p-6">
@@ -370,8 +454,17 @@ export default function MediaLibraryDemo() {
                           </DropdownMenu>
                         </div>
                         
+                        {/* Selection Checkbox */}
+                        <div className="absolute top-2 left-2 bg-background/95 rounded-md p-0.5 shadow-sm">
+                          <Checkbox
+                            checked={selectedIds.includes(item.id)}
+                            onCheckedChange={() => toggleSelection(item.id)}
+                            aria-label={t('Select {{name}}', { name: item.name })}
+                          />
+                        </div>
+
                         {/* File Type Badge */}
-                        <div className="absolute top-2 left-2">
+                        <div className="absolute bottom-2 left-2">
                           <Badge variant="secondary" className="text-xs bg-background/95">
                             {item.mime_type.split('/')[1].toUpperCase()}
                           </Badge>
@@ -623,6 +716,26 @@ export default function MediaLibraryDemo() {
                 </div>
               </div>
             )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Bulk Delete Confirmation Dialog */}
+        <Dialog open={isBulkDeleteModalOpen} onOpenChange={setIsBulkDeleteModalOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{t('Delete Selected Files')}</DialogTitle>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground">
+              {t('Are you sure you want to delete the {{count}} selected file(s)? This action cannot be undone.', { count: selectedIds.length })}
+            </p>
+            <div className="flex justify-end gap-3 pt-2">
+              <Button variant="outline" onClick={() => setIsBulkDeleteModalOpen(false)} disabled={bulkDeleting}>
+                {t('Cancel')}
+              </Button>
+              <Button variant="destructive" onClick={handleBulkDelete} disabled={bulkDeleting}>
+                {bulkDeleting ? t('Deleting...') : t('Delete Selected')}
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>

@@ -587,6 +587,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Media Library API routes - permissions handled in controller
     Route::get('api/media', [MediaController::class, 'index'])->name('api.media.index');
     Route::post('api/media/batch', [MediaController::class, 'batchStore'])->name('api.media.batch');
+    Route::delete('api/media/bulk', [MediaController::class, 'bulkDestroy'])->name('api.media.bulk-destroy');
     Route::get('api/media/{id}/download', [MediaController::class, 'download'])->name('api.media.download');
     Route::delete('api/media/{id}', [MediaController::class, 'destroy'])->name('api.media.destroy');
 

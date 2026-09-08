@@ -389,6 +389,69 @@ class MediaController extends Controller
         return response()->json(['message' => __('Media deleted successfully')]);
     }
     
+    public function bulkDestroy(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user->hasPermissionTo('delete-media') && !$user->hasPermissionTo('manage-media')) {
+            return response()->json([
+                'message' => 'Access denied. You do not have permission to delete media.',
+                'error' => 'insufficient_permissions'
+            ], 403);
+        }
+
+        $ids = $request->input('ids', []);
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(['message' => __('No media selected.')], 422);
+        }
+
+        $query = Media::whereIn('id', $ids);
+
+        // Same ownership scoping as single delete: superadmin (or
+        // manage-any-media) can delete anything, company users can delete
+        // their team's media, everyone else only their own.
+        if ($user->type !== 'superadmin' && !$user->hasPermissionTo('manage-any-media')) {
+            if ($user->type === 'company') {
+                $userIds = User::where('created_by', $user->id)
+                    ->orWhere('id', $user->id)
+                    ->pluck('id')
+                    ->toArray();
+                $query->whereIn('user_id', $userIds);
+            } else {
+                $query->where('user_id', $user->id);
+            }
+        }
+
+        $mediaList = $query->get();
+        $freedSize = 0;
+        $deletedIds = [];
+
+        foreach ($mediaList as $media) {
+            $mediaItem = $media->model;
+            $freedSize += $media->size;
+            $deletedIds[] = $media->id;
+
+            try {
+                $media->delete();
+            } catch (\Exception $e) {
+                $media->forceDelete();
+            }
+
+            if ($mediaItem && $mediaItem->getMedia()->count() === 0) {
+                $mediaItem->delete();
+            }
+        }
+
+        if ($freedSize > 0) {
+            $this->updateStorageUsage($user, -$freedSize);
+        }
+
+        return response()->json([
+            'message' => __(':count file(s) deleted successfully.', ['count' => count($deletedIds)]),
+            'deleted_ids' => $deletedIds,
+        ]);
+    }
+
     private function checkStorageLimit($files)
     {
         $user = auth()->user();

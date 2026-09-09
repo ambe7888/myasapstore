@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\OrderCreated;
 use App\Services\WhatsAppCloudApiService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -20,6 +21,16 @@ class SendOrderCreatedSellerWhatsAppAlert
 
     public function handle(OrderCreated $event): void
     {
+        // OrderCreated can fire more than once for the same order (e.g. a
+        // retried request), so guard against sending the seller alert twice
+        // — same pattern as SendOrderCreatedWhatsApp, but its own cache key
+        // since that listener guards a different notification.
+        $cacheKey = 'seller_whatsapp_alert_' . $event->order->id;
+        if (Cache::has($cacheKey)) {
+            return;
+        }
+        Cache::put($cacheKey, true, 300);
+
         try {
             $this->service->sendOrderNotification($event->order);
         } catch (\Throwable $e) {

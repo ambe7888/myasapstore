@@ -92,7 +92,7 @@ class WhatsAppCloudApiService
             $this->getConfiguredVariableKeys()
         );
 
-        return $this->sendTemplate($to, $bodyParams);
+        return $this->sendTemplate($to, $bodyParams, (string) $order->id);
     }
 
     /**
@@ -132,7 +132,7 @@ class WhatsAppCloudApiService
             $this->getConfiguredVariableKeys()
         );
 
-        $result = $this->sendTemplate($cleanTo, $bodyParams);
+        $result = $this->sendTemplate($cleanTo, $bodyParams, '1');
 
         return $result === true ? true : ($this->lastError ?? 'Échec de l\'envoi.');
     }
@@ -212,16 +212,46 @@ class WhatsAppCloudApiService
         return implode("\n", $lines);
     }
 
-    private function sendTemplate(string $to, array $bodyParams): bool
+    /**
+     * $linkOrderId, when the "order link button" setting is on, becomes the
+     * dynamic suffix Meta appends to the template's URL button — e.g. a
+     * button configured as https://mystoreasap.com/orders/{{1}} resolves to
+     * https://mystoreasap.com/orders/458 for that specific order.
+     */
+    private function sendTemplate(string $to, array $bodyParams, ?string $linkOrderId = null): bool
     {
         $accessToken = getSetting('whatsapp_cloud_access_token');
         $phoneNumberId = getSetting('whatsapp_cloud_phone_number_id');
         $templateName = getSetting('whatsapp_cloud_template_name', 'new_order_notification');
         $lang = getSetting('whatsapp_cloud_template_lang', 'fr');
+        $includeLinkButton = getSetting('whatsapp_cloud_include_link_button', '0') === '1';
 
         if (!$accessToken || !$phoneNumberId) {
             $this->lastError = 'Identifiants WhatsApp Cloud API manquants.';
             return false;
+        }
+
+        $components = [];
+
+        if (!empty($bodyParams)) {
+            $components[] = [
+                'type' => 'body',
+                'parameters' => array_map(
+                    fn ($param) => ['type' => 'text', 'text' => (string) $param],
+                    $bodyParams
+                ),
+            ];
+        }
+
+        if ($includeLinkButton && $linkOrderId !== null) {
+            $components[] = [
+                'type' => 'button',
+                'sub_type' => 'url',
+                'index' => '0',
+                'parameters' => [
+                    ['type' => 'text', 'text' => $linkOrderId],
+                ],
+            ];
         }
 
         try {
@@ -234,13 +264,7 @@ class WhatsAppCloudApiService
                     'template' => [
                         'name' => $templateName,
                         'language' => ['code' => $lang],
-                        'components' => empty($bodyParams) ? [] : [[
-                            'type' => 'body',
-                            'parameters' => array_map(
-                                fn ($param) => ['type' => 'text', 'text' => (string) $param],
-                                $bodyParams
-                            ),
-                        ]],
+                        'components' => $components,
                     ],
                 ]
             );

@@ -163,6 +163,7 @@ class SystemSettingsController extends Controller
                 'whatsapp_cloud_template_lang' => 'required|string',
                 'whatsapp_cloud_template_variables' => 'required|array|min:1',
                 'whatsapp_cloud_template_variables.*' => 'required|string|in:' . implode(',', $supportedKeys),
+                'whatsapp_cloud_include_link_button' => 'required|boolean',
             ]);
 
             foreach ($validated as $key => $value) {

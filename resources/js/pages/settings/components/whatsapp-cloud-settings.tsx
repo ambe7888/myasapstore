@@ -43,6 +43,7 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
     whatsapp_cloud_template_name: settings.whatsapp_cloud_template_name || 'new_order_notification',
     whatsapp_cloud_template_lang: settings.whatsapp_cloud_template_lang || 'fr',
     whatsapp_cloud_template_variables: parseVariables(settings.whatsapp_cloud_template_variables),
+    whatsapp_cloud_include_link_button: getEnabledState(settings.whatsapp_cloud_include_link_button),
   });
 
   const [form, setForm] = useState(buildForm);
@@ -216,11 +217,26 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
             </Button>
           </div>
 
+          <div className="flex items-center justify-between p-4 bg-muted/20 border rounded-xl md:col-span-2">
+            <div className="space-y-0.5">
+              <Label htmlFor="whatsapp_cloud_include_link_button">{t('Include a button linking to the order')}</Label>
+              <p className="text-sm text-muted-foreground">
+                {t('Adds a button so the seller can open the order directly from WhatsApp — your template must define a dynamic URL button for this to work')}
+              </p>
+            </div>
+            <Switch
+              id="whatsapp_cloud_include_link_button"
+              checked={form.whatsapp_cloud_include_link_button}
+              onCheckedChange={(checked) => handleChange('whatsapp_cloud_include_link_button', checked)}
+            />
+          </div>
+
           <div className="md:col-span-2 p-4 bg-muted/20 border rounded-xl text-sm text-muted-foreground space-y-1">
             <p className="font-medium text-foreground">{t('Before this works, you need to')}</p>
             <p>1. {t('Create a WhatsApp Business app in Meta Business Manager and get a permanent access token + Phone Number ID')}</p>
             <p>2. {t('Create and get approved a message template on Meta, with one {{n}} placeholder per variable you configure below')}</p>
             <p>3. {t('Enter that exact template name and language above, and match each {{n}} to the variables below in the same order')}</p>
+            <p>4. {t('If you enable the order link button, add a "Visit website" button of type Dynamic in the template, with your orders URL as the base and one variable at the end (e.g. https://mystoreasap.com/orders/{{1}})')}</p>
           </div>
 
           <div className="grid gap-2 md:col-span-2 pt-2 border-t">

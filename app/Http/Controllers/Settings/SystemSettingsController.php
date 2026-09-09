@@ -153,18 +153,23 @@ class SystemSettingsController extends Controller
     public function updateWhatsappCloud(Request $request)
     {
         try {
+            $supportedKeys = array_keys(\App\Services\WhatsAppCloudApiService::supportedVariables());
+
             $validated = $request->validate([
                 'whatsapp_cloud_enabled' => 'required|boolean',
                 'whatsapp_cloud_access_token' => 'nullable|string',
                 'whatsapp_cloud_phone_number_id' => 'nullable|string',
                 'whatsapp_cloud_template_name' => 'required|string',
                 'whatsapp_cloud_template_lang' => 'required|string',
-                'whatsapp_cloud_api_version' => 'required|string',
+                'whatsapp_cloud_template_variables' => 'required|array|min:1',
+                'whatsapp_cloud_template_variables.*' => 'required|string|in:' . implode(',', $supportedKeys),
             ]);
 
             foreach ($validated as $key => $value) {
                 if (is_bool($value)) {
                     $value = $value ? '1' : '0';
+                } elseif (is_array($value)) {
+                    $value = json_encode(array_values($value));
                 }
                 updateSetting($key, $value);
             }

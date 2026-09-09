@@ -119,6 +119,7 @@ class SettingsController extends Controller
             'availableModules' => Webhook::modules(),
             'whatsappVariables' => $whatsappVariables,
             'whatsappSettings' => $whatsappSettings,
+            'whatsappCloudVariables' => \App\Services\WhatsAppCloudApiService::supportedVariables(),
             'notificationTemplates' => $notificationTemplates,
         ]);
     }

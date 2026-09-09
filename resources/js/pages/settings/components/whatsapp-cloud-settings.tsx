@@ -2,48 +2,84 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState, useEffect } from 'react';
-import { Save, Send } from 'lucide-react';
+import { Save, Send, Plus, X } from 'lucide-react';
 import { SettingsSection } from '@/components/settings-section';
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
 import { toast } from '@/components/custom-toast';
 import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface WhatsappCloudSettingsProps {
   settings?: Record<string, any>;
+  availableVariables?: Record<string, string>;
 }
 
-export default function WhatsappCloudSettings({ settings = {} }: WhatsappCloudSettingsProps) {
+const DEFAULT_VARIABLES = ['store_name', 'order_no', 'final_total'];
+
+export default function WhatsappCloudSettings({ settings = {}, availableVariables = {} }: WhatsappCloudSettingsProps) {
   const { t } = useTranslation();
 
   const getEnabledState = (val: any) => val === '1' || val === 1 || val === true || val === 'true';
 
-  const [form, setForm] = useState(() => ({
+  const parseVariables = (raw: any): string[] => {
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === 'string' && raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch {
+        // fall through to default
+      }
+    }
+    return [...DEFAULT_VARIABLES];
+  };
+
+  const buildForm = () => ({
     whatsapp_cloud_enabled: getEnabledState(settings.whatsapp_cloud_enabled),
     whatsapp_cloud_access_token: settings.whatsapp_cloud_access_token || '',
     whatsapp_cloud_phone_number_id: settings.whatsapp_cloud_phone_number_id || '',
     whatsapp_cloud_template_name: settings.whatsapp_cloud_template_name || 'new_order_notification',
     whatsapp_cloud_template_lang: settings.whatsapp_cloud_template_lang || 'fr',
-    whatsapp_cloud_api_version: settings.whatsapp_cloud_api_version || 'v20.0',
-  }));
+    whatsapp_cloud_template_variables: parseVariables(settings.whatsapp_cloud_template_variables),
+  });
 
+  const [form, setForm] = useState(buildForm);
   const [testNumber, setTestNumber] = useState('');
   const [testing, setTesting] = useState(false);
 
   useEffect(() => {
-    setForm({
-      whatsapp_cloud_enabled: getEnabledState(settings.whatsapp_cloud_enabled),
-      whatsapp_cloud_access_token: settings.whatsapp_cloud_access_token || '',
-      whatsapp_cloud_phone_number_id: settings.whatsapp_cloud_phone_number_id || '',
-      whatsapp_cloud_template_name: settings.whatsapp_cloud_template_name || 'new_order_notification',
-      whatsapp_cloud_template_lang: settings.whatsapp_cloud_template_lang || 'fr',
-      whatsapp_cloud_api_version: settings.whatsapp_cloud_api_version || 'v20.0',
-    });
+    setForm(buildForm());
   }, [settings]);
 
   const handleChange = (field: string, value: string | boolean) => {
     setForm(prev => ({ ...prev, [field]: value }));
+  };
+
+  const variableKeys = Object.keys(availableVariables);
+  const firstAvailableKey = variableKeys[0] || '';
+
+  const updateVariableAt = (index: number, value: string) => {
+    setForm(prev => {
+      const next = [...prev.whatsapp_cloud_template_variables];
+      next[index] = value;
+      return { ...prev, whatsapp_cloud_template_variables: next };
+    });
+  };
+
+  const addVariable = () => {
+    setForm(prev => ({
+      ...prev,
+      whatsapp_cloud_template_variables: [...prev.whatsapp_cloud_template_variables, firstAvailableKey],
+    }));
+  };
+
+  const removeVariable = (index: number) => {
+    setForm(prev => ({
+      ...prev,
+      whatsapp_cloud_template_variables: prev.whatsapp_cloud_template_variables.filter((_, i) => i !== index),
+    }));
   };
 
   const submit = (e: React.FormEvent) => {
@@ -121,16 +157,6 @@ export default function WhatsappCloudSettings({ settings = {} }: WhatsappCloudSe
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="whatsapp_cloud_api_version">{t('Graph API Version')}</Label>
-            <Input
-              id="whatsapp_cloud_api_version"
-              value={form.whatsapp_cloud_api_version}
-              onChange={(e) => handleChange('whatsapp_cloud_api_version', e.target.value)}
-              placeholder="v20.0"
-            />
-          </div>
-
-          <div className="grid gap-2">
             <Label htmlFor="whatsapp_cloud_template_name">{t('Template Name')}</Label>
             <Input
               id="whatsapp_cloud_template_name"
@@ -150,11 +176,51 @@ export default function WhatsappCloudSettings({ settings = {} }: WhatsappCloudSe
             />
           </div>
 
+          <div className="grid gap-2 md:col-span-2">
+            <Label>{t('Template Variables')}</Label>
+            <p className="text-sm text-muted-foreground">
+              {t('For each {{n}} placeholder in your approved template, in order, choose what it should contain')}
+            </p>
+            <div className="space-y-2">
+              {form.whatsapp_cloud_template_variables.map((key, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-muted-foreground w-10 shrink-0">{`{{${index + 1}}}`}</span>
+                  <Select value={key} onValueChange={(value) => updateVariableAt(index, value)}>
+                    <SelectTrigger className="flex-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {variableKeys.map((varKey) => (
+                        <SelectItem key={varKey} value={varKey}>
+                          {availableVariables[varKey]}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="h-9 w-9 p-0 text-destructive"
+                    onClick={() => removeVariable(index)}
+                    disabled={form.whatsapp_cloud_template_variables.length <= 1}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <Button type="button" variant="outline" size="sm" className="w-fit" onClick={addVariable}>
+              <Plus className="h-4 w-4 mr-2" />
+              {t('Add a variable')}
+            </Button>
+          </div>
+
           <div className="md:col-span-2 p-4 bg-muted/20 border rounded-xl text-sm text-muted-foreground space-y-1">
             <p className="font-medium text-foreground">{t('Before this works, you need to')}</p>
             <p>1. {t('Create a WhatsApp Business app in Meta Business Manager and get a permanent access token + Phone Number ID')}</p>
-            <p>2. {t('Create and get approved a message template with 3 body variables, e.g.')}: <span className="italic">"Nouvelle commande {'{{2}}'} chez {'{{1}}'} pour un montant de {'{{3}}'} FCFA."</span></p>
-            <p>3. {t('Enter that exact template name and language above, then save')}</p>
+            <p>2. {t('Create and get approved a message template on Meta, with one {{n}} placeholder per variable you configure below')}</p>
+            <p>3. {t('Enter that exact template name and language above, and match each {{n}} to the variables below in the same order')}</p>
           </div>
 
           <div className="grid gap-2 md:col-span-2 pt-2 border-t">

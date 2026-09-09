@@ -12,10 +12,49 @@ use Illuminate\Support\Facades\Log;
  * used to alert every store owner on new orders — separate from the
  * existing WhatsAppService, which only builds a wa.me click-to-chat link
  * for the storefront's "pay via WhatsApp" checkout option.
+ *
+ * Meta's approved message templates only accept positional {{1}}, {{2}}...
+ * placeholders, not named ones, so instead of a free-text template body
+ * (like the messaging_message_template setting) the superadmin picks, in
+ * order, which of the system's supported order variables fills each
+ * position — matching whatever variables their approved template defines.
  */
 class WhatsAppCloudApiService
 {
+    /**
+     * Fixed Graph API version this integration is built against. Not user
+     * configurable — bumping it is a code change, not a settings tweak.
+     */
+    private const API_VERSION = 'v21.0';
+
     private ?string $lastError = null;
+
+    /**
+     * Variable keys the system knows how to fill in, in the same spirit as
+     * the order-confirmation message template's {store_name}/{order_no}/...
+     * placeholders. Shown to the superadmin as a dropdown per template
+     * position so every position always resolves to a real value.
+     */
+    public static function supportedVariables(): array
+    {
+        return [
+            'store_name' => __('Store name'),
+            'order_no' => __('Order number'),
+            'customer_name' => __('Customer name'),
+            'final_total' => __('Order total'),
+            'sub_total' => __('Subtotal'),
+            'qty_total' => __('Total quantity'),
+            'shipping_amount' => __('Shipping cost'),
+            'discount_amount' => __('Discount amount'),
+            'total_tax' => __('Tax amount'),
+            'shipping_address' => __('Shipping address'),
+            'shipping_city' => __('Shipping city'),
+            'shipping_country' => __('Shipping country'),
+            'shipping_postalcode' => __('Shipping postal code'),
+            'order_date' => __('Order date'),
+            'payment_method' => __('Payment method'),
+        ];
+    }
 
     public function isEnabled(): bool
     {
@@ -45,11 +84,13 @@ class WhatsAppCloudApiService
             return false;
         }
 
-        return $this->sendTemplate($to, [
-            $store->name,
-            $order->order_number,
-            number_format($order->total_amount, 2),
-        ]);
+        $values = $this->resolveOrderVariables($order);
+        $bodyParams = array_map(
+            fn (string $key) => $values[$key] ?? '',
+            $this->getConfiguredVariableKeys()
+        );
+
+        return $this->sendTemplate($to, $bodyParams);
     }
 
     /**
@@ -64,18 +105,82 @@ class WhatsAppCloudApiService
             return 'Numéro de téléphone invalide.';
         }
 
-        $result = $this->sendTemplate($cleanTo, ['Boutique Test', 'TEST-0001', '0.00'], true);
+        $sampleValues = [
+            'store_name' => 'Boutique Test',
+            'order_no' => 'TEST-0001',
+            'customer_name' => 'Client Test',
+            'final_total' => '15 000',
+            'sub_total' => '14 000',
+            'qty_total' => '2',
+            'shipping_amount' => '1 000',
+            'discount_amount' => '0',
+            'total_tax' => '0',
+            'shipping_address' => 'Cocody, Rue des Jardins',
+            'shipping_city' => 'Abidjan',
+            'shipping_country' => 'Côte d\'Ivoire',
+            'shipping_postalcode' => '00225',
+            'order_date' => now()->format('d/m/Y H:i'),
+            'payment_method' => 'Espèces',
+        ];
+
+        $bodyParams = array_map(
+            fn (string $key) => $sampleValues[$key] ?? $key,
+            $this->getConfiguredVariableKeys()
+        );
+
+        $result = $this->sendTemplate($cleanTo, $bodyParams);
 
         return $result === true ? true : ($this->lastError ?? 'Échec de l\'envoi.');
     }
 
-    private function sendTemplate(string $to, array $bodyParams, bool $throwDetails = false): bool
+    /**
+     * The superadmin's configured, ordered list of variable keys — one per
+     * template position. Falls back to a sensible 3-variable default so a
+     * fresh install still sends something meaningful.
+     */
+    private function getConfiguredVariableKeys(): array
+    {
+        $raw = getSetting('whatsapp_cloud_template_variables');
+        $keys = $raw ? json_decode($raw, true) : null;
+
+        if (!is_array($keys) || empty($keys)) {
+            return ['store_name', 'order_no', 'final_total'];
+        }
+
+        $supported = array_keys(self::supportedVariables());
+        return array_values(array_filter($keys, fn ($key) => in_array($key, $supported, true)));
+    }
+
+    private function resolveOrderVariables(Order $order): array
+    {
+        $shippingCity = $order->shipping_city ? (\App\Models\City::find($order->shipping_city)->name ?? $order->shipping_city) : '';
+        $shippingCountry = $order->shipping_country ? (\App\Models\Country::find($order->shipping_country)->name ?? $order->shipping_country) : '';
+
+        return [
+            'store_name' => $order->store->name ?? '',
+            'order_no' => $order->order_number,
+            'customer_name' => trim($order->customer_first_name . ' ' . $order->customer_last_name),
+            'final_total' => number_format($order->total_amount, 2),
+            'sub_total' => number_format($order->subtotal, 2),
+            'qty_total' => (string) $order->items->sum('quantity'),
+            'shipping_amount' => number_format($order->shipping_amount, 2),
+            'discount_amount' => number_format($order->discount_amount, 2),
+            'total_tax' => number_format($order->tax_amount, 2),
+            'shipping_address' => $order->shipping_address ?? '',
+            'shipping_city' => $shippingCity,
+            'shipping_country' => $shippingCountry,
+            'shipping_postalcode' => $order->shipping_postal_code ?? '',
+            'order_date' => $order->created_at->format('d/m/Y H:i'),
+            'payment_method' => ucfirst($order->payment_method ?? ''),
+        ];
+    }
+
+    private function sendTemplate(string $to, array $bodyParams): bool
     {
         $accessToken = getSetting('whatsapp_cloud_access_token');
         $phoneNumberId = getSetting('whatsapp_cloud_phone_number_id');
         $templateName = getSetting('whatsapp_cloud_template_name', 'new_order_notification');
         $lang = getSetting('whatsapp_cloud_template_lang', 'fr');
-        $apiVersion = getSetting('whatsapp_cloud_api_version', 'v20.0');
 
         if (!$accessToken || !$phoneNumberId) {
             $this->lastError = 'Identifiants WhatsApp Cloud API manquants.';
@@ -84,7 +189,7 @@ class WhatsAppCloudApiService
 
         try {
             $response = Http::withToken($accessToken)->post(
-                "https://graph.facebook.com/{$apiVersion}/{$phoneNumberId}/messages",
+                'https://graph.facebook.com/' . self::API_VERSION . "/{$phoneNumberId}/messages",
                 [
                     'messaging_product' => 'whatsapp',
                     'to' => $to,
@@ -92,7 +197,7 @@ class WhatsAppCloudApiService
                     'template' => [
                         'name' => $templateName,
                         'language' => ['code' => $lang],
-                        'components' => [[
+                        'components' => empty($bodyParams) ? [] : [[
                             'type' => 'body',
                             'parameters' => array_map(
                                 fn ($param) => ['type' => 'text', 'text' => (string) $param],

@@ -17,6 +17,7 @@ import PaymentSettings from './components/payment-settings';
 import StorageSettings from './components/storage-settings';
 import RecaptchaSettings from './components/recaptcha-settings';
 import ChatGptSettings from './components/chatgpt-settings';
+import WhatsappCloudSettings from './components/whatsapp-cloud-settings';
 import CookieSettings from './components/cookie-settings';
 import SeoSettings from './components/seo-settings';
 import CacheSettings from './components/cache-settings';
@@ -94,6 +95,12 @@ export default function Settings() {
       permission: 'manage-chatgpt-settings'
     },
     {
+      title: t('WhatsApp Notifications'),
+      href: '#whatsapp-cloud-settings',
+      icon: <MessageSquare className="h-4 w-4 mr-2" />,
+      permission: 'manage-whatsapp-cloud-settings'
+    },
+    {
       title: t('Cookie Settings'),
       href: '#cookie-settings',
       icon: <Cookie className="h-4 w-4 mr-2" />,
@@ -157,6 +164,7 @@ export default function Settings() {
   const storageSettingsRef = useRef<HTMLDivElement>(null);
   const recaptchaSettingsRef = useRef<HTMLDivElement>(null);
   const chatgptSettingsRef = useRef<HTMLDivElement>(null);
+  const whatsappCloudSettingsRef = useRef<HTMLDivElement>(null);
   const cookieSettingsRef = useRef<HTMLDivElement>(null);
   const seoSettingsRef = useRef<HTMLDivElement>(null);
   const cacheSettingsRef = useRef<HTMLDivElement>(null);
@@ -183,6 +191,7 @@ export default function Settings() {
       const storageSettingsPosition = storageSettingsRef.current?.offsetTop || 0;
       const recaptchaSettingsPosition = recaptchaSettingsRef.current?.offsetTop || 0;
       const chatgptSettingsPosition = chatgptSettingsRef.current?.offsetTop || 0;
+      const whatsappCloudSettingsPosition = whatsappCloudSettingsRef.current?.offsetTop || 0;
       const cookieSettingsPosition = cookieSettingsRef.current?.offsetTop || 0;
       const seoSettingsPosition = seoSettingsRef.current?.offsetTop || 0;
       const cacheSettingsPosition = cacheSettingsRef.current?.offsetTop || 0;
@@ -204,6 +213,8 @@ export default function Settings() {
         setActiveSection('seo-settings');
       } else if (scrollPosition >= cookieSettingsPosition) {
         setActiveSection('cookie-settings');
+      } else if (scrollPosition >= whatsappCloudSettingsPosition) {
+        setActiveSection('whatsapp-cloud-settings');
       } else if (scrollPosition >= chatgptSettingsPosition) {
         setActiveSection('chatgpt-settings');
       } else if (scrollPosition >= recaptchaSettingsPosition) {
@@ -352,6 +363,13 @@ export default function Settings() {
           {(auth.permissions?.includes('manage-chatgpt-settings') || auth.user?.type === 'superadmin') && (
             <section id="chatgpt-settings" ref={chatgptSettingsRef} className="mb-8">
               <ChatGptSettings settings={systemSettings} />
+            </section>
+          )}
+
+          {/* WhatsApp Cloud API Settings Section */}
+          {(auth.permissions?.includes('manage-whatsapp-cloud-settings') || auth.user?.type === 'superadmin') && (
+            <section id="whatsapp-cloud-settings" ref={whatsappCloudSettingsRef} className="mb-8">
+              <WhatsappCloudSettings settings={systemSettings} />
             </section>
           )}
 

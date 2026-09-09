@@ -11,6 +11,7 @@ use App\Events\UserCreated;
 use App\Listeners\HandleWebhooks;
 use App\Listeners\SendOrderCreatedEmail;
 use App\Listeners\SendOrderCreatedWhatsApp;
+use App\Listeners\SendOrderCreatedSellerWhatsAppAlert;
 use App\Listeners\SendOrderStatusChangedEmail;
 use App\Listeners\SendStoreCreatedEmail;
 use App\Listeners\SendUserCreatedEmail;
@@ -32,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
         OrderCreated::class => [
             SendOrderCreatedEmail::class,
             SendOrderCreatedWhatsApp::class,
+            SendOrderCreatedSellerWhatsAppAlert::class,
             SendNotificationSMS::class . '@handleOrderCreated',
             HandleWebhooks::class . '@handleOrderCreated',
         ],

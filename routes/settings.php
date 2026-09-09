@@ -71,6 +71,12 @@ Route::middleware(['auth', 'verified', 'plan.access'])->group(function () {
     Route::post('settings/storage', [SystemSettingsController::class, 'updateStorage'])->name('settings.storage.update');
     Route::post('settings/recaptcha', [SystemSettingsController::class, 'updateRecaptcha'])->name('settings.recaptcha.update');
     Route::post('settings/chatgpt', [SystemSettingsController::class, 'updateChatgpt'])->name('settings.chatgpt.update');
+    Route::post('settings/whatsapp-cloud', [SystemSettingsController::class, 'updateWhatsappCloud'])
+        ->middleware('role_or_permission:superadmin')
+        ->name('settings.whatsapp-cloud.update');
+    Route::post('settings/whatsapp-cloud/test', [SystemSettingsController::class, 'testWhatsappCloud'])
+        ->middleware('role_or_permission:superadmin')
+        ->name('settings.whatsapp-cloud.test');
     Route::post('settings/cookie', [SystemSettingsController::class, 'updateCookie'])
         ->middleware('role_or_permission:superadmin|manage-cookie-settings')
         ->name('settings.cookie.update');

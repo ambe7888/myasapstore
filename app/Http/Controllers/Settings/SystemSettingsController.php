@@ -144,6 +144,60 @@ class SystemSettingsController extends Controller
     }
 
     /**
+     * Update the WhatsApp Cloud API settings used to notify sellers of
+     * new orders.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateWhatsappCloud(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'whatsapp_cloud_enabled' => 'required|boolean',
+                'whatsapp_cloud_access_token' => 'nullable|string',
+                'whatsapp_cloud_phone_number_id' => 'nullable|string',
+                'whatsapp_cloud_template_name' => 'required|string',
+                'whatsapp_cloud_template_lang' => 'required|string',
+                'whatsapp_cloud_api_version' => 'required|string',
+            ]);
+
+            foreach ($validated as $key => $value) {
+                if (is_bool($value)) {
+                    $value = $value ? '1' : '0';
+                }
+                updateSetting($key, $value);
+            }
+
+            return redirect()->back()->with('success', __('WhatsApp Cloud API settings updated successfully.'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('Failed to update WhatsApp Cloud API settings: :error', ['error' => $e->getMessage()]));
+        }
+    }
+
+    /**
+     * Send a test WhatsApp order notification to verify the Cloud API
+     * configuration works before relying on it for real orders.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function testWhatsappCloud(Request $request)
+    {
+        $request->validate([
+            'to' => 'required|string',
+        ]);
+
+        $result = (new \App\Services\WhatsAppCloudApiService())->sendTestNotification($request->to);
+
+        if ($result === true) {
+            return response()->json(['message' => __('Test message sent successfully.')]);
+        }
+
+        return response()->json(['message' => is_string($result) ? $result : __('Failed to send test message.')], 422);
+    }
+
+    /**
      * Update the storage settings.
      *
      * @param  \Illuminate\Http\Request  $request

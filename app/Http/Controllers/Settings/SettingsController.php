@@ -120,6 +120,7 @@ class SettingsController extends Controller
             'whatsappVariables' => $whatsappVariables,
             'whatsappSettings' => $whatsappSettings,
             'whatsappCloudVariables' => \App\Services\WhatsAppCloudApiService::supportedVariables(),
+            'whatsappCloudLinkVariables' => \App\Services\WhatsAppCloudApiService::supportedLinkVariables(),
             'notificationTemplates' => $notificationTemplates,
         ]);
     }

@@ -32,7 +32,7 @@ import { hasPermission } from '@/utils/permissions';
 
 export default function Settings() {
   const { t } = useTranslation();
-  const { systemSettings = {}, cacheSize = '0.00', timezones = {}, dateFormats = {}, timeFormats = {}, paymentSettings = {}, whatsappVariables = {}, whatsappCloudVariables = {}, telegramVariables = {}, webhooks = [], availableModules = {}, notificationTemplates = [], auth = {}, flash } = usePage().props as any;
+  const { systemSettings = {}, cacheSize = '0.00', timezones = {}, dateFormats = {}, timeFormats = {}, paymentSettings = {}, whatsappVariables = {}, whatsappCloudVariables = {}, whatsappCloudLinkVariables = {}, telegramVariables = {}, webhooks = [], availableModules = {}, notificationTemplates = [], auth = {}, flash } = usePage().props as any;
   const [activeSection, setActiveSection] = useState('system-settings');
   
   // Flash messages are handled globally by the flash-messages.ts system
@@ -369,7 +369,7 @@ export default function Settings() {
           {/* WhatsApp Cloud API Settings Section */}
           {(auth.permissions?.includes('manage-whatsapp-cloud-settings') || auth.user?.type === 'superadmin') && (
             <section id="whatsapp-cloud-settings" ref={whatsappCloudSettingsRef} className="mb-8">
-              <WhatsappCloudSettings settings={systemSettings} availableVariables={whatsappCloudVariables} />
+              <WhatsappCloudSettings settings={systemSettings} availableVariables={whatsappCloudVariables} availableLinkVariables={whatsappCloudLinkVariables} />
             </section>
           )}
 

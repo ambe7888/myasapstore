@@ -58,6 +58,19 @@ class WhatsAppCloudApiService
         ];
     }
 
+    /**
+     * Variables that can fill the template's dynamic URL button, kept
+     * separate from supportedVariables() because most of those (e.g.
+     * shipping address) would build a broken link — only values that are
+     * safe to drop into a URL path belong here.
+     */
+    public static function supportedLinkVariables(): array
+    {
+        return [
+            'order_id' => __('Order ID (for the order link)'),
+        ];
+    }
+
     public function isEnabled(): bool
     {
         return getSetting('whatsapp_cloud_enabled', '0') === '1';
@@ -92,7 +105,11 @@ class WhatsAppCloudApiService
             $this->getConfiguredVariableKeys()
         );
 
-        return $this->sendTemplate($to, $bodyParams, (string) $order->id);
+        $linkValues = ['order_id' => (string) $order->id];
+        $linkParam = $this->getConfiguredLinkVariable();
+        $linkValue = $linkParam !== null ? ($linkValues[$linkParam] ?? null) : null;
+
+        return $this->sendTemplate($to, $bodyParams, $linkValue);
     }
 
     /**
@@ -132,7 +149,11 @@ class WhatsAppCloudApiService
             $this->getConfiguredVariableKeys()
         );
 
-        $result = $this->sendTemplate($cleanTo, $bodyParams, '1');
+        $sampleLinkValues = ['order_id' => '1'];
+        $linkParam = $this->getConfiguredLinkVariable();
+        $linkValue = $linkParam !== null ? ($sampleLinkValues[$linkParam] ?? null) : null;
+
+        $result = $this->sendTemplate($cleanTo, $bodyParams, $linkValue);
 
         return $result === true ? true : ($this->lastError ?? 'Échec de l\'envoi.');
     }
@@ -153,6 +174,21 @@ class WhatsAppCloudApiService
 
         $supported = array_keys(self::supportedVariables());
         return array_values(array_filter($keys, fn ($key) => in_array($key, $supported, true)));
+    }
+
+    /**
+     * The superadmin's chosen variable for the template's dynamic URL
+     * button, or null when no button is configured (empty setting = no
+     * button component sent at all).
+     */
+    private function getConfiguredLinkVariable(): ?string
+    {
+        $key = getSetting('whatsapp_cloud_link_variable');
+        if (!$key || !in_array($key, array_keys(self::supportedLinkVariables()), true)) {
+            return null;
+        }
+
+        return $key;
     }
 
     private function resolveOrderVariables(Order $order): array
@@ -213,18 +249,19 @@ class WhatsAppCloudApiService
     }
 
     /**
-     * $linkOrderId, when the "order link button" setting is on, becomes the
-     * dynamic suffix Meta appends to the template's URL button — e.g. a
-     * button configured as https://mystoreasap.com/orders/{{1}} resolves to
-     * https://mystoreasap.com/orders/458 for that specific order.
+     * $linkValue, when set, becomes the dynamic suffix Meta appends to the
+     * template's URL button — e.g. a button configured as
+     * https://mystoreasap.com/orders/{{1}} resolves to
+     * https://mystoreasap.com/orders/458 when $linkValue is "458". Null
+     * means no button component is sent (either no button is configured,
+     * or the chosen variable has no value for this order).
      */
-    private function sendTemplate(string $to, array $bodyParams, ?string $linkOrderId = null): bool
+    private function sendTemplate(string $to, array $bodyParams, ?string $linkValue = null): bool
     {
         $accessToken = getSetting('whatsapp_cloud_access_token');
         $phoneNumberId = getSetting('whatsapp_cloud_phone_number_id');
         $templateName = getSetting('whatsapp_cloud_template_name', 'new_order_notification');
         $lang = getSetting('whatsapp_cloud_template_lang', 'fr');
-        $includeLinkButton = getSetting('whatsapp_cloud_include_link_button', '0') === '1';
 
         if (!$accessToken || !$phoneNumberId) {
             $this->lastError = 'Identifiants WhatsApp Cloud API manquants.';
@@ -243,13 +280,13 @@ class WhatsAppCloudApiService
             ];
         }
 
-        if ($includeLinkButton && $linkOrderId !== null) {
+        if ($linkValue !== null) {
             $components[] = [
                 'type' => 'button',
                 'sub_type' => 'url',
                 'index' => '0',
                 'parameters' => [
-                    ['type' => 'text', 'text' => $linkOrderId],
+                    ['type' => 'text', 'text' => $linkValue],
                 ],
             ];
         }

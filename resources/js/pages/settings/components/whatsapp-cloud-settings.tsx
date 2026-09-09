@@ -14,11 +14,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 interface WhatsappCloudSettingsProps {
   settings?: Record<string, any>;
   availableVariables?: Record<string, string>;
+  availableLinkVariables?: Record<string, string>;
 }
 
 const DEFAULT_VARIABLES = ['store_name', 'order_no', 'final_total'];
+const NO_LINK_VALUE = '__none__';
 
-export default function WhatsappCloudSettings({ settings = {}, availableVariables = {} }: WhatsappCloudSettingsProps) {
+export default function WhatsappCloudSettings({ settings = {}, availableVariables = {}, availableLinkVariables = {} }: WhatsappCloudSettingsProps) {
   const { t } = useTranslation();
 
   const getEnabledState = (val: any) => val === '1' || val === 1 || val === true || val === 'true';
@@ -43,7 +45,7 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
     whatsapp_cloud_template_name: settings.whatsapp_cloud_template_name || 'new_order_notification',
     whatsapp_cloud_template_lang: settings.whatsapp_cloud_template_lang || 'fr',
     whatsapp_cloud_template_variables: parseVariables(settings.whatsapp_cloud_template_variables),
-    whatsapp_cloud_include_link_button: getEnabledState(settings.whatsapp_cloud_include_link_button),
+    whatsapp_cloud_link_variable: settings.whatsapp_cloud_link_variable || null,
   });
 
   const [form, setForm] = useState(buildForm);
@@ -54,7 +56,7 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
     setForm(buildForm());
   }, [settings]);
 
-  const handleChange = (field: string, value: string | boolean) => {
+  const handleChange = (field: string, value: string | boolean | null) => {
     setForm(prev => ({ ...prev, [field]: value }));
   };
 
@@ -217,18 +219,27 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
             </Button>
           </div>
 
-          <div className="flex items-center justify-between p-4 bg-muted/20 border rounded-xl md:col-span-2">
-            <div className="space-y-0.5">
-              <Label htmlFor="whatsapp_cloud_include_link_button">{t('Include a button linking to the order')}</Label>
-              <p className="text-sm text-muted-foreground">
-                {t('Adds a button so the seller can open the order directly from WhatsApp — your template must define a dynamic URL button for this to work')}
-              </p>
-            </div>
-            <Switch
-              id="whatsapp_cloud_include_link_button"
-              checked={form.whatsapp_cloud_include_link_button}
-              onCheckedChange={(checked) => handleChange('whatsapp_cloud_include_link_button', checked)}
-            />
+          <div className="grid gap-2 md:col-span-2">
+            <Label>{t('Order Link Button')}</Label>
+            <p className="text-sm text-muted-foreground">
+              {t('If your template defines a dynamic URL button, choose what fills it — your template must define a dynamic URL button for this to work')}
+            </p>
+            <Select
+              value={form.whatsapp_cloud_link_variable || NO_LINK_VALUE}
+              onValueChange={(value) => handleChange('whatsapp_cloud_link_variable', value === NO_LINK_VALUE ? null : value)}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={NO_LINK_VALUE}>{t('No button')}</SelectItem>
+                {Object.keys(availableLinkVariables).map((varKey) => (
+                  <SelectItem key={varKey} value={varKey}>
+                    {availableLinkVariables[varKey]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="md:col-span-2 p-4 bg-muted/20 border rounded-xl text-sm text-muted-foreground space-y-1">
@@ -236,7 +247,7 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
             <p>1. {t('Create a WhatsApp Business app in Meta Business Manager and get a permanent access token + Phone Number ID')}</p>
             <p>2. {t('Create and get approved a message template on Meta, with one {{n}} placeholder per variable you configure below')}</p>
             <p>3. {t('Enter that exact template name and language above, and match each {{n}} to the variables below in the same order')}</p>
-            <p>4. {t('If you enable the order link button, add a "Visit website" button of type Dynamic in the template, with your orders URL as the base and one variable at the end (e.g. https://mystoreasap.com/orders/{{1}})')}</p>
+            <p>4. {t('If your template has a dynamic URL button, add it as a "Visit website" button of type Dynamic, with your orders URL as the base and one variable at the end (e.g. https://mystoreasap.com/orders/{{1}}), then select what fills it above')}</p>
           </div>
 
           <div className="grid gap-2 md:col-span-2 pt-2 border-t">

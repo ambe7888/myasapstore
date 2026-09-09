@@ -307,8 +307,10 @@ class WhatsAppCloudApiService
             );
 
             if ($response->failed()) {
-                $this->lastError = $response->json('error.message') ?? $response->body();
-                Log::warning('WhatsApp Cloud API notification failed: ' . $this->lastError);
+                $message = $response->json('error.message');
+                $details = $response->json('error.error_data.details');
+                $this->lastError = $details ? "{$message} — {$details}" : ($message ?? $response->body());
+                Log::warning('WhatsApp Cloud API notification failed: ' . $this->lastError, ['payload' => $components]);
                 return false;
             }
 

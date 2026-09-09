@@ -53,7 +53,7 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                   <div className="absolute inset-0 bg-amber-900/0 group-hover:bg-amber-900/30 transition-colors duration-300 flex items-end">
                     <div className="w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center">
-                        <span className="text-amber-800 font-bold text-sm">Explore Collection</span>
+                        <span className="text-amber-800 font-bold text-sm">Découvrir la collection</span>
                       </div>
                     </div>
                   </div>
@@ -96,7 +96,7 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
                     <div className="absolute inset-0 bg-amber-900/0 group-hover:bg-amber-900/30 transition-colors duration-300 flex items-end">
                       <div className="w-full p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                         <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <span className="text-amber-800 font-bold text-sm">Explore Collection</span>
+                          <span className="text-amber-800 font-bold text-sm">Découvrir la collection</span>
                         </div>
                       </div>
                     </div>
@@ -119,7 +119,7 @@ const FurnitureCategorySection: React.FC<FurnitureCategorySectionProps> = ({ cat
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center gap-3 bg-yellow-800 text-white px-12 py-5 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 group shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 hover:scale-105"
           >
-            <span>View All Categories</span>
+            <span>Voir toutes les catégories</span>
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

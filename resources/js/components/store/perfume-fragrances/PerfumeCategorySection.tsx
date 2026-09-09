@@ -18,10 +18,10 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-            {content?.title || 'Fragrance Families'}
+            {content?.title || 'Nos catégories'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
-            {content?.description || 'Explore our carefully curated fragrance categories.'}
+            {content?.description || "Découvrez notre sélection soigneusement choisie pour vous."}
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
           >
-            <span>View All Collections</span>
+            <span>Voir toutes les collections</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

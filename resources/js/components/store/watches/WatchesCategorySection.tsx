@@ -26,10 +26,10 @@ export default function WatchesCategorySection({ categories, content }: WatchesC
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-light text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Shop by Collection'}
+            {content?.title || 'Achetez par collection'}
           </h2>
           <p className="text-lg text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Explore our curated selection of luxury timepieces, from classic dress watches to modern sports chronographs.'}
+            {content?.description || "Découvrez notre sélection soigneusement choisie pour vous."}
           </p>
         </div>
 

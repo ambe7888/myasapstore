@@ -16,11 +16,11 @@ function JewelryCategorySection({ categories = [], content }: JewelryCategorySec
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif text-neutral-900 mb-4">
-            {content?.title || 'Shop by Category'}
+            {content?.title || 'Achetez par catégorie'}
           </h2>
           <div className="w-24 h-1 bg-yellow-600 mx-auto mb-4"></div>
           <p className="text-neutral-600 max-w-2xl mx-auto">
-            {content?.description || 'Browse our carefully curated jewelry collections'}
+            {content?.description || "Parcourez notre sélection soigneusement choisie pour vous"}
           </p>
         </div>
         
@@ -51,7 +51,7 @@ function JewelryCategorySection({ categories = [], content }: JewelryCategorySec
                   {category.products_count} {category.products_count === 1 ? 'item' : 'items'} available
                 </p>
                 <div className="flex items-center text-yellow-600 text-sm font-medium">
-                  <span>Browse Collection</span>
+                  <span>Découvrir la collection</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -66,7 +66,7 @@ function JewelryCategorySection({ categories = [], content }: JewelryCategorySec
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center px-8 py-4 bg-yellow-600 text-white font-medium hover:bg-yellow-700 transition-colors"
           >
-            <span>View All Categories</span>
+            <span>Voir toutes les catégories</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

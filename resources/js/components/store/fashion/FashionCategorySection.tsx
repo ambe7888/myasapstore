@@ -21,7 +21,7 @@ export default function FashionCategorySection({ categories = [], content }: Fas
   const enhancedCategories = displayCategories.map(category => ({
     ...category,
     image: category.image ? getImageUrl(category.image) : `https://placehold.co/400x600/000000/ffffff?text=${encodeURIComponent(category.name)}`,
-    description: category.description || 'Discover the collection',
+    description: category.description || 'Découvrez la collection',
   }));
 
   return (
@@ -35,7 +35,7 @@ export default function FashionCategorySection({ categories = [], content }: Fas
                 {content?.title || 'Collections'}
               </h2>
               <p className="text-gray-500 font-light text-lg mt-4 max-w-2xl">
-                {content?.description || 'Curated collections for the modern wardrobe'}
+                {content?.description || 'Des collections sélectionnées pour une garde-robe moderne'}
               </p>
             </div>
             <div className="hidden lg:block">
@@ -72,7 +72,7 @@ export default function FashionCategorySection({ categories = [], content }: Fas
                     </h3>
                     <div className="w-12 h-px bg-white/60 mb-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                     <div className="flex items-center text-white/80 text-xs font-light tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                      <span>Shop Now</span>
+                      <span>Voir les produits</span>
                       <svg className="w-3 h-3 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
@@ -87,7 +87,7 @@ export default function FashionCategorySection({ categories = [], content }: Fas
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-gray-500 font-light text-lg">No collections available</p>
+            <p className="text-gray-500 font-light text-lg">Aucune collection disponible</p>
           </div>
         )}
       </div>

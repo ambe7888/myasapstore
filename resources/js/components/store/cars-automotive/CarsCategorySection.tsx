@@ -33,10 +33,10 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-black text-black mb-6 tracking-tight">
-            {categoryContent.title || 'Shop by Category'}
+            {categoryContent.title || 'Achetez par catégorie'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {categoryContent.description || 'Find the perfect parts and accessories for your vehicle.'}
+            {categoryContent.description || "Trouvez exactement ce que vous cherchez, organisé par catégorie."}
           </p>
           <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
         </div>
@@ -78,7 +78,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
                   
                   <div className="text-right">
                     <a href={generateStoreUrl('store.products', store) + '?category=' + category.id} className="bg-red-600 hover:bg-black text-white px-6 py-3 font-bold tracking-wider uppercase transition-colors flex items-center">
-                      Shop Now
+                      Voir les produits
                       <ChevronRight className="h-5 w-5 ml-2" />
                     </a>
                   </div>
@@ -94,7 +94,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors"
           >
-            View All Categories
+            Voir toutes les catégories
             <ChevronRight className="h-5 w-5 ml-2" />
           </a>
         </div>

@@ -21,7 +21,7 @@ export default function BeautyCategorySection({ categories = [], content }: Beau
   const enhancedCategories = displayCategories.map(category => ({
     ...category,
     image: category.image ? getImageUrl(category.image) : `https://placehold.co/400x500/fdf2f8/ec4899?text=${encodeURIComponent(category.name)}`,
-    description: category.description || 'Discover the collection',
+    description: category.description || 'Découvrez la collection',
   }));
 
   return (
@@ -30,10 +30,10 @@ export default function BeautyCategorySection({ categories = [], content }: Beau
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-6xl font-light text-gray-900 mb-6">
-            {content?.title || 'Shop by Category'}
+            {content?.title || 'Achetez par catégorie'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Explore our carefully curated beauty collections designed to enhance your natural radiance.'}
+            {content?.description || "Découvrez notre sélection soigneusement choisie pour vous."}
           </p>
         </div>
         
@@ -76,7 +76,7 @@ export default function BeautyCategorySection({ categories = [], content }: Beau
                       {category.description}
                     </p>
                     <div className="flex items-center text-rose-600 font-medium text-sm">
-                      <span>Explore Collection</span>
+                      <span>Découvrir la collection</span>
                       <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
@@ -93,7 +93,7 @@ export default function BeautyCategorySection({ categories = [], content }: Beau
                 <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd" />
               </svg>
             </div>
-            <p className="text-gray-500 text-lg">No collections available</p>
+            <p className="text-gray-500 text-lg">Aucune collection disponible</p>
           </div>
         )}
       </div>

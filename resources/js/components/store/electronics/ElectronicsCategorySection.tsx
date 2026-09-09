@@ -28,10 +28,10 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            {content?.title || 'Shop by Category'}
+            {content?.title || 'Achetez par catégorie'}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {content?.description || 'Explore our comprehensive range of electronics and gadgets organized by category for easy browsing.'}
+            {content?.description || 'Parcourez notre sélection soigneusement choisie, organisée par catégorie.'}
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
 
                 {/* Hover Arrow */}
                 <div className="flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
-                  <span className="text-sm font-semibold mr-2">Explore</span>
+                  <span className="text-sm font-semibold mr-2">Découvrir</span>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -101,7 +101,7 @@ export default function ElectronicsCategorySection({ categories, content }: Elec
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            <span>View All Categories</span>
+            <span>Voir toutes les catégories</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

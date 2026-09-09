@@ -129,7 +129,7 @@ class WhatsAppCloudApiService
             'order_no' => 'TEST-0001',
             'customer_name' => 'Client Test',
             'customer_phone' => '+225 07 00 00 00 00',
-            'items_summary' => "1x Chaussure Berluti (Rouge, 42) - 45 000\n2x Sac Lacoste - 18 000",
+            'items_summary' => '1x Chaussure Berluti (Rouge, 42) - 45 000 | 2x Sac Lacoste - 18 000',
             'final_total' => '15 000',
             'sub_total' => '14 000',
             'qty_total' => '2',
@@ -245,7 +245,9 @@ class WhatsAppCloudApiService
             $lines[] = "{$item->quantity}x {$label} - " . number_format($item->total_price, 2);
         }
 
-        return implode("\n", $lines);
+        // Meta rejects newline/tab characters in template parameter text, so
+        // items are separated with " | " instead of one-per-line.
+        return implode(' | ', $lines);
     }
 
     /**
@@ -274,7 +276,7 @@ class WhatsAppCloudApiService
             $components[] = [
                 'type' => 'body',
                 'parameters' => array_map(
-                    fn ($param) => ['type' => 'text', 'text' => (string) $param],
+                    fn ($param) => ['type' => 'text', 'text' => $this->sanitizeParamText((string) $param)],
                     $bodyParams
                 ),
             ];
@@ -286,7 +288,7 @@ class WhatsAppCloudApiService
                 'sub_type' => 'url',
                 'index' => '0',
                 'parameters' => [
-                    ['type' => 'text', 'text' => $linkValue],
+                    ['type' => 'text', 'text' => $this->sanitizeParamText($linkValue)],
                 ],
             ];
         }
@@ -320,6 +322,19 @@ class WhatsAppCloudApiService
             Log::error('WhatsApp Cloud API request error: ' . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Meta rejects any parameter text containing newlines/tabs or 4+
+     * consecutive spaces (error #132018), so every value — regardless of
+     * which order field it came from — is normalized before being sent.
+     */
+    private function sanitizeParamText(string $value): string
+    {
+        $value = preg_replace('/[\r\n\t]+/', ' ', $value);
+        $value = preg_replace('/ {2,}/', ' ', $value);
+
+        return trim($value);
     }
 
     private function cleanNumber(?string $number): ?string

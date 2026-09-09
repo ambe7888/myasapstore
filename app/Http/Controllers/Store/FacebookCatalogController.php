@@ -22,18 +22,26 @@ class FacebookCatalogController extends Controller
      */
     public function feed(Request $request, ?string $storeSlug = null): Response
     {
-        // 1. Resolve Store
-        $store = $request->attributes->get('store');
+        // 1. Resolve Store — 'resolved_store' is the attribute key every
+        // other part of the app uses (CheckStoreStatus, DomainResolver);
+        // this used to check a 'store' key that nothing ever sets.
+        $store = $request->attributes->get('resolved_store');
 
-        if (!$store && $storeSlug) {
-            $store = Store::where('slug', $storeSlug)->first();
+        if (!$store) {
+            $slug = $storeSlug ?? $request->route('storeSlug');
+            if ($slug) {
+                $store = Store::where('slug', $slug)->first();
+            }
         }
 
         if (!$store) {
-            $currentHost = $request->getHost();
+            $currentHost = Store::sanitizeDomain($request->getHost());
             $store = Store::where(function ($q) use ($currentHost) {
-                $q->where('custom_domain', $currentHost)
-                  ->orWhere('custom_subdomain', $currentHost);
+                $q->where(function ($q2) use ($currentHost) {
+                    $q2->where('custom_domain', $currentHost)->where('enable_custom_domain', true);
+                })->orWhere(function ($q2) use ($currentHost) {
+                    $q2->where('custom_subdomain', $currentHost)->where('enable_custom_subdomain', true);
+                });
             })->first();
         }
 

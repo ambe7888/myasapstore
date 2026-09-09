@@ -41,6 +41,8 @@ class WhatsAppCloudApiService
             'store_name' => __('Store name'),
             'order_no' => __('Order number'),
             'customer_name' => __('Customer name'),
+            'customer_phone' => __('Customer phone'),
+            'items_summary' => __('Order items (product, variant, quantity)'),
             'final_total' => __('Order total'),
             'sub_total' => __('Subtotal'),
             'qty_total' => __('Total quantity'),
@@ -109,6 +111,8 @@ class WhatsAppCloudApiService
             'store_name' => 'Boutique Test',
             'order_no' => 'TEST-0001',
             'customer_name' => 'Client Test',
+            'customer_phone' => '+225 07 00 00 00 00',
+            'items_summary' => "1x Chaussure Berluti (Rouge, 42) - 45 000\n2x Sac Lacoste - 18 000",
             'final_total' => '15 000',
             'sub_total' => '14 000',
             'qty_total' => '2',
@@ -160,6 +164,8 @@ class WhatsAppCloudApiService
             'store_name' => $order->store->name ?? '',
             'order_no' => $order->order_number,
             'customer_name' => trim($order->customer_first_name . ' ' . $order->customer_last_name),
+            'customer_phone' => $order->customer_phone ?? '',
+            'items_summary' => $this->buildItemsSummary($order),
             'final_total' => number_format($order->total_amount, 2),
             'sub_total' => number_format($order->subtotal, 2),
             'qty_total' => (string) $order->items->sum('quantity'),
@@ -173,6 +179,37 @@ class WhatsAppCloudApiService
             'order_date' => $order->created_at->format('d/m/Y H:i'),
             'payment_method' => ucfirst($order->payment_method ?? ''),
         ];
+    }
+
+    /**
+     * Meta templates can't loop over a variable number of items, so this
+     * flattens the order's line items (with variant and quantity) into one
+     * multi-line block that fills a single {{n}} position — the same
+     * approach WhatsAppService uses for its {item_variable} placeholder.
+     */
+    private function buildItemsSummary(Order $order): string
+    {
+        $lines = [];
+
+        foreach ($order->items as $item) {
+            $variants = $item->product_variants;
+            $variant = '';
+
+            if (is_array($variants) && !empty($variants)) {
+                $variantParts = [];
+                foreach ($variants as $key => $value) {
+                    $variantParts[] = is_numeric($key) ? $value : "$key: $value";
+                }
+                $variant = implode(', ', $variantParts);
+            } elseif (is_string($variants) && $variants && $variants !== '[]' && $variants !== 'null') {
+                $variant = $variants;
+            }
+
+            $label = $item->product_name . ($variant !== '' ? " ({$variant})" : '');
+            $lines[] = "{$item->quantity}x {$label} - " . number_format($item->total_price, 2);
+        }
+
+        return implode("\n", $lines);
     }
 
     private function sendTemplate(string $to, array $bodyParams): bool

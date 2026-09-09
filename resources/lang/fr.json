@@ -27,6 +27,8 @@
     "Store name": "Nom de la boutique",
     "Order number": "Numéro de commande",
     "Customer name": "Nom du client",
+    "Customer phone": "Téléphone du client",
+    "Order items (product, variant, quantity)": "Détail des produits (article, variante, quantité)",
     "Order total": "Total de la commande",
     "Total quantity": "Quantité totale",
     "Shipping cost": "Frais de livraison",

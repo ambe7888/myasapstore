@@ -56,7 +56,7 @@ export default function StoreSettings({ store, settings }: Props) {
       const host = window.location.host;
       return `https://${store.custom_subdomain}.${host}/facebook-catalog.xml`;
     }
-    return `${window.location.origin}/store/${store?.slug}/facebook-catalog.xml`;
+    return `${window.location.origin}/${store?.slug}/facebook-catalog.xml`;
   };
 
   const handleSave = () => {

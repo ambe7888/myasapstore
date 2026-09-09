@@ -153,7 +153,13 @@ class ThemeController extends Controller
      */
     protected function getCustomPages($storeId, $storeSlug=null)
     {
-        $isCustomDomain = request() && request()->attributes->has('resolved_store') ?? false;
+        // NOT "was a store resolved" (CheckStoreStatus sets 'resolved_store'
+        // for every path-based visit too) — whether THIS store is actually
+        // configured to use a custom domain/subdomain, which is what
+        // decides whether a relative link (vs one prefixed with the store
+        // slug) will resolve correctly.
+        $storeModel = Store::find($storeId);
+        $isCustomDomain = $storeModel && ($storeModel->enable_custom_domain || $storeModel->enable_custom_subdomain);
         return CustomPage::where('store_id', $storeId)
             ->where('status', 'published')
             ->where('show_in_navigation', true)
@@ -189,8 +195,8 @@ class ThemeController extends Controller
     {
         $storeSlug = request()->route('storeSlug') ?? null;
         $store = $this->getStore($request, $storeSlug);
-        
-        $isCustomDomain = request() && request()->attributes->has('resolved_store') ?? false;
+
+        $isCustomDomain = ($store['enable_custom_domain'] ?? false) || ($store['enable_custom_subdomain'] ?? false);
         $customPages = $this->getCustomPages($store['id'], $storeSlug);
         
         // Get dynamic content from database or fallback to static
@@ -338,9 +344,8 @@ class ThemeController extends Controller
     {
         $storeSlug = request()->route('storeSlug') ?? null;
         $store = $this->getStore($request, $storeSlug);
-        $isCustomDomain = $request && $request->attributes->has('resolved_store');
-        $isCustomDomain = $request && $request->attributes->has('resolved_store');
-        
+        $isCustomDomain = ($store['enable_custom_domain'] ?? false) || ($store['enable_custom_subdomain'] ?? false);
+
         // Get actual cart items from database
         $cartItems = CartItem::where('store_id', $store['id'])
             ->where('session_id', session()->getId())

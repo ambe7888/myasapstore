@@ -1126,43 +1126,27 @@ class ThemeController extends Controller
     }
 
     /**
-     * Display products for a specific category.
+     * Redirect a category page hit to the product list filtered by that
+     * category — the same pattern every other category link in the app
+     * already uses (homepage tiles, product category badges). This route
+     * used to render an Inertia page ('store/category') that was never
+     * built for any theme, so every visit to it failed with a page error.
      */
     public function category(Request $request)
     {
         $storeSlug = request()->route('storeSlug') ?? null;
-        $slug = request()->route('slug') ?? (request()->route('storeSlug') ?? null);
+        $slug = request()->route('slug') ?? null;
         $store = $this->getStore($request, $storeSlug);
-        
+
         $category = Category::where('store_id', $store['id'])
             ->where('slug', $slug)
             ->where('is_active', true)
             ->firstOrFail();
-            
-        $products = Product::where('store_id', $store['id'])
-            ->where('category_id', $category->id)
-            ->where('is_active', true)
-            ->with('category')
-            ->latest()
-            ->take(12)
-            ->get();
-            
-        $customPages = $this->getCustomPages($store['id'], $storeSlug);
-        
-        return Inertia::render('store/category', array_merge([
-            'store' => $store,
-            'theme' => $store['theme'],
-            'category' => [
-                'id' => $category->id,
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'description' => $category->description,
-            ],
-            'products' => $products,
-            'customPages' => $customPages,
-            'cartCount' => 3,
-            'wishlistCount' => 5,
-        ], $this->getCommonData()));
+
+        return redirect()->route('store.products', array_filter([
+            'storeSlug' => $storeSlug,
+            'category' => $category->id,
+        ]));
     }
 
     /**

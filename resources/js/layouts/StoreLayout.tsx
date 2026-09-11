@@ -100,19 +100,30 @@ function StoreLayoutContent({
     const style = document.createElement('style');
     style.id = 'store-custom-css';
     
-    // Theme color classes override based on the active theme preset
-    // These maps specify which Tailwind classes are used by each store theme
-    const themeColorClasses: Record<string, { prefix: string; shades: number[] }> = {
-      'furniture-interior': { prefix: 'amber', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'cars-automotive':    { prefix: 'red',   shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'beauty-cosmetics':   { prefix: 'rose',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'baby-kids':          { prefix: 'pink',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'perfume-fragrances': { prefix: 'purple',shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'electronics':        { prefix: 'blue',  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'fashion':            { prefix: 'slate', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'watches':            { prefix: 'slate', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'jewelry':            { prefix: 'amber', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
-      'default':            { prefix: 'indigo',shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] },
+    // Theme color classes override based on the active theme preset.
+    // Each theme's "prefixes" list is the actual Tailwind hue(s) its pages
+    // are authored with for BRAND/accent elements (buttons, badges, CTAs) —
+    // confirmed by auditing real usage, not assumed from the theme's name.
+    // A few themes turned out to use a different hue than originally mapped
+    // (watches: real accent is amber, slate is just neutral structure;
+    // jewelry: real accent is yellow, amber only appears in one section;
+    // default: real accent is blue in markup, indigo is only the inline-style
+    // fallback hex used by AddToCartButton/BuyNowButton, a separate
+    // mechanism this map doesn't need to cover). Secondary prefixes handle
+    // themes that mix two hues for the same brand identity (e.g. a
+    // from-rose/to-pink gradient) so overriding only the primary hue doesn't
+    // leave a gradient half-recolored.
+    const themeColorClasses: Record<string, { prefixes: string[]; shades: number[] }> = {
+      'furniture-interior': { prefixes: ['amber', 'yellow'],  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'cars-automotive':    { prefixes: ['red'],              shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'beauty-cosmetics':   { prefixes: ['rose', 'pink'],     shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'baby-kids':          { prefixes: ['pink'],             shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'perfume-fragrances': { prefixes: ['purple', 'amber'],  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'electronics':        { prefixes: ['blue'],             shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'fashion':            { prefixes: ['slate'],            shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'watches':            { prefixes: ['amber'],            shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'jewelry':            { prefixes: ['yellow', 'amber'],  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
+      'default':            { prefixes: ['blue'],             shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] },
     };
 
     const currentTheme = theme || 'default';
@@ -151,27 +162,32 @@ function StoreLayoutContent({
     // Only inject overrides when vendor picked a non-default color
     // Use scoped [data-theme] .class selectors (specificity 0,1,1) which always beat .class alone (0,0,1)
     // --color-store-primary-* is set directly on the [data-theme] element and is a normal CSS property (inheritable)
-    if (selectedPreset && selectedPreset !== themeClasses.prefix) {
-      const p = themeClasses.prefix;
+    const OPACITY_FRACTIONS = [5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95];
+    if (selectedPreset && !themeClasses.prefixes.includes(selectedPreset)) {
       const t = selectedPreset;
-      const colorRules = themeClasses.shades.map(shade => {
+      const colorRules = themeClasses.prefixes.flatMap(p => themeClasses.shades.map(shade => {
         const v = `var(--color-store-primary-${shade})`;
+        const opacityRules = OPACITY_FRACTIONS.map(pct =>
+          `[data-theme="${t}"] .bg-${p}-${shade}\\/${pct} { background-color: color-mix(in oklch, ${v} ${pct}%, transparent); }`
+        ).join('\n');
         return `
           [data-theme="${t}"] .bg-${p}-${shade} { background-color: ${v}; }
           [data-theme="${t}"] .text-${p}-${shade} { color: ${v}; }
           [data-theme="${t}"] .border-${p}-${shade} { border-color: ${v}; }
           [data-theme="${t}"] .ring-${p}-${shade} { --tw-ring-color: ${v}; }
+          [data-theme="${t}"] .shadow-${p}-${shade} { --tw-shadow-color: ${v}; }
           [data-theme="${t}"] .from-${p}-${shade} { --tw-gradient-from: ${v}; }
           [data-theme="${t}"] .to-${p}-${shade} { --tw-gradient-to: ${v}; }
           [data-theme="${t}"] .hover\\:bg-${p}-${shade}:hover { background-color: ${v}; }
           [data-theme="${t}"] .hover\\:text-${p}-${shade}:hover { color: ${v}; }
           [data-theme="${t}"] .hover\\:border-${p}-${shade}:hover { border-color: ${v}; }
+          [data-theme="${t}"] .group:hover .group-hover\\:bg-${p}-${shade} { background-color: ${v}; }
+          [data-theme="${t}"] .group:hover .group-hover\\:text-${p}-${shade} { color: ${v}; }
           [data-theme="${t}"] .focus\\:border-${p}-${shade}:focus { border-color: ${v}; }
           [data-theme="${t}"] .focus\\:ring-${p}-${shade}:focus { --tw-ring-color: ${v}; }
-          [data-theme="${t}"] .bg-${p}-${shade}\\/20 { background-color: color-mix(in oklch, ${v} 20%, transparent); }
-          [data-theme="${t}"] .bg-${p}-${shade}\\/50 { background-color: color-mix(in oklch, ${v} 50%, transparent); }
+          ${opacityRules}
         `;
-      }).join('');
+      })).join('');
       cssContent += colorRules;
     }
 

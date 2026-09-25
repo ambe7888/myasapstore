@@ -33,7 +33,7 @@ class CheckPlanAccess
 
         // Check if user needs plan subscription
         if ($user->needsPlanSubscription()) {
-            $defaultPlan = Plan::where('is_free', 1)->first() ?? Plan::first();
+            $defaultPlan = Plan::where('is_default', true)->first() ?? Plan::first();
             if ($defaultPlan) {
                 $user->update([
                     'plan_id' => $defaultPlan->id,

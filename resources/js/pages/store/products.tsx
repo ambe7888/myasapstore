@@ -105,7 +105,8 @@ export default function ProductListing({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: ProductListingProps) {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT("fr");
   useStoreFavicon();
   
   const { props } = usePage();
@@ -120,7 +121,7 @@ export default function ProductListing({
   const [priceRange, setPriceRange] = useState({ min: filters.min_price || 0, max: filters.max_price || 1000 });
   const [selectedRating, setSelectedRating] = useState(Number(filters.rating) || 0);
   const [availability, setAvailability] = useState(filters.availability || 'all');
-  const [sortBy, setSortBy] = useState(filters.sort || 'popularity');
+  const [sortBy, setSortBy] = useState(filters.sort || 'newest');
   const [perPage, setPerPage] = useState(filters.per_page || 12);
 
   const listingMode = store?.product_listing_mode === 'infinite_scroll' ? 'infinite_scroll' : 'pagination';
@@ -142,7 +143,7 @@ export default function ProductListing({
     if (priceRange.max < 1000) params.max_price = priceRange.max;
     if (selectedRating > 0) params.rating = selectedRating;
     if (availability !== 'all') params.availability = availability;
-    if (sortBy !== 'popularity') params.sort = sortBy;
+    if (sortBy !== 'newest') params.sort = sortBy;
     if (perPage !== 12) params.per_page = perPage;
     
     router.visit(generateStoreUrl('store.products', store), {
@@ -160,7 +161,7 @@ export default function ProductListing({
     setPriceRange({ min: 0, max: 1000 });
     setSelectedRating(0);
     setAvailability('all');
-    setSortBy('popularity');
+    setSortBy('newest');
     setPerPage(12);
     
     router.visit(generateStoreUrl('store.products', store), {
@@ -486,8 +487,8 @@ export default function ProductListing({
                         }}
                         className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                       >
-                        <option value="popularity">{t("Popularity")}</option>
                         <option value="newest">{t("Newest")}</option>
+                        <option value="popularity">{t("Popularity")}</option>
                         <option value="price_low_high">{t("Price: Low to High")}</option>
                         <option value="price_high_low">{t("Price: High to Low")}</option>
                         <option value="rating">{t("Rating")}</option>
@@ -510,7 +511,7 @@ export default function ProductListing({
                           if (priceRange.max < 1000) params.max_price = priceRange.max;
                           if (selectedRating > 0) params.rating = selectedRating;
                           if (availability !== 'all') params.availability = availability;
-                          if (sortBy !== 'popularity') params.sort = sortBy;
+                          if (sortBy !== 'newest') params.sort = sortBy;
                           params.per_page = newPerPage;
                           
                           router.visit(generateStoreUrl('store.products', store), {

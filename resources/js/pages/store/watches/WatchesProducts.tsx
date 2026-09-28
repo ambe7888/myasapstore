@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useStoreTranslation } from '@/hooks/use-store-translation';
 import React, { useState, useEffect, useRef } from 'react';
 import { Head, Link, usePage, router } from '@inertiajs/react';
 import StoreLayout from '@/layouts/StoreLayout';
@@ -104,8 +104,7 @@ export default function WatchesProducts({
   filters = {},
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: WatchesProductsProps) {
-  const { i18n } = useTranslation();
-  const t = i18n.getFixedT("fr");
+  const t = useStoreTranslation();
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'watches-store';
   

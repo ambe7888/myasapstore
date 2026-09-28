@@ -20,7 +20,7 @@ class DomainResolver
         }
         
         // Skip for admin/dashboard routes and regular store routes
-        if ($request->is('dashboard*') || $request->is('admin*') || $request->is('password*') || $request->is('store/*') || $request->is('stores/*')) {
+        if ($request->is('dashboard*') || $request->is('admin*') || $request->is('password*') || $request->is('store/*') || $request->is('stores/*') || $request->is('translations/*')) {
             return $next($request);
         }
         

@@ -191,6 +191,31 @@ class HandleInertiaRequests extends Middleware
                     'newRegistrationsCount' => $newRegistrationsCount
                 ];
             },
+            'planExpiry' => function () use ($request) {
+                $user = $request->user();
+                if (!$user) {
+                    return null;
+                }
+
+                $billingUser = null;
+                if ($user->type === 'company') {
+                    $billingUser = $user;
+                } elseif ($user->type === 'user' && $user->created_by) {
+                    $billingUser = \App\Models\User::find($user->created_by);
+                }
+
+                if (!$billingUser || !$billingUser->plan_expire_date) {
+                    return null;
+                }
+
+                $daysRemaining = \Carbon\Carbon::today()->diffInDays($billingUser->plan_expire_date->copy()->startOfDay(), false);
+
+                return [
+                    'expireDate' => $billingUser->plan_expire_date->format('Y-m-d'),
+                    'daysRemaining' => (int) $daysRemaining,
+                    'isActive' => (bool) $billingUser->plan_is_active,
+                ];
+            },
             'isImpersonating' => session('impersonated_by') ? true : false,
             'ziggy' => fn(): array=> [
                  ...(new Ziggy)->toArray(),

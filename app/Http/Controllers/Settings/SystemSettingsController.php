@@ -161,6 +161,7 @@ class SystemSettingsController extends Controller
                 'whatsapp_cloud_access_token' => 'nullable|string',
                 'whatsapp_cloud_phone_number_id' => 'nullable|string',
                 'whatsapp_cloud_template_name' => 'required|string',
+                'whatsapp_cloud_plan_expiry_template_name' => 'nullable|string',
                 'whatsapp_cloud_template_lang' => 'required|string',
                 'whatsapp_cloud_template_variables' => 'required|array|min:1',
                 'whatsapp_cloud_template_variables.*' => 'required|string|in:' . implode(',', $supportedKeys),

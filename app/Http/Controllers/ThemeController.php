@@ -247,7 +247,8 @@ class ThemeController extends Controller
         $featuredProducts = Product::where('store_id', $store['id'])
             ->where('is_active', true)
             ->with('category')
-            ->latest()
+            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->take(4)
             ->get()
             ->map(function ($product) {
@@ -272,6 +273,7 @@ class ThemeController extends Controller
             ->where('is_active', true)
             ->with('category')
             ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->take(12)
             ->get()
             ->map(function ($product) {
@@ -1003,7 +1005,7 @@ class ThemeController extends Controller
         // Apply sorting
         switch ($request->get('sort', 'popularity')) {
             case 'newest':
-                $query->orderBy('created_at', 'desc');
+                $query->orderBy('created_at', 'desc')->orderBy('id', 'desc');
                 break;
             case 'price_low_high':
                 $query->orderBy('price', 'asc');
@@ -1015,7 +1017,7 @@ class ThemeController extends Controller
                 $query->orderBy('reviews_avg_rating', 'desc');
                 break;
             default: // popularity
-                $query->orderBy('created_at', 'desc');
+                $query->orderBy('created_at', 'desc')->orderBy('id', 'desc');
                 break;
         }
 

@@ -39,7 +39,7 @@ class ProductController extends BaseController
         }
         
         $perPage = min((int) $request->input('per_page', 10), 200);
-        $products = $query->latest()->paginate($perPage)->withQueryString();
+        $products = $query->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate($perPage)->withQueryString();
         
         // Get categories for the filter dropdown
         $categories = Category::where('store_id', $currentStoreId)

@@ -43,6 +43,7 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
     whatsapp_cloud_access_token: settings.whatsapp_cloud_access_token || '',
     whatsapp_cloud_phone_number_id: settings.whatsapp_cloud_phone_number_id || '',
     whatsapp_cloud_template_name: settings.whatsapp_cloud_template_name || 'new_order_notification',
+    whatsapp_cloud_plan_expiry_template_name: settings.whatsapp_cloud_plan_expiry_template_name || 'plan_expiry_alert',
     whatsapp_cloud_template_lang: settings.whatsapp_cloud_template_lang || 'fr',
     whatsapp_cloud_template_variables: parseVariables(settings.whatsapp_cloud_template_variables),
     whatsapp_cloud_link_variable: settings.whatsapp_cloud_link_variable || null,
@@ -176,6 +177,19 @@ export default function WhatsappCloudSettings({ settings = {}, availableVariable
               value={form.whatsapp_cloud_template_lang}
               onChange={(e) => handleChange('whatsapp_cloud_template_lang', e.target.value)}
               placeholder="fr"
+            />
+          </div>
+
+          <div className="grid gap-2 md:col-span-2">
+            <Label htmlFor="whatsapp_cloud_plan_expiry_template_name">{t('Plan Expiry Template Name')}</Label>
+            <p className="text-sm text-muted-foreground">
+              {t('A separate approved template used to alert a store owner the day their plan subscription expires. It must define exactly two {{n}} variables, in order: store name, then expiration date.')}
+            </p>
+            <Input
+              id="whatsapp_cloud_plan_expiry_template_name"
+              value={form.whatsapp_cloud_plan_expiry_template_name}
+              onChange={(e) => handleChange('whatsapp_cloud_plan_expiry_template_name', e.target.value)}
+              placeholder="plan_expiry_alert"
             />
           </div>
 

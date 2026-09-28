@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -159,6 +160,34 @@ class WhatsAppCloudApiService
     }
 
     /**
+     * Notify a company owner that their plan subscription has reached its
+     * expiration date. Uses its own Meta-approved template (separate from
+     * the order-notification one) since the variables are unrelated to an
+     * order — the superadmin must create and get this template approved in
+     * Meta Business Manager with exactly two body variables, in this order:
+     * {{1}} = store/company name, {{2}} = expiration date.
+     */
+    public function sendPlanExpiryAlert(User $user): bool
+    {
+        if (!$this->isEnabled()) {
+            return false;
+        }
+
+        $to = $this->cleanNumber($user->phone);
+        if (!$to) {
+            Log::warning('WhatsApp Cloud API: user has no usable phone number for plan expiry alert', ['user_id' => $user->id]);
+            return false;
+        }
+
+        $storeName = $user->stores()->first()->name ?? $user->name;
+        $expireDate = $user->plan_expire_date?->format('d/m/Y') ?? '';
+
+        $templateName = getSetting('whatsapp_cloud_plan_expiry_template_name', 'plan_expiry_alert');
+
+        return $this->sendTemplate($to, [$storeName, $expireDate], null, $templateName);
+    }
+
+    /**
      * The superadmin's configured, ordered list of variable keys — one per
      * template position. Falls back to a sensible 3-variable default so a
      * fresh install still sends something meaningful.
@@ -258,11 +287,11 @@ class WhatsAppCloudApiService
      * means no button component is sent (either no button is configured,
      * or the chosen variable has no value for this order).
      */
-    private function sendTemplate(string $to, array $bodyParams, ?string $linkValue = null): bool
+    private function sendTemplate(string $to, array $bodyParams, ?string $linkValue = null, ?string $templateName = null): bool
     {
         $accessToken = getSetting('whatsapp_cloud_access_token');
         $phoneNumberId = getSetting('whatsapp_cloud_phone_number_id');
-        $templateName = getSetting('whatsapp_cloud_template_name', 'new_order_notification');
+        $templateName = $templateName ?? getSetting('whatsapp_cloud_template_name', 'new_order_notification');
         $lang = getSetting('whatsapp_cloud_template_lang', 'fr');
 
         if (!$accessToken || !$phoneNumberId) {

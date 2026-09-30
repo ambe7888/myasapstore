@@ -464,6 +464,40 @@ export default function StoreSettings({ store, settings }: Props) {
                 </div>
               </div>
 
+              {/* Product Filters Visibility */}
+              <div className="space-y-3 p-4 border rounded-lg bg-gray-50/50">
+                <div>
+                  <Label className="text-base font-semibold">{t('Filtres de la boutique')}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t('Choisissez les filtres affichés à vos clients sur la page produits. Désactivez ceux dont vous n\'avez pas besoin.')}
+                  </p>
+                </div>
+                {[
+                  { key: 'search', label: 'Recherche' },
+                  { key: 'categories', label: 'Catégories' },
+                  { key: 'price', label: 'Gamme de prix' },
+                  { key: 'brands', label: 'Marques' },
+                  { key: 'rating', label: 'Note' },
+                  { key: 'availability', label: 'Disponibilité' },
+                ].map(({ key, label }) => {
+                  const hidden = String(formData.hidden_product_filters || '').split(',').filter(Boolean);
+                  const visible = !hidden.includes(key);
+                  return (
+                    <div key={key} className="flex items-center justify-between py-1">
+                      <Label htmlFor={`filter_${key}`}>{t(label)}</Label>
+                      <Switch
+                        id={`filter_${key}`}
+                        checked={visible}
+                        onCheckedChange={(checked) => {
+                          const next = checked ? hidden.filter((k) => k !== key) : [...hidden, key];
+                          updateSetting('hidden_product_filters', next.join(','));
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
               {/* Add to Cart Text */}
               {formData.show_add_to_cart_button !== false && (
                 <div className="space-y-2">

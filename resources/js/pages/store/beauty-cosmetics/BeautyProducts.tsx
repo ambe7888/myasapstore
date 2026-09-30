@@ -104,6 +104,8 @@ export default function BeautyProducts({
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: BeautyProductsProps) {
   const t = useStoreTranslation();
+  const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
+  const showFilter = (key: string) => !hiddenFilters.includes(key);
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'beauty-store';
   
@@ -262,6 +264,7 @@ export default function BeautyProducts({
                 </div>
 
                 {/* Search */}
+                {showFilter('search') && (<>
                 <div className="mb-8">
                   <label className="block text-sm font-bold text-rose-700 mb-3 uppercase tracking-wide">Search Beauty Products</label>
                   <div className="relative">
@@ -276,8 +279,10 @@ export default function BeautyProducts({
                     />
                   </div>
                 </div>
+                </>)}
 
                 {/* Categories */}
+                {showFilter('categories') && (<>
                 <div className="mb-8">
                   <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Beauty Categories</label>
                   <div className="space-y-3 max-h-48 overflow-y-auto">
@@ -303,8 +308,10 @@ export default function BeautyProducts({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Price Range */}
+                {showFilter('price') && (<>
                 <div className="mb-8">
                   <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">{t("Price Range")}</label>
                   <div className="bg-white p-4 rounded-xl border-2 border-rose-100">
@@ -327,8 +334,10 @@ export default function BeautyProducts({
                     </div>
                   </div>
                 </div>
+                </>)}
 
                 {/* Brands */}
+                {showFilter('brands') && (<>
                 {brands.length > 0 && (
                   <div className="mb-8">
                     <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Beauty Brands</label>
@@ -356,8 +365,10 @@ export default function BeautyProducts({
                     </div>
                   </div>
                 )}
+                </>)}
 
                 {/* Rating */}
+                {showFilter('rating') && (<>
                 <div className="mb-8">
                   <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Customer Rating</label>
                   <div className="space-y-3">
@@ -383,8 +394,10 @@ export default function BeautyProducts({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Availability */}
+                {showFilter('availability') && (<>
                 <div className="mb-8">
                   <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">{t("Availability")}</label>
                   <div className="space-y-3">
@@ -420,6 +433,7 @@ export default function BeautyProducts({
                     </label>
                   </div>
                 </div>
+                </>)}
 
                 <button
                   onClick={applyFilters}

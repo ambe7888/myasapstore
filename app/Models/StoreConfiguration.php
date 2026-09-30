@@ -65,6 +65,7 @@ class StoreConfiguration extends Model
             'require_variant_selection' => true,
             'show_add_to_cart_button' => true,
             'product_listing_mode' => 'pagination',
+            'hidden_product_filters' => '',
         ];
         
         // Convert string boolean values to actual booleans

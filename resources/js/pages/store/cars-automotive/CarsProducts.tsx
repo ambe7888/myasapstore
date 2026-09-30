@@ -105,6 +105,8 @@ export default function CarsProducts({
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: CarsProductsProps) {
   const t = useStoreTranslation();
+  const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
+  const showFilter = (key: string) => !hiddenFilters.includes(key);
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'cars-store';
   
@@ -258,6 +260,7 @@ export default function CarsProducts({
                   </div>
 
                   {/* Search */}
+                  {showFilter('search') && (<>
                   <div className="mb-6">
                     <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wider uppercase">Search Parts</label>
                     <div className="relative">
@@ -272,8 +275,10 @@ export default function CarsProducts({
                       />
                     </div>
                   </div>
+                  </>)}
 
                   {/* Categories */}
+                  {showFilter('categories') && (<>
                   <div className="mb-6">
                     <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Categories")}</label>
                     <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -299,8 +304,10 @@ export default function CarsProducts({
                       ))}
                     </div>
                   </div>
+                  </>)}
 
                   {/* Price Range */}
+                  {showFilter('price') && (<>
                   <div className="mb-6">
                     <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Price Range")}</label>
                     <div className="flex items-center space-x-2">
@@ -321,8 +328,10 @@ export default function CarsProducts({
                       />
                     </div>
                   </div>
+                  </>)}
 
                   {/* Brands */}
+                  {showFilter('brands') && (<>
                   {brands.length > 0 && (
                     <div className="mb-6">
                       <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Brands")}</label>
@@ -350,8 +359,10 @@ export default function CarsProducts({
                       </div>
                     </div>
                   )}
+                  </>)}
 
                   {/* Rating */}
+                  {showFilter('rating') && (<>
                   <div className="mb-6">
                     <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Rating")}</label>
                     <div className="space-y-2">
@@ -377,8 +388,10 @@ export default function CarsProducts({
                       ))}
                     </div>
                   </div>
+                  </>)}
 
                   {/* Availability */}
+                  {showFilter('availability') && (<>
                   <div className="mb-6">
                     <label className="block text-sm font-bold text-gray-700 mb-3 tracking-wider uppercase">{t("Availability")}</label>
                     <div className="space-y-2">
@@ -414,6 +427,7 @@ export default function CarsProducts({
                       </label>
                     </div>
                   </div>
+                  </>)}
 
                   <button
                     onClick={applyFilters}

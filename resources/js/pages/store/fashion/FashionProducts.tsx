@@ -104,6 +104,8 @@ export default function FashionProducts({
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: FashionProductsProps) {
   const t = useStoreTranslation();
+  const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
+  const showFilter = (key: string) => !hiddenFilters.includes(key);
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'fashion-store';
   
@@ -251,6 +253,7 @@ export default function FashionProducts({
                 </div>
 
                 {/* Search */}
+                {showFilter('search') && (<>
                 <div className="mb-6">
                   <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">{t("Search")}</label>
                   <div className="relative">
@@ -264,8 +267,10 @@ export default function FashionProducts({
                     />
                   </div>
                 </div>
+                </>)}
 
                 {/* Categories */}
+                {showFilter('categories') && (<>
                 <div className="mb-8">
                   <label className="block text-xs font-thin mb-4 uppercase tracking-widest text-gray-300">Collections</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -291,8 +296,10 @@ export default function FashionProducts({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Price Range */}
+                {showFilter('price') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Price Range")}</label>
                   <div className="space-y-2">
@@ -315,8 +322,10 @@ export default function FashionProducts({
                     </div>
                   </div>
                 </div>
+                </>)}
 
                 {/* Brands */}
+                {showFilter('brands') && (<>
                 {brands.length > 0 && (
                   <div className="mb-8">
                     <label className="block text-xs font-thin mb-4 uppercase tracking-widest text-gray-300">Designers</label>
@@ -344,8 +353,10 @@ export default function FashionProducts({
                     </div>
                   </div>
                 )}
+                </>)}
 
                 {/* Rating */}
+                {showFilter('rating') && (<>
                 <div className="mb-6">
                   <label className="block text-xs font-light mb-3 uppercase tracking-widest text-gray-500">{t("Rating")}</label>
                   <div className="space-y-2">
@@ -371,8 +382,10 @@ export default function FashionProducts({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Availability */}
+                {showFilter('availability') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Availability")}</label>
                   <div className="space-y-2">
@@ -408,6 +421,7 @@ export default function FashionProducts({
                     </label>
                   </div>
                 </div>
+                </>)}
 
                 <button
                   onClick={applyFilters}

@@ -106,6 +106,8 @@ export default function ProductListing({
   pagination = { current_page: 1, last_page: 1, per_page: 12, total: 0, from: 0, to: 0 }
 }: ProductListingProps) {
   const t = useStoreTranslation();
+  const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
+  const showFilter = (key: string) => !hiddenFilters.includes(key);
   useStoreFavicon();
   
   const { props } = usePage();
@@ -261,6 +263,7 @@ export default function ProductListing({
                 </div>
 
                 {/* Search */}
+                {showFilter('search') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Search")}</label>
                   <div className="relative">
@@ -275,8 +278,10 @@ export default function ProductListing({
                     />
                   </div>
                 </div>
+                </>)}
 
                 {/* Categories */}
+                {showFilter('categories') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Categories")}</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -302,8 +307,10 @@ export default function ProductListing({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Price Range */}
+                {showFilter('price') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Price Range")}</label>
                   <div className="space-y-2">
@@ -326,8 +333,10 @@ export default function ProductListing({
                     </div>
                   </div>
                 </div>
+                </>)}
 
                 {/* Brands */}
+                {showFilter('brands') && (<>
                 {brands.length > 0 && (
                   <div className="mb-6">
                     <label className="block text-sm font-medium mb-2">{t("Brands")}</label>
@@ -355,8 +364,10 @@ export default function ProductListing({
                     </div>
                   </div>
                 )}
+                </>)}
 
                 {/* Rating */}
+                {showFilter('rating') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Rating")}</label>
                   <div className="space-y-2">
@@ -382,8 +393,10 @@ export default function ProductListing({
                     ))}
                   </div>
                 </div>
+                </>)}
 
                 {/* Availability */}
+                {showFilter('availability') && (<>
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">{t("Availability")}</label>
                   <div className="space-y-2">
@@ -419,6 +432,7 @@ export default function ProductListing({
                     </label>
                   </div>
                 </div>
+                </>)}
 
                 <button
                   onClick={applyFilters}

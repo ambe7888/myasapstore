@@ -106,6 +106,8 @@ export default function BeautyProducts({
   const t = useStoreTranslation();
   const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
   const showFilter = (key: string) => !hiddenFilters.includes(key);
+  const hiddenSorts = String(store?.hidden_sort_options || '').split(',').filter(Boolean);
+  const showSort = (key: string) => !hiddenSorts.includes(key);
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'beauty-store';
   
@@ -502,10 +504,10 @@ export default function BeautyProducts({
                         className="border-2 border-rose-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
                       >
                         <option value="newest">{t("New Arrivals")}</option>
-                        <option value="popularity">{t("Most Popular")}</option>
-                        <option value="price_low_high">{t("Price: Low to High")}</option>
-                        <option value="price_high_low">{t("Price: High to Low")}</option>
-                        <option value="rating">{t("Highest Rated")}</option>
+                        {showSort('popularity') && <option value="popularity">{t("Most Popular")}</option>}
+                        {showSort('price_low_high') && <option value="price_low_high">{t("Price: Low to High")}</option>}
+                        {showSort('price_high_low') && <option value="price_high_low">{t("Price: High to Low")}</option>}
+                        {showSort('rating') && <option value="rating">{t("Highest Rated")}</option>}
                       </select>
                     </div>
 

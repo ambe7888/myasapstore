@@ -66,6 +66,7 @@ class ThemeController extends Controller
                 'show_add_to_cart_button' => isset($configuration['show_add_to_cart_button']) ? ($configuration['show_add_to_cart_button'] === true || $configuration['show_add_to_cart_button'] === 'true' || $configuration['show_add_to_cart_button'] === 1 || $configuration['show_add_to_cart_button'] === '1') : true,
                 'product_listing_mode' => in_array($configuration['product_listing_mode'] ?? 'pagination', ['pagination', 'infinite_scroll']) ? $configuration['product_listing_mode'] : 'pagination',
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
+                'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -130,6 +131,7 @@ class ThemeController extends Controller
                 'show_add_to_cart_button' => isset($configuration['show_add_to_cart_button']) ? ($configuration['show_add_to_cart_button'] === true || $configuration['show_add_to_cart_button'] === 'true' || $configuration['show_add_to_cart_button'] === 1 || $configuration['show_add_to_cart_button'] === '1') : true,
                 'product_listing_mode' => in_array($configuration['product_listing_mode'] ?? 'pagination', ['pagination', 'infinite_scroll']) ? $configuration['product_listing_mode'] : 'pagination',
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
+                'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

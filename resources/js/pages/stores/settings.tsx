@@ -498,6 +498,37 @@ export default function StoreSettings({ store, settings }: Props) {
                 })}
               </div>
 
+              {/* Sort Options Visibility */}
+              <div className="space-y-3 p-4 border rounded-lg bg-gray-50/50">
+                <div>
+                  <Label className="text-base font-semibold">{t('Options du "Trier par"')}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t('Choisissez les options de tri proposées à vos clients. "Nouveautés" reste toujours disponible.')}
+                  </p>
+                </div>
+                {[
+                  { key: 'popularity', label: 'Le plus populaire' },
+                  { key: 'price_low_high', label: 'Prix : du - cher au + cher' },
+                  { key: 'price_high_low', label: 'Prix : du + cher au - cher' },
+                  { key: 'rating', label: 'Mieux notés' },
+                ].map(({ key, label }) => {
+                  const hidden = String(formData.hidden_sort_options || '').split(',').filter(Boolean);
+                  return (
+                    <div key={key} className="flex items-center justify-between py-1">
+                      <Label htmlFor={`sort_${key}`}>{t(label)}</Label>
+                      <Switch
+                        id={`sort_${key}`}
+                        checked={!hidden.includes(key)}
+                        onCheckedChange={(checked) => {
+                          const next = checked ? hidden.filter((k) => k !== key) : [...hidden, key];
+                          updateSetting('hidden_sort_options', next.join(','));
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
               {/* Add to Cart Text */}
               {formData.show_add_to_cart_button !== false && (
                 <div className="space-y-2">

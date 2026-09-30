@@ -107,6 +107,8 @@ export default function CarsProducts({
   const t = useStoreTranslation();
   const hiddenFilters = String(store?.hidden_product_filters || '').split(',').filter(Boolean);
   const showFilter = (key: string) => !hiddenFilters.includes(key);
+  const hiddenSorts = String(store?.hidden_sort_options || '').split(',').filter(Boolean);
+  const showSort = (key: string) => !hiddenSorts.includes(key);
   const { props } = usePage();
   const storeSlug = props.store?.slug || 'cars-store';
   
@@ -495,10 +497,10 @@ export default function CarsProducts({
                           className="border border-gray-300 px-3 py-1 text-sm focus:outline-none focus:border-red-600"
                         >
                           <option value="newest">{t("New Arrivals")}</option>
-                          <option value="popularity">{t("Most Popular")}</option>
-                          <option value="price_low_high">{t("Price: Low to High")}</option>
-                          <option value="price_high_low">{t("Price: High to Low")}</option>
-                          <option value="rating">{t("Highest Rated")}</option>
+                          {showSort('popularity') && <option value="popularity">{t("Most Popular")}</option>}
+                          {showSort('price_low_high') && <option value="price_low_high">{t("Price: Low to High")}</option>}
+                          {showSort('price_high_low') && <option value="price_high_low">{t("Price: High to Low")}</option>}
+                          {showSort('rating') && <option value="rating">{t("Highest Rated")}</option>}
                         </select>
                       </div>
 

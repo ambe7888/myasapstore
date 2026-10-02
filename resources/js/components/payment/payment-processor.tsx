@@ -40,6 +40,7 @@ import { PaymentWallPaymentForm } from './paymentwall-payment-form';
 import { SSPayPaymentForm } from './sspay-payment-form';
 import { TapPaymentForm } from './tap-payment-form';
 import { XenditPaymentForm } from './xendit-payment-form';
+import { MoneyFusionPaymentForm } from './moneyfusion-payment-form';
 
 interface PaymentMethod {
   id: string;
@@ -183,6 +184,15 @@ export function PaymentProcessor({
             {...commonProps}
             planPrice={Number(plan.price)}
             bankDetails={plan.paymentMethods?.bank_detail || ''}
+          />
+        );
+      case 'moneyfusion':
+        return (
+          <MoneyFusionPaymentForm
+            {...commonProps}
+            planPrice={Number(plan.price)}
+            formattedPrice={plan.formatted_price}
+            paymentLink={plan.paymentMethods?.moneyfusion_link || ''}
           />
         );
       case 'razorpay':

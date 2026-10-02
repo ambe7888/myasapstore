@@ -28,6 +28,7 @@ use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\PayPalPaymentController;
 use App\Http\Controllers\BankPaymentController;
+use App\Http\Controllers\MoneyFusionPaymentController;
 use App\Http\Controllers\PaystackPaymentController;
 use App\Http\Controllers\FlutterwavePaymentController;
 use App\Http\Controllers\PayTabsPaymentController;
@@ -230,6 +231,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('payments/stripe', [StripePaymentController::class, 'processPayment'])->name('stripe.payment');
     Route::post('payments/paypal', [PayPalPaymentController::class, 'processPayment'])->name('paypal.payment.web');
     Route::post('payments/bank', [BankPaymentController::class, 'processPayment'])->name('bank.payment.web');
+    Route::post('payments/moneyfusion', [MoneyFusionPaymentController::class, 'processPayment'])->name('moneyfusion.payment.web');
 
 
     Route::post('payments/paystack', [PaystackPaymentController::class, 'processPayment'])->name('paystack.payment');

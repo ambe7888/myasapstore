@@ -186,6 +186,15 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
       });
     }
     
+    if ((paymentSettings?.is_moneyfusion_enabled === true || paymentSettings?.is_moneyfusion_enabled === '1') && paymentSettings?.moneyfusion_link) {
+      methods.push({
+        id: 'moneyfusion',
+        name: t('Money Fusion (Mobile Money)'),
+        icon: <CreditCard className="h-5 w-5" />,
+        enabled: true
+      });
+    }
+
     if (paymentSettings?.is_stripe_enabled === true || paymentSettings?.is_stripe_enabled === '1') {
       methods.push({
         id: 'stripe',

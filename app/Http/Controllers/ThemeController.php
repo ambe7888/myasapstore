@@ -1598,6 +1598,7 @@ class ThemeController extends Controller
             'flutterwave' => '💳 Flutterwave',
             'coingate' => '🪙 CoinGate',
             'tap' => '💳 Tap Payment',
+            'moneyfusion' => '📱 Money Fusion (Mobile Money)',
             'telegram' => '💬 Telegram',
         ];
         

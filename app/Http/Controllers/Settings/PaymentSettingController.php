@@ -160,6 +160,7 @@ class PaymentSettingController extends Controller
                 'cashfree_mode' => 'in:sandbox,live',
                 'cashfree_secret_key' => 'nullable|string',
                 'cashfree_public_key' => 'nullable|string',
+                'moneyfusion_link' => 'nullable|url|max:500',
                 'whatsapp_phone_number' => 'nullable|regex:/^[0-9+\-\s()]*$/',
                 'telegram_bot_token' => 'nullable|string',
                 'telegram_chat_id' => 'nullable|string',
@@ -222,6 +223,7 @@ class PaymentSettingController extends Controller
             'is_easebuzz_enabled' => $request->boolean('is_easebuzz_enabled'),
             'is_ozow_enabled' => $request->boolean('is_ozow_enabled'),
             'is_cashfree_enabled' => $request->boolean('is_cashfree_enabled'),
+            'is_moneyfusion_enabled' => $request->boolean('is_moneyfusion_enabled'),
             'paypal_mode' => $validatedData['paypal_mode'] ?? 'sandbox',
             'mercadopago_mode' => $validatedData['mercadopago_mode'] ?? 'sandbox',
             'bank_detail' => $validatedData['bank_detail'],
@@ -302,6 +304,7 @@ class PaymentSettingController extends Controller
             'cashfree_mode' => $validatedData['cashfree_mode'] ?? 'sandbox',
             'cashfree_secret_key' => $validatedData['cashfree_secret_key'],
             'cashfree_public_key' => $validatedData['cashfree_public_key'],
+            'moneyfusion_link' => $validatedData['moneyfusion_link'] ?? '',
         ];
         
         return $settings;
@@ -442,6 +445,14 @@ class PaymentSettingController extends Controller
         if ($request->boolean('is_cashfree_enabled')) {
             $config = ['public_key' => $validatedData['cashfree_public_key'], 'secret_key' => $validatedData['cashfree_secret_key']];
             $validation = validatePaymentMethodConfig('cashfree', $config);
+            if (!$validation['valid']) {
+                $errors = array_merge($errors, $validation['errors']);
+            }
+        }
+
+        if ($request->boolean('is_moneyfusion_enabled')) {
+            $config = ['link' => $validatedData['moneyfusion_link'] ?? null];
+            $validation = validatePaymentMethodConfig('moneyfusion', $config);
             if (!$validation['valid']) {
                 $errors = array_merge($errors, $validation['errors']);
             }

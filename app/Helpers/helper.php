@@ -476,6 +476,12 @@ if (! function_exists('getPaymentMethodConfig')) {
                     'mode' => $settings['toyyibpay_mode'] ?? 'sandbox',
                 ];
                 
+            case 'moneyfusion':
+                return [
+                    'enabled' => isPaymentMethodEnabled('moneyfusion', $userId, $storeId),
+                    'link' => $settings['moneyfusion_link'] ?? null,
+                ];
+
             case 'cashfree':
                 return [
                     'enabled' => isPaymentMethodEnabled('cashfree', $userId, $storeId),
@@ -619,7 +625,7 @@ if (! function_exists('getEnabledPaymentMethods')) {
                 'stripe', 'razorpay', 'mercadopago', 'flutterwave', 'paytabs', 'skrill',
                 'coingate', 'payfast', 'tap', 'xendit', 'paytr', 'mollie', 'toyyibpay',
                 'cashfree', 'iyzipay', 'benefit', 'ozow', 'easebuzz', 'khalti',
-                'authorizenet', 'fedapay', 'payhere', 'paymentwall'
+                'authorizenet', 'fedapay', 'payhere', 'paymentwall', 'moneyfusion'
             ];
         }
         
@@ -762,6 +768,12 @@ if (! function_exists('validatePaymentMethodConfig')) {
                 }
                 break;
                 
+            case 'moneyfusion':
+                if (empty($config['link']) || !filter_var($config['link'], FILTER_VALIDATE_URL)) {
+                    $errors[] = 'Money Fusion payment link is required and must be a valid URL';
+                }
+                break;
+
             case 'cashfree':
                 if (empty($config['public_key'])) {
                     $errors[] = 'Cashfree App ID is required';

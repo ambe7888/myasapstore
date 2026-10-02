@@ -162,6 +162,8 @@ class OrderService
                 return $this->processCoinGatePayment($order, $storeSlug);
             case 'tap':
                 return $this->processTapPayment($order, $storeSlug);
+            case 'moneyfusion':
+                return $this->processMoneyFusionPayment($order);
             default:
                 return ['success' => false, 'message' => 'Unsupported payment method: ' . $order->payment_method];
         }
@@ -1069,6 +1071,37 @@ class OrderService
                 'message' => 'CoinGate payment failed: ' . $e->getMessage()
             ];
         }
+    }
+
+    private function processMoneyFusionPayment(Order $order): array
+    {
+        $storeModel = \App\Models\Store::find($order->store_id);
+        if (!$storeModel || !$storeModel->user) {
+            return ['success' => false, 'message' => 'Store configuration error'];
+        }
+
+        $config = getPaymentMethodConfig('moneyfusion', $storeModel->user->id, $order->store_id);
+
+        if (!$config['enabled'] || empty($config['link']) || !filter_var($config['link'], FILTER_VALIDATE_URL)) {
+            return ['success' => false, 'message' => 'Money Fusion is not configured for this store'];
+        }
+
+        // Money Fusion only provides a static payment link (no API/webhook), so
+        // the payment can't be confirmed automatically: the order stays pending
+        // until the seller verifies the payment received on their account.
+        $order->update([
+            'status' => 'pending',
+            'payment_status' => 'pending',
+            'payment_gateway' => 'moneyfusion',
+        ]);
+
+        return [
+            'success' => true,
+            'message' => 'Redirecting to Money Fusion payment link.',
+            'order_id' => $order->id,
+            'order_number' => $order->order_number,
+            'checkout_url' => $config['link'],
+        ];
     }
 
     private function processTapPayment(Order $order, string $storeSlug = null): array

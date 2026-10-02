@@ -219,7 +219,7 @@ class OrderController extends Controller
 
             if ($paymentResult['success']) {
                 // For Stripe, PayPal, PayFast, MercadoPago, Paystack, PayTabs, CoinGate, and Tap, redirect to checkout URL
-                if (in_array($request->payment_method, ['stripe', 'paypal', 'payfast', 'mercadopago', 'paystack', 'paytabs', 'coingate', 'tap']) && isset($paymentResult['checkout_url'])) {
+                if (in_array($request->payment_method, ['stripe', 'paypal', 'payfast', 'mercadopago', 'paystack', 'paytabs', 'coingate', 'tap', 'moneyfusion']) && isset($paymentResult['checkout_url'])) {
                     return redirect($paymentResult['checkout_url']);
                 }
                 

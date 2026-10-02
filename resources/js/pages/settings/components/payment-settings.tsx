@@ -145,8 +145,7 @@ interface PaymentSettings {
   payfast_passphrase: string;
   payfast_mode: 'sandbox' | 'live';
   is_moneyfusion_enabled: boolean;
-  moneyfusion_url: string;
-  moneyfusion_token: string;
+  moneyfusion_link: string;
 }
 
 interface PaymentSettingsProps {
@@ -296,8 +295,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
     payfast_passphrase: settings.payfast_passphrase || '',
     payfast_mode: settings.payfast_mode || 'sandbox',
     is_moneyfusion_enabled: settings.is_moneyfusion_enabled === true || settings.is_moneyfusion_enabled === '1',
-    moneyfusion_url: settings.moneyfusion_url || '',
-    moneyfusion_token: settings.moneyfusion_token || '',
+    moneyfusion_link: settings.moneyfusion_link || '',
   });
 
 
@@ -1377,26 +1375,20 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                 enabled={data.is_moneyfusion_enabled}
                 onToggle={(checked) => setData('is_moneyfusion_enabled', checked)}
                 helpUrl={PAYMENT_METHOD_HELP_URLS[PAYMENT_METHODS.MONEYFUSION]}
-                helpText={t("Obtenez vos identifiants API Money Fusion sur moneyfusion.net")}
+                helpText={t("Copiez votre lien de paiement depuis votre compte Money Fusion (moneyfusion.net)")}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <PaymentInputField
-                    id="moneyfusion_url"
-                    label={t("URL de paiement / Endpoint API")}
-                    value={data.moneyfusion_url}
-                    onChange={(value) => setData('moneyfusion_url', value)}
-                    placeholder="https://pay.moneyfusion.net/v1/pay"
-                    error={errors.moneyfusion_url}
+                    id="moneyfusion_link"
+                    label={t("Lien de paiement Money Fusion")}
+                    value={data.moneyfusion_link}
+                    onChange={(value) => setData('moneyfusion_link', value)}
+                    placeholder="https://pay.moneyfusion.net/..."
+                    error={errors.moneyfusion_link}
                   />
-                  <PaymentInputField
-                    id="moneyfusion_token"
-                    label={t("Token marchand / Clé API")}
-                    value={data.moneyfusion_token}
-                    onChange={(value) => setData('moneyfusion_token', value)}
-                    placeholder={t("Entrez votre Token Money Fusion")}
-                    isSecret
-                    error={errors.moneyfusion_token}
-                  />
+                  <p className="text-sm text-muted-foreground">
+                    {t("Vos clients seront redirigés vers ce lien pour payer. Les commandes restent « en attente » : confirmez le paiement dans votre compte Money Fusion avant de valider la commande.")}
+                  </p>
                 </div>
               </PaymentMethodCard>
               )}

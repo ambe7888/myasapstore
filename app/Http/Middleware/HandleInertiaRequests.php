@@ -95,17 +95,6 @@ class HandleInertiaRequests extends Middleware
             $storeCurrency = $this->getStoreCurrencySettings($request, $store);
         }
         
-        try {
-            \Log::info('Store currency in Inertia share:', [
-                'host' => $request->getHost(),
-                'storeCurrency' => $storeCurrency ?? null,
-                'resolved_store_attr' => $request->attributes->get('resolved_store') ? $request->attributes->get('resolved_store')->id : null,
-                'resolved_store_local' => $store ? $store->id : null,
-            ]);
-        } catch (\Exception $e) {
-            // Ignore log errors
-        }
-        
         return [
             ...parent::share($request),
             'name'  => config('app.name'),

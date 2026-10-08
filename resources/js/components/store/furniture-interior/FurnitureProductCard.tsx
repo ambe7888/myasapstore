@@ -103,7 +103,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
               ⭐ En vedette
             </span>
           )}
-          {product.variants && product.variants.length > 0 && (
+          {product.variants && product.variants.length > 0 && (props as any).store?.show_variant_badge !== false && (
             <span className="bg-amber-800 text-amber-100 px-2 py-1 text-xs font-bold rounded-lg shadow-md">
               Multi-variantes
             </span>

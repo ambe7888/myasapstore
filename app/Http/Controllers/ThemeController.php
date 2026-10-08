@@ -67,6 +67,7 @@ class ThemeController extends Controller
                 'product_listing_mode' => in_array($configuration['product_listing_mode'] ?? 'pagination', ['pagination', 'infinite_scroll']) ? $configuration['product_listing_mode'] : 'pagination',
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
                 'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
+                'show_variant_badge' => !isset($configuration['show_variant_badge']) || in_array($configuration['show_variant_badge'], [true, 'true', 1, '1'], true),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -132,6 +133,7 @@ class ThemeController extends Controller
                 'product_listing_mode' => in_array($configuration['product_listing_mode'] ?? 'pagination', ['pagination', 'infinite_scroll']) ? $configuration['product_listing_mode'] : 'pagination',
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
                 'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
+                'show_variant_badge' => !isset($configuration['show_variant_badge']) || in_array($configuration['show_variant_badge'], [true, 'true', 1, '1'], true),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,

@@ -426,6 +426,20 @@ export default function StoreSettings({ store, settings }: Props) {
                 />
               </div>
 
+              <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50/50">
+                <div className="space-y-0.5">
+                  <Label htmlFor="show_variant_badge" className="text-base font-semibold">{t("Afficher l'étiquette « Options disponibles »")}</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {t("Désactivez cette option pour masquer l'étiquette affichée sur les produits qui ont des variantes")}
+                  </p>
+                </div>
+                <Switch
+                  id="show_variant_badge"
+                  checked={formData.show_variant_badge !== false}
+                  onCheckedChange={(checked) => updateSetting('show_variant_badge', checked)}
+                />
+              </div>
+
               {/* Product Listing Mode */}
               <div className="space-y-2 p-4 border rounded-lg bg-gray-50/50">
                 <Label className="text-base font-semibold">{t('Affichage de la liste des produits')}</Label>

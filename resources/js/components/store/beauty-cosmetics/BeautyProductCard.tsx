@@ -70,7 +70,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
             -{discountPercentage}% OFF
           </div>
         )}
-        {hasVariants && (
+        {hasVariants && (props as any).store?.show_variant_badge !== false && (
           <div className="bg-rose-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm flex items-center gap-1">
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
               <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />

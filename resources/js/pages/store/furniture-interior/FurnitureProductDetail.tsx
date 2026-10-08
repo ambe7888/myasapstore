@@ -243,7 +243,7 @@ function FurnitureProductDetailContent({
                     </div>
                   )}
                   
-                  {hasVariants && (
+                  {hasVariants && (props as any).store?.show_variant_badge !== false && (
                     <div className="absolute top-6 right-6 bg-amber-800 text-amber-100 px-3 py-1 text-xs font-bold rounded-lg shadow-md">
                       Multi-variantes
                     </div>

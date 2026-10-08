@@ -67,6 +67,7 @@ class StoreConfiguration extends Model
             'product_listing_mode' => 'pagination',
             'hidden_product_filters' => '',
             'hidden_sort_options' => '',
+            'show_variant_badge' => true,
         ];
         
         // Convert string boolean values to actual booleans

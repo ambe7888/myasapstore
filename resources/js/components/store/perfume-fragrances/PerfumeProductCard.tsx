@@ -67,7 +67,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
               -{discountPercentage}%
             </span>
           )}
-          {product.variants && product.variants.length > 0 && (
+          {product.variants && product.variants.length > 0 && (props as any).store?.show_variant_badge !== false && (
             <span className="bg-purple-800 text-white px-3 py-1 text-xs font-medium rounded-full">
               Variants
             </span>

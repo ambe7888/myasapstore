@@ -84,7 +84,7 @@ export default function BabyKidsProductCard({ product, storeSettings, currencies
             )}
             
             {/* Variant Badge */}
-            {product.variants && product.variants.length > 0 && (
+            {product.variants && product.variants.length > 0 && (props as any).store?.show_variant_badge !== false && (
               <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                 In Variant
               </div>

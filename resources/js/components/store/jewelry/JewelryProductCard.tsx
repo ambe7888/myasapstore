@@ -61,7 +61,7 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
           </div>
         )}
         
-        {hasVariants && (
+        {hasVariants && (props as any).store?.show_variant_badge !== false && (
           <div className={`absolute left-4 ${hasDiscount ? 'top-12' : 'top-4'} bg-yellow-600 text-white px-3 py-1 text-xs font-medium uppercase`}>
             Variants
           </div>

@@ -63,7 +63,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
         
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">
-          {hasVariants && (
+          {hasVariants && (props as any).store?.show_variant_badge !== false && (
             <span className="bg-black text-white px-3 py-1 text-xs font-bold tracking-wider uppercase">
               IN VARIANT
             </span>

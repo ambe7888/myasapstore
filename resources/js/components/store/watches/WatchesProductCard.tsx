@@ -89,7 +89,7 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
         )}
 
         {/* Variant Badge */}
-        {hasVariants && (
+        {hasVariants && (props as any).store?.show_variant_badge !== false && (
           <div className="absolute bottom-4 left-4 bg-slate-700 text-white px-3 py-1 text-xs font-medium tracking-wider uppercase">
             In Variant
           </div>

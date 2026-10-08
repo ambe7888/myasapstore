@@ -136,7 +136,7 @@ export default function ProductCard({
         )}
         
         {/* Badges */}
-        {hasVariants && (
+        {hasVariants && (props as any).store?.show_variant_badge !== false && (
           <div className="absolute top-3 left-3">
             <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">
               {t("In Variant")}

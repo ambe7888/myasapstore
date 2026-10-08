@@ -73,12 +73,13 @@ interface Props {
   hasDefaultPlan?: boolean;
   isAdmin?: boolean;
   currentPlan?: any;
+  subscription?: { plan_name: string; expire_date: string | null; days_remaining: number | null; is_active: boolean } | null;
   userTrialUsed?: boolean;
   paymentMethods?: any[];
   activePlansCount?: number;
 }
 
-export default function Plans({ plans: initialPlans, billingCycle: initialBillingCycle = 'monthly', hasDefaultPlan, isAdmin = false, currentPlan, userTrialUsed, paymentMethods = [], activePlansCount = 0 }: Props) {
+export default function Plans({ plans: initialPlans, billingCycle: initialBillingCycle = 'monthly', hasDefaultPlan, isAdmin = false, currentPlan, subscription, userTrialUsed, paymentMethods = [], activePlansCount = 0 }: Props) {
   const { t } = useTranslation();
   const { flash } = usePage().props as any;
   const [plans, setPlans] = useState<Plan[]>(initialPlans);
@@ -656,7 +657,40 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
       url="/plans"
     >
       <div className="space-y-8">
-        {/* Header with controls */}
+        {/* Current subscription */}
+        {!isAdmin && subscription && (() => {
+          const days = subscription.days_remaining;
+          const expired = days !== null && days < 0;
+          const soon = days !== null && days >= 0 && days <= 7;
+          const tone = expired
+            ? 'border-red-200 bg-red-50 text-red-900'
+            : soon
+              ? 'border-amber-200 bg-amber-50 text-amber-900'
+              : 'border-emerald-200 bg-emerald-50 text-emerald-900';
+          const endDate = subscription.expire_date
+            ? new Date(subscription.expire_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+            : null;
+          return (
+            <div className={`rounded-xl border p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 ${tone}`}>
+              <div>
+                <p className="text-xs uppercase font-semibold tracking-wide opacity-70">{t("Abonnement en cours")}</p>
+                <p className="text-xl font-bold mt-1">{subscription.plan_name}</p>
+                <p className="text-sm mt-1">
+                  {endDate
+                    ? (expired
+                        ? `${t("Expiré le")} ${endDate}`
+                        : `${t("Valable jusqu'au")} ${endDate}${days !== null ? ` (${days === 0 ? t("expire aujourd'hui") : `${days} ${days > 1 ? t("jours restants") : t("jour restant")}`})` : ''}`)
+                    : t("Sans date de fin")}
+                </p>
+              </div>
+              <span className="self-start sm:self-center px-3 py-1 rounded-full text-sm font-semibold bg-white/70 border">
+                {expired ? t("Expiré") : soon ? t("Expire bientôt") : subscription.is_active ? t("Actif") : t("Inactif")}
+              </span>
+            </div>
+          );
+        })()}
+
+        {/* Header with controls */
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">

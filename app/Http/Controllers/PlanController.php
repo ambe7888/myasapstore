@@ -320,9 +320,24 @@ class PlanController extends Controller
         
         $activePlansCount = Plan::where('is_plan_enable', 'on')->count();
         
+        // The subscription belongs to the company owner; staff users inherit it.
+        $billingUser = ($user->type === 'user' && $user->created_by)
+            ? (\App\Models\User::with('plan')->find($user->created_by) ?? $user)
+            : $user;
+        $expireDate = $billingUser->plan_expire_date;
+        $subscription = $billingUser->plan ? [
+            'plan_name' => $billingUser->plan->name,
+            'expire_date' => $expireDate?->format('Y-m-d'),
+            'days_remaining' => $expireDate
+                ? (int) \Carbon\Carbon::today()->diffInDays($expireDate->copy()->startOfDay(), false)
+                : null,
+            'is_active' => (bool) $billingUser->plan_is_active,
+        ] : null;
+
         return Inertia::render('plans/index', [
             'plans' => $plans,
             'billingCycle' => $billingCycle,
+            'subscription' => $subscription,
             'currentPlan' => $user->plan,
             'userTrialUsed' => $user->is_trial,
             'activePlansCount' => $activePlansCount

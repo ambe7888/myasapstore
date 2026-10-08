@@ -74,7 +74,10 @@ class CompanyController extends Controller
                 'status' => $company->status,
                 'created_at' => $company->created_at,
                 'plan_name' => $company->plan ? $company->plan->name : __('No Plan'),
-                'plan_expiry_date' => $company->plan_expire_date,
+                'plan_expiry_date' => $company->plan_expire_date?->format('Y-m-d'),
+                'plan_days_remaining' => $company->plan_expire_date
+                    ? (int) \Carbon\Carbon::today()->diffInDays($company->plan_expire_date->copy()->startOfDay(), false)
+                    : null,
             ];
         });
         

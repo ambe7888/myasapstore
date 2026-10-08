@@ -10,7 +10,7 @@ interface PlanExpiry {
 export function PlanExpiryBanner() {
     const { planExpiry } = usePage().props as { planExpiry?: PlanExpiry | null };
 
-    if (!planExpiry || !planExpiry.isActive || planExpiry.daysRemaining > 7) {
+    if (!planExpiry || planExpiry.daysRemaining > 7) {
         return null;
     }
 

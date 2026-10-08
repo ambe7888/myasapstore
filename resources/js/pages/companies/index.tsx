@@ -372,6 +372,12 @@ export default function Companies() {
       label: t('Plan'),
       render: (value: string) => <span className="capitalize">{value}</span>
     },
+    {
+      key: 'plan_expiry_date',
+      label: t("Fin d'abonnement"),
+      sortable: true,
+      render: (_value: string, row: any) => renderExpiry(row.plan_expiry_date, row.plan_days_remaining)
+    },
     { 
       key: 'created_at', 
       label: t('Created At'), 
@@ -379,6 +385,20 @@ export default function Companies() {
       render: (value: string) => window.appSettings?.formatDateTime(value, false) || new Date(value).toLocaleDateString()
     }
   ];
+
+  const renderExpiry = (date?: string | null, days?: number | null) => {
+    if (!date || days === null || days === undefined) {
+      return <span className="text-gray-400 text-xs">-</span>;
+    }
+    const formatted = new Date(date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+    if (days < 0) {
+      return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800">{t("Expiré")} · {formatted}</span>;
+    }
+    if (days <= 7) {
+      return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">{days === 0 ? t("Expire aujourd'hui") : `${days} ${days > 1 ? t("jours") : t("jour")}`} · {formatted}</span>;
+    }
+    return <span className="text-xs text-gray-700">{formatted}</span>;
+  };
 
   return (
     <PageTemplate 
@@ -576,6 +596,7 @@ export default function Companies() {
                 <span className="font-semibold text-emerald-700 capitalize truncate block mt-0.5">
                   {company.plan_name || 'Free'}
                 </span>
+                <span className="block mt-1">{renderExpiry(company.plan_expiry_date, company.plan_days_remaining)}</span>
               </div>
             </div>
 
@@ -842,6 +863,7 @@ export default function Companies() {
                     <span className="font-semibold text-emerald-700 capitalize truncate block mt-0.5">
                       {company.plan_name || 'Free'}
                     </span>
+                    <span className="block mt-1">{renderExpiry(company.plan_expiry_date, company.plan_days_remaining)}</span>
                   </div>
                 </div>
 

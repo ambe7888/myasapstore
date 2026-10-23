@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Heart, Eye, Star } from 'lucide-react';
-import { Link, usePage, router } from '@inertiajs/react';
+import { Heart, Star } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
 import AddToCartButton from '../AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl, getProductCoverImage } from '@/utils/image-helper';
@@ -22,166 +22,117 @@ interface FashionProductCardProps {
       name: string;
       values: string[];
     }>;
+    [key: string]: any;
   };
   storeSettings?: any;
   currencies?: any[];
 }
 
-export default function FashionProductCard({
-  product,
-  storeSettings,
-  currencies
-}: FashionProductCardProps) {
+export default function FashionProductCard({ product }: FashionProductCardProps) {
   const { props } = usePage();
   const store = props.store;
-  const finalStoreSettings = storeSettings || props.storeSettings || {};
-  const finalCurrencies = currencies || props.currencies || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const format = useCurrencyFormatter();
-  
-  const [isHovered, setIsHovered] = useState(false);
+
   const [isFallback, setIsFallback] = useState(!product.cover_image && !product.image);
-  
+
   const isProductInWishlist = isInWishlist(product.id);
-  const hasVariants = product.variants && Array.isArray(product.variants) && product.variants.length > 0;
-  const isOnSale = product.sale_price && parseFloat(product.sale_price) < parseFloat(product.price);
+  const price = Number(product.price);
+  const salePrice = product.sale_price ? Number(product.sale_price) : null;
+  const isOnSale = salePrice !== null && salePrice < price;
+  const discount = isOnSale ? Math.round(((price - (salePrice as number)) / price) * 100) : 0;
   const isInStock = product.stock > 0 && product.is_active;
-  
-  const handleQuickView = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    router.visit(generateStoreUrl('store.product', store,  { id: product.id }));
-  };
-  
-  const handleAddToWishlist = async (e: React.MouseEvent) => {
+  const rating = Number(product.average_rating || product.rating || 0);
+  const hasReviews = (product.total_reviews || product.reviews_count || 0) > 0;
+  const productUrl = generateStoreUrl('store.product', store, { id: product.id });
+
+  const handleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     await toggleWishlist(product.id);
   };
 
   return (
-    <div 
-      className="group relative bg-white overflow-hidden border border-gray-100 hover:border-black transition-all duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Product Image */}
-      <Link 
-        href={generateStoreUrl('store.product', store,  { id: product.id })} 
-        className="block relative overflow-hidden aspect-[3/4]"
-      >
-        <img 
-          src={getProductCoverImage(product, store)} 
+    <div className="group flex flex-col">
+      <Link href={productUrl} className="relative block aspect-[3/4] overflow-hidden rounded-2xl bg-slate-100">
+        <img
+          src={getProductCoverImage(product, store)}
           alt={product.name}
-          className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
+          loading="lazy"
+          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${isFallback ? 'object-contain p-8' : 'object-cover'}`}
           onError={(e) => {
             setIsFallback(true);
             const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;
             (e.target as HTMLImageElement).src = storeLogo ? getImageUrl(storeLogo) : getImageUrl('/images/logos/logo-dark.png');
           }}
         />
-        
-        {/* Overlay for out of stock products */}
-        {!isInStock && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <span className="bg-white text-black text-sm font-light px-4 py-2 tracking-wide uppercase">
-              Out of Stock
+
+        <div className="absolute left-3 top-3 flex flex-col items-start gap-1.5">
+          {isOnSale && (
+            <span className="rounded-full bg-rose-600 px-2.5 py-1 text-[11px] font-semibold text-white">
+              -{discount}%
             </span>
-          </div>
-        )}
-        
-        {/* Sale Badge */}
-        {isOnSale && (
-          <div className="absolute top-4 left-4">
-            <span className="bg-black text-white text-xs font-light px-3 py-1 tracking-wider uppercase">
-              Sale
+          )}
+          {!isInStock && (
+            <span className="rounded-full bg-slate-900 px-2.5 py-1 text-[11px] font-semibold text-white">
+              Rupture de stock
             </span>
-          </div>
-        )}
-        
-        {/* Quick actions overlay */}
-        <div className={`absolute inset-0 bg-black/20 flex items-center justify-center gap-4 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-          <button 
-            onClick={handleAddToWishlist}
-            disabled={wishlistLoading}
-            className="bg-white p-3 hover:bg-black hover:text-white transition-colors"
-            aria-label={isProductInWishlist ? "Remove from wishlist" : "Add to wishlist"}
-          >
-            <Heart className={`h-5 w-5 ${isProductInWishlist ? 'text-red-500 fill-red-500' : ''}`} />
-          </button>
-          <button 
-            onClick={handleQuickView}
-            className="bg-white p-3 hover:bg-black hover:text-white transition-colors"
-            aria-label="Quick view"
-          >
-            <Eye className="h-5 w-5" />
-          </button>
+          )}
         </div>
+
+        <button
+          onClick={handleWishlist}
+          disabled={wishlistLoading}
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-sm backdrop-blur transition hover:bg-white sm:opacity-0 sm:group-hover:opacity-100"
+          aria-label={isProductInWishlist ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+        >
+          <Heart className={`h-4 w-4 ${isProductInWishlist ? 'fill-rose-500 text-rose-500' : ''}`} />
+        </button>
       </Link>
-      
-      {/* Product Info */}
-      <div className="p-6 text-center">
+
+      <div className="mt-3 flex flex-1 flex-col">
         {product.category && (
-          <Link 
-            href={generateStoreUrl('store.products', store) + '?category=' + product.category.id} 
-            className="text-xs text-gray-500 uppercase tracking-widest hover:text-black transition-colors"
+          <Link
+            href={generateStoreUrl('store.products', store) + '?category=' + product.category.id}
+            className="text-[11px] uppercase tracking-wide text-slate-400 hover:text-slate-700 transition-colors"
           >
             {product.category.name}
           </Link>
         )}
-        
-        <Link href={generateStoreUrl('store.product', store,  { id: product.id })}>
-          <h3 className="font-light text-lg mt-2 mb-3 hover:text-gray-600 transition-colors line-clamp-2">
+
+        <Link href={productUrl}>
+          <h3 className="mt-1 line-clamp-2 text-sm sm:text-[15px] font-medium text-slate-900 hover:underline underline-offset-2">
             {product.name}
           </h3>
         </Link>
-        
-        {/* Rating */}
-        {(product.total_reviews > 0 || product.reviews_count > 0) && (
-          <div className="flex items-center justify-center mb-3">
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((star) => {
-                const rating = product.average_rating || product.rating || 0;
-                return (
-                  <Star 
-                    key={star} 
-                    className={`h-3 w-3 ${star <= Math.floor(Number(rating)) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
-                  />
-                );
-              })}
-            </div>
-            <span className="text-xs text-gray-500 ml-2">({Number(product.average_rating || product.rating || 0).toFixed(1)})</span>
+
+        {hasReviews && (
+          <div className="mt-1.5 flex items-center gap-1">
+            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+            <span className="text-xs text-slate-500">{rating.toFixed(1)}</span>
           </div>
         )}
-        
-        {/* Price */}
-        <div className="mb-4">
-          {isOnSale ? (
-            <div className="flex items-center justify-center gap-2">
-              <span className="font-medium text-lg">{format(product.sale_price || 0)}</span>
-              <span className="text-gray-500 text-sm line-through">{format(product.price)}</span>
-            </div>
-          ) : (
-            <span className="font-medium text-lg">{format(product.price)}</span>
-          )}
+
+        <div className="mt-2 flex items-baseline gap-2">
+          <span className="text-base font-semibold text-slate-900">{format(isOnSale ? salePrice : price)}</span>
+          {isOnSale && <span className="text-sm text-slate-400 line-through">{format(price)}</span>}
         </div>
-        
-        {/* Add to cart button */}
-        <div className="flex gap-1.5 sm:gap-2 w-full">
+
+        <div className="mt-3 flex gap-2">
           {store?.show_add_to_cart_button !== false && (
-            <div className="flex-1 min-w-0">
+            <div className="min-w-0 flex-1">
               <AddToCartButton
                 product={product}
                 store={store}
-                className="w-full h-9 sm:h-10 rounded-lg text-[11px] sm:text-xs font-semibold text-white flex items-center justify-center px-1"
+                className="flex h-10 w-full items-center justify-center rounded-full px-2 text-[11px] sm:text-xs font-semibold text-white"
               />
             </div>
           )}
-          <div className="flex-1 min-w-0">
-            <BuyNowButton 
-              product={product} 
-              store={store} 
-              className="w-full h-9 sm:h-10 text-white font-semibold rounded-lg flex items-center justify-center text-[11px] sm:text-xs shadow-sm px-1" 
+          <div className="min-w-0 flex-1">
+            <BuyNowButton
+              product={product}
+              store={store}
+              className="flex h-10 w-full items-center justify-center rounded-full px-2 text-[11px] sm:text-xs font-semibold text-white"
             />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FashionProductCard } from './';
 import { usePage } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface Product {
@@ -23,36 +24,49 @@ interface FashionTrendingProductsSectionProps {
 export default function FashionTrendingProductsSection({ products = [], content, storeSettings = {}, currencies = [] }: FashionTrendingProductsSectionProps) {
   const { props } = usePage();
   const store = props.store;
-  
-  const enhancedProducts = products.slice(0, 6).map(product => ({
-    ...product,
-    href: product.href || generateStoreUrl('store.product', store,  { id: product.id })
-  }));
+
+  const items = products.slice(0, 8);
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-14 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-thin mb-6 tracking-wide text-black">
-            {content?.title || 'Trending Now'}
-          </h2>
-          <div className="w-16 h-px bg-black mx-auto mb-8"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto font-light text-lg leading-relaxed">
-            {content?.description || 'The hottest pieces everyone\'s talking about - from runway to street style.'}
-          </p>
+        <div className="flex items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+              {content?.title || 'Nouveautés'}
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-slate-500 max-w-xl">
+              {content?.description || 'Les derniers articles ajoutés à la boutique.'}
+            </p>
+          </div>
+          <a
+            href={generateStoreUrl('store.products', store)}
+            className="hidden sm:inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-slate-900 hover:underline underline-offset-4"
+          >
+            Voir tout
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
-        
-        {enhancedProducts.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8">
-            {enhancedProducts.map((product) => (
-              <FashionProductCard key={product.id} product={product} storeSettings={storeSettings} currencies={currencies} />
+
+        {items.length > 0 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-8 sm:gap-x-5">
+            {items.map((product) => (
+              <FashionProductCard key={product.id} product={product as any} storeSettings={storeSettings} currencies={currencies} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-16">
-            <p className="text-gray-500 font-light">No trending products available.</p>
+          <div className="rounded-2xl border border-dashed border-slate-200 py-16 text-center">
+            <p className="text-slate-500">Aucun produit disponible pour le moment.</p>
           </div>
         )}
+
+        <a
+          href={generateStoreUrl('store.products', store)}
+          className="mt-8 sm:hidden inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-slate-300 py-3 text-sm font-semibold text-slate-900"
+        >
+          Voir tout
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </section>
   );

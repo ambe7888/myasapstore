@@ -1,5 +1,8 @@
 import React from 'react';
+import { usePage } from '@inertiajs/react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { getImageUrl } from '@/utils/image-helper';
+import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface Category {
   id: number;
@@ -16,80 +19,76 @@ interface FashionCategorySectionProps {
 }
 
 export default function FashionCategorySection({ categories = [], content }: FashionCategorySectionProps) {
-  const displayCategories = categories.length > 0 ? categories : [];
-  
-  const enhancedCategories = displayCategories.map(category => ({
+  const { props } = usePage();
+  const store = props.store;
+
+  const items = categories.slice(0, 8).map((category) => ({
     ...category,
-    image: category.image ? getImageUrl(category.image) : `https://placehold.co/400x600/000000/ffffff?text=${encodeURIComponent(category.name)}`,
-    description: category.description || 'Découvrez la collection',
+    image: category.image
+      ? getImageUrl(category.image)
+      : `https://placehold.co/600x750/f1f5f9/475569?text=${encodeURIComponent(category.name)}`,
   }));
 
   return (
-    <section className="py-32 bg-gray-50">
+    <section className="py-14 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-24">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-8xl font-thin text-black tracking-tight leading-none">
-                {content?.title || 'Collections'}
-              </h2>
-              <p className="text-gray-500 font-light text-lg mt-4 max-w-2xl">
-                {content?.description || 'Des collections sélectionnées pour une garde-robe moderne'}
-              </p>
-            </div>
-            <div className="hidden lg:block">
-              <div className="w-32 h-px bg-black"></div>
-            </div>
+        <div className="flex items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+              {content?.title || 'Acheter par catégorie'}
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-slate-500 max-w-xl">
+              {content?.description || 'Parcourez nos catégories et trouvez ce qu\'il vous faut.'}
+            </p>
           </div>
+          <a
+            href={generateStoreUrl('store.products', store)}
+            className="hidden sm:inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-slate-900 hover:underline underline-offset-4"
+          >
+            Voir tout
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
-        
-        {enhancedCategories.length > 0 ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 h-[70vh]">
-            {enhancedCategories.slice(0, 4).map((category, index) => (
-              <a 
-                key={category.id} 
+
+        {items.length > 0 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+            {items.map((category) => (
+              <a
+                key={category.id}
                 href={category.href}
-                className="group block relative overflow-hidden bg-white"
+                className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-slate-100"
               >
-                <img 
+                <img
                   src={category.image}
                   alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://placehold.co/400x600/f5f5f5/666666?text=${encodeURIComponent(category.name)}`;
+                    (e.target as HTMLImageElement).src = `https://placehold.co/600x750/f1f5f9/475569?text=${encodeURIComponent(category.name)}`;
                   }}
                 />
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500"></div>
-                
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-white text-2xl font-thin mb-2 tracking-wide">
-                      {category.name}
-                    </h3>
-                    <div className="w-12 h-px bg-white/60 mb-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                    <div className="flex items-center text-white/80 text-xs font-light tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                      <span>Voir les produits</span>
-                      <svg className="w-3 h-3 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4 sm:p-5">
+                  <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">{category.name}</h3>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-slate-900 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
                 </div>
-                
-                {/* Corner Element */}
-                <div className="absolute top-4 right-4 w-6 h-6 border border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"></div>
               </a>
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
-            <p className="text-gray-500 font-light text-lg">Aucune collection disponible</p>
+          <div className="rounded-2xl border border-dashed border-slate-200 py-16 text-center">
+            <p className="text-slate-500">Aucune catégorie disponible pour le moment.</p>
           </div>
         )}
+
+        <a
+          href={generateStoreUrl('store.products', store)}
+          className="mt-6 sm:hidden inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-slate-300 py-3 text-sm font-semibold text-slate-900"
+        >
+          Voir tout
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </section>
   );

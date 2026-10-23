@@ -1,6 +1,7 @@
 import React from 'react';
 import { FashionProductCard } from './';
 import { usePage } from '@inertiajs/react';
+import { ArrowRight } from 'lucide-react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
 
 interface Product {
@@ -23,34 +24,37 @@ interface FashionFeaturedProductsSectionProps {
 export default function FashionFeaturedProductsSection({ products = [], content, storeSettings = {}, currencies = [] }: FashionFeaturedProductsSectionProps) {
   const { props } = usePage();
   const store = props.store;
-  
-  const enhancedProducts = products.map(product => ({
-    ...product,
-    href: product.href || generateStoreUrl('store.product', store,  { id: product.id })
-  }));
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-14 lg:py-20 bg-slate-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-thin mb-6 tracking-wide text-black">
-            {content?.title || 'Editor\'s Picks'}
-          </h2>
-          <div className="w-16 h-px bg-black mx-auto mb-8"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto font-light text-lg leading-relaxed">
-            {content?.description || 'Handpicked by our style experts - the must-have pieces that define this season\'s trends.'}
-          </p>
+        <div className="flex items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+              {content?.title || 'Nos sélections'}
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-slate-500 max-w-xl">
+              {content?.description || 'Les articles à ne pas manquer.'}
+            </p>
+          </div>
+          <a
+            href={generateStoreUrl('store.products', store)}
+            className="hidden sm:inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-slate-900 hover:underline underline-offset-4"
+          >
+            Voir tout
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
-        
-        {enhancedProducts.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8">
-            {enhancedProducts.map((product) => (
-              <FashionProductCard key={product.id} product={product} storeSettings={storeSettings} currencies={currencies} />
+
+        {products.length > 0 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-8 sm:gap-x-5">
+            {products.map((product) => (
+              <FashionProductCard key={product.id} product={product as any} storeSettings={storeSettings} currencies={currencies} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-16">
-            <p className="text-gray-500 font-light">No featured products available.</p>
+          <div className="rounded-2xl border border-dashed border-slate-200 py-16 text-center">
+            <p className="text-slate-500">Aucun produit disponible pour le moment.</p>
           </div>
         )}
       </div>

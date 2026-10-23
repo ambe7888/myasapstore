@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { 
-  Search, 
-  ShoppingCart, 
-  Heart, 
-  User, 
-  Menu as MenuIcon, 
-  X 
-} from 'lucide-react';
+import { ShoppingBag, Heart, User, Menu as MenuIcon, X } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
@@ -28,171 +21,131 @@ interface FashionHeaderProps {
 }
 
 export default function FashionHeader({
-  storeName = 'Fashion Store',
+  storeName = 'Ma boutique',
   logo,
-  cartCount = 0,
-  wishlistCount = 0,
   isLoggedIn = false,
-  userName = "",
+  userName = '',
   customPages = [],
 }: FashionHeaderProps) {
   const { props } = usePage();
   const store = props.store;
   const { count } = useCart();
-  const { count: wishlistCountFromContext } = useWishlist();
-  
+  const { count: wishlistCount } = useWishlist();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const userRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (userRef.current && !userRef.current.contains(e.target as Node)) setIsUserOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
+
+  const iconButton = 'relative flex h-10 w-10 items-center justify-center rounded-full text-slate-800 hover:bg-slate-100 transition-colors';
+  const badge = 'absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-slate-900 px-1 text-[10px] font-semibold text-white';
+  const menuItem = 'block w-full px-4 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50';
 
   return (
-    <>
-      <header className="bg-white border-b border-gray-100 relative z-40">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden p-2 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <MenuIcon className="h-6 w-6" />
-              )}
-            </button>
-            
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link href={generateStoreUrl('store.home', store)}>
-                {logo ? (
-                  <img src={getImageUrl(logo)} alt={storeName} className="h-8" />
-                ) : (
-                  <span className="text-2xl font-thin tracking-widest uppercase">{storeName}</span>
-                )}
-              </Link>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-12">
-              {customPages.map((item) => (
-                <Link 
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-900 hover:text-gray-600 font-light tracking-wide transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-            
-            {/* Actions */}
-            <div className="flex items-center space-x-6">
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            className={iconButton}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menu"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+          </button>
+        </div>
 
-              {/* User Account */}
-              <div className="relative">
-                <button 
-                  className="p-2 text-gray-900 hover:text-gray-600 focus:outline-none transition-colors"
-                  onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                >
-                  <User className="h-5 w-5" />
-                </button>
-                
-                {isUserDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg border border-gray-100 overflow-hidden z-50">
-                    {isLoggedIn ? (
-                      <>
-                        <div className="px-4 py-3 border-b border-gray-100">
-                          <p className="text-sm font-light text-gray-900">Hello, {userName}</p>
-                        </div>
-                        <Link 
-                          href={generateStoreUrl('store.my-profile', store)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-light"
-                        >
-                          My Profile
-                        </Link>
-                        <Link 
-                          href={generateStoreUrl('store.my-orders', store)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-light"
-                        >
-                          My Orders
-                        </Link>
-                        <Link 
-                          href={generateStoreUrl('store.logout', store)} 
-                          method="post" 
-                          as="button" 
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-light"
-                        >
-                          Logout
-                        </Link>
-                      </>
-                    ) : (
-                      <>
-                        <Link 
-                          href={generateStoreUrl('store.login', store)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-light"
-                        >
-                          Login
-                        </Link>
-                        <Link 
-                          href={generateStoreUrl('store.register', store)}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-light"
-                        >
-                          Register
-                        </Link>
-                      </>
-                    )}
-                  </div>
+        <Link href={generateStoreUrl('store.home', store)} className="flex shrink-0 items-center">
+          {logo ? (
+            <img src={getImageUrl(logo)} alt={storeName} className="h-9 w-auto" />
+          ) : (
+            <span className="text-xl font-semibold tracking-tight text-slate-900">{storeName}</span>
+          )}
+        </Link>
+
+        <nav className="hidden md:flex flex-1 items-center justify-center gap-8">
+          {customPages.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-1">
+          <div className="relative" ref={userRef}>
+            <button className={iconButton} onClick={() => setIsUserOpen(!isUserOpen)} aria-label="Mon compte">
+              <User className="h-5 w-5" />
+            </button>
+
+            {isUserOpen && (
+              <div className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-50">
+                {isLoggedIn ? (
+                  <>
+                    <div className="border-b border-slate-100 px-4 py-3">
+                      <p className="text-sm font-medium text-slate-900">Bonjour, {userName}</p>
+                    </div>
+                    <Link href={generateStoreUrl('store.my-profile', store)} className={menuItem}>
+                      Mon profil
+                    </Link>
+                    <Link href={generateStoreUrl('store.my-orders', store)} className={menuItem}>
+                      Mes commandes
+                    </Link>
+                    <Link href={generateStoreUrl('store.logout', store)} method="post" as="button" className={menuItem}>
+                      Se déconnecter
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href={generateStoreUrl('store.login', store)} className={menuItem}>
+                      Se connecter
+                    </Link>
+                    <Link href={generateStoreUrl('store.register', store)} className={menuItem}>
+                      Créer un compte
+                    </Link>
+                  </>
                 )}
               </div>
-              
-              {/* Wishlist */}
-              <Link 
-                href={generateStoreUrl('store.wishlist', store)}
-                className="p-2 text-gray-900 hover:text-gray-600 focus:outline-none relative transition-colors"
+            )}
+          </div>
+
+          <Link href={generateStoreUrl('store.wishlist', store)} className={iconButton} aria-label="Favoris">
+            <Heart className="h-5 w-5" />
+            {wishlistCount > 0 && <span className={badge}>{wishlistCount}</span>}
+          </Link>
+
+          <Link href={generateStoreUrl('store.cart', store)} className={iconButton} aria-label="Panier">
+            <ShoppingBag className="h-5 w-5" />
+            {count > 0 && <span className={badge}>{count}</span>}
+          </Link>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-slate-100 bg-white">
+          <div className="container mx-auto px-4 py-3">
+            {customPages.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block border-b border-slate-100 py-3 text-sm font-medium text-slate-800 last:border-0"
+                onClick={() => setIsMenuOpen(false)}
               >
-                <Heart className="h-5 w-5" />
-                {wishlistCountFromContext > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    {wishlistCountFromContext}
-                  </span>
-                )}
+                {item.name}
               </Link>
-              
-              {/* Cart */}
-              <Link 
-                href={generateStoreUrl('store.cart', store)}
-                className="p-2 text-gray-900 hover:text-gray-600 focus:outline-none relative transition-colors"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                {count > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    {count}
-                  </span>
-                )}
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
-        
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
-            <div className="px-4 py-4 space-y-4">
-              {customPages.map((item) => (
-                <Link 
-                  key={item.name}
-                  href={item.href}
-                  className="block text-gray-900 hover:text-gray-600 font-light tracking-wide transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </header>
-
-
-    </>
+      )}
+    </header>
   );
 }

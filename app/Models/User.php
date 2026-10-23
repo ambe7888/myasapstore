@@ -417,7 +417,9 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
             }
             
             // Create default store for company users (except during seeding)
-            if ($user->type === 'company' && !getCurrentStoreId($user) && !static::$skipStoreCreation) {
+            // Don't use getCurrentStoreId() here: with no store yet it auto-creates a
+            // "<name>'s Store" fallback, which would pre-empt the store named at signup.
+            if ($user->type === 'company' && !$user->stores()->exists() && !static::$skipStoreCreation) {
                 $storeName = request('store_name') ? trim(request('store_name')) : ($user->name . "'s Store");
                 $storePhone = $user->phone ?? (request('phone') ? trim(request('country_code') . ' ' . request('phone')) : null);
 

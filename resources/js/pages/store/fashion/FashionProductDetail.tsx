@@ -262,7 +262,7 @@ function FashionProductDetail({
                           })}
                         </div>
                         <span className="text-sm text-gray-500 ml-2 font-light">
-                          ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} Reviews
+                          ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} avis
                         </span>
                       </div>
                     )}
@@ -417,7 +417,7 @@ function FashionProductDetail({
                               : 'text-gray-500 hover:text-gray-700'
                           }`}
                         >
-                          Specifications
+                          Spécifications
                         </button>
                       )}
                       {product.details && (
@@ -441,7 +441,7 @@ function FashionProductDetail({
                               : 'text-gray-500 hover:text-gray-700'
                           }`}
                         >
-                          Advanced
+                          Informations avancées
                         </button>
                       )}
                       <button
@@ -452,7 +452,7 @@ function FashionProductDetail({
                             : 'text-gray-500 hover:text-gray-700'
                         }`}
                       >
-                        Reviews ({totalReviews})
+                        Avis ({totalReviews})
                       </button>
                     </div>
 
@@ -496,7 +496,7 @@ function FashionProductDetail({
                                     );
                                   })}
                                 </div>
-                                <span className="text-sm font-light">Based on {totalReviews} reviews</span>
+                                <span className="text-sm font-light">Basé sur {totalReviews} avis</span>
                               </div>
 
                               <button
@@ -534,7 +534,7 @@ function FashionProductDetail({
                                     {review.store_response && (
                                       <div className="bg-gray-50 border-l-4 border-black p-3 mt-3">
                                         <div className="flex items-center mb-1">
-                                          <span className="text-sm font-light text-black">Store Response:</span>
+                                          <span className="text-sm font-light text-black">Réponse de la boutique :</span>
                                         </div>
                                         <p className="text-sm text-gray-700 font-light">{review.store_response}</p>
                                       </div>
@@ -619,7 +619,7 @@ function FashionProductDetail({
                             rating: reviewRating,
                             title: reviewTitle,
                             content: reviewContent,
-                            customer_name: data.review?.customer_name || props.auth?.user?.name || 'Anonymous',
+                            customer_name: data.review?.customer_name || props.auth?.user?.name || "Anonyme",
                             created_at: "À l'instant",
                             store_response: null
                           };
@@ -704,7 +704,7 @@ function FashionProductDetail({
                           disabled={isSubmittingReview}
                           className="flex-1 py-3 bg-black text-white font-light tracking-widest uppercase text-xs hover:bg-gray-900 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                       </div>
                     </form>

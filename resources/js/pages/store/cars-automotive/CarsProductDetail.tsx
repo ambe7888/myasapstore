@@ -293,7 +293,7 @@ function CarsProductDetailInner({
                 <div>
                   <h1 className="text-4xl font-black tracking-wider">{product.name}</h1>
                   <div className="text-red-400 text-sm font-bold tracking-widest uppercase">
-                    {product.category?.name || 'Performance Part'} • SKU: {product.sku || product.id}
+                    {product.category?.name || "Produit"} • SKU: {product.sku || product.id}
                   </div>
                 </div>
               </div>
@@ -306,7 +306,7 @@ function CarsProductDetailInner({
             
             {/* Breadcrumb */}
             <nav className="text-sm font-bold tracking-wide text-gray-300 store-breadcrumb">
-              <a href={generateStoreUrl('store.home', store)} className="hover:text-red-400 transition-colors">Garage</a>
+              <a href={generateStoreUrl('store.home', store)} className="hover:text-red-400 transition-colors">Boutique</a>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-500 inline" />
               {product.category && (
                 <>
@@ -385,7 +385,7 @@ function CarsProductDetailInner({
                         })}
                       </div>
                       <span className="text-sm text-gray-600 ml-3 font-bold">
-                        ({(averageRating || product.average_rating || product.rating || 0).toFixed(1)}) • {totalReviews || product.reviews_count || productReviews?.length || 0} Reviews
+                        ({(averageRating || product.average_rating || product.rating || 0).toFixed(1)}) • {totalReviews || product.reviews_count || productReviews?.length || 0} avis
                       </span>
                     </div>
                     <div className={`px-3 py-1 text-xs font-bold tracking-wider uppercase ${
@@ -526,7 +526,7 @@ function CarsProductDetailInner({
                       
                       <button className="flex items-center justify-center space-x-2 py-3 border-2 border-gray-300 hover:border-red-600 hover:bg-red-50 font-bold text-sm uppercase tracking-wider transition-all">
                         <Share2 className="h-4 w-4" />
-                        <span>Share</span>
+                        <span>Partager</span>
                       </button>
                     </div>
                   </div>
@@ -550,7 +550,7 @@ function CarsProductDetailInner({
                         : 'text-gray-600 hover:text-gray-800'
                     }`}
                   >
-                    Overview
+                    Aperçu
                   </button>
                   {product.specifications && (
                     <button
@@ -561,7 +561,7 @@ function CarsProductDetailInner({
                           : 'text-gray-600 hover:text-gray-800'
                       }`}
                     >
-                      Specifications
+                      Spécifications
                     </button>
                   )}
                   {product.details && (
@@ -585,7 +585,7 @@ function CarsProductDetailInner({
                           : 'text-gray-600 hover:text-gray-800'
                       }`}
                     >
-                      Advanced
+                      Informations avancées
                     </button>
                   )}
                   <button
@@ -596,7 +596,7 @@ function CarsProductDetailInner({
                         : 'text-gray-600 hover:text-gray-800'
                     }`}
                   >
-                    Reviews ({totalReviews || product.reviews_count || productReviews?.length || 0})
+                    Avis ({totalReviews || product.reviews_count || productReviews?.length || 0})
                   </button>
                 </div>
 
@@ -654,7 +654,7 @@ function CarsProductDetailInner({
                                 );
                               })}
                             </div>
-                            <span className="text-sm font-black tracking-wider uppercase">Based on {totalReviews || 0} reviews</span>
+                            <span className="text-sm font-black tracking-wider uppercase">Basé sur {totalReviews || 0} avis</span>
                           </div>
 
                           <button
@@ -691,7 +691,7 @@ function CarsProductDetailInner({
                                 <p className="text-gray-700">{review.content}</p>
                                 {review.store_response && (
                                   <div className="bg-gray-50 border-l-4 border-red-600 p-4 mt-4">
-                                    <div className="font-bold text-red-600 mb-2">Store Response:</div>
+                                    <div className="font-bold text-red-600 mb-2">Réponse de la boutique :</div>
                                     <p className="text-gray-700">{review.store_response}</p>
                                   </div>
                                 )}
@@ -716,7 +716,7 @@ function CarsProductDetailInner({
           <div className="bg-white py-16">
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-black text-black mb-4 tracking-wider uppercase">Related Performance Parts</h2>
+                <h2 className="text-3xl font-black text-black mb-4 tracking-wider uppercase">Produits similaires</h2>
                 <p className="text-gray-600">Complétez votre commande avec ces articles</p>
               </div>
               <CarsRelatedProducts
@@ -857,7 +857,7 @@ function CarsProductDetailInner({
                             disabled={isSubmittingReview}
                             className="w-full inline-flex justify-center border border-transparent shadow-lg px-6 py-3 bg-red-600 text-base font-black text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wider uppercase disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                            {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                           </button>
                           <button
                             type="button"

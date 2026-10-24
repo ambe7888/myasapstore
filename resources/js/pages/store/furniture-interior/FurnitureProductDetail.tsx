@@ -417,7 +417,7 @@ function FurnitureProductDetailContent({
                         {/* Floating Variants selection */}
                         {hasVariants && productVariants && (
                           <div className="flex flex-wrap gap-2 items-center bg-amber-50/80 p-2 rounded-xl border border-amber-200 max-h-[100px] overflow-y-auto w-full justify-between">
-                            <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Options:</span>
+                            <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Options :</span>
                             <div className="flex flex-wrap gap-2">
                               {productVariants.map((variant) => (
                                 <div key={variant.name} className="flex items-center gap-1">
@@ -851,7 +851,7 @@ function FurnitureProductDetailContent({
                             disabled={isSubmittingReview}
                             className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-yellow-800 text-base font-bold text-white hover:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                            {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                           </button>
                           <button
                             type="button"

@@ -595,7 +595,7 @@ export default function BeautyProducts({
                                       })}
                                     </div>
                                     <span className="text-sm font-semibold text-gray-600 ml-2">({Number(product.average_rating || product.rating || 0).toFixed(1)})</span>
-                                    <span className="text-xs text-rose-600 ml-2 font-medium">• {product.total_reviews || product.reviews_count || 0} reviews</span>
+                                    <span className="text-xs text-rose-600 ml-2 font-medium">• {product.total_reviews || product.reviews_count || 0} avis</span>
                                   </div>
                                 )}
                                 <div className="flex items-center mb-4">

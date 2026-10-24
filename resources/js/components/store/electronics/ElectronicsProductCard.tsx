@@ -164,7 +164,7 @@ export default function ElectronicsProductCard({
               })}
             </div>
             <span className="text-sm text-gray-500 ml-2">({Number(product.average_rating || product.rating || 0).toFixed(1)})</span>
-            <span className="text-xs text-gray-400 ml-1">• {product.total_reviews || product.reviews_count || 0} reviews</span>
+            <span className="text-xs text-gray-400 ml-1">• {product.total_reviews || product.reviews_count || 0} avis</span>
           </div>
         )}
         

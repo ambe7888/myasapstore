@@ -251,7 +251,7 @@ function JewelryProductDetailContent({
                           );
                         })}
                       </div>
-                      <span className="text-gray-600 font-light">({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} Reviews</span>
+                      <span className="text-gray-600 font-light">({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} avis</span>
                     </div>
                   )}
                   
@@ -405,7 +405,7 @@ function JewelryProductDetailContent({
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Specifications
+                    Spécifications
                   </button>
                 )}
                 {hasCustomFields && (
@@ -417,7 +417,7 @@ function JewelryProductDetailContent({
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Advanced
+                    Informations avancées
                   </button>
                 )}
                 <button
@@ -428,7 +428,7 @@ function JewelryProductDetailContent({
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  Reviews ({totalReviews || product.reviews_count || productReviews?.length || 0})
+                  Avis ({totalReviews || product.reviews_count || productReviews?.length || 0})
                 </button>
               </div>
 
@@ -482,7 +482,7 @@ function JewelryProductDetailContent({
                               );
                             })}
                           </div>
-                          <span className="text-sm font-light">Based on {totalReviews || 0} reviews</span>
+                          <span className="text-sm font-light">Basé sur {totalReviews || 0} avis</span>
                         </div>
 
                         <button
@@ -520,7 +520,7 @@ function JewelryProductDetailContent({
                               {review.store_response && (
                                 <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 mt-3">
                                   <div className="flex items-center mb-1">
-                                    <span className="text-sm font-medium text-yellow-600">Store Response:</span>
+                                    <span className="text-sm font-medium text-yellow-600">Réponse de la boutique :</span>
                                   </div>
                                   <p className="text-sm text-gray-700">{review.store_response}</p>
                                 </div>
@@ -547,7 +547,7 @@ function JewelryProductDetailContent({
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif text-neutral-900 mb-4">
-                  Related Pieces
+                  Produits similaires
                 </h2>
                 <div className="w-24 h-1 bg-yellow-600 mx-auto mb-4"></div>
                 <p className="text-neutral-600 max-w-2xl mx-auto">
@@ -707,7 +707,7 @@ function JewelryProductDetailContent({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-xl border border-transparent shadow-lg px-6 py-3 bg-yellow-600 text-base font-light text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"

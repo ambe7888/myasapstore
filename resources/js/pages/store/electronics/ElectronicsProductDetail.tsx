@@ -279,7 +279,7 @@ function ElectronicsProductDetail({
                           })}
                         </div>
                         <span className="text-sm text-gray-600 ml-3">
-                          ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} Reviews
+                          ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} avis
                         </span>
                       </div>
                     )}
@@ -429,7 +429,7 @@ function ElectronicsProductDetail({
                               : 'text-gray-500 hover:text-gray-700'
                           }`}
                         >
-                          Specifications
+                          Spécifications
                         </button>
                       )}
                       {hasCustomFields && (
@@ -441,7 +441,7 @@ function ElectronicsProductDetail({
                               : 'text-gray-500 hover:text-gray-700'
                           }`}
                         >
-                          Advanced
+                          Informations avancées
                         </button>
                       )}
                       <button
@@ -452,7 +452,7 @@ function ElectronicsProductDetail({
                             : 'text-gray-500 hover:text-gray-700'
                         }`}
                       >
-                        Reviews ({totalReviews || product.reviews_count || productReviews?.length || 0})
+                        Avis ({totalReviews || product.reviews_count || productReviews?.length || 0})
                       </button>
                     </div>
 
@@ -506,7 +506,7 @@ function ElectronicsProductDetail({
                                     );
                                   })}
                                 </div>
-                                <span className="text-sm font-semibold">Based on {totalReviews || 0} reviews</span>
+                                <span className="text-sm font-semibold">Basé sur {totalReviews || 0} avis</span>
                               </div>
 
                               <button
@@ -544,7 +544,7 @@ function ElectronicsProductDetail({
                                     {review.store_response && (
                                       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                                         <div className="flex items-center mb-2">
-                                          <span className="font-semibold text-blue-900">Store Response:</span>
+                                          <span className="font-semibold text-blue-900">Réponse de la boutique :</span>
                                         </div>
                                         <p className="text-blue-800">{review.store_response}</p>
                                       </div>
@@ -715,7 +715,7 @@ function ElectronicsProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-lg px-6 py-3 bg-blue-600 text-base font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"

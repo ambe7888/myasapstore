@@ -293,7 +293,7 @@ function BabyKidsProductDetailContent({
                           );
                         })}
                       </div>
-                      <span className="text-gray-600">({(averageRating || 0).toFixed(1)}) {totalReviews || 0} reviews</span>
+                      <span className="text-gray-600">({(averageRating || 0).toFixed(1)}) {totalReviews || 0} avis</span>
                     </div>
                   )}
 
@@ -421,7 +421,7 @@ function BabyKidsProductDetailContent({
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                         </svg>
-                        <span>{isProductInWishlist ? 'In Wishlist' : "Ajouter aux favoris"}</span>
+                        <span>{isProductInWishlist ? "Dans les favoris" : "Ajouter aux favoris"}</span>
                       </button>
                     </div>
 
@@ -473,7 +473,7 @@ function BabyKidsProductDetailContent({
                           : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                       }`}
                     >
-                      Specifications
+                      Spécifications
                     </button>
                   )}
                   {product.details && (
@@ -497,7 +497,7 @@ function BabyKidsProductDetailContent({
                           : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                       }`}
                     >
-                      Advanced
+                      Informations avancées
                     </button>
                   )}
                   <button
@@ -508,7 +508,7 @@ function BabyKidsProductDetailContent({
                         : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
                     }`}
                   >
-                    Reviews ({totalReviews || 0})
+                    Avis ({totalReviews || 0})
                   </button>
                 </div>
 
@@ -572,7 +572,7 @@ function BabyKidsProductDetailContent({
                               );
                             })}
                           </div>
-                          <span className="text-sm font-bold">Based on {totalReviews || 0} reviews</span>
+                          <span className="text-sm font-bold">Basé sur {totalReviews || 0} avis</span>
                         </div>
                         <button
                           onClick={() => {
@@ -604,7 +604,7 @@ function BabyKidsProductDetailContent({
                                     );
                                   })}
                                 </div>
-                                <div className="text-sm text-gray-600">{totalReviews || 0} reviews</div>
+                                <div className="text-sm text-gray-600">{totalReviews || 0} avis</div>
                               </div>
                             </div>
                           </div>
@@ -618,7 +618,7 @@ function BabyKidsProductDetailContent({
                                       <span className="text-pink-600 font-bold">{review.customer_name?.charAt(0) || 'U'}</span>
                                     </div>
                                     <div>
-                                      <div className="font-bold text-gray-800">{review.customer_name || 'Anonymous'}</div>
+                                      <div className="font-bold text-gray-800">{review.customer_name || "Anonyme"}</div>
                                       <div className="flex items-center gap-2">
                                         <div className="flex">
                                           {[...Array(5)].map((_, i) => (
@@ -636,7 +636,7 @@ function BabyKidsProductDetailContent({
                                 <p className="text-gray-700">{review.content}</p>
                                 {review.store_response && (
                                   <div className="bg-pink-50 border-l-4 border-pink-500 p-4 mt-4">
-                                    <div className="font-bold text-pink-600 mb-2">Store Response:</div>
+                                    <div className="font-bold text-pink-600 mb-2">Réponse de la boutique :</div>
                                     <p className="text-gray-700">{review.store_response}</p>
                                   </div>
                                 )}
@@ -780,7 +780,7 @@ function BabyKidsProductDetailContent({
                         </div>
                         <div className="mt-8 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
                           <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-pink-500 text-base font-bold text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                            {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                           </button>
                           <button type="button" className="mt-3 w-full inline-flex justify-center rounded-2xl border-2 border-pink-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-pink-50 hover:border-pink-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" onClick={() => setShowReviewModal(false)}>
                             Annuler

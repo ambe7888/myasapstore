@@ -289,7 +289,7 @@ function BeautyProductDetailContent({
                           })}
                         </div>
                         <span className="text-gray-600 ml-3">
-                          ({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} Reviews
+                          ({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} avis
                         </span>
                       </div>
                     )}
@@ -458,7 +458,7 @@ function BeautyProductDetailContent({
                           : 'text-gray-600 hover:text-rose-500'
                       }`}
                     >
-                      Ingredients
+                      Ingrédients
                     </button>
                   )}
                   {hasCustomFields && (
@@ -470,7 +470,7 @@ function BeautyProductDetailContent({
                           : 'text-gray-600 hover:text-rose-500'
                       }`}
                     >
-                      Advanced
+                      Informations avancées
                     </button>
                   )}
                   <button
@@ -481,7 +481,7 @@ function BeautyProductDetailContent({
                         : 'text-gray-600 hover:text-rose-500'
                     }`}
                   >
-                    Reviews ({totalReviews || product.reviews_count || productReviews?.length || 0})
+                    Avis ({totalReviews || product.reviews_count || productReviews?.length || 0})
                   </button>
                 </div>
 
@@ -535,7 +535,7 @@ function BeautyProductDetailContent({
                                 );
                               })}
                             </div>
-                            <span className="text-sm font-medium">Based on {totalReviews || 0} reviews</span>
+                            <span className="text-sm font-medium">Basé sur {totalReviews || 0} avis</span>
                           </div>
 
                           <button
@@ -573,7 +573,7 @@ function BeautyProductDetailContent({
                                 {review.store_response && (
                                   <div className="bg-rose-50 border-l-4 border-rose-500 p-4 mt-4 rounded-r-lg">
                                     <div className="flex items-center mb-2">
-                                      <span className="text-sm font-medium text-rose-600">Store Response:</span>
+                                      <span className="text-sm font-medium text-rose-600">Réponse de la boutique :</span>
                                     </div>
                                     <p className="text-sm text-gray-700">{review.store_response}</p>
                                   </div>
@@ -756,7 +756,7 @@ function BeautyProductDetailContent({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-full border border-transparent shadow-lg px-6 py-3 bg-rose-600 text-base font-semibold text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 sm:w-auto transition-all duration-300 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"

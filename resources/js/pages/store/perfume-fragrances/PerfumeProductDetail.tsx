@@ -251,7 +251,7 @@ function PerfumeProductDetailContent({
                           );
                         })}
                       </div>
-                      <span className="text-gray-600">({totalReviews || 0} {totalReviews === 1 ? 'review' : 'reviews'})</span>
+                      <span className="text-gray-600">({totalReviews || 0} avis)</span>
                     </div>
                   )}
                 </div>
@@ -345,7 +345,7 @@ function PerfumeProductDetailContent({
                 {/* Quantity & Actions */}
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
-                    <label className="text-sm font-medium text-gray-900">Quantity:</label>
+                    <label className="text-sm font-medium text-gray-900">Quantité :</label>
                     <div className="flex items-center border border-gray-300 rounded-full overflow-hidden">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -512,16 +512,16 @@ function PerfumeProductDetailContent({
                             <h3 className="text-lg font-medium text-gray-900">Informations sur le produit</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <h4 className="font-medium text-gray-900 mb-2">Features</h4>
+                                <h4 className="font-medium text-gray-900 mb-2">Caractéristiques</h4>
                                 <ul className="text-gray-600 space-y-1">
                                   <li>• Qualité premium</li>
-                                  <li>• Long-lasting scent</li>
-                                  <li>• Elegant packaging</li>
+                                  <li>• Longue durée</li>
+                                  <li>• Emballage soigné</li>
                                   <li>• Idéal pour offrir</li>
                                 </ul>
                               </div>
                               <div>
-                                <h4 className="font-medium text-gray-900 mb-2">Usage</h4>
+                                <h4 className="font-medium text-gray-900 mb-2">Utilisation</h4>
                                 <p className="text-gray-600">Suivez les conseils d'utilisation pour de meilleurs résultats.</p>
                               </div>
                             </div>
@@ -572,7 +572,7 @@ function PerfumeProductDetailContent({
                                     );
                                   })}
                                 </div>
-                                <span className="text-gray-600">({totalReviews || 0} reviews)</span>
+                                <span className="text-gray-600">({totalReviews || 0} avis)</span>
                               </div>
                               <button
                                 onClick={() => {
@@ -594,7 +594,7 @@ function PerfumeProductDetailContent({
                               productReviews.map((review, index) => (
                                 <div key={review.id || index} className="border-b border-gray-100 pb-4">
                                   <div className="flex items-center justify-between mb-2">
-                                    <span className="font-medium text-gray-900">{review.customer_name || review.user_name || review.name || 'Anonymous'}</span>
+                                    <span className="font-medium text-gray-900">{review.customer_name || review.user_name || review.name || "Anonyme"}</span>
                                     <div className="flex items-center">
                                       {[...Array(5)].map((_, i) => (
                                         <svg
@@ -626,7 +626,7 @@ function PerfumeProductDetailContent({
                                   )}
                                   {review.store_response && (
                                     <div className="bg-purple-50 border-l-4 border-purple-800 p-4 mt-4 rounded-r-lg">
-                                      <div className="font-medium text-purple-800 mb-2">Store Response:</div>
+                                      <div className="font-medium text-purple-800 mb-2">Réponse de la boutique :</div>
                                       <p className="text-gray-700">{review.store_response}</p>
                                     </div>
                                   )}
@@ -762,7 +762,7 @@ function PerfumeProductDetailContent({
                         </div>
                         <div className="mt-8 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
                           <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-purple-800 text-base font-bold text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                            {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                           </button>
                           <button type="button" className="mt-3 w-full inline-flex justify-center rounded-2xl border-2 border-purple-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-purple-50 hover:border-purple-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" onClick={() => setShowReviewModal(false)}>
                             Annuler

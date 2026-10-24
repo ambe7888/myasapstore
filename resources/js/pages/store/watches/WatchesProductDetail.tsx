@@ -283,7 +283,7 @@ function WatchesProductDetail({
                           })}
                         </div>
                         <span className="text-xs text-slate-300">
-                          ({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} Reviews
+                          ({Number(averageRating || 0).toFixed(1)}) • {totalReviews || 0} avis
                         </span>
                       </div>
                     )}
@@ -293,7 +293,7 @@ function WatchesProductDetail({
                   <div className="space-y-6">
                     {/* Stock Status */}
                     <div>
-                      <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">Availability</h3>
+                      <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">Disponibilité</h3>
                       {isInStock ? (
                         <div className="flex items-center text-green-600 bg-green-50 px-3 py-2 text-sm">
                           <Check className="h-4 w-4 mr-2" />
@@ -452,7 +452,7 @@ function WatchesProductDetail({
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Catégorie :</span>
-                        <span className="text-slate-900 font-medium">{product.category?.name || 'Timepiece'}</span>
+                        <span className="text-slate-900 font-medium">{product.category?.name || "Produit"}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Stock :</span>
@@ -487,8 +487,8 @@ function WatchesProductDetail({
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <div className="text-sm font-medium tracking-wide uppercase">Specifications</div>
-                      <div className="text-xs text-slate-500 mt-1">Technical specs</div>
+                      <div className="text-sm font-medium tracking-wide uppercase">Spécifications</div>
+                      <div className="text-xs text-slate-500 mt-1">Caractéristiques techniques</div>
                     </button>
                   )}
                   
@@ -502,7 +502,7 @@ function WatchesProductDetail({
                       }`}
                     >
                       <div className="text-sm font-medium tracking-wide uppercase">Détails</div>
-                      <div className="text-xs text-slate-500 mt-1">Additional info</div>
+                      <div className="text-xs text-slate-500 mt-1">Informations complémentaires</div>
                     </button>
                   )}
                   
@@ -515,8 +515,8 @@ function WatchesProductDetail({
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <div className="text-sm font-medium tracking-wide uppercase">Advanced</div>
-                      <div className="text-xs text-slate-500 mt-1">Custom attributes</div>
+                      <div className="text-sm font-medium tracking-wide uppercase">Informations avancées</div>
+                      <div className="text-xs text-slate-500 mt-1">Attributs personnalisés</div>
                     </button>
                   )}
                   
@@ -587,7 +587,7 @@ function WatchesProductDetail({
                                 );
                               })}
                             </div>
-                            <span className="text-sm font-medium">Based on {totalReviews || 0} reviews</span>
+                            <span className="text-sm font-medium">Basé sur {totalReviews || 0} avis</span>
                           </div>
 
                           <button
@@ -624,7 +624,7 @@ function WatchesProductDetail({
                                 <p className="text-slate-600 font-light text-sm">{review.content}</p>
                                 {review.store_response && (
                                   <div className="bg-amber-50 border-l-4 border-amber-500 p-3 mt-3">
-                                    <div className="text-xs font-medium text-slate-900 mb-1">Store Response:</div>
+                                    <div className="text-xs font-medium text-slate-900 mb-1">Réponse de la boutique :</div>
                                     <p className="text-xs text-slate-700">{review.store_response}</p>
                                   </div>
                                 )}
@@ -784,7 +784,7 @@ function WatchesProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-lg px-6 py-3 bg-amber-500 text-base font-medium text-slate-900 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"

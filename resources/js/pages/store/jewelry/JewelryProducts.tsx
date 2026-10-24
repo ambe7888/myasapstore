@@ -586,7 +586,7 @@ export default function JewelryProducts({
                                       })}
                                     </div>
                                     <span className="text-sm text-neutral-600 ml-2">({Number(product.average_rating || 0).toFixed(1)})</span>
-                                    <span className="text-xs text-neutral-500 ml-2">• {product.total_reviews || 0} reviews</span>
+                                    <span className="text-xs text-neutral-500 ml-2">• {product.total_reviews || 0} avis</span>
                                   </div>
                                 )}
                                 <div className="flex items-center mb-6">

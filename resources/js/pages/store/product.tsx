@@ -446,7 +446,7 @@ export default function ProductDetail({
                       })}
                     </div>
                     <span className="text-sm text-gray-500 ml-2">
-                      ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} Reviews
+                      ({Number(averageRating || 0).toFixed(1)}) - {totalReviews || 0} avis
                     </span>
                   </div>
                 )}
@@ -605,7 +605,7 @@ export default function ProductDetail({
                     {/* Floating Variants selection */}
                     {hasVariants && productVariants && (
                       <div className="flex flex-wrap gap-2 items-center bg-gray-50 dark:bg-slate-800 p-2 rounded-xl border border-gray-200 dark:border-slate-700 max-h-[100px] overflow-y-auto w-full justify-between">
-                        <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Options:</span>
+                        <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Options :</span>
                         <div className="flex flex-wrap gap-2">
                           {productVariants.map((variant) => (
                             <div key={variant.name} className="flex items-center gap-1">
@@ -670,7 +670,7 @@ export default function ProductDetail({
                             : 'text-gray-500 hover:text-gray-700'
                           }`}
                       >
-                        Specifications
+                        Spécifications
                       </button>
                     )}
                     {product.details && (
@@ -692,7 +692,7 @@ export default function ProductDetail({
                             : 'text-gray-500 hover:text-gray-700'
                           }`}
                       >
-                        Advanced
+                        Informations avancées
                       </button>
                     )}
                     <button
@@ -702,7 +702,7 @@ export default function ProductDetail({
                           : 'text-gray-500 hover:text-gray-700'
                         }`}
                     >
-                      Reviews ({totalReviews})
+                      Avis ({totalReviews})
                     </button>
                   </div>
 
@@ -760,7 +760,7 @@ export default function ProductDetail({
                                   );
                                 })}
                               </div>
-                              <span className="text-sm font-medium">Based on {totalReviews} reviews</span>
+                              <span className="text-sm font-medium">Basé sur {totalReviews} avis</span>
                             </div>
 
                             <button
@@ -799,7 +799,7 @@ export default function ProductDetail({
                                   {review.store_response && (
                                     <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mt-3">
                                       <div className="flex items-center mb-1">
-                                        <span className="text-sm font-medium text-blue-800">Store Response:</span>
+                                        <span className="text-sm font-medium text-blue-800">Réponse de la boutique :</span>
                                       </div>
                                       <p className="text-sm text-blue-700">{review.store_response}</p>
                                     </div>
@@ -890,7 +890,7 @@ export default function ProductDetail({
                             rating: reviewRating,
                             title: reviewTitle,
                             content: reviewContent,
-                            customer_name: data.review?.customer_name || props.auth?.user?.name || 'Anonymous',
+                            customer_name: data.review?.customer_name || props.auth?.user?.name || "Anonyme",
                             created_at: "À l'instant",
                             store_response: null
                           };
@@ -972,7 +972,7 @@ export default function ProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
+                          {isSubmittingReview ? "Envoi en cours..." : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"

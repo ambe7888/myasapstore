@@ -175,9 +175,9 @@ export default function ProductGrid({
                 
                 <p className="text-gray-600 mb-4">
                   {quickViewProduct.stock > 0 ? (
-                    <span className="text-green-600">In Stock ({quickViewProduct.stock} available)</span>
+                    <span className="text-green-600">En stock ({quickViewProduct.stock} {quickViewProduct.stock > 1 ? 'disponibles' : 'disponible'})</span>
                   ) : (
-                    <span className="text-red-600">Out of Stock</span>
+                    <span className="text-red-600">Rupture de stock</span>
                   )}
                 </p>
                 

@@ -606,7 +606,7 @@ export default function JewelryProducts({
                                   {product.stock > 0 ? (
                                     <div className="flex items-center text-green-600 text-sm">
                                       <Shield className="h-4 w-4 mr-2" />
-                                      <span>In Stock ({product.stock} available)</span>
+                                      <span>En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                                     </div>
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm">

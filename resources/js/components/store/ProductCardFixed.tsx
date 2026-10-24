@@ -105,7 +105,7 @@ export default function ProductCard({
         {!isInStock && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
             <span className="bg-white/80 text-gray-800 text-sm font-medium px-3 py-1 rounded-md backdrop-blur-sm">
-              Out of Stock
+              Rupture de stock
             </span>
           </div>
         )}

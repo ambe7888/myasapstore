@@ -599,7 +599,7 @@ export default function CarsProducts({
                                     <div className="flex items-center">
                                       <div className={`w-2 h-2 rounded-full mr-2 ${product.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
                                       <span className="text-xs font-bold tracking-wider uppercase text-gray-600">
-                                        {product.stock > 0 ? `${product.stock} In Stock` : 'Out of Stock'}
+                                        {product.stock > 0 ? `${product.stock} en stock` : 'Rupture de stock'}
                                       </span>
                                     </div>
                                   </div>

@@ -615,7 +615,7 @@ export default function ElectronicsProducts({
                                   {product.stock > 0 ? (
                                     <div className="flex items-center text-green-600 text-sm font-semibold">
                                       <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                                      <span>In Stock ({product.stock} available)</span>
+                                      <span>En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                                     </div>
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm font-semibold">

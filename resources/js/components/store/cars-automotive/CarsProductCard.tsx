@@ -155,7 +155,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
           <div className="flex items-center">
             <div className={`w-2 h-2 rounded-full mr-2 ${isInStock ? 'bg-green-500' : 'bg-red-500'}`}></div>
             <span className="text-xs font-bold tracking-wider uppercase text-gray-600">
-              {isInStock ? `${product.stock} In Stock` : 'Out of Stock'}
+              {isInStock ? `${product.stock} en stock` : 'Rupture de stock'}
             </span>
           </div>
 

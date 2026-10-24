@@ -288,7 +288,7 @@ function FashionProductDetail({
                     {isInStock ? (
                       <div className="flex items-center text-green-600">
                         <Check className="h-4 w-4 mr-2" />
-                        <span className="font-light text-sm">In Stock ({product.stock} available)</span>
+                        <span className="font-light text-sm">En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                       </div>
                     ) : (
                       <div className="flex items-center text-red-500">

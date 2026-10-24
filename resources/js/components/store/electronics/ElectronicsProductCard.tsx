@@ -88,7 +88,7 @@ export default function ElectronicsProductCard({
         {!isInStock && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
             <span className="bg-white text-gray-800 text-sm font-semibold px-4 py-2 rounded-lg">
-              Out of Stock
+              Rupture de stock
             </span>
           </div>
         )}
@@ -185,12 +185,12 @@ export default function ElectronicsProductCard({
           {isInStock ? (
             <div className="flex items-center text-green-600 text-sm">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-              <span>In Stock ({product.stock} available)</span>
+              <span>En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
             </div>
           ) : (
             <div className="flex items-center text-red-600 text-sm">
               <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
-              <span>Out of Stock</span>
+              <span>Rupture de stock</span>
             </div>
           )}
         </div>

@@ -210,7 +210,7 @@ function ElectronicsWishlistContent({
                               className={`w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg ${cartLoading || !isInStock ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                               <ShoppingCart className="w-4 h-4" />
-                              <span>{!isInStock ? 'Out of Stock' : cartLoading ? 'Adding...' : 'Add to Cart'}</span>
+                              <span>{!isInStock ? 'Rupture de stock' : cartLoading ? 'Adding...' : 'Add to Cart'}</span>
                             </button>
                           </div>
                         </div>

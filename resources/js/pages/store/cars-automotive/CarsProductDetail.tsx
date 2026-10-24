@@ -391,7 +391,7 @@ function CarsProductDetailInner({
                     <div className={`px-3 py-1 text-xs font-bold tracking-wider uppercase ${
                       isInStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                     }`}>
-                      {isInStock ? `${product.stock} In Stock` : 'Out of Stock'}
+                      {isInStock ? `${product.stock} en stock` : 'Rupture de stock'}
                     </div>
                   </div>
                 )}

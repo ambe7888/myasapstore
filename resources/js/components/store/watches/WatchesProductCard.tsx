@@ -84,7 +84,7 @@ export default function WatchesProductCard({ product, store, storeSettings = {},
         {/* Stock Status */}
         {!isInStock && (
           <div className="absolute top-4 right-4 bg-slate-900 text-white px-3 py-1 text-xs font-medium tracking-wider uppercase">
-            Out of Stock
+            Rupture de stock
           </div>
         )}
 

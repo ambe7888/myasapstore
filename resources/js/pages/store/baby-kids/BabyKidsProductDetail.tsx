@@ -323,7 +323,7 @@ function BabyKidsProductDetailContent({
                     {product.stock > 0 ? (
                       <span className="inline-flex items-center gap-2 text-green-700 bg-green-100 px-4 py-2 rounded-full font-semibold">
                         <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                        In Stock ({product.stock} available)
+                        En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-2 text-red-700 bg-red-100 px-4 py-2 rounded-full font-semibold">

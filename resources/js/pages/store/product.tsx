@@ -471,7 +471,7 @@ export default function ProductDetail({
                   {isInStock ? (
                     <div className="flex items-center text-green-600">
                       <Check className="h-5 w-5 mr-2" />
-                      <span>In Stock ({product.stock} available)</span>
+                      <span>En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                     </div>
                   ) : (
                     <div className="flex items-center text-red-500">

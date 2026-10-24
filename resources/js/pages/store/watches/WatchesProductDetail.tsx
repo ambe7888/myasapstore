@@ -297,7 +297,7 @@ function WatchesProductDetail({
                       {isInStock ? (
                         <div className="flex items-center text-green-600 bg-green-50 px-3 py-2 text-sm">
                           <Check className="h-4 w-4 mr-2" />
-                          <span>In Stock ({product.stock} available)</span>
+                          <span>En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                         </div>
                       ) : (
                         <div className="flex items-center text-red-600 bg-red-50 px-3 py-2 text-sm">

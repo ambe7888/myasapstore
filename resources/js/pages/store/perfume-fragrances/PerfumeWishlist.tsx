@@ -165,7 +165,7 @@ function PerfumeWishlistContent({
                                 : 'bg-purple-100 text-purple-800 hover:bg-purple-200'
                             } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                           >
-                            {item.stock <= 0 ? 'Out of Stock' : 'Add Cart'}
+                            {item.stock <= 0 ? 'Rupture de stock' : 'Add Cart'}
                           </button>
                         </div>
                       </div>

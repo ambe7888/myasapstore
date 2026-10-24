@@ -302,7 +302,7 @@ function ElectronicsProductDetail({
                     {isInStock ? (
                       <div className="flex items-center text-green-600 bg-green-50 px-4 py-2 rounded-lg">
                         <Check className="h-5 w-5 mr-2" />
-                        <span className="font-semibold">In Stock ({product.stock} available)</span>
+                        <span className="font-semibold">En stock ({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                       </div>
                     ) : (
                       <div className="flex items-center text-red-500 bg-red-50 px-4 py-2 rounded-lg">

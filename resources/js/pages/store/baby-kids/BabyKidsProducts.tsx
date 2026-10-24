@@ -613,7 +613,7 @@ export default function BabyKidsProducts({
                                       <div className="flex items-center">
                                         <div className={`w-2 h-2 rounded-full mr-1 ${product.stock > 0 ? 'bg-green-400' : 'bg-red-400'}`}></div>
                                         <span className="text-xs text-gray-600">
-                                          {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                                          {product.stock > 0 ? 'En stock' : 'Rupture de stock'}
                                         </span>
                                       </div>
                                     </div>

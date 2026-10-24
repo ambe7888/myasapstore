@@ -366,7 +366,7 @@ function PerfumeProductDetailContent({
                       </button>
                     </div>
                     {product.stock && (
-                      <span className="text-sm text-gray-600">({product.stock} available)</span>
+                      <span className="text-sm text-gray-600">({product.stock} {product.stock > 1 ? 'disponibles' : 'disponible'})</span>
                     )}
                   </div>
 

@@ -131,9 +131,9 @@ export default function BabyKidsProfile({
                         </div>
                         <div>
                           <h2 className="text-xl font-bold text-gray-800">
-                            Profile Information
+                            Informations du profil
                           </h2>
-                          <p className="text-sm text-gray-600">Keep your details up to date</p>
+                          <p className="text-sm text-gray-600">Gardez vos informations à jour</p>
                         </div>
                       </div>
                       {!isEditing ? (
@@ -142,7 +142,7 @@ export default function BabyKidsProfile({
                           className="bg-pink-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-pink-600 transition-colors flex items-center space-x-2"
                         >
                           <Edit3 className="h-4 w-4" />
-                          <span>Edit</span>
+                          <span>Modifier</span>
                         </button>
                       ) : (
                         <button
@@ -150,7 +150,7 @@ export default function BabyKidsProfile({
                           className="bg-gray-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-600 transition-colors flex items-center space-x-2"
                         >
                           <X className="h-4 w-4" />
-                          <span>Cancel</span>
+                          <span>Annuler</span>
                         </button>
                       )}
                     </div>
@@ -167,7 +167,7 @@ export default function BabyKidsProfile({
                                 value={data.first_name}
                                 onChange={(e) => setData('first_name', e.target.value)}
                                 disabled={!isEditing}
-                                placeholder="Enter your first name"
+                                placeholder="Saisissez votre prénom"
                                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                   isEditing 
                                     ? 'border-pink-300 focus:border-pink-500 bg-white' 
@@ -188,7 +188,7 @@ export default function BabyKidsProfile({
                                 value={data.last_name}
                                 onChange={(e) => setData('last_name', e.target.value)}
                                 disabled={!isEditing}
-                                placeholder="Enter your last name"
+                                placeholder="Saisissez votre nom"
                                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                   isEditing 
                                     ? 'border-pink-300 focus:border-pink-500 bg-white' 
@@ -244,7 +244,7 @@ export default function BabyKidsProfile({
                           {/* Address */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Address
+                              Adresse
                             </label>
                             <div className="relative">
                               <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -267,14 +267,14 @@ export default function BabyKidsProfile({
                           {/* City */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              City
+                              Ville
                             </label>
                             <input
                               type="text"
                               value={data.city}
                               onChange={(e) => setData('city', e.target.value)}
                               disabled={!isEditing}
-                              placeholder="Your city"
+                              placeholder="Votre ville"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
                                   ? 'border-gray-300 focus:border-pink-500 bg-white' 
@@ -294,7 +294,7 @@ export default function BabyKidsProfile({
                               value={data.state}
                               onChange={(e) => setData('state', e.target.value)}
                               disabled={!isEditing}
-                              placeholder="Your state"
+                              placeholder="Votre région"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
                                   ? 'border-gray-300 focus:border-pink-500 bg-white' 
@@ -327,14 +327,14 @@ export default function BabyKidsProfile({
                           {/* Country */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Country
+                              Pays
                             </label>
                             <input
                               type="text"
                               value={data.country}
                               onChange={(e) => setData('country', e.target.value)}
                               disabled={!isEditing}
-                              placeholder="Your country"
+                              placeholder="Votre pays"
                               className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${
                                 isEditing 
                                   ? 'border-gray-300 focus:border-pink-500 bg-white' 
@@ -353,7 +353,7 @@ export default function BabyKidsProfile({
                               className="bg-pink-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-pink-600 transition-colors flex items-center space-x-2 disabled:opacity-50"
                             >
                               <Save className="h-4 w-4" />
-                              <span>{processing ? 'Saving...' : 'Save Changes'}</span>
+                              <span>{processing ? 'Saving...' : "Enregistrer les modifications"}</span>
                             </button>
                           </div>
                         )}
@@ -367,15 +367,15 @@ export default function BabyKidsProfile({
                               <Lock className="h-5 w-5 text-white" />
                             </div>
                             <div>
-                              <h3 className="text-lg font-bold text-gray-800">Password</h3>
-                              <p className="text-sm text-gray-600">Update your password</p>
+                              <h3 className="text-lg font-bold text-gray-800">Mot de passe</h3>
+                              <p className="text-sm text-gray-600">Modifier votre mot de passe</p>
                             </div>
                           </div>
                           <button
                             onClick={() => setShowPasswordForm(!showPasswordForm)}
                             className="bg-purple-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600 transition-colors"
                           >
-                            {showPasswordForm ? 'Cancel' : 'Change Password'}
+                            {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                           </button>
                         </div>
 
@@ -383,7 +383,7 @@ export default function BabyKidsProfile({
                           <form onSubmit={handlePasswordSubmit} className="space-y-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Current Password
+                                Mot de passe actuel
                               </label>
                               <input
                                 type="password"
@@ -395,7 +395,7 @@ export default function BabyKidsProfile({
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-2">
-                                New Password
+                                Nouveau mot de passe
                               </label>
                               <input
                                 type="password"
@@ -407,7 +407,7 @@ export default function BabyKidsProfile({
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Confirm New Password
+                                Confirmer le nouveau mot de passe
                               </label>
                               <input
                                 type="password"
@@ -423,7 +423,7 @@ export default function BabyKidsProfile({
                                 disabled={passwordForm.processing}
                                 className="bg-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-600 transition-colors disabled:opacity-50"
                               >
-                                {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                                {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                               </button>
                             </div>
                           </form>

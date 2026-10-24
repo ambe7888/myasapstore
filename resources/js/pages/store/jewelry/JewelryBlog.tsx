@@ -78,7 +78,7 @@ export default function JewelryBlog({
                 Jewelry Journal
               </h1>
               <p className="text-gray-600 font-light text-lg max-w-xl mx-auto leading-relaxed mb-6">
-                Discover insights, trends, and stories from the world of luxury jewelry
+                Découvrez nos conseils, nos idées et nos actualités
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function JewelryBlog({
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400" />
                 <input
                   type="text"
-                  placeholder="Search articles..."
+                  placeholder="Rechercher un article..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-yellow-600 transition-colors"
@@ -117,12 +117,12 @@ export default function JewelryBlog({
                   <Search className="w-8 h-8 text-yellow-600" />
                 </div>
                 <h2 className="text-2xl font-serif text-neutral-900 mb-4">
-                  {searchTerm ? 'No articles found' : 'No articles yet'}
+                  {searchTerm ? "Aucun article trouvé" : "Aucun article pour le moment"}
                 </h2>
                 <p className="text-neutral-600 mb-6">
                   {searchTerm 
-                    ? 'Try adjusting your search terms' 
-                    : 'Check back soon for the latest jewelry insights and stories'
+                    ? "Essayez de modifier votre recherche" 
+                    : "Revenez bientôt pour découvrir nos derniers articles"
                   }
                 </p>
                 {searchTerm && (
@@ -130,7 +130,7 @@ export default function JewelryBlog({
                     onClick={() => setSearchTerm('')}
                     className="bg-yellow-600 text-white px-6 py-3 font-medium hover:bg-yellow-700 transition-colors rounded-lg"
                   >
-                    Clear Search
+                    Effacer la recherche
                   </button>
                 )}
               </div>
@@ -147,16 +147,16 @@ export default function JewelryBlog({
               </h3>
               <div className="w-16 h-1 bg-yellow-600 mx-auto mb-6"></div>
               <p className="text-neutral-600 mb-8">
-                Subscribe to our newsletter for the latest jewelry trends, care tips, and exclusive insights
+                Abonnez-vous à notre newsletter pour recevoir nos actualités et nos conseils
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Saisissez votre e-mail"
                   className="flex-1 px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-yellow-600 transition-colors"
                 />
                 <button className="px-6 py-3 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors">
-                  Subscribe
+                  S'abonner
                 </button>
               </div>
             </div>

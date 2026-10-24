@@ -178,7 +178,7 @@ function PerfumeProductDetailContent({
         <section className="py-6 bg-stone-50 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm text-gray-600">
-              <Link href={generateStoreUrl('store.home', store)} className="hover:text-purple-800">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="hover:text-purple-800">Accueil</Link>
               <span className="mx-2">/</span>
               <Link href={generateStoreUrl('store.products', store) + '?category=' + product.category?.id} className="hover:text-purple-800">{product.category?.name}</Link>
               <span className="mx-2">/</span>
@@ -462,7 +462,7 @@ function PerfumeProductDetailContent({
                       {product.description ? (
                         <div dangerouslySetInnerHTML={{ __html: product.description }} />
                       ) : (
-                        <p className="text-gray-600">No description available for this product.</p>
+                        <p className="text-gray-600">Aucune description disponible pour ce produit.</p>
                       )}
                     </div>
                   )}
@@ -482,13 +482,13 @@ function PerfumeProductDetailContent({
                             )}
                             {product.brand && (
                               <div className="flex justify-between py-2 border-b border-gray-100">
-                                <span className="font-medium text-gray-900">Brand:</span>
+                                <span className="font-medium text-gray-900">Marque :</span>
                                 <span className="text-gray-600">{product.brand}</span>
                               </div>
                             )}
                             {product.category && (
                               <div className="flex justify-between py-2 border-b border-gray-100">
-                                <span className="font-medium text-gray-900">Category:</span>
+                                <span className="font-medium text-gray-900">Catégorie :</span>
                                 <span className="text-gray-600">{product.category.name}</span>
                               </div>
                             )}
@@ -509,20 +509,20 @@ function PerfumeProductDetailContent({
                       ) : (
                         <div className="space-y-6">
                           <div className="space-y-4">
-                            <h3 className="text-lg font-medium text-gray-900">Product Information</h3>
+                            <h3 className="text-lg font-medium text-gray-900">Informations sur le produit</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
                                 <h4 className="font-medium text-gray-900 mb-2">Features</h4>
                                 <ul className="text-gray-600 space-y-1">
-                                  <li>• Premium quality fragrance</li>
+                                  <li>• Qualité premium</li>
                                   <li>• Long-lasting scent</li>
                                   <li>• Elegant packaging</li>
-                                  <li>• Perfect for gifting</li>
+                                  <li>• Idéal pour offrir</li>
                                 </ul>
                               </div>
                               <div>
                                 <h4 className="font-medium text-gray-900 mb-2">Usage</h4>
-                                <p className="text-gray-600">Apply to pulse points such as wrists, neck, and behind ears for best results.</p>
+                                <p className="text-gray-600">Suivez les conseils d'utilisation pour de meilleurs résultats.</p>
                               </div>
                             </div>
                           </div>
@@ -534,8 +534,8 @@ function PerfumeProductDetailContent({
                   {activeTab === 'advanced' && hasCustomFields && (
                     <div className="space-y-6 max-h-80 overflow-y-auto">
                       <div>
-                        <h3 className="text-lg font-medium text-gray-900 mb-2">Advanced Product Information</h3>
-                        <p className="text-gray-600 mb-6">Fragrance specifications and custom attributes</p>
+                        <h3 className="text-lg font-medium text-gray-900 mb-2">Informations détaillées du produit</h3>
+                        <p className="text-gray-600 mb-6">Caractéristiques du produit</p>
                       </div>
                       <div className="bg-purple-50 border border-purple-200 rounded-2xl overflow-hidden">
                         <div className="divide-y divide-purple-100">
@@ -561,7 +561,7 @@ function PerfumeProductDetailContent({
                       {productReviews && productReviews.length > 0 ? (
                         <div className="space-y-6">
                           <div className="flex items-center justify-between">
-                            <h3 className="text-lg font-medium text-gray-900">Customer Reviews</h3>
+                            <h3 className="text-lg font-medium text-gray-900">Avis clients</h3>
                             <div className="flex items-center gap-4">
                               <div className="flex items-center space-x-2">
                                 <div className="flex items-center">
@@ -584,7 +584,7 @@ function PerfumeProductDetailContent({
                                 }}
                                 className="px-4 py-2 bg-purple-800 text-white rounded-full hover:bg-purple-900 font-medium transition-colors"
                               >
-                                Write a Review
+                                Donner votre avis
                               </button>
                             </div>
                           </div>
@@ -611,7 +611,7 @@ function PerfumeProductDetailContent({
                                   {review.title && (
                                     <h4 className="font-medium text-gray-900 mb-2">{review.title}</h4>
                                   )}
-                                  <p className="text-gray-600 mb-2">{review.content || review.comment || review.review || 'No review content'}</p>
+                                  <p className="text-gray-600 mb-2">{review.content || review.comment || review.review || "Aucun contenu d'avis"}</p>
                                   {review.created_at && (
                                     <p className="text-sm text-gray-500">
                                       {(() => {
@@ -634,7 +634,7 @@ function PerfumeProductDetailContent({
                                 </div>
                               ))
                             ) : (
-                              <p className="text-gray-500 text-center py-4">No reviews available for this product.</p>
+                              <p className="text-gray-500 text-center py-4">Aucun avis disponible pour ce produit.</p>
                             )}
                           </div>
                         </div>
@@ -645,8 +645,8 @@ function PerfumeProductDetailContent({
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                           </div>
-                          <h3 className="text-lg font-medium text-gray-900 mb-2">No Reviews Yet</h3>
-                          <p className="text-gray-600">Be the first to review this product.</p>
+                          <h3 className="text-lg font-medium text-gray-900 mb-2">Aucun avis pour le moment</h3>
+                          <p className="text-gray-600">Soyez le premier à donner votre avis sur ce produit.</p>
                         </div>
                       )}
                     </div>
@@ -661,7 +661,7 @@ function PerfumeProductDetailContent({
         {relatedProducts.length > 0 && (
           <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-light text-purple-800 text-center mb-12">You Might Also Love</h2>
+              <h2 className="text-3xl font-light text-purple-800 text-center mb-12">Vous pourriez aussi aimer</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((relatedProduct) => (
                   <PerfumeProductCard
@@ -687,7 +687,7 @@ function PerfumeProductDetailContent({
                 <div className="bg-gradient-to-br from-purple-50 to-purple-100 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-6">Write a Review</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-6">Donner votre avis</h3>
                       <form className="space-y-4" onSubmit={async (e) => {
                         e.preventDefault();
                         if (reviewRating === 0) {
@@ -717,8 +717,8 @@ function PerfumeProductDetailContent({
                               rating: reviewRating,
                               title: reviewTitle,
                               content: reviewContent,
-                              customer_name: data.review?.customer_name || 'You',
-                              created_at: 'Just now',
+                              customer_name: data.review?.customer_name || "Vous",
+                              created_at: "À l'instant",
                               store_response: null
                             };
                             setProductReviews(prev => {
@@ -743,7 +743,7 @@ function PerfumeProductDetailContent({
                         }
                       }}>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Your Rating *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Votre note *</label>
                           <div className="flex">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <button key={star} type="button" className="p-1 focus:outline-none" onClick={() => setReviewRating(star)}>
@@ -753,19 +753,19 @@ function PerfumeProductDetailContent({
                           </div>
                         </div>
                         <div>
-                          <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
-                          <input type="text" id="review-title" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" placeholder="Give your review a title" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required />
+                          <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Titre de l'avis *</label>
+                          <input type="text" id="review-title" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" placeholder="Donnez un titre à votre avis" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required />
                         </div>
                         <div>
-                          <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
+                          <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Votre avis *</label>
                           <textarea id="review-content" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" placeholder="Écrivez votre avis ici" value={reviewContent} onChange={(e) => setReviewContent(e.target.value)} required></textarea>
                         </div>
                         <div className="mt-8 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
                           <button type="submit" disabled={isSubmittingReview} className="w-full inline-flex justify-center rounded-2xl border border-transparent shadow-lg px-6 py-3 bg-purple-800 text-base font-bold text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                           </button>
                           <button type="button" className="mt-3 w-full inline-flex justify-center rounded-2xl border-2 border-purple-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-purple-50 hover:border-purple-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1" onClick={() => setShowReviewModal(false)}>
-                            Cancel
+                            Annuler
                           </button>
                         </div>
                       </form>

@@ -70,7 +70,7 @@ function FurnitureWishlistContent({
         <div className="bg-yellow-800 text-white py-12">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-3xl font-bold mb-4">My Wishlist</h1>
+              <h1 className="text-3xl font-bold mb-4">Mes favoris</h1>
               <div className="w-16 h-0.5 bg-amber-200 mx-auto"></div>
             </div>
           </div>
@@ -82,10 +82,10 @@ function FurnitureWishlistContent({
               <>
                 <div className="flex items-center justify-between mb-12">
                   <h2 className="text-2xl font-bold text-slate-900">
-                    {items.length} {items.length === 1 ? 'Item' : 'Items'} in Your Wishlist
+                    {items.length} {items.length === 1 ? "article" : "articles"} dans vos favoris
                   </h2>
                   <div className="text-sm text-slate-600">
-                    Save your favorites and shop them later
+                    Enregistrez vos favoris pour plus tard
                   </div>
                 </div>
                 
@@ -105,7 +105,7 @@ function FurnitureWishlistContent({
                           <div className="absolute inset-0 border-4 border-amber-800/15 rounded-lg m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           {item.sale_price && (
                             <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 text-sm font-bold rounded-xl shadow-lg">
-                              <span className="block text-xs">SAVE</span>
+                              <span className="block text-xs">ÉCONOMISEZ</span>
                               <span className="block text-lg leading-none">
                                 {Math.round(((item.price - item.sale_price) / item.price) * 100)}%
                               </span>
@@ -179,7 +179,7 @@ function FurnitureWishlistContent({
                             >
                               <ShoppingCart className="w-5 h-5" />
                               <span>
-                                {item.stock <= 0 ? 'Rupture de stock' : 'Add to Cart'}
+                                {item.stock <= 0 ? 'Rupture de stock' : "Ajouter au panier"}
                               </span>
                             </button>
                           </div>
@@ -194,9 +194,9 @@ function FurnitureWishlistContent({
                 <div className="w-32 h-32 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <Heart className="w-16 h-16 text-amber-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">Your wishlist is empty</h2>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">Vos favoris sont vides</h2>
                 <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto leading-relaxed">
-                  Start building your dream home by adding furniture pieces you love
+                  Commencez à ajouter vos produits préférés
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}
@@ -214,8 +214,8 @@ function FurnitureWishlistContent({
           <div className="bg-amber-50 py-20">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-slate-900 mb-4">You Might Also Love</h2>
-                <p className="text-slate-600 text-lg">Discover more beautiful furniture pieces</p>
+                <h2 className="text-4xl font-bold text-slate-900 mb-4">Vous pourriez aussi aimer</h2>
+                <p className="text-slate-600 text-lg">Découvrez plus de produits</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((product) => (

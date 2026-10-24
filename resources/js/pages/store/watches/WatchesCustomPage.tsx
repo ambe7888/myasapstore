@@ -53,14 +53,14 @@ export default function WatchesCustomPage({
               <div className="max-w-4xl">
                 <div className="mb-6">
                   <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
-                    Information
+                    Informations
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
                   {page.title}
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Essential information crafted with precision for our valued clientele
+                  Informations importantes pour nos clients
                 </p>
               </div>
             </div>

@@ -30,7 +30,7 @@ interface BlogSectionProps {
 
 export default function BlogSection({
   title = "Latest from Our Blog",
-  subtitle = "Read our latest articles and get inspired",
+  subtitle = "Découvrez nos derniers articles",
   posts = [],
   content
 }: BlogSectionProps) {
@@ -124,7 +124,7 @@ export default function BlogSection({
                   href={generateStoreUrl('store.blog.show', store, {slug: post.slug})}
                   className="inline-flex items-center text-primary font-medium hover:underline"
                 >
-                  Read More
+                  Lire la suite
                   <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
                 </div>
@@ -133,7 +133,7 @@ export default function BlogSection({
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-500">No blog posts available at the moment.</p>
+            <p className="text-gray-500">Aucun article disponible pour le moment.</p>
           </div>
         )}
         
@@ -144,7 +144,7 @@ export default function BlogSection({
               href={generateStoreUrl('store.blog', store)}
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors"
             >
-              View All Articles
+              Voir tous les articles
               <ArrowRight className="h-5 w-5 ml-2" />
             </Link>
           </div>

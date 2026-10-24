@@ -221,7 +221,7 @@ export default function BlogDetail({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               <Link href={generateStoreUrl('store.blog', store)} className="text-gray-500 hover:text-primary">Blog</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
@@ -270,7 +270,7 @@ export default function BlogDetail({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
-                            aria-label="Share on Facebook"
+                            aria-label="Partager sur Facebook"
                           >
                             <Facebook className="h-4 w-4" />
                           </a>
@@ -279,7 +279,7 @@ export default function BlogDetail({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-sky-500 text-white p-2 rounded-full hover:bg-sky-600 transition-colors"
-                            aria-label="Share on Twitter"
+                            aria-label="Partager sur Twitter"
                           >
                             <Twitter className="h-4 w-4" />
                           </a>
@@ -288,7 +288,7 @@ export default function BlogDetail({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-blue-700 text-white p-2 rounded-full hover:bg-blue-800 transition-colors"
-                            aria-label="Share on LinkedIn"
+                            aria-label="Partager sur LinkedIn"
                           >
                             <Linkedin className="h-4 w-4" />
                           </a>
@@ -342,11 +342,11 @@ export default function BlogDetail({
                 {/* Search */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
                   <div className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Search</h3>
+                    <h3 className="text-lg font-bold mb-4">Rechercher</h3>
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder="Search articles..."
+                        placeholder="Rechercher un article..."
                         className="w-full border border-gray-300 rounded-md py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -382,7 +382,7 @@ export default function BlogDetail({
                 {/* Recent Posts */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
                   <div className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Recent Posts</h3>
+                    <h3 className="text-lg font-bold mb-4">Articles récents</h3>
                     <div className="space-y-4">
                       {recentPosts.map(recentPost => (
                         <Link 
@@ -417,16 +417,16 @@ export default function BlogDetail({
                 {/* Subscribe */}
                 <div className="bg-primary rounded-xl shadow-md overflow-hidden">
                   <div className="p-6 text-white">
-                    <h3 className="text-lg font-bold mb-2">Subscribe to Our Newsletter</h3>
-                    <p className="text-white/80 text-sm mb-4">Get the latest posts delivered right to your inbox.</p>
+                    <h3 className="text-lg font-bold mb-2">Abonnez-vous à notre newsletter</h3>
+                    <p className="text-white/80 text-sm mb-4">Recevez nos derniers articles directement dans votre boîte mail.</p>
                     <div className="space-y-3">
                       <input
                         type="email"
-                        placeholder="Your email address"
+                        placeholder="Votre adresse e-mail"
                         className="w-full border border-white/20 bg-white/10 rounded-md py-2 px-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
                       />
                       <button className="w-full bg-white text-primary font-medium py-2 px-4 rounded-md hover:bg-gray-100 transition-colors">
-                        Subscribe
+                        S'abonner
                       </button>
                     </div>
                   </div>

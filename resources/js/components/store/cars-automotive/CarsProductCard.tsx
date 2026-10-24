@@ -65,7 +65,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
         <div className="absolute top-4 left-4 flex flex-col gap-2">
           {hasVariants && (props as any).store?.show_variant_badge !== false && (
             <span className="bg-black text-white px-3 py-1 text-xs font-bold tracking-wider uppercase">
-              IN VARIANT
+              OPTIONS DISPONIBLES
             </span>
           )}
           {hasDiscount && (
@@ -75,7 +75,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
           )}
           {!isInStock && (
             <span className="bg-gray-900 text-white px-3 py-1 text-xs font-bold tracking-wider uppercase">
-              OUT OF STOCK
+              RUPTURE DE STOCK
             </span>
           )}
         </div>

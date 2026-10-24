@@ -29,9 +29,9 @@ const getIcon = (iconName: string) => {
 
 export default function WatchesCTASection({ content, ctaBoxes, bottomSection }: WatchesCTASectionProps) {
   const boxes = ctaBoxes?.value || ctaBoxes || content?.value || content || [
-    { icon: 'settings', title: 'Watch Services', subtitle: 'Professional maintenance & repair' },
-    { icon: 'star', title: 'Collector\'s Club', subtitle: 'Exclusive access to rare pieces' },
-    { icon: 'gift', title: 'Gift Certificates', subtitle: 'Perfect for watch enthusiasts' },
+    { icon: 'settings', title: "Nos services", subtitle: 'Professional maintenance & repair' },
+    { icon: 'star', title: 'Collector\'s Club', subtitle: "Accès exclusif à nos nouveautés" },
+    { icon: 'gift', title: 'Gift Certificates', subtitle: "Idéal pour offrir" },
     { icon: 'users', title: 'VIP Concierge', subtitle: 'Personal shopping assistance' }
   ];
 
@@ -54,16 +54,16 @@ export default function WatchesCTASection({ content, ctaBoxes, bottomSection }: 
         {/* Bottom CTA */}
         <div className="text-center">
           <h3 className="text-3xl font-light text-white mb-4">
-            {bottomSection?.title?.value || bottomSection?.title || 'Join the Elite Circle'}
+            {bottomSection?.title?.value || bottomSection?.title || "Rejoignez-nous"}
           </h3>
           <p className="text-slate-400 font-light mb-8 max-w-2xl mx-auto">
-            {bottomSection?.description?.value || bottomSection?.description || bottomSection?.subtitle?.value || bottomSection?.subtitle || 'Experience personalized service and exclusive access to the world\'s finest timepieces.'}
+            {bottomSection?.description?.value || bottomSection?.description || bottomSection?.subtitle?.value || bottomSection?.subtitle || "Profitez d'un service personnalisé et d'un accès privilégié à nos nouveautés."}
           </p>
           <a
             href={formatCustomLink(bottomSection?.button_link?.value || bottomSection?.button_link, store, '/contact')}
             className="inline-flex items-center px-8 py-3 bg-amber-500 text-slate-900 font-medium tracking-wider uppercase text-sm hover:bg-amber-400 transition-colors duration-300"
           >
-            {bottomSection?.button_text?.value || bottomSection?.button_text || 'Get Started'}
+            {bottomSection?.button_text?.value || bottomSection?.button_text || "Commencer"}
           </a>
         </div>
       </div>

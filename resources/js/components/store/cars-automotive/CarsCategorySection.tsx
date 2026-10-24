@@ -72,7 +72,7 @@ export default function CarsCategorySection({ categories, content }: CarsCategor
                       </p>
                     )}
                     <p className="text-gray-600 mb-6">
-                      Professional-grade automotive components for enhanced performance
+                      Des produits de qualité, sélectionnés avec soin
                     </p>
                   </div>
                   

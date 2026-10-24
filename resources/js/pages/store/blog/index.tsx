@@ -45,10 +45,10 @@ function NewsletterSubscribe() {
           setIsSubmitted(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -57,12 +57,12 @@ function NewsletterSubscribe() {
   return (
     <div className="bg-primary rounded-xl shadow-md overflow-hidden">
       <div className="p-6 text-white">
-        <h3 className="text-lg font-bold mb-2">Subscribe to Our Newsletter</h3>
-        <p className="text-white/80 text-sm mb-4">Get the latest posts delivered right to your inbox.</p>
+        <h3 className="text-lg font-bold mb-2">Abonnez-vous à notre newsletter</h3>
+        <p className="text-white/80 text-sm mb-4">Recevez nos derniers articles directement dans votre boîte mail.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
-            placeholder="Your email address"
+            placeholder="Votre adresse e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border-2 border-white/30 bg-white/20 rounded-lg py-3 px-4 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white focus:border-white backdrop-blur-sm"
@@ -74,7 +74,7 @@ function NewsletterSubscribe() {
             disabled={isLoading}
             className="w-full bg-yellow-400 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 active:bg-yellow-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            {isLoading ? 'Subscribing...' : 'Subscribe Now'}
+            {isLoading ? "Inscription..." : "S'abonner maintenant"}
           </button>
         </form>
         {isSubmitted && (
@@ -252,9 +252,9 @@ export default function BlogIndex({
         <div className="relative bg-primary text-white store-page-header">
           <div className="container mx-auto px-4 py-16 md:py-24">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Notre blog</h1>
               <p className="text-lg text-white/80">
-                Latest news, tips, and insights from our team
+                Les dernières actualités et conseils de notre équipe
               </p>
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function BlogIndex({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               <span className="text-gray-800 font-medium">Blog</span>
             </div>
@@ -339,7 +339,7 @@ export default function BlogIndex({
                           href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                           className="inline-flex items-center text-primary font-medium hover:underline"
                         >
-                          Read More
+                          Lire la suite
                           <ChevronRight className="h-4 w-4 ml-1" />
                         </Link>
                       </div>
@@ -350,8 +350,8 @@ export default function BlogIndex({
                 {/* Empty State */}
                 {posts.length === 0 && (
                   <div className="bg-white rounded-xl p-8 text-center">
-                    <h3 className="text-xl font-medium text-gray-700 mb-2">No posts found</h3>
-                    <p className="text-gray-500">Check back later for new content.</p>
+                    <h3 className="text-xl font-medium text-gray-700 mb-2">Aucun article trouvé</h3>
+                    <p className="text-gray-500">Revenez plus tard pour découvrir du nouveau contenu.</p>
                   </div>
                 )}
               </div>
@@ -361,11 +361,11 @@ export default function BlogIndex({
                 {/* Search */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
                   <div className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Search</h3>
+                    <h3 className="text-lg font-bold mb-4">Rechercher</h3>
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder="Search articles..."
+                        placeholder="Rechercher un article..."
                         className="w-full border border-gray-300 rounded-md py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />

@@ -105,7 +105,7 @@ export default function PerfumeProfile({
               </h1>
               
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Manage your fragrance preferences and personal information with elegance and sophistication.
+                Gérez votre compte et vos informations personnelles.
               </p>
             </div>
           </div>
@@ -129,14 +129,14 @@ export default function PerfumeProfile({
                         className="bg-amber-400 hover:bg-amber-500 text-purple-900 px-8 py-3 rounded-full font-medium transition-colors flex items-center justify-center"
                       >
                         <Edit3 className="h-5 w-5 mr-2" />
-                        {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                        {isEditing ? "Annuler la modification" : "Modifier le profil"}
                       </button>
                       <button 
                         onClick={() => setShowPasswordForm(!showPasswordForm)}
                         className="border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-purple-900 px-8 py-3 rounded-full font-medium transition-all flex items-center justify-center"
                       >
                         <Shield className="h-5 w-5 mr-2" />
-                        {showPasswordForm ? 'Cancel' : 'Change Password'}
+                        {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                       </button>
                     </div>
                   </div>
@@ -149,7 +149,7 @@ export default function PerfumeProfile({
                   <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 rounded-t-3xl">
                     <div className="flex items-center">
                       <Sparkles className="h-6 w-6 text-amber-400 mr-3" />
-                      <h3 className="text-2xl font-light">Personal Details</h3>
+                      <h3 className="text-2xl font-light">Informations personnelles</h3>
                     </div>
                   </div>
                   <div className="p-8 space-y-6">
@@ -212,7 +212,7 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{user.phone || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{user.phone || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -225,13 +225,13 @@ export default function PerfumeProfile({
                 <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 rounded-t-3xl">
                   <div className="flex items-center">
                     <MapPin className="h-6 w-6 text-amber-400 mr-3" />
-                    <h3 className="text-2xl font-light">Delivery Address</h3>
+                    <h3 className="text-2xl font-light">Adresse de livraison</h3>
                   </div>
                 </div>
                 <div className="p-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-purple-800 mb-2">Street Address</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Adresse</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -241,12 +241,12 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{profileForm.data.address || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{profileForm.data.address || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">City</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Ville</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -256,7 +256,7 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{profileForm.data.city || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{profileForm.data.city || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -271,7 +271,7 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{profileForm.data.state || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{profileForm.data.state || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -286,12 +286,12 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{profileForm.data.postal_code || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{profileForm.data.postal_code || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-purple-800 mb-2">Country</label>
+                      <label className="block text-sm font-medium text-purple-800 mb-2">Pays</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -301,7 +301,7 @@ export default function PerfumeProfile({
                         />
                       ) : (
                         <div className="bg-stone-50 p-4 rounded-xl border border-purple-100">
-                          <span className="text-lg text-gray-900">{profileForm.data.country || 'Not provided'}</span>
+                          <span className="text-lg text-gray-900">{profileForm.data.country || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -314,7 +314,7 @@ export default function PerfumeProfile({
                         className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 rounded-full font-medium transition-colors disabled:opacity-50 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                       >
                         <Sparkles className="h-5 w-5 mr-2" />
-                        {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                        {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                       </button>
                     </div>
                   )}
@@ -333,7 +333,7 @@ export default function PerfumeProfile({
                   <div className="p-8">
                     <form onSubmit={handlePasswordSubmit} className="space-y-6">
                       <div>
-                        <label className="block text-sm font-medium text-purple-800 mb-2">Current Password</label>
+                        <label className="block text-sm font-medium text-purple-800 mb-2">Mot de passe actuel</label>
                         <input
                           type="password"
                           value={passwordForm.data.current_password}
@@ -344,7 +344,7 @@ export default function PerfumeProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-purple-800 mb-2">New Password</label>
+                        <label className="block text-sm font-medium text-purple-800 mb-2">Nouveau mot de passe</label>
                         <input
                           type="password"
                           value={passwordForm.data.password}
@@ -355,7 +355,7 @@ export default function PerfumeProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-purple-800 mb-2">Confirm New Password</label>
+                        <label className="block text-sm font-medium text-purple-800 mb-2">Confirmer le nouveau mot de passe</label>
                         <input
                           type="password"
                           value={passwordForm.data.password_confirmation}
@@ -372,14 +372,14 @@ export default function PerfumeProfile({
                           className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 rounded-full font-medium transition-colors disabled:opacity-50 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
                           <Shield className="h-5 w-5 mr-2" />
-                          {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                          {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                         </button>
                         <button 
                           type="button"
                           onClick={() => setShowPasswordForm(false)}
                           className="border-2 border-purple-800 text-purple-800 hover:bg-purple-800 hover:text-white px-8 py-4 rounded-full font-medium transition-all"
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

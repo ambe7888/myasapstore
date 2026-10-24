@@ -72,12 +72,12 @@ export default function FashionLogin({
                     Member Access
                   </div>
                   <h1 className="text-6xl font-thin mb-6 tracking-tight leading-none">
-                    Welcome
+                    Bienvenue
                     <br />
-                    <span className="text-white/60">Back</span>
+                    <span className="text-white/60">Retour</span>
                   </h1>
                   <p className="text-white/70 font-light text-xl leading-relaxed max-w-lg">
-                    Access your personal style sanctuary and exclusive fashion collections
+                    Accédez à votre compte
                   </p>
                 </div>
                 
@@ -85,7 +85,7 @@ export default function FashionLogin({
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-white/80 font-light">Exclusive member collections</span>
+                    <span className="text-white/80 font-light">Collections réservées aux membres</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -93,7 +93,7 @@ export default function FashionLogin({
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-white/80 font-light">Priority access to new arrivals</span>
+                    <span className="text-white/80 font-light">Accès prioritaire aux nouveautés</span>
                   </div>
                 </div>
               </div>
@@ -101,8 +101,8 @@ export default function FashionLogin({
               {/* Right Side - Form */}
               <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-2xl border border-white/20">
                 <div className="text-center mb-10">
-                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Sign In</h2>
-                  <p className="text-gray-600 font-light">Enter your credentials to continue</p>
+                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Se connecter</h2>
+                  <p className="text-gray-600 font-light">Saisissez vos identifiants pour continuer</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -134,13 +134,13 @@ export default function FashionLogin({
                   <div className="group">
                     <div className="flex items-center justify-between mb-4">
                       <label htmlFor="password" className="block text-sm font-light tracking-widest uppercase text-gray-700">
-                        Password
+                        Mot de passe
                       </label>
                       <Link
                         href={generateStoreUrl('store.forgot-password', store)}
                         className="text-sm text-black hover:text-gray-600 font-light tracking-wide transition-colors"
                       >
-                        Forgot password?
+                        Mot de passe oublié ?
                       </Link>
                     </div>
                     <div className="relative">
@@ -198,7 +198,7 @@ export default function FashionLogin({
                       disabled={processing}
                       className="w-full bg-black text-white py-4 font-light tracking-widest uppercase text-sm hover:bg-gray-900 transition-all duration-300 transform hover:translate-y-[-1px] disabled:opacity-50 disabled:transform-none"
                     >
-                      {processing ? 'Signing In...' : 'Sign In'}
+                      {processing ? "Connexion..." : "Se connecter"}
                     </button>
                   </div>
                 </form>
@@ -210,7 +210,7 @@ export default function FashionLogin({
                       <div className="w-full border-t border-gray-200"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-6 bg-white text-gray-500 font-light">Or continue with</span>
+                      <span className="px-6 bg-white text-gray-500 font-light">Ou continuer avec</span>
                     </div>
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function FashionLogin({
                       href={generateStoreUrl('store.register', store)}
                       className="font-light text-black hover:text-gray-600 tracking-wide transition-colors border-b border-black/20 hover:border-black/60"
                     >
-                      Create Account
+                      Créer un compte
                     </Link>
                   </p>
                 </div>

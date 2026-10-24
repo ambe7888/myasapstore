@@ -218,7 +218,7 @@ export default function BabyKidsCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -242,7 +242,7 @@ export default function BabyKidsCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -254,11 +254,11 @@ export default function BabyKidsCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -401,7 +401,7 @@ export default function BabyKidsCheckout({
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Passer à la caisse</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
-                Complete your order for your little ones
+                Finalisez votre commande
               </p>
             </div>
           </div>
@@ -455,7 +455,7 @@ export default function BabyKidsCheckout({
                     <div className="relative bg-white rounded-3xl shadow-xl border-4 border-pink-400 p-8">
                       <div className="flex items-center mb-6">
                         <Package className="h-6 w-6 text-pink-500 mr-3" />
-                        <h2 className="text-2xl font-bold text-gray-800">Shipping Information</h2>
+                        <h2 className="text-2xl font-bold text-gray-800">Informations de livraison</h2>
                       </div>
                       
                       <form onSubmit={handleShippingSubmit} className="space-y-6">
@@ -492,7 +492,7 @@ export default function BabyKidsCheckout({
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Email *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">E-mail *</label>
                             <input
                               type="email"
                               value={shippingEmail}
@@ -506,7 +506,7 @@ export default function BabyKidsCheckout({
                             )}
                           </div>
                           <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Phone *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Téléphone *</label>
                             <input
                               type="tel"
                               value={shippingPhone}
@@ -523,7 +523,7 @@ export default function BabyKidsCheckout({
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="hidden">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Country *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Pays *</label>
                             <select
                               value={shippingCountry}
                               onChange={(e) => handleShippingCountryChange(e.target.value)}
@@ -547,7 +547,7 @@ export default function BabyKidsCheckout({
                                 shippingErrors.shippingState ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             >
-                              <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                              <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                               {states.map((state: any) => (
                                 <option key={state.id} value={state.id}>
                                   {state.name}
@@ -562,7 +562,7 @@ export default function BabyKidsCheckout({
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="hidden">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">City *</label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Ville *</label>
                             <select
                               value={shippingCity}
                               onChange={(e) => {
@@ -575,7 +575,7 @@ export default function BabyKidsCheckout({
                                 shippingErrors.shippingCity ? 'border-red-500' : 'border-pink-300 focus:border-pink-500'
                               }`}
                             >
-                              <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                              <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                               {cities.map((city: any) => (
                                 <option key={city.id} value={city.id}>
                                   {city.name}
@@ -631,7 +631,7 @@ export default function BabyKidsCheckout({
                                           <div>
                                             <span className="block text-sm font-bold text-gray-800">{method.name}</span>
                                             <span className="block text-sm text-gray-600">
-                                              {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                              {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                             </span>
                                           </div>
                                           <span className="text-lg font-bold text-pink-500">
@@ -684,7 +684,7 @@ export default function BabyKidsCheckout({
                             rows={4}
                             value={orderNotes}
                             onChange={(e) => setOrderNotes(e.target.value)}
-                            placeholder="Special instructions for your order"
+                            placeholder="Instructions particulières pour votre commande"
                             className="w-full px-4 py-3 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500"
                           />
                         </div>
@@ -694,7 +694,7 @@ export default function BabyKidsCheckout({
                             type="submit"
                             className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors"
                           >
-                            Continue to Review
+                            Continuer vers le récapitulatif
                           </button>
                         </div>
                       </form>
@@ -708,13 +708,13 @@ export default function BabyKidsCheckout({
                     <div className="relative bg-white rounded-3xl shadow-xl border-4 border-blue-400 p-8">
                       <div className="flex items-center mb-6">
                         <ShoppingCart className="h-6 w-6 text-blue-500 mr-3" />
-                        <h2 className="text-2xl font-bold text-gray-800">Review Your Order</h2>
+                        <h2 className="text-2xl font-bold text-gray-800">Vérifiez votre commande</h2>
                       </div>
                       
                       <div className="space-y-8">
                         {/* Order Items */}
                         <div>
-                          <h3 className="text-lg font-bold text-gray-800 mb-4">Order Items</h3>
+                          <h3 className="text-lg font-bold text-gray-800 mb-4">Articles commandés</h3>
                           
                           <div className="space-y-4">
                             {cartItems.map((item) => {
@@ -746,12 +746,12 @@ export default function BabyKidsCheckout({
                         
                         {/* Shipping Information */}
                         <div>
-                          <h3 className="text-lg font-bold text-gray-800 mb-4">Shipping Information</h3>
+                          <h3 className="text-lg font-bold text-gray-800 mb-4">Informations de livraison</h3>
                           
                           <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <p className="text-sm font-bold text-pink-600 mb-2">Contact Details</p>
+                                <p className="text-sm font-bold text-pink-600 mb-2">Coordonnées</p>
                                 <p className="text-gray-800">{shippingFirstName} {shippingLastName}</p>
                                 <p className="text-gray-800">{shippingEmail}</p>
                                 <p className="text-gray-800">{shippingPhone}</p>
@@ -766,7 +766,7 @@ export default function BabyKidsCheckout({
                             <div className="mt-6 pt-6 border-t-2 border-pink-300">
                               <p className="text-sm font-bold text-pink-600 mb-2">Méthode de livraison</p>
                               <p className="text-gray-800">
-                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                               </p>
                             </div>
                           </div>
@@ -790,14 +790,14 @@ export default function BabyKidsCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
                         >
-                          Back to Shipping
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-pink-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-pink-600 transition-colors"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -827,7 +827,7 @@ export default function BabyKidsCheckout({
                               className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300 rounded"
                             />
                             <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-gray-800 font-medium">
-                              Same as shipping address
+                              Identique à l'adresse de livraison
                             </label>
                           </div>
                           
@@ -858,8 +858,8 @@ export default function BabyKidsCheckout({
                                     className="h-4 w-4 text-pink-500 focus:ring-pink-500 border-pink-300"
                                   />
                                   <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                    <span className="block text-sm font-bold text-gray-800">Cash on Delivery</span>
-                                    <span className="block text-sm text-gray-600">Pay when your order is delivered to your little ones</span>
+                                    <span className="block text-sm font-bold text-gray-800">Paiement à la livraison</span>
+                                    <span className="block text-sm text-gray-600">Payez à la livraison de votre commande</span>
                                   </label>
                                 </div>
                               </div>
@@ -881,7 +881,7 @@ export default function BabyKidsCheckout({
                                   />
                                   <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-sm font-bold text-gray-800">WhatsApp</span>
-                                    <span className="block text-sm text-gray-600">Complete your order via WhatsApp for your little ones</span>
+                                    <span className="block text-sm text-gray-600">Finalisez votre commande via WhatsApp</span>
                                   </label>
                                 </div>
                               </div>
@@ -903,7 +903,7 @@ export default function BabyKidsCheckout({
                                   />
                                   <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-sm font-bold text-gray-800">Telegram</span>
-                                    <span className="block text-sm text-gray-600">Complete your order via Telegram for your little ones</span>
+                                    <span className="block text-sm text-gray-600">Finalisez votre commande via Telegram</span>
                                   </label>
                                 </div>
                               </div>
@@ -959,7 +959,7 @@ export default function BabyKidsCheckout({
                                         {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                       </span>
                                       <span className="block text-sm text-gray-600">
-                                        {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                        {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                       </span>
                                     </label>
                                   </div>
@@ -967,7 +967,7 @@ export default function BabyKidsCheckout({
                                   {/* Bank Transfer Details */}
                                   {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                     <div className="mt-4 p-4 bg-pink-50 border-2 border-pink-200 rounded-2xl">
-                                      <h4 className="text-sm font-bold text-pink-800 mb-2">Bank Transfer Details</h4>
+                                      <h4 className="text-sm font-bold text-pink-800 mb-2">Détails du virement bancaire</h4>
                                       <div className="text-sm text-pink-700 whitespace-pre-line">
                                         {config.details}
                                       </div>
@@ -982,7 +982,7 @@ export default function BabyKidsCheckout({
                         {/* WhatsApp Number Input */}
                         {paymentMethod === 'whatsapp' && (
                           <div className="mt-6">
-                            <h3 className="text-lg font-bold text-gray-800 mb-4">WhatsApp Details</h3>
+                            <h3 className="text-lg font-bold text-gray-800 mb-4">Détails WhatsApp</h3>
                             
                             <div>
                               <label className="block text-sm font-bold text-gray-700 mb-2">WhatsApp Number *</label>
@@ -1012,7 +1012,7 @@ export default function BabyKidsCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1118,10 +1118,10 @@ export default function BabyKidsCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 rounded-r-2xl font-bold text-sm transition-colors ${
@@ -1130,11 +1130,11 @@ export default function BabyKidsCheckout({
                               : 'bg-yellow-500 text-white hover:bg-yellow-600'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-600 font-bold">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-600 font-bold">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1172,7 +1172,7 @@ export default function BabyKidsCheckout({
                   {/* Secure Checkout */}
                   <div className="flex items-center justify-center mb-4">
                     <Lock className="h-4 w-4 text-blue-500 mr-2" />
-                    <p className="text-xs text-gray-600 font-bold">Secure & Safe Checkout</p>
+                    <p className="text-xs text-gray-600 font-bold">Paiement sécurisé</p>
                   </div>
 
                 </div>

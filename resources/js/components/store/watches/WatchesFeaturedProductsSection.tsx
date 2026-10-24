@@ -44,10 +44,10 @@ export default function WatchesFeaturedProductsSection({
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-light text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Master Collection'}
+            {content?.title || "Nos sélections"}
           </h2>
           <p className="text-lg text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Handpicked by our horologists - exceptional timepieces that represent the pinnacle of watchmaking excellence.'}
+            {content?.description || "Sélectionnés avec soin par notre équipe : les incontournables du moment."}
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function WatchesFeaturedProductsSection({
               href={generateStoreUrl('store.products', store)}
               className="inline-flex items-center px-10 py-4 bg-slate-900 text-white font-medium tracking-wider uppercase text-sm hover:bg-slate-800 transition-colors duration-300"
             >
-              View All Timepieces
+              Voir tous les produits
               <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

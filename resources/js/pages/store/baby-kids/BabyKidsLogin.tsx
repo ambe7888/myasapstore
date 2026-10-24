@@ -70,8 +70,8 @@ export default function BabyKidsLogin({
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h1 className="text-4xl font-black text-gray-800 mb-3">Welcome Back!</h1>
-                <p className="text-lg text-gray-600">Sign in to your parent account</p>
+                <h1 className="text-4xl font-black text-gray-800 mb-3">Bon retour !</h1>
+                <p className="text-lg text-gray-600">Connectez-vous à votre compte</p>
               </div>
 
               {/* Block Card Design */}
@@ -100,7 +100,7 @@ export default function BabyKidsLogin({
                       className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-pink-200 focus:border-pink-400 focus:outline-none transition-all duration-300 text-lg ${
                         errors.email ? 'border-red-300 bg-red-50' : 'border-pink-200 bg-pink-50/50'
                       }`}
-                      placeholder="Enter your email"
+                      placeholder="Saisissez votre e-mail"
                       required
                     />
                     {errors.email && (
@@ -122,13 +122,13 @@ export default function BabyKidsLogin({
                             <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                           </svg>
                         </div>
-                        Password
+                        Mot de passe
                       </label>
                       <Link
                         href={generateStoreUrl('store.forgot-password', store)}
                         className="text-sm text-pink-500 hover:text-pink-600 font-bold transition-colors duration-300"
                       >
-                        Forgot password?
+                        Mot de passe oublié ?
                       </Link>
                     </div>
                     <div className="relative">
@@ -140,7 +140,7 @@ export default function BabyKidsLogin({
                         className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-blue-200 focus:border-blue-400 focus:outline-none transition-all duration-300 text-lg ${
                           errors.password ? 'border-red-300 bg-red-50' : 'border-blue-200 bg-blue-50/50'
                         }`}
-                        placeholder="Enter your password"
+                        placeholder="Saisissez votre mot de passe"
                         required
                       />
                       <button
@@ -193,11 +193,11 @@ export default function BabyKidsLogin({
                     {processing ? (
                       <div className="flex items-center justify-center space-x-2">
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Signing In...</span>
+                        <span>Connexion...</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-center space-x-2">
-                        <span>Sign In</span>
+                        <span>Se connecter</span>
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
@@ -214,7 +214,7 @@ export default function BabyKidsLogin({
                       href={generateStoreUrl('store.register', store)}
                       className="text-pink-500 hover:text-pink-600 font-bold transition-colors duration-300"
                     >
-                      Create Account
+                      Créer un compte
                     </Link>
                   </p>
                 </div>

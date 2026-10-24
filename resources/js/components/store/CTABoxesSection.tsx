@@ -17,25 +17,25 @@ export default function CTABoxesSection({
   boxes = [
     {
       id: 1,
-      title: "New Arrivals",
-      subtitle: "Check out our latest collection",
-      buttonText: "Shop Now",
+      title: "Nouveautés",
+      subtitle: "Découvrez nos dernières nouveautés",
+      buttonText: "Acheter maintenant",
       buttonLink: "/new-arrivals",
       backgroundImage: "/storage/media/cta-new-arrivals.jpg"
     },
     {
       id: 2,
-      title: "Summer Sale",
+      title: "Promotions",
       subtitle: "Up to 50% off",
-      buttonText: "View Offers",
+      buttonText: "Voir les offres",
       buttonLink: "/sale",
       backgroundImage: "/storage/media/cta-summer-sale.jpg"
     },
     {
       id: 3,
       title: "Gift Cards",
-      subtitle: "The perfect present",
-      buttonText: "Buy Now",
+      subtitle: "Le cadeau idéal",
+      buttonText: "Acheter maintenant",
       buttonLink: "/gift-cards",
       backgroundImage: "/storage/media/cta-gift-cards.jpg"
     }

@@ -145,9 +145,9 @@ export default function Register({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Create an Account</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Créer un compte</h1>
               <p className="text-white/80">
-                Join us to enjoy personalized shopping experience and exclusive offers
+                Rejoignez-nous et profitez d'offres exclusives
               </p>
             </div>
           </div>
@@ -157,9 +157,9 @@ export default function Register({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Register</span>
+              <span className="text-gray-800 font-medium">S'inscrire</span>
             </div>
           </div>
         </div>
@@ -245,7 +245,7 @@ export default function Register({
                   {/* Password */}
                   <div className="mb-6">
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -287,7 +287,7 @@ export default function Register({
                   {/* Confirm Password */}
                   <div className="mb-6">
                     <label htmlFor="password-confirmation" className="block text-sm font-medium text-gray-700 mb-1">
-                      Confirm Password
+                      Confirmer le mot de passe
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -332,7 +332,7 @@ export default function Register({
                       disabled={processing}
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                     >
-                      {processing ? 'Creating Account...' : 'Create Account'}
+                      {processing ? "Création du compte..." : "Créer un compte"}
                     </button>
                   </div>
                 </form>
@@ -344,7 +344,7 @@ export default function Register({
                       <div className="w-full border-t border-gray-300"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white text-gray-500">Or sign up with</span>
+                      <span className="px-2 bg-white text-gray-500">Ou s'inscrire avec</span>
                     </div>
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export default function Register({
                       href={generateStoreUrl('store.login', store)}
                       className="font-medium text-primary hover:text-primary-700"
                     >
-                      Sign in
+                      Se connecter
                     </Link>
                   </p>
                 </div>

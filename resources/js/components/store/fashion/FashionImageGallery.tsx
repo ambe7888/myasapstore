@@ -44,14 +44,14 @@ export default function FashionImageGallery({ images, selectedImage = 0, onImage
             <button 
               onClick={() => handleImageSelect(activeIndex === 0 ? images.length - 1 : activeIndex - 1)}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 hover:bg-white transition-colors group"
-              aria-label="Previous image"
+              aria-label="Image précédente"
             >
               <ChevronLeft className="h-5 w-5 text-black group-hover:scale-110 transition-transform" />
             </button>
             <button 
               onClick={() => handleImageSelect(activeIndex === images.length - 1 ? 0 : activeIndex + 1)}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 hover:bg-white transition-colors group"
-              aria-label="Next image"
+              aria-label="Image suivante"
             >
               <ChevronRight className="h-5 w-5 text-black group-hover:scale-110 transition-transform" />
             </button>

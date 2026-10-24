@@ -33,7 +33,7 @@ export default function FashionBlogSection({ posts = [], content }: FashionBlogS
           </h2>
           <div className="w-16 h-px bg-black mx-auto mb-8"></div>
           <p className="text-gray-600 max-w-2xl mx-auto font-light text-lg leading-relaxed">
-            {content?.description || 'Fashion insights, styling tips, and trend forecasts from industry experts and influencers.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
         
@@ -72,7 +72,7 @@ export default function FashionBlogSection({ posts = [], content }: FashionBlogS
                       href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                       className="text-xs uppercase tracking-wider text-black hover:text-gray-600 transition-colors duration-300 font-medium"
                     >
-                      Read More
+                      Lire la suite
                     </a>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export default function FashionBlogSection({ posts = [], content }: FashionBlogS
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-500 font-light">No blog posts available.</p>
+            <p className="text-gray-500 font-light">Aucun article disponible.</p>
           </div>
         )}
       </div>

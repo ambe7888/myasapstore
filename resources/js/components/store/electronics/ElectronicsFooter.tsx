@@ -45,7 +45,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
               )}
             </div>
             <p className="text-blue-200 mb-6 leading-relaxed">
-              {content?.description?.value || content?.description || 'Your trusted destination for premium electronics and innovative gadgets with expert support and warranty.'}
+              {content?.description?.value || content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
             </p>
             
             {/* Social Links */}
@@ -73,13 +73,13 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
           {/* Support Menu */}
           <div>
             <h3 className="text-lg font-semibold mb-6">
-              {content?.menu1?.title?.value || content?.menu1?.title || 'Support'}
+              {content?.menu1?.title?.value || content?.menu1?.title || "Assistance"}
             </h3>
             <ul className="space-y-3">
               {(content?.menu1?.links?.value || content?.menu1?.links || [
-                { name: 'Tech Support', href: '/support' },
+                { name: "Assistance", href: '/support' },
                 { name: 'Warranty', href: '/warranty' },
-                { name: 'Returns', href: '/returns' },
+                { name: "Retours", href: '/returns' },
                 { name: 'Setup Guide', href: '/setup' }
               ]).map((link, index) => (
                 <li key={index}>
@@ -104,10 +104,10 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
             </h3>
             <ul className="space-y-3">
               {(content?.menu2?.links?.value || content?.menu2?.links || [
-                { name: 'About Us', href: '/about' },
+                { name: "À propos", href: '/about' },
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
-                { name: 'Privacy Policy', href: '/privacy' }
+                { name: "Politique de confidentialité", href: '/privacy' }
               ]).map((link, index) => (
                 <li key={index}>
                   <a
@@ -126,7 +126,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Info</h3>
+            <h3 className="text-lg font-semibold mb-6">Informations de contact</h3>
             <div className="space-y-4">
               <div className="flex items-start">
                 <svg className="w-5 h-5 text-blue-400 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -160,7 +160,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-12 pt-8 text-center">
           <p className="text-blue-200 text-sm">
-            {(content?.copyright_text?.value || content?.copyright_text || '© {year} {store_name}. All rights reserved.')
+            {(content?.copyright_text?.value || content?.copyright_text || "© {year} {store_name}. Tous droits réservés.")
               .replace('{year}', currentYear.toString())
               .replace('{store_name}', storeName)}
           </p>

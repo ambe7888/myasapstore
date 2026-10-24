@@ -210,7 +210,7 @@ function FashionProductDetail({
           <div className="border-b border-gray-100 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">
               <nav className="text-sm font-light tracking-wide">
-                <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-black transition-colors">Home</a>
+                <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-black transition-colors">Accueil</a>
                 <ChevronRight className="h-4 w-4 mx-2 text-gray-400 inline" />
                 {product.category && (
                   <>
@@ -429,7 +429,7 @@ function FashionProductDetail({
                               : 'text-gray-500 hover:text-gray-700'
                           }`}
                         >
-                          Additional Details
+                          Détails supplémentaires
                         </button>
                       )}
                       {hasCustomFields && (
@@ -509,7 +509,7 @@ function FashionProductDetail({
                                 }}
                                 className="px-6 py-3 bg-black text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black font-light tracking-wide transition-colors"
                               >
-                                Write a Review
+                                Donner votre avis
                               </button>
                             </div>
 
@@ -543,7 +543,7 @@ function FashionProductDetail({
                                 ))
                               ) : (
                                 <div className="text-center py-8">
-                                  <p className="text-gray-500 font-light">No reviews yet. Be the first to review this product!</p>
+                                  <p className="text-gray-500 font-light">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                                 </div>
                               )}
                             </div>
@@ -563,8 +563,8 @@ function FashionProductDetail({
           {relatedProducts.length > 0 && (
             <FashionRelatedProducts
               products={relatedProducts}
-              title="You May Also Like"
-              subtitle="Discover similar styles that complement your taste"
+              title="Vous pourriez aussi aimer"
+              subtitle="Découvrez des produits similaires"
               storeSettings={storeSettings}
               currencies={currencies}
             />
@@ -583,7 +583,7 @@ function FashionProductDetail({
             <div className="inline-block align-bottom bg-white text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-8 pt-8 pb-6">
                 <div className="w-full">
-                  <h3 className="text-2xl font-thin tracking-wide text-black mb-8 text-center">Write a Review</h3>
+                  <h3 className="text-2xl font-thin tracking-wide text-black mb-8 text-center">Donner votre avis</h3>
 
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
@@ -620,7 +620,7 @@ function FashionProductDetail({
                             title: reviewTitle,
                             content: reviewContent,
                             customer_name: data.review?.customer_name || props.auth?.user?.name || 'Anonymous',
-                            created_at: 'Just now',
+                            created_at: "À l'instant",
                             store_response: null
                           };
                           
@@ -641,14 +641,14 @@ function FashionProductDetail({
                           toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
-                        console.error('Error submitting review:', error);
+                        console.error("Erreur lors de l'envoi de l'avis :", error);
                         toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
                     }}>
                       <div>
-                        <label className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Your Rating *</label>
+                        <label className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Votre note *</label>
                         <div className="flex justify-center mb-2">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -666,12 +666,12 @@ function FashionProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-title" className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Review Title *</label>
+                        <label htmlFor="review-title" className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Titre de l'avis *</label>
                         <input
                           type="text"
                           id="review-title"
                           className="w-full px-0 py-3 border-0 border-b border-gray-300 bg-transparent focus:outline-none focus:border-black font-light tracking-wide transition-colors"
-                          placeholder="Give your review a title"
+                          placeholder="Donnez un titre à votre avis"
                           value={reviewTitle}
                           onChange={(e) => setReviewTitle(e.target.value)}
                           required
@@ -679,7 +679,7 @@ function FashionProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-content" className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Your Review *</label>
+                        <label htmlFor="review-content" className="block text-xs font-light tracking-widest uppercase text-gray-700 mb-3">Votre avis *</label>
                         <textarea
                           id="review-content"
                           rows={4}
@@ -697,14 +697,14 @@ function FashionProductDetail({
                           className="flex-1 py-3 border border-gray-300 text-gray-700 font-light tracking-widest uppercase text-xs hover:bg-gray-50 focus:outline-none transition-colors"
                           onClick={() => setShowReviewModal(false)}
                         >
-                          Cancel
+                          Annuler
                         </button>
                         <button
                           type="submit"
                           disabled={isSubmittingReview}
                           className="flex-1 py-3 bg-black text-white font-light tracking-widest uppercase text-xs hover:bg-gray-900 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                         </button>
                       </div>
                     </form>

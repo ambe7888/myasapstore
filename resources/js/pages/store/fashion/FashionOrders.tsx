@@ -82,7 +82,7 @@ export default function FashionOrders({
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">My Orders</h1>
               <p className="text-white/70 font-light text-lg">
-                Track your fashion journey
+                Suivez vos commandes
               </p>
             </div>
           </div>
@@ -143,9 +143,9 @@ export default function FashionOrders({
             ) : (
               <div className="text-center py-20">
                 <Package className="h-16 w-16 text-gray-300 mx-auto mb-6" />
-                <h2 className="text-2xl font-thin text-gray-900 mb-4">No orders yet</h2>
+                <h2 className="text-2xl font-thin text-gray-900 mb-4">Aucune commande pour le moment</h2>
                 <p className="text-gray-600 font-light mb-8">
-                  Start shopping to see your orders here
+                  Commencez vos achats pour voir vos commandes ici
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

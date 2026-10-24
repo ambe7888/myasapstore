@@ -76,9 +76,9 @@ export default function ElectronicsBlog({
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <Tag className="w-8 h-8" />
               </div>
-              <h1 className="text-5xl font-bold mb-6">Tech Blog</h1>
+              <h1 className="text-5xl font-bold mb-6">Notre blog</h1>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                Stay updated with the latest technology trends, product reviews, and industry insights
+                Restez informé de nos dernières actualités
               </p>
             </div>
           </section>
@@ -92,7 +92,7 @@ export default function ElectronicsBlog({
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search articles..."
+                    placeholder="Rechercher un article..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -101,7 +101,7 @@ export default function ElectronicsBlog({
 
                 {/* Category Filter */}
                 <div className="flex items-center gap-4">
-                  <span className="text-gray-700 font-semibold">Filter by:</span>
+                  <span className="text-gray-700 font-semibold">Filtrer par :</span>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
@@ -185,7 +185,7 @@ export default function ElectronicsBlog({
                           href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                           className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300 group"
                         >
-                          <span>Read More</span>
+                          <span>Lire la suite</span>
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                         </a>
                       </div>
@@ -197,11 +197,11 @@ export default function ElectronicsBlog({
                   <div className="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <Search className="w-8 h-8 text-gray-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">No Articles Found</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Aucun article trouvé</h3>
                   <p className="text-gray-600 mb-8">
                     {searchTerm || selectedCategory 
-                      ? "Try adjusting your search or filter criteria" 
-                      : "No blog posts are available at the moment"}
+                      ? "Essayez de modifier votre recherche ou vos filtres" 
+                      : "Aucun article disponible pour le moment"}
                   </p>
                   {(searchTerm || selectedCategory) && (
                     <button

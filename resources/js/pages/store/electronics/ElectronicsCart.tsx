@@ -137,7 +137,7 @@ function ElectronicsCartContent({
               </div>
               <h1 className="text-5xl font-bold mb-6">Panier d'achat</h1>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                Review your selected electronics and proceed to checkout
+                Vérifiez vos articles et passez à la caisse
               </p>
             </div>
           </section>
@@ -282,7 +282,7 @@ function ElectronicsCartContent({
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Tax</span>
+                          <span className="text-gray-600">Taxe</span>
                           <span className="font-semibold">{formatCurrency(dynamicSummary.tax || 0, storeSettings, currencies)}</span>
                         </div>
                         <div className="border-t border-gray-200 pt-4">
@@ -306,7 +306,7 @@ function ElectronicsCartContent({
                       <div className="space-y-3 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Shield className="w-4 h-4 text-green-600" />
-                          <span>Secure checkout with SSL encryption</span>
+                          <span>Paiement sécurisé avec cryptage SSL</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <Truck className="w-4 h-4 text-blue-600" />
@@ -322,9 +322,9 @@ function ElectronicsCartContent({
                   <div className="w-24 h-24 bg-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-8">
                     <ShoppingCart className="w-12 h-12 text-gray-400" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Your Cart is Empty</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Votre panier est vide</h2>
                   <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                    Looks like you haven't added any electronics to your cart yet. Start shopping to fill it up!
+                    Vous n'avez encore ajouté aucun article à votre panier. Commencez vos achats !
                   </p>
                   <Link
                     href={generateStoreUrl('store.products', store)}

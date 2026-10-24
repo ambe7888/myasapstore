@@ -18,11 +18,11 @@ export default function JewelryBlogSection({ posts = [], content }: JewelryBlogS
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif text-neutral-900 mb-4">
-            {content?.title || 'Latest Articles'}
+            {content?.title || "Derniers articles"}
           </h2>
           <div className="w-24 h-1 bg-yellow-600 mx-auto mb-4"></div>
           <p className="text-neutral-600 max-w-2xl mx-auto">
-            {content?.description || 'Discover insights, trends, and stories from the world of luxury jewelry.'}
+            {content?.description || "Découvrez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function JewelryBlogSection({ posts = [], content }: JewelryBlogS
             href={generateStoreUrl('store.blog', store)}
             className="inline-flex items-center bg-yellow-600 text-white px-8 py-4 font-medium hover:bg-yellow-700 transition-colors"
           >
-            <span>View All Articles</span>
+            <span>Voir tous les articles</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

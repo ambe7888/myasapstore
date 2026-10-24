@@ -58,8 +58,8 @@ export default function ElectronicsLogin({
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <Lock className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-              <p className="text-gray-600">Sign in to your account to continue</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Bon retour</h2>
+              <p className="text-gray-600">Connectez-vous pour continuer</p>
             </div>
 
             {/* Login Form */}
@@ -76,7 +76,7 @@ export default function ElectronicsLogin({
                       value={data.email}
                       onChange={(e) => setData('email', e.target.value)}
                       className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Enter your email"
+                      placeholder="Saisissez votre e-mail"
                       required
                     />
                   </div>
@@ -86,7 +86,7 @@ export default function ElectronicsLogin({
                 {/* Password Field */}
                 <div>
                   <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -96,7 +96,7 @@ export default function ElectronicsLogin({
                       value={data.password}
                       onChange={(e) => setData('password', e.target.value)}
                       className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Enter your password"
+                      placeholder="Saisissez votre mot de passe"
                       required
                     />
                     <button
@@ -125,7 +125,7 @@ export default function ElectronicsLogin({
                     href={generateStoreUrl('store.forgot-password', store)}
                     className="text-sm text-blue-600 hover:text-blue-700 font-semibold"
                   >
-                    Forgot password?
+                    Mot de passe oublié ?
                   </Link>
                 </div>
 
@@ -141,10 +141,10 @@ export default function ElectronicsLogin({
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Signing In...
+                      Connexion...
                     </>
                   ) : (
-                    'Sign In'
+                    "Se connecter"
                   )}
                 </button>
               </form>
@@ -157,7 +157,7 @@ export default function ElectronicsLogin({
                     href={generateStoreUrl('store.register', store)}
                     className="text-blue-600 hover:text-blue-700 font-semibold"
                   >
-                    Create one now
+                    Créez-en un maintenant
                   </Link>
                 </p>
               </div>

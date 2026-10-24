@@ -82,7 +82,7 @@ export default function FashionProfile({
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">My Profile</h1>
               <p className="text-white/70 font-light text-lg">
-                Manage your account information
+                Gérez les informations de votre compte
               </p>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function FashionProfile({
                 <div className="space-y-8">
                   {/* Personal Information */}
                   <div>
-                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Personal Information</h2>
+                    <h2 className="text-2xl font-thin mb-6 tracking-wide">Informations personnelles</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">Prénom</label>
@@ -147,7 +147,7 @@ export default function FashionProfile({
                         <div className="relative">
                           <input
                             type="tel"
-                            value={user.phone || 'Not provided'}
+                            value={user.phone || "Non renseigné"}
                             className="w-full px-0 py-3 border-0 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-black transition-colors font-light"
                             readOnly
                           />
@@ -160,16 +160,16 @@ export default function FashionProfile({
                   {/* Address Information */}
                   {user.address && (
                     <div>
-                      <h2 className="text-2xl font-thin mb-6 tracking-wide">Address Information</h2>
+                      <h2 className="text-2xl font-thin mb-6 tracking-wide">Informations d'adresse</h2>
                       <div className="space-y-6">
                         <div>
                           <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                            Address
+                            Adresse
                           </label>
                           <div className="relative">
                             <input
                               type="text"
-                              value={user.address.address || 'Not provided'}
+                              value={user.address.address || "Non renseigné"}
                               className="w-full px-0 py-3 border-0 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-black transition-colors font-light"
                               readOnly
                             />
@@ -180,11 +180,11 @@ export default function FashionProfile({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
                             <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                              City
+                              Ville
                             </label>
                             <input
                               type="text"
-                              value={user.address.city || 'Not provided'}
+                              value={user.address.city || "Non renseigné"}
                               className="w-full px-0 py-3 border-0 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-black transition-colors font-light"
                               readOnly
                             />
@@ -196,7 +196,7 @@ export default function FashionProfile({
                             </label>
                             <input
                               type="text"
-                              value={user.address.postal_code || 'Not provided'}
+                              value={user.address.postal_code || "Non renseigné"}
                               className="w-full px-0 py-3 border-0 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-black transition-colors font-light"
                               readOnly
                             />
@@ -209,24 +209,24 @@ export default function FashionProfile({
                   {/* Action Buttons */}
                   <div className="pt-8 flex space-x-4">
                     <button className="bg-black text-white px-8 py-3 font-light tracking-wide uppercase text-sm hover:bg-gray-800 transition-colors">
-                      Edit Profile
+                      Modifier le profil
                     </button>
                     <button 
                       onClick={() => setShowPasswordForm(!showPasswordForm)}
                       className="border border-gray-300 px-8 py-3 font-light tracking-wide uppercase text-sm hover:border-black transition-colors"
                     >
-                      {showPasswordForm ? 'Cancel' : 'Change Password'}
+                      {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                     </button>
                   </div>
                   
                   {/* Password Change Form */}
                   {showPasswordForm && (
                     <div className="mt-8 pt-8 border-t border-gray-200">
-                      <h2 className="text-2xl font-thin mb-6 tracking-wide">Change Password</h2>
+                      <h2 className="text-2xl font-thin mb-6 tracking-wide">Changer le mot de passe</h2>
                       <form onSubmit={handlePasswordSubmit} className="space-y-6">
                         <div>
                           <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                            Current Password
+                            Mot de passe actuel
                           </label>
                           <input
                             type="password"
@@ -239,7 +239,7 @@ export default function FashionProfile({
                         
                         <div>
                           <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                            New Password
+                            Nouveau mot de passe
                           </label>
                           <input
                             type="password"
@@ -252,7 +252,7 @@ export default function FashionProfile({
                         
                         <div>
                           <label className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                            Confirm New Password
+                            Confirmer le nouveau mot de passe
                           </label>
                           <input
                             type="password"
@@ -270,14 +270,14 @@ export default function FashionProfile({
                             className="bg-black text-white px-8 py-3 font-light tracking-wide uppercase text-sm hover:bg-gray-800 transition-colors disabled:opacity-50 border-0 focus:outline-none focus:ring-0"
                             style={{ backgroundColor: '#000000', color: '#ffffff' }}
                           >
-                            {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                            {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                           </button>
                           <button 
                             type="button"
                             onClick={() => setShowPasswordForm(false)}
                             className="border border-gray-300 px-8 py-3 font-light tracking-wide uppercase text-sm hover:border-black transition-colors"
                           >
-                            Cancel
+                            Annuler
                           </button>
                         </div>
                       </form>

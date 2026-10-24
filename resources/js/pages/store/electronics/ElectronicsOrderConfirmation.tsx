@@ -112,7 +112,7 @@ const { props } = usePage();
       country: ''
     },
     payment_method: 'Credit Card',
-    shipping_method: 'Standard Shipping'
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;
@@ -179,9 +179,9 @@ const { props } = usePage();
           <div className="bg-white border-b border-gray-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">
               <nav className="text-sm">
-                <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-blue-600 transition-colors">Home</Link>
+                <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-blue-600 transition-colors">Accueil</Link>
                 <ChevronRight className="h-4 w-4 mx-2 text-gray-400 inline" />
-                <span className="text-gray-900 font-semibold">Order Confirmation</span>
+                <span className="text-gray-900 font-semibold">Confirmation de commande</span>
               </nav>
             </div>
           </div>
@@ -199,7 +199,7 @@ const { props } = usePage();
                     Thank you for your purchase. Votre commande a été enregistrée avec succès.
                   </p>
                   <div className="inline-flex items-center bg-blue-50 rounded-lg px-6 py-3">
-                    <span className="text-blue-600 font-semibold mr-2">Order ID:</span>
+                    <span className="text-blue-600 font-semibold mr-2">N° de commande :</span>
                     <span className="text-blue-900 font-bold text-lg">{orderData.id}</span>
                   </div>
                 </div>
@@ -273,7 +273,7 @@ const { props } = usePage();
                 <div className="lg:col-span-2">
                   <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div className="bg-slate-900 text-white p-6">
-                      <h2 className="text-2xl font-bold">Order Items</h2>
+                      <h2 className="text-2xl font-bold">Articles commandés</h2>
                     </div>
                     
                     <div className="p-6">
@@ -360,7 +360,7 @@ const { props } = usePage();
                     <div className="bg-slate-900 text-white p-6">
                       <h3 className="text-xl font-bold flex items-center">
                         <MapPin className="w-5 h-5 mr-2" />
-                        Shipping Address
+                        Adresse de livraison
                       </h3>
                     </div>
                     
@@ -384,7 +384,7 @@ const { props } = usePage();
               <div className="max-w-4xl mx-auto">
                 <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                   <div className="bg-slate-900 text-white p-6">
-                    <h2 className="text-2xl font-bold">What Happens Next?</h2>
+                    <h2 className="text-2xl font-bold">Et ensuite ?</h2>
                   </div>
                   
                   <div className="p-8">
@@ -394,7 +394,7 @@ const { props } = usePage();
                           <Package className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-lg font-bold text-gray-900 mb-2">Processing</h3>
-                        <p className="text-gray-600">We're preparing your order for shipment</p>
+                        <p className="text-gray-600">Nous préparons votre commande pour l'expédition</p>
                       </div>
                       
                       <div className="text-center">
@@ -402,7 +402,7 @@ const { props } = usePage();
                           <Truck className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-lg font-bold text-gray-900 mb-2">Livraison</h3>
-                        <p className="text-gray-600">Votre commande sera expédiée with tracking</p>
+                        <p className="text-gray-600">Votre commande sera expédiée avec suivi</p>
                       </div>
                       
                       <div className="text-center">
@@ -410,7 +410,7 @@ const { props } = usePage();
                           <CheckCircle className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-lg font-bold text-gray-900 mb-2">Livraison</h3>
-                        <p className="text-gray-600">Enjoy your new electronics!</p>
+                        <p className="text-gray-600">Merci pour votre confiance !</p>
                       </div>
                     </div>
                   </div>
@@ -427,7 +427,7 @@ const { props } = usePage();
                   href={generateStoreUrl('store.my-orders', store)}
                   className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg"
                 >
-                  Track Your Order
+                  Suivre ma commande
                 </Link>
                 <Link
                   href={generateStoreUrl('store.products', store)}

@@ -39,7 +39,7 @@ export default function PerfumeBrandLogoSlider({ content }: PerfumeBrandLogoSlid
           </h2>
           
           <p className="text-gray-600 max-w-2xl mx-auto">
-            {content?.description || 'We proudly feature the world\'s most renowned fragrance houses and emerging artisan perfumers, curating an exclusive collection of luxury scents.'}
+            {content?.description || "Nous travaillons avec des marques de confiance pour vous offrir une qualité irréprochable."}
           </p>
         </div>
 
@@ -79,16 +79,16 @@ export default function PerfumeBrandLogoSlider({ content }: PerfumeBrandLogoSlid
         {(content?.bottom_title || content?.bottom_description || content?.bottom_button_text) && (
           <div className="text-center mt-12 p-8 bg-purple-50 rounded-2xl">
             <h3 className="text-xl font-medium text-purple-800 mb-3">
-              {content?.bottom_title || 'Looking for a Specific Brand?'}
+              {content?.bottom_title || "Vous cherchez une marque en particulier ?"}
             </h3>
             <p className="text-gray-600 mb-6">
-              {content?.bottom_description || 'We work with hundreds of fragrance brands. Contact us for special requests.'}
+              {content?.bottom_description || "Nous travaillons avec de nombreuses marques. Contactez-nous pour une demande particulière."}
             </p>
             <a
               href={formatCustomLink(content?.bottom_button_link, store, '/contact')}
               className="inline-flex items-center px-6 py-3 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
             >
-              {content?.bottom_button_text || 'Contact Us'}
+              {content?.bottom_button_text || "Nous contacter"}
             </a>
           </div>
         )}

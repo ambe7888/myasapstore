@@ -231,14 +231,14 @@ export default function WatchesProducts({
               <div className="max-w-4xl">
                 <div className="mb-6">
                   <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
-                    Master Collection
+                    Nos sélections
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
                   Luxury Timepieces
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Discover exceptional watches that blend traditional craftsmanship with modern innovation
+                  Découvrez nos produits et ajoutez-les à votre panier
                 </p>
               </div>
             </div>
@@ -253,7 +253,7 @@ export default function WatchesProducts({
             <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <div className="bg-white border border-slate-200 p-6 sticky top-24">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-light text-slate-900">Filter Selection</h3>
+                  <h3 className="text-lg font-light text-slate-900">Sélection des filtres</h3>
                   <button
                     onClick={clearFilters}
                     className="text-sm text-amber-600 hover:text-amber-700 font-medium"
@@ -273,7 +273,7 @@ export default function WatchesProducts({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                      placeholder="Search timepieces..."
+                      placeholder="Rechercher un produit..."
                       className="w-full pl-10 pr-4 py-2 border border-slate-300 focus:outline-none focus:border-amber-500"
                     />
                   </div>
@@ -406,7 +406,7 @@ export default function WatchesProducts({
                         onChange={() => setAvailability('all')}
                         className="mr-2 text-amber-500 focus:ring-amber-500"
                       />
-                      <span className="text-sm text-slate-700">All Timepieces</span>
+                      <span className="text-sm text-slate-700">Tous les produits</span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -561,7 +561,7 @@ export default function WatchesProducts({
                             />
                             {product.sale_price && (
                               <div className="absolute top-3 left-3 bg-amber-500 text-slate-900 text-xs font-medium px-3 py-1 uppercase tracking-wider">
-                                SALE
+                                PROMO
                               </div>
                             )}
                           </Link>
@@ -612,7 +612,7 @@ export default function WatchesProducts({
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm">
                                       <Settings className="h-4 w-4 mr-2" />
-                                      <span>Made to Order</span>
+                                      <span>Sur commande</span>
                                     </div>
                                   )}
                                 </div>
@@ -647,8 +647,8 @@ export default function WatchesProducts({
                 <div className="text-center py-16">
                   <div className="text-slate-500 mb-6">
                     <Clock className="h-16 w-16 mx-auto mb-6 opacity-50" />
-                    <h3 className="text-xl font-light mb-3 text-slate-700">No timepieces found</h3>
-                    <p className="text-slate-600">Try adjusting your filters to discover more watches</p>
+                    <h3 className="text-xl font-light mb-3 text-slate-700">Aucun produit trouvé</h3>
+                    <p className="text-slate-600">Essayez de modifier vos filtres pour découvrir plus de produits</p>
                   </div>
                   <button
                     onClick={clearFilters}
@@ -668,7 +668,7 @@ export default function WatchesProducts({
                       disabled={pagination.current_page === 1}
                       className="px-4 py-2 border border-slate-300 text-sm hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -693,7 +693,7 @@ export default function WatchesProducts({
                       disabled={pagination.current_page === pagination.last_page}
                       className="px-4 py-2 border border-slate-300 text-sm hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>

@@ -57,9 +57,9 @@ export default function WatchesForgotPassword({
                     <path fillRule="evenodd" d="M18 8A6 6 0 006 8v1H3a1 1 0 00-1 1v8a1 1 0 001 1h14a1 1 0 001-1v-8a1 1 0 00-1-1h-3V8zM8 8a4 4 0 118 0v1H8V8z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-light text-slate-900 mb-4">Account Recovery</h2>
+                <h2 className="text-3xl font-light text-slate-900 mb-4">Récupération du compte</h2>
                 <p className="text-slate-600 leading-relaxed">
-                  We'll help you regain access to your account quickly and securely.
+                  Nous vous aidons à retrouver l'accès à votre compte rapidement et en toute sécurité.
                 </p>
               </div>
               
@@ -72,8 +72,8 @@ export default function WatchesForgotPassword({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Email Verification</div>
-                    <div className="text-slate-600 text-sm">Secure reset link sent to your email</div>
+                    <div className="text-slate-900 font-medium">Vérification de l'e-mail</div>
+                    <div className="text-slate-600 text-sm">Lien de réinitialisation sécurisé envoyé par e-mail</div>
                   </div>
                 </div>
                 
@@ -84,8 +84,8 @@ export default function WatchesForgotPassword({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Secure Process</div>
-                    <div className="text-slate-600 text-sm">Your account remains protected</div>
+                    <div className="text-slate-900 font-medium">Processus sécurisé</div>
+                    <div className="text-slate-600 text-sm">Votre compte reste protégé</div>
                   </div>
                 </div>
                 
@@ -96,8 +96,8 @@ export default function WatchesForgotPassword({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Quick Access</div>
-                    <div className="text-slate-600 text-sm">Back to your collection in minutes</div>
+                    <div className="text-slate-900 font-medium">Accès rapide</div>
+                    <div className="text-slate-600 text-sm">Retrouvez votre compte en quelques minutes</div>
                   </div>
                 </div>
               </div>
@@ -109,8 +109,8 @@ export default function WatchesForgotPassword({
             <div className="w-full max-w-md">
               {/* Header */}
               <div className="text-center mb-8">
-                <h1 className="text-3xl font-light text-slate-900 mb-2">Account Recovery</h1>
-                <p className="text-slate-600">We'll send secure reset instructions to your email</p>
+                <h1 className="text-3xl font-light text-slate-900 mb-2">Récupération du compte</h1>
+                <p className="text-slate-600">Nous vous enverrons les instructions de réinitialisation par e-mail</p>
               </div>
 
               {/* Reset Form */}
@@ -135,7 +135,7 @@ export default function WatchesForgotPassword({
                       value={data.email}
                       onChange={(e) => setData('email', e.target.value)}
                       className="w-full px-4 py-4 border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all duration-300 pl-12"
-                      placeholder="Enter your email address"
+                      placeholder="Saisissez votre adresse e-mail"
                       required
                     />
                     <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
@@ -175,7 +175,7 @@ export default function WatchesForgotPassword({
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                     </svg>
-                    Back to Sign In
+                    Retour à la connexion
                   </Link>
                 </div>
                 <div className="text-slate-400">or</div>
@@ -184,7 +184,7 @@ export default function WatchesForgotPassword({
                     href={generateStoreUrl('store.register', store)}
                     className="text-amber-600 hover:text-amber-700 font-medium transition-colors"
                   >
-                    Create New Account
+                    Créer un nouveau compte
                   </Link>
                 </div>
               </div>

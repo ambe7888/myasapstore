@@ -37,7 +37,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
             {content?.title || 'Parenting Tips'}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {content?.description || 'Helpful advice and inspiration for raising happy, healthy children.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                     />
                   </a>
                   <div className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
-                    Featured
+                    À la une
                   </div>
                   <a href={generateStoreUrl('store.blog.show', store, {slug: posts[0].slug})}>
                     <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors duration-300">
@@ -75,7 +75,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                       href={generateStoreUrl('store.blog.show', store, {slug: posts[0].slug})}
                       className="text-pink-500 font-semibold hover:text-pink-600 transition-colors duration-300"
                     >
-                      {content?.read_more_text || 'Read More'} →
+                      {content?.read_more_text || "Lire la suite"} →
                     </a>
                   </div>
                 </article>
@@ -83,17 +83,17 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                 <article className="group relative bg-pink-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                   <img
                     src="https://placehold.co/400x300/fef7f7/ec4899?text=Featured+Post"
-                    alt="Featured Post"
+                    alt="Article à la une"
                     className="w-full h-48 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300 mb-6"
                   />
                   <div className="bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold inline-block mb-4">
-                    Featured
+                    À la une
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors duration-300">
-                    Essential Baby Care Tips for New Parents
+                    Nos conseils du moment
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Discover helpful tips and advice for caring for your little ones with comfort, safety, and style in mind.
+                    Découvrez nos conseils, nos idées et les actualités de la boutique.
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500">Mar 15</span>
@@ -130,7 +130,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                       href={generateStoreUrl('store.blog.show', store, {slug: post.slug})}
                       className="text-pink-500 font-semibold hover:text-pink-600 transition-colors duration-300"
                     >
-                      {content?.read_text || 'Read'} →
+                      {content?.read_text || "Lire"} →
                     </a>
                   </div>
                 </article>
@@ -143,7 +143,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
                       className="w-full h-32 object-cover rounded-xl mb-4 group-hover:scale-105 transition-transform duration-300"
                     />
                     <h4 className="font-bold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300">
-                      {index === 0 ? 'Choosing Safe Clothes for Toddlers' : 'Building Your Baby\'s Wardrobe'}
+                      {index === 0 ? "Nos idées du moment" : "Nos conseils du moment"}
                     </h4>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-gray-500">Mar {10 + index}</span>
@@ -164,7 +164,7 @@ export default function BabyKidsBlogSection({ posts = [], content, store }: Baby
             href={generateStoreUrl('store.blog', store)}
             className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
           >
-            <span>{content?.view_all_text || 'View All Articles'}</span>
+            <span>{content?.view_all_text || "Voir tous les articles"}</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

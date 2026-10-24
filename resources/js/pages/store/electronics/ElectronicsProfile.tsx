@@ -107,7 +107,7 @@ export default function ElectronicsProfile({
                 <User className="w-8 h-8" />
               </div>
               <h1 className="text-4xl font-bold mb-4">My Profile</h1>
-              <p className="text-xl text-blue-100">Manage your account information</p>
+              <p className="text-xl text-blue-100">Gérez les informations de votre compte</p>
             </div>
           </section>
 
@@ -132,7 +132,7 @@ export default function ElectronicsProfile({
                         className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                       >
                         <Edit className="w-4 h-4 inline mr-2" />
-                        {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                        {isEditing ? "Annuler la modification" : "Modifier le profil"}
                       </button>
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export default function ElectronicsProfile({
                     {/* Personal Information */}
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                       <div className="bg-blue-600 text-white p-6">
-                        <h3 className="text-xl font-bold">Personal Information</h3>
+                        <h3 className="text-xl font-bold">Informations personnelles</h3>
                       </div>
                       <div className="p-6">
                         {isEditing ? (
@@ -183,14 +183,14 @@ export default function ElectronicsProfile({
                                 disabled={profileForm.processing}
                                 className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
                               >
-                                {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                                {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                               </button>
                               <button 
                                 type="button"
                                 onClick={() => setIsEditing(false)}
                                 className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors"
                               >
-                                Cancel
+                                Annuler
                               </button>
                             </div>
                           </form>
@@ -267,12 +267,12 @@ export default function ElectronicsProfile({
                                 value={profileForm.data.phone}
                                 onChange={(e) => profileForm.setData('phone', e.target.value)}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Enter phone number"
+                                placeholder="Saisissez votre numéro de téléphone"
                               />
                             ) : (
                               <input
                                 type="tel"
-                                value={user.phone || 'Not provided'}
+                                value={user.phone || "Non renseigné"}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
                                 readOnly
                               />
@@ -289,17 +289,17 @@ export default function ElectronicsProfile({
                         <div className="bg-blue-600 text-white p-6">
                           <h3 className="text-xl font-bold flex items-center">
                             <MapPin className="w-5 h-5 mr-2" />
-                            Address Information
+                            Informations d'adresse
                           </h3>
                         </div>
                         <div className="p-6 space-y-6">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">
-                              Address
+                              Adresse
                             </label>
                             <input
                               type="text"
-                              value={user.address.address || 'Not provided'}
+                              value={user.address.address || "Non renseigné"}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
                               readOnly
                             />
@@ -308,11 +308,11 @@ export default function ElectronicsProfile({
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                City
+                                Ville
                               </label>
                               <input
                                 type="text"
-                                value={user.address.city || 'Not provided'}
+                                value={user.address.city || "Non renseigné"}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
                                 readOnly
                               />
@@ -324,7 +324,7 @@ export default function ElectronicsProfile({
                               </label>
                               <input
                                 type="text"
-                                value={user.address.postal_code || 'Not provided'}
+                                value={user.address.postal_code || "Non renseigné"}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
                                 readOnly
                               />
@@ -348,13 +348,13 @@ export default function ElectronicsProfile({
                             onClick={() => setShowPasswordForm(true)}
                             className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                           >
-                            Change Password
+                            Changer le mot de passe
                           </button>
                         ) : (
                           <form onSubmit={handlePasswordSubmit} className="space-y-6">
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                Current Password
+                                Mot de passe actuel
                               </label>
                               <input
                                 type="password"
@@ -367,7 +367,7 @@ export default function ElectronicsProfile({
                             
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                New Password
+                                Nouveau mot de passe
                               </label>
                               <input
                                 type="password"
@@ -380,7 +380,7 @@ export default function ElectronicsProfile({
                             
                             <div>
                               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                Confirm New Password
+                                Confirmer le nouveau mot de passe
                               </label>
                               <input
                                 type="password"
@@ -397,14 +397,14 @@ export default function ElectronicsProfile({
                                 disabled={passwordForm.processing}
                                 className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
                               >
-                                {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                                {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                               </button>
                               <button 
                                 type="button"
                                 onClick={() => setShowPasswordForm(false)}
                                 className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors"
                               >
-                                Cancel
+                                Annuler
                               </button>
                             </div>
                           </form>

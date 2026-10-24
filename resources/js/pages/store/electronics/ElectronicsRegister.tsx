@@ -61,8 +61,8 @@ export default function ElectronicsRegister({
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
-              <p className="text-gray-600">Join us and start shopping for the latest tech</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Créer un compte</h2>
+              <p className="text-gray-600">Rejoignez-nous et commencez vos achats</p>
             </div>
 
             {/* Register Form */}
@@ -71,7 +71,7 @@ export default function ElectronicsRegister({
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Full Name
+                    Nom complet
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -81,7 +81,7 @@ export default function ElectronicsRegister({
                       value={data.name}
                       onChange={(e) => setData('name', e.target.value)}
                       className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Enter your full name"
+                      placeholder="Saisissez votre nom complet"
                       required
                     />
                   </div>
@@ -99,7 +99,7 @@ export default function ElectronicsRegister({
                       value={data.email}
                       onChange={(e) => setData('email', e.target.value)}
                       className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Enter your email"
+                      placeholder="Saisissez votre e-mail"
                       required
                     />
                   </div>
@@ -109,7 +109,7 @@ export default function ElectronicsRegister({
                 {/* Password Field */}
                 <div>
                   <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -136,7 +136,7 @@ export default function ElectronicsRegister({
                 {/* Confirm Password Field */}
                 <div>
                   <label htmlFor="password_confirmation" className="block text-sm font-semibold text-gray-900 mb-2">
-                    Confirm Password
+                    Confirmer le mot de passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -146,7 +146,7 @@ export default function ElectronicsRegister({
                       value={data.password_confirmation}
                       onChange={(e) => setData('password_confirmation', e.target.value)}
                       className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Confirm your password"
+                      placeholder="Confirmez votre mot de passe"
                       required
                     />
                     <button
@@ -172,11 +172,11 @@ export default function ElectronicsRegister({
                     <span className="ml-3 text-sm text-gray-600">
                       I agree to the{' '}
                       <a href="/terms" className="text-blue-600 hover:text-blue-700 font-semibold">
-                        Terms of Service
+                        Conditions d'utilisation
                       </a>{' '}
                       and{' '}
                       <a href="/privacy" className="text-blue-600 hover:text-blue-700 font-semibold">
-                        Privacy Policy
+                        Politique de confidentialité
                       </a>
                     </span>
                   </label>
@@ -195,10 +195,10 @@ export default function ElectronicsRegister({
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Creating Account...
+                      Création du compte...
                     </>
                   ) : (
-                    'Create Account'
+                    "Créer un compte"
                   )}
                 </button>
               </form>
@@ -211,7 +211,7 @@ export default function ElectronicsRegister({
                     href={generateStoreUrl('store.login', store)}
                     className="text-blue-600 hover:text-blue-700 font-semibold"
                   >
-                    Sign in here
+                    Connectez-vous ici
                   </Link>
                 </p>
               </div>

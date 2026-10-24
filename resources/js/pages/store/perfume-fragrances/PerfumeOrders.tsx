@@ -84,7 +84,7 @@ export default function PerfumeOrders({
               </h1>
               
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Track your fragrance orders and discover your scent journey history.
+                Suivez vos commandes et retrouvez votre historique d'achats.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function PerfumeOrders({
                             className="bg-purple-800 hover:bg-purple-900 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors flex items-center"
                           >
                             <Eye className="h-4 w-4 mr-2" />
-                            View
+                            Voir
                           </Link>
                           
                           {(order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed') && (
@@ -154,16 +154,16 @@ export default function PerfumeOrders({
                   <div className="w-32 h-32 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
                     <Package className="h-16 w-16 text-purple-800" />
                   </div>
-                  <h2 className="text-4xl font-light text-purple-800 mb-6">No Orders Yet</h2>
+                  <h2 className="text-4xl font-light text-purple-800 mb-6">Aucune commande pour le moment</h2>
                   <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                    Your fragrance journey awaits. Discover our curated collection of luxury scents and create your first order.
+                    Découvrez notre sélection et passez votre première commande.
                   </p>
                   <Link
                     href={generateStoreUrl('store.products', store)}
                     className="bg-purple-800 hover:bg-purple-900 text-white px-12 py-4 rounded-full font-medium transition-colors inline-flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     <Sparkles className="h-6 w-6 mr-3" />
-                    Explore Fragrances
+                    Découvrir la collection
                   </Link>
                 </div>
               </div>

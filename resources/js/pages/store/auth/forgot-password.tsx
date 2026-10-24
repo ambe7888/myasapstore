@@ -138,9 +138,9 @@ export default function ForgotPassword({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Forgot Password</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Mot de passe oublié</h1>
               <p className="text-white/80">
-                Enter your email address to receive password reset instructions
+                Saisissez votre adresse e-mail pour recevoir les instructions de réinitialisation
               </p>
             </div>
           </div>
@@ -149,9 +149,9 @@ export default function ForgotPassword({
         <div className="bg-gray-50 py-4">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Forgot Password</span>
+              <span className="text-gray-800 font-medium">Mot de passe oublié</span>
             </div>
           </div>
         </div>
@@ -201,7 +201,7 @@ export default function ForgotPassword({
                     className="inline-flex items-center text-sm text-primary hover:text-primary-700"
                   >
                     <ArrowLeft className="h-4 w-4 mr-1" />
-                    Back to Login
+                    Retour à la connexion
                   </Link>
                 </div>
               </div>

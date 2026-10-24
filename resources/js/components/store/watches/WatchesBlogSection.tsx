@@ -37,7 +37,7 @@ export default function WatchesBlogSection({ posts, content }: WatchesBlogSectio
             {content?.title || 'Horological Journal'}
           </h2>
           <p className="text-lg text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Expert insights into watchmaking, collecting tips, and the latest developments in the world of luxury timepieces.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default function WatchesBlogSection({ posts, content }: WatchesBlogSectio
                   href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                   className="inline-flex items-center text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
                 >
-                  Read More
+                  Lire la suite
                   <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -109,7 +109,7 @@ export default function WatchesBlogSection({ posts, content }: WatchesBlogSectio
               href={generateStoreUrl('store.blog', store)}
               className="inline-flex items-center px-8 py-4 bg-slate-900 text-white font-medium tracking-wider uppercase text-sm hover:bg-slate-800 transition-colors duration-300"
             >
-              View All Articles
+              Voir tous les articles
               <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

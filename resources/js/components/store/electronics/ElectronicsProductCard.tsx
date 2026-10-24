@@ -107,7 +107,7 @@ export default function ElectronicsProductCard({
         {!isOnSale && (
           <div className="absolute top-4 left-4">
             <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-              NEW
+              NOUVEAU
             </span>
           </div>
         )}
@@ -125,7 +125,7 @@ export default function ElectronicsProductCard({
           <button 
             onClick={handleQuickView}
             className={`bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white transition-all duration-300 transform ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'} delay-75`}
-            aria-label="Quick view"
+            aria-label="Aperçu rapide"
           >
             <Eye className="h-4 w-4 text-gray-600" />
           </button>

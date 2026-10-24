@@ -12,10 +12,10 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
   const { props } = usePage();
 
   const boxes = ctaBoxes?.value || ctaBoxes || content?.value || content || [
-    { icon: 'diamond', title: 'Custom Design', subtitle: 'Bring your vision to life' },
-    { icon: 'clock', title: 'Watch Services', subtitle: 'Expert maintenance & repair' },
+    { icon: 'diamond', title: 'Custom Design', subtitle: "Un service personnalisé" },
+    { icon: 'clock', title: "Nos services", subtitle: 'Expert maintenance & repair' },
     { icon: 'gift', title: 'Gift Concierge', subtitle: 'Personalized gift selection' },
-    { icon: 'star', title: 'VIP Membership', subtitle: 'Exclusive privileges & events' }
+    { icon: 'star', title: 'VIP Membership', subtitle: "Avantages et événements exclusifs" }
   ];
 
   const getIcon = (iconName: string) => {
@@ -87,16 +87,16 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <h3 className="text-3xl font-extralight text-stone-900 mb-6 tracking-tight">
-            {bottomSection?.title?.value || bottomSection?.title || 'Experience Luxury Service'}
+            {bottomSection?.title?.value || bottomSection?.title || "Un service attentif"}
           </h3>
           <p className="text-lg text-stone-600 font-light mb-8 max-w-2xl mx-auto">
-            {bottomSection?.description?.value || bottomSection?.description || 'Our dedicated team of jewelry experts is here to provide personalized service and ensure your complete satisfaction.'}
+            {bottomSection?.description?.value || bottomSection?.description || "Notre équipe est à votre disposition pour vous conseiller et vous accompagner."}
           </p>
           <a
             href={formatCustomLink(bottomSection?.button_link?.value || bottomSection?.button_link, store, '#')}
             className="inline-flex items-center bg-yellow-600 text-white px-10 py-4 font-medium uppercase text-sm hover:bg-yellow-700 transition-colors duration-300"
           >
-            <span>{bottomSection?.button_text?.value || bottomSection?.button_text || 'Contact Our Experts'}</span>
+            <span>{bottomSection?.button_text?.value || bottomSection?.button_text || "Contacter notre équipe"}</span>
             <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

@@ -141,9 +141,9 @@ export default function Login({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Login</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Connexion</h1>
               <p className="text-white/80">
-                Sign in to your account to access your orders, wishlist, and more
+                Connectez-vous pour accéder à vos commandes, vos favoris et plus encore
               </p>
             </div>
           </div>
@@ -153,9 +153,9 @@ export default function Login({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Login</span>
+              <span className="text-gray-800 font-medium">Connexion</span>
             </div>
           </div>
         </div>
@@ -194,13 +194,13 @@ export default function Login({
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-1">
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                        Password
+                        Mot de passe
                       </label>
                       <Link
                         href={generateStoreUrl('store.forgot-password', store)}
                         className="text-sm text-primary hover:text-primary-700"
                       >
-                        Forgot password?
+                        Mot de passe oublié ?
                       </Link>
                     </div>
                     <div className="relative">
@@ -258,7 +258,7 @@ export default function Login({
                       disabled={processing}
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                     >
-                      {processing ? 'Signing In...' : 'Sign In'}
+                      {processing ? "Connexion..." : "Se connecter"}
                     </button>
                   </div>
                 </form>
@@ -270,7 +270,7 @@ export default function Login({
                       <div className="w-full border-t border-gray-300"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                      <span className="px-2 bg-white text-gray-500">Ou continuer avec</span>
                     </div>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export default function Login({
                       href={generateStoreUrl('store.register', store)}
                       className="font-medium text-primary hover:text-primary-700"
                     >
-                      Sign up now
+                      Inscrivez-vous maintenant
                     </Link>
                   </p>
                 </div>

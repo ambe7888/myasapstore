@@ -32,15 +32,15 @@ export default function PerfumeTrendingProductsSection({
             <svg className="w-5 h-5 text-purple-800 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
             </svg>
-            <span className="text-purple-800 font-medium text-sm">Trending Now</span>
+            <span className="text-purple-800 font-medium text-sm">Tendances du moment</span>
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-            {content?.title || 'Trending Scents'}
+            {content?.title || "Produits tendance"}
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-            {content?.description || 'The most sought-after fragrances of the season - from timeless classics to contemporary masterpieces that capture the essence of modern luxury.'}
+            {content?.description || "Les produits les plus appréciés du moment."}
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function PerfumeTrendingProductsSection({
                 </svg>
               </div>
               <h3 className="text-3xl font-light text-gray-900 mb-2">50+</h3>
-              <p className="text-gray-600">Luxury Brands</p>
+              <p className="text-gray-600">Nos marques</p>
             </div>
             
             <div className="text-center p-8 bg-stone-50 rounded-2xl">
@@ -98,10 +98,10 @@ export default function PerfumeTrendingProductsSection({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
-            <h3 className="text-2xl font-light text-gray-900 mb-4">Trending Products Coming Soon</h3>
+            <h3 className="text-2xl font-light text-gray-900 mb-4">Produits tendance bientôt disponibles</h3>
             <p className="text-gray-600 max-w-md mx-auto">
-              Our trending fragrance collection is being curated. 
-              Discover the most popular scents that everyone is talking about.
+              Notre sélection du moment est en préparation. 
+              Découvrez les produits les plus appréciés du moment.
             </p>
           </div>
         )}
@@ -131,10 +131,10 @@ export default function PerfumeTrendingProductsSection({
             <div className="relative z-10">
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-light text-purple-800 mb-4">
-                  {designProcess?.title || 'The Art of Perfumery'}
+                  {designProcess?.title || "Notre sélection"}
                 </h3>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  {designProcess?.description || 'Every fragrance tells a story. Discover the craftsmanship behind our curated collection.'}
+                  {designProcess?.description || "Chaque produit est choisi avec soin. Découvrez notre sélection."}
                 </p>
               </div>
               
@@ -143,17 +143,17 @@ export default function PerfumeTrendingProductsSection({
                   {
                     icon: 'sparkles',
                     title: 'Curated Selection',
-                    description: 'Each fragrance is carefully selected by our expert perfumers for its unique character and quality.'
+                    description: "Chaque produit est sélectionné avec soin par notre équipe pour sa qualité."
                   },
                   {
                     icon: 'star',
-                    title: 'Premium Quality',
-                    description: 'Only the finest ingredients and master craftsmanship make it into our exclusive collection.'
+                    title: "Qualité premium",
+                    description: "Seuls les meilleurs produits intègrent notre sélection."
                   },
                   {
                     icon: 'heart',
                     title: 'Personal Journey',
-                    description: 'Find your signature scent with our personalized consultation and fragrance matching service.'
+                    description: "Profitez de notre conseil personnalisé pour trouver ce qui vous correspond."
                   }
                 ]).map((step, index) => (
                   <div key={index} className="text-center">

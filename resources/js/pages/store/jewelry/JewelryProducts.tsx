@@ -236,11 +236,11 @@ export default function JewelryProducts({
                 <Gem className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-5xl font-light text-gray-800 mb-6 tracking-wide">
-                Fine Jewelry Collection
+                Notre collection
               </h1>
               <div className="w-24 h-px bg-yellow-500 mx-auto mb-6"></div>
               <p className="text-gray-600 font-light text-lg max-w-2xl mx-auto leading-relaxed">
-                Discover exquisite pieces crafted with precision and passion, each telling a story of timeless elegance
+                Découvrez nos produits et ajoutez-les à votre panier
               </p>
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function JewelryProducts({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                      placeholder="Search jewelry..."
+                      placeholder="Rechercher un produit..."
                       className="w-full pl-10 pr-4 py-2 border border-neutral-300 focus:outline-none focus:border-yellow-600"
                     />
                   </div>
@@ -405,7 +405,7 @@ export default function JewelryProducts({
                         onChange={() => setAvailability('all')}
                         className="mr-2 text-yellow-600 focus:ring-yellow-500"
                       />
-                      <span className="text-sm text-neutral-700">All Items</span>
+                      <span className="text-sm text-neutral-700">Tous les articles</span>
                     </label>
                     <label className="flex items-center">
                       <input
@@ -560,7 +560,7 @@ export default function JewelryProducts({
                             />
                             {product.sale_price && (
                               <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-medium px-3 py-1 uppercase">
-                                SALE
+                                PROMO
                               </div>
                             )}
                           </Link>
@@ -611,7 +611,7 @@ export default function JewelryProducts({
                                   ) : (
                                     <div className="flex items-center text-red-600 text-sm">
                                       <Crown className="h-4 w-4 mr-2" />
-                                      <span>Made to Order</span>
+                                      <span>Sur commande</span>
                                     </div>
                                   )}
                                 </div>
@@ -645,8 +645,8 @@ export default function JewelryProducts({
                 <div className="text-center py-16">
                   <div className="text-neutral-500 mb-6">
                     <Gem className="h-16 w-16 mx-auto mb-6 opacity-50" />
-                    <h3 className="text-xl font-serif mb-3 text-neutral-700">No jewelry found</h3>
-                    <p className="text-neutral-600">Try adjusting your filters to discover more pieces</p>
+                    <h3 className="text-xl font-serif mb-3 text-neutral-700">Aucun produit trouvé</h3>
+                    <p className="text-neutral-600">Essayez de modifier vos filtres pour découvrir plus de produits</p>
                   </div>
                   <button
                     onClick={clearFilters}
@@ -666,7 +666,7 @@ export default function JewelryProducts({
                       disabled={pagination.current_page === 1}
                       className="px-4 py-2 border border-neutral-300 text-sm hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -691,7 +691,7 @@ export default function JewelryProducts({
                       disabled={pagination.current_page === pagination.last_page}
                       className="px-4 py-2 border border-neutral-300 text-sm hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>

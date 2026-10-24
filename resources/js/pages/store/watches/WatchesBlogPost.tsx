@@ -71,7 +71,7 @@ export default function WatchesBlogPost({
                     className="inline-flex items-center text-amber-500 hover:text-amber-400 font-medium tracking-wide transition-colors"
                   >
                     <ArrowLeft className="h-5 w-5 mr-2" />
-                    Back to Horological Journal
+                    Retour au blog
                   </Link>
                 </div>
                 

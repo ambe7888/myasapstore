@@ -177,7 +177,7 @@ export default function Profile({
       
       <AccountLayout
         title="My Profile"
-        description="Manage your account information and password"
+        description="Gérez les informations de votre compte et votre mot de passe"
         activeTab="profile"
         store={store}
         storeContent={storeContent}
@@ -200,7 +200,7 @@ export default function Profile({
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                Personal Information
+                Informations personnelles
               </button>
               <button
                 onClick={() => setActiveTab('password')}
@@ -210,7 +210,7 @@ export default function Profile({
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                Change Password
+                Changer le mot de passe
               </button>
             </nav>
           </div>
@@ -301,7 +301,7 @@ export default function Profile({
                   {/* Date of Birth */}
                   <div>
                     <label htmlFor="date_of_birth" className="block text-sm font-medium text-gray-700 mb-1">
-                      Date of Birth
+                      Date de naissance
                     </label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -326,18 +326,18 @@ export default function Profile({
                       onChange={(e) => profileForm.setData('gender', e.target.value)}
                       className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                     >
-                      <option value="">Select Gender</option>
+                      <option value="">Sélectionnez votre genre</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
-                      <option value="prefer_not_to_say">Prefer not to say</option>
+                      <option value="prefer_not_to_say">Je préfère ne pas répondre</option>
                     </select>
                   </div>
                   
                   {/* Address */}
                   <div className="md:col-span-2">
                     <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-                      Street Address
+                      Adresse
                     </label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -354,7 +354,7 @@ export default function Profile({
                   {/* City */}
                   <div>
                     <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-                      City
+                      Ville
                     </label>
                     <input
                       id="city"
@@ -396,7 +396,7 @@ export default function Profile({
                   {/* Country */}
                   <div>
                     <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
-                      Country
+                      Pays
                     </label>
                     <select
                       id="country"
@@ -420,7 +420,7 @@ export default function Profile({
                     disabled={profileForm.processing}
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                   >
-                    {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                    {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                   </button>
                 </div>
               </form>
@@ -434,7 +434,7 @@ export default function Profile({
                 {/* Current Password */}
                 <div className="mb-6">
                   <label htmlFor="current_password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Current Password
+                    Mot de passe actuel
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -465,7 +465,7 @@ export default function Profile({
                 {/* New Password */}
                 <div className="mb-6">
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    New Password
+                    Nouveau mot de passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -496,7 +496,7 @@ export default function Profile({
                 {/* Confirm Password */}
                 <div className="mb-6">
                   <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 mb-1">
-                    Confirm New Password
+                    Confirmer le nouveau mot de passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -525,7 +525,7 @@ export default function Profile({
                     disabled={passwordForm.processing}
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                   >
-                    {passwordForm.processing ? 'Updating...' : 'Change Password'}
+                    {passwordForm.processing ? 'Updating...' : "Changer le mot de passe"}
                   </button>
                 </div>
               </form>

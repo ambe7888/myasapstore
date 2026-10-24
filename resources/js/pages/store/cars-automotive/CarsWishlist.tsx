@@ -97,8 +97,8 @@ function CarsWishlistInner() {
                 <div className="w-6 h-6 bg-white transform -rotate-45"></div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-wider">GARAGE WISHLIST</h1>
-                <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Performance Parts Collection</div>
+                <h1 className="text-5xl font-black tracking-wider">MES FAVORIS</h1>
+                <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Notre collection</div>
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-2">
@@ -108,7 +108,7 @@ function CarsWishlistInner() {
             </div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl">
-            Your curated collection of premium automotive parts and performance accessories
+            Votre sélection
           </p>
         </div>
       </div>
@@ -129,12 +129,12 @@ function CarsWishlistInner() {
                     <div className="w-px h-12 bg-gray-600"></div>
                     <div className="text-center">
                       <div className="text-3xl font-black text-red-600">{items.filter(item => item.stock > 0).length}</div>
-                      <div className="text-sm font-bold tracking-widest uppercase">In Stock</div>
+                      <div className="text-sm font-bold tracking-widest uppercase">En stock</div>
                     </div>
                   </div>
                   <div className="flex items-center text-red-400">
                     <Wrench className="h-5 w-5 mr-2" />
-                    <span className="font-bold tracking-wider uppercase">Ready for Installation</span>
+                    <span className="font-bold tracking-wider uppercase">Prêt à l'envoi</span>
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@ function CarsWishlistInner() {
                           </span>
                           <div className={`w-3 h-3 rounded-full ${item.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
                           <span className={`ml-2 text-xs font-bold tracking-wider uppercase ${item.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                            {item.stock > 0 ? 'Available' : 'Unavailable'}
+                            {item.stock > 0 ? "Disponible" : "Indisponible"}
                           </span>
                         </div>
                         
@@ -209,7 +209,7 @@ function CarsWishlistInner() {
                           } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                         >
                           <ShoppingCart className="h-4 w-4" />
-                          <span>{item.stock <= 0 ? 'UNAVAILABLE' : 'ADD TO CART'}</span>
+                          <span>{item.stock <= 0 ? 'UNAVAILABLE' : "AJOUTER AU PANIER"}</span>
                         </button>
                         
                         <button 
@@ -248,9 +248,9 @@ function CarsWishlistInner() {
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <Heart className="h-12 w-12 text-gray-400" />
                 </div>
-                <h2 className="text-4xl font-black text-black mb-6">EMPTY GARAGE</h2>
+                <h2 className="text-4xl font-black text-black mb-6">AUCUN PRODUIT</h2>
                 <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                  Your performance parts wishlist is empty. Start building your dream setup with premium automotive components.
+                  Vos favoris sont vides. Commencez à ajouter vos produits préférés.
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}
@@ -270,8 +270,8 @@ function CarsWishlistInner() {
         <div className="bg-white py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">RECOMMENDED FOR YOU</h2>
-              <p className="text-gray-600">Premium parts selected by our automotive experts</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">RECOMMANDÉ POUR VOUS</h2>
+              <p className="text-gray-600">Une sélection pensée pour vous</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.slice(0, 4).map((product) => (

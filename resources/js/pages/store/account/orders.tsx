@@ -176,7 +176,7 @@ export default function Orders({
       
       <AccountLayout
         title="My Orders"
-        description="Track and manage your order history"
+        description="Suivez et gérez l'historique de vos commandes"
         activeTab="orders"
         store={store}
         storeContent={storeContent}
@@ -189,9 +189,9 @@ export default function Orders({
       >
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">Order History</h2>
+            <h2 className="text-lg font-medium text-gray-900">Historique des commandes</h2>
             <p className="mt-1 text-sm text-gray-500">
-              Check the status of recent orders, manage returns, and download invoices.
+              Suivez l'état de vos commandes récentes.
             </p>
           </div>
           
@@ -223,7 +223,7 @@ export default function Orders({
                         className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                       >
                         <Eye className="h-4 w-4 mr-1" />
-                        View Order
+                        Voir la commande
                       </Link>
                     </div>
                   </div>
@@ -236,9 +236,9 @@ export default function Orders({
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
                 <Package className="h-8 w-8 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-1">No orders yet</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Aucune commande pour le moment</h3>
               <p className="text-gray-500 mb-4">
-                You haven't placed any orders yet. Start shopping to see your orders here.
+                Vous n'avez pas encore passé de commande. Commencez vos achats !
               </p>
               <Link
                 href={generateStoreUrl('store.products', store)}

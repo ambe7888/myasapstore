@@ -126,7 +126,7 @@ const { props } = usePage();
       zip: '',
       country: ''
     },
-    payment_method: 'Cash on Livraison',
+    payment_method: "Paiement à la livraison",
     shipping_method: 'Standard Livraison'
   };
   
@@ -176,7 +176,7 @@ const { props } = usePage();
               </h1>
               
               <p className="text-xl text-gray-600 font-light leading-relaxed mb-8">
-                Your fragrance journey begins now. We've received your order and will prepare it with the utmost care.
+                Nous avons bien reçu votre commande et la préparons avec soin.
               </p>
               
               <div className="inline-flex items-center bg-white border-2 border-purple-200 rounded-full px-8 py-4 shadow-lg">
@@ -207,7 +207,7 @@ const { props } = usePage();
                 </h3>
                 
                 <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
-                  Your fragrance order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 
                 <div className="flex justify-center gap-4">
@@ -218,7 +218,7 @@ const { props } = usePage();
                     }}
                     className="bg-green-500 text-white px-6 py-3 rounded-full font-medium hover:bg-green-600 transition-colors"
                   >
-                    Open WhatsApp Now
+                    Ouvrir WhatsApp maintenant
                   </button>
                   <button
                     onClick={() => setShowWhatsappPrompt(false)}
@@ -276,7 +276,7 @@ const { props } = usePage();
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <Sparkles className="h-8 w-8 text-amber-400 mr-4" />
-                      <h2 className="text-3xl font-light">Your Fragrance Collection</h2>
+                      <h2 className="text-3xl font-light">Votre sélection</h2>
                     </div>
                     <span className="bg-amber-400 text-purple-900 px-4 py-2 rounded-full font-medium text-sm">
                       {orderData.status}
@@ -356,7 +356,7 @@ const { props } = usePage();
                 <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-6 rounded-t-3xl">
                   <div className="flex items-center">
                     <Heart className="h-8 w-8 text-amber-400 mr-4" />
-                    <h2 className="text-3xl font-light">Livraison & Paiement Details</h2>
+                    <h2 className="text-3xl font-light">Détails de livraison et de paiement</h2>
                   </div>
                 </div>
                 
@@ -366,7 +366,7 @@ const { props } = usePage();
                       <div className="flex items-start mb-4">
                         <MapPin className="h-8 w-8 text-purple-800 mr-4 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-purple-800 mb-3">Livraison Address</p>
+                          <p className="text-sm font-medium text-purple-800 mb-3">Adresse de livraison</p>
                           <p className="text-gray-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />

@@ -39,7 +39,7 @@ export default function PerfumeFeaturedProductsSection({
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-            {content?.description || 'Handpicked by our fragrance experts - the most coveted scents that define luxury and sophistication in the world of perfumery.'}
+            {content?.description || "Sélectionnés avec soin par notre équipe : les incontournables du moment."}
           </p>
         </div>
 
@@ -62,10 +62,10 @@ export default function PerfumeFeaturedProductsSection({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
               </svg>
             </div>
-            <h3 className="text-2xl font-light text-gray-900 mb-4">No Featured Products Yet</h3>
+            <h3 className="text-2xl font-light text-gray-900 mb-4">Aucun produit en vedette pour le moment</h3>
             <p className="text-gray-600 max-w-md mx-auto">
-              Our curated selection of signature fragrances will be available soon. 
-              Check back for our expertly chosen collection.
+              Notre sélection sera bientôt disponible. 
+              Revenez bientôt découvrir notre sélection.
             </p>
           </div>
         )}
@@ -81,7 +81,7 @@ export default function PerfumeFeaturedProductsSection({
               href={generateStoreUrl('store.products', store)}
               className="inline-flex items-center px-8 py-4 bg-white border-2 border-purple-200 rounded-full hover:border-purple-300 transition-colors duration-300 group"
             >
-              <span className="text-purple-800 font-medium mr-3">Discover More Fragrances</span>
+              <span className="text-purple-800 font-medium mr-3">Découvrir plus de produits</span>
               <svg className="w-5 h-5 text-purple-800 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

@@ -78,10 +78,10 @@ function JewelryWishlistContent({
                 <Heart className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-5xl font-light text-gray-800 mb-6 tracking-wide">
-                Your Wishlist
+                Vos favoris
               </h1>
               <p className="text-gray-600 font-light text-lg max-w-2xl mx-auto leading-relaxed">
-                Curated luxury pieces for your perfect collection
+                Vos produits préférés, enregistrés pour plus tard
               </p>
               
               {/* Elegant Divider */}
@@ -136,10 +136,10 @@ function JewelryWishlistContent({
                       <Heart className="w-10 h-10 text-yellow-600" />
                     </div>
                     <h2 className="text-3xl font-light text-gray-800 mb-4 tracking-wide">
-                      Your Wishlist is Empty
+                      Vos favoris sont vides
                     </h2>
                     <p className="text-gray-600 font-light mb-8 leading-relaxed">
-                      Start adding luxury jewelry pieces you love to create your perfect collection
+                      Commencez à ajouter vos produits préférés
                     </p>
                     
                     {/* Elegant Divider */}
@@ -154,7 +154,7 @@ function JewelryWishlistContent({
                       className="inline-flex items-center bg-yellow-600 text-white px-8 py-4 font-medium hover:bg-yellow-700 transition-colors"
                     >
                       <Gem className="w-5 h-5 mr-2" />
-                      Explore Collections
+                      Découvrir les collections
                     </Link>
                   </div>
                 </div>
@@ -169,11 +169,11 @@ function JewelryWishlistContent({
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif text-neutral-900 mb-4">
-                  You Might Also Like
+                  Vous pourriez aussi aimer
                 </h2>
                 <div className="w-24 h-1 bg-yellow-600 mx-auto mb-4"></div>
                 <p className="text-neutral-600 max-w-2xl mx-auto">
-                  Discover more exquisite pieces from our luxury collection
+                  Découvrez plus de produits
                 </p>
               </div>
               

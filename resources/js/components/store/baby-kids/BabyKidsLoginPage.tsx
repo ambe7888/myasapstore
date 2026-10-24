@@ -74,15 +74,15 @@ export default function BabyKidsLoginPage({
                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-3">Welcome Back!</h1>
-                <p className="text-gray-600 text-lg">Let's sign you in to continue shopping</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-3">Bon retour !</h1>
+                <p className="text-gray-600 text-lg">Connectez-vous pour continuer vos achats</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Email */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Email Address
+                    Adresse e-mail
                   </label>
                   <input
                     type="email"
@@ -103,7 +103,7 @@ export default function BabyKidsLoginPage({
                 <div>
                   <div className="flex justify-between items-center mb-3">
                     <label className="block text-sm font-bold text-gray-700">
-                      Password
+                      Mot de passe
                     </label>
                     <Link
                       href={generateStoreUrl('store.forgot-password', store)}
@@ -152,7 +152,7 @@ export default function BabyKidsLoginPage({
                     className="h-5 w-5 text-pink-500 focus:ring-pink-400 border-2 border-pink-300 rounded"
                   />
                   <label htmlFor="remember" className="ml-3 text-gray-700 font-semibold">
-                    Remember me for next time
+                    Se souvenir de moi
                   </label>
                 </div>
                 
@@ -162,7 +162,7 @@ export default function BabyKidsLoginPage({
                   disabled={processing}
                   className="w-full bg-pink-500 text-white py-5 rounded-2xl font-bold text-xl hover:bg-pink-600 focus:ring-4 focus:ring-pink-200 transition-all duration-300 shadow-xl disabled:opacity-50 transform hover:scale-105"
                 >
-                  {processing ? 'Signing In...' : 'Sign In'}
+                  {processing ? "Connexion..." : "Se connecter"}
                 </button>
               </form>
               
@@ -174,7 +174,7 @@ export default function BabyKidsLoginPage({
                     href={generateStoreUrl('store.register', store)}
                     className="font-bold text-pink-500 hover:text-pink-600 transition-colors underline"
                   >
-                    Create Account
+                    Créer un compte
                   </Link>
                 </p>
               </div>

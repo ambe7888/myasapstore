@@ -233,7 +233,7 @@ export default function CarsProducts({
                 </div>
                 <div>
                   <h1 className="text-3xl font-black tracking-wider">AUTO PARTS</h1>
-                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Performance Collection</div>
+                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Notre collection</div>
                 </div>
               </div>
               <div className="hidden md:flex items-center space-x-2">
@@ -264,7 +264,7 @@ export default function CarsProducts({
                   {/* Search */}
                   {showFilter('search') && (<>
                   <div className="mb-6">
-                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wider uppercase">Search Parts</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2 tracking-wider uppercase">Rechercher un produit</label>
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                       <input
@@ -272,7 +272,7 @@ export default function CarsProducts({
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                        placeholder="Search auto parts..."
+                        placeholder="Rechercher un produit..."
                         className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-red-600"
                       />
                     </div>
@@ -405,7 +405,7 @@ export default function CarsProducts({
                           onChange={() => setAvailability('all')}
                           className="mr-2 text-red-600 focus:ring-red-500"
                         />
-                        <span className="text-sm text-gray-700 font-medium">All Parts</span>
+                        <span className="text-sm text-gray-700 font-medium">Tous les produits</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -559,7 +559,7 @@ export default function CarsProducts({
                               />
                               {product.sale_price && (
                                 <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 tracking-wider uppercase">
-                                  SALE
+                                  PROMO
                                 </div>
                               )}
                             </Link>
@@ -632,8 +632,8 @@ export default function CarsProducts({
                   <div className="text-center py-16">
                     <div className="text-gray-500 mb-6">
                       <Car className="h-16 w-16 mx-auto mb-6 opacity-50" />
-                      <h3 className="text-xl font-bold mb-3 text-gray-700">No auto parts found</h3>
-                      <p className="text-gray-600">Try adjusting your filters to discover more parts</p>
+                      <h3 className="text-xl font-bold mb-3 text-gray-700">Aucun produit trouvé</h3>
+                      <p className="text-gray-600">Essayez de modifier vos filtres pour découvrir plus de produits</p>
                     </div>
                     <button
                       onClick={clearFilters}
@@ -653,7 +653,7 @@ export default function CarsProducts({
                         disabled={pagination.current_page === 1}
                         className="px-4 py-2 border border-gray-300 text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                       >
-                        Previous
+                        Précédent
                       </button>
                       
                       {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -678,7 +678,7 @@ export default function CarsProducts({
                         disabled={pagination.current_page === pagination.last_page}
                         className="px-4 py-2 border border-gray-300 text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                       >
-                        Next
+                        Suivant
                       </button>
                     </nav>
                   </div>

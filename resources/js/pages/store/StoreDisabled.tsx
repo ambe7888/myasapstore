@@ -36,7 +36,7 @@ export default function StoreDisabled({ store }: StoreDisabledProps) {
                         </div>
                         
                         <p className="text-gray-600 mb-8 leading-relaxed">
-                            This store is temporarily not accepting visitors. Please check back later or contact the store owner for more information about when it will be available again.
+                            Cette boutique n'est temporairement pas accessible. Revenez plus tard ou contactez le propriétaire de la boutique pour plus d'informations.
                         </p>
                         
                         <Link
@@ -44,7 +44,7 @@ export default function StoreDisabled({ store }: StoreDisabledProps) {
                             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                         >
                             <Home className="w-5 h-5 mr-2" />
-                            Go to Homepage
+                            Aller à l'accueil
                         </Link>
                     </div>
                 </div>

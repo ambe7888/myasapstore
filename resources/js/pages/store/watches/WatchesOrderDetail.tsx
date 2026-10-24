@@ -123,7 +123,7 @@ export default function WatchesOrderDetail({
               className="inline-flex items-center text-slate-600 hover:text-amber-600 transition-colors font-light"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Orders
+              Retour aux commandes
             </Link>
           </div>
         </div>
@@ -149,13 +149,13 @@ export default function WatchesOrderDetail({
               {/* Order Items */}
               <div className="bg-white border border-slate-200 mb-8">
                 <div className="p-6 border-b border-slate-200">
-                  <h2 className="text-xl font-light text-slate-900">Order Items</h2>
+                  <h2 className="text-xl font-light text-slate-900">Articles commandés</h2>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="min-w-full">
                     <thead className="bg-slate-50">
                       <tr>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Product</th>
+                        <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Produit</th>
                         <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Prix</th>
                         <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Quantité</th>
                         <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Total</th>
@@ -203,7 +203,7 @@ export default function WatchesOrderDetail({
                   <div className="p-6">
                     <h3 className="text-lg font-light text-slate-900 mb-4 flex items-center">
                       <MapPin className="h-5 w-5 mr-2 text-amber-500" />
-                      Shipping Address
+                      Adresse de livraison
                     </h3>
                     <div className="bg-slate-50 p-4">
                       <p className="font-medium text-slate-900">{order.shipping_address?.name}</p>
@@ -219,15 +219,15 @@ export default function WatchesOrderDetail({
                   <div className="p-6">
                     <h3 className="text-lg font-light text-slate-900 mb-4 flex items-center">
                       <CreditCard className="h-5 w-5 mr-2 text-amber-500" />
-                      Payment & Shipping
+                      Paiement et livraison
                     </h3>
                     <div className="bg-slate-50 p-4 space-y-3">
                       <div>
-                        <span className="text-sm text-slate-500">Payment Method:</span>
+                        <span className="text-sm text-slate-500">Mode de paiement :</span>
                         <p className="font-medium text-slate-900">{order.payment_method}</p>
                       </div>
                       <div>
-                        <span className="text-sm text-slate-500">Shipping Method:</span>
+                        <span className="text-sm text-slate-500">Mode de livraison :</span>
                         <p className="font-medium text-slate-900">{order.shipping_method}</p>
                       </div>
                     </div>
@@ -241,25 +241,25 @@ export default function WatchesOrderDetail({
                   <h3 className="text-lg font-light text-slate-900 mb-4">Résumé de la commande</h3>
                   <div className="bg-slate-50 p-4">
                     <div className="flex justify-between py-2 text-slate-600">
-                      <span>Subtotal:</span>
+                      <span>Sous-total :</span>
                       <span>{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                     </div>
                     {order.discount > 0 && (
                       <div className="flex justify-between py-2 text-green-600">
-                        <span>Discount:</span>
+                        <span>Remise :</span>
                         <span>-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                       </div>
                     )}
                     <div className="flex justify-between py-2 text-slate-600">
-                      <span>Shipping:</span>
+                      <span>Livraison :</span>
                       <span>{order.shipping === 0 ? 'Gratuit' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
                     </div>
                     <div className="flex justify-between py-2 text-slate-600">
-                      <span>Tax:</span>
+                      <span>Taxe :</span>
                       <span>{formatCurrency(order.tax, storeSettings, currencies)}</span>
                     </div>
                     <div className="flex justify-between py-3 border-t border-slate-300 font-medium text-lg text-slate-900">
-                      <span>Total:</span>
+                      <span>Total :</span>
                       <span>{formatCurrency(order.total, storeSettings, currencies)}</span>
                     </div>
                   </div>

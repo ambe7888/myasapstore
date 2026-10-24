@@ -113,7 +113,7 @@ const { props } = usePage();
       country: ''
     },
     payment_method: 'Credit Card',
-    shipping_method: 'Standard Shipping'
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;
@@ -271,7 +271,7 @@ const { props } = usePage();
                 <div className="p-8">
                   {/* Order Items Table */}
                   <div className="mb-8">
-                    <h3 className="text-lg font-light tracking-wide mb-6">Order Items</h3>
+                    <h3 className="text-lg font-light tracking-wide mb-6">Articles commandés</h3>
                     
                     <div className="overflow-hidden border border-gray-200">
                       <table className="min-w-full divide-y divide-gray-200">
@@ -372,7 +372,7 @@ const { props } = usePage();
               {/* Addresses & Info */}
               <div className="bg-white border border-gray-200 mb-16">
                 <div className="p-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-thin tracking-wide">Shipping & Paiement Information</h2>
+                  <h2 className="text-2xl font-thin tracking-wide">Informations de livraison et de paiement</h2>
                 </div>
                 
                 <div className="p-8">
@@ -381,7 +381,7 @@ const { props } = usePage();
                       <div className="flex items-start mb-4">
                         <MapPin className="h-5 w-5 text-gray-400 mr-3 mt-0.5" />
                         <div>
-                          <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Shipping Address</p>
+                          <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Adresse de livraison</p>
                           <p className="text-sm text-black font-light leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />
@@ -422,7 +422,7 @@ const { props } = usePage();
                       <div className="ml-4">
                         <h3 className="text-lg font-light text-black">Traitement de la commande</h3>
                         <p className="mt-2 text-base text-gray-500 font-light">
-                          Nous tratons actuellement votre commande. You'll receive an email when your order ships.
+                          Nous traitons actuellement votre commande. Vous recevrez un e-mail lors de son expédition.
                         </p>
                       </div>
                     </div>
@@ -450,7 +450,7 @@ const { props } = usePage();
                   href={generateStoreUrl('store.my-orders', store)}
                   className="bg-black text-white px-8 py-3 font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors text-center"
                 >
-                  Track Your Order
+                  Suivre ma commande
                 </Link>
                 <Link
                   href={generateStoreUrl('store.products', store)}

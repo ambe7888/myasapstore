@@ -66,7 +66,7 @@ export default function FashionBlog({
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">Style Journal</h1>
               <p className="text-white/70 font-light text-lg">
-                Fashion insights, trends, and inspiration
+                Nos conseils, nos idées et nos actualités
               </p>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function FashionBlog({
                         
                         <div className="pt-2">
                           <span className="text-xs uppercase tracking-wider text-black hover:text-gray-600 transition-colors duration-300 font-medium">
-                            Read More
+                            Lire la suite
                           </span>
                         </div>
                       </div>
@@ -134,9 +134,9 @@ export default function FashionBlog({
               </div>
             ) : (
               <div className="text-center py-20">
-                <h2 className="text-2xl font-thin text-gray-900 mb-4">No articles yet</h2>
+                <h2 className="text-2xl font-thin text-gray-900 mb-4">Aucun article pour le moment</h2>
                 <p className="text-gray-600 font-light">
-                  Check back soon for the latest fashion insights and trends
+                  Revenez bientôt pour découvrir nos derniers articles
                 </p>
               </div>
             )}

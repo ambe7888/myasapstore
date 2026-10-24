@@ -150,7 +150,7 @@ const { props } = usePage();
               </h1>
               <div className="w-24 h-px bg-yellow-500 mx-auto mb-6"></div>
               <p className="text-gray-600 font-light text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-                Thank you for choosing our luxury jewelry collection
+                Merci pour votre confiance
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -215,7 +215,7 @@ const { props } = usePage();
                     <div className="mb-8">
                       <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
                         <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-semibold text-green-800">Order Statut: Confirmed</h3>
+                          <h3 className="text-lg font-semibold text-green-800">Statut de la commande : Confirmée</h3>
                           <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Processing</span>
                         </div>
                         
@@ -247,8 +247,8 @@ const { props } = usePage();
                           <div className="flex items-start">
                             <Clock className="w-5 h-5 text-yellow-600 mr-3 mt-0.5" />
                             <div>
-                              <p className="text-sm font-medium text-gray-800">What happens next?</p>
-                              <p className="text-sm text-gray-600 mt-1">Our artisans are carefully preparing your jewelry. You'll receive email updates at each step, including tracking information once shipped.</p>
+                              <p className="text-sm font-medium text-gray-800">Et ensuite ?</p>
+                              <p className="text-sm text-gray-600 mt-1">Nous préparons votre commande avec soin. Vous recevrez des mises à jour par e-mail à chaque étape.</p>
                             </div>
                           </div>
                         </div>
@@ -258,7 +258,7 @@ const { props } = usePage();
                     {/* Order Items */}
                     <div className="mb-8">
                       <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Your Exquisite Selection</h2>
+                        <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Votre sélection</h2>
                         <div className="flex items-center space-x-2">
                           <Gem className="w-4 h-4 text-yellow-600" />
                           <span className="text-sm text-gray-600 font-medium">{order.items?.length || 0} precious item{(order.items?.length || 0) !== 1 ? 's' : ''}</span>
@@ -301,7 +301,7 @@ const { props } = usePage();
                                 <div className="text-2xl font-bold text-gray-800 mb-1">
                                   {formatCurrency((parseFloat(item.price || 0) * item.quantity), storeSettings, currencies)}
                                 </div>
-                                <div className="text-sm text-gray-500 font-medium">Item Total</div>
+                                <div className="text-sm text-gray-500 font-medium">Total de l'article</div>
                                 <div className="mt-2 text-xs text-green-600 font-medium">
                                   ✓ In Stock
                                 </div>
@@ -316,7 +316,7 @@ const { props } = usePage();
 
                     {/* Livraison Information */}
                     <div className="pt-8 border-t border-yellow-200">
-                      <h3 className="text-2xl font-serif text-gray-800 mb-6 tracking-wide">Livraison & Care Information</h3>
+                      <h3 className="text-2xl font-serif text-gray-800 mb-6 tracking-wide">Informations de livraison et d'entretien</h3>
                       
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* Shipping Address */}
@@ -325,7 +325,7 @@ const { props } = usePage();
                             <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mr-4 shadow-md">
                               <Package className="w-6 h-6 text-white" />
                             </div>
-                            <h4 className="font-semibold text-gray-800 text-lg">Livraison Address</h4>
+                            <h4 className="font-semibold text-gray-800 text-lg">Adresse de livraison</h4>
                           </div>
                           <div className="bg-white/80 rounded-lg p-4">
                             <p className="font-semibold text-gray-800 text-lg">{order.shipping_address?.name || 'N/A'}</p>
@@ -343,22 +343,22 @@ const { props } = usePage();
                             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 shadow-md">
                               <Truck className="w-6 h-6 text-white" />
                             </div>
-                            <h4 className="font-semibold text-gray-800 text-lg">Shipping Details</h4>
+                            <h4 className="font-semibold text-gray-800 text-lg">Détails de livraison</h4>
                           </div>
                           <div className="bg-white/80 rounded-lg p-4">
                             <div className="flex items-center mb-3">
                               <Clock className="w-5 h-5 text-blue-600 mr-2" />
-                              <span className="font-semibold text-gray-800">3-5 Business Days</span>
+                              <span className="font-semibold text-gray-800">3 à 5 jours ouvrés</span>
                             </div>
-                            <p className="text-gray-600 text-sm mb-3">Express insured shipping with signature confirmation</p>
+                            <p className="text-gray-600 text-sm mb-3">Livraison express assurée</p>
                             <div className="space-y-2 text-sm">
                               <div className="flex items-center text-green-600">
                                 <Shield className="w-4 h-4 mr-2" />
-                                <span>Fully insured delivery</span>
+                                <span>Livraison assurée</span>
                               </div>
                               <div className="flex items-center text-blue-600">
                                 <Mail className="w-4 h-4 mr-2" />
-                                <span>Real-time tracking updates</span>
+                                <span>Suivi en temps réel</span>
                               </div>
                             </div>
                           </div>
@@ -397,7 +397,7 @@ const { props } = usePage();
                           
                           {parseFloat(order.discount || 0) > 0 && (
                             <div className="flex justify-between text-sm text-green-200">
-                              <span>Special Remise</span>
+                              <span>Remise spéciale</span>
                               <span className="font-semibold">-{formatCurrency(order.discount || 0, storeSettings, currencies)}</span>
                             </div>
                           )}
@@ -413,7 +413,7 @@ const { props } = usePage();
                           </div>
                           
                           <div className="flex justify-between text-lg font-bold text-white pt-3 border-t border-yellow-400">
-                            <span>Total Paid</span>
+                            <span>Total payé</span>
                             <span>{formatCurrency(order.total || 0, storeSettings, currencies)}</span>
                           </div>
                         </div>
@@ -426,7 +426,7 @@ const { props } = usePage();
                           className="w-full bg-white text-yellow-600 px-6 py-4 rounded-xl font-semibold hover:bg-yellow-50 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                         >
                           <Gem className="w-5 h-5 mr-2" />
-                          Explore More Jewelry
+                          Découvrir plus de produits
                         </Link>
                         
                         {isLoggedIn && (
@@ -435,7 +435,7 @@ const { props } = usePage();
                             className="w-full bg-white/20 text-white px-6 py-4 rounded-xl font-semibold hover:bg-white/30 transition-all duration-200 flex items-center justify-center backdrop-blur-sm"
                           >
                             <Package className="w-5 h-5 mr-2" />
-                            Track This Order
+                            Suivre cette commande
                           </Link>
                         )}
                       </div>

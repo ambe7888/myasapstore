@@ -339,7 +339,7 @@ export default function ProductDetail({
       }
       toast.success('Produit ajouté au panier avec succès !');
     } catch (error) {
-      console.error('Failed to add to cart:', error);
+      console.error("Échec de l'ajout au panier :", error);
       toast.error('Erreur lors de l\'ajout au panier. Veuillez réessayer.');
     } finally {
       setIsAddingToCart(false);
@@ -390,7 +390,7 @@ export default function ProductDetail({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               {product.category && (
                 <>
@@ -587,14 +587,14 @@ export default function ProductDetail({
                   <button
                     onClick={handleAddToWishlist}
                     className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 h-12 flex items-center justify-center"
-                    aria-label="Add to wishlist"
+                    aria-label="Ajouter aux favoris"
                   >
                     <Heart className="h-5 w-5 text-gray-600" />
                   </button>
 
                   <button
                     className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 h-12 flex items-center justify-center"
-                    aria-label="Share product"
+                    aria-label="Partager le produit"
                   >
                     <Share2 className="h-5 w-5 text-gray-600" />
                   </button>
@@ -681,7 +681,7 @@ export default function ProductDetail({
                             : 'text-gray-500 hover:text-gray-700'
                           }`}
                       >
-                        Additional Details
+                        Détails supplémentaires
                       </button>
                     )}
                     {hasCustomFields && (
@@ -722,8 +722,8 @@ export default function ProductDetail({
                     {activeTab === 'advanced' && hasCustomFields && (
                       <div className="space-y-6 max-h-80 overflow-y-auto">
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">Advanced Product Information</h3>
-                          <p className="text-sm text-gray-600 mb-6">Additional product specifications and custom attributes</p>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">Informations détaillées du produit</h3>
+                          <p className="text-sm text-gray-600 mb-6">Caractéristiques supplémentaires du produit</p>
                         </div>
                         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                           <div className="divide-y divide-gray-200">
@@ -773,7 +773,7 @@ export default function ProductDetail({
                               }}
                               className="px-4 py-2 bg-primary text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                             >
-                              Write a Review
+                              Donner votre avis
                             </button>
                           </div>
 
@@ -808,7 +808,7 @@ export default function ProductDetail({
                               ))
                             ) : (
                               <div className="text-center py-8">
-                                <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+                                <p className="text-gray-500">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                               </div>
                             )}
                           </div>
@@ -826,8 +826,8 @@ export default function ProductDetail({
         {relatedProducts.length > 0 && (
           <div className="bg-gray-50">
             <ProductSlider
-              title="Related Products"
-              subtitle="You might also like these products"
+              title="Produits similaires"
+              subtitle="Vous pourriez aussi aimer ces produits"
               products={relatedProducts}
               viewAllLink={generateStoreUrl('store.products', store)}
               viewAllText="Voir tous les produits"
@@ -852,7 +852,7 @@ export default function ProductDetail({
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Write a Review</h3>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Donner votre avis</h3>
 
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
@@ -891,7 +891,7 @@ export default function ProductDetail({
                             title: reviewTitle,
                             content: reviewContent,
                             customer_name: data.review?.customer_name || props.auth?.user?.name || 'Anonymous',
-                            created_at: 'Just now',
+                            created_at: "À l'instant",
                             store_response: null
                           };
                           
@@ -912,7 +912,7 @@ export default function ProductDetail({
                           toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
-                        console.error('Error submitting review:', error);
+                        console.error("Erreur lors de l'envoi de l'avis :", error);
                         toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
@@ -920,7 +920,7 @@ export default function ProductDetail({
                     }}>
                       {/* Rating */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Your Rating *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Votre note *</label>
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -939,12 +939,12 @@ export default function ProductDetail({
 
                       {/* Review Title */}
                       <div>
-                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
+                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Titre de l'avis *</label>
                         <input
                           type="text"
                           id="review-title"
                           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                          placeholder="Give your review a title"
+                          placeholder="Donnez un titre à votre avis"
                           value={reviewTitle}
                           onChange={(e) => setReviewTitle(e.target.value)}
                           required
@@ -953,7 +953,7 @@ export default function ProductDetail({
 
                       {/* Review Content */}
                       <div>
-                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
+                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Votre avis *</label>
                         <textarea
                           id="review-content"
                           rows={4}
@@ -972,14 +972,14 @@ export default function ProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"
                           className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:w-auto sm:text-sm"
                           onClick={() => setShowReviewModal(false)}
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

@@ -37,10 +37,10 @@ export default function HomeAccessoriesCTASection({
 }: HomeAccessoriesCTASectionProps) {
   // Get CTA boxes from props with fallback
   const boxes = ctaBoxes?.value || ctaBoxes || content?.cta_boxes?.value || [
-    { icon: 'truck', title: 'Free Shipping', subtitle: 'On all orders over $50' },
-    { icon: 'refresh-cw', title: 'Easy Returns', subtitle: '30-day return policy' },
-    { icon: 'shield-check', title: 'Secure Payment', subtitle: '100% secure checkout' },
-    { icon: 'users', title: '24/7 Support', subtitle: 'Dedicated customer service' }
+    { icon: 'truck', title: "Livraison gratuite", subtitle: "Sur les commandes éligibles" },
+    { icon: 'refresh-cw', title: "Retours faciles", subtitle: '30-day return policy' },
+    { icon: 'shield-check', title: "Paiement sécurisé", subtitle: '100% secure checkout' },
+    { icon: 'users', title: '24/7 Support', subtitle: "Service client dédié" }
   ];
 
   if (!boxes || boxes.length === 0) {

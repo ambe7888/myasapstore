@@ -145,7 +145,7 @@ export default function OrderConfirmation({
       country: ''
     },
     payment_method: 'Credit Card',
-    shipping_method: 'Standard Shipping'
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;

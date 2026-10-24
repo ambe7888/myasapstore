@@ -67,7 +67,7 @@ export default function PerfumeCategorySection({ categories = [], content }: Per
                     {category.name}
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    Explore our curated collection
+                    Découvrez notre sélection
                   </p>
                 </div>
               </Link>

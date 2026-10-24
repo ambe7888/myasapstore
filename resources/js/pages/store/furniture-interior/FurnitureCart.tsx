@@ -95,7 +95,7 @@ function FurnitureCartContent({
                             const hasDiscount = item.sale_price && parseFloat(item.sale_price) > 0 && parseFloat(item.sale_price) < parseFloat(item.price);
                             return hasDiscount ? (
                               <div className="absolute top-2 left-2 bg-red-500 text-white px-3 py-2 text-xs font-bold rounded-xl shadow-lg">
-                                <span className="block text-xs">SAVE</span>
+                                <span className="block text-xs">ÉCONOMISEZ</span>
                                 <span className="block text-sm leading-none">{Math.round(((parseFloat(item.price) - parseFloat(item.sale_price)) / parseFloat(item.price)) * 100)}%</span>
                               </div>
                             ) : null;
@@ -128,7 +128,7 @@ function FurnitureCartContent({
                                   const hasValidVariants = variants && typeof variants === 'object' && Object.keys(variants).length > 0;
                                   return hasValidVariants ? (
                                     <span className="bg-amber-800 text-amber-100 px-3 py-2 text-sm font-bold rounded-full">
-                                      In Variant
+                                      Options disponibles
                                     </span>
                                   ) : null;
                                 })()}
@@ -260,7 +260,7 @@ function FurnitureCartContent({
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Tax</span>
+                        <span className="text-slate-600">Taxe</span>
                         <span className="font-bold text-slate-900">{formatCurrency(summary.tax, storeSettings, currencies)}</span>
                       </div>
                       <div className="border-t-2 border-amber-200 pt-4">
@@ -299,7 +299,7 @@ function FurnitureCartContent({
                 </div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-4">Votre panier est vide</h2>
                 <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto leading-relaxed">
-                  Discover our beautiful furniture collection and start creating your dream space
+                  Découvrez nos produits et ajoutez-les à votre panier
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

@@ -55,7 +55,7 @@ export default function CarsCustomPage({
                 </div>
                 <div>
                   <h1 className="text-3xl font-black tracking-wider">{page.title}</h1>
-                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Information Center</div>
+                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Centre d'information</div>
                 </div>
               </div>
               <div className="hidden md:flex items-center space-x-2">

@@ -44,10 +44,10 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -72,7 +72,7 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
             </h2>
             
             <p className="text-xl text-gray-600 leading-relaxed">
-              {content?.subtitle || 'Be the first to discover new arrivals, limited editions, and receive personalized fragrance recommendations.'}
+              {content?.subtitle || "Soyez le premier informé de nos nouveautés, de nos offres exclusives et de nos recommandations personnalisées."}
             </p>
             
             {/* Form */}
@@ -83,7 +83,7 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={content?.placeholder_text || 'Enter your email address'}
+                    placeholder={content?.placeholder_text || "Saisissez votre adresse e-mail"}
                     className="flex-1 px-6 py-4 border border-purple-200 rounded-full focus:outline-none focus:border-purple-500 transition-colors duration-300"
                     required
                   />
@@ -92,7 +92,7 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                     disabled={isSubmitting}
                     className="px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 disabled:opacity-50 whitespace-nowrap"
                   >
-                    {isSubmitting ? 'Joining...' : (content?.button_text || 'Join Society')}
+                    {isSubmitting ? 'Joining...' : (content?.button_text || "Je m'abonne")}
                   </button>
                 </div>
               </form>
@@ -104,14 +104,14 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900">Welcome to Scent Society!</h3>
-                  <p className="text-gray-600">Thank you for joining our exclusive fragrance community.</p>
+                  <h3 className="text-lg font-medium text-gray-900">Bienvenue !</h3>
+                  <p className="text-gray-600">Merci de vous être abonné à notre newsletter.</p>
                 </div>
               </div>
             )}
             
             <p className="text-gray-500 text-sm">
-              {content?.privacy_text || 'Unsubscribe anytime. Your privacy is our priority.'}
+              {content?.privacy_text || "Désabonnement possible à tout moment."}
             </p>
             
             {error && (
@@ -129,7 +129,7 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
               <div className="grid grid-cols-2 gap-4">
                 {(content?.stats || [
                   { "number": "500+", "label": "Premium Scents" },
-                  { "number": "50+", "label": "Luxury Brands" }
+                  { "number": "50+", "label": "Nos marques" }
                 ]).map((stat: any, index: number) => (
                   <div key={index} className="bg-white p-6 rounded-2xl shadow-sm border border-purple-100 text-center">
                     <div className="text-2xl font-light text-purple-800 mb-2">{stat.number}</div>
@@ -150,8 +150,8 @@ export default function PerfumeNewsletterSection({ content }: PerfumeNewsletterS
                   <h3 className="text-xl font-medium mb-3">{content?.benefits_title || 'Member Benefits'}</h3>
                   <ul className="space-y-2 text-purple-100">
                     {(content?.benefits || [
-                      { text: 'Early access to new releases' },
-                      { text: 'Exclusive member discounts' },
+                      { text: "Accès anticipé aux nouveautés" },
+                      { text: "Remises exclusives" },
                       { text: 'Personalized recommendations' }
                     ]).map((benefit: any, index: number) => (
                       <li key={index} className="flex items-center">

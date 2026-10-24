@@ -28,7 +28,7 @@ interface WatchesRelatedProductsProps {
 export default function WatchesRelatedProducts({ 
   products, 
   title = 'Related Timepieces',
-  subtitle = 'Discover similar watches that complement your collection',
+  subtitle = "Découvrez des produits similaires",
   storeSettings = {}, 
   currencies = [] 
 }: WatchesRelatedProductsProps) {

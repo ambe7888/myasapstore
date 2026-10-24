@@ -54,7 +54,7 @@ export default function CarsTrendingProductsSection({
             </h2>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {trendingContent.description || 'The most popular automotive parts that enthusiasts are buying right now.'}
+            {trendingContent.description || "Les produits les plus appréciés du moment."}
           </p>
           
           {/* Red accent line */}
@@ -79,8 +79,8 @@ export default function CarsTrendingProductsSection({
               <div className="text-gray-400 mb-4">
                 <TrendingUp className="w-16 h-16 mx-auto" />
               </div>
-              <h3 className="text-xl font-bold text-gray-500 mb-2">No Trending Products</h3>
-              <p className="text-gray-400">Trending products will appear here once they are added.</p>
+              <h3 className="text-xl font-bold text-gray-500 mb-2">Aucun produit tendance</h3>
+              <p className="text-gray-400">Les produits tendance apparaîtront ici dès leur ajout.</p>
             </div>
           </div>
         )}

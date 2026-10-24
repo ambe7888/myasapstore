@@ -25,7 +25,7 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
             {content?.title || 'Design Journal'}
           </h2>
           <p className="text-lg lg:text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
-            {content?.description || 'Wooden furniture inspiration, interior design trends, and expert tips for creating beautiful, functional living spaces.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -81,7 +81,7 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
 
                   {/* Excerpt */}
                   <p className="text-slate-700 text-sm mb-6 line-clamp-3 leading-relaxed">
-                    {post.excerpt || post.description || 'Discover the latest wooden furniture trends and expert tips for creating beautiful interior spaces that reflect your personal style.'}
+                    {post.excerpt || post.description || "Découvrez nos conseils, nos idées et les actualités de la boutique."}
                   </p>
 
                   {/* Read More Button */}
@@ -89,7 +89,7 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
                     href={generateStoreUrl('store.blog.show', store,  { slug: post.slug })}
                     className="inline-flex items-center gap-2 bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold text-sm px-4 py-2 rounded-xl transition-all duration-300 group/link shadow-md hover:shadow-lg"
                   >
-                    <span>Read More</span>
+                    <span>Lire la suite</span>
                     <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
@@ -110,12 +110,12 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
               {
                 title: 'Creating a Cozy Bedroom Sanctuary',
                 category: 'Bedroom',
-                excerpt: 'Transform your bedroom into a peaceful retreat with our expert tips on color schemes, lighting, and furniture selection.'
+                excerpt: "Découvrez nos conseils, nos idées et les actualités de la boutique."
               },
               {
                 title: 'Sustainable Furniture: Style Meets Responsibility',
                 category: 'Sustainability',
-                excerpt: 'Learn how to choose eco-friendly furniture options that don\'t compromise on style or quality for your home.'
+                excerpt: "Découvrez nos conseils, nos idées et les actualités de la boutique."
               }
             ].map((post, index) => (
               <article key={index} className="group relative bg-white rounded-3xl shadow-lg shadow-amber-200/30 hover:shadow-2xl hover:shadow-amber-300/40 transition-all duration-500 overflow-hidden border border-amber-100 hover:border-amber-200 transform hover:-translate-y-3">
@@ -155,7 +155,7 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
                   </p>
 
                   <div className="inline-flex items-center gap-2 bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold text-sm px-4 py-2 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-                    <span>Read More</span>
+                    <span>Lire la suite</span>
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
@@ -172,7 +172,7 @@ function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps
             href={generateStoreUrl('store.blog', store)}
             className="inline-flex items-center gap-3 bg-yellow-800 text-white px-12 py-5 rounded-2xl font-bold hover:bg-yellow-900 transition-all duration-300 group shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 hover:scale-105 text-lg"
           >
-            <span>View All Articles</span>
+            <span>Voir tous les articles</span>
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

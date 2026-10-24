@@ -103,7 +103,7 @@ function BabyKidsCartContent({
           alert(data.message);
         }
       } catch (error) {
-        alert('Error validating coupon. Please try again.');
+        alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
       }
     }
   };
@@ -134,7 +134,7 @@ function BabyKidsCartContent({
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Panier d'achat</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
-                Review your items for your little ones
+                Vérifiez vos articles
               </p>
             </div>
           </div>
@@ -184,7 +184,7 @@ function BabyKidsCartContent({
                                 {/* Sale Badge */}
                                 {item.sale_price && item.sale_price < item.price && (
                                   <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                                    Sale
+                                    Promo
                                   </div>
                                 )}
                               </div>
@@ -245,7 +245,7 @@ function BabyKidsCartContent({
                                 {/* Subtotal */}
                                 <div className="mt-4 pt-4 border-t border-pink-200">
                                   <div className="flex justify-between items-center">
-                                    <span className="text-gray-600">Subtotal:</span>
+                                    <span className="text-gray-600">Sous-total :</span>
                                     <span className="text-xl font-bold text-gray-800">
                                       {formatCurrency(itemSubtotal, storeSettings, currencies)}
                                     </span>
@@ -285,7 +285,7 @@ function BabyKidsCartContent({
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Tax</span>
+                        <span className="text-gray-600">Taxe</span>
                         <span className="font-bold">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                       </div>
                       
@@ -315,11 +315,11 @@ function BabyKidsCartContent({
                                 : 'bg-pink-500 hover:bg-pink-600 text-white'
                             }`}
                           >
-                            {couponApplied ? 'Remove Coupon' : 'Apply Coupon'}
+                            {couponApplied ? "Retirer le coupon" : "Appliquer le coupon"}
                           </button>
                         </form>
                         {couponApplied && (
-                          <p className="text-sm text-green-600 mt-2 font-semibold">Coupon applied successfully!</p>
+                          <p className="text-sm text-green-600 mt-2 font-semibold">Coupon appliqué avec succès !</p>
                         )}
                       </div>
                       
@@ -352,9 +352,9 @@ function BabyKidsCartContent({
                         <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Your Cart is Empty</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Votre panier est vide</h3>
                     <p className="text-gray-600 mb-6">
-                      Start adding amazing products for your little ones!
+                      Commencez à ajouter vos produits préférés !
                     </p>
                     <a
                       href={generateStoreUrl('store.products', store)}

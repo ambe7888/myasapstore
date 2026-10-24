@@ -47,7 +47,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
             
             {/* Subtitle */}
             <p className={`text-xl text-slate-300 mb-12 font-light leading-relaxed max-w-2xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.subtitle || 'Discover exceptional timepieces that blend traditional craftsmanship with modern innovation.'}
+              {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
             </p>
             
             {/* Buttons */}
@@ -56,7 +56,7 @@ export default function WatchesHeroSection({ content }: WatchesHeroSectionProps)
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-amber-500 text-slate-900 px-10 py-4 font-medium tracking-wider uppercase text-sm hover:bg-amber-400 transition-all duration-300 inline-flex items-center justify-center min-w-[220px]"
               >
-                <span>{content?.button_text || 'Explore Collection'}</span>
+                <span>{content?.button_text || "Découvrir la collection"}</span>
                 <svg className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>

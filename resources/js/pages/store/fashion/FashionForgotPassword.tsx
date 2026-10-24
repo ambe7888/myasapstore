@@ -61,8 +61,8 @@ export default function FashionForgotPassword({
             <div className="max-w-md mx-auto">
               <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-2xl border border-white/20">
                 <div className="text-center mb-10">
-                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Reset Password</h2>
-                  <p className="text-gray-600 font-light">Enter your email to receive reset instructions</p>
+                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Réinitialiser le mot de passe</h2>
+                  <p className="text-gray-600 font-light">Saisissez votre e-mail pour recevoir les instructions</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -106,7 +106,7 @@ export default function FashionForgotPassword({
                     className="inline-flex items-center text-sm text-gray-600 font-light hover:text-gray-900 transition-colors"
                   >
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back to Sign In
+                    Retour à la connexion
                   </Link>
                 </div>
               </div>

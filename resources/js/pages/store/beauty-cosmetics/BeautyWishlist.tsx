@@ -79,10 +79,10 @@ function BeautyWishlistContent({
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6">
-              Beauty Wishlist
+              Mes favoris
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Your curated collection of beauty essentials
+              Votre sélection
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ function BeautyWishlistContent({
                         className={`flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-rose-700 transition-colors ${cartLoading || item.stock <= 0 ? 'cursor-not-allowed opacity-50' : ''}`}
                       >
                         <ShoppingCart className="h-4 w-4" />
-                        <span>Add to Bag</span>
+                        <span>Ajouter au panier</span>
                       </button>
                     </div>
                   </div>
@@ -152,9 +152,9 @@ function BeautyWishlistContent({
               <div className="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <Heart className="h-12 w-12 text-rose-400" />
               </div>
-              <h2 className="text-3xl font-light text-gray-900 mb-4">Your wishlist is empty</h2>
+              <h2 className="text-3xl font-light text-gray-900 mb-4">Vos favoris sont vides</h2>
               <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
-                Discover beautiful products and add them to your wishlist
+                Découvrez nos produits et ajoutez-les à vos favoris
               </p>
               <Link
                 href={generateStoreUrl('store.products', store)}
@@ -170,7 +170,7 @@ function BeautyWishlistContent({
       {relatedProducts.length > 0 && (
         <div className="bg-gradient-to-br from-rose-50 to-pink-50 py-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-light text-center mb-16 text-gray-900">You Might Also Love</h2>
+            <h2 className="text-4xl font-light text-center mb-16 text-gray-900">Vous pourriez aussi aimer</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {relatedProducts.slice(0, 4).map((product) => (
                 <BeautyProductCard

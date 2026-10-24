@@ -30,7 +30,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
                 )}
               </div>
               <p className="text-yellow-100 leading-relaxed mb-6">
-                {content?.description || 'Your destination for premium furniture and interior design. Creating beautiful, functional spaces with carefully curated pieces and expert design services.'}
+                {content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
               </p>
               
               {/* Social Links */}
@@ -53,14 +53,14 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
             {/* Customer Service Menu */}
             <div>
               <h4 className="text-lg font-semibold mb-6">
-                {content?.menu1?.title || 'Customer Service'}
+                {content?.menu1?.title || "Service client"}
               </h4>
               <ul className="space-y-3">
                 {(content?.menu1?.links || [
                   { name: 'Design Consultation', href: '/design-consultation' },
                   { name: 'Delivery & Setup', href: '/delivery' },
-                  { name: 'Care Instructions', href: '/care' },
-                  { name: 'Contact Support', href: '/contact' }
+                  { name: "Conseils d'entretien", href: '/care' },
+                  { name: "Contacter le support", href: '/contact' }
                 ]).map((link, index) => (
                   <li key={index}>
                     <Link
@@ -84,10 +84,10 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
               </h4>
               <ul className="space-y-3">
                 {(content?.menu2?.links || [
-                  { name: 'About Us', href: '/about' },
+                  { name: "À propos", href: '/about' },
                   { name: 'Design Team', href: '/designers' },
                   { name: 'Showrooms', href: '/showrooms' },
-                  { name: 'Privacy Policy', href: '/privacy' }
+                  { name: "Politique de confidentialité", href: '/privacy' }
                 ]).map((link, index) => (
                   <li key={index}>
                     <Link
@@ -106,7 +106,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-semibold mb-6">Contact Info</h4>
+              <h4 className="text-lg font-semibold mb-6">Informations de contact</h4>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -144,7 +144,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
         <div className="border-t border-yellow-700 py-6">
           <div className="text-center">
             <p className="text-yellow-200 text-sm">
-              {(content?.copyright_text || '© {year} {store_name}. All rights reserved.')
+              {(content?.copyright_text || "© {year} {store_name}. Tous droits réservés.")
                 .replace('{year}', currentYear.toString())
                 .replace('{store_name}', storeName || 'Furniture Store')}
             </p>

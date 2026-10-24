@@ -44,9 +44,9 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
   };
 
   const categories = blogContent.categories || [
-    { icon: 'wrench', title: 'Installation Guides', description: 'Step-by-step tutorials for DIY enthusiasts' },
-    { icon: 'zap', title: 'Performance Tips', description: 'Expert advice on maximizing your vehicle\'s potential' },
-    { icon: 'settings', title: 'Industry News', description: 'Latest trends and innovations in automotive' }
+    { icon: 'wrench', title: 'Installation Guides', description: "Des conseils pas à pas" },
+    { icon: 'zap', title: 'Performance Tips', description: "Nos conseils et nos idées" },
+    { icon: 'settings', title: 'Industry News', description: "Les dernières actualités de la boutique" }
   ];
 
   return (
@@ -59,7 +59,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
             {blogContent.title || 'Auto Journal'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {blogContent.description || 'Expert insights, installation guides, and the latest automotive trends.'}
+            {blogContent.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-6 left-6 bg-red-600 text-white px-4 py-2 font-bold text-sm">
-                        FEATURED
+                        À LA UNE
                       </div>
                     </div>
                     
@@ -109,7 +109,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                       )}
                       
                       <div className="flex items-center text-red-600 font-bold tracking-wider uppercase group-hover:translate-x-2 transition-transform">
-                        Read Full Story
+                        Lire l'article complet
                         <ArrowRight className="h-5 w-5 ml-3" />
                       </div>
                     </div>
@@ -145,7 +145,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                       </h4>
                       
                       <div className="flex items-center text-red-600 text-sm font-bold group-hover:translate-x-1 transition-transform">
-                        Read More
+                        Lire la suite
                         <ArrowRight className="h-3 w-3 ml-2" />
                       </div>
                     </div>
@@ -163,8 +163,8 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-500 mb-2">No Blog Posts</h3>
-              <p className="text-gray-400">Blog posts will appear here once they are published.</p>
+              <h3 className="text-xl font-bold text-gray-500 mb-2">Aucun article</h3>
+              <p className="text-gray-400">Les articles apparaîtront ici dès leur publication.</p>
             </div>
           </div>
         )}
@@ -192,7 +192,7 @@ export default function CarsBlogSection({ posts, content, store }: CarsBlogSecti
               href={generateStoreUrl('store.blog', store)}
               className="inline-flex items-center px-8 py-4 bg-black hover:bg-red-600 text-white font-bold tracking-wider uppercase transition-colors transform hover:scale-105"
             >
-              View All Articles
+              Voir tous les articles
               <ChevronRight className="h-5 w-5 ml-2" />
             </Link>
           </div>

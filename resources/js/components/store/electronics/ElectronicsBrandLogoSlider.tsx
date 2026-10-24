@@ -22,10 +22,10 @@ export default function ElectronicsBrandLogoSlider({ content }: ElectronicsBrand
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Trusted by Leading Brands
+            Marques de confiance
           </h2>
           <p className="text-gray-600">
-            We partner with the world's most innovative technology companies
+            Nous travaillons avec des marques de confiance
           </p>
         </div>
 

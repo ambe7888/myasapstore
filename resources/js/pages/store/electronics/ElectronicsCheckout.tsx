@@ -142,7 +142,7 @@ function ElectronicsCheckoutContent({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -153,11 +153,11 @@ function ElectronicsCheckoutContent({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -274,8 +274,8 @@ function ElectronicsCheckoutContent({
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <CreditCard className="w-8 h-8" />
               </div>
-              <h1 className="text-4xl font-bold mb-4">Secure Checkout</h1>
-              <p className="text-xl text-blue-100">Complete your electronics purchase</p>
+              <h1 className="text-4xl font-bold mb-4">Paiement sécurisé</h1>
+              <p className="text-xl text-blue-100">Finalisez votre achat</p>
             </div>
           </section>
 
@@ -324,7 +324,7 @@ function ElectronicsCheckoutContent({
                 <div className="lg:col-span-2">
                   {currentStep === 'shipping' && (
                     <div className="bg-white rounded-2xl shadow-lg p-8">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Shipping Information</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Informations de livraison</h2>
                       
                       <form onSubmit={(e) => {
                         e.preventDefault();
@@ -337,13 +337,13 @@ function ElectronicsCheckoutContent({
                         if (!shippingData.email) {
                           newErrors.email = "L'adresse e-mail est requise";
                         } else if (!/\S+@\S+\.\S+/.test(shippingData.email)) {
-                          newErrors.email = 'Email is invalid';
+                          newErrors.email = "L'adresse e-mail n'est pas valide";
                         }
                         if (!shippingData.phone) newErrors.phone = "Le numéro de téléphone est requis";
-                        if (!shippingData.street) newErrors.street = 'Street address is required';
+                        if (!shippingData.street) newErrors.street = "L'adresse est obligatoire";
                         if (!shippingData.city) newErrors.city = 'La ville est requise';
-                        if (!shippingData.state) newErrors.state = 'State is required';
-                        if (!shippingData.zip) newErrors.zip = 'ZIP code is required';
+                        if (!shippingData.state) newErrors.state = "La région est obligatoire";
+                        if (!shippingData.zip) newErrors.zip = "Le code postal est obligatoire";
                         if (!selectedShippingId) newErrors.shipping = 'Veuillez sélectionner un mode de livraison';
                         
                         if (Object.keys(newErrors).length > 0) {
@@ -383,7 +383,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">E-mail *</label>
                             <input
                               type="email"
                               value={shippingData.email}
@@ -397,7 +397,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Téléphone *</label>
                             <input
                               type="tel"
                               value={shippingData.phone}
@@ -412,7 +412,7 @@ function ElectronicsCheckoutContent({
                           </div>
 
                           <div className="hidden">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Country *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Pays *</label>
                             <select
                               value={shippingData.country}
                               onChange={(e) => handleCountryChange(e.target.value)}
@@ -436,7 +436,7 @@ function ElectronicsCheckoutContent({
                                 shippingErrors.state ? 'border-red-500' : 'border-gray-300'
                               }`}
                             >
-                              <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                              <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                               {states.map((state: any) => (
                                 <option key={state.id} value={state.id}>
                                   {state.name}
@@ -448,7 +448,7 @@ function ElectronicsCheckoutContent({
                             )}
                           </div>
                           <div className="hidden">
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">City *</label>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Ville *</label>
                             <select
                               value={shippingData.city}
                               onChange={(e) => {
@@ -461,7 +461,7 @@ function ElectronicsCheckoutContent({
                                 shippingErrors.city ? 'border-red-500' : 'border-gray-300'
                               }`}
                             >
-                              <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                              <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                               {cities.map((city: any) => (
                                 <option key={city.id} value={city.id}>
                                   {city.name}
@@ -550,7 +550,7 @@ function ElectronicsCheckoutContent({
                             onChange={(e) => setOrderNotes(e.target.value)}
                             rows={3}
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Special instructions for delivery"
+                            placeholder="Instructions particulières pour la livraison"
                           />
                         </div>
 
@@ -559,7 +559,7 @@ function ElectronicsCheckoutContent({
                             type="submit"
                             className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                           >
-                            Continue to Payment
+                            Continuer vers le paiement
                           </button>
                         </div>
                       </form>
@@ -582,8 +582,8 @@ function ElectronicsCheckoutContent({
                               className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                             />
                             <div className="ml-3">
-                              <div className="font-semibold text-gray-900">Cash on Delivery</div>
-                              <div className="text-sm text-gray-500">Pay when your order is delivered</div>
+                              <div className="font-semibold text-gray-900">Paiement à la livraison</div>
+                              <div className="text-sm text-gray-500">Payez à la livraison de votre commande</div>
                             </div>
                           </label>
                         )}
@@ -599,7 +599,7 @@ function ElectronicsCheckoutContent({
                             />
                             <div className="ml-3">
                               <div className="font-semibold text-gray-900">WhatsApp</div>
-                              <div className="text-sm text-gray-500">Complete payment via WhatsApp</div>
+                              <div className="text-sm text-gray-500">Finaliser le paiement via WhatsApp</div>
                             </div>
                           </label>
                         )}
@@ -619,7 +619,7 @@ function ElectronicsCheckoutContent({
                             </div>
                             <label htmlFor="payment-telegram" className="ml-3 flex flex-col cursor-pointer">
                               <span className="block text-sm font-medium text-gray-900">Telegram</span>
-                              <span className="block text-sm text-gray-500">Complete payment via Telegram</span>
+                              <span className="block text-sm text-gray-500">Finaliser le paiement via Telegram</span>
                             </label>
                           </div>
                         )}
@@ -667,14 +667,14 @@ function ElectronicsCheckoutContent({
                                 />
                                 <div className="ml-3">
                                   <div className="font-semibold text-gray-900">{methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}</div>
-                                  <div className="text-sm text-gray-500">{method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}</div>
+                                  <div className="text-sm text-gray-500">{method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}</div>
                                 </div>
                               </label>
                               
                               {/* Bank Transfer Details */}
                               {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                 <div className="mx-4 mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                  <h4 className="text-sm font-semibold text-blue-900 mb-2">Bank Transfer Details</h4>
+                                  <h4 className="text-sm font-semibold text-blue-900 mb-2">Détails du virement bancaire</h4>
                                   <div className="text-sm text-blue-800 whitespace-pre-line">
                                     {config.details}
                                   </div>
@@ -688,7 +688,7 @@ function ElectronicsCheckoutContent({
                       {/* WhatsApp Number Input */}
                       {paymentMethod === 'whatsapp' && (
                         <div className="mt-6">
-                          <h3 className="text-lg font-bold text-gray-900 mb-4">WhatsApp Details</h3>
+                          <h3 className="text-lg font-bold text-gray-900 mb-4">Détails WhatsApp</h3>
                           
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">WhatsApp Number *</label>
@@ -718,7 +718,7 @@ function ElectronicsCheckoutContent({
                           onChange={(e) => setOrderNotes(e.target.value)}
                           rows={3}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="Special instructions for delivery"
+                          placeholder="Instructions particulières pour la livraison"
                         />
                       </div>
 
@@ -727,13 +727,13 @@ function ElectronicsCheckoutContent({
                           onClick={() => setCurrentStep('shipping')}
                           className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                         >
-                          Back to Shipping
+                          Retour à la livraison
                         </button>
                         <button
                           onClick={() => setCurrentStep('review')}
                           className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </div>
@@ -741,7 +741,7 @@ function ElectronicsCheckoutContent({
 
                   {currentStep === 'review' && (
                     <div className="bg-white rounded-2xl shadow-lg p-8">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Review Your Order</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6">Vérifiez votre commande</h2>
                       
                       <div className="space-y-6">
                         {cartItems.map((item) => (
@@ -767,7 +767,7 @@ function ElectronicsCheckoutContent({
                           onClick={() => setCurrentStep('payment')}
                           className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                         >
-                          Back to Payment
+                          Retour au paiement
                         </button>
                         <button
                           onClick={handlePlaceOrder}
@@ -828,19 +828,19 @@ function ElectronicsCheckoutContent({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-6 py-3 ${couponApplied ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'} text-white rounded-r-lg font-semibold transition-colors`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-600 mt-2">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-600 mt-2">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                     
@@ -885,11 +885,11 @@ function ElectronicsCheckoutContent({
                     <div className="space-y-3 text-sm text-gray-600">
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4 text-green-600" />
-                        <span>Secure SSL encryption</span>
+                        <span>Cryptage SSL sécurisé</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Truck className="w-4 h-4 text-blue-600" />
-                        <span>Fast & reliable delivery</span>
+                        <span>Livraison rapide et fiable</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Zap className="w-4 h-4 text-yellow-600" />

@@ -239,9 +239,9 @@ export default function ElectronicsProducts({
         <div className="bg-slate-900 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-bold mb-6">Electronics Collection</h1>
+              <h1 className="text-5xl font-bold mb-6">Notre collection</h1>
               <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-                Discover cutting-edge technology and innovative electronics for your modern lifestyle
+                Découvrez nos produits et ajoutez-les à votre panier
               </p>
             </div>
           </div>
@@ -268,7 +268,7 @@ export default function ElectronicsProducts({
                 {/* Search */}
                 {showFilter('search') && (<>
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">Search Products</label>
+                  <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">Rechercher un produit</label>
                   <div className="relative">
                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500" />
                     <input
@@ -276,7 +276,7 @@ export default function ElectronicsProducts({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                      placeholder="Find electronics..."
+                      placeholder="Rechercher un produit..."
                       className="w-full pl-12 pr-4 py-3 bg-white border-2 border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     />
                   </div>
@@ -372,7 +372,7 @@ export default function ElectronicsProducts({
                 {/* Rating */}
                 {showFilter('rating') && (<>
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Customer Rating</label>
+                  <label className="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Note des clients</label>
                   <div className="space-y-3">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <label key={rating} className="flex items-center p-3 rounded-xl hover:bg-blue-50 transition-colors cursor-pointer border-2 border-transparent hover:border-blue-200">
@@ -569,7 +569,7 @@ export default function ElectronicsProducts({
                             />
                             {product.sale_price && (
                               <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                SALE
+                                PROMO
                               </div>
                             )}
                           </Link>
@@ -672,7 +672,7 @@ export default function ElectronicsProducts({
                       disabled={pagination.current_page === 1}
                       className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -697,7 +697,7 @@ export default function ElectronicsProducts({
                       disabled={pagination.current_page === pagination.last_page}
                       className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>

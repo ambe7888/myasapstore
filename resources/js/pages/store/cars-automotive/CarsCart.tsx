@@ -68,7 +68,7 @@ function CarsCartContent({
                 <div className="w-6 h-6 bg-white transform -rotate-45"></div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-wider">GARAGE CART</h1>
+                <h1 className="text-5xl font-black tracking-wider">MON PANIER</h1>
                 <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Performance Parts Ready</div>
               </div>
             </div>
@@ -79,7 +79,7 @@ function CarsCartContent({
             </div>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl">
-            Review your selected automotive components before installation
+            Vérifiez vos articles avant de commander
           </p>
         </div>
       </div>
@@ -99,12 +99,12 @@ function CarsCartContent({
                     <div className="w-px h-12 bg-gray-600"></div>
                     <div className="text-center">
                       <div className="text-3xl font-black text-red-600">{formatCurrency(summary.total, storeSettings, currencies)}</div>
-                      <div className="text-sm font-bold tracking-widest uppercase">Total Value</div>
+                      <div className="text-sm font-bold tracking-widest uppercase">Valeur totale</div>
                     </div>
                   </div>
                   <div className="flex items-center text-red-400">
                     <Wrench className="h-5 w-5 mr-2" />
-                    <span className="font-bold tracking-wider uppercase">Ready to Install</span>
+                    <span className="font-bold tracking-wider uppercase">Prêt à l'envoi</span>
                   </div>
                 </div>
               </div>
@@ -146,7 +146,7 @@ function CarsCartContent({
                                 <div className={`flex items-center gap-2 ${item.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
                                   <div className={`w-2 h-2 rounded-full ${item.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
                                   <span className="text-sm font-medium">
-                                    {item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}
+                                    {item.stock > 0 ? `${item.stock} in stock` : "Rupture de stock"}
                                   </span>
                                 </div>
                               </div>
@@ -227,7 +227,7 @@ function CarsCartContent({
 
                               {/* Item Total */}
                               <div className="text-right">
-                                <div className="text-sm text-gray-600 mb-1">Item Total</div>
+                                <div className="text-sm text-gray-600 mb-1">Total de l'article</div>
                                 <div className="text-2xl font-bold text-red-600">
                                   {formatCurrency((item.sale_price && item.sale_price < item.price ? item.sale_price : item.price) * item.quantity, storeSettings, currencies)}
                                 </div>
@@ -253,7 +253,7 @@ function CarsCartContent({
                   <div className="bg-black text-white p-8 border-l-4 border-red-600 sticky top-8">
                     <div className="flex items-center mb-6">
                       <Settings className="h-6 w-6 text-red-600 mr-3" />
-                      <h2 className="text-2xl font-black tracking-wider">ORDER SUMMARY</h2>
+                      <h2 className="text-2xl font-black tracking-wider">RÉCAPITULATIF DE LA COMMANDE</h2>
                     </div>
 
                     <div className="space-y-4 mb-8">
@@ -270,7 +270,7 @@ function CarsCartContent({
                         </span>
                       </div>
                       <div className="flex justify-between border-b border-gray-700 pb-2">
-                        <span className="font-bold tracking-wider uppercase text-gray-300">Tax</span>
+                        <span className="font-bold tracking-wider uppercase text-gray-300">Taxe</span>
                         <span className="font-black text-white">
                           {formatCurrency(summary.tax, storeSettings, currencies)}
                         </span>
@@ -298,7 +298,7 @@ function CarsCartContent({
                       className="w-full border-2 border-gray-600 hover:border-red-600 text-gray-300 hover:text-red-600 py-4 font-bold text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3"
                     >
                       <Wrench className="h-5 w-5" />
-                      <span>Browse More Parts</span>
+                      <span>Voir plus de produits</span>
                     </Link>
 
 
@@ -312,9 +312,9 @@ function CarsCartContent({
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <ShoppingBag className="h-12 w-12 text-gray-400" />
                 </div>
-                <h2 className="text-4xl font-black text-black mb-6">EMPTY GARAGE</h2>
+                <h2 className="text-4xl font-black text-black mb-6">AUCUN PRODUIT</h2>
                 <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                  Your cart is empty. Start building your performance setup with premium automotive components.
+                  Votre panier est vide. Commencez vos achats !
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

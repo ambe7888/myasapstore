@@ -25,10 +25,10 @@ function FurnitureBrandLogoSlider({ content }: FurnitureBrandLogoSliderProps) {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Trusted by Premium Brands'}
+            {content?.title || "Marques de confiance"}
           </h2>
           <p className="text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'We partner with the world\'s leading furniture manufacturers and designers to bring you exceptional quality and craftsmanship.'}
+            {content?.description || "Nous travaillons avec des marques de confiance pour vous offrir une qualité irréprochable."}
           </p>
         </div>
 
@@ -61,7 +61,7 @@ function FurnitureBrandLogoSlider({ content }: FurnitureBrandLogoSliderProps) {
         {content?.stats !== null && content?.stats?.show_section !== false && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mt-20 pt-16 border-t-2 border-amber-200">
             {(content?.stats?.value || content?.stats || [
-              { number: '50+', label: 'Premium Brands' },
+              { number: '50+', label: "Nos marques" },
               { number: '25+', label: 'Years Experience' },
               { number: '10K+', label: 'Happy Customers' },
               { number: '99%', label: 'Satisfaction Rate' }

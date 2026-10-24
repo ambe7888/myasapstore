@@ -36,10 +36,10 @@ export default function BabyKidsTrendingProductsSection({
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            {content?.title || 'Trending Now'}
+            {content?.title || "Tendances du moment"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {content?.description || 'The cutest styles that parents are loving right now - from playtime essentials to special occasion outfits.'}
+            {content?.description || "Les produits les plus appréciés du moment."}
           </p>
         </div>
 

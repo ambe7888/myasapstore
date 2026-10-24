@@ -80,7 +80,7 @@ export default function WatchesCategorySection({ categories, content }: WatchesC
               href={generateStoreUrl('store.products', store)}
               className="inline-flex items-center px-8 py-3 border-2 border-slate-900 text-slate-900 font-medium tracking-wider uppercase text-sm hover:bg-slate-900 hover:text-white transition-all duration-300"
             >
-              View All Collections
+              Voir toutes les collections
               <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

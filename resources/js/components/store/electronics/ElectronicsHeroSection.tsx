@@ -36,18 +36,18 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold px-4 py-2 rounded-full">
                 <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></div>
-                {content?.badge_text || 'Latest Technology 2024'}
+                {content?.badge_text || "Nouveautés"}
               </span>
             </div>
             
             {/* Title */}
             <h1 className={`text-4xl lg:text-6xl font-bold leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Next-Gen Technology for Modern Life'}
+              {content?.title || "Découvrez notre nouvelle collection"}
             </h1>
             
             {/* Subtitle */}
             <p className={`text-xl text-blue-100 mb-12 leading-relaxed max-w-lg transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.subtitle || 'Discover cutting-edge electronics and innovative gadgets that enhance your productivity and entertainment experience.'}
+              {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
             </p>
             
             {/* Buttons */}
@@ -56,7 +56,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
               >
-                <span>{content?.button_text || 'Shop Tech'}</span>
+                <span>{content?.button_text || "Voir la boutique"}</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -65,16 +65,16 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
                 href={formatCustomLink(content?.secondary_button_link, store, '/catalog')}
                 className="group border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
               >
-                <span>{content?.secondary_button_text || 'View Catalog'}</span>
+                <span>{content?.secondary_button_text || "Voir le catalogue"}</span>
               </a>
             </div>
 
             {/* Info Boxes */}
             <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
               {(content?.info_boxes || [
-                { icon: 'zap', title: 'Fast Charging', description: 'Quick power solutions' },
+                { icon: 'zap', title: "Qualité garantie", description: "Sélection soignée" },
                 { icon: 'shield', title: '2-Year Warranty', description: 'Extended protection' },
-                { icon: 'cpu', title: 'Latest Tech', description: 'Cutting-edge innovation' }
+                { icon: 'cpu', title: "Nouveautés", description: 'Cutting-edge innovation' }
               ]).map((box, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <div className="w-8 h-8 mb-3 text-cyan-400">
@@ -107,7 +107,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
             <div className="relative z-10">
               <img 
                 src={getImageUrl(content?.image || '/storage/media/79/home-banner-electronics.png')}
-                alt="Electronics Collection" 
+                alt="Notre collection" 
                 className="w-full h-auto rounded-2xl shadow-2xl"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/1e293b/60a5fa?text=Electronics+%26+Gadgets';

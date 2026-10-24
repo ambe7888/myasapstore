@@ -75,7 +75,7 @@ export default function PerfumeCustomPage({
                   </div>
                   <h3 className="text-2xl font-light text-gray-900 mb-4">Content Coming Soon</h3>
                   <p className="text-gray-600 max-w-md mx-auto">
-                    This page is being prepared with exclusive content. Please check back soon.
+                    Cette page est en cours de préparation. Revenez bientôt.
                   </p>
                 </div>
               )}

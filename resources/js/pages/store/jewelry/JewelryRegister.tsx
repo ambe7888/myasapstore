@@ -74,10 +74,10 @@ export default function JewelryRegister({
                   <Crown className="w-10 h-10 text-white" />
                 </div>
                 <h1 className="text-4xl font-light text-gray-800 mb-4 tracking-wide">
-                  Join Our Elite Collection
+                  Rejoignez-nous
                 </h1>
                 <p className="text-gray-600 text-lg font-light">
-                  Create your account to access exclusive jewelry pieces
+                  Créez votre compte et commencez vos achats
                 </p>
               </div>
 
@@ -167,7 +167,7 @@ export default function JewelryRegister({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                        Password
+                        Mot de passe
                       </label>
                       <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -205,7 +205,7 @@ export default function JewelryRegister({
 
                     <div className="space-y-3">
                       <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 tracking-wide uppercase">
-                        Confirm Password
+                        Confirmer le mot de passe
                       </label>
                       <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -255,11 +255,11 @@ export default function JewelryRegister({
                     <label htmlFor="terms" className="text-sm text-gray-700 font-light leading-relaxed">
                       I agree to the{' '}
                       <Link href="#" className="text-yellow-600 hover:text-yellow-700 font-medium">
-                        Terms of Service
+                        Conditions d'utilisation
                       </Link>{' '}
                       and{' '}
                       <Link href="#" className="text-yellow-600 hover:text-yellow-700 font-medium">
-                        Privacy Policy
+                        Politique de confidentialité
                       </Link>
                     </label>
                   </div>
@@ -279,10 +279,10 @@ export default function JewelryRegister({
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Creating Account...
+                        Création du compte...
                       </div>
                     ) : (
-                      'Create Your Elite Account'
+                      "Créer votre compte"
                     )}
                   </button>
                 </form>
@@ -307,7 +307,7 @@ export default function JewelryRegister({
                       href={generateStoreUrl('store.login', store)}
                       className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors border-b border-yellow-300 hover:border-yellow-500"
                     >
-                      Sign In
+                      Se connecter
                     </Link>
                   </p>
                 </div>

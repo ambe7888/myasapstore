@@ -67,18 +67,18 @@ export default function CarsRegister({
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-4 h-4 bg-red-600 rotate-45"></div>
-                    <span className="text-red-600 font-bold tracking-widest uppercase text-sm">Join The Crew</span>
+                    <span className="text-red-600 font-bold tracking-widest uppercase text-sm">Rejoignez-nous</span>
                     <div className="w-4 h-4 bg-red-600 rotate-45"></div>
                   </div>
                   
                   <h1 className="text-7xl font-black tracking-tight leading-none">
-                    ENTER
+                    ENTRER
                     <br />
                     <span className="text-red-600">GARAGE</span>
                   </h1>
                   
                   <p className="text-xl text-gray-700 font-medium leading-relaxed max-w-lg">
-                    Join the elite automotive community. Get access to premium parts, exclusive deals, and expert support.
+                    Rejoignez-nous et profitez d'offres exclusives et d'une assistance dédiée.
                   </p>
                 </div>
 
@@ -90,7 +90,7 @@ export default function CarsRegister({
                     </div>
                     <div>
                       <h3 className="font-bold text-black">Premium Access</h3>
-                      <p className="text-gray-600 text-sm">Exclusive automotive parts catalog</p>
+                      <p className="text-gray-600 text-sm">Catalogue complet</p>
                     </div>
                   </div>
                   
@@ -100,7 +100,7 @@ export default function CarsRegister({
                     </div>
                     <div>
                       <h3 className="font-bold text-black">Member Pricing</h3>
-                      <p className="text-gray-600 text-sm">Special discounts and early access</p>
+                      <p className="text-gray-600 text-sm">Remises spéciales et accès anticipé</p>
                     </div>
                   </div>
                   
@@ -109,8 +109,8 @@ export default function CarsRegister({
                       <Wrench className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">Pro Support</h3>
-                      <p className="text-gray-600 text-sm">Direct access to automotive experts</p>
+                      <h3 className="font-bold text-black">Assistance dédiée</h3>
+                      <p className="text-gray-600 text-sm">Accès direct à notre équipe</p>
                     </div>
                   </div>
                 </div>
@@ -121,10 +121,10 @@ export default function CarsRegister({
                 <div className="mb-10">
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-2 h-2 bg-red-600 rotate-45 mr-3"></div>
-                    <h2 className="text-3xl font-black text-black tracking-wider">REGISTER</h2>
+                    <h2 className="text-3xl font-black text-black tracking-wider">INSCRIPTION</h2>
                     <div className="w-2 h-2 bg-red-600 rotate-45 ml-3"></div>
                   </div>
-                  <p className="text-gray-600 text-center font-medium">Create your automotive account</p>
+                  <p className="text-gray-600 text-center font-medium">Créez votre compte</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -211,7 +211,7 @@ export default function CarsRegister({
                   <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="password" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">
-                        Password
+                        Mot de passe
                       </label>
                       <div className="relative">
                         <input
@@ -245,7 +245,7 @@ export default function CarsRegister({
 
                     <div>
                       <label htmlFor="password_confirmation" className="block text-red-600 font-bold tracking-widest uppercase text-xs mb-3">
-                        Confirm Password
+                        Confirmer le mot de passe
                       </label>
                       <div className="relative">
                         <input
@@ -290,7 +290,7 @@ export default function CarsRegister({
                         <span>JOINING...</span>
                       </div>
                     ) : (
-                      'JOIN GARAGE'
+                      "S'INSCRIRE"
                     )}
                   </button>
                 </form>
@@ -304,7 +304,7 @@ export default function CarsRegister({
                       href={generateStoreUrl('store.login', store)}
                       className="text-red-600 hover:text-red-700 font-bold tracking-wider uppercase transition-colors"
                     >
-                      Access Account
+                      Accéder à mon compte
                     </Link>
                   </p>
                 </div>

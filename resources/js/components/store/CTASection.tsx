@@ -9,9 +9,9 @@ interface CTASectionProps {
 }
 
 export default function CTASection({
-  title = "Special Discount This Week",
-  subtitle = "Get up to 50% off on selected items. Limited time offer.",
-  buttonText = "Shop Now",
+  title = "Offre spéciale de la semaine",
+  subtitle = "Profitez de remises sur une sélection d'articles. Offre limitée.",
+  buttonText = "Acheter maintenant",
   buttonLink = "/shop",
   backgroundImage = "/storage/media/cta-background.jpg"
 }: CTASectionProps) {

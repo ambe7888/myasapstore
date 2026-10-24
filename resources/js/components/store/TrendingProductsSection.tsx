@@ -15,8 +15,8 @@ interface TrendingProductsSectionProps {
 }
 
 export default function TrendingProductsSection({
-  title = "Trending Products",
-  subtitle = "Our most popular products this week",
+  title = "Produits tendance",
+  subtitle = "Nos produits les plus populaires cette semaine",
   viewAllLink = "/shop",
   products = [],
   content,

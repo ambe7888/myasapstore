@@ -92,13 +92,13 @@ export default function BabyKidsOrders({
                   <div className="w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-8">
                     <ShoppingBag className="h-16 w-16 text-pink-500" />
                   </div>
-                  <h3 className="text-3xl font-bold text-gray-800 mb-4">No Orders Yet!</h3>
-                  <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">Ready to find something special for your little one? Let's start shopping together!</p>
+                  <h3 className="text-3xl font-bold text-gray-800 mb-4">Aucune commande pour le moment !</h3>
+                  <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">Prêt à trouver votre bonheur ? Commençons vos achats !</p>
                   <Link
                     href={generateStoreUrl('store.home', store)}
                     className="bg-pink-500 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
-                    Explore Products
+                    Découvrir les produits
                   </Link>
                 </div>
               ) : (

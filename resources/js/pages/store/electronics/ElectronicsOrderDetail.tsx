@@ -91,7 +91,7 @@ export default function ElectronicsOrderDetail({
         <div className="bg-slate-900 text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-bold tracking-wide mb-6">Order Details</h1>
+              <h1 className="text-5xl font-bold tracking-wide mb-6">Détails de la commande</h1>
               <p className="text-blue-200 font-light text-lg">
                 Order #{order.id}
               </p>
@@ -137,14 +137,14 @@ export default function ElectronicsOrderDetail({
                       href={generateStoreUrl('store.my-orders', store)}
                       className="px-6 py-2 border border-gray-300 text-sm font-semibold tracking-wide uppercase hover:border-blue-600 hover:text-blue-600 transition-colors"
                     >
-                      Back to Orders
+                      Retour aux commandes
                     </Link>
                   </div>
                 </div>
 
                 {/* Order Items */}
                 <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">Order Items</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">Articles commandés</h3>
                   <div className="space-y-4">
                     {order.items.map((item) => (
                       <div key={item.id} className="flex items-center space-x-4 p-4 border border-gray-200">
@@ -176,7 +176,7 @@ export default function ElectronicsOrderDetail({
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2 flex items-center">
                       <MapPin className="h-5 w-5 mr-2" />
-                      Shipping Address
+                      Adresse de livraison
                     </h3>
                     <div className="bg-gray-50 p-4">
                       <p className="font-semibold">{order.shipping_address.name}</p>
@@ -191,26 +191,26 @@ export default function ElectronicsOrderDetail({
                     <h3 className="text-lg font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Résumé de la commande</h3>
                     <div className="bg-gray-50 p-4 space-y-3">
                       <div className="flex justify-between">
-                        <span>Subtotal:</span>
+                        <span>Sous-total :</span>
                         <span className="font-semibold">{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                       </div>
                       {order.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span>Discount:</span>
+                          <span>Remise :</span>
                           <span className="font-semibold">-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       <div className="flex justify-between">
-                        <span>Shipping:</span>
+                        <span>Livraison :</span>
                         <span className="font-semibold">{formatCurrency(order.shipping, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Tax:</span>
+                        <span>Taxe :</span>
                         <span className="font-semibold">{formatCurrency(order.tax, storeSettings, currencies)}</span>
                       </div>
                       <div className="border-t border-gray-300 pt-3">
                         <div className="flex justify-between">
-                          <span className="text-lg font-bold">Total:</span>
+                          <span className="text-lg font-bold">Total :</span>
                           <span className="text-lg font-bold text-blue-600">{formatCurrency(order.total, storeSettings, currencies)}</span>
                         </div>
                       </div>

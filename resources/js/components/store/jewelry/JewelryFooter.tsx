@@ -10,7 +10,7 @@ interface JewelryFooterProps {
 
 export default function JewelryFooter({ storeName = 'Luxury Jewelry', logo, content = {} }: JewelryFooterProps) {
   const footerContent = content || {};
-  const description = footerContent.description || 'Fine jewelry and luxury goods since our founding.';
+  const description = footerContent.description || "Des produits de qualité, sélectionnés avec soin pour vous.";
   const socialLinks = footerContent.social_links || [];
 
   return (
@@ -42,7 +42,7 @@ export default function JewelryFooter({ storeName = 'Luxury Jewelry', logo, cont
           {/* Navigation Links */}
           <div className="flex flex-wrap justify-center gap-8">
             {(footerContent.menu?.links || [
-              { name: 'Jewelry Care', href: '/jewelry-care' },
+              { name: "Conseils d'entretien", href: '/jewelry-care' },
               { name: 'Sizing Guide', href: '/sizing' },
               { name: 'Heritage', href: '/heritage' },
               { name: 'Contact', href: '/contact' }

@@ -257,25 +257,25 @@ function CartContent({
           alert(data.message);
         }
       } catch (error) {
-        alert('Error validating coupon. Please try again.');
+        alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
       }
     } else {
-      alert('Please enter a coupon code');
+      alert("Veuillez saisir un code promo");
     }
   };
 
   const handleAddToCart = (product: any) => {
-    console.log('Add to cart', product);
+    console.log("Ajouter au panier", product);
     // In a real app, this would dispatch an action to add the product to the cart
   };
 
   const handleQuickView = (product: any) => {
-    console.log('Quick view', product);
+    console.log("Aperçu rapide", product);
     // In a real app, this would open a quick view modal
   };
 
   const handleAddToWishlist = (product: any) => {
-    console.log('Add to wishlist', product);
+    console.log("Ajouter aux favoris", product);
     // In a real app, this would dispatch an action to add the product to the wishlist
   };
 
@@ -300,7 +300,7 @@ function CartContent({
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-4xl font-bold mb-4">Panier d'achat</h1>
               <p className="text-white/80">
-                Review your items and proceed to checkout
+                Vérifiez vos articles et passez à la caisse
               </p>
             </div>
           </div>
@@ -310,7 +310,7 @@ function CartContent({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               <span className="text-gray-800 font-medium">Panier d'achat</span>
             </div>
@@ -328,7 +328,7 @@ function CartContent({
                     <table className="w-full">
                       <thead className="bg-gray-50 border-b">
                         <tr>
-                          <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                          <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Produit</th>
                           <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Prix</th>
                           <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
                           <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Sous-total</th>
@@ -377,7 +377,7 @@ function CartContent({
                                     
                                     {/* Show subtotal on mobile */}
                                     <div className="md:hidden mt-1">
-                                      <span className="text-sm text-gray-500">Subtotal: </span>
+                                      <span className="text-sm text-gray-500">Sous-total : </span>
                                       <span className="font-medium">{formatCurrency(itemSubtotal, storeSettings, currencies)}</span>
                                     </div>
                                   </div>
@@ -461,7 +461,7 @@ function CartContent({
                 {/* Cart Summary */}
                 <div>
                   <div className="bg-gray-50 rounded-lg p-6 shadow">
-                    <h2 className="text-lg font-bold mb-4">Cart Summary</h2>
+                    <h2 className="text-lg font-bold mb-4">Récapitulatif du panier</h2>
                     
                     <div className="space-y-4">
                       <div className="flex justify-between">
@@ -484,7 +484,7 @@ function CartContent({
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Tax</span>
+                        <span className="text-gray-600">Taxe</span>
                         <span className="font-medium">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                       </div>
                       
@@ -500,7 +500,7 @@ function CartContent({
                         <form onSubmit={handleApplyCoupon} className="flex">
                           <input
                             type="text"
-                            placeholder="Coupon code"
+                            placeholder="Code promo"
                             value={couponCode}
                             onChange={(e) => setCouponCode(e.target.value)}
                             className="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -510,11 +510,11 @@ function CartContent({
                             type="submit"
                             className={`px-4 py-2 ${couponApplied ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-800 hover:bg-gray-700'} text-white rounded-r-md`}
                           >
-                            {couponApplied ? 'Remove' : 'Apply'}
+                            {couponApplied ? "Retirer" : "Appliquer"}
                           </button>
                         </form>
                         {couponApplied && (
-                          <p className="text-sm text-green-600 mt-2">Coupon applied successfully!</p>
+                          <p className="text-sm text-green-600 mt-2">Coupon appliqué avec succès !</p>
                         )}
                       </div>
                       
@@ -535,7 +535,7 @@ function CartContent({
                         </div>
                         <div className="flex items-center">
                           <ShoppingBag className="h-4 w-4 mr-2" />
-                          <span>30-day easy returns</span>
+                          <span>Retours faciles sous 30 jours</span>
                         </div>
                       </div>
                     </div>
@@ -548,7 +548,7 @@ function CartContent({
                   <ShoppingBag className="h-12 w-12 text-gray-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Votre panier est vide</h2>
-                <p className="text-gray-500 mb-6">Looks like you haven't added any products to your cart yet</p>
+                <p className="text-gray-500 mb-6">Vous n'avez encore ajouté aucun produit à votre panier</p>
                 <Link 
                   href={generateStoreUrl('store.products', store)}
                   className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"

@@ -23,7 +23,7 @@ export default function JewelryFeaturedProductsSection({ products = [], content,
             {content?.title || 'Signature Pieces'}
           </h2>
           <p className="text-lg text-stone-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Handpicked masterpieces that embody our commitment to exceptional craftsmanship and timeless beauty.'}
+            {content?.description || "Sélectionnés avec soin par notre équipe : les incontournables du moment."}
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function JewelryFeaturedProductsSection({ products = [], content,
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center border-2 border-yellow-600 text-yellow-600 px-10 py-4 font-medium uppercase text-sm hover:bg-yellow-600 hover:text-white transition-all duration-300"
           >
-            <span>View All Pieces</span>
+            <span>Voir tous les produits</span>
             <svg className="w-4 h-4 ml-3" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

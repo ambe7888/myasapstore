@@ -119,10 +119,10 @@ export default function JewelryProfile({
                 <Crown className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl md:text-4xl font-serif text-gray-800 mb-2 tracking-wide">
-                Account Settings
+                Paramètres du compte
               </h1>
               <p className="text-gray-600 font-light text-base max-w-lg mx-auto leading-relaxed">
-                Keep your information up to date for the best shopping experience
+                Gardez vos informations à jour pour une meilleure expérience d'achat
               </p>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function JewelryProfile({
                         </h2>
                         <p className="text-yellow-200 flex items-center text-sm">
                           <Gem className="w-3 h-3 mr-1" />
-                          Valued Customer
+                          Cher client
                         </p>
                       </div>
                     </div>
@@ -171,7 +171,7 @@ export default function JewelryProfile({
                     >
                       <div className="flex items-center">
                         <Edit3 className="w-4 h-4 mr-2" />
-                        Personal Information
+                        Informations personnelles
                       </div>
                     </button>
                     <button
@@ -184,7 +184,7 @@ export default function JewelryProfile({
                     >
                       <div className="flex items-center">
                         <Lock className="w-4 h-4 mr-2" />
-                        Change Password
+                        Changer le mot de passe
                       </div>
                     </button>
                   </nav>
@@ -204,8 +204,8 @@ export default function JewelryProfile({
                                 <User className="w-5 h-5 text-yellow-600" />
                               </div>
                               <div>
-                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Personal Details</h3>
-                                <p className="text-sm text-gray-500 mt-1">Your basic information for account identification</p>
+                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Informations personnelles</h3>
+                                <p className="text-sm text-gray-500 mt-1">Vos informations pour identifier votre compte</p>
                               </div>
                             </div>
                           </div>
@@ -247,7 +247,7 @@ export default function JewelryProfile({
                             
                             <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
                               <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Date of Birth
+                                Date de naissance
                               </label>
                               <div className="relative">
                                 <input
@@ -269,11 +269,11 @@ export default function JewelryProfile({
                                 onChange={(e) => profileForm.setData('gender', e.target.value)}
                                 className="w-full px-4 py-3 bg-white border-2 border-yellow-200 rounded-lg focus:outline-none focus:border-yellow-500 transition-colors font-medium text-gray-800"
                               >
-                                <option value="">Select Gender</option>
+                                <option value="">Sélectionnez votre genre</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
-                                <option value="prefer_not_to_say">Prefer not to say</option>
+                                <option value="prefer_not_to_say">Je préfère ne pas répondre</option>
                               </select>
                             </div>
                           </div>
@@ -287,8 +287,8 @@ export default function JewelryProfile({
                                 <Mail className="w-5 h-5 text-blue-600" />
                               </div>
                               <div>
-                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Contact Details</h3>
-                                <p className="text-sm text-gray-500 mt-1">How we can reach you for order updates and promotions</p>
+                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Coordonnées</h3>
+                                <p className="text-sm text-gray-500 mt-1">Comment nous pouvons vous joindre pour le suivi de vos commandes et nos promotions</p>
                               </div>
                             </div>
                           </div>
@@ -334,8 +334,8 @@ export default function JewelryProfile({
                                 <MapPin className="w-5 h-5 text-purple-600" />
                               </div>
                               <div>
-                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Shipping Address</h3>
-                                <p className="text-sm text-gray-500 mt-1">Default delivery address for your jewelry orders</p>
+                                <h3 className="text-xl font-serif text-gray-800 tracking-wide">Adresse de livraison</h3>
+                                <p className="text-sm text-gray-500 mt-1">Adresse de livraison par défaut pour vos commandes</p>
                               </div>
                             </div>
                           </div>
@@ -343,7 +343,7 @@ export default function JewelryProfile({
                           <div className="space-y-6">
                             <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
                               <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Street Address
+                                Adresse
                               </label>
                               <div className="relative">
                                 <input
@@ -359,7 +359,7 @@ export default function JewelryProfile({
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                               <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
                                 <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                  City
+                                  Ville
                                 </label>
                                 <input
                                   type="text"
@@ -396,7 +396,7 @@ export default function JewelryProfile({
                             
                             <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
                               <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                                Country
+                                Pays
                               </label>
                               <select
                                 value={profileForm.data.country}
@@ -423,7 +423,7 @@ export default function JewelryProfile({
                               className="flex items-center justify-center bg-yellow-600 text-white px-6 py-3 font-medium text-sm hover:bg-yellow-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                               <Save className="w-4 h-4 mr-2" />
-                              {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                              {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                             </button>
                           </div>
                         </div>
@@ -443,7 +443,7 @@ export default function JewelryProfile({
                           </div>
                           <div>
                             <h3 className="text-xl font-serif text-gray-800 tracking-wide">Security Settings</h3>
-                            <p className="text-sm text-gray-500 mt-1">Keep your account secure with a strong password</p>
+                            <p className="text-sm text-gray-500 mt-1">Protégez votre compte avec un mot de passe solide</p>
                           </div>
                         </div>
                       </div>
@@ -453,7 +453,7 @@ export default function JewelryProfile({
                       <form onSubmit={handlePasswordSubmit} className="space-y-6">
                         <div className="bg-red-50 rounded-xl p-6 border border-red-200">
                           <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                            Current Password
+                            Mot de passe actuel
                           </label>
                           <div className="relative">
                             <input
@@ -478,7 +478,7 @@ export default function JewelryProfile({
                         
                         <div className="bg-red-50 rounded-xl p-6 border border-red-200">
                           <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                            New Password
+                            Nouveau mot de passe
                           </label>
                           <div className="relative">
                             <input
@@ -503,7 +503,7 @@ export default function JewelryProfile({
                         
                         <div className="bg-red-50 rounded-xl p-6 border border-red-200">
                           <label className="block text-sm font-medium text-gray-600 mb-3 uppercase tracking-wider">
-                            Confirm New Password
+                            Confirmer le nouveau mot de passe
                           </label>
                           <div className="relative">
                             <input
@@ -530,7 +530,7 @@ export default function JewelryProfile({
                             className="flex items-center justify-center bg-red-600 text-white px-6 py-3 font-medium text-sm hover:bg-red-700 transition-all duration-200 rounded-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <Lock className="w-4 h-4 mr-2" />
-                            {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                            {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                           </button>
                         </div>
                       </form>

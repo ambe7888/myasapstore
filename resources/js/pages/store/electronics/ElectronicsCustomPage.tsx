@@ -56,7 +56,7 @@ export default function ElectronicsCustomPage({
               </div>
               <h1 className="text-5xl font-bold mb-6">{page.name}</h1>
               <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                Important information and policies for our valued customers
+                Informations importantes et conditions pour nos clients
               </p>
             </div>
           </section>
@@ -75,10 +75,10 @@ export default function ElectronicsCustomPage({
                   <div className="mt-12 pt-8 border-t border-gray-200">
                     <div className="bg-blue-50 rounded-xl p-6">
                       <h3 className="text-xl font-bold text-gray-900 mb-4">
-                        Need More Information?
+                        Besoin de plus d'informations ?
                       </h3>
                       <p className="text-gray-600 mb-6">
-                        If you have any questions about this page or need additional clarification, 
+                        Pour toute question sur cette page ou pour plus de précisions, 
                         our customer support team is here to help.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-4">
@@ -86,13 +86,13 @@ export default function ElectronicsCustomPage({
                           href="/contact"
                           className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
                         >
-                          Contact Support
+                          Contacter le support
                         </a>
                         <a
                           href={generateStoreUrl('store.home', store)}
                           className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-300"
                         >
-                          Back to Store
+                          Retour à la boutique
                         </a>
                       </div>
                     </div>

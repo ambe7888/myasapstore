@@ -44,10 +44,10 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -70,15 +70,15 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                   {content?.title || 'Wooden Craft Stories'}
                 </h2>
                 <p className="text-lg lg:text-xl text-slate-700 mb-10 leading-relaxed">
-                  {content?.subtitle || 'Join our community of furniture lovers and get exclusive access to new collections, design tips, and artisan stories.'}
+                  {content?.subtitle || "Rejoignez notre communauté et recevez nos nouveautés et nos offres exclusives."}
                 </p>
 
                 {/* Benefits */}
                 <div className="space-y-3">
                   {(content?.benefits || [
-                    { text: 'New handcrafted arrivals' },
+                    { text: "Nouveautés" },
                     { text: 'Design tips & inspiration' }, 
-                    { text: 'Exclusive member offers' }
+                    { text: "Offres exclusives" }
                   ]).map((benefit, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-amber-600 rounded-full flex-shrink-0"></div>
@@ -130,13 +130,13 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                           </svg>
-                          {content?.button_text || 'Join Community'}
+                          {content?.button_text || "Je m'abonne"}
                         </>
                       )}
                     </button>
 
                     <p className="text-sm text-slate-600 text-center">
-                      {content?.privacy_text || 'Unsubscribe anytime. Your privacy is protected.'}
+                      {content?.privacy_text || "Désabonnement possible à tout moment."}
                     </p>
                     
                     {error && (
@@ -152,9 +152,9 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">Welcome! 🎉</h3>
+                    <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">Bienvenue ! 🎉</h3>
                     <p className="text-lg text-slate-700">
-                      You're now part of our wooden craft community. Check your inbox!
+                      Vous faites maintenant partie de notre communauté. Consultez votre boîte mail !
                     </p>
                   </div>
                 )}

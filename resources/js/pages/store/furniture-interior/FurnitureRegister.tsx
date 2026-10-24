@@ -64,15 +64,15 @@ export default function FurnitureRegister({
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-800 to-amber-900 rounded-2xl mb-6 shadow-lg">
                   <Sofa className="w-10 h-10 text-amber-100" />
                 </div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-2">Join Our Family</h1>
-                <p className="text-slate-600">Create your furniture account</p>
+                <h1 className="text-3xl font-bold text-slate-900 mb-2">Rejoignez-nous</h1>
+                <p className="text-slate-600">Créez votre compte</p>
               </div>
               
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-amber-100">
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Full Name
+                      Nom complet
                     </label>
                     <div className="relative">
                       <input
@@ -84,7 +84,7 @@ export default function FurnitureRegister({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Enter your full name"
+                        placeholder="Saisissez votre nom complet"
                         required
                       />
                       <User className="absolute right-3 top-3 h-5 w-5 text-amber-600" />
@@ -114,7 +114,7 @@ export default function FurnitureRegister({
                   
                   <div>
                     <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -126,7 +126,7 @@ export default function FurnitureRegister({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Create password"
+                        placeholder="Créer un mot de passe"
                         required
                       />
                       <div className="absolute right-3 top-3 flex items-center space-x-2">
@@ -145,7 +145,7 @@ export default function FurnitureRegister({
 
                   <div>
                     <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Confirm Password
+                      Confirmer le mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -157,7 +157,7 @@ export default function FurnitureRegister({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Confirm password"
+                        placeholder="Confirmer le mot de passe"
                         required
                       />
                       <div className="absolute right-3 top-3 flex items-center space-x-2">
@@ -186,11 +186,11 @@ export default function FurnitureRegister({
                     <label htmlFor="terms" className="ml-2 text-sm text-slate-700">
                       I agree to the{' '}
                       <Link href="/terms" className="text-yellow-800 hover:text-amber-900 font-semibold">
-                        Terms
+                        Conditions
                       </Link>{' '}
                       and{' '}
                       <Link href="/privacy" className="text-yellow-800 hover:text-amber-900 font-semibold">
-                        Privacy Policy
+                        Politique de confidentialité
                       </Link>
                     </label>
                   </div>
@@ -201,7 +201,7 @@ export default function FurnitureRegister({
                     disabled={processing}
                     className="w-full bg-yellow-800 text-white py-3 px-4 rounded-xl font-semibold hover:bg-amber-900 focus:outline-none focus:ring-4 focus:ring-amber-300 transition-all duration-200 disabled:opacity-50 shadow-lg mt-6"
                   >
-                    {processing ? 'Creating Account...' : 'Create Account'}
+                    {processing ? "Création du compte..." : "Créer un compte"}
                   </button>
                 </form>
                 
@@ -212,7 +212,7 @@ export default function FurnitureRegister({
                       href={generateStoreUrl('store.login', store)}
                       className="font-semibold text-yellow-800 hover:text-amber-900"
                     >
-                      Sign In
+                      Se connecter
                     </Link>
                   </p>
                 </div>

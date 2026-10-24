@@ -35,12 +35,12 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
             
             {/* Title */}
             <h1 className={`text-4xl lg:text-6xl font-light text-gray-900 leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Discover Your Signature Scent'}
+              {content?.title || "Découvrez notre sélection"}
             </h1>
             
             {/* Subtitle */}
             <p className={`text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.subtitle || 'Immerse yourself in our curated collection of luxury fragrances, where each bottle tells a unique story of elegance and sophistication.'}
+              {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
             </p>
             
             {/* Buttons */}
@@ -49,7 +49,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="bg-purple-800 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-900 transition-colors duration-300 text-center"
               >
-                {content?.button_text || 'Explore Fragrances'}
+                {content?.button_text || "Découvrir la collection"}
               </a>
               <a 
                 href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}
@@ -71,7 +71,7 @@ export default function PerfumeHeroSection({ content }: PerfumeHeroSectionProps)
               <div className="relative bg-white p-8 rounded-t-full shadow-2xl">
                 <img 
                   src={getImageUrl(content?.image || '/storage/media/28/home-banner-perfume-fragrances.png')}
-                  alt="Luxury Perfume Collection" 
+                  alt="Notre collection" 
                   className="w-full h-96 md:h-[500px] object-cover rounded-t-full"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'https://placehold.co/400x500/fafaf9/7c3aed?text=Luxury+Perfume';

@@ -117,7 +117,7 @@ function PerfumeCheckout({
   
   // Checkout steps
   const steps = [
-    { id: 'shipping', name: 'Delivery', icon: Package },
+    { id: 'shipping', name: "Livraison", icon: Package },
     { id: 'review', name: 'Review', icon: ShoppingCart },
     { id: 'payment', name: 'Payment', icon: CreditCard },
   ];
@@ -314,7 +314,7 @@ function PerfumeCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -338,7 +338,7 @@ function PerfumeCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -350,11 +350,11 @@ function PerfumeCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -499,11 +499,11 @@ function PerfumeCheckout({
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Secure Checkout
+                Paiement sécurisé
               </h1>
               
               <p className="text-xl text-gray-600 font-light leading-relaxed">
-                Complete your fragrance journey with confidence
+                Finalisez votre achat en toute confiance
               </p>
             </div>
           </div>
@@ -676,7 +676,7 @@ function PerfumeCheckout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-gray-300'
                             }`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -706,7 +706,7 @@ function PerfumeCheckout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-gray-300'
                             }`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -740,7 +740,7 @@ function PerfumeCheckout({
                       
                       {/* Shipping Methods */}
                       <div className="mt-8">
-                        <h3 className="text-xl font-medium text-purple-800 mb-4">Delivery Method</h3>
+                        <h3 className="text-xl font-medium text-purple-800 mb-4">Mode de livraison</h3>
                         
                         <div className="space-y-3">
                           {shippingMethods.length > 0 ? (
@@ -767,7 +767,7 @@ function PerfumeCheckout({
                                         <div>
                                           <span className="block text-sm font-medium text-gray-900">{method.name}</span>
                                           <span className="block text-sm text-gray-600">
-                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                           </span>
                                         </div>
                                         <span className="text-lg font-medium text-purple-800">
@@ -826,7 +826,7 @@ function PerfumeCheckout({
                           rows={4}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Any special delivery instructions or fragrance preferences..."
+                          placeholder="Instructions particulières pour la livraison..."
                           className="block w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                         />
                       </div>
@@ -836,7 +836,7 @@ function PerfumeCheckout({
                           type="submit"
                           className="bg-purple-800 text-white px-8 py-4 rounded-full font-medium hover:bg-purple-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </form>
@@ -849,14 +849,14 @@ function PerfumeCheckout({
                     <div className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-4 -mx-8 -mt-8 mb-8 rounded-t-3xl">
                       <div className="flex items-center">
                         <ShoppingCart className="h-6 w-6 text-amber-400 mr-3" />
-                        <h2 className="text-2xl font-light">Review Your Order</h2>
+                        <h2 className="text-2xl font-light">Vérifiez votre commande</h2>
                       </div>
                     </div>
                     
                     <div className="space-y-8">
                       {/* Order Items */}
                       <div>
-                        <h3 className="text-xl font-medium text-purple-800 mb-4">Fragrance Collection</h3>
+                        <h3 className="text-xl font-medium text-purple-800 mb-4">Notre collection</h3>
                         
                         <div className="space-y-4">
                           {cartItems.map((item) => {
@@ -893,22 +893,22 @@ function PerfumeCheckout({
                         <div className="bg-stone-50 p-6 rounded-xl border border-purple-100">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <p className="text-sm font-medium text-purple-800 mb-2">Contact Details</p>
+                              <p className="text-sm font-medium text-purple-800 mb-2">Coordonnées</p>
                               <p className="text-gray-900">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-gray-900">{shippingEmail}</p>
                               <p className="text-gray-900">{shippingPhone}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-medium text-purple-800 mb-2">Delivery Address</p>
+                              <p className="text-sm font-medium text-purple-800 mb-2">Adresse de livraison</p>
                               <p className="text-gray-900">{shippingStreet}</p>
                               <p className="text-gray-900">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                               <p className="text-gray-900">{selectedCountryName}</p>
                             </div>
                           </div>
                           <div className="mt-6 pt-6 border-t border-purple-200">
-                            <p className="text-sm font-medium text-purple-800 mb-2">Delivery Method</p>
+                            <p className="text-sm font-medium text-purple-800 mb-2">Mode de livraison</p>
                             <p className="text-gray-900">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                             </p>
                           </div>
                         </div>
@@ -917,7 +917,7 @@ function PerfumeCheckout({
                       {/* Order Notes */}
                       {orderNotes && (
                         <div>
-                          <h3 className="text-xl font-medium text-purple-800 mb-4">Special Instructions</h3>
+                          <h3 className="text-xl font-medium text-purple-800 mb-4">Instructions spéciales</h3>
                           
                           <div className="bg-stone-50 p-6 rounded-xl border border-purple-100">
                             <p className="text-gray-900">{orderNotes}</p>
@@ -931,14 +931,14 @@ function PerfumeCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border-2 border-purple-800 text-purple-800 px-6 py-3 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-all duration-300"
                         >
-                          Back to Delivery
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-purple-800 hover:bg-purple-900 text-white px-8 py-4 rounded-full font-medium transition-colors"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -969,7 +969,7 @@ function PerfumeCheckout({
                             className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-purple-300 rounded"
                           />
                           <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-gray-900 font-medium">
-                            Same as delivery address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -1000,8 +1000,8 @@ function PerfumeCheckout({
                                   className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-purple-300"
                                 />
                                 <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                  <span className="block text-sm font-medium text-gray-900">Cash on Delivery</span>
-                                  <span className="block text-sm text-gray-600">Pay when your fragrances are delivered</span>
+                                  <span className="block text-sm font-medium text-gray-900">Paiement à la livraison</span>
+                                  <span className="block text-sm text-gray-600">Payez à la livraison de votre commande</span>
                                 </label>
                               </div>
                             </div>
@@ -1023,7 +1023,7 @@ function PerfumeCheckout({
                                 />
                                 <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-medium text-gray-900">WhatsApp</span>
-                                  <span className="block text-sm text-gray-600">Complete your fragrance order via WhatsApp</span>
+                                  <span className="block text-sm text-gray-600">Finalisez votre commande via WhatsApp</span>
                                 </label>
                               </div>
                             </div>
@@ -1045,7 +1045,7 @@ function PerfumeCheckout({
                                 />
                                 <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-medium text-gray-900">Telegram</span>
-                                  <span className="block text-sm text-gray-600">Complete your fragrance order via Telegram</span>
+                                  <span className="block text-sm text-gray-600">Finalisez votre commande via Telegram</span>
                                 </label>
                               </div>
                             </div>
@@ -1101,7 +1101,7 @@ function PerfumeCheckout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-gray-600">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1109,7 +1109,7 @@ function PerfumeCheckout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mt-4 p-4 bg-purple-50 border-2 border-purple-200 rounded-xl">
-                                    <h4 className="text-sm font-medium text-purple-800 mb-2">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-medium text-purple-800 mb-2">Détails du virement bancaire</h4>
                                     <div className="text-sm text-purple-700 whitespace-pre-line font-mono">
                                       {config.details}
                                     </div>
@@ -1123,7 +1123,7 @@ function PerfumeCheckout({
                         {/* WhatsApp Number Input */}
                         {paymentMethod === 'whatsapp' && (
                           <div className="mt-6">
-                            <h3 className="text-xl font-medium text-purple-800 mb-4">WhatsApp Details</h3>
+                            <h3 className="text-xl font-medium text-purple-800 mb-4">Détails WhatsApp</h3>
                             
                             <div>
                               <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Number *</label>
@@ -1153,7 +1153,7 @@ function PerfumeCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border-2 border-purple-800 text-purple-800 px-6 py-3 rounded-full font-medium hover:bg-purple-800 hover:text-white transition-all duration-300"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1221,7 +1221,7 @@ function PerfumeCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter code"
+                          placeholder="Saisissez le code"
                           className="flex-grow px-3 py-2 border border-purple-600 bg-purple-800 text-white rounded-l-lg focus:outline-none focus:border-amber-400"
                           disabled={couponApplied}
                         />
@@ -1257,10 +1257,10 @@ function PerfumeCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 text-sm font-medium rounded-r-lg transition-colors ${
@@ -1269,11 +1269,11 @@ function PerfumeCheckout({
                               : 'bg-amber-400 text-purple-900 hover:bg-amber-500'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-400 font-medium">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-400 font-medium">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1311,7 +1311,7 @@ function PerfumeCheckout({
                   {/* Secure Checkout */}
                   <div className="mt-6 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-amber-400 mr-2" />
-                    <p className="text-xs text-purple-200 font-medium">Secure & Protected Checkout</p>
+                    <p className="text-xs text-purple-200 font-medium">Paiement sécurisé et protégé</p>
                   </div>
                 </div>
               </div>

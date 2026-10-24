@@ -116,7 +116,7 @@ function JewelryCheckout({
   };
   
   const steps = [
-    { id: 'shipping', name: 'Delivery', icon: MapPin },
+    { id: 'shipping', name: "Livraison", icon: MapPin },
     { id: 'review', name: 'Review', icon: Check },
     { id: 'payment', name: 'Payment', icon: Shield },
   ];
@@ -223,12 +223,12 @@ function JewelryCheckout({
     if (!shippingFirstName) newErrors.shippingFirstName = "Le prénom est requis";
     if (!shippingLastName) newErrors.shippingLastName = "Le nom est requis";
     if (!shippingEmail) newErrors.shippingEmail = "L'adresse e-mail est requise";
-    else if (!/\S+@\S+\.\S+/.test(shippingEmail)) newErrors.shippingEmail = 'Email is invalid';
+    else if (!/\S+@\S+\.\S+/.test(shippingEmail)) newErrors.shippingEmail = "L'adresse e-mail n'est pas valide";
     if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
-    if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
+    if (!shippingStreet) newErrors.shippingStreet = "L'adresse est obligatoire";
     if (!shippingCity) newErrors.shippingCity = 'La ville est requise';
-    if (!shippingState) newErrors.shippingState = 'State is required';
-    if (!shippingZip) newErrors.shippingZip = 'ZIP code is required';
+    if (!shippingState) newErrors.shippingState = "La région est obligatoire";
+    if (!shippingZip) newErrors.shippingZip = "Le code postal est obligatoire";
     
     if (Object.keys(newErrors).length > 0) {
       setShippingErrors(newErrors);
@@ -250,7 +250,7 @@ function JewelryCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -261,11 +261,11 @@ function JewelryCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -402,11 +402,11 @@ function JewelryCheckout({
                 <Gem className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-5xl font-light text-gray-800 mb-6 tracking-wide">
-                Luxury Checkout
+                Finaliser la commande
               </h1>
               <div className="w-24 h-px bg-yellow-500 mx-auto mb-6"></div>
               <p className="text-gray-600 font-light text-lg max-w-2xl mx-auto leading-relaxed">
-                Complete your exquisite jewelry purchase with confidence
+                Finalisez votre achat en toute confiance
               </p>
             </div>
           </div>
@@ -490,7 +490,7 @@ function JewelryCheckout({
                           <div>
                             <h2 className="text-2xl font-light text-gray-800 tracking-wide">Informations de livraison</h2>
                             <p className="text-gray-600 font-light text-sm mt-1">
-                              Where shall we deliver your exquisite pieces?
+                              Où devons-nous livrer votre commande ?
                             </p>
                           </div>
                         </div>
@@ -499,7 +499,7 @@ function JewelryCheckout({
                         <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
                           <div className="flex items-center text-sm text-yellow-700">
                             <Clock className="w-4 h-4 mr-2" />
-                            <span>Step 1 of 3 - This should take about 2 minutes</span>
+                            <span>Étape 1 sur 3 - Cela prend environ 2 minutes</span>
                           </div>
                         </div>
                       </div>
@@ -517,7 +517,7 @@ function JewelryCheckout({
                               className={`w-full px-4 py-3 rounded-lg border-2 ${
                                 shippingErrors.shippingFirstName ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
                               } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
-                              placeholder="Enter your first name"
+                              placeholder="Saisissez votre prénom"
                             />
                             {shippingErrors.shippingFirstName && (
                               <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingFirstName}</p>
@@ -533,7 +533,7 @@ function JewelryCheckout({
                               className={`w-full px-4 py-3 rounded-lg border-2 ${
                                 shippingErrors.shippingLastName ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
                               } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
-                              placeholder="Enter your last name"
+                              placeholder="Saisissez votre nom"
                             />
                             {shippingErrors.shippingLastName && (
                               <p className="mt-2 text-sm text-red-600">{shippingErrors.shippingLastName}</p>
@@ -604,7 +604,7 @@ function JewelryCheckout({
                                 shippingErrors.shippingState ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
                               } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
                             >
-                              <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                              <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                               {states.map((state: any) => (
                                 <option key={state.id} value={state.id}>
                                   {state.name}
@@ -632,7 +632,7 @@ function JewelryCheckout({
                                 shippingErrors.shippingCity ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-yellow-500'
                               } focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300`}
                             >
-                              <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                              <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                               {cities.map((city: any) => (
                                 <option key={city.id} value={city.id}>
                                   {city.name}
@@ -667,7 +667,7 @@ function JewelryCheckout({
                         <div className="pt-8 border-t border-gray-200">
                           <div className="flex items-center mb-6">
                             <Truck className="w-5 h-5 text-yellow-600 mr-3" />
-                            <h3 className="text-xl font-light text-gray-800 tracking-wide">Delivery Options</h3>
+                            <h3 className="text-xl font-light text-gray-800 tracking-wide">Options de livraison</h3>
                           </div>
                           
                           <div className="space-y-4">
@@ -699,12 +699,12 @@ function JewelryCheckout({
                                               <span className="text-base font-medium text-gray-800">{method.name}</span>
                                               {shippingCost === 0 && (
                                                 <span className="ml-2 px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">
-                                                  FREE
+                                                  GRATUIT
                                                 </span>
                                               )}
                                             </div>
                                             <span className="block text-sm text-gray-600 mt-1">
-                                              {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                              {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                             </span>
                                             {method.min_order_amount > 0 && (
                                               <span className="block text-xs text-gray-500 mt-2 bg-gray-50 px-2 py-1 rounded">
@@ -728,7 +728,7 @@ function JewelryCheckout({
                             ) : (
                               <div className="text-center py-12 text-gray-500">
                                 <MapPin className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                                <p className="font-light">No delivery options available</p>
+                                <p className="font-light">Aucune option de livraison disponible</p>
                               </div>
                             )}
                           </div>
@@ -772,10 +772,10 @@ function JewelryCheckout({
                             rows={3}
                             value={orderNotes}
                             onChange={(e) => setOrderNotes(e.target.value)}
-                            placeholder="Gift message, special delivery instructions, or any other notes..."
+                            placeholder="Message cadeau, instructions de livraison ou autres remarques..."
                             className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-yellow-500 focus:outline-none transition-all duration-200 bg-white hover:border-yellow-300 resize-none"
                           />
-                          <p className="text-xs text-gray-500 mt-2">This information will be shared with our delivery team</p>
+                          <p className="text-xs text-gray-500 mt-2">Ces informations seront transmises à notre équipe de livraison</p>
                         </div>
                         
                         <div className="flex justify-between items-center pt-8">
@@ -793,7 +793,7 @@ function JewelryCheckout({
                                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                             }`}
                           >
-                            Review Order
+                            Vérifier la commande
                             <ChevronRight className="w-4 h-4 ml-2" />
                           </button>
                         </div>
@@ -810,9 +810,9 @@ function JewelryCheckout({
                             <Check className="w-5 h-5 text-yellow-600" />
                           </div>
                           <div>
-                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Review Your Order</h2>
+                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Vérifiez votre commande</h2>
                             <p className="text-gray-600 font-light text-sm mt-1">
-                              Please review your luxury selection before finalizing
+                              Vérifiez votre commande avant de la finaliser
                             </p>
                           </div>
                         </div>
@@ -820,7 +820,7 @@ function JewelryCheckout({
                         <div className="bg-green-50 rounded-lg p-4 border border-green-200">
                           <div className="flex items-center text-sm text-green-700">
                             <Check className="w-4 h-4 mr-2" />
-                            <span>Delivery information completed - Almost there!</span>
+                            <span>Informations de livraison complétées - Presque terminé !</span>
                           </div>
                         </div>
                       </div>
@@ -828,7 +828,7 @@ function JewelryCheckout({
                       <div className="space-y-8">
                         {/* Order Items */}
                         <div>
-                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Your Selection</h3>
+                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Votre sélection</h3>
                           
                           <div className="space-y-4">
                             {cartItems.map((item) => {
@@ -862,7 +862,7 @@ function JewelryCheckout({
                         
                         {/* Shipping Information */}
                         <div className="pt-8 border-t border-yellow-200">
-                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Delivery Details</h3>
+                          <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Détails de livraison</h3>
                           
                           <div className="bg-yellow-50/50 rounded-xl p-6 border border-yellow-200">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -880,9 +880,9 @@ function JewelryCheckout({
                               </div>
                             </div>
                             <div className="mt-6 pt-6 border-t border-yellow-300">
-                              <p className="text-sm font-light text-gray-600 mb-2 tracking-wide uppercase">Delivery Method</p>
+                              <p className="text-sm font-light text-gray-600 mb-2 tracking-wide uppercase">Mode de livraison</p>
                               <p className="text-gray-800 font-light">
-                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No delivery method selected'}
+                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                               </p>
                             </div>
                           </div>
@@ -890,7 +890,7 @@ function JewelryCheckout({
                         
                         {orderNotes && (
                           <div className="pt-8 border-t border-yellow-200">
-                            <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Special Instructions</h3>
+                            <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Instructions spéciales</h3>
                             <div className="bg-yellow-50/50 rounded-xl p-6 border border-yellow-200">
                               <p className="text-gray-800 font-light">{orderNotes}</p>
                             </div>
@@ -903,14 +903,14 @@ function JewelryCheckout({
                             onClick={() => setCurrentStep('shipping')}
                             className="border-2 border-yellow-300 text-gray-700 px-8 py-4 rounded-xl font-medium hover:border-yellow-500 transition-colors"
                           >
-                            Back to Delivery
+                            Retour à la livraison
                           </button>
                           <button
                             type="button"
                             onClick={() => setCurrentStep('payment')}
                             className="bg-yellow-600 text-white px-10 py-4 rounded-xl font-medium hover:bg-yellow-700 transition-colors shadow-lg"
                           >
-                            Continue to Payment
+                            Continuer vers le paiement
                           </button>
                         </div>
                       </div>
@@ -926,9 +926,9 @@ function JewelryCheckout({
                             <CreditCard className="w-5 h-5 text-yellow-600" />
                           </div>
                           <div>
-                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Secure Payment</h2>
+                            <h2 className="text-2xl font-light text-gray-800 tracking-wide">Paiement sécurisé</h2>
                             <p className="text-gray-600 font-light text-sm mt-1">
-                              Complete your purchase with confidence
+                              Finalisez votre achat en toute confiance
                             </p>
                           </div>
                         </div>
@@ -936,7 +936,7 @@ function JewelryCheckout({
                         <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
                           <div className="flex items-center text-sm text-blue-700">
                             <Shield className="w-4 h-4 mr-2" />
-                            <span>Your payment information is protected with 256-bit SSL encryption</span>
+                            <span>Vos informations de paiement sont protégées par un cryptage SSL 256 bits</span>
                           </div>
                         </div>
                       </div>
@@ -955,7 +955,7 @@ function JewelryCheckout({
                               className="h-5 w-5 text-yellow-600 focus:ring-yellow-500 border-yellow-300 rounded"
                             />
                             <label htmlFor="same-as-shipping" className="ml-3 text-gray-800 font-light">
-                              Same as delivery address
+                              Identique à l'adresse de livraison
                             </label>
                           </div>
                           
@@ -986,8 +986,8 @@ function JewelryCheckout({
                                     className="h-5 w-5 text-yellow-600 focus:ring-yellow-500 border-yellow-300"
                                   />
                                   <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                    <span className="block text-lg font-light text-gray-800">Cash on Delivery</span>
-                                    <span className="block text-sm text-gray-600 mt-1">Pay when your jewelry is delivered</span>
+                                    <span className="block text-lg font-light text-gray-800">Paiement à la livraison</span>
+                                    <span className="block text-sm text-gray-600 mt-1">Payez à la livraison de votre commande</span>
                                   </label>
                                 </div>
                               </div>
@@ -1009,7 +1009,7 @@ function JewelryCheckout({
                                   />
                                   <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-lg font-light text-gray-800">WhatsApp</span>
-                                    <span className="block text-sm text-gray-600 mt-1">Complete payment via WhatsApp</span>
+                                    <span className="block text-sm text-gray-600 mt-1">Finaliser le paiement via WhatsApp</span>
                                   </label>
                                 </div>
                               </div>
@@ -1031,7 +1031,7 @@ function JewelryCheckout({
                                   />
                                   <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                     <span className="block text-lg font-light text-gray-800">Telegram</span>
-                                    <span className="block text-sm text-gray-600 mt-1">Complete payment via Telegram</span>
+                                    <span className="block text-sm text-gray-600 mt-1">Finaliser le paiement via Telegram</span>
                                   </label>
                                 </div>
                               </div>
@@ -1087,7 +1087,7 @@ function JewelryCheckout({
                                         {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                       </span>
                                       <span className="block text-sm text-gray-600 mt-1">
-                                        {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                        {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                       </span>
                                     </label>
                                   </div>
@@ -1095,7 +1095,7 @@ function JewelryCheckout({
                                   {/* Bank Transfer Details */}
                                   {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                     <div className="mx-6 mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                      <h4 className="text-sm font-medium text-blue-900 mb-2">Bank Transfer Details</h4>
+                                      <h4 className="text-sm font-medium text-blue-900 mb-2">Détails du virement bancaire</h4>
                                       <div className="text-sm text-blue-800 whitespace-pre-line">
                                         {config.details}
                                       </div>
@@ -1110,7 +1110,7 @@ function JewelryCheckout({
                         {/* WhatsApp Number Input */}
                         {paymentMethod === 'whatsapp' && (
                           <div className="pt-8 border-t border-yellow-200">
-                            <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">WhatsApp Details</h3>
+                            <h3 className="text-xl font-light text-gray-800 mb-6 tracking-wide">Détails WhatsApp</h3>
                             
                             <div>
                               <label className="block text-sm font-light text-gray-700 mb-3 tracking-wide">
@@ -1141,7 +1141,7 @@ function JewelryCheckout({
                             onClick={() => setCurrentStep('review')}
                             className="border-2 border-yellow-300 text-gray-700 px-8 py-4 rounded-xl font-medium hover:border-yellow-500 transition-colors"
                           >
-                            Back to Review
+                            Retour au récapitulatif
                           </button>
                           <button
                             type="button"
@@ -1216,7 +1216,7 @@ function JewelryCheckout({
                           type="text"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter promo code"
+                          placeholder="Saisissez le code promo"
                           className="flex-grow px-3 py-2 bg-white/20 text-white placeholder-yellow-200 border border-yellow-400 rounded-l-lg focus:outline-none focus:border-yellow-300 text-sm"
                           disabled={couponApplied}
                         />
@@ -1252,7 +1252,7 @@ function JewelryCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             }
                           }}
@@ -1262,7 +1262,7 @@ function JewelryCheckout({
                               : 'bg-white text-yellow-600 hover:bg-yellow-50'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
@@ -1315,7 +1315,7 @@ function JewelryCheckout({
                       </div>
                       <div className="flex flex-col items-center">
                         <Shield className="h-5 w-5 text-yellow-200 mb-1" />
-                        <p className="text-xs text-yellow-200">Safe Payment</p>
+                        <p className="text-xs text-yellow-200">Paiement sécurisé</p>
                       </div>
                     </div>
                   </div>

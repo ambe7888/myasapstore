@@ -26,7 +26,7 @@ export default function StoreMaintenance({ store }: StoreMaintenanceProps) {
                         </div>
                         
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            We'll Be Right Back!
+                            Nous revenons très vite !
                         </h1>
                         
                         <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
@@ -36,7 +36,7 @@ export default function StoreMaintenance({ store }: StoreMaintenanceProps) {
                         </div>
                         
                         <p className="text-gray-600 mb-8 leading-relaxed">
-                            We're working hard to improve your shopping experience. Our team is making some exciting updates and we'll be back online shortly. Thank you for your patience!
+                            Nous améliorons votre expérience d'achat. Notre équipe effectue quelques mises à jour et nous serons de retour très bientôt. Merci de votre patience !
                         </p>
                         
                         <Link
@@ -44,7 +44,7 @@ export default function StoreMaintenance({ store }: StoreMaintenanceProps) {
                             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                         >
                             <Home className="w-5 h-5 mr-2" />
-                            Go to Homepage
+                            Aller à l'accueil
                         </Link>
                     </div>
                 </div>

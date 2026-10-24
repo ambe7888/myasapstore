@@ -106,7 +106,7 @@ export default function CarsProfile({
                 </div>
                 <div>
                   <h1 className="text-5xl font-black tracking-wider">DRIVER PROFILE</h1>
-                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Account Management</div>
+                  <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Gestion du compte</div>
                 </div>
               </div>
               <div className="hidden md:flex items-center space-x-2">
@@ -116,7 +116,7 @@ export default function CarsProfile({
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Manage your automotive account and personal information
+              Gérez votre compte et vos informations personnelles
             </p>
           </div>
         </div>
@@ -139,14 +139,14 @@ export default function CarsProfile({
                         className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 font-bold tracking-wider uppercase transition-colors flex items-center justify-center"
                       >
                         <Edit3 className="h-5 w-5 mr-2" />
-                        {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                        {isEditing ? "Annuler la modification" : "Modifier le profil"}
                       </button>
                       <button 
                         onClick={() => setShowPasswordForm(!showPasswordForm)}
                         className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 font-bold tracking-wider uppercase transition-all flex items-center justify-center"
                       >
                         <Shield className="h-5 w-5 mr-2" />
-                        {showPasswordForm ? 'Cancel' : 'Change Password'}
+                        {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                       </button>
                     </div>
                   </div>
@@ -159,7 +159,7 @@ export default function CarsProfile({
                   <div className="bg-black text-white px-6 py-4">
                     <div className="flex items-center">
                       <User className="h-6 w-6 text-red-600 mr-3" />
-                      <h3 className="text-2xl font-black tracking-wider uppercase">Personal Details</h3>
+                      <h3 className="text-2xl font-black tracking-wider uppercase">Informations personnelles</h3>
                     </div>
                   </div>
                   <div className="p-8 space-y-6">
@@ -201,7 +201,7 @@ export default function CarsProfile({
                   <div className="bg-black text-white px-6 py-4">
                     <div className="flex items-center">
                       <Mail className="h-6 w-6 text-red-600 mr-3" />
-                      <h3 className="text-2xl font-black tracking-wider uppercase">Contact Info</h3>
+                      <h3 className="text-2xl font-black tracking-wider uppercase">Informations de contact</h3>
                     </div>
                   </div>
                   <div className="p-8 space-y-6">
@@ -222,7 +222,7 @@ export default function CarsProfile({
                         />
                       ) : (
                         <div className="bg-gray-50 p-4 border-2 border-gray-200">
-                          <span className="text-lg font-bold text-gray-900">{user.phone || 'Not provided'}</span>
+                          <span className="text-lg font-bold text-gray-900">{user.phone || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -235,13 +235,13 @@ export default function CarsProfile({
                 <div className="bg-black text-white px-6 py-4">
                   <div className="flex items-center">
                     <MapPin className="h-6 w-6 text-red-600 mr-3" />
-                    <h3 className="text-2xl font-black tracking-wider uppercase">Garage Address</h3>
+                    <h3 className="text-2xl font-black tracking-wider uppercase">Adresse</h3>
                   </div>
                 </div>
                 <div className="p-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Street Address</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Adresse</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -251,12 +251,12 @@ export default function CarsProfile({
                         />
                       ) : (
                         <div className="bg-gray-50 p-4 border-2 border-gray-200">
-                          <span className="text-lg font-bold text-gray-900">{user.address?.address || 'Not provided'}</span>
+                          <span className="text-lg font-bold text-gray-900">{user.address?.address || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">City</label>
+                      <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Ville</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -266,7 +266,7 @@ export default function CarsProfile({
                         />
                       ) : (
                         <div className="bg-gray-50 p-4 border-2 border-gray-200">
-                          <span className="text-lg font-bold text-gray-900">{user.address?.city || 'Not provided'}</span>
+                          <span className="text-lg font-bold text-gray-900">{user.address?.city || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -281,7 +281,7 @@ export default function CarsProfile({
                         />
                       ) : (
                         <div className="bg-gray-50 p-4 border-2 border-gray-200">
-                          <span className="text-lg font-bold text-gray-900">{user.address?.postal_code || 'Not provided'}</span>
+                          <span className="text-lg font-bold text-gray-900">{user.address?.postal_code || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -294,7 +294,7 @@ export default function CarsProfile({
                         className="bg-red-600 hover:bg-black text-white px-8 py-4 font-bold tracking-wider uppercase transition-colors disabled:opacity-50 flex items-center"
                       >
                         <Wrench className="h-5 w-5 mr-2" />
-                        {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                        {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                       </button>
                     </div>
                   )}
@@ -307,13 +307,13 @@ export default function CarsProfile({
                   <div className="bg-black text-white px-6 py-4">
                     <div className="flex items-center">
                       <Lock className="h-6 w-6 text-red-600 mr-3" />
-                      <h3 className="text-2xl font-black tracking-wider uppercase">Security Update</h3>
+                      <h3 className="text-2xl font-black tracking-wider uppercase">Mise à jour de sécurité</h3>
                     </div>
                   </div>
                   <div className="p-8">
                     <form onSubmit={handlePasswordSubmit} className="space-y-6">
                       <div>
-                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Current Password</label>
+                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Mot de passe actuel</label>
                         <input
                           type="password"
                           value={passwordForm.data.current_password}
@@ -324,7 +324,7 @@ export default function CarsProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">New Password</label>
+                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Nouveau mot de passe</label>
                         <input
                           type="password"
                           value={passwordForm.data.password}
@@ -335,7 +335,7 @@ export default function CarsProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Confirm New Password</label>
+                        <label className="block text-sm font-black tracking-wider uppercase text-red-600 mb-2">Confirmer le nouveau mot de passe</label>
                         <input
                           type="password"
                           value={passwordForm.data.password_confirmation}
@@ -352,14 +352,14 @@ export default function CarsProfile({
                           className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 font-bold tracking-wider uppercase transition-colors disabled:opacity-50 flex items-center"
                         >
                           <Shield className="h-5 w-5 mr-2" />
-                          {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                          {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                         </button>
                         <button 
                           type="button"
                           onClick={() => setShowPasswordForm(false)}
                           className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-4 font-bold tracking-wider uppercase transition-all"
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

@@ -61,8 +61,8 @@ export default function FurnitureLogin({
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-800 to-amber-900 rounded-2xl mb-6 shadow-lg">
                   <Sofa className="w-10 h-10 text-amber-100" />
                 </div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h1>
-                <p className="text-slate-600">Sign in to your furniture collection</p>
+                <h1 className="text-3xl font-bold text-slate-900 mb-2">Bon retour</h1>
+                <p className="text-slate-600">Connectez-vous à votre compte</p>
               </div>
               
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-amber-100">
@@ -79,7 +79,7 @@ export default function FurnitureLogin({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Enter your email"
+                        placeholder="Saisissez votre e-mail"
                         required
                       />
                       <Mail className="absolute right-3 top-3 h-5 w-5 text-amber-600" />
@@ -90,13 +90,13 @@ export default function FurnitureLogin({
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <label className="block text-sm font-semibold text-slate-900">
-                        Password
+                        Mot de passe
                       </label>
                       <Link
                         href={generateStoreUrl('store.forgot-password', store)}
                         className="text-sm text-yellow-800 hover:text-amber-900 font-medium"
                       >
-                        Forgot password?
+                        Mot de passe oublié ?
                       </Link>
                     </div>
                     <div className="relative">
@@ -109,7 +109,7 @@ export default function FurnitureLogin({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Enter your password"
+                        placeholder="Saisissez votre mot de passe"
                         required
                       />
                       <div className="absolute right-3 top-3 flex items-center space-x-2">
@@ -144,7 +144,7 @@ export default function FurnitureLogin({
                     disabled={processing}
                     className="w-full bg-yellow-800 text-white py-3 px-4 rounded-xl font-semibold hover:bg-amber-900 focus:outline-none focus:ring-4 focus:ring-amber-300 transition-all duration-200 disabled:opacity-50 shadow-lg"
                   >
-                    {processing ? 'Signing In...' : 'Sign In'}
+                    {processing ? "Connexion..." : "Se connecter"}
                   </button>
                 </form>
                 
@@ -155,7 +155,7 @@ export default function FurnitureLogin({
                       href={generateStoreUrl('store.register', store)}
                       className="font-semibold text-yellow-800 hover:text-amber-900"
                     >
-                      Create Account
+                      Créer un compte
                     </Link>
                   </p>
                 </div>

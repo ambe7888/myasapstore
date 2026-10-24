@@ -10,7 +10,7 @@ interface FurnitureCTASectionProps {
 function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTASectionProps) {
   const boxes = ctaBoxes?.value || ctaBoxes || content?.value || content || [
     { icon: 'palette', title: 'Interior Design', subtitle: 'Professional design consultation' },
-    { icon: 'ruler', title: 'Custom Furniture', subtitle: 'Bespoke pieces made to order' },
+    { icon: 'ruler', title: 'Custom Furniture', subtitle: "Sur commande" },
     { icon: 'home', title: 'Room Planning', subtitle: '3D visualization & layout' },
     { icon: 'award', title: 'Premium Materials', subtitle: 'Sustainable & luxury finishes' }
   ];
@@ -89,10 +89,10 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
           <div className="text-center">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-8 tracking-tight">
-                {ctaBottom?.title || 'Ready to Transform Your Space?'}
+                {ctaBottom?.title || "Prêt à passer commande ?"}
               </h2>
               <p className="text-lg lg:text-xl text-slate-700 mb-12 leading-relaxed max-w-4xl mx-auto">
-                {ctaBottom?.description || 'Schedule a free consultation with our wooden furniture experts and discover how we can bring your vision to life.'}
+                {ctaBottom?.description || "Contactez-nous pour un conseil gratuit et personnalisé."}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -103,7 +103,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  {ctaBottom?.primary_button_text || 'Book Free Consultation'}
+                  {ctaBottom?.primary_button_text || "Demander un conseil gratuit"}
                 </a>
                 <a
                   href={formatCustomLink(ctaBottom?.secondary_button_link, store, '#portfolio')}
@@ -112,7 +112,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
-                  {ctaBottom?.secondary_button_text || 'View Portfolio'}
+                  {ctaBottom?.secondary_button_text || "Voir nos réalisations"}
                 </a>
               </div>
             </div>

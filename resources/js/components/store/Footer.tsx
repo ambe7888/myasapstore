@@ -68,10 +68,10 @@ export default function Footer({
           setIsSubmitted(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -121,20 +121,20 @@ export default function Footer({
             {/* About Us Column */}
             <div>
               <h3 className="text-lg font-semibold mb-4 relative inline-block">
-                About Us
+                À propos
                 <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary"></span>
               </h3>
               <ul className="space-y-3">
                 <li>
                   <a href="/about" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <span className="mr-2 text-primary">›</span>
-                    About Us
+                    À propos
                   </a>
                 </li>
                 <li>
                   <a href="/contact" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <span className="mr-2 text-primary">›</span>
-                    Contact Us
+                    Nous contacter
                   </a>
                 </li>
                 <li>
@@ -146,13 +146,13 @@ export default function Footer({
                 <li>
                   <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <span className="mr-2 text-primary">›</span>
-                    Privacy Policy
+                    Politique de confidentialité
                   </a>
                 </li>
                 <li>
                   <a href="/terms" className="text-gray-400 hover:text-white transition-colors flex items-center">
                     <span className="mr-2 text-primary">›</span>
-                    Terms & Conditions
+                    Conditions générales
                   </a>
                 </li>
               </ul>
@@ -161,7 +161,7 @@ export default function Footer({
             {/* Contact Info */}
             <div>
               <h3 className="text-lg font-semibold mb-4 relative inline-block">
-                Contact Us
+                Nous contacter
                 <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary"></span>
               </h3>
               <ul className="space-y-3">
@@ -185,11 +185,11 @@ export default function Footer({
 
               {/* Newsletter Mini Form */}
               <div className="mt-6">
-                <h4 className="text-sm font-semibold mb-2">Subscribe to our newsletter</h4>
+                <h4 className="text-sm font-semibold mb-2">Abonnez-vous à notre newsletter</h4>
                 <form className="flex">
                   <input
                     type="email"
-                    placeholder="Your email"
+                    placeholder="Votre e-mail"
                     value={newsLetterEmail}
                     onChange={(e) => setNewsLetterEmail(e.target.value)}
                     className="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary w-full text-sm"
@@ -202,7 +202,7 @@ export default function Footer({
                     disabled={isLoading}
                     className="bg-primary text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Subscribing...' : 'Subscribe'}
+                    {isLoading ? "Inscription..." : "S'abonner"}
                   </button>
                 </form>
                 {isSubmitted && (

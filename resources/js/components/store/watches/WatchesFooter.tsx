@@ -29,7 +29,7 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
             
             {/* Description */}
             <p className="text-slate-400 font-light leading-relaxed mb-8 max-w-md">
-              {content?.description?.value || content?.description || 'Your premier destination for luxury timepieces. Curating the world\'s finest watches with uncompromising attention to quality and authenticity.'}
+              {content?.description?.value || content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
             </p>
 
             {/* Contact Info */}
@@ -65,13 +65,13 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
           {/* Customer Service */}
           <div>
             <h4 className="text-lg font-medium mb-6 tracking-wide">
-              {content?.menu1?.title?.value || content?.menu1?.title || 'Customer Service'}
+              {content?.menu1?.title?.value || content?.menu1?.title || "Service client"}
             </h4>
             <ul className="space-y-3">
               {(content?.menu1?.links?.value || content?.menu1?.links || [
-                { name: 'Watch Care Guide', href: '/care-guide' },
+                { name: "Conseils d'entretien", href: '/care-guide' },
                 { name: 'Warranty & Service', href: '/warranty' },
-                { name: 'Contact Experts', href: '/contact' },
+                { name: "Nous contacter", href: '/contact' },
                 { name: 'Authentication', href: '/authentication' }
               ]).map((link, index) => (
                 <li key={index}>
@@ -93,10 +93,10 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
             </h4>
             <ul className="space-y-3">
               {(content?.menu2?.links?.value || content?.menu2?.links || [
-                { name: 'About Us', href: '/about' },
+                { name: "À propos", href: '/about' },
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
-                { name: 'Privacy Policy', href: '/privacy' }
+                { name: "Politique de confidentialité", href: '/privacy' }
               ]).map((link, index) => (
                 <li key={index}>
                   <a
@@ -118,7 +118,7 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
           <div className="flex flex-col md:flex-row items-center justify-between">
             {/* Copyright */}
             <p className="text-slate-400 font-light text-sm mb-4 md:mb-0">
-              {(content?.copyright_text?.value || content?.copyright_text || '© {year} {store_name}. All rights reserved.')
+              {(content?.copyright_text?.value || content?.copyright_text || "© {year} {store_name}. Tous droits réservés.")
                 .replace('{year}', currentYear.toString())
                 .replace('{store_name}', storeName)}
             </p>

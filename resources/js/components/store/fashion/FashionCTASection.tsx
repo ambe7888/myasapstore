@@ -8,10 +8,10 @@ interface FashionCTASectionProps {
 
 export default function FashionCTASection({ content, ctaBoxes, bottomSection }: FashionCTASectionProps) {
   const boxes = ctaBoxes?.value || ctaBoxes || content?.value || content || [
-    { icon: 'sparkles', title: 'Personal Styling', subtitle: 'Free styling consultation' },
-    { icon: 'heart', title: 'Wishlist Alerts', subtitle: 'Get notified when items go on sale' },
-    { icon: 'gift', title: 'Gift Cards', subtitle: 'Perfect for fashion lovers' },
-    { icon: 'users', title: 'VIP Membership', subtitle: 'Exclusive access & rewards' }
+    { icon: 'sparkles', title: 'Personal Styling', subtitle: "Conseil personnalisé gratuit" },
+    { icon: 'heart', title: "Alertes favoris", subtitle: "Soyez informé de nos promotions" },
+    { icon: 'gift', title: 'Gift Cards', subtitle: "Idéal pour offrir" },
+    { icon: 'users', title: 'VIP Membership', subtitle: "Accès exclusif et avantages" }
   ];
 
   return (

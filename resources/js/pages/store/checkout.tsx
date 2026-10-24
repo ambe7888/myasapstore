@@ -393,7 +393,7 @@ export default function Checkout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -417,12 +417,12 @@ export default function Checkout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         // Basic phone number validation (digits only, 10-15 characters)
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -450,7 +450,7 @@ export default function Checkout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -462,7 +462,7 @@ export default function Checkout({
       const newErrors: Record<string, string> = {};
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-        newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+        newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
       }
       
       if (Object.keys(newErrors).length > 0) {
@@ -476,13 +476,13 @@ export default function Checkout({
       const newErrors: Record<string, string> = {};
       
       if (!bankTransferFile) {
-        newErrors.bankTransferFile = 'Payment receipt/proof is required for bank transfer';
+        newErrors.bankTransferFile = "Un justificatif de paiement est obligatoire pour un virement bancaire";
       }
       
       if (Object.keys(newErrors).length > 0) {
         setPaymentErrors(newErrors);
         // Show toast notification
-        alert('Please upload payment receipt/proof for bank transfer');
+        alert("Veuillez importer le justificatif de paiement du virement bancaire");
         return; // Stop execution if validation fails
       }
     }
@@ -612,11 +612,11 @@ export default function Checkout({
             if (data.errors) {
               setPaymentErrors(data.errors);
             }
-            alert(data.message || 'Order placement failed');
+            alert(data.message || "Échec de la commande");
           }
         } catch (error) {
-          console.error('Order placement error:', error);
-          alert('Failed to place order. Please try again.');
+          console.error("Erreur lors de la commande :", error);
+          alert("Échec de la commande. Veuillez réessayer.");
         }
       }
     }
@@ -697,7 +697,7 @@ export default function Checkout({
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-4xl font-bold mb-4">Passer à la caisse</h1>
               <p className="text-white/80">
-                Complete your purchase securely
+                Finalisez votre achat en toute sécurité
               </p>
             </div>
           </div>
@@ -707,9 +707,9 @@ export default function Checkout({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <Link href={generateStoreUrl('store.cart', store)} className="text-gray-500 hover:text-primary">Cart</Link>
+              <Link href={generateStoreUrl('store.cart', store)} className="text-gray-500 hover:text-primary">Panier</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
               <span className="text-gray-800 font-medium">Passer à la caisse</span>
             </div>
@@ -917,7 +917,7 @@ export default function Checkout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-gray-300'
                             } rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -947,7 +947,7 @@ export default function Checkout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-gray-300'
                             } rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -1005,7 +1005,7 @@ export default function Checkout({
                                   <label htmlFor={`shipping-${method.id}`} className="ml-3 flex flex-col cursor-pointer">
                                     <span className="block text-sm font-medium text-gray-900">{method.name}</span>
                                     <span className="block text-sm text-gray-500">
-                                      {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                      {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                     </span>
                                     {method.min_order_amount > 0 && (
                                       <span className="block text-xs text-gray-400">
@@ -1083,7 +1083,7 @@ export default function Checkout({
                           type="submit"
                           className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
-                          Review Order
+                          Vérifier la commande
                           <ChevronRight className="ml-2 h-5 w-5" />
                         </button>
                       </div>
@@ -1115,7 +1115,7 @@ export default function Checkout({
                             className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                           />
                           <label htmlFor="same-as-shipping" className="ml-2 block text-sm text-gray-700">
-                            Same as shipping address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -1237,7 +1237,7 @@ export default function Checkout({
                                 disabled={!billingCountry || loadingBillingStates}
                                 className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                               >
-                                <option value="">{loadingBillingStates ? 'Loading...' : 'Select State'}</option>
+                                <option value="">{loadingBillingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                                 {billingStates.map((state: any) => (
                                   <option key={state.id} value={state.id}>
                                     {state.name}
@@ -1258,7 +1258,7 @@ export default function Checkout({
                                 disabled={!billingState || loadingBillingCities}
                                 className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                               >
-                                <option value="">{loadingBillingCities ? 'Loading...' : 'Select City'}</option>
+                                <option value="">{loadingBillingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                                 {billingCities.map((city: any) => (
                                   <option key={city.id} value={city.id}>
                                     {city.name}
@@ -1400,7 +1400,7 @@ export default function Checkout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-gray-500">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1490,7 +1490,7 @@ export default function Checkout({
                     <div className="p-6 border-b border-gray-200">
                       <h2 className="text-lg font-medium text-gray-900">Vérifiez votre commande</h2>
                       <p className="mt-1 text-sm text-gray-500">
-                        Please review your order details before placing your order.
+                        Vérifiez les détails de votre commande avant de la valider.
                       </p>
                     </div>
                     
@@ -1504,7 +1504,7 @@ export default function Checkout({
                             <thead className="bg-gray-50">
                               <tr>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  Product
+                                  Produit
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
@@ -1574,7 +1574,7 @@ export default function Checkout({
                           <div className="mt-4 pt-4 border-t border-gray-200">
                             <p className="text-sm font-medium text-gray-500">Méthode de livraison</p>
                             <p className="text-sm text-gray-900 mt-1">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                             </p>
                           </div>
                         </div>
@@ -1738,19 +1738,19 @@ export default function Checkout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 ${couponApplied ? 'bg-red-600' : 'bg-primary'} text-white rounded-r-md hover:${couponApplied ? 'bg-red-700' : 'bg-primary-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary text-sm font-medium`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-600">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-600">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>

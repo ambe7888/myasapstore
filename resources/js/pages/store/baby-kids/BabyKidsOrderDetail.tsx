@@ -98,9 +98,9 @@ export default function BabyKidsOrderDetail({
                 className="inline-flex items-center space-x-2 text-pink-600 hover:text-pink-700 mb-6 transition-colors"
               >
                 <ArrowLeft className="h-5 w-5" />
-                <span>Back to Orders</span>
+                <span>Retour aux commandes</span>
               </Link>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Order Details</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Détails de la commande</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full"></div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function BabyKidsOrderDetail({
                 <div className="bg-pink-500 text-white p-8">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h1 className="text-3xl font-bold mb-2">ORDER INVOICE</h1>
+                      <h1 className="text-3xl font-bold mb-2">FACTURE DE LA COMMANDE</h1>
                       <p className="text-pink-100">Order #{order.id}</p>
                     </div>
                     <div className="text-right">
@@ -138,7 +138,7 @@ export default function BabyKidsOrderDetail({
                       ) : (
                         <Package className="h-6 w-6 text-blue-500" />
                       )}
-                      <span className="text-lg font-semibold">Status:</span>
+                      <span className="text-lg font-semibold">Statut :</span>
                     </div>
                     <span className={`px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(order.status)}`}>
                       {order.status.toUpperCase()}
@@ -148,12 +148,12 @@ export default function BabyKidsOrderDetail({
 
                 {/* Order Items Table */}
                 <div className="p-6">
-                  <h2 className="text-xl font-bold text-gray-800 mb-6">Order Items</h2>
+                  <h2 className="text-xl font-bold text-gray-800 mb-6">Articles commandés</h2>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
                         <tr className="border-b-2 border-gray-200">
-                          <th className="text-left py-3 px-2 font-semibold text-gray-700">Product</th>
+                          <th className="text-left py-3 px-2 font-semibold text-gray-700">Produit</th>
                           <th className="text-center py-3 px-2 font-semibold text-gray-700">Qty</th>
                           <th className="text-right py-3 px-2 font-semibold text-gray-700">Prix</th>
                           <th className="text-right py-3 px-2 font-semibold text-gray-700">Total</th>
@@ -169,7 +169,7 @@ export default function BabyKidsOrderDetail({
                                   alt={item.name || item.product?.name}
                                   className="w-12 h-12 object-cover rounded-lg"
                                   onError={(e) => {
-                                    (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name || item.product?.name || 'Product')}`;
+                                    (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name || item.product?.name || "Produit")}`;
                                   }}
                                 />
                                 <span className="font-medium text-gray-800">{item.name || item.product?.name}</span>
@@ -191,7 +191,7 @@ export default function BabyKidsOrderDetail({
                   <div>
                     <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center">
                       <MapPin className="h-5 w-5 mr-2 text-pink-500" />
-                      Shipping Address
+                      Adresse de livraison
                     </h3>
                     <div className="bg-white p-4 rounded-lg">
                       <p className="font-semibold text-gray-800">{order.shipping_address.name}</p>
@@ -203,16 +203,16 @@ export default function BabyKidsOrderDetail({
 
                   {/* Payment & Shipping Info */}
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-3">Payment & Shipping</h3>
+                    <h3 className="text-lg font-bold text-gray-800 mb-3">Paiement et livraison</h3>
                     <div className="bg-white p-4 rounded-lg space-y-3">
                       <div className="flex items-center space-x-2">
                         <CreditCard className="h-4 w-4 text-pink-500" />
-                        <span className="text-sm text-gray-600">Payment:</span>
+                        <span className="text-sm text-gray-600">Paiement :</span>
                         <span className="font-medium">{order.payment_method}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Truck className="h-4 w-4 text-pink-500" />
-                        <span className="text-sm text-gray-600">Shipping:</span>
+                        <span className="text-sm text-gray-600">Livraison :</span>
                         <span className="font-medium">{order.shipping_method}</span>
                       </div>
                     </div>
@@ -224,26 +224,26 @@ export default function BabyKidsOrderDetail({
                   <div className="max-w-sm ml-auto">
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Subtotal:</span>
+                        <span className="text-gray-600">Sous-total :</span>
                         <span>{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                       </div>
                       {order.discount > 0 && (
                         <div className="flex justify-between text-green-600">
-                          <span>Discount:</span>
+                          <span>Remise :</span>
                           <span>-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                         </div>
                       )}
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Shipping:</span>
+                        <span className="text-gray-600">Livraison :</span>
                         <span>{formatCurrency(order.shipping, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Tax:</span>
+                        <span className="text-gray-600">Taxe :</span>
                         <span>{formatCurrency(order.tax, storeSettings, currencies)}</span>
                       </div>
                       <div className="border-t-2 pt-2">
                         <div className="flex justify-between text-xl font-bold">
-                          <span>Total:</span>
+                          <span>Total :</span>
                           <span>{formatCurrency(order.total, storeSettings, currencies)}</span>
                         </div>
                       </div>

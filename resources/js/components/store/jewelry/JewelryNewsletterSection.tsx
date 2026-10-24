@@ -42,10 +42,10 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -62,13 +62,13 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
               {content?.title || 'Luxury Insider'}
             </h2>
             <p className="text-neutral-600 text-lg mb-8 leading-relaxed">
-              {content?.subtitle || 'Be the first to discover new collections and exclusive events.'}
+              {content?.subtitle || "Soyez le premier informé de nos nouveautés et de nos événements exclusifs."}
             </p>
             
             {/* Features List */}
             <div className="space-y-4">
               {(content?.features || [
-                { title: 'Exclusive collection previews' },
+                { title: "Aperçus exclusifs" },
                 { title: 'VIP event invitations' },
                 { title: 'Personal styling consultations' }
               ]).map((feature, index) => (
@@ -85,7 +85,7 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
             <div className="text-center mb-8">
               <div className="w-12 h-px bg-yellow-600 mx-auto mb-4"></div>
               <h3 className="text-2xl font-serif text-neutral-900 mb-2">Stay Connected</h3>
-              <p className="text-neutral-600 text-sm">Join our exclusive community</p>
+              <p className="text-neutral-600 text-sm">Rejoignez notre communauté</p>
             </div>
             
             {isSubscribed ? (
@@ -95,8 +95,8 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif text-neutral-900 mb-2">Welcome to Our Elite Circle!</h3>
-                <p className="text-neutral-600">You've been successfully subscribed to our newsletter.</p>
+                <h3 className="text-xl font-serif text-neutral-900 mb-2">Bienvenue !</h3>
+                <p className="text-neutral-600">Vous êtes maintenant abonné à notre newsletter.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -105,7 +105,7 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={content?.placeholder_text || 'Enter your email address'}
+                    placeholder={content?.placeholder_text || "Saisissez votre adresse e-mail"}
                     className="w-full px-0 py-4 border-0 border-b-2 border-neutral-200 bg-transparent focus:border-yellow-600 focus:outline-none transition-colors text-lg placeholder-neutral-400"
                     required
                   />
@@ -117,7 +117,7 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
                   disabled={isSubmitting}
                   className="w-full bg-yellow-600 text-white py-4 font-medium uppercase text-sm tracking-wide hover:bg-yellow-700 transition-colors duration-300 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Joining...' : (content?.button_text || 'Join Elite Circle')}
+                  {isSubmitting ? 'Joining...' : (content?.button_text || "Je m'abonne")}
                 </button>
                 
                 {error && (
@@ -128,21 +128,21 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
                 
                 <div className="text-center pt-4">
                   <p className="text-neutral-500 text-xs leading-relaxed">
-                    {content?.privacy_text || 'Unsubscribe anytime. Privacy guaranteed.'}
+                    {content?.privacy_text || "Désabonnement possible à tout moment."}
                   </p>
                   <div className="flex items-center justify-center mt-4 space-x-4 text-xs text-neutral-400">
                     <div className="flex items-center space-x-1">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Secure</span>
+                      <span>Sécurisé</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                       </svg>
-                      <span>No Spam</span>
+                      <span>Pas de spam</span>
                     </div>
                   </div>
                 </div>

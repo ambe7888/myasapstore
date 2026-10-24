@@ -124,7 +124,7 @@ export default function JewelryOrderDetail({
               className="inline-flex items-center text-yellow-700 hover:text-yellow-800 font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to My Orders
+              Retour à mes commandes
             </Link>
           </div>
         </div>
@@ -152,13 +152,13 @@ export default function JewelryOrderDetail({
               {/* Order Items */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div className="p-6 border-b border-gray-200">
-                  <h2 className="text-lg font-medium text-gray-900 mb-4">Order Items</h2>
+                  <h2 className="text-lg font-medium text-gray-900 mb-4">Articles commandés</h2>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
                         <tr>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Product
+                            Produit
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
@@ -209,7 +209,7 @@ export default function JewelryOrderDetail({
                   <div className="p-6">
                     <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
                       <MapPin className="h-5 w-5 mr-2" />
-                      Shipping Address
+                      Adresse de livraison
                     </h3>
                     <div className="bg-gray-50 p-4 rounded-md">
                       <p className="font-medium">{order.shipping_address?.name || 'N/A'}</p>
@@ -225,15 +225,15 @@ export default function JewelryOrderDetail({
                   <div className="p-6">
                     <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
                       <CreditCard className="h-5 w-5 mr-2" />
-                      Payment & Shipping
+                      Paiement et livraison
                     </h3>
                     <div className="bg-gray-50 p-4 rounded-md">
                       <div className="mb-2">
-                        <span className="text-sm text-gray-500">Payment Method:</span>
+                        <span className="text-sm text-gray-500">Mode de paiement :</span>
                         <p className="font-medium">{order.payment_method || 'N/A'}</p>
                       </div>
                       <div>
-                        <span className="text-sm text-gray-500">Shipping Method:</span>
+                        <span className="text-sm text-gray-500">Mode de livraison :</span>
                         <p className="font-medium">{order.shipping_method || 'N/A'}</p>
                       </div>
                     </div>
@@ -247,25 +247,25 @@ export default function JewelryOrderDetail({
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Résumé de la commande</h3>
                   <div className="bg-gray-50 p-4 rounded-md">
                     <div className="flex justify-between py-2">
-                      <span>Subtotal:</span>
+                      <span>Sous-total :</span>
                       <span>{formatCurrency(order.subtotal || 0, storeSettings, currencies)}</span>
                     </div>
                     {parseFloat(order.discount || 0) > 0 && (
                       <div className="flex justify-between py-2 text-green-600">
-                        <span>Discount:</span>
+                        <span>Remise :</span>
                         <span>-{formatCurrency(order.discount || 0, storeSettings, currencies)}</span>
                       </div>
                     )}
                     <div className="flex justify-between py-2">
-                      <span>Shipping:</span>
+                      <span>Livraison :</span>
                       <span>{formatCurrency(order.shipping || 0, storeSettings, currencies)}</span>
                     </div>
                     <div className="flex justify-between py-2">
-                      <span>Tax:</span>
+                      <span>Taxe :</span>
                       <span>{formatCurrency(order.tax || 0, storeSettings, currencies)}</span>
                     </div>
                     <div className="flex justify-between py-2 border-t font-bold text-lg">
-                      <span>Total:</span>
+                      <span>Total :</span>
                       <span>{formatCurrency(order.total || 0, storeSettings, currencies)}</span>
                     </div>
                   </div>

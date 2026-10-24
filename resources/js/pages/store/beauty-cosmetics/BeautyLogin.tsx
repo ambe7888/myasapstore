@@ -58,8 +58,8 @@ export default function BeautyLogin({
                   <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h1 className="text-3xl font-light text-gray-900 mb-2">Welcome Back</h1>
-              <p className="text-gray-600">Sign in to your beauty account</p>
+              <h1 className="text-3xl font-light text-gray-900 mb-2">Bon retour</h1>
+              <p className="text-gray-600">Connectez-vous à votre compte</p>
             </div>
 
             {/* Form Card */}
@@ -76,7 +76,7 @@ export default function BeautyLogin({
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                       errors.email ? 'border-red-300' : 'border-gray-300'
                     }`}
-                    placeholder="Enter your email"
+                    placeholder="Saisissez votre e-mail"
                     required
                   />
                   {errors.email && (
@@ -88,13 +88,13 @@ export default function BeautyLogin({
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                      Password
+                      Mot de passe
                     </label>
                     <Link
                       href={generateStoreUrl('store.forgot-password', store)}
                       className="text-sm text-rose-600 hover:text-rose-500"
                     >
-                      Forgot password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
                   <div className="relative">
@@ -106,7 +106,7 @@ export default function BeautyLogin({
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                         errors.password ? 'border-red-300' : 'border-gray-300'
                       }`}
-                      placeholder="Enter your password"
+                      placeholder="Saisissez votre mot de passe"
                       required
                     />
                     <button
@@ -149,7 +149,7 @@ export default function BeautyLogin({
                   disabled={processing}
                   className="w-full bg-rose-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-rose-700 focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-colors disabled:opacity-50"
                 >
-                  {processing ? 'Signing In...' : 'Sign In'}
+                  {processing ? "Connexion..." : "Se connecter"}
                 </button>
               </form>
               
@@ -161,7 +161,7 @@ export default function BeautyLogin({
                     href={generateStoreUrl('store.register', store)}
                     className="text-rose-600 hover:text-rose-500 font-medium"
                   >
-                    Create Account
+                    Créer un compte
                   </Link>
                 </p>
               </div>

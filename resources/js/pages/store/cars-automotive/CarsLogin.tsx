@@ -75,7 +75,7 @@ export default function CarsLogin({
                   </h1>
                   
                   <p className="text-xl text-gray-700 font-medium leading-relaxed max-w-lg">
-                    Enter the garage. Access premium automotive parts, exclusive deals, and performance upgrades.
+                    Connectez-vous pour accéder à vos commandes, vos favoris et vos avantages.
                   </p>
                 </div>
 
@@ -106,8 +106,8 @@ export default function CarsLogin({
                       <Wrench className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">Expert Support</h3>
-                      <p className="text-gray-600 text-sm">Technical assistance available</p>
+                      <h3 className="font-bold text-black">Assistance dédiée</h3>
+                      <p className="text-gray-600 text-sm">Assistance disponible</p>
                     </div>
                   </div>
                 </div>
@@ -118,10 +118,10 @@ export default function CarsLogin({
                 <div className="mb-10">
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-2 h-2 bg-red-600 rotate-45 mr-3"></div>
-                    <h2 className="text-3xl font-black text-black tracking-wider">LOGIN</h2>
+                    <h2 className="text-3xl font-black text-black tracking-wider">CONNEXION</h2>
                     <div className="w-2 h-2 bg-red-600 rotate-45 ml-3"></div>
                   </div>
-                  <p className="text-gray-600 text-center font-medium">Access your automotive account</p>
+                  <p className="text-gray-600 text-center font-medium">Accédez à votre compte</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -154,7 +154,7 @@ export default function CarsLogin({
                   {/* Password Field */}
                   <div>
                     <label htmlFor="password" className="block text-red-600 font-bold tracking-widest uppercase text-sm mb-4">
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -201,7 +201,7 @@ export default function CarsLogin({
                       href={generateStoreUrl('store.forgot-password', store)}
                       className="text-red-600 hover:text-red-400 font-bold text-sm tracking-wider uppercase transition-colors"
                     >
-                      Forgot Password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
 
@@ -231,7 +231,7 @@ export default function CarsLogin({
                       href={generateStoreUrl('store.register', store)}
                       className="text-red-600 hover:text-red-700 font-bold tracking-wider uppercase transition-colors"
                     >
-                      Create Account
+                      Créer un compte
                     </Link>
                   </p>
                 </div>

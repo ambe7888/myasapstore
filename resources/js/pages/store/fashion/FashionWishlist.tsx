@@ -77,9 +77,9 @@ function FashionWishlistContent({
         <div className="bg-black text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-thin tracking-wide mb-6">Your Wishlist</h1>
+              <h1 className="text-5xl font-thin tracking-wide mb-6">Vos favoris</h1>
               <p className="text-white/70 font-light text-lg">
-                Curated pieces for your perfect style
+                Vos produits préférés, enregistrés pour plus tard
               </p>
             </div>
           </div>
@@ -141,9 +141,9 @@ function FashionWishlistContent({
             ) : (
               <div className="text-center py-20">
                 <Heart className="h-16 w-16 text-gray-300 mx-auto mb-6" />
-                <h2 className="text-2xl font-thin text-gray-900 mb-4">Your wishlist is empty</h2>
+                <h2 className="text-2xl font-thin text-gray-900 mb-4">Vos favoris sont vides</h2>
                 <p className="text-gray-600 font-light mb-8">
-                  Start adding items you love to create your perfect collection
+                  Commencez à ajouter vos produits préférés
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}
@@ -157,7 +157,7 @@ function FashionWishlistContent({
         {relatedProducts.length > 0 && (
           <div className="bg-gray-50 py-16">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-thin text-center mb-12 tracking-wide">You Might Also Like</h2>
+              <h2 className="text-3xl font-thin text-center mb-12 tracking-wide">Vous pourriez aussi aimer</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((product) => (
                   <FashionProductCard

@@ -8,10 +8,10 @@ interface BeautyCTASectionProps {
 export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASectionProps) {
   // Handle different possible data structures
   const boxes = ctaBoxes?.value || ctaBoxes || content?.value || content?.cta_boxes || content || [
-    { icon: 'user-check', title: 'Skin Analysis', subtitle: 'Free personalized consultation' },
+    { icon: 'user-check', title: 'Skin Analysis', subtitle: "Conseil personnalisé gratuit" },
     { icon: 'calendar', title: 'Beauty Calendar', subtitle: 'Track your skincare routine' },
     { icon: 'gift', title: 'Beauty Box', subtitle: 'Monthly curated surprises' },
-    { icon: 'star', title: 'Rewards Program', subtitle: 'Earn points with every purchase' }
+    { icon: 'star', title: 'Rewards Program', subtitle: "Profitez d'avantages à chaque achat" }
   ];
 
   const getIcon = (iconName: string) => {
@@ -78,7 +78,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
               {/* Hover Arrow */}
               <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="inline-flex items-center text-rose-600 font-medium">
-                  <span className="text-sm">Learn More</span>
+                  <span className="text-sm">En savoir plus</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>

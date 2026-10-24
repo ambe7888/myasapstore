@@ -76,8 +76,8 @@ export default function BabyKidsRegisterPage({
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-3">Join Our Family!</h1>
-                <p className="text-gray-600 text-lg">Create your account and start shopping</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-3">Rejoignez-nous !</h1>
+                <p className="text-gray-600 text-lg">Créez votre compte et commencez vos achats</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -85,7 +85,7 @@ export default function BabyKidsRegisterPage({
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">
-                      First Name
+                      Prénom
                     </label>
                     <input
                       type="text"
@@ -103,7 +103,7 @@ export default function BabyKidsRegisterPage({
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Last Name
+                      Nom
                     </label>
                     <input
                       type="text"
@@ -124,7 +124,7 @@ export default function BabyKidsRegisterPage({
                 {/* Email */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">
-                    Email Address
+                    Adresse e-mail
                   </label>
                   <input
                     type="email"
@@ -144,7 +144,7 @@ export default function BabyKidsRegisterPage({
                 {/* Password */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -179,7 +179,7 @@ export default function BabyKidsRegisterPage({
                 {/* Confirm Password */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">
-                    Confirm Password
+                    Confirmer le mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -217,7 +217,7 @@ export default function BabyKidsRegisterPage({
                   disabled={processing}
                   className="w-full bg-pink-500 text-white py-5 rounded-2xl font-bold text-xl hover:bg-pink-600 focus:ring-4 focus:ring-pink-200 transition-all duration-300 shadow-xl disabled:opacity-50 transform hover:scale-105"
                 >
-                  {processing ? 'Creating Account...' : 'Create Account'}
+                  {processing ? "Création du compte..." : "Créer un compte"}
                 </button>
               </form>
               
@@ -229,7 +229,7 @@ export default function BabyKidsRegisterPage({
                     href={generateStoreUrl('store.login', store)}
                     className="font-bold text-pink-500 hover:text-pink-600 transition-colors underline"
                   >
-                    Sign In
+                    Se connecter
                   </Link>
                 </p>
               </div>

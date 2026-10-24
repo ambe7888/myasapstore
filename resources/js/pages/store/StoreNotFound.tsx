@@ -9,7 +9,7 @@ interface StoreNotFoundProps {
 export default function StoreNotFound({ requestedSlug }: StoreNotFoundProps) {
     return (
         <>
-            <Head title="Store Not Found" />
+            <Head title="Boutique introuvable" />
             
             <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
                 <div className="max-w-lg w-full text-center">
@@ -20,14 +20,14 @@ export default function StoreNotFound({ requestedSlug }: StoreNotFoundProps) {
                     
                     {/* Headline */}
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        Store Not Found
+                        Boutique introuvable
                     </h1>
                     
                     {/* Message */}
                     <p className="text-lg text-gray-600 mb-8">
                         {requestedSlug 
                             ? `We couldn't find a store with the address "${requestedSlug}".`
-                            : "We couldn't find a store with this address."
+                            : "Nous n'avons trouvé aucune boutique à cette adresse."
                         } It may have been moved or is temporarily unavailable.
                     </p>
                     
@@ -38,7 +38,7 @@ export default function StoreNotFound({ requestedSlug }: StoreNotFoundProps) {
                             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5 mr-2" />
-                            Go Back
+                            Retour
                         </button>
                         
                         <Link
@@ -46,7 +46,7 @@ export default function StoreNotFound({ requestedSlug }: StoreNotFoundProps) {
                             className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
                         >
                             <Home className="w-5 h-5 mr-2" />
-                            Go to Home
+                            Aller à l'accueil
                         </Link>
                     </div>
                 </div>

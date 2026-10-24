@@ -81,7 +81,7 @@ export default function FurnitureOrders({
             <div className="text-center">
               <h1 className="text-4xl font-bold mb-4">My Furniture Orders</h1>
               <p className="text-amber-200 text-lg">
-                Track your furniture purchases and delivery status
+                Suivez vos commandes et l'état de la livraison
               </p>
             </div>
           </div>
@@ -151,9 +151,9 @@ export default function FurnitureOrders({
                   <div className="w-32 h-32 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-8">
                     <Package className="h-16 w-16 text-amber-600" />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-4">No Furniture Orders Yet</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 mb-4">Aucune commande pour le moment</h2>
                   <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Start browsing our beautiful furniture collection to place your first order
+                    Découvrez nos produits pour passer votre première commande
                   </p>
                   <Link
                     href={generateStoreUrl('store.products', store)}

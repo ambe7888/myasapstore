@@ -171,7 +171,7 @@ function JewelryProductDetailContent({
           
           <div className="container mx-auto px-4 py-8 relative z-10">
             <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-              <Link href={generateStoreUrl('store.home', store)} className="hover:text-yellow-600">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="hover:text-yellow-600">Accueil</Link>
               <span>/</span>
               <Link href={generateStoreUrl('store.products', store) + '?category=' + product.category?.id} className="hover:text-yellow-600">{product.category?.name}</Link>
               <span>/</span>
@@ -444,8 +444,8 @@ function JewelryProductDetailContent({
                 {activeTab === 'advanced' && hasCustomFields && (
                   <div className="space-y-6 max-h-80 overflow-y-auto">
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">Advanced Product Information</h3>
-                      <p className="text-gray-600 mb-6">Jewelry specifications and custom attributes</p>
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">Informations détaillées du produit</h3>
+                      <p className="text-gray-600 mb-6">Caractéristiques du produit</p>
                     </div>
                     <div className="bg-yellow-50 border border-yellow-200 rounded-lg overflow-hidden">
                       <div className="divide-y divide-yellow-100">
@@ -495,7 +495,7 @@ function JewelryProductDetailContent({
                           }}
                           className="px-6 py-3 bg-yellow-600 text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 font-medium tracking-wide transition-colors"
                         >
-                          Write a Review
+                          Donner votre avis
                         </button>
                       </div>
 
@@ -529,7 +529,7 @@ function JewelryProductDetailContent({
                           ))
                         ) : (
                           <div className="text-center py-8">
-                            <p className="text-gray-500 font-light">No reviews yet. Be the first to review this product!</p>
+                            <p className="text-gray-500 font-light">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                           </div>
                         )}
                       </div>
@@ -551,7 +551,7 @@ function JewelryProductDetailContent({
                 </h2>
                 <div className="w-24 h-1 bg-yellow-600 mx-auto mb-4"></div>
                 <p className="text-neutral-600 max-w-2xl mx-auto">
-                  Discover more exquisite pieces from our luxury collection
+                  Découvrez plus de produits
                 </p>
               </div>
               
@@ -592,7 +592,7 @@ function JewelryProductDetailContent({
               <div className="bg-gradient-to-br from-yellow-50 to-amber-50 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <h3 className="text-2xl font-light text-gray-900 mb-6 tracking-wide">Write a Review</h3>
+                    <h3 className="text-2xl font-light text-gray-900 mb-6 tracking-wide">Donner votre avis</h3>
 
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
@@ -621,7 +621,7 @@ function JewelryProductDetailContent({
                         
                         if (data.success) {
                           toast.success('Merci pour votre avis !', {
-                            description: 'Your review has been submitted successfully.'
+                            description: "Votre avis a bien été envoyé."
                           });
                           
                           const newReview = {
@@ -629,8 +629,8 @@ function JewelryProductDetailContent({
                             rating: reviewRating,
                             title: reviewTitle,
                             content: reviewContent,
-                            customer_name: data.review?.customer_name || 'You',
-                            created_at: 'Just now',
+                            customer_name: data.review?.customer_name || "Vous",
+                            created_at: "À l'instant",
                             store_response: null
                           };
                           
@@ -651,14 +651,14 @@ function JewelryProductDetailContent({
                           toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
-                        console.error('Error submitting review:', error);
+                        console.error("Erreur lors de l'envoi de l'avis :", error);
                         toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
                     }}>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Your Rating *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Votre note *</label>
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -676,12 +676,12 @@ function JewelryProductDetailContent({
                       </div>
 
                       <div>
-                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
+                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Titre de l'avis *</label>
                         <input
                           type="text"
                           id="review-title"
                           className="w-full px-4 py-3 border-2 border-yellow-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-white/80 backdrop-blur-sm"
-                          placeholder="Give your review a title"
+                          placeholder="Donnez un titre à votre avis"
                           value={reviewTitle}
                           onChange={(e) => setReviewTitle(e.target.value)}
                           required
@@ -689,7 +689,7 @@ function JewelryProductDetailContent({
                       </div>
 
                       <div>
-                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
+                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Votre avis *</label>
                         <textarea
                           id="review-content"
                           rows={4}
@@ -707,14 +707,14 @@ function JewelryProductDetailContent({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-xl border border-transparent shadow-lg px-6 py-3 bg-yellow-600 text-base font-light text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"
                           className="mt-3 w-full inline-flex justify-center rounded-xl border-2 border-yellow-200 shadow-lg px-6 py-3 bg-white text-base font-light text-gray-700 hover:bg-yellow-50 hover:border-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide"
                           onClick={() => setShowReviewModal(false)}
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

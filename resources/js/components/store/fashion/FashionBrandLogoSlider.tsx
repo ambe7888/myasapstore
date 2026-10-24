@@ -23,7 +23,7 @@ export default function FashionBrandLogoSlider({ content }: FashionBrandLogoSlid
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h3 className="text-2xl font-thin tracking-wide text-gray-600 uppercase">
-            Featured Brands
+            Nos marques
           </h3>
         </div>
         

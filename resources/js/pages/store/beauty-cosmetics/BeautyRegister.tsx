@@ -61,8 +61,8 @@ export default function BeautyRegister({
                   <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                 </svg>
               </div>
-              <h1 className="text-3xl font-light text-gray-900 mb-2">Join Our Beauty Community</h1>
-              <p className="text-gray-600">Create your account and start your beauty journey</p>
+              <h1 className="text-3xl font-light text-gray-900 mb-2">Rejoignez-nous</h1>
+              <p className="text-gray-600">Créez votre compte et commencez vos achats</p>
             </div>
 
             {/* Form Card */}
@@ -71,7 +71,7 @@ export default function BeautyRegister({
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Nom complet
                   </label>
                   <input
                     id="name"
@@ -81,7 +81,7 @@ export default function BeautyRegister({
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                       errors.name ? 'border-red-300' : 'border-gray-300'
                     }`}
-                    placeholder="Enter your full name"
+                    placeholder="Saisissez votre nom complet"
                     required
                   />
                   {errors.name && (
@@ -100,7 +100,7 @@ export default function BeautyRegister({
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                       errors.email ? 'border-red-300' : 'border-gray-300'
                     }`}
-                    placeholder="Enter your email"
+                    placeholder="Saisissez votre e-mail"
                     required
                   />
                   {errors.email && (
@@ -111,7 +111,7 @@ export default function BeautyRegister({
                 {/* Password */}
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -148,7 +148,7 @@ export default function BeautyRegister({
                 {/* Confirm Password */}
                 <div>
                   <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 mb-2">
-                    Confirm Password
+                    Confirmer le mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -159,7 +159,7 @@ export default function BeautyRegister({
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                         errors.password_confirmation ? 'border-red-300' : 'border-gray-300'
                       }`}
-                      placeholder="Confirm your password"
+                      placeholder="Confirmez votre mot de passe"
                       required
                     />
                     <button
@@ -195,11 +195,11 @@ export default function BeautyRegister({
                   <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
                     I agree to the{' '}
                     <Link href="/terms" className="text-rose-600 hover:text-rose-500">
-                      Terms of Service
+                      Conditions d'utilisation
                     </Link>{' '}
                     and{' '}
                     <Link href="/privacy" className="text-rose-600 hover:text-rose-500">
-                      Privacy Policy
+                      Politique de confidentialité
                     </Link>
                   </label>
                 </div>
@@ -213,7 +213,7 @@ export default function BeautyRegister({
                   disabled={processing}
                   className="w-full bg-rose-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-rose-700 focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-colors disabled:opacity-50"
                 >
-                  {processing ? 'Creating Account...' : 'Create Account'}
+                  {processing ? "Création du compte..." : "Créer un compte"}
                 </button>
               </form>
               
@@ -225,7 +225,7 @@ export default function BeautyRegister({
                     href={generateStoreUrl('store.login', store)}
                     className="text-rose-600 hover:text-rose-500 font-medium"
                   >
-                    Sign In
+                    Se connecter
                   </Link>
                 </p>
               </div>

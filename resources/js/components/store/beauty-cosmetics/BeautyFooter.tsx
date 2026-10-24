@@ -47,7 +47,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
                 <h3 className="text-2xl font-light text-rose-400 mb-4">{storeName}</h3>
               )}
               <p className="text-gray-300 leading-relaxed">
-                {footerContent?.description?.value || footerContent?.description || 'Your trusted beauty destination for premium skincare, makeup, and wellness products.'}
+                {footerContent?.description?.value || footerContent?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
               </p>
             </div>
             
@@ -69,13 +69,13 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
           {/* Customer Care */}
           <div>
             <h4 className="text-lg font-semibold mb-6 text-rose-400">
-              {footerContent?.menu1?.title?.value || footerContent?.menu1?.title || 'Customer Care'}
+              {footerContent?.menu1?.title?.value || footerContent?.menu1?.title || "Service client"}
             </h4>
             <ul className="space-y-3">
               {(footerContent?.menu1?.links?.value || footerContent?.menu1?.links || [
                 { name: 'Beauty Consultation', href: '/consultation' },
                 { name: 'Shipping & Returns', href: '/shipping' },
-                { name: 'Contact Us', href: '/contact' },
+                { name: "Nous contacter", href: '/contact' },
                 { name: 'Ingredient Guide', href: '/ingredients' }
               ]).map((link, index) => (
                 <li key={index}>
@@ -97,10 +97,10 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
             </h4>
             <ul className="space-y-3">
               {(footerContent?.menu2?.links?.value || footerContent?.menu2?.links || [
-                { name: 'About Us', href: '/about' },
+                { name: "À propos", href: '/about' },
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
-                { name: 'Privacy Policy', href: '/privacy' }
+                { name: "Politique de confidentialité", href: '/privacy' }
               ]).map((link, index) => (
                 <li key={index}>
                   <a 
@@ -116,7 +116,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-rose-400">Get in Touch</h4>
+            <h4 className="text-lg font-semibold mb-6 text-rose-400">Contactez-nous</h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <svg className="w-5 h-5 text-rose-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -155,7 +155,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-center items-center">
             <p className="text-gray-400 text-sm">
-              {(footerContent?.copyright_text?.value || footerContent?.copyright_text || '© {year} {store_name}. All rights reserved.')
+              {(footerContent?.copyright_text?.value || footerContent?.copyright_text || "© {year} {store_name}. Tous droits réservés.")
                 .replace('{year}', currentYear.toString())
                 .replace('{store_name}', storeName)}
             </p>

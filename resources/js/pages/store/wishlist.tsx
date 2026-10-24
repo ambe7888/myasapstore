@@ -71,7 +71,7 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
   };
 
   const handleQuickView = (product: any) => {
-    console.log('Quick view', product);
+    console.log("Aperçu rapide", product);
   };
 
   const handleRemoveFromWishlist = async (product: any) => {
@@ -86,9 +86,9 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">My Wishlist</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Mes favoris</h1>
               <p className="text-white/80">
-                Items you've saved for later
+                Les articles enregistrés pour plus tard
               </p>
             </div>
           </div>
@@ -98,9 +98,9 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Wishlist</span>
+              <span className="text-gray-800 font-medium">Favoris</span>
             </div>
           </div>
         </div>
@@ -114,9 +114,9 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
                   <table className="w-full">
                     <thead className="bg-gray-50 border-b">
                       <tr>
-                        <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                        <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Produit</th>
                         <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Prix</th>
-                        <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Stock Status</th>
+                        <th className="py-4 px-6 text-left text-sm font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Disponibilité</th>
                         <th className="py-4 px-6 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         <th className="py-4 px-6 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">Retirer</th>
                       </tr>
@@ -159,7 +159,7 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
                                 <div className="md:hidden mt-1">
                                   {item.stock > 0 ? (
                                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                      In Stock
+                                      En stock
                                     </span>
                                   ) : (
                                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rupture de stock</span>
@@ -181,7 +181,7 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
                           <td className="py-4 px-6 hidden md:table-cell">
                             {item.stock > 0 ? (
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                In Stock
+                                En stock
                               </span>
                             ) : (
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rupture de stock</span>
@@ -221,8 +221,8 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gray-100 mb-6">
                   <Heart className="h-12 w-12 text-gray-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Your wishlist is empty</h2>
-                <p className="text-gray-500 mb-6">Items added to your wishlist will appear here</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Vos favoris sont vides</h2>
+                <p className="text-gray-500 mb-6">Les articles ajoutés à vos favoris apparaîtront ici</p>
                 <Link 
                   href={generateStoreUrl('store.products', store)}
                   className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
@@ -241,7 +241,7 @@ function WishlistContent({ relatedProducts = [] }: { relatedProducts?: Product[]
         {items.length > 0 && relatedProducts.length > 0 && (
           <div className="bg-gray-50 py-12">
             <div className="container mx-auto px-4">
-              <h2 className="text-2xl font-bold mb-8 text-center">You Might Also Like</h2>
+              <h2 className="text-2xl font-bold mb-8 text-center">Vous pourriez aussi aimer</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {relatedProducts.map((product) => (
                   <ProductCard

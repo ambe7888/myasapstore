@@ -80,7 +80,7 @@ export default function FashionBlogPost({
               className="inline-flex items-center text-white hover:text-gray-300 transition-colors"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              <span className="font-light tracking-wide">Back to Journal</span>
+              <span className="font-light tracking-wide">Retour au blog</span>
             </Link>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function FashionBlogPost({
               <footer className="mt-16 pt-8 border-t border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-gray-500">
-                    <span className="font-light">Published by </span>
+                    <span className="font-light">Publié par </span>
                     <span className="font-medium">{post.author.name}</span>
                   </div>
                   

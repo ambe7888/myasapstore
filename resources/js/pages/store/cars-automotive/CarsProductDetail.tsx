@@ -521,7 +521,7 @@ function CarsProductDetailInner({
                         } ${wishlistLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                       >
                         <Heart className={`h-4 w-4 ${isProductInWishlist ? 'fill-white' : ''}`} />
-                        <span>Wishlist</span>
+                        <span>Favoris</span>
                       </button>
                       
                       <button className="flex items-center justify-center space-x-2 py-3 border-2 border-gray-300 hover:border-red-600 hover:bg-red-50 font-bold text-sm uppercase tracking-wider transition-all">
@@ -537,7 +537,7 @@ function CarsProductDetailInner({
             {/* Product Details Tabs */}
             <div className="bg-white mt-16 border-l-8 border-red-600 shadow-lg">
               <div className="bg-black text-white px-8 py-4">
-                <h2 className="text-2xl font-black tracking-wider uppercase">Technical Details</h2>
+                <h2 className="text-2xl font-black tracking-wider uppercase">Détails techniques</h2>
               </div>
               
               <div className="p-8">
@@ -573,7 +573,7 @@ function CarsProductDetailInner({
                           : 'text-gray-600 hover:text-gray-800'
                       }`}
                     >
-                      Details
+                      Détails
                     </button>
                   )}
                   {hasCustomFields && (
@@ -616,8 +616,8 @@ function CarsProductDetailInner({
                   {activeTab === 'advanced' && hasCustomFields && (
                     <div className="space-y-6 max-h-80 overflow-y-auto">
                       <div>
-                        <h3 className="text-xl font-black text-gray-900 mb-2 tracking-wider uppercase">Advanced Product Information</h3>
-                        <p className="text-gray-600 mb-6">Performance specifications and custom attributes</p>
+                        <h3 className="text-xl font-black text-gray-900 mb-2 tracking-wider uppercase">Informations détaillées du produit</h3>
+                        <p className="text-gray-600 mb-6">Caractéristiques du produit</p>
                       </div>
                       <div className="bg-red-50 border border-red-200 rounded-lg overflow-hidden">
                         <div className="divide-y divide-red-100">
@@ -667,7 +667,7 @@ function CarsProductDetailInner({
                             }}
                             className="px-6 py-3 bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-black tracking-wider uppercase transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           >
-                            Write a Review
+                            Donner votre avis
                           </button>
                         </div>
 
@@ -699,7 +699,7 @@ function CarsProductDetailInner({
                             ))
                           ) : (
                             <div className="text-center py-12">
-                              <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+                              <p className="text-gray-500">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                             </div>
                           )}
                         </div>
@@ -717,7 +717,7 @@ function CarsProductDetailInner({
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-black text-black mb-4 tracking-wider uppercase">Related Performance Parts</h2>
-                <p className="text-gray-600">Complete your build with these compatible components</p>
+                <p className="text-gray-600">Complétez votre commande avec ces articles</p>
               </div>
               <CarsRelatedProducts
                 products={relatedProducts}
@@ -742,7 +742,7 @@ function CarsProductDetailInner({
                 <div className="bg-black px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                      <h3 className="text-2xl font-black text-white mb-6 tracking-wider uppercase">Write a Review</h3>
+                      <h3 className="text-2xl font-black text-white mb-6 tracking-wider uppercase">Donner votre avis</h3>
 
                       <form className="space-y-4" onSubmit={async (e) => {
                         e.preventDefault();
@@ -771,7 +771,7 @@ function CarsProductDetailInner({
                           
                           if (data.success) {
                             toast.success('Merci pour votre avis !', {
-                              description: 'Your review has been submitted successfully.'
+                              description: "Votre avis a bien été envoyé."
                             });
                             
                             const newReview = {
@@ -779,8 +779,8 @@ function CarsProductDetailInner({
                               rating: reviewRating,
                               title: reviewTitle,
                               content: reviewContent,
-                              customer_name: data.review?.customer_name || 'You',
-                              created_at: 'Just now',
+                              customer_name: data.review?.customer_name || "Vous",
+                              created_at: "À l'instant",
                               store_response: null
                             };
                             
@@ -801,14 +801,14 @@ function CarsProductDetailInner({
                             toast.error(data.message || "Échec de l'envoi de l'avis");
                           }
                         } catch (error) {
-                          console.error('Error submitting review:', error);
+                          console.error("Erreur lors de l'envoi de l'avis :", error);
                           toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                         } finally {
                           setIsSubmittingReview(false);
                         }
                       }}>
                         <div>
-                          <label className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Your Rating *</label>
+                          <label className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Votre note *</label>
                           <div className="flex">
                             {[1, 2, 3, 4, 5].map((star) => (
                               <button
@@ -826,12 +826,12 @@ function CarsProductDetailInner({
                         </div>
 
                         <div>
-                          <label htmlFor="review-title" className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Review Title *</label>
+                          <label htmlFor="review-title" className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Titre de l'avis *</label>
                           <input
                             type="text"
                             id="review-title"
                             className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white"
-                            placeholder="Give your review a title"
+                            placeholder="Donnez un titre à votre avis"
                             value={reviewTitle}
                             onChange={(e) => setReviewTitle(e.target.value)}
                             required
@@ -839,7 +839,7 @@ function CarsProductDetailInner({
                         </div>
 
                         <div>
-                          <label htmlFor="review-content" className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Your Review *</label>
+                          <label htmlFor="review-content" className="block text-sm font-black text-white mb-1 tracking-wider uppercase">Votre avis *</label>
                           <textarea
                             id="review-content"
                             rows={4}
@@ -857,14 +857,14 @@ function CarsProductDetailInner({
                             disabled={isSubmittingReview}
                             className="w-full inline-flex justify-center border border-transparent shadow-lg px-6 py-3 bg-red-600 text-base font-black text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wider uppercase disabled:opacity-50 disabled:cursor-not-allowed"
                           >
-                            {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                            {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                           </button>
                           <button
                             type="button"
                             className="mt-3 w-full inline-flex justify-center border border-gray-300 shadow-lg px-6 py-3 bg-white text-base font-black text-gray-700 hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wider uppercase"
                             onClick={() => setShowReviewModal(false)}
                           >
-                            Cancel
+                            Annuler
                           </button>
                         </div>
                       </form>

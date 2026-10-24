@@ -95,10 +95,10 @@ function BabyKidsWishlistContent({
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">My Wishlist</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Mes favoris</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600">
-                Your favorite items for your little ones
+                Vos articles préférés
               </p>
             </div>
           </div>
@@ -111,7 +111,7 @@ function BabyKidsWishlistContent({
               <>
                 <div className="flex items-center justify-between mb-12">
                   <h2 className="text-3xl font-bold text-gray-800">
-                    {items.length} {items.length === 1 ? 'Item' : 'Items'} in Your Wishlist
+                    {items.length} {items.length === 1 ? "article" : "articles"} dans vos favoris
                   </h2>
 
                 </div>
@@ -208,7 +208,7 @@ function BabyKidsWishlistContent({
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                                 </svg>
-                                <span>{item.stock <= 0 ? 'Rupture de stock' : 'Add to Cart'}</span>
+                                <span>{item.stock <= 0 ? 'Rupture de stock' : "Ajouter au panier"}</span>
                               </button>
                             </div>
                           </div>
@@ -229,9 +229,9 @@ function BabyKidsWishlistContent({
                         <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Your Wishlist is Empty</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Vos favoris sont vides</h3>
                     <p className="text-gray-600 mb-6">
-                      Start adding items you love for your little ones!
+                      Commencez à ajouter vos produits préférés !
                     </p>
                     <a
                       href={generateStoreUrl('store.products', store)}
@@ -251,8 +251,8 @@ function BabyKidsWishlistContent({
           <div className="bg-pink-50 py-16">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-gray-800 mb-4">You Might Also Love</h2>
-                <p className="text-gray-600 text-lg">Discover more amazing products for your little ones</p>
+                <h2 className="text-4xl font-bold text-gray-800 mb-4">Vous pourriez aussi aimer</h2>
+                <p className="text-gray-600 text-lg">Découvrez plus de produits</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((product) => (

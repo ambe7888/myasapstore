@@ -29,7 +29,7 @@ export default function WatchesBrandLogoSlider({ content }: WatchesBrandLogoSlid
             Authorized Dealer
           </h3>
           <p className="text-slate-600 font-light">
-            Trusted by the world's most prestigious watch manufacturers
+            Nous travaillons avec des marques de confiance
           </p>
         </div>
 

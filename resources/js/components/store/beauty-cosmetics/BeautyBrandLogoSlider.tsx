@@ -24,10 +24,10 @@ export default function BeautyBrandLogoSlider({ content }: BeautyBrandLogoSlider
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-2xl font-light text-gray-900 mb-4">
-            Trusted Beauty Brands
+            Marques de confiance
           </h2>
           <p className="text-gray-600">
-            Partnering with the world's most loved beauty brands
+            Nous travaillons avec des marques de confiance
           </p>
         </div>
 
@@ -56,8 +56,8 @@ export default function BeautyBrandLogoSlider({ content }: BeautyBrandLogoSlider
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
           {(content?.stats || [
             { number: '50K+', label: 'Happy Customers' },
-            { number: '200+', label: 'Beauty Brands' },
-            { number: '5K+', label: 'Products' },
+            { number: '200+', label: "Nos marques" },
+            { number: '5K+', label: "Produits" },
             { number: '98%', label: 'Satisfaction Rate' }
           ]).map((stat, index) => (
             <div key={index} className="text-center">

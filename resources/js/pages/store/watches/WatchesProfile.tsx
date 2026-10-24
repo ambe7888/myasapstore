@@ -107,14 +107,14 @@ export default function WatchesProfile({
               <div className="max-w-4xl">
                 <div className="mb-6">
                   <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
-                    Account
+                    Compte
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
                   My Profile
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Manage your luxury timepiece collection preferences and account details
+                  Gérez votre compte et vos informations personnelles
                 </p>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function WatchesProfile({
                         className="bg-amber-500 text-slate-900 px-6 py-3 rounded-lg font-medium hover:bg-amber-600 transition-colors flex items-center"
                       >
                         <Edit3 className="w-4 h-4 mr-2" />
-                        Edit Profile
+                        Modifier le profil
                       </button>
                     ) : (
                       <button 
@@ -159,7 +159,7 @@ export default function WatchesProfile({
                         className="border border-slate-400 text-white px-6 py-3 rounded-lg font-medium hover:border-slate-300 transition-colors flex items-center"
                       >
                         <X className="w-4 h-4 mr-2" />
-                        Cancel
+                        Annuler
                       </button>
                     )}
                   </div>
@@ -174,7 +174,7 @@ export default function WatchesProfile({
                       <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                         <User className="w-5 h-5 text-amber-600" />
                       </div>
-                      <h3 className="text-xl font-medium text-slate-900">Personal Details</h3>
+                      <h3 className="text-xl font-medium text-slate-900">Informations personnelles</h3>
                     </div>
                     
                     <div className="space-y-6">
@@ -210,7 +210,7 @@ export default function WatchesProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Date of Birth</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Date de naissance</label>
                         <input
                           type="date"
                           value={isEditing ? profileForm.data.date_of_birth : user.date_of_birth || ''}
@@ -236,7 +236,7 @@ export default function WatchesProfile({
                           }`}
                           disabled={!isEditing}
                         >
-                          <option value="">Select Gender</option>
+                          <option value="">Sélectionnez votre genre</option>
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                           <option value="other">Other</option>
@@ -276,7 +276,7 @@ export default function WatchesProfile({
                           type="tel"
                           value={isEditing ? profileForm.data.phone : user.phone || ''}
                           onChange={(e) => profileForm.setData('phone', e.target.value)}
-                          placeholder={!isEditing && !user.phone ? 'Not provided' : ''}
+                          placeholder={!isEditing && !user.phone ? "Non renseigné" : ''}
                           className={`w-full px-4 py-3 border rounded-lg transition-colors ${
                             isEditing 
                               ? 'border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200' 
@@ -294,17 +294,17 @@ export default function WatchesProfile({
                       <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
                         <MapPin className="w-5 h-5 text-amber-600" />
                       </div>
-                      <h3 className="text-xl font-medium text-slate-900">Address Information</h3>
+                      <h3 className="text-xl font-medium text-slate-900">Informations d'adresse</h3>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Street Address</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Adresse</label>
                         <input
                           type="text"
                           value={isEditing ? profileForm.data.address : user.address?.address || ''}
                           onChange={(e) => profileForm.setData('address', e.target.value)}
-                          placeholder={!isEditing && !user.address?.address ? 'Not provided' : ''}
+                          placeholder={!isEditing && !user.address?.address ? "Non renseigné" : ''}
                           className={`w-full px-4 py-3 border rounded-lg transition-colors ${
                             isEditing 
                               ? 'border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200' 
@@ -315,12 +315,12 @@ export default function WatchesProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">City</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Ville</label>
                         <input
                           type="text"
                           value={isEditing ? profileForm.data.city : user.address?.city || ''}
                           onChange={(e) => profileForm.setData('city', e.target.value)}
-                          placeholder={!isEditing && !user.address?.city ? 'Not provided' : ''}
+                          placeholder={!isEditing && !user.address?.city ? "Non renseigné" : ''}
                           className={`w-full px-4 py-3 border rounded-lg transition-colors ${
                             isEditing 
                               ? 'border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200' 
@@ -336,7 +336,7 @@ export default function WatchesProfile({
                           type="text"
                           value={isEditing ? profileForm.data.state : user.address?.state || ''}
                           onChange={(e) => profileForm.setData('state', e.target.value)}
-                          placeholder={!isEditing && !user.address?.state ? 'Not provided' : ''}
+                          placeholder={!isEditing && !user.address?.state ? "Non renseigné" : ''}
                           className={`w-full px-4 py-3 border rounded-lg transition-colors ${
                             isEditing 
                               ? 'border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200' 
@@ -352,7 +352,7 @@ export default function WatchesProfile({
                           type="text"
                           value={isEditing ? profileForm.data.postal_code : user.address?.postal_code || ''}
                           onChange={(e) => profileForm.setData('postal_code', e.target.value)}
-                          placeholder={!isEditing && !user.address?.postal_code ? 'Not provided' : ''}
+                          placeholder={!isEditing && !user.address?.postal_code ? "Non renseigné" : ''}
                           className={`w-full px-4 py-3 border rounded-lg transition-colors ${
                             isEditing 
                               ? 'border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200' 
@@ -363,7 +363,7 @@ export default function WatchesProfile({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Country</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Pays</label>
                         <select
                           value={isEditing ? profileForm.data.country : user.address?.country || 'United States'}
                           onChange={(e) => profileForm.setData('country', e.target.value)}
@@ -395,7 +395,7 @@ export default function WatchesProfile({
                       className="bg-amber-500 text-slate-900 px-8 py-4 rounded-lg font-medium hover:bg-amber-600 transition-colors disabled:opacity-50 flex items-center text-lg"
                     >
                       <Save className="w-5 h-5 mr-2" />
-                      {profileForm.processing ? 'Saving Changes...' : 'Save Changes'}
+                      {profileForm.processing ? 'Saving Changes...' : "Enregistrer les modifications"}
                     </button>
                   </div>
                 )}
@@ -415,14 +415,14 @@ export default function WatchesProfile({
                     className="border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-amber-500 hover:text-amber-600 transition-colors flex items-center"
                   >
                     <Lock className="w-4 h-4 mr-2" />
-                    {showPasswordForm ? 'Cancel' : 'Change Password'}
+                    {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                   </button>
                 </div>
                 
                 {showPasswordForm && (
                   <form onSubmit={handlePasswordSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">Current Password</label>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">Mot de passe actuel</label>
                       <input
                         type="password"
                         value={passwordForm.data.current_password}
@@ -433,7 +433,7 @@ export default function WatchesProfile({
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">New Password</label>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">Nouveau mot de passe</label>
                       <input
                         type="password"
                         value={passwordForm.data.password}
@@ -444,7 +444,7 @@ export default function WatchesProfile({
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">Confirm Password</label>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">Confirmer le mot de passe</label>
                       <input
                         type="password"
                         value={passwordForm.data.password_confirmation}
@@ -461,7 +461,7 @@ export default function WatchesProfile({
                         className="bg-amber-500 text-slate-900 px-8 py-3 rounded-lg font-medium hover:bg-amber-600 transition-colors disabled:opacity-50 flex items-center"
                       >
                         <Shield className="w-4 h-4 mr-2" />
-                        {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                        {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                       </button>
                     </div>
                   </form>

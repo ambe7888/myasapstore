@@ -42,10 +42,10 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
           setIsSubmitted(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -69,7 +69,7 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
           
           {/* Subtitle */}
           <p className="text-xl text-white/80 mb-12 font-light leading-relaxed max-w-2xl mx-auto">
-            {content?.subtitle || 'Be the first to know about new arrivals, exclusive sales, and styling tips from our fashion experts.'}
+            {content?.subtitle || "Soyez le premier informé de nos nouveautés, de nos ventes exclusives et de nos conseils."}
           </p>
           
           {/* Newsletter Form */}
@@ -81,8 +81,8 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-light mb-2 tracking-wide">Thank You!</h3>
-                <p className="text-white/80 font-light">You've been successfully subscribed to our newsletter.</p>
+                <h3 className="text-xl font-light mb-2 tracking-wide">Merci !</h3>
+                <p className="text-white/80 font-light">Vous êtes maintenant abonné à notre newsletter.</p>
               </div>
             </div>
           ) : (
@@ -92,7 +92,7 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={content?.placeholder_text || 'Enter your email for style updates'}
+                  placeholder={content?.placeholder_text || "Saisissez votre e-mail pour recevoir nos actualités"}
                   className="flex-1 px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white/40 transition-colors"
                   required
                 />
@@ -101,7 +101,7 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
                   disabled={isSubmitting}
                   className="px-8 py-4 bg-white text-black font-medium tracking-wide uppercase text-sm hover:bg-gray-100 transition-colors disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Joining...' : (content?.button_text || 'Join Now')}
+                  {isSubmitting ? 'Joining...' : (content?.button_text || "Je m'abonne")}
                 </button>
               </div>
               {error && (
@@ -114,7 +114,7 @@ export default function FashionNewsletterSection({ content }: FashionNewsletterS
           
           {/* Privacy Text */}
           <p className="text-white/60 text-sm font-light">
-            {content?.privacy_text || 'Unsubscribe anytime. Your style, your choice.'}
+            {content?.privacy_text || "Désabonnement possible à tout moment."}
           </p>
           
 

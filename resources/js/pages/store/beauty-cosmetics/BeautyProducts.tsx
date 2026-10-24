@@ -234,14 +234,14 @@ export default function BeautyProducts({
               <div className="flex items-center justify-center mb-4">
                 <span className="inline-flex items-center px-4 py-2 bg-white text-rose-600 text-sm font-medium rounded-full shadow-sm">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  Premium Beauty Collection
+                  Notre collection
                 </span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-light text-gray-900 leading-tight mb-6">
-                Beauty Products
+                Produits
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Discover premium skincare, makeup, and wellness products that celebrate your unique beauty
+                Découvrez notre sélection de produits de qualité, choisis avec soin pour vous
               </p>
             </div>
           </div>
@@ -268,7 +268,7 @@ export default function BeautyProducts({
                 {/* Search */}
                 {showFilter('search') && (<>
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-rose-700 mb-3 uppercase tracking-wide">Search Beauty Products</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-3 uppercase tracking-wide">Rechercher un produit</label>
                   <div className="relative">
                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-rose-500" />
                     <input
@@ -276,7 +276,7 @@ export default function BeautyProducts({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                      placeholder="Find your perfect match..."
+                      placeholder="Rechercher un produit..."
                       className="w-full pl-12 pr-4 py-3 bg-white border-2 border-rose-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-all"
                     />
                   </div>
@@ -286,7 +286,7 @@ export default function BeautyProducts({
                 {/* Categories */}
                 {showFilter('categories') && (<>
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Beauty Categories</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Catégories</label>
                   <div className="space-y-3 max-h-48 overflow-y-auto">
                     {categories.map((category) => (
                       <label key={category.id} className="flex items-center p-3 rounded-xl hover:bg-rose-100 transition-colors cursor-pointer">
@@ -342,7 +342,7 @@ export default function BeautyProducts({
                 {showFilter('brands') && (<>
                 {brands.length > 0 && (
                   <div className="mb-8">
-                    <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Beauty Brands</label>
+                    <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Nos marques</label>
                     <div className="space-y-3 max-h-40 overflow-y-auto">
                       {brands.map((brand) => (
                         <label key={brand.id} className="flex items-center p-2 rounded-lg hover:bg-rose-100 transition-colors cursor-pointer">
@@ -372,7 +372,7 @@ export default function BeautyProducts({
                 {/* Rating */}
                 {showFilter('rating') && (<>
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Customer Rating</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-4 uppercase tracking-wide">Note des clients</label>
                   <div className="space-y-3">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <label key={rating} className="flex items-center p-3 rounded-xl hover:bg-rose-100 transition-colors cursor-pointer border-2 border-transparent hover:border-rose-200">
@@ -569,7 +569,7 @@ export default function BeautyProducts({
                             />
                             {product.sale_price && (
                               <div className="absolute top-3 left-3 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                                SALE
+                                PROMO
                               </div>
                             )}
                           </Link>
@@ -651,7 +651,7 @@ export default function BeautyProducts({
                 <div className="text-center py-16">
                   <div className="text-gray-500 mb-6">
                     <Sparkles className="h-16 w-16 mx-auto mb-6 opacity-50 text-rose-300" />
-                    <h3 className="text-xl font-semibold mb-3 text-gray-700">No beauty products found</h3>
+                    <h3 className="text-xl font-semibold mb-3 text-gray-700">Aucun produit trouvé</h3>
                     <p className="text-gray-600">{t("Try adjusting your filters or search terms")} to discover more products</p>
                   </div>
                   <button
@@ -672,7 +672,7 @@ export default function BeautyProducts({
                       disabled={pagination.current_page === 1}
                       className="px-4 py-2 border-2 border-rose-200 rounded-lg text-sm hover:bg-rose-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-rose-600"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -697,7 +697,7 @@ export default function BeautyProducts({
                       disabled={pagination.current_page === pagination.last_page}
                       className="px-4 py-2 border-2 border-rose-200 rounded-lg text-sm hover:bg-rose-50 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-rose-600"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>

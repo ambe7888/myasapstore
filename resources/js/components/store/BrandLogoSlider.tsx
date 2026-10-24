@@ -18,14 +18,14 @@ export default function BrandLogoSlider({
   content
 }: BrandLogoSliderProps) {
   const defaultBrands = [
-    { id: 1, name: "Brand One", logo: "/storage/media/brands/brand1.png", url: "#" },
-    { id: 2, name: "Brand Two", logo: "/storage/media/brands/brand2.png", url: "#" },
-    { id: 3, name: "Brand Three", logo: "/storage/media/brands/brand3.png", url: "#" },
-    { id: 4, name: "Brand Four", logo: "/storage/media/brands/brand4.png", url: "#" },
-    { id: 5, name: "Brand Five", logo: "/storage/media/brands/brand5.png", url: "#" },
-    { id: 6, name: "Brand Six", logo: "/storage/media/brands/brand6.png", url: "#" },
-    { id: 7, name: "Brand Seven", logo: "/storage/media/brands/brand7.png", url: "#" },
-    { id: 8, name: "Brand Eight", logo: "/storage/media/brands/brand8.png", url: "#" }
+    { id: 1, name: "Marque un", logo: "/storage/media/brands/brand1.png", url: "#" },
+    { id: 2, name: "Marque deux", logo: "/storage/media/brands/brand2.png", url: "#" },
+    { id: 3, name: "Marque trois", logo: "/storage/media/brands/brand3.png", url: "#" },
+    { id: 4, name: "Marque quatre", logo: "/storage/media/brands/brand4.png", url: "#" },
+    { id: 5, name: "Marque cinq", logo: "/storage/media/brands/brand5.png", url: "#" },
+    { id: 6, name: "Marque six", logo: "/storage/media/brands/brand6.png", url: "#" },
+    { id: 7, name: "Marque sept", logo: "/storage/media/brands/brand7.png", url: "#" },
+    { id: 8, name: "Marque huit", logo: "/storage/media/brands/brand8.png", url: "#" }
   ];
   const sliderRef = useRef<HTMLDivElement>(null);
   

@@ -61,8 +61,8 @@ export default function BeautyForgotPassword({
                   <path fillRule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h1 className="text-3xl font-light text-gray-900 mb-2">Reset Password</h1>
-              <p className="text-gray-600">Enter your email to receive reset instructions</p>
+              <h1 className="text-3xl font-light text-gray-900 mb-2">Réinitialiser le mot de passe</h1>
+              <p className="text-gray-600">Saisissez votre e-mail pour recevoir les instructions</p>
             </div>
 
             {/* Status Message */}
@@ -86,7 +86,7 @@ export default function BeautyForgotPassword({
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors ${
                       errors.email ? 'border-red-300' : 'border-gray-300'
                     }`}
-                    placeholder="Enter your email address"
+                    placeholder="Saisissez votre adresse e-mail"
                     required
                   />
                   {errors.email && (
@@ -113,7 +113,7 @@ export default function BeautyForgotPassword({
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  Back to Sign In
+                  Retour à la connexion
                 </Link>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function BeautyForgotPassword({
                   href={generateStoreUrl('store.login', store)}
                   className="text-rose-600 hover:text-rose-500 font-medium"
                 >
-                  Sign In
+                  Se connecter
                 </Link>
               </p>
             </div>

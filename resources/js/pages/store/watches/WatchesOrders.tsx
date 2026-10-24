@@ -112,14 +112,14 @@ export default function WatchesOrders({
               <div className="max-w-4xl">
                 <div className="mb-6">
                   <span className="bg-amber-500 text-slate-900 px-6 py-2 text-sm font-medium tracking-wider uppercase">
-                    Order History
+                    Historique des commandes
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
                   My Orders
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Track your luxury timepiece orders and delivery status
+                  Suivez vos commandes et l'état de la livraison
                 </p>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function WatchesOrders({
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center">
                           <Filter className="w-5 h-5 text-slate-600 mr-2" />
-                          <span className="text-sm font-medium text-slate-700">Filter by status:</span>
+                          <span className="text-sm font-medium text-slate-700">Filtrer par statut :</span>
                         </div>
                         <div className="flex space-x-2">
                           {[
@@ -169,7 +169,7 @@ export default function WatchesOrders({
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
                           type="text"
-                          placeholder="Search by order number..."
+                          placeholder="Rechercher par numéro de commande..."
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                           className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:border-amber-500 focus:ring-2 focus:ring-amber-200 w-64"
@@ -231,9 +231,9 @@ export default function WatchesOrders({
                     <div className="text-center py-12">
                       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-12">
                         <Package className="h-16 w-16 text-slate-300 mx-auto mb-6" />
-                        <h3 className="text-xl font-medium text-slate-900 mb-2">No orders found</h3>
+                        <h3 className="text-xl font-medium text-slate-900 mb-2">Aucune commande trouvée</h3>
                         <p className="text-slate-600 mb-6">
-                          No orders match your current filters. Try adjusting your search criteria.
+                          Aucune commande ne correspond à vos filtres. Essayez de modifier votre recherche.
                         </p>
                         <button
                           onClick={() => {
@@ -254,16 +254,16 @@ export default function WatchesOrders({
                     <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
                       <Package className="h-10 w-10 text-slate-400" />
                     </div>
-                    <h2 className="text-2xl font-light text-slate-900 mb-4">No Orders Yet</h2>
+                    <h2 className="text-2xl font-light text-slate-900 mb-4">Aucune commande pour le moment</h2>
                     <p className="text-slate-600 mb-8 leading-relaxed">
-                      Your luxury timepiece collection awaits. Start exploring our exquisite watches to place your first order.
+                      Découvrez notre sélection et passez votre première commande.
                     </p>
                     <Link
                       href={generateStoreUrl('store.products', store)}
                       className="bg-amber-500 text-slate-900 px-8 py-4 rounded-lg font-medium hover:bg-amber-600 transition-colors inline-flex items-center"
                     >
                       <Clock className="w-5 h-5 mr-2" />
-                      Explore Timepieces
+                      Découvrir les produits
                     </Link>
                   </div>
                 </div>

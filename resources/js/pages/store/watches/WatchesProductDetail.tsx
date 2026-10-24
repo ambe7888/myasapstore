@@ -215,7 +215,7 @@ function WatchesProductDetail({
           <div className="bg-slate-50 border-b border-slate-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-4">
               <nav className="text-sm font-light tracking-wide">
-                <a href={`/store/${store.slug}`} className="text-slate-500 hover:text-amber-600 transition-colors">Home</a>
+                <a href={`/store/${store.slug}`} className="text-slate-500 hover:text-amber-600 transition-colors">Accueil</a>
                 <ChevronRight className="h-4 w-4 mx-2 text-slate-400 inline" />
                 {product.category && (
                   <>
@@ -436,7 +436,7 @@ function WatchesProductDetail({
                     {/* Description */}
                     {product.description && (
                       <div className="pt-4 border-t border-slate-200">
-                        <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">About This Timepiece</h3>
+                        <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-slate-900">À propos de ce produit</h3>
                         <div 
                           className="text-sm text-slate-600 leading-relaxed prose prose-slate max-w-none"
                           dangerouslySetInnerHTML={{ __html: product.description || '' }}
@@ -451,11 +451,11 @@ function WatchesProductDetail({
                         <span className="text-slate-900 font-medium">{product.sku || `#${product.id}`}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Category:</span>
+                        <span className="text-slate-600">Catégorie :</span>
                         <span className="text-slate-900 font-medium">{product.category?.name || 'Timepiece'}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Stock:</span>
+                        <span className="text-slate-600">Stock :</span>
                         <span className="text-slate-900 font-medium">{product.stock} units</span>
                       </div>
                     </div>
@@ -475,7 +475,7 @@ function WatchesProductDetail({
                     }`}
                   >
                     <div className="text-sm font-medium tracking-wide uppercase">Description</div>
-                    <div className="text-xs text-slate-500 mt-1">Product details</div>
+                    <div className="text-xs text-slate-500 mt-1">Détails du produit</div>
                   </button>
                   
                   {product.specifications && (
@@ -501,7 +501,7 @@ function WatchesProductDetail({
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <div className="text-sm font-medium tracking-wide uppercase">Details</div>
+                      <div className="text-sm font-medium tracking-wide uppercase">Détails</div>
                       <div className="text-xs text-slate-500 mt-1">Additional info</div>
                     </button>
                   )}
@@ -528,7 +528,7 @@ function WatchesProductDetail({
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
-                    <div className="text-sm font-medium tracking-wide uppercase">Reviews</div>
+                    <div className="text-sm font-medium tracking-wide uppercase">Avis</div>
                     <div className="text-xs text-slate-500 mt-1">{totalReviews || product.reviews_count || productReviews?.length || 0} customer reviews</div>
                   </button>
                 </div>
@@ -549,8 +549,8 @@ function WatchesProductDetail({
                   {activeTab === 'advanced' && hasCustomFields && (
                     <div className="space-y-6 max-h-80 overflow-y-auto">
                       <div>
-                        <h3 className="text-lg font-medium text-slate-900 mb-2">Advanced Product Information</h3>
-                        <p className="text-slate-600 mb-6">Watch specifications and custom attributes</p>
+                        <h3 className="text-lg font-medium text-slate-900 mb-2">Informations détaillées du produit</h3>
+                        <p className="text-slate-600 mb-6">Caractéristiques du produit</p>
                       </div>
                       <div className="bg-white border border-slate-200 overflow-hidden">
                         <div className="divide-y divide-slate-100">
@@ -600,7 +600,7 @@ function WatchesProductDetail({
                             }}
                             className="px-6 py-3 bg-slate-900 text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 font-medium tracking-wide transition-colors"
                           >
-                            Write a Review
+                            Donner votre avis
                           </button>
                         </div>
 
@@ -632,7 +632,7 @@ function WatchesProductDetail({
                             ))
                           ) : (
                             <div className="text-center py-8">
-                              <p className="text-slate-500 font-light">No reviews yet. Be the first to review this timepiece!</p>
+                              <p className="text-slate-500 font-light">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                             </div>
                           )}
                         </div>
@@ -648,8 +648,8 @@ function WatchesProductDetail({
           {relatedProducts.length > 0 && (
             <WatchesRelatedProducts
               products={relatedProducts}
-              title="You May Also Like"
-              subtitle="Discover similar timepieces that complement your collection"
+              title="Vous pourriez aussi aimer"
+              subtitle="Découvrez des produits similaires"
               storeSettings={storeSettings}
               currencies={currencies}
             />
@@ -669,7 +669,7 @@ function WatchesProductDetail({
               <div className="bg-slate-900 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <h3 className="text-2xl font-light text-white mb-6 tracking-wide">Write a Review</h3>
+                    <h3 className="text-2xl font-light text-white mb-6 tracking-wide">Donner votre avis</h3>
 
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
@@ -698,7 +698,7 @@ function WatchesProductDetail({
                         
                         if (data.success) {
                           toast.success('Merci pour votre avis !', {
-                            description: 'Your review has been submitted successfully.'
+                            description: "Votre avis a bien été envoyé."
                           });
                           
                           const newReview = {
@@ -706,8 +706,8 @@ function WatchesProductDetail({
                             rating: reviewRating,
                             title: reviewTitle,
                             content: reviewContent,
-                            customer_name: data.review?.customer_name || 'You',
-                            created_at: 'Just now',
+                            customer_name: data.review?.customer_name || "Vous",
+                            created_at: "À l'instant",
                             store_response: null
                           };
                           
@@ -728,14 +728,14 @@ function WatchesProductDetail({
                           toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
-                        console.error('Error submitting review:', error);
+                        console.error("Erreur lors de l'envoi de l'avis :", error);
                         toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
                     }}>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Your Rating *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Votre note *</label>
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -753,12 +753,12 @@ function WatchesProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
+                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Titre de l'avis *</label>
                         <input
                           type="text"
                           id="review-title"
                           className="w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white"
-                          placeholder="Give your review a title"
+                          placeholder="Donnez un titre à votre avis"
                           value={reviewTitle}
                           onChange={(e) => setReviewTitle(e.target.value)}
                           required
@@ -766,7 +766,7 @@ function WatchesProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
+                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Votre avis *</label>
                         <textarea
                           id="review-content"
                           rows={4}
@@ -784,14 +784,14 @@ function WatchesProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-lg px-6 py-3 bg-amber-500 text-base font-medium text-slate-900 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"
                           className="mt-3 w-full inline-flex justify-center rounded-lg border border-slate-300 shadow-lg px-6 py-3 bg-white text-base font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl tracking-wide"
                           onClick={() => setShowReviewModal(false)}
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

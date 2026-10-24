@@ -66,7 +66,7 @@ export default function FurnitureBlogPost({
                 className="inline-flex items-center text-amber-200 hover:text-white mb-6 transition-colors"
               >
                 <ArrowLeft className="h-5 w-5 mr-2" />
-                Back to Blog
+                Retour au blog
               </Link>
               
               <div className="text-center">

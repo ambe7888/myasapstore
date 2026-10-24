@@ -33,26 +33,26 @@ export default function InfoBoxesSection({
     {
       id: 1,
       icon: <Truck className="h-8 w-8" />,
-      title: "Free Shipping",
-      description: "On all orders over $50"
+      title: "Livraison gratuite",
+      description: "Sur les commandes éligibles"
     },
     {
       id: 2,
       icon: <RefreshCw className="h-8 w-8" />,
-      title: "Easy Returns",
+      title: "Retours faciles",
       description: "30-day return policy"
     },
     {
       id: 3,
       icon: <CreditCard className="h-8 w-8" />,
-      title: "Secure Payment",
+      title: "Paiement sécurisé",
       description: "100% secure checkout"
     },
     {
       id: 4,
       icon: <HeadphonesIcon className="h-8 w-8" />,
       title: "24/7 Support",
-      description: "Dedicated customer service"
+      description: "Service client dédié"
     }
   ];
   

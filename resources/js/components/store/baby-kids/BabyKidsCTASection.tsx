@@ -17,10 +17,10 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
                 Array.isArray(content?.cta_boxes) ? content.cta_boxes :
                 Array.isArray(content?.value) ? content.value :
                 Array.isArray(content) ? content : [
-    { icon: 'gift', title: 'Gift Cards', subtitle: 'Perfect for baby showers' },
-    { icon: 'star', title: 'Size Exchange', subtitle: 'Easy returns & exchanges' },
-    { icon: 'users', title: 'Parent Community', subtitle: 'Join our parenting tips group' },
-    { icon: 'truck', title: 'Fast Delivery', subtitle: 'Same-day delivery available' }
+    { icon: 'gift', title: 'Gift Cards', subtitle: "Idéal pour offrir" },
+    { icon: 'star', title: "Échange de taille", subtitle: "Retours et échanges faciles" },
+    { icon: 'users', title: 'Parent Community', subtitle: "Rejoignez notre communauté" },
+    { icon: 'truck', title: "Livraison rapide", subtitle: "Livraison rapide disponible" }
   ];
 
   const getIcon = (iconName: string) => {
@@ -74,10 +74,10 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            {content?.title || 'Why Parents Choose Us'}
+            {content?.title || "Pourquoi nous choisir"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {content?.description || 'We\'re committed to making your parenting journey easier with quality products and exceptional service.'}
+            {content?.description || "Nous nous engageons à vous offrir des produits de qualité et un service attentif."}
           </p>
         </div>
 
@@ -126,10 +126,10 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
         <div className="text-center mt-16">
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/50 max-w-4xl mx-auto">
             <h3 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
-              {content?.bottom_title || 'Ready to Shop for Your Little One?'}
+              {content?.bottom_title || "Prêt à passer commande ?"}
             </h3>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {content?.bottom_description || 'Join thousands of happy parents who trust us for their children\'s clothing needs.'}
+              {content?.bottom_description || "Rejoignez nos clients qui nous font confiance."}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -150,7 +150,7 @@ export default function BabyKidsCTASection({ content, ctaBoxes }: BabyKidsCTASec
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                 </svg>
-                <span>{content?.secondary_button_text || 'Size Guide'}</span>
+                <span>{content?.secondary_button_text || "Guide des tailles"}</span>
               </Link>
             </div>
           </div>

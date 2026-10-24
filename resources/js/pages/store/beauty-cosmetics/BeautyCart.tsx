@@ -82,7 +82,7 @@ function BeautyCartContent({
               Beauty Bag
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Your curated beauty essentials ready for checkout
+              Vos articles sont prêts pour la commande
             </p>
           </div>
         </div>
@@ -192,7 +192,7 @@ function BeautyCartContent({
                     </div>
                     
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Tax</span>
+                      <span className="text-gray-600">Taxe</span>
                       <span className="font-semibold text-gray-900">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                     </div>
                     
@@ -225,7 +225,7 @@ function BeautyCartContent({
                     </div>
                     <div className="flex items-center gap-3">
                       <ShoppingBag className="h-4 w-4 text-rose-500" />
-                      <span>30-day easy returns</span>
+                      <span>Retours faciles sous 30 jours</span>
                     </div>
                   </div>
                 </div>
@@ -236,9 +236,9 @@ function BeautyCartContent({
               <div className="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <ShoppingBag className="h-12 w-12 text-rose-400" />
               </div>
-              <h2 className="text-3xl font-light text-gray-900 mb-4">Your beauty bag is empty</h2>
+              <h2 className="text-3xl font-light text-gray-900 mb-4">Votre panier est vide</h2>
               <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
-                Discover amazing beauty products and start building your perfect routine
+                Découvrez nos produits et ajoutez-les à votre panier
               </p>
               <Link
                 href={generateStoreUrl('store.products', store)}

@@ -113,7 +113,7 @@ const { props } = usePage();
       country: ''
     },
     payment_method: 'Credit Card',
-    shipping_method: 'Standard Shipping'
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;
@@ -382,7 +382,7 @@ const { props } = usePage();
               {/* Shipping & Paiement Info */}
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 mb-8">
                 <div className="p-6 border-b border-slate-200">
-                  <h2 className="text-xl font-medium text-slate-900">Livraison & Paiement Information</h2>
+                  <h2 className="text-xl font-medium text-slate-900">Informations de livraison et de paiement</h2>
                 </div>
                 
                 <div className="p-6">
@@ -391,7 +391,7 @@ const { props } = usePage();
                       <div className="flex items-start">
                         <MapPin className="h-5 w-5 text-amber-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-slate-700 mb-3">Livraison Address</p>
+                          <p className="text-sm font-medium text-slate-700 mb-3">Adresse de livraison</p>
                           <p className="text-sm text-slate-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />

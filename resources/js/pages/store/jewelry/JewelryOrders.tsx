@@ -110,7 +110,7 @@ export default function JewelryOrders({
               className="inline-flex items-center text-yellow-700 hover:text-yellow-800 font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
+              Retour à l'accueil
             </Link>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function JewelryOrders({
                     <div>
                       <h1 className="text-2xl font-serif mb-1">My Orders</h1>
                       <p className="text-yellow-200 text-sm">
-                        View and manage your order history
+                        Consultez et gérez l'historique de vos commandes
                       </p>
                     </div>
                   </div>
@@ -140,10 +140,10 @@ export default function JewelryOrders({
                 <div className="p-6">
                   <div className="mb-6">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Order History</h2>
+                      <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Historique des commandes</h2>
                       <div className="flex items-center space-x-2 text-sm text-gray-600">
                         <Shield className="h-4 w-4 text-green-600" />
-                        <span>All orders are fully insured</span>
+                        <span>Toutes les commandes sont assurées</span>
                       </div>
                     </div>
                   </div>
@@ -167,7 +167,7 @@ export default function JewelryOrders({
                               target="_blank"
                               className="px-3 py-1 text-yellow-600 hover:text-yellow-700 text-sm"
                             >
-                              View
+                              Voir
                             </Link>
                           </div>
                         </div>
@@ -180,9 +180,9 @@ export default function JewelryOrders({
                   <div className="inline-flex items-center justify-center w-32 h-32 bg-yellow-100 rounded-full mb-8 shadow-xl">
                     <Gem className="h-16 w-16 text-yellow-600" />
                   </div>
-                  <h3 className="text-2xl font-serif text-gray-800 mb-4">No Orders Yet</h3>
+                  <h3 className="text-2xl font-serif text-gray-800 mb-4">Aucune commande pour le moment</h3>
                   <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                    Start shopping to see your orders here. Browse our collection and find something special.
+                    Commencez vos achats pour voir vos commandes ici.
                   </p>
                   <Link
                     href={generateStoreUrl('store.home', store)}

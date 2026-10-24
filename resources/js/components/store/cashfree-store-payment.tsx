@@ -118,7 +118,7 @@ export function CashfreeStorePayment({
       const result = await cashfree.checkout(checkoutOptions);
       
       if (result.error) {
-        throw new Error(result.error.message || 'Payment failed');
+        throw new Error(result.error.message || "Échec du paiement");
       }
       
       if (result.paymentDetails) {
@@ -132,7 +132,7 @@ export function CashfreeStorePayment({
           
           onSuccess();
         } catch (verifyError: any) {
-          const errorMsg = verifyError.response?.data?.error || 'Payment verification failed';
+          const errorMsg = verifyError.response?.data?.error || "Échec de la vérification du paiement";
           throw new Error(errorMsg);
         }
       } else {
@@ -141,7 +141,7 @@ export function CashfreeStorePayment({
       
     } catch (error: any) {
       console.error('Cashfree payment error:', error);
-      setError(error.message || 'Payment failed. Please try again.');
+      setError(error.message || "Échec du paiement. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -150,7 +150,7 @@ export function CashfreeStorePayment({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        You will be redirected to Cashfree to complete your payment securely.
+        Vous allez être redirigé vers Cashfree pour finaliser votre paiement en toute sécurité.
       </p>
       
       {error && (
@@ -166,14 +166,14 @@ export function CashfreeStorePayment({
           className="flex-1"
           disabled={isLoading}
         >
-          Cancel
+          Annuler
         </Button>
         <Button 
           onClick={handlePayment} 
           className="flex-1"
           disabled={isLoading}
         >
-          {isLoading ? 'Processing...' : 'Pay with Cashfree'}
+          {isLoading ? 'Processing...' : "Payer avec Cashfree"}
         </Button>
       </div>
     </div>

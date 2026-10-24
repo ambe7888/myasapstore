@@ -40,7 +40,7 @@ export default function PerfumeBlogPost({
 
   return (
     <>
-      <Head title={`${post.title || 'Blog Post'} - ${store.name}`} />
+      <Head title={`${post.title || "Article"} - ${store.name}`} />
       
       <StoreLayout
         storeName={store.name}
@@ -66,12 +66,12 @@ export default function PerfumeBlogPost({
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  Back to Blog
+                  Retour au blog
                 </Link>
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                {post.title || 'Blog Post Title'}
+                {post.title || "Titre de l'article"}
               </h1>
               
               <div className="flex items-center justify-center space-x-6 text-gray-600">
@@ -145,7 +145,7 @@ export default function PerfumeBlogPost({
                         </svg>
                       </div>
                       <h3 className="text-2xl font-light text-gray-900 mb-4">Content Coming Soon</h3>
-                      <p className="text-gray-600">This article is being prepared with exclusive insights.</p>
+                      <p className="text-gray-600">Cet article est en cours de préparation.</p>
                     </div>
                   )}
                 </div>

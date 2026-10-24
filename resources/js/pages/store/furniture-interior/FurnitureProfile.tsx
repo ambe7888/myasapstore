@@ -102,7 +102,7 @@ export default function FurnitureProfile({
             <div className="text-center">
               <h1 className="text-4xl font-bold mb-4">My Profile</h1>
               <p className="text-amber-200 text-lg">
-                Manage your account and personal information
+                Gérez votre compte et vos informations personnelles
               </p>
             </div>
           </div>
@@ -126,14 +126,14 @@ export default function FurnitureProfile({
                         className="bg-yellow-800 text-white px-6 py-3 rounded-2xl font-bold hover:bg-yellow-900 transition-colors flex items-center justify-center"
                       >
                         <Edit3 className="h-5 w-5 mr-2" />
-                        {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                        {isEditing ? "Annuler la modification" : "Modifier le profil"}
                       </button>
                       <button 
                         onClick={() => setShowPasswordForm(!showPasswordForm)}
                         className="border-2 border-amber-600 text-amber-800 px-6 py-3 rounded-2xl font-bold hover:bg-amber-50 transition-colors flex items-center justify-center"
                       >
                         <Shield className="h-5 w-5 mr-2" />
-                        {showPasswordForm ? 'Cancel' : 'Change Password'}
+                        {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                       </button>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ export default function FurnitureProfile({
                 <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 p-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <User className="h-6 w-6 text-amber-800 mr-3" />
-                    Personal Details
+                    Informations personnelles
                   </h3>
                   <div className="space-y-6">
                     <div>
@@ -185,7 +185,7 @@ export default function FurnitureProfile({
                 <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 p-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <Mail className="h-6 w-6 text-amber-800 mr-3" />
-                    Contact Info
+                    Informations de contact
                   </h3>
                   <div className="space-y-6">
                     <div>
@@ -205,7 +205,7 @@ export default function FurnitureProfile({
                         />
                       ) : (
                         <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                          <span className="text-lg text-slate-900">{user.phone || 'Not provided'}</span>
+                          <span className="text-lg text-slate-900">{user.phone || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -217,11 +217,11 @@ export default function FurnitureProfile({
               <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 p-8 mt-8">
                 <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                   <Home className="h-6 w-6 text-amber-800 mr-3" />
-                  Home Address
+                  Adresse du domicile
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-bold text-amber-800 mb-2">Street Address</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Adresse</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -231,12 +231,12 @@ export default function FurnitureProfile({
                         />
                       ) : (
                         <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                          <span className="text-lg text-slate-900">{user.address?.address || 'Not provided'}</span>
+                          <span className="text-lg text-slate-900">{user.address?.address || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-amber-800 mb-2">City</label>
+                      <label className="block text-sm font-bold text-amber-800 mb-2">Ville</label>
                       {isEditing ? (
                         <input
                           type="text"
@@ -246,7 +246,7 @@ export default function FurnitureProfile({
                         />
                       ) : (
                         <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                          <span className="text-lg text-slate-900">{user.address?.city || 'Not provided'}</span>
+                          <span className="text-lg text-slate-900">{user.address?.city || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -261,7 +261,7 @@ export default function FurnitureProfile({
                         />
                       ) : (
                         <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                          <span className="text-lg text-slate-900">{user.address?.postal_code || 'Not provided'}</span>
+                          <span className="text-lg text-slate-900">{user.address?.postal_code || "Non renseigné"}</span>
                         </div>
                       )}
                     </div>
@@ -274,7 +274,7 @@ export default function FurnitureProfile({
                         className="bg-yellow-800 text-white px-8 py-3 rounded-2xl font-bold hover:bg-yellow-900 transition-colors disabled:opacity-50 flex items-center justify-center"
                       >
                         <Edit3 className="h-5 w-5 mr-2" />
-                        {profileForm.processing ? 'Saving...' : 'Save Changes'}
+                        {profileForm.processing ? 'Saving...' : "Enregistrer les modifications"}
                       </button>
                     </div>
                   )}
@@ -285,11 +285,11 @@ export default function FurnitureProfile({
                 <div className="bg-white rounded-3xl shadow-lg border-2 border-red-200 p-8 mt-8">
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <Lock className="h-6 w-6 text-red-600 mr-3" />
-                    Change Password
+                    Changer le mot de passe
                   </h3>
                   <form onSubmit={handlePasswordSubmit} className="space-y-6">
                     <div>
-                      <label className="block text-sm font-bold text-red-800 mb-2">Current Password</label>
+                      <label className="block text-sm font-bold text-red-800 mb-2">Mot de passe actuel</label>
                       <input
                         type="password"
                         value={passwordForm.data.current_password}
@@ -300,7 +300,7 @@ export default function FurnitureProfile({
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-bold text-red-800 mb-2">New Password</label>
+                      <label className="block text-sm font-bold text-red-800 mb-2">Nouveau mot de passe</label>
                       <input
                         type="password"
                         value={passwordForm.data.password}
@@ -311,7 +311,7 @@ export default function FurnitureProfile({
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-bold text-red-800 mb-2">Confirm New Password</label>
+                      <label className="block text-sm font-bold text-red-800 mb-2">Confirmer le nouveau mot de passe</label>
                       <input
                         type="password"
                         value={passwordForm.data.password_confirmation}
@@ -328,14 +328,14 @@ export default function FurnitureProfile({
                         className="bg-yellow-800 text-white px-8 py-3 rounded-2xl font-bold hover:bg-yellow-900 transition-colors disabled:opacity-50 flex items-center justify-center"
                       >
                         <Lock className="h-5 w-5 mr-2" />
-                        {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                        {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                       </button>
                       <button 
                         type="button"
                         onClick={() => setShowPasswordForm(false)}
                         className="border-2 border-red-600 text-red-600 px-8 py-3 rounded-2xl font-bold hover:bg-red-50 transition-colors"
                       >
-                        Cancel
+                        Annuler
                       </button>
                     </div>
                   </form>

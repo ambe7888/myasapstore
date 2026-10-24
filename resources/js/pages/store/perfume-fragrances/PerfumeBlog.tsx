@@ -62,7 +62,7 @@ export default function PerfumeBlog({
                 Fragrance Journal
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Dive into the art of perfumery with expert insights and fragrance stories.
+                Retrouvez nos conseils, nos idées et les actualités de la boutique.
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function PerfumeBlog({
                         
                         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                           <span className="text-purple-800 font-medium text-sm group-hover:text-purple-900 transition-colors duration-300">
-                            Read Article
+                            Lire l'article
                           </span>
                           <svg className="w-4 h-4 text-purple-800 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -141,7 +141,7 @@ export default function PerfumeBlog({
                 </div>
                 <h3 className="text-2xl font-light text-gray-900 mb-4">Coming Soon</h3>
                 <p className="text-gray-600 max-w-md mx-auto">
-                  Our fragrance journal is being crafted with expert insights. Stay tuned for captivating stories.
+                  Nos articles arrivent bientôt. Restez connectés !
                 </p>
               </div>
             )}

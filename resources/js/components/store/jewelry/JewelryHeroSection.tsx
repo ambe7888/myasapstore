@@ -31,7 +31,7 @@ export default function JewelryHeroSection({ content }: JewelryHeroSectionProps)
           <div className="w-16 h-px bg-yellow-600 mx-auto mb-8"></div>
           
           <span className="text-yellow-700 text-sm font-medium uppercase tracking-widest mb-6 block">
-            {content?.badge_text || 'Exclusive Collection 2024'}
+            {content?.badge_text || "Collection exclusive"}
           </span>
           
           <h1 className="text-5xl font-serif text-neutral-900 mb-6 leading-tight">
@@ -39,7 +39,7 @@ export default function JewelryHeroSection({ content }: JewelryHeroSectionProps)
           </h1>
           
           <p className="text-neutral-600 mb-10 text-lg leading-relaxed">
-            {content?.subtitle || 'Discover exquisite jewelry crafted with precision and passion.'}
+            {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -47,7 +47,7 @@ export default function JewelryHeroSection({ content }: JewelryHeroSectionProps)
               href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
               className="bg-yellow-600 text-white px-8 py-4 uppercase text-sm font-medium tracking-wide hover:bg-yellow-700 transition-colors"
             >
-              {content?.button_text || 'Explore Collection'}
+              {content?.button_text || "Découvrir la collection"}
             </a>
             <a 
               href={formatCustomLink(content?.secondary_button_link, store, generateStoreUrl('store.products', store))}

@@ -239,10 +239,10 @@ export default function BabyKidsProducts({
           
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
             <div className="text-center">
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Baby & Kids Collection</h1>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Notre collection</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Adorable, comfortable, and safe clothing for your precious little ones
+                Des produits de qualité, sélectionnés avec soin pour vous
               </p>
             </div>
           </div>
@@ -257,7 +257,7 @@ export default function BabyKidsProducts({
                   <div className="absolute top-3 left-3 w-full h-full bg-pink-200 rounded-3xl opacity-30"></div>
                   <div className="relative bg-white rounded-3xl shadow-lg border-2 border-pink-300 p-6 sticky top-24">
                     <div className="flex items-center justify-between mb-6">
-                      <h3 className="text-lg font-bold text-gray-800">Filter Options</h3>
+                      <h3 className="text-lg font-bold text-gray-800">Options de filtrage</h3>
                       <button
                         onClick={clearFilters}
                         className="text-sm text-pink-600 hover:text-pink-700 font-medium"
@@ -277,7 +277,7 @@ export default function BabyKidsProducts({
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                          placeholder="Search baby items..."
+                          placeholder="Rechercher un produit..."
                           className="w-full pl-10 pr-4 py-2 border-2 border-pink-200 rounded-xl focus:outline-none focus:border-pink-400"
                         />
                       </div>
@@ -410,7 +410,7 @@ export default function BabyKidsProducts({
                             onChange={() => setAvailability('all')}
                             className="mr-2 text-pink-500 focus:ring-pink-400"
                           />
-                          <span className="text-sm text-gray-700">All Items</span>
+                          <span className="text-sm text-gray-700">Tous les articles</span>
                         </label>
                         <label className="flex items-center">
                           <input
@@ -571,7 +571,7 @@ export default function BabyKidsProducts({
                                 />
                                 {product.sale_price && (
                                   <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                    SALE
+                                    PROMO
                                   </div>
                                 )}
                               </Link>
@@ -647,8 +647,8 @@ export default function BabyKidsProducts({
                   <div className="text-center py-16">
                     <div className="text-gray-500 mb-6">
                       <Baby className="h-16 w-16 mx-auto mb-6 opacity-50 text-pink-400" />
-                      <h3 className="text-xl font-bold mb-3 text-gray-700">No baby items found</h3>
-                      <p className="text-gray-600">Try adjusting your filters to discover more adorable items</p>
+                      <h3 className="text-xl font-bold mb-3 text-gray-700">Aucun produit trouvé</h3>
+                      <p className="text-gray-600">Essayez de modifier vos filtres pour découvrir plus de produits</p>
                     </div>
                     <button
                       onClick={clearFilters}
@@ -668,7 +668,7 @@ export default function BabyKidsProducts({
                         disabled={pagination.current_page === 1}
                         className="px-4 py-2 border-2 border-pink-200 rounded-xl text-sm hover:bg-pink-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Previous
+                        Précédent
                       </button>
                       
                       {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -693,7 +693,7 @@ export default function BabyKidsProducts({
                         disabled={pagination.current_page === pagination.last_page}
                         className="px-4 py-2 border-2 border-pink-200 rounded-xl text-sm hover:bg-pink-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Next
+                        Suivant
                       </button>
                     </nav>
                   </div>

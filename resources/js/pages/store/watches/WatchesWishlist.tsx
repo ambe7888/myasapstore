@@ -78,10 +78,10 @@ function WatchesWishlistContent({
                   </span>
                 </div>
                 <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
-                  Your Wishlist
+                  Vos favoris
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Curated timepieces that caught your discerning eye
+                  Vos produits préférés, enregistrés pour plus tard
                 </p>
               </div>
             </div>
@@ -120,16 +120,16 @@ function WatchesWishlistContent({
             ) : (
               <div className="text-center py-20">
                 <Heart className="h-16 w-16 text-slate-300 mx-auto mb-6" />
-                <h2 className="text-2xl font-light text-slate-900 mb-4">Your wishlist is empty</h2>
+                <h2 className="text-2xl font-light text-slate-900 mb-4">Vos favoris sont vides</h2>
                 <p className="text-slate-600 font-light mb-8">
-                  Start adding exceptional timepieces you love to create your perfect collection
+                  Commencez à ajouter vos produits préférés
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="inline-flex items-center bg-slate-900 text-white px-8 py-3 font-medium tracking-wider uppercase hover:bg-slate-800 transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Explore Collection
+                  Découvrir la collection
                 </Link>
               </div>
             )}
@@ -139,7 +139,7 @@ function WatchesWishlistContent({
         {relatedProducts.length > 0 && (
           <div className="bg-slate-50 py-16">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-light text-center mb-12 tracking-wide text-slate-900">You Might Also Like</h2>
+              <h2 className="text-3xl font-light text-center mb-12 tracking-wide text-slate-900">Vous pourriez aussi aimer</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((product) => (
                   <WatchesProductCard

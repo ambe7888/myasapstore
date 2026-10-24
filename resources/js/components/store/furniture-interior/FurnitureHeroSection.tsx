@@ -118,7 +118,7 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
                       <div className="relative aspect-[16/9] rounded-xl overflow-hidden">
                         <img 
                           src={getImageUrl(content?.image || '/storage/media/70/home-banner-furniture-interior.png')}
-                          alt="Featured Products" 
+                          alt="Produits en vedette" 
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = 'https://placehold.co/800x450/f5f5dc/8b7355?text=Featured+Products';

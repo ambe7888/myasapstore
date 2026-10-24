@@ -83,7 +83,7 @@ export default function BeautyProfile({
                 Beauty Profile
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Manage your beauty journey and account preferences
+                Gérez votre compte et vos préférences
               </p>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function BeautyProfile({
                     <div>
                       <div className="flex items-center mb-8">
                         <Sparkles className="h-6 w-6 text-rose-500 mr-3" />
-                        <h3 className="text-2xl font-light text-gray-900">Personal Information</h3>
+                        <h3 className="text-2xl font-light text-gray-900">Informations personnelles</h3>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-rose-50 rounded-2xl p-6">
@@ -143,7 +143,7 @@ export default function BeautyProfile({
                         {user.date_of_birth && (
                           <div className="bg-rose-50 rounded-2xl p-6">
                             <label className="block text-sm font-medium text-gray-500 mb-3">
-                              Date of Birth
+                              Date de naissance
                             </label>
                             <div className="relative">
                               <input
@@ -201,7 +201,7 @@ export default function BeautyProfile({
                           <div className="relative">
                             <input
                               type="tel"
-                              value={user.phone || 'Not provided'}
+                              value={user.phone || "Non renseigné"}
                               className="w-full px-4 py-3 bg-white rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors"
                               readOnly
                             />
@@ -216,17 +216,17 @@ export default function BeautyProfile({
                       <div>
                         <div className="flex items-center mb-8">
                           <MapPin className="h-6 w-6 text-rose-500 mr-3" />
-                          <h3 className="text-2xl font-light text-gray-900">Address Information</h3>
+                          <h3 className="text-2xl font-light text-gray-900">Informations d'adresse</h3>
                         </div>
                         <div className="space-y-6">
                           <div className="bg-rose-50 rounded-2xl p-6">
                             <label className="block text-sm font-medium text-gray-500 mb-3">
-                              Street Address
+                              Adresse
                             </label>
                             <div className="relative">
                               <input
                                 type="text"
-                                value={user.address.address || 'Not provided'}
+                                value={user.address.address || "Non renseigné"}
                                 className="w-full px-4 py-3 bg-white rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors"
                                 readOnly
                               />
@@ -237,11 +237,11 @@ export default function BeautyProfile({
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-rose-50 rounded-2xl p-6">
                               <label className="block text-sm font-medium text-gray-500 mb-3">
-                                City
+                                Ville
                               </label>
                               <input
                                 type="text"
-                                value={user.address.city || 'Not provided'}
+                                value={user.address.city || "Non renseigné"}
                                 className="w-full px-4 py-3 bg-white rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors"
                                 readOnly
                               />
@@ -253,7 +253,7 @@ export default function BeautyProfile({
                               </label>
                               <input
                                 type="text"
-                                value={user.address.state || 'Not provided'}
+                                value={user.address.state || "Non renseigné"}
                                 className="w-full px-4 py-3 bg-white rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors"
                                 readOnly
                               />
@@ -265,7 +265,7 @@ export default function BeautyProfile({
                               </label>
                               <input
                                 type="text"
-                                value={user.address.postal_code || 'Not provided'}
+                                value={user.address.postal_code || "Non renseigné"}
                                 className="w-full px-4 py-3 bg-white rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors"
                                 readOnly
                               />
@@ -279,14 +279,14 @@ export default function BeautyProfile({
                     <div className="flex flex-wrap gap-4 pt-8">
                       <button className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2">
                         <User className="h-5 w-5" />
-                        Edit Profile
+                        Modifier le profil
                       </button>
                       <button 
                         onClick={() => setShowPasswordForm(!showPasswordForm)}
                         className="border-2 border-rose-200 text-rose-600 px-8 py-4 rounded-full font-semibold hover:border-rose-300 hover:bg-rose-50 transition-colors flex items-center gap-2"
                       >
                         <Lock className="h-5 w-5" />
-                        {showPasswordForm ? 'Cancel' : 'Change Password'}
+                        {showPasswordForm ? "Annuler" : "Changer le mot de passe"}
                       </button>
                     </div>
                     
@@ -295,12 +295,12 @@ export default function BeautyProfile({
                       <div className="bg-rose-50 rounded-3xl p-8">
                         <div className="flex items-center mb-8">
                           <Lock className="h-6 w-6 text-rose-500 mr-3" />
-                          <h3 className="text-2xl font-light text-gray-900">Change Password</h3>
+                          <h3 className="text-2xl font-light text-gray-900">Changer le mot de passe</h3>
                         </div>
                         <form onSubmit={handlePasswordSubmit} className="space-y-6">
                           <div className="bg-white rounded-2xl p-6">
                             <label className="block text-sm font-medium text-gray-500 mb-3">
-                              Current Password
+                              Mot de passe actuel
                             </label>
                             <input
                               type="password"
@@ -313,7 +313,7 @@ export default function BeautyProfile({
                           
                           <div className="bg-white rounded-2xl p-6">
                             <label className="block text-sm font-medium text-gray-500 mb-3">
-                              New Password
+                              Nouveau mot de passe
                             </label>
                             <input
                               type="password"
@@ -326,7 +326,7 @@ export default function BeautyProfile({
                           
                           <div className="bg-white rounded-2xl p-6">
                             <label className="block text-sm font-medium text-gray-500 mb-3">
-                              Confirm New Password
+                              Confirmer le nouveau mot de passe
                             </label>
                             <input
                               type="password"
@@ -344,14 +344,14 @@ export default function BeautyProfile({
                               className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors disabled:opacity-50 shadow-lg hover:shadow-xl flex items-center gap-2"
                             >
                               <Lock className="h-5 w-5" />
-                              {passwordForm.processing ? 'Updating...' : 'Update Password'}
+                              {passwordForm.processing ? 'Updating...' : "Mettre à jour le mot de passe"}
                             </button>
                             <button 
                               type="button"
                               onClick={() => setShowPasswordForm(false)}
                               className="border-2 border-rose-200 text-rose-600 px-8 py-4 rounded-full font-semibold hover:border-rose-300 hover:bg-rose-50 transition-colors"
                             >
-                              Cancel
+                              Annuler
                             </button>
                           </div>
                         </form>

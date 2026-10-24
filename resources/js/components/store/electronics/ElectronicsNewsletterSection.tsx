@@ -44,10 +44,10 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -86,7 +86,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
 
           {/* Subtitle */}
           <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
-            {content?.subtitle || 'Stay ahead with the latest tech news, product launches, and exclusive deals delivered to your inbox.'}
+            {content?.subtitle || "Recevez nos nouveautés et nos offres exclusives directement dans votre boîte mail."}
           </p>
 
           {/* Newsletter Form */}
@@ -98,7 +98,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={content?.placeholder_text || 'Enter your email for tech updates'}
+                    placeholder={content?.placeholder_text || "Saisissez votre e-mail pour recevoir nos actualités"}
                     className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                     required
                   />
@@ -124,7 +124,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                     </>
                   ) : (
                     <>
-                      <span>{content?.button_text || 'Subscribe'}</span>
+                      <span>{content?.button_text || "S'abonner"}</span>
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
@@ -143,7 +143,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Successfully Subscribed!</h3>
-              <p className="text-green-200">You'll receive the latest tech updates in your inbox.</p>
+              <p className="text-green-200">Vous recevrez nos dernières actualités dans votre boîte mail.</p>
             </div>
           )}
 
@@ -156,15 +156,15 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
 
           {/* Privacy Text */}
           <p className="text-sm text-blue-200 mb-12">
-            {content?.privacy_text || 'Unsubscribe anytime. Your privacy matters.'}
+            {content?.privacy_text || "Désabonnement possible à tout moment."}
           </p>
 
           {/* Tech Features */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {(content?.features?.value || content?.features || [
-              { title: 'Latest Releases', description: 'Be first to know about new gadgets' },
-              { title: 'Exclusive Deals', description: 'Special discounts for subscribers' },
-              { title: 'Expert Reviews', description: 'In-depth product analysis' }
+              { title: "Nouveautés", description: "Soyez informé de nos nouveautés" },
+              { title: "Offres exclusives", description: "Remises spéciales pour nos abonnés" },
+              { title: "Avis détaillés", description: "Analyses détaillées" }
             ]).map((feature, index) => (
               <div key={index} className="text-center">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4">

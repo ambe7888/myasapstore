@@ -84,7 +84,7 @@ export default function CarsBlog({
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Expert insights, installation guides, and the latest automotive industry developments
+              Retrouvez nos conseils, nos idées et les actualités de la boutique
             </p>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function CarsBlog({
                           </p>
                           
                           <div className="flex items-center text-red-600 font-bold tracking-wider uppercase group-hover:translate-x-2 transition-transform">
-                            Read Technical Guide
+                            Lire l'article
                             <ArrowRight className="h-5 w-5 ml-3" />
                           </div>
                         </div>
@@ -154,8 +154,8 @@ export default function CarsBlog({
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-black text-gray-500 mb-4">No Technical Articles</h2>
-                  <p className="text-gray-400">Automotive guides and technical articles will appear here once published.</p>
+                  <h2 className="text-2xl font-black text-gray-500 mb-4">Aucun article</h2>
+                  <p className="text-gray-400">Les articles apparaîtront ici dès leur publication.</p>
                 </div>
               </div>
             )}

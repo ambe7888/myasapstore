@@ -59,9 +59,9 @@ export default function WatchesLogin({
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-light text-slate-900 mb-4">Your Collection</h2>
+                <h2 className="text-3xl font-light text-slate-900 mb-4">Votre sélection</h2>
                 <p className="text-slate-600 leading-relaxed">
-                  Access your saved watches, order history, and exclusive member benefits.
+                  Accédez à vos favoris, à l'historique de vos commandes et à vos avantages.
                 </p>
               </div>
               
@@ -74,7 +74,7 @@ export default function WatchesLogin({
                   </div>
                   <div>
                     <div className="text-slate-900 font-medium">Saved Watches</div>
-                    <div className="text-slate-600 text-sm">Your wishlist & favorites</div>
+                    <div className="text-slate-600 text-sm">Vos favoris</div>
                   </div>
                 </div>
                 
@@ -85,8 +85,8 @@ export default function WatchesLogin({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Order History</div>
-                    <div className="text-slate-600 text-sm">Track your purchases</div>
+                    <div className="text-slate-900 font-medium">Historique des commandes</div>
+                    <div className="text-slate-600 text-sm">Suivez vos commandes</div>
                   </div>
                 </div>
                 
@@ -98,7 +98,7 @@ export default function WatchesLogin({
                   </div>
                   <div>
                     <div className="text-slate-900 font-medium">Member Benefits</div>
-                    <div className="text-slate-600 text-sm">Exclusive offers & support</div>
+                    <div className="text-slate-600 text-sm">Offres exclusives et assistance</div>
                   </div>
                 </div>
               </div>
@@ -110,8 +110,8 @@ export default function WatchesLogin({
             <div className="w-full max-w-md">
               {/* Header */}
               <div className="text-center mb-8">
-                <h1 className="text-3xl font-light text-slate-900 mb-2">Sign In</h1>
-                <p className="text-slate-600">Access your horological collection</p>
+                <h1 className="text-3xl font-light text-slate-900 mb-2">Se connecter</h1>
+                <p className="text-slate-600">Accédez à votre compte</p>
               </div>
 
               {/* Login Form */}
@@ -142,7 +142,7 @@ export default function WatchesLogin({
                   {/* Password */}
                   <div className="group">
                     <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -151,7 +151,7 @@ export default function WatchesLogin({
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         className="w-full px-4 py-4 border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all duration-300 pl-12 pr-12"
-                        placeholder="Enter your password"
+                        placeholder="Saisissez votre mot de passe"
                         required
                       />
                       <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
@@ -185,7 +185,7 @@ export default function WatchesLogin({
                       href={generateStoreUrl('store.forgot-password', store)}
                       className="text-sm text-amber-600 hover:text-amber-700 transition-colors"
                     >
-                      Forgot password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
 
@@ -201,22 +201,22 @@ export default function WatchesLogin({
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Signing In...
+                        Connexion...
                       </>
-                    ) : 'Sign In'}
+                    ) : "Se connecter"}
                   </button>
                 </form>
 
                 {/* Register Link */}
                 <div className="text-center mt-6 pt-6 border-t border-slate-200">
                   <p className="text-slate-600 mb-3">
-                    Don't have an account?
+                    Vous n'avez pas de compte ?
                   </p>
                   <Link
                     href={generateStoreUrl('store.register', store)}
                     className="text-amber-600 hover:text-amber-700 font-medium transition-colors"
                   >
-                    Create Account
+                    Créer un compte
                   </Link>
                 </div>
               </div>

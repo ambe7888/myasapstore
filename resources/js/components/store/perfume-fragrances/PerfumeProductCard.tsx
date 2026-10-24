@@ -59,7 +59,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {product.is_new && (
             <span className="bg-amber-400 text-white px-3 py-1 text-xs font-medium rounded-full">
-              New
+              Nouveau
             </span>
           )}
           {discountPercentage > 0 && (
@@ -104,7 +104,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
               <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
             </svg>
-            Quick View
+            Aperçu rapide
           </Link>
         </div>
       </div>

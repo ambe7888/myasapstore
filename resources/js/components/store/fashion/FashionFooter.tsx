@@ -42,7 +42,7 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
                   </h2>
                 )}
                 <p className="text-gray-600 font-light text-lg leading-relaxed max-w-md">
-                  {content?.description || 'Your destination for contemporary fashion and timeless style. Curating the world\'s best designers and emerging brands.'}
+                  {content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
                 </p>
               </div>
               
@@ -70,23 +70,23 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
               {/* Contact Information */}
               <div>
                 <h3 className="text-2xl font-thin tracking-wide mb-6 uppercase">
-                  Contact Us
+                  Nous contacter
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">Address</p>
+                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">Adresse</p>
                     <p className="text-gray-900 font-light leading-relaxed">
                       {content?.contact?.address || '789 Fashion Avenue, Style District, NY 10018'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">Phone</p>
+                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">Téléphone</p>
                     <p className="text-gray-900 font-light">
                       {content?.contact?.phone || '+1 (555) 328-4466'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">Email</p>
+                    <p className="text-gray-600 font-light text-sm uppercase tracking-wide mb-2">E-mail</p>
                     <p className="text-gray-900 font-light">
                       {content?.contact?.email || 'hello@fashionstore.com'}
                     </p>
@@ -98,13 +98,13 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
               <div className="grid grid-cols-2 gap-8">
                 <div>
                   <h4 className="text-sm font-light tracking-widest uppercase mb-4 text-gray-700">
-                    {content?.menu1?.title || 'Customer Care'}
+                    {content?.menu1?.title || "Service client"}
                   </h4>
                   <ul className="space-y-3">
                     {(content?.menu1?.links || [
-                      { name: 'Size Guide', href: '/size-guide' },
+                      { name: "Guide des tailles", href: '/size-guide' },
                       { name: 'Shipping & Returns', href: '/shipping' },
-                      { name: 'Contact Us', href: '/contact' }
+                      { name: "Nous contacter", href: '/contact' }
                     ]).map((link, index) => (
                       <li key={index}>
                         <a href={link.href} className="text-gray-600 hover:text-gray-900 transition-colors font-light text-sm">
@@ -121,7 +121,7 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
                   </h4>
                   <ul className="space-y-3">
                     {(content?.menu2?.links || [
-                      { name: 'About Us', href: '/about' },
+                      { name: "À propos", href: '/about' },
                       { name: 'Careers', href: '/careers' },
                       { name: 'Press', href: '/press' }
                     ]).map((link, index) => (

@@ -117,7 +117,7 @@ function FurnitureCheckout({
   
   // Checkout steps
   const steps = [
-    { id: 'shipping', name: 'Delivery', icon: Package },
+    { id: 'shipping', name: "Livraison", icon: Package },
     { id: 'review', name: 'Review', icon: ShoppingCart },
     { id: 'payment', name: 'Payment', icon: CreditCard },
   ];
@@ -321,7 +321,7 @@ function FurnitureCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -345,7 +345,7 @@ function FurnitureCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -357,7 +357,7 @@ function FurnitureCheckout({
       const newErrors: Record<string, string> = {};
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-        newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+        newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
       }
       
       if (Object.keys(newErrors).length > 0) {
@@ -490,9 +490,9 @@ function FurnitureCheckout({
         <div className="bg-gradient-to-r from-amber-900 to-yellow-900 text-white py-16 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-4xl font-bold mb-4">Secure Checkout</h1>
+              <h1 className="text-4xl font-bold mb-4">Paiement sécurisé</h1>
               <p className="text-amber-200 text-lg">
-                Complete your furniture order with confidence
+                Finalisez votre commande en toute confiance
               </p>
             </div>
           </div>
@@ -555,7 +555,7 @@ function FurnitureCheckout({
                     <div className="mb-8">
                       <h2 className="text-3xl font-bold text-slate-900 mb-3">Informations de livraison</h2>
                       <p className="text-slate-600 text-lg">
-                        Where should we deliver your beautiful furniture?
+                        Où devons-nous livrer votre commande ?
                       </p>
                     </div>
                     
@@ -665,7 +665,7 @@ function FurnitureCheckout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-amber-200'
                             } focus:outline-none focus:border-amber-600 transition-colors`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -695,7 +695,7 @@ function FurnitureCheckout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-amber-200'
                             } focus:outline-none focus:border-amber-600 transition-colors`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -729,7 +729,7 @@ function FurnitureCheckout({
                       
                       {/* Shipping Methods */}
                       <div className="mt-8">
-                        <h3 className="text-xl font-bold text-slate-900 mb-4">Delivery Method</h3>
+                        <h3 className="text-xl font-bold text-slate-900 mb-4">Mode de livraison</h3>
                         
                         <div className="space-y-3">
                           {shippingMethods.length > 0 ? (
@@ -815,7 +815,7 @@ function FurnitureCheckout({
                           rows={4}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Any special delivery instructions or assembly requests"
+                          placeholder="Instructions particulières pour la livraison"
                           className="block w-full px-4 py-3 border-2 border-amber-200 rounded-xl focus:outline-none focus:border-amber-600 transition-colors"
                         />
                       </div>
@@ -825,7 +825,7 @@ function FurnitureCheckout({
                           type="submit"
                           className="bg-gradient-to-r from-yellow-800 to-amber-800 text-white px-8 py-4 rounded-2xl font-bold hover:from-yellow-900 hover:to-amber-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </form>
@@ -836,16 +836,16 @@ function FurnitureCheckout({
                 {currentStep === 'review' && (
                   <div className="bg-white rounded-3xl shadow-lg border-2 border-amber-100 p-8">
                     <div className="mb-8">
-                      <h2 className="text-3xl font-bold text-slate-900 mb-3">Review Your Order</h2>
+                      <h2 className="text-3xl font-bold text-slate-900 mb-3">Vérifiez votre commande</h2>
                       <p className="text-slate-600 text-lg">
-                        Please review your furniture order before proceeding to payment.
+                        Vérifiez votre commande avant de passer au paiement.
                       </p>
                     </div>
                     
                     <div className="space-y-8">
                       {/* Order Items */}
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-4">Your Furniture</h3>
+                        <h3 className="text-xl font-bold text-slate-900 mb-4">Votre sélection</h3>
                         
                         <div className="space-y-4">
                           {cartItems.map((item) => {
@@ -884,7 +884,7 @@ function FurnitureCheckout({
                         <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <p className="text-sm font-bold text-amber-800 mb-2">Contact Details</p>
+                              <p className="text-sm font-bold text-amber-800 mb-2">Coordonnées</p>
                               <p className="text-slate-900">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-slate-900">{shippingEmail}</p>
                               <p className="text-slate-900">{shippingPhone}</p>
@@ -908,7 +908,7 @@ function FurnitureCheckout({
                       {/* Order Notes */}
                       {orderNotes && (
                         <div>
-                          <h3 className="text-xl font-bold text-slate-900 mb-4">Special Instructions</h3>
+                          <h3 className="text-xl font-bold text-slate-900 mb-4">Instructions spéciales</h3>
                           
                           <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200">
                             <p className="text-slate-900">{orderNotes}</p>
@@ -922,14 +922,14 @@ function FurnitureCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border-2 border-amber-600 text-amber-800 px-6 py-3 rounded-2xl font-bold hover:bg-amber-50 transition-colors"
                         >
-                          Back to Delivery
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-gradient-to-r from-yellow-800 to-amber-800 text-white px-8 py-4 rounded-2xl font-bold hover:from-yellow-900 hover:to-amber-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -942,7 +942,7 @@ function FurnitureCheckout({
                     <div className="mb-8">
                       <h2 className="text-3xl font-bold text-slate-900 mb-3">Détails de paiement</h2>
                       <p className="text-slate-600 text-lg">
-                        Choose your preferred payment method to complete your order.
+                        Choisissez votre mode de paiement pour finaliser votre commande.
                       </p>
                     </div>
                     
@@ -960,7 +960,7 @@ function FurnitureCheckout({
                             className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-amber-300 rounded"
                           />
                           <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-slate-900 font-medium">
-                            Same as delivery address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -992,8 +992,8 @@ function FurnitureCheckout({
                                   className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-amber-300"
                                 />
                                 <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                  <span className="block text-sm font-bold text-slate-900">Cash on Delivery</span>
-                                  <span className="block text-sm text-slate-600">Pay when your furniture is delivered</span>
+                                  <span className="block text-sm font-bold text-slate-900">Paiement à la livraison</span>
+                                  <span className="block text-sm text-slate-600">Payez à la livraison de votre commande</span>
                                 </label>
                               </div>
                             </div>
@@ -1015,7 +1015,7 @@ function FurnitureCheckout({
                                 />
                                 <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-medium text-gray-900">WhatsApp</span>
-                                  <span className="block text-sm text-gray-600">Complete payment via WhatsApp</span>
+                                  <span className="block text-sm text-gray-600">Finaliser le paiement via WhatsApp</span>
                                 </label>
                               </div>
                             </div>
@@ -1037,7 +1037,7 @@ function FurnitureCheckout({
                                 />
                                 <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-bold text-slate-900">Telegram</span>
-                                  <span className="block text-sm text-slate-600">Complete payment via Telegram</span>
+                                  <span className="block text-sm text-slate-600">Finaliser le paiement via Telegram</span>
                                 </label>
                               </div>
                             </div>
@@ -1093,7 +1093,7 @@ function FurnitureCheckout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-slate-600">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1101,7 +1101,7 @@ function FurnitureCheckout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-xl">
-                                    <h4 className="text-sm font-bold text-blue-900 mb-2">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-bold text-blue-900 mb-2">Détails du virement bancaire</h4>
                                     <div className="text-sm text-blue-800 whitespace-pre-line">
                                       {config.details}
                                     </div>
@@ -1127,7 +1127,7 @@ function FurnitureCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border-2 border-amber-600 text-amber-800 px-6 py-3 rounded-2xl font-bold hover:bg-amber-50 transition-colors"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1192,7 +1192,7 @@ function FurnitureCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter code"
+                          placeholder="Saisissez le code"
                           className="flex-grow px-3 py-2 border border-yellow-300 rounded-l-lg focus:outline-none focus:border-yellow-600"
                           disabled={couponApplied}
                         />
@@ -1228,10 +1228,10 @@ function FurnitureCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 rounded-r-lg text-sm font-bold transition-colors ${
@@ -1240,11 +1240,11 @@ function FurnitureCheckout({
                               : 'bg-yellow-800 text-white hover:bg-yellow-900'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-600 font-medium">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-600 font-medium">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1282,7 +1282,7 @@ function FurnitureCheckout({
                   {/* Secure Checkout */}
                   <div className="mt-6 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-yellow-600 mr-2" />
-                    <p className="text-xs text-yellow-700 font-medium">Secure & Protected Checkout</p>
+                    <p className="text-xs text-yellow-700 font-medium">Paiement sécurisé et protégé</p>
                   </div>
                 </div>
               </div>

@@ -85,7 +85,7 @@ export default function ElectronicsOrders({
                 <Package className="w-8 h-8" />
               </div>
               <h1 className="text-4xl font-bold mb-4">My Orders</h1>
-              <p className="text-xl text-blue-100">Track your electronics purchases</p>
+              <p className="text-xl text-blue-100">Suivez vos commandes</p>
             </div>
           </section>
 
@@ -151,9 +151,9 @@ export default function ElectronicsOrders({
                     <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                       <Package className="h-10 w-10 text-gray-400" />
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">No orders yet</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">Aucune commande pour le moment</h2>
                     <p className="text-gray-600 mb-8 text-lg">
-                      Start shopping for the latest electronics and gadgets
+                      Commencez vos achats
                     </p>
                     <Link
                       href={generateStoreUrl('store.products', store)}

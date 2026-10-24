@@ -104,7 +104,7 @@ const { props } = usePage();
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Commande Confirmée!</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 mb-4">
-                Thank you for your order! Your little ones will love their new items.
+                Merci pour votre commande !
               </p>
               <p className="text-lg text-gray-500">
                 Order #{order.order_number || order.id}
@@ -130,10 +130,10 @@ const { props } = usePage();
                 <h3 className="text-2xl font-bold text-gray-800 mb-3">Ouverture de WhatsApp...</h3>
                 <div className="w-16 h-1 bg-pink-400 mx-auto rounded-full mb-4"></div>
                 <p className="text-lg text-gray-600 mb-3">
-                  La confirmation de votre commande s'ouvrira sur WhatsApp automatically for your little ones!
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp !
                 </p>
                 <p className="text-sm text-gray-500 mb-6">
-                  You'll receive all order details and can chat with us directly.
+                  Vous recevrez tous les détails de la commande et pourrez échanger directement avec nous.
                 </p>
                 
                 <div className="flex justify-center gap-4">
@@ -144,7 +144,7 @@ const { props } = usePage();
                     }}
                     className="bg-green-500 text-white px-6 py-3 rounded-full font-bold hover:bg-green-600 transition-colors"
                   >
-                    Open WhatsApp Now
+                    Ouvrir WhatsApp maintenant
                   </button>
                   <button
                     onClick={() => setShowWhatsappPrompt(false)}
@@ -204,20 +204,20 @@ const { props } = usePage();
                       <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Contact Details</p>
+                            <p className="text-sm font-bold text-pink-600 mb-2">Coordonnées</p>
                             <p className="text-gray-800">{order.customer_first_name || ''} {order.customer_last_name || ''}</p>
                             <p className="text-gray-800">{order.customer_email || ''}</p>
                             <p className="text-gray-800">{order.customer_phone || ''}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Livraison Address</p>
+                            <p className="text-sm font-bold text-pink-600 mb-2">Adresse de livraison</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.street || '' : order.shipping_address || ''}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? `${order.shipping_address?.city || ''}, ${order.shipping_address?.state || ''} ${order.shipping_address?.zip || ''}` : `${order.shipping_city || ''}, ${order.shipping_state || ''} ${order.shipping_postal_code || ''}`}</p>
                             <p className="text-gray-800">{typeof order.shipping_address === 'object' ? order.shipping_address?.country || '' : order.shipping_country || ''}</p>
                           </div>
                         </div>
                         <div className="mt-6 pt-6 border-t-2 border-pink-300">
-                          <p className="text-sm font-bold text-pink-600 mb-2">Livraison Method</p>
+                          <p className="text-sm font-bold text-pink-600 mb-2">Mode de livraison</p>
                           <p className="text-gray-800">{order.shipping_method || 'Standard Livraison'}</p>
                         </div>
                       </div>
@@ -225,7 +225,7 @@ const { props } = usePage();
 
                     {/* Paiement Information */}
                     <div className="mb-8">
-                      <h3 className="text-lg font-bold text-gray-800 mb-4">Paiement Information</h3>
+                      <h3 className="text-lg font-bold text-gray-800 mb-4">Informations de paiement</h3>
                       
                       <div className="bg-pink-50 p-6 rounded-2xl border-2 border-pink-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -234,7 +234,7 @@ const { props } = usePage();
                             <p className="text-gray-800 capitalize">{order.payment_method || ''}</p>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-pink-600 mb-2">Billing Address</p>
+                            <p className="text-sm font-bold text-pink-600 mb-2">Adresse de facturation</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? order.billing_address?.street || '' : order.billing_address || ''}</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? `${order.billing_address?.city || ''}, ${order.billing_address?.state || ''} ${order.billing_address?.zip || ''}` : `${order.billing_city || ''}, ${order.billing_state || ''} ${order.billing_postal_code || ''}`}</p>
                             <p className="text-gray-800">{typeof order.billing_address === 'object' ? order.billing_address?.country || '' : order.billing_country || ''}</p>
@@ -289,7 +289,7 @@ const { props } = usePage();
                       <Check className="h-8 w-8 text-white" />
                     </div>
                     <p className="text-lg font-bold text-gray-800 capitalize">{order.status}</p>
-                    <p className="text-sm text-gray-600">We're preparing your order with love!</p>
+                    <p className="text-sm text-gray-600">Nous préparons votre commande avec soin !</p>
                   </div>
 
                   {/* Order Info */}

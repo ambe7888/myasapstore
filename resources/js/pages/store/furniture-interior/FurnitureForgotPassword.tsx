@@ -62,7 +62,7 @@ export default function FurnitureForgotPassword({
                   className="inline-flex items-center gap-2 text-yellow-800 hover:text-amber-900 font-medium"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Back to Sign In
+                  Retour à la connexion
                 </Link>
               </div>
               
@@ -70,8 +70,8 @@ export default function FurnitureForgotPassword({
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-800 to-amber-900 rounded-2xl mb-6 shadow-lg">
                   <Sofa className="w-10 h-10 text-amber-100" />
                 </div>
-                <h1 className="text-3xl font-bold text-slate-900 mb-2">Reset Password</h1>
-                <p className="text-slate-600">Enter your email to receive reset instructions</p>
+                <h1 className="text-3xl font-bold text-slate-900 mb-2">Réinitialiser le mot de passe</h1>
+                <p className="text-slate-600">Saisissez votre e-mail pour recevoir les instructions</p>
               </div>
               
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-amber-100">
@@ -94,7 +94,7 @@ export default function FurnitureForgotPassword({
                             ? 'border-red-400 bg-red-50' 
                             : 'border-amber-200 focus:border-yellow-800 bg-amber-50/30 focus:bg-white'
                         }`}
-                        placeholder="Enter your email address"
+                        placeholder="Saisissez votre adresse e-mail"
                         required
                       />
                       <Mail className="absolute right-3 top-3 h-5 w-5 text-amber-600" />
@@ -118,7 +118,7 @@ export default function FurnitureForgotPassword({
                       href={generateStoreUrl('store.register', store)}
                       className="font-semibold text-yellow-800 hover:text-amber-900"
                     >
-                      Create Account
+                      Créer un compte
                     </Link>
                   </p>
                 </div>

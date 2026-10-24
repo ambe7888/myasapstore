@@ -76,7 +76,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
               )}
             </div>
             <p className="text-gray-300 leading-relaxed mb-8 text-lg">
-              {footerContent.description || 'Your trusted source for premium automotive parts and performance upgrades.'}
+              {footerContent.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
             </p>
             
             {/* Social Links */}
@@ -101,15 +101,15 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
             <div className="flex items-center mb-8">
               <div className="w-1 h-8 bg-red-600 mr-4"></div>
               <h4 className="text-xl font-bold tracking-wider uppercase text-white">
-                {footerContent.menu1?.title || 'Customer Support'}
+                {footerContent.menu1?.title || "Service client"}
               </h4>
             </div>
             <ul className="space-y-4">
               {(footerContent.menu1?.links || [
                 {name: 'Installation Guide', href: '/installation-guide'},
                 {name: 'Shipping & Returns', href: '/shipping'},
-                {name: 'Contact Support', href: '/contact'},
-                {name: 'Technical Help', href: '/technical-help'}
+                {name: "Contacter le support", href: '/contact'},
+                {name: "Assistance", href: '/technical-help'}
               ]).map((link, index) => (
                 <li key={index}>
                   <a
@@ -134,10 +134,10 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
             </div>
             <ul className="space-y-4">
               {(footerContent.menu2?.links || [
-                {name: 'About Us', href: '/about'},
+                {name: "À propos", href: '/about'},
                 {name: 'Careers', href: '/careers'},
                 {name: 'Press', href: '/press'},
-                {name: 'Privacy Policy', href: '/privacy'}
+                {name: "Politique de confidentialité", href: '/privacy'}
               ]).map((link, index) => (
                 <li key={index}>
                   <a
@@ -156,7 +156,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
           <div>
             <div className="flex items-center mb-8">
               <div className="w-1 h-8 bg-red-600 mr-4"></div>
-              <h4 className="text-xl font-bold tracking-wider uppercase text-white">{footerContent.contact?.title || 'Get In Touch'}</h4>
+              <h4 className="text-xl font-bold tracking-wider uppercase text-white">{footerContent.contact?.title || "Contactez-nous"}</h4>
             </div>
             
             <div className="space-y-4">
@@ -187,7 +187,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
             {/* Business Hours */}
             <div className="mt-6 p-4 bg-gray-900 border-l-4 border-red-600">
               <h5 className="font-bold text-white mb-3 text-sm uppercase">
-                {footerContent.business_hours?.title || 'Service Hours'}
+                {footerContent.business_hours?.title || "Horaires"}
               </h5>
               <div className="space-y-1">
                 {(footerContent.business_hours?.hours || [

@@ -71,15 +71,15 @@ export default function BabyKidsForgotPasswordPage({
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-3">Forgot Password?</h1>
-                <p className="text-gray-600 text-lg">Don't worry! We'll help you reset it quickly</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-3">Mot de passe oublié ?</h1>
+                <p className="text-gray-600 text-lg">Pas d'inquiétude ! Nous allons vous aider à le réinitialiser rapidement</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Email */}
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Email Address
+                    Adresse e-mail
                   </label>
                   <input
                     type="email"
@@ -95,7 +95,7 @@ export default function BabyKidsForgotPasswordPage({
                     <p className="mt-2 text-sm text-red-600 font-semibold">{errors.email}</p>
                   )}
                   <p className="mt-2 text-sm text-gray-500">
-                    We'll send you a secure link to reset your password
+                    Nous vous enverrons un lien sécurisé pour réinitialiser votre mot de passe
                   </p>
                 </div>
                 
@@ -118,14 +118,14 @@ export default function BabyKidsForgotPasswordPage({
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  Back to Login
+                  Retour à la connexion
                 </Link>
               </div>
               
               {/* Help Text */}
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-500">
-                  Remember your password? No problem!
+                  Vous vous souvenez de votre mot de passe ? Parfait !
                 </p>
               </div>
               

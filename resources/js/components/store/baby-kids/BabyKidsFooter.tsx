@@ -47,7 +47,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                 )}
               </div>
               <p className="text-gray-600 leading-relaxed mb-6">
-                {content?.description || 'Your trusted partner in dressing your little ones with love, care, and style. Safe, comfortable, and adorable clothing for every precious moment.'}
+                {content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
               </p>
               
               {/* Social Links */}
@@ -80,13 +80,13 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
                 </div>
-                {content?.menu1?.title || 'Customer Care'}
+                {content?.menu1?.title || "Service client"}
               </h3>
               <ul className="space-y-3">
                 {(content?.menu1?.links || [
-                  { name: 'Size Guide', href: '/size-guide' },
-                  { name: 'Care Instructions', href: '/care-guide' },
-                  { name: 'Contact Us', href: '/contact' },
+                  { name: "Guide des tailles", href: '/size-guide' },
+                  { name: "Conseils d'entretien", href: '/care-guide' },
+                  { name: "Nous contacter", href: '/contact' },
                   { name: 'Safety Info', href: '/safety' }
                 ]).map((link, index) => (
                   <li key={index}>
@@ -116,10 +116,10 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
               </h3>
               <ul className="space-y-3">
                 {(content?.menu2?.links || [
-                  { name: 'About Us', href: '/about' },
-                  { name: 'Our Mission', href: '/mission' },
+                  { name: "À propos", href: '/about' },
+                  { name: "Notre mission", href: '/mission' },
                   { name: 'Sustainability', href: '/sustainability' },
-                  { name: 'Privacy Policy', href: '/privacy' }
+                  { name: "Politique de confidentialité", href: '/privacy' }
                 ]).map((link, index) => (
                   <li key={index}>
                     <Link
@@ -144,7 +144,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                 </div>
-                {content?.contact_title || 'Contact Us'}
+                {content?.contact_title || "Nous contacter"}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">

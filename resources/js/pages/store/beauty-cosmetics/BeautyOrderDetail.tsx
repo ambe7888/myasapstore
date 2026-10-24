@@ -105,7 +105,7 @@ export default function BeautyOrderDetail({
                 <Package className="h-10 w-10 text-white" />
               </div>
               <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6">
-                Order Details
+                Détails de la commande
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Order #{order.id}
@@ -150,7 +150,7 @@ export default function BeautyOrderDetail({
                         className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/30 transition-colors flex items-center gap-2"
                       >
                         <ArrowLeft className="h-4 w-4" />
-                        Back to Orders
+                        Retour aux commandes
                       </Link>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ export default function BeautyOrderDetail({
                   <div className="mb-12">
                     <div className="flex items-center mb-8">
                       <Sparkles className="h-6 w-6 text-rose-500 mr-3" />
-                      <h3 className="text-2xl font-light text-gray-900">Beauty Items</h3>
+                      <h3 className="text-2xl font-light text-gray-900">Articles</h3>
                     </div>
                     <div className="space-y-4">
                       {order.items.map((item) => (
@@ -194,7 +194,7 @@ export default function BeautyOrderDetail({
                     <div>
                       <div className="flex items-center mb-6">
                         <MapPin className="h-6 w-6 text-rose-500 mr-3" />
-                        <h3 className="text-2xl font-light text-gray-900">Shipping Address</h3>
+                        <h3 className="text-2xl font-light text-gray-900">Adresse de livraison</h3>
                       </div>
                       <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6">
                         <div className="space-y-2 text-gray-900">
@@ -215,26 +215,26 @@ export default function BeautyOrderDetail({
                       <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6">
                         <div className="space-y-4">
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Subtotal:</span>
+                            <span className="text-gray-600">Sous-total :</span>
                             <span className="font-semibold text-gray-900">{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                           </div>
                           {order.discount > 0 && (
                             <div className="flex justify-between items-center text-green-600">
-                              <span>Discount:</span>
+                              <span>Remise :</span>
                               <span className="font-semibold">-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                             </div>
                           )}
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Shipping:</span>
+                            <span className="text-gray-600">Livraison :</span>
                             <span className="font-semibold text-gray-900">{formatCurrency(order.shipping, storeSettings, currencies)}</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Tax:</span>
+                            <span className="text-gray-600">Taxe :</span>
                             <span className="font-semibold text-gray-900">{formatCurrency(order.tax, storeSettings, currencies)}</span>
                           </div>
                           <div className="border-t border-rose-200 pt-4">
                             <div className="flex justify-between items-center">
-                              <span className="text-xl font-bold text-gray-900">Total:</span>
+                              <span className="text-xl font-bold text-gray-900">Total :</span>
                               <span className="text-xl font-bold text-rose-600">{formatCurrency(order.total, storeSettings, currencies)}</span>
                             </div>
                           </div>
@@ -270,7 +270,7 @@ export default function BeautyOrderDetail({
                       className="px-8 py-4 bg-rose-600 text-white rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl flex items-center gap-2"
                     >
                       <Package className="h-5 w-5" />
-                      View All Orders
+                      Voir toutes les commandes
                     </Link>
                     <Link
                       href={generateStoreUrl('store.products', store)}

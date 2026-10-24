@@ -49,15 +49,15 @@ export default function ResetPassword({
     const newErrors: Record<string, string> = {};
     
     if (!password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Le mot de passe est obligatoire";
     } else if (password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = "Le mot de passe doit contenir au moins 8 caractères";
     }
     
     if (!passwordConfirmation) {
-      newErrors.passwordConfirmation = 'Please confirm your password';
+      newErrors.passwordConfirmation = "Veuillez confirmer votre mot de passe";
     } else if (password !== passwordConfirmation) {
-      newErrors.passwordConfirmation = 'Passwords do not match';
+      newErrors.passwordConfirmation = "Les mots de passe ne correspondent pas";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -66,7 +66,7 @@ export default function ResetPassword({
     }
     
     // In a real app, this would dispatch an action to reset the password
-    console.log('Reset password with token', token, 'for email', email, 'to', password);
+    console.log("Réinitialiser le mot de passe", token, 'for email', email, 'to', password);
     
     // Show success message
     setSubmitted(true);
@@ -96,9 +96,9 @@ export default function ResetPassword({
         <div className="bg-primary text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Reset Password</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Réinitialiser le mot de passe</h1>
               <p className="text-white/80">
-                Create a new password for your account
+                Créez un nouveau mot de passe pour votre compte
               </p>
             </div>
           </div>
@@ -108,13 +108,13 @@ export default function ResetPassword({
         <div className="bg-gray-50 py-4 store-breadcrumb">
           <div className="container mx-auto px-4">
             <div className="flex items-center text-sm">
-              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-primary">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <Link href={generateStoreUrl('store.login', store)} className="text-gray-500 hover:text-primary">Login</Link>
+              <Link href={generateStoreUrl('store.login', store)} className="text-gray-500 hover:text-primary">Connexion</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <Link href={generateStoreUrl('store.forgot-password', store)} className="text-gray-500 hover:text-primary">Forgot Password</Link>
+              <Link href={generateStoreUrl('store.forgot-password', store)} className="text-gray-500 hover:text-primary">Mot de passe oublié</Link>
               <ChevronRight className="h-4 w-4 mx-2 text-gray-400" />
-              <span className="text-gray-800 font-medium">Reset Password</span>
+              <span className="text-gray-800 font-medium">Réinitialiser le mot de passe</span>
             </div>
           </div>
         </div>
@@ -131,16 +131,16 @@ export default function ResetPassword({
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Password Reset Successful</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Mot de passe réinitialisé avec succès</h2>
                     <p className="text-gray-600 mb-6">
-                      Your password has been reset successfully. You can now log in with your new password.
+                      Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.
                     </p>
                     <div className="flex justify-center">
                       <Link
                         href={generateStoreUrl('store.login', store)}
                         className="inline-flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                       >
-                        Log In Now
+                        Se connecter maintenant
                       </Link>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default function ResetPassword({
                       {/* Password */}
                       <div className="mb-6">
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                          New Password
+                          Nouveau mot de passe
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -193,7 +193,7 @@ export default function ResetPassword({
                       {/* Password Confirmation */}
                       <div className="mb-6">
                         <label htmlFor="passwordConfirmation" className="block text-sm font-medium text-gray-700 mb-1">
-                          Confirm New Password
+                          Confirmer le nouveau mot de passe
                         </label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -228,7 +228,7 @@ export default function ResetPassword({
                       
                       {/* Password Requirements */}
                       <div className="mb-6 p-4 bg-gray-50 rounded-md">
-                        <h4 className="text-sm font-medium text-gray-700 mb-2">Password Requirements:</h4>
+                        <h4 className="text-sm font-medium text-gray-700 mb-2">Conditions du mot de passe :</h4>
                         <ul className="text-xs text-gray-600 space-y-1">
                           <li className="flex items-center">
                             <span className={`inline-block w-4 h-4 mr-2 rounded-full ${password.length >= 8 ? 'bg-green-500' : 'bg-gray-300'}`}></span>
@@ -236,19 +236,19 @@ export default function ResetPassword({
                           </li>
                           <li className="flex items-center">
                             <span className={`inline-block w-4 h-4 mr-2 rounded-full ${/[A-Z]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
-                            Contains at least one uppercase letter
+                            Contient au moins une lettre majuscule
                           </li>
                           <li className="flex items-center">
                             <span className={`inline-block w-4 h-4 mr-2 rounded-full ${/[a-z]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
-                            Contains at least one lowercase letter
+                            Contient au moins une lettre minuscule
                           </li>
                           <li className="flex items-center">
                             <span className={`inline-block w-4 h-4 mr-2 rounded-full ${/[0-9]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
-                            Contains at least one number
+                            Contient au moins un chiffre
                           </li>
                           <li className="flex items-center">
                             <span className={`inline-block w-4 h-4 mr-2 rounded-full ${/[^A-Za-z0-9]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
-                            Contains at least one special character
+                            Contient au moins un caractère spécial
                           </li>
                         </ul>
                       </div>
@@ -259,7 +259,7 @@ export default function ResetPassword({
                           type="submit"
                           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
-                          Reset Password
+                          Réinitialiser le mot de passe
                         </button>
                       </div>
                       
@@ -270,7 +270,7 @@ export default function ResetPassword({
                           className="inline-flex items-center text-primary hover:text-primary-700"
                         >
                           <ArrowLeft className="h-4 w-4 mr-2" />
-                          Back to login
+                          Retour à la connexion
                         </Link>
                       </div>
                     </form>

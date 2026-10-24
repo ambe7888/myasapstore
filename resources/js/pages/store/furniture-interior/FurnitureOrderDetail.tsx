@@ -117,9 +117,9 @@ export default function FurnitureOrderDetail({
         <div className="bg-yellow-800 text-white py-16 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-4xl font-bold mb-4">Order Details</h1>
+              <h1 className="text-4xl font-bold mb-4">Détails de la commande</h1>
               <p className="text-amber-200 text-lg">
-                Track your furniture order and delivery information
+                Suivez votre commande et les informations de livraison
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function FurnitureOrderDetail({
                   className="inline-flex items-center text-amber-800 hover:text-amber-900 font-medium"
                 >
                   <ArrowLeft className="h-5 w-5 mr-2" />
-                  Back to My Orders
+                  Retour à mes commandes
                 </Link>
               </div>
 
@@ -145,7 +145,7 @@ export default function FurnitureOrderDetail({
                 <div className="bg-yellow-800 text-white p-8">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h1 className="text-4xl font-bold mb-2">ORDER DETAILS</h1>
+                      <h1 className="text-4xl font-bold mb-2">DÉTAILS DE LA COMMANDE</h1>
                       <p className="text-amber-200 text-lg">{store.name}</p>
                     </div>
                     <div className="text-right">
@@ -169,7 +169,7 @@ export default function FurnitureOrderDetail({
                     <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200">
                       <h3 className="text-lg font-bold text-amber-800 mb-4 flex items-center">
                         <Home className="h-5 w-5 mr-2" />
-                        DELIVERY ADDRESS
+                        ADRESSE DE LIVRAISON
                       </h3>
                       <div className="text-slate-900 space-y-1">
                         <p className="font-bold text-lg">{order.shipping_address.name}</p>
@@ -181,18 +181,18 @@ export default function FurnitureOrderDetail({
 
                     {/* Order Info */}
                     <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200">
-                      <h3 className="text-lg font-bold text-amber-800 mb-4">ORDER INFORMATION</h3>
+                      <h3 className="text-lg font-bold text-amber-800 mb-4">INFORMATIONS SUR LA COMMANDE</h3>
                       <div className="space-y-3">
                         <div className="flex justify-between">
-                          <span className="text-slate-600">Order Date:</span>
+                          <span className="text-slate-600">Date de la commande :</span>
                           <span className="font-bold text-slate-900">{formatDate(order.date)}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-slate-600">Payment Method:</span>
+                          <span className="text-slate-600">Mode de paiement :</span>
                           <span className="font-bold text-slate-900">{order.payment_method}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-slate-600">Delivery Method:</span>
+                          <span className="text-slate-600">Mode de livraison :</span>
                           <span className="font-bold text-slate-900">{order.shipping_method}</span>
                         </div>
                       </div>
@@ -201,14 +201,14 @@ export default function FurnitureOrderDetail({
 
                   {/* Items Table */}
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-6">FURNITURE ITEMS</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-6">ARTICLES</h3>
                     <div className="overflow-hidden border-2 border-amber-200 rounded-2xl">
                       <table className="w-full">
                         <thead className="bg-yellow-800 text-white">
                           <tr>
-                            <th className="text-left p-4 font-bold">ITEM</th>
+                            <th className="text-left p-4 font-bold">ARTICLE</th>
                             <th className="text-center p-4 font-bold">QTY</th>
-                            <th className="text-right p-4 font-bold">UNIT PRICE</th>
+                            <th className="text-right p-4 font-bold">PRIX UNITAIRE</th>
                             <th className="text-right p-4 font-bold">TOTAL</th>
                           </tr>
                         </thead>
@@ -246,29 +246,29 @@ export default function FurnitureOrderDetail({
                   <div className="flex justify-end">
                     <div className="w-full max-w-md">
                       <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200">
-                        <h4 className="text-xl font-bold text-amber-800 mb-4">ORDER SUMMARY</h4>
+                        <h4 className="text-xl font-bold text-amber-800 mb-4">RÉCAPITULATIF DE LA COMMANDE</h4>
                         <div className="space-y-3">
                           <div className="flex justify-between py-2">
-                            <span className="text-slate-600">Subtotal:</span>
+                            <span className="text-slate-600">Sous-total :</span>
                             <span className="font-bold text-slate-900">{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                           </div>
                           {order.discount > 0 && (
                             <div className="flex justify-between py-2">
-                              <span className="text-green-600">Discount:</span>
+                              <span className="text-green-600">Remise :</span>
                               <span className="font-bold text-green-600">-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                             </div>
                           )}
                           <div className="flex justify-between py-2">
-                            <span className="text-slate-600">Delivery:</span>
+                            <span className="text-slate-600">Livraison :</span>
                             <span className="font-bold text-slate-900">{formatCurrency(order.shipping, storeSettings, currencies)}</span>
                           </div>
                           <div className="flex justify-between py-2">
-                            <span className="text-slate-600">Tax:</span>
+                            <span className="text-slate-600">Taxe :</span>
                             <span className="font-bold text-slate-900">{formatCurrency(order.tax, storeSettings, currencies)}</span>
                           </div>
                           <div className="border-t-3 border-amber-300 pt-3">
                             <div className="flex justify-between">
-                              <span className="text-2xl font-bold text-amber-800">TOTAL:</span>
+                              <span className="text-2xl font-bold text-amber-800">TOTAL :</span>
                               <span className="text-2xl font-bold text-amber-800">{formatCurrency(order.total, storeSettings, currencies)}</span>
                             </div>
                           </div>
@@ -279,8 +279,8 @@ export default function FurnitureOrderDetail({
 
                   {/* Order Footer */}
                   <div className="mt-8 pt-8 border-t-2 border-amber-200 text-center">
-                    <p className="text-slate-600 mb-2">Thank you for choosing our furniture collection!</p>
-                    <p className="text-sm text-slate-500">For any questions about this order, please contact our customer service.</p>
+                    <p className="text-slate-600 mb-2">Merci pour votre confiance !</p>
+                    <p className="text-sm text-slate-500">Pour toute question sur cette commande, contactez notre service client.</p>
                   </div>
                 </div>
               </div>

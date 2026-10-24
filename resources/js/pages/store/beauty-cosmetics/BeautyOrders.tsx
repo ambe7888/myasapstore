@@ -100,7 +100,7 @@ export default function BeautyOrders({
                 Beauty Orders
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Track your beauty journey and past purchases
+                Suivez vos commandes et vos achats passés
               </p>
             </div>
           </div>
@@ -168,9 +168,9 @@ export default function BeautyOrders({
                 <div className="w-24 h-24 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <Package className="h-12 w-12 text-rose-400" />
                 </div>
-                <h2 className="text-3xl font-light text-gray-900 mb-4">No beauty orders yet</h2>
+                <h2 className="text-3xl font-light text-gray-900 mb-4">Aucune commande pour le moment</h2>
                 <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
-                  Start your beauty journey and discover amazing products
+                  Commencez vos achats et découvrez nos produits
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

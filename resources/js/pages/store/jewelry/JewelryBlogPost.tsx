@@ -70,7 +70,7 @@ export default function JewelryBlogPost({
               className="inline-flex items-center text-yellow-600 hover:text-yellow-700 font-medium transition-colors mb-8"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Journal
+              Retour au blog
             </Link>
             
             {/* Category Badge */}

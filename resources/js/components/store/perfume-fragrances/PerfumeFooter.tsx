@@ -40,7 +40,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
               </div>
               
               <p className="text-purple-100 leading-relaxed max-w-md">
-                {content?.description || 'Your premier destination for luxury fragrances and perfumes. Curating the world\'s finest scents from prestigious houses and emerging artisan perfumers.'}
+                {content?.description || "Votre boutique de confiance : des produits de qualité, sélectionnés avec soin pour vous."}
               </p>
               
               {/* Social Links */}
@@ -63,14 +63,14 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
             {/* Menu 1 */}
             <div>
               <h3 className="text-lg font-medium mb-6 text-white">
-                {content?.menu1?.title || 'Fragrance Services'}
+                {content?.menu1?.title || "Nos services"}
               </h3>
               <ul className="space-y-4">
                 {(content?.menu1?.links || [
                   {name: 'Scent Consultation', href: '/consultation'},
                   {name: 'Fragrance Samples', href: '/samples'},
-                  {name: 'Gift Services', href: '/gifts'},
-                  {name: 'Fragrance Care', href: '/care-guide'}
+                  {name: "Nos services", href: '/gifts'},
+                  {name: "Conseils d'entretien", href: '/care-guide'}
                 ]).map((link, index) => (
                   <li key={index}>
                     <Link
@@ -91,10 +91,10 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
               </h3>
               <ul className="space-y-4">
                 {(content?.menu2?.links || [
-                  {name: 'Our Story', href: '/about'},
+                  {name: "Notre histoire", href: '/about'},
                   {name: 'Perfumers', href: '/perfumers'},
                   {name: 'Sustainability', href: '/sustainability'},
-                  {name: 'Privacy Policy', href: '/privacy'}
+                  {name: "Politique de confidentialité", href: '/privacy'}
                 ]).map((link, index) => (
                   <li key={index}>
                     <Link

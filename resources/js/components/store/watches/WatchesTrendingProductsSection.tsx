@@ -46,10 +46,10 @@ export default function WatchesTrendingProductsSection({
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-light text-slate-900 mb-6 tracking-tight">
-            {content?.title || 'Trending Timepieces'}
+            {content?.title || "Produits tendance"}
           </h2>
           <p className="text-lg text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'The most sought-after watches by collectors and enthusiasts - from vintage classics to modern innovations.'}
+            {content?.description || "Les produits les plus appréciés du moment."}
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function WatchesTrendingProductsSection({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div className="text-center">
               <div className="text-4xl font-light text-slate-900 mb-2">500+</div>
-              <div className="text-sm font-medium tracking-wider uppercase text-slate-600">Luxury Brands</div>
+              <div className="text-sm font-medium tracking-wider uppercase text-slate-600">Nos marques</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-light text-slate-900 mb-2">50K+</div>

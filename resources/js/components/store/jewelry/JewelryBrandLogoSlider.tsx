@@ -23,7 +23,7 @@ export default function JewelryBrandLogoSlider({ content }: JewelryBrandLogoSlid
             Prestigious Partners
           </h2>
           <p className="text-stone-600 font-light">
-            Collaborating with the world's finest jewelry houses and luxury brands
+            Nous collaborons avec des marques de confiance
           </p>
         </div>
 

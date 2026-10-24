@@ -66,10 +66,10 @@ export default function JewelryForgotPassword({
                   <Shield className="w-10 h-10 text-white" />
                 </div>
                 <h1 className="text-4xl font-light text-gray-800 mb-4 tracking-wide">
-                  Reset Password
+                  Réinitialiser le mot de passe
                 </h1>
                 <p className="text-gray-600 text-lg font-light">
-                  Secure your account with a new password
+                  Sécurisez votre compte avec un nouveau mot de passe
                 </p>
               </div>
 
@@ -82,10 +82,10 @@ export default function JewelryForgotPassword({
               <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-yellow-200/50 p-10">
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-light text-gray-800 mb-3">
-                    Forgot Your Password?
+                    Mot de passe oublié ?
                   </h2>
                   <p className="text-gray-600 font-light leading-relaxed">
-                    No worries! Enter your email address and we'll send you a secure link to reset your password.
+                    Pas d'inquiétude ! Saisissez votre adresse e-mail et nous vous enverrons un lien sécurisé pour réinitialiser votre mot de passe.
                   </p>
                 </div>
 
@@ -129,7 +129,7 @@ export default function JewelryForgotPassword({
                         Sending Reset Link...
                       </div>
                     ) : (
-                      'Send Password Reset Link'
+                      "Envoyer le lien de réinitialisation"
                     )}
                   </button>
                 </form>
@@ -140,7 +140,7 @@ export default function JewelryForgotPassword({
                     className="inline-flex items-center text-yellow-600 hover:text-yellow-700 font-medium transition-colors group"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    Back to Sign In
+                    Retour à la connexion
                   </Link>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function JewelryForgotPassword({
                     href="#"
                     className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors border-b border-yellow-300 hover:border-yellow-500"
                   >
-                    Contact Support
+                    Contacter le support
                   </Link>
                 </p>
               </div>

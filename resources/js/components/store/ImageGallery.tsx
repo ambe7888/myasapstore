@@ -37,14 +37,14 @@ export default function ImageGallery({ images, selectedIndex }: ImageGalleryProp
           <button 
             onClick={() => setActiveIndex(prev => (prev === 0 ? images.length - 1 : prev - 1))}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors"
-            aria-label="Previous image"
+            aria-label="Image précédente"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button 
             onClick={() => setActiveIndex(prev => (prev === images.length - 1 ? 0 : prev + 1))}
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors"
-            aria-label="Next image"
+            aria-label="Image suivante"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

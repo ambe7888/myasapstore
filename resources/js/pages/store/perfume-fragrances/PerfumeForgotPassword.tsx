@@ -62,8 +62,8 @@ export default function PerfumeForgotPassword({
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-light text-purple-800 mb-2">Reset Password</h1>
-                <p className="text-gray-600">Enter your email to receive reset instructions</p>
+                <h1 className="text-3xl font-light text-purple-800 mb-2">Réinitialiser le mot de passe</h1>
+                <p className="text-gray-600">Saisissez votre e-mail pour recevoir les instructions</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -78,7 +78,7 @@ export default function PerfumeForgotPassword({
                     className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                       errors.email ? 'border-red-300' : ''
                     }`}
-                    placeholder="Enter your email address"
+                    placeholder="Saisissez votre adresse e-mail"
                     required
                   />
                   {errors.email && (
@@ -105,7 +105,7 @@ export default function PerfumeForgotPassword({
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  Back to Login
+                  Retour à la connexion
                 </Link>
               </div>
             </div>

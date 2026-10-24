@@ -52,7 +52,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
               <div className="w-6 h-6 bg-white rounded-full mr-3 flex items-center justify-center">
                 <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
               </div>
-              {content?.badge_text || 'New Arrivals 2024'}
+              {content?.badge_text || "Nouveautés"}
             </div>
           </div>
           
@@ -63,7 +63,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
           
           {/* Subtitle */}
           <p className={`text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {content?.subtitle || 'Discover adorable, comfortable, and safe clothing designed for your precious little ones.'}
+            {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
             <div className="relative bg-white rounded-3xl shadow-2xl p-6 h-80 overflow-hidden">
               <img 
                 src={getImageUrl(content?.image || '/storage/media/52/home-banner-baby-kids.png')}
-                alt="Baby & Kids Collection" 
+                alt="Notre collection" 
                 className="w-full h-full object-cover rounded-2xl"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/fef7f7/ec4899?text=Baby+Collection';
@@ -86,7 +86,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                {content?.overlay_badge_text || 'Premium Quality'}
+                {content?.overlay_badge_text || "Qualité premium"}
               </div>
               
               {/* Bottom Action */}
@@ -95,7 +95,7 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
                   href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                   className="w-full bg-pink-500 text-white py-3 rounded-2xl font-bold hover:bg-pink-600 transition-colors duration-300 shadow-xl flex items-center justify-center"
                 >
-                  <span>{content?.button_text || 'Shop Now'}</span>
+                  <span>{content?.button_text || "Acheter maintenant"}</span>
                   <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -108,9 +108,9 @@ export default function BabyKidsHeroSection({ content }: BabyKidsHeroSectionProp
           <div className="space-y-6">
             {/* Dynamic Trust Badges */}
             {(content?.trust_badges || [
-              { title: "Premium Quality", subtitle: "Safety First" },
-              { title: "50K+ Families", subtitle: "Love our products" },
-              { title: "4.9 Star Rating", subtitle: "Trusted by parents" }
+              { title: "Qualité premium", subtitle: "Qualité garantie" },
+              { title: "50K+ Families", subtitle: "Des produits appréciés" },
+              { title: "4.9 Star Rating", subtitle: "Ils nous font confiance" }
             ]).map((badge: any, index: number) => {
               const colors = ['green', 'blue', 'pink', 'yellow'];
               const color = colors[index % colors.length];

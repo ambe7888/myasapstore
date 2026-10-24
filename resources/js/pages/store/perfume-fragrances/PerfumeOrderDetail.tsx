@@ -108,11 +108,11 @@ export default function PerfumeOrderDetail({
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Order Details
+                Détails de la commande
               </h1>
               
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Your fragrance order information and delivery details.
+                Les informations de votre commande et de livraison.
               </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function PerfumeOrderDetail({
 
               {/* Order Items */}
               <div className="bg-white border-x border-purple-100 p-8">
-                <h3 className="text-xl font-medium text-purple-800 mb-6">Your Fragrance Collection</h3>
+                <h3 className="text-xl font-medium text-purple-800 mb-6">Votre sélection</h3>
                 <div className="space-y-4">
                   {order.items.map((item) => (
                     <div key={item.id} className="flex items-center space-x-4 p-4 bg-stone-50 rounded-xl border border-purple-100">
@@ -160,7 +160,7 @@ export default function PerfumeOrderDetail({
                         <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm text-gray-600">Unit Price</p>
+                        <p className="text-sm text-gray-600">Prix unitaire</p>
                         <p className="text-lg font-medium text-purple-800">{formatCurrency(item.price, storeSettings, currencies)}</p>
                       </div>
                       <div className="text-right">
@@ -179,7 +179,7 @@ export default function PerfumeOrderDetail({
                   <div className="bg-stone-50 p-6 rounded-xl border border-purple-100">
                     <h4 className="text-lg font-medium text-purple-800 mb-4 flex items-center">
                       <MapPin className="h-5 w-5 mr-2" />
-                      Delivery Address
+                      Adresse de livraison
                     </h4>
                     <div className="space-y-1 text-gray-900">
                       <p className="font-medium">{order.shipping_address.name}</p>
@@ -193,7 +193,7 @@ export default function PerfumeOrderDetail({
                   <div className="bg-stone-50 p-6 rounded-xl border border-purple-100">
                     <h4 className="text-lg font-medium text-purple-800 mb-4 flex items-center">
                       <CreditCard className="h-5 w-5 mr-2" />
-                      Payment & Delivery
+                      Paiement et livraison
                     </h4>
                     <div className="space-y-3">
                       <div>
@@ -201,7 +201,7 @@ export default function PerfumeOrderDetail({
                         <p className="font-medium text-gray-900">{order.payment_method}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Delivery Method</p>
+                        <p className="text-sm text-gray-600">Mode de livraison</p>
                         <p className="font-medium text-gray-900">{order.shipping_method}</p>
                       </div>
                     </div>
@@ -229,7 +229,7 @@ export default function PerfumeOrderDetail({
                     <span className="text-white">{order.shipping === 0 ? 'Gratuit' : formatCurrency(order.shipping, storeSettings, currencies)}</span>
                   </div>
                   <div className="flex justify-between text-purple-200">
-                    <span>Tax</span>
+                    <span>Taxe</span>
                     <span className="text-white">{formatCurrency(order.tax, storeSettings, currencies)}</span>
                   </div>
                   <div className="flex justify-between text-xl font-medium text-white pt-3 border-t-2 border-amber-400">

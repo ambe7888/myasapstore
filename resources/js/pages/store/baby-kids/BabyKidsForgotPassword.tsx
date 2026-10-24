@@ -66,8 +66,8 @@ export default function BabyKidsForgotPassword({
                     <path fillRule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h1 className="text-4xl font-black text-gray-800 mb-3">Forgot Password?</h1>
-                <p className="text-lg text-gray-600">No worries! We'll help you reset it</p>
+                <h1 className="text-4xl font-black text-gray-800 mb-3">Mot de passe oublié ?</h1>
+                <p className="text-lg text-gray-600">Pas d'inquiétude ! Nous allons vous aider à le réinitialiser</p>
               </div>
 
               {status && (
@@ -104,7 +104,7 @@ export default function BabyKidsForgotPassword({
                         className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-400 focus:outline-none transition-all duration-300 text-lg ${
                           errors.email ? 'border-red-300 bg-red-50' : 'border-yellow-200 bg-yellow-50/50'
                         }`}
-                        placeholder="Enter your email address"
+                        placeholder="Saisissez votre adresse e-mail"
                         required
                       />
                       {errors.email && (
@@ -149,7 +149,7 @@ export default function BabyKidsForgotPassword({
                           <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      Back to Sign In
+                      Retour à la connexion
                     </Link>
                   </div>
                 </div>

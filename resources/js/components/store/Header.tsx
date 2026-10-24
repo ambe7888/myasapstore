@@ -95,7 +95,7 @@ function Header({
           <div className="container mx-auto flex justify-between items-center">
             {content?.show_welcome && (
               <div>
-                <span className="text-gray-600">{content?.welcome_text || 'Welcome to our store'}</span>
+                <span className="text-gray-600">{content?.welcome_text || "Bienvenue dans notre boutique"}</span>
               </div>
             )}
             {content?.show_phone && (

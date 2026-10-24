@@ -10,10 +10,10 @@ interface PerfumeCTASectionProps {
 
 export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: PerfumeCTASectionProps) {
   const boxes = ctaBoxes?.value || ctaBoxes || content?.cta_boxes?.value || content?.cta_boxes || [
-    { icon: 'nose', title: 'Scent Profiling', subtitle: 'Discover your fragrance personality' },
-    { icon: 'star', title: 'VIP Rewards', subtitle: 'Exclusive member benefits' },
-    { icon: 'truck', title: 'White Glove Delivery', subtitle: 'Premium packaging & delivery' },
-    { icon: 'users', title: 'Fragrance Concierge', subtitle: 'Personal shopping service' }
+    { icon: 'nose', title: 'Scent Profiling', subtitle: "Trouvez ce qui vous correspond" },
+    { icon: 'star', title: 'VIP Rewards', subtitle: "Avantages exclusifs" },
+    { icon: 'truck', title: "Livraison soignée", subtitle: "Emballage et livraison soignés" },
+    { icon: 'users', title: 'Fragrance Concierge', subtitle: "Service personnalisé" }
   ];
 
   const getIcon = (iconName: string) => {
@@ -61,7 +61,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
             <svg className="w-5 h-5 text-purple-800 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd" />
             </svg>
-            <span className="text-purple-800 font-medium text-sm">{content?.badge_text || 'Premium Services'}</span>
+            <span className="text-purple-800 font-medium text-sm">{content?.badge_text || "Nos services"}</span>
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
@@ -69,7 +69,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-            {content?.description || 'Discover our exclusive services designed to elevate your fragrance journey with personalized attention and premium care.'}
+            {content?.description || "Découvrez nos services conçus pour vous accompagner à chaque étape de votre achat."}
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
                   href={box.link || '#'}
                   className="inline-flex items-center text-purple-800 font-medium text-sm group-hover:text-purple-900 transition-colors duration-300"
                 >
-                  <span>{box.button_text || 'Learn More'}</span>
+                  <span>{box.button_text || "En savoir plus"}</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -128,10 +128,10 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
             
             <div className="relative z-10">
               <h3 className="text-3xl font-light text-gray-900 mb-4">
-                {bottomSection?.title?.value || bottomSection?.title || content?.bottom_title || 'Ready to Find Your Signature Scent?'}
+                {bottomSection?.title?.value || bottomSection?.title || content?.bottom_title || "Prêt à trouver votre bonheur ?"}
               </h3>
               <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                {bottomSection?.description?.value || bottomSection?.description || content?.bottom_description || 'Book a complimentary consultation with our fragrance experts and discover the perfect scent that tells your unique story.'}
+                {bottomSection?.description?.value || bottomSection?.description || content?.bottom_description || "Contactez notre équipe pour un conseil personnalisé et trouvez le produit qui vous correspond."}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

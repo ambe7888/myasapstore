@@ -84,7 +84,7 @@ export default function CarsOrders({
                   <Package className="h-6 w-6 text-white transform -rotate-45" />
                 </div>
                 <div>
-                  <h1 className="text-5xl font-black tracking-wider">ORDER HISTORY</h1>
+                  <h1 className="text-5xl font-black tracking-wider">HISTORIQUE DES COMMANDES</h1>
                   <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Performance Parts Tracking</div>
                 </div>
               </div>
@@ -95,7 +95,7 @@ export default function CarsOrders({
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Track your automotive parts orders and installation status
+              Suivez l'état de vos commandes
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function CarsOrders({
                               <div className="flex items-center space-x-3">
                                 <Calendar className="h-5 w-5 text-red-600" />
                                 <div>
-                                  <div className="text-xs font-bold tracking-wider uppercase text-gray-600">Order Date</div>
+                                  <div className="text-xs font-bold tracking-wider uppercase text-gray-600">Date de la commande</div>
                                   <div className="font-bold text-gray-900">
                                     {new Date(order.date).toLocaleDateString('en-US', { 
                                       year: 'numeric', 
@@ -141,7 +141,7 @@ export default function CarsOrders({
                               <div className="flex items-center space-x-3">
                                 <CreditCard className="h-5 w-5 text-red-600" />
                                 <div>
-                                  <div className="text-xs font-bold tracking-wider uppercase text-gray-600">Total Amount</div>
+                                  <div className="text-xs font-bold tracking-wider uppercase text-gray-600">Montant total</div>
                                   <div className="font-bold text-gray-900 text-lg">{formatCurrency(order.total, storeSettings, currencies)}</div>
                                 </div>
                               </div>
@@ -190,9 +190,9 @@ export default function CarsOrders({
                         <div className="text-red-400 font-bold tracking-wider uppercase text-sm">
                           {order.status === 'delivered' ? 'Parts Delivered' : 
                            order.status === 'shipped' ? 'Parts Shipped' : 
-                           order.status === 'processing' ? 'Processing Order' : 
+                           order.status === 'processing' ? "Commande en traitement" : 
                            order.status === 'completed' ? 'Installation Complete' :
-                           'Order Status'}
+                           "Statut de la commande"}
                         </div>
                       </div>
                     </div>
@@ -205,9 +205,9 @@ export default function CarsOrders({
                   <div className="w-32 h-32 bg-gray-100 flex items-center justify-center mx-auto mb-8 transform rotate-45">
                     <Package className="h-16 w-16 text-gray-400 transform -rotate-45" />
                   </div>
-                  <h2 className="text-4xl font-black text-black mb-6 tracking-wider uppercase">EMPTY GARAGE</h2>
+                  <h2 className="text-4xl font-black text-black mb-6 tracking-wider uppercase">AUCUN PRODUIT</h2>
                   <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                    No performance parts orders yet. Start building your automotive setup with premium components.
+                    Aucune commande pour le moment. Commencez vos achats !
                   </p>
                   <Link
                     href={generateStoreUrl('store.products', store)}

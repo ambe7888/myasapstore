@@ -222,7 +222,7 @@ export default function ProductGrid({
                     disabled={quickViewProduct.stock <= 0}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    Add to Cart
+                    Ajouter au panier
                   </button>
                 </div>
                 
@@ -234,7 +234,7 @@ export default function ProductGrid({
                   }}
                 >
                   <Heart className="h-4 w-4 mr-2" />
-                  Add to Wishlist
+                  Ajouter aux favoris
                 </button>
               </div>
             </div>

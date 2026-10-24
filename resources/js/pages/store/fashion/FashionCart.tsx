@@ -80,7 +80,7 @@ function FashionCartContent({
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">Panier d'achat</h1>
               <p className="text-white/70 font-light text-lg">
-                Review your selected items
+                Vérifiez vos articles
               </p>
             </div>
           </div>
@@ -176,7 +176,7 @@ function FashionCartContent({
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="font-light">Tax</span>
+                        <span className="font-light">Taxe</span>
                         <span className="font-medium">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                       </div>
                       
@@ -205,7 +205,7 @@ function FashionCartContent({
                 <ShoppingBag className="h-16 w-16 text-gray-300 mx-auto mb-6" />
                 <h2 className="text-2xl font-thin text-gray-900 mb-4">Votre panier est vide</h2>
                 <p className="text-gray-600 font-light mb-8">
-                  Discover our latest collections and add items to your cart
+                  Découvrez nos dernières collections et ajoutez des articles à votre panier
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

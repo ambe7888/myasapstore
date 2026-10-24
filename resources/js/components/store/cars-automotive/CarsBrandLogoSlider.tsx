@@ -33,10 +33,10 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-black text-black mb-6 tracking-tight">
-            {brandContent.title || 'Trusted Brands'}
+            {brandContent.title || "Marques de confiance"}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {brandContent.description || 'We partner with the world\'s leading automotive manufacturers and performance brands'}
+            {brandContent.description || "Nous travaillons avec des marques de confiance"}
           </p>
           <div className="w-24 h-1 bg-red-600 mx-auto mt-8"></div>
         </div>
@@ -60,15 +60,15 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
         {/* Bottom CTA */}
         <div className="text-center">
           <div className="bg-white border-2 border-red-600 p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-black text-black mb-4">{brandContent.bottom_title || 'Can\'t Find Your Brand?'}</h3>
+            <h3 className="text-2xl font-black text-black mb-4">{brandContent.bottom_title || "Vous ne trouvez pas votre marque ?"}</h3>
             <p className="text-gray-600 mb-6">
-              {brandContent.bottom_description || 'We work with hundreds of automotive brands. Contact us for special orders.'}
+              {brandContent.bottom_description || "Nous travaillons avec de nombreuses marques. Contactez-nous pour une demande particulière."}
             </p>
             <a
               href={formatCustomLink(brandContent.bottom_button_link, store, '/contact')}
               className="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
             >
-              {brandContent.bottom_button_text || 'Contact Us'}
+              {brandContent.bottom_button_text || "Nous contacter"}
             </a>
           </div>
         </div>

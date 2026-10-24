@@ -18,9 +18,9 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
 
   const stats = content?.stats || [
     { number: '50K+', label: 'Happy Families' },
-    { number: '100K+', label: 'Products Sold' },
+    { number: '100K+', label: "Produits vendus" },
     { number: '99%', label: 'Parent Satisfaction' },
-    { number: '24/7', label: 'Customer Support' }
+    { number: '24/7', label: "Service client" }
   ];
 
   return (
@@ -49,10 +49,10 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
         {/* Stats Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            {content?.title || 'Trusted by Parents Everywhere'}
+            {content?.title || "Ils nous font confiance"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-12">
-            {content?.description || 'Join our growing community of parents who choose quality and comfort for their little ones.'}
+            {content?.description || "Rejoignez nos clients qui nous font confiance."}
           </p>
           
           {/* Stats Grid */}
@@ -103,7 +103,7 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
         {/* Brand Logos Section */}
         <div className="text-center">
           <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-8">
-            {content?.brands_title || 'Featured Brands'}
+            {content?.brands_title || "Nos marques"}
           </h3>
           
           {/* Logos Container */}

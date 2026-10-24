@@ -23,8 +23,8 @@ interface FashionRelatedProductsProps {
 
 export default function FashionRelatedProducts({ 
   products, 
-  title = "You May Also Like",
-  subtitle = "Discover similar styles that complement your taste",
+  title = "Vous pourriez aussi aimer",
+  subtitle = "Découvrez des produits similaires",
   storeSettings = {},
   currencies = []
 }: FashionRelatedProductsProps) {

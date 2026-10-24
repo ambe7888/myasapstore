@@ -112,7 +112,7 @@ const { props } = usePage();
       zip: '',
       country: ''
     },
-    payment_method: 'Cash on Livraison',
+    payment_method: "Paiement à la livraison",
     shipping_method: 'Standard Livraison'
   };
   
@@ -183,7 +183,7 @@ const { props } = usePage();
                   <CheckCircle className="h-6 w-6 text-white transform -rotate-45" />
                 </div>
                 <div>
-                  <h1 className="text-5xl font-black tracking-wider">ORDER CONFIRMED</h1>
+                  <h1 className="text-5xl font-black tracking-wider">COMMANDE CONFIRMÉE</h1>
                   <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Professional Parts Installation Ready</div>
                 </div>
               </div>
@@ -194,7 +194,7 @@ const { props } = usePage();
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Your automotive parts order has been successfully processed and is ready for installation.
+              Votre commande a bien été enregistrée.
             </p>
             <div className="mt-6">
               <div className="inline-block bg-red-600 text-white px-8 py-4 font-black text-xl tracking-wider uppercase">
@@ -216,7 +216,7 @@ const { props } = usePage();
                   Ouverture de WhatsApp...
                 </h3>
                 <p className="text-xl text-green-700 leading-relaxed mb-8">
-                  Your automotive parts order confirmation will open in WhatsApp automatically.
+                  La confirmation de votre commande s'ouvrira automatiquement sur WhatsApp.
                 </p>
                 <div className="flex justify-center gap-6">
                   <button
@@ -368,7 +368,7 @@ const { props } = usePage();
                       <div className="flex items-start mb-4">
                         <MapPin className="h-8 w-8 text-red-600 mr-4 mt-1" />
                         <div>
-                          <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-3">Installation Address</p>
+                          <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-3">Adresse de livraison</p>
                           <p className="text-gray-900 leading-relaxed font-medium">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />

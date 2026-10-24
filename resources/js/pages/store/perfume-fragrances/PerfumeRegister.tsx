@@ -67,15 +67,15 @@ export default function PerfumeRegister({
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1a1 1 0 00.293.707L15 9.414l.707-.707A1 1 0 0016 8V7zM16 3a1 1 0 10-2 0v3a1 1 0 00.293.707L15 7.414l.707-.707A1 1 0 0016 6V3z" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-light text-purple-800 mb-2">Join Our Community</h1>
-                <p className="text-gray-600">Create your fragrance account</p>
+                <h1 className="text-3xl font-light text-purple-800 mb-2">Rejoignez-nous</h1>
+                <p className="text-gray-600">Créez votre compte</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Nom complet
                   </label>
                   <input
                     id="name"
@@ -85,7 +85,7 @@ export default function PerfumeRegister({
                     className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                       errors.name ? 'border-red-300' : ''
                     }`}
-                    placeholder="Enter your full name"
+                    placeholder="Saisissez votre nom complet"
                     required
                   />
                   {errors.name && (
@@ -104,7 +104,7 @@ export default function PerfumeRegister({
                     className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                       errors.email ? 'border-red-300' : ''
                     }`}
-                    placeholder="Enter your email"
+                    placeholder="Saisissez votre e-mail"
                     required
                   />
                   {errors.email && (
@@ -115,7 +115,7 @@ export default function PerfumeRegister({
                 {/* Password */}
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -154,7 +154,7 @@ export default function PerfumeRegister({
                 {/* Confirm Password */}
                 <div>
                   <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 mb-2">
-                    Confirm Password
+                    Confirmer le mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -165,7 +165,7 @@ export default function PerfumeRegister({
                       className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                         errors.password_confirmation ? 'border-red-300' : ''
                       }`}
-                      placeholder="Confirm your password"
+                      placeholder="Confirmez votre mot de passe"
                       required
                     />
                     <button
@@ -196,7 +196,7 @@ export default function PerfumeRegister({
                   disabled={processing}
                   className="w-full bg-purple-800 text-white py-3 px-4 rounded-xl font-medium hover:bg-purple-900 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors duration-300 disabled:opacity-50"
                 >
-                  {processing ? 'Creating Account...' : 'Create Account'}
+                  {processing ? "Création du compte..." : "Créer un compte"}
                 </button>
               </form>
               
@@ -208,7 +208,7 @@ export default function PerfumeRegister({
                     href={generateStoreUrl('store.login', store)}
                     className="text-purple-800 hover:text-purple-900 font-medium transition-colors duration-300"
                   >
-                    Sign In
+                    Se connecter
                   </Link>
                 </p>
               </div>

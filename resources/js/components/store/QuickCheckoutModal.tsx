@@ -139,7 +139,7 @@ export default function QuickCheckoutModal({
           setLoadingShipping(false);
         })
         .catch(err => {
-          console.error("Error loading shipping methods:", err);
+          console.error("Erreur de chargement des modes de livraison :", err);
           setLoadingShipping(false);
         });
 
@@ -158,7 +158,7 @@ export default function QuickCheckoutModal({
           setLoadingPayments(false);
         })
         .catch(err => {
-          console.error("Error loading payment methods:", err);
+          console.error("Erreur de chargement des modes de paiement :", err);
           const fallback = [{ id: 'cod', name: '💵 Paiement à la livraison' }];
           setPaymentMethods(fallback);
           setPaymentMethod('cod');

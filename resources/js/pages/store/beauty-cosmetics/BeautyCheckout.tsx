@@ -227,10 +227,10 @@ export default function BeautyCheckout({
     if (!shippingFirstName) newErrors.shippingFirstName = "Le prénom est requis";
     if (!shippingLastName) newErrors.shippingLastName = "Le nom est requis";
     if (!shippingPhone) newErrors.shippingPhone = "Le numéro de téléphone est requis";
-    if (!shippingStreet) newErrors.shippingStreet = 'Street address is required';
+    if (!shippingStreet) newErrors.shippingStreet = "L'adresse est obligatoire";
     if (!shippingCity) newErrors.shippingCity = 'La ville est requise';
-    if (!shippingState) newErrors.shippingState = 'State is required';
-    if (!shippingZip) newErrors.shippingZip = 'ZIP code is required';
+    if (!shippingState) newErrors.shippingState = "La région est obligatoire";
+    if (!shippingZip) newErrors.shippingZip = "Le code postal est obligatoire";
     
     if (Object.keys(newErrors).length > 0) {
       setShippingErrors(newErrors);
@@ -254,7 +254,7 @@ export default function BeautyCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -265,11 +265,11 @@ export default function BeautyCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -399,10 +399,10 @@ export default function BeautyCheckout({
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6">
-                Beauty Checkout
+                Finaliser la commande
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Complete your beauty journey with secure checkout
+                Finalisez votre commande en toute sécurité
               </p>
             </div>
           </div>
@@ -463,9 +463,9 @@ export default function BeautyCheckout({
                 {currentStep === 'shipping' && (
                   <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                     <div className="mb-8">
-                      <h2 className="text-3xl font-light text-gray-900 mb-4">Shipping Information</h2>
+                      <h2 className="text-3xl font-light text-gray-900 mb-4">Informations de livraison</h2>
                       <p className="text-gray-600">
-                        Enter your shipping details and choose a shipping method.
+                        Saisissez vos informations de livraison et choisissez un mode de livraison.
                       </p>
                     </div>
                     
@@ -575,7 +575,7 @@ export default function BeautyCheckout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-rose-200'
                             } focus:outline-none focus:border-rose-500 transition-colors bg-white/80`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -605,7 +605,7 @@ export default function BeautyCheckout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-rose-200'
                             } focus:outline-none focus:border-rose-500 transition-colors bg-white/80`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -666,7 +666,7 @@ export default function BeautyCheckout({
                                         <div>
                                           <span className="block font-medium text-gray-900">{method.name}</span>
                                           <span className="block text-sm text-gray-600">
-                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                           </span>
                                           {method.min_order_amount > 0 && (
                                             <span className="block text-xs text-gray-500 mt-1">
@@ -732,7 +732,7 @@ export default function BeautyCheckout({
                           rows={4}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Special instructions for delivery or any other notes"
+                          placeholder="Instructions particulières pour la livraison ou autres remarques"
                           className="block w-full px-4 py-3 rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 transition-colors bg-white/80"
                         />
                       </div>
@@ -742,7 +742,7 @@ export default function BeautyCheckout({
                           type="submit"
                           className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </form>
@@ -753,16 +753,16 @@ export default function BeautyCheckout({
                 {currentStep === 'review' && (
                   <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                     <div className="mb-8">
-                      <h2 className="text-3xl font-light text-gray-900 mb-4">Review Your Order</h2>
+                      <h2 className="text-3xl font-light text-gray-900 mb-4">Vérifiez votre commande</h2>
                       <p className="text-gray-600">
-                        Please review your order details before placing your order.
+                        Vérifiez les détails de votre commande avant de la valider.
                       </p>
                     </div>
                     
                     <div className="space-y-8">
                       {/* Order Items */}
                       <div>
-                        <h3 className="text-xl font-medium text-gray-900 mb-6">Order Items</h3>
+                        <h3 className="text-xl font-medium text-gray-900 mb-6">Articles commandés</h3>
                         
                         <div className="space-y-4">
                           {cartItems.map((item) => {
@@ -796,7 +796,7 @@ export default function BeautyCheckout({
                       
                       {/* Shipping Information */}
                       <div>
-                        <h3 className="text-xl font-medium text-gray-900 mb-6">Shipping Information</h3>
+                        <h3 className="text-xl font-medium text-gray-900 mb-6">Informations de livraison</h3>
                         
                         <div className="bg-white/60 rounded-2xl p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -816,7 +816,7 @@ export default function BeautyCheckout({
                           <div className="mt-6 pt-6 border-t border-rose-200">
                             <p className="text-sm font-medium text-gray-500 mb-2">Méthode de livraison</p>
                             <p className="text-gray-900">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                             </p>
                           </div>
                         </div>
@@ -839,14 +839,14 @@ export default function BeautyCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border-2 border-rose-200 text-rose-600 px-6 py-3 rounded-full font-medium hover:border-rose-300 transition-colors"
                         >
-                          Back to Shipping
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors shadow-lg hover:shadow-xl"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -857,9 +857,9 @@ export default function BeautyCheckout({
                 {currentStep === 'payment' && (
                   <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                     <div className="mb-8">
-                      <h2 className="text-3xl font-light text-gray-900 mb-4">Payment Information</h2>
+                      <h2 className="text-3xl font-light text-gray-900 mb-4">Informations de paiement</h2>
                       <p className="text-gray-600">
-                        Choose your payment method and enter your billing details.
+                        Choisissez votre mode de paiement et saisissez vos informations de facturation.
                       </p>
                     </div>
                     
@@ -877,7 +877,7 @@ export default function BeautyCheckout({
                             className="h-5 w-5 text-rose-600 focus:ring-rose-500 border-rose-300 rounded"
                           />
                           <label htmlFor="same-as-shipping" className="ml-3 block text-gray-900 font-medium">
-                            Same as shipping address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -909,8 +909,8 @@ export default function BeautyCheckout({
                                   className="h-5 w-5 text-rose-600 focus:ring-rose-500 border-rose-300"
                                 />
                                 <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                  <span className="block font-medium text-gray-900">Cash on Delivery</span>
-                                  <span className="block text-sm text-gray-600">Pay when your order is delivered</span>
+                                  <span className="block font-medium text-gray-900">Paiement à la livraison</span>
+                                  <span className="block text-sm text-gray-600">Payez à la livraison de votre commande</span>
                                 </label>
                               </div>
                             </div>
@@ -932,7 +932,7 @@ export default function BeautyCheckout({
                                 />
                                 <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block font-medium text-gray-900">WhatsApp</span>
-                                  <span className="block text-sm text-gray-600">Complete payment via WhatsApp</span>
+                                  <span className="block text-sm text-gray-600">Finaliser le paiement via WhatsApp</span>
                                 </label>
                               </div>
                             </div>
@@ -954,7 +954,7 @@ export default function BeautyCheckout({
                                 />
                                 <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block font-medium text-gray-900">Telegram</span>
-                                  <span className="block text-sm text-gray-600">Complete payment via Telegram</span>
+                                  <span className="block text-sm text-gray-600">Finaliser le paiement via Telegram</span>
                                 </label>
                               </div>
                             </div>
@@ -1010,7 +1010,7 @@ export default function BeautyCheckout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-gray-600">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1018,7 +1018,7 @@ export default function BeautyCheckout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mx-6 mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                                    <h4 className="text-sm font-medium text-blue-900 mb-2">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-medium text-blue-900 mb-2">Détails du virement bancaire</h4>
                                     <div className="text-sm text-blue-800 whitespace-pre-line">
                                       {config.details}
                                     </div>
@@ -1033,7 +1033,7 @@ export default function BeautyCheckout({
                       {/* WhatsApp Number Input */}
                       {paymentMethod === 'whatsapp' && (
                         <div>
-                          <h3 className="text-xl font-medium text-gray-900 mb-6">WhatsApp Details</h3>
+                          <h3 className="text-xl font-medium text-gray-900 mb-6">Détails WhatsApp</h3>
                           
                           <div>
                             <label htmlFor="whatsapp-number" className="block text-sm font-medium text-gray-900 mb-3">
@@ -1074,7 +1074,7 @@ export default function BeautyCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border-2 border-rose-200 text-rose-600 px-6 py-3 rounded-full font-medium hover:border-rose-300 transition-colors"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1091,7 +1091,7 @@ export default function BeautyCheckout({
               {/* Order Summary */}
               <div className="lg:col-span-2">
                 <div className="bg-rose-600 text-white rounded-3xl p-8 sticky top-6 shadow-2xl">
-                  <h2 className="text-2xl font-light mb-8 text-center">Beauty Bag Summary</h2>
+                  <h2 className="text-2xl font-light mb-8 text-center">Récapitulatif du panier</h2>
                   <div className="w-16 h-1 bg-white/30 mx-auto mb-8 rounded-full"></div>
                   
                   {/* Order Items */}
@@ -1170,19 +1170,19 @@ export default function BeautyCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 ${couponApplied ? 'bg-red-500 hover:bg-red-600' : 'bg-white/20 hover:bg-white/30'} text-white rounded-r-xl text-sm font-medium transition-colors`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-300">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-300">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1220,7 +1220,7 @@ export default function BeautyCheckout({
                   {/* Secure Checkout */}
                   <div className="mt-8 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-white/60 mr-2" />
-                    <p className="text-xs text-white/60 font-medium">Secure Checkout</p>
+                    <p className="text-xs text-white/60 font-medium">Paiement sécurisé</p>
                   </div>
                 </div>
               </div>

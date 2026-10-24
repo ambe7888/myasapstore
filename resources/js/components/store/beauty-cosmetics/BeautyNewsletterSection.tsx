@@ -42,10 +42,10 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +73,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
 
               {/* Title */}
               <h2 className="text-3xl lg:text-5xl font-light text-gray-900 mb-4">
-                {content?.title || 'Join Our Beauty Community'}
+                {content?.title || "Rejoignez-nous"}
               </h2>
               
               {/* Highlight */}
@@ -85,7 +85,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
 
               {/* Subtitle */}
               <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-                {content?.subtitle || 'Be the first to discover new products, get exclusive beauty tips, and enjoy member-only discounts.'}
+                {content?.subtitle || "Soyez le premier informé de nos nouveautés et profitez d'offres réservées à nos abonnés."}
               </p>
 
               {/* Newsletter Form */}
@@ -97,8 +97,8 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Welcome to Our Beauty Community!</h3>
-                    <p className="text-gray-600">You've been successfully subscribed to our newsletter.</p>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Bienvenue !</h3>
+                    <p className="text-gray-600">Vous êtes maintenant abonné à notre newsletter.</p>
                   </div>
                 </div>
               ) : (
@@ -109,7 +109,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder={content?.placeholder_text || 'Enter your email for beauty updates'}
+                        placeholder={content?.placeholder_text || "Saisissez votre e-mail pour recevoir nos actualités"}
                         className="w-full px-6 py-4 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-rose-200 transition-all duration-300"
                         required
                       />
@@ -128,7 +128,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                           Joining...
                         </div>
                       ) : (
-                        content?.button_text || 'Join Community'
+                        content?.button_text || "Je m'abonne"
                       )}
                     </button>
                   </div>
@@ -150,9 +150,9 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
               {/* Benefits */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
                 {(content?.benefits || [
-                  { icon: '🎁', title: 'Exclusive Offers', description: 'Member-only discounts & early access' },
+                  { icon: '🎁', title: "Offres exclusives", description: 'Member-only discounts & early access' },
                   { icon: '✨', title: 'Beauty Tips', description: 'Weekly tutorials & expert advice' },
-                  { icon: '💌', title: 'New Arrivals', description: 'First to know about latest products' }
+                  { icon: '💌', title: "Nouveautés", description: "Soyez informé de nos nouveautés" }
                 ]).map((benefit, index) => (
                   <div key={index} className="flex flex-col items-center text-center">
                     <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-3">

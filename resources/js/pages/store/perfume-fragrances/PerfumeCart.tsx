@@ -95,7 +95,7 @@ function PerfumeCartContent({
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">Panier d'achat</h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Your selected fragrances
+                Votre sélection
               </p>
             </div>
           </div>
@@ -156,7 +156,7 @@ function PerfumeCartContent({
                                       <div className={`w-1.5 h-1.5 rounded-full ${
                                         item.stock > 0 ? 'bg-green-500' : 'bg-red-500'
                                       }`}></div>
-                                      <span>{item.stock > 0 ? `${item.stock} available` : 'Out of stock'}</span>
+                                      <span>{item.stock > 0 ? `${item.stock} available` : "Rupture de stock"}</span>
                                     </div>
                                   </div>
                                   
@@ -235,7 +235,7 @@ function PerfumeCartContent({
                             {/* Item Total */}
                             <div className="mt-3 pt-3 border-t border-gray-200">
                               <div className="flex justify-between items-center">
-                                <span className="text-sm text-gray-600">Item Total:</span>
+                                <span className="text-sm text-gray-600">Total de l'article :</span>
                                 <span className="font-semibold text-purple-800">
                                   {formatCurrency((item.sale_price && item.sale_price < item.price ? item.sale_price : item.price) * item.quantity, storeSettings, currencies)}
                                 </span>
@@ -263,7 +263,7 @@ function PerfumeCartContent({
                         <span className="font-medium">{summary.shipping === 0 ? 'Calculé à la caisse' : formatCurrency(summary.shipping, storeSettings, currencies)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Tax</span>
+                        <span className="text-gray-600">Taxe</span>
                         <span className="font-medium">{formatCurrency(summary.tax || 0, storeSettings, currencies)}</span>
                       </div>
                       <div className="border-t border-gray-200 pt-4">
@@ -293,9 +293,9 @@ function PerfumeCartContent({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
                 </div>
-                <h3 className="text-3xl font-light text-gray-900 mb-4">Your Cart is Empty</h3>
+                <h3 className="text-3xl font-light text-gray-900 mb-4">Votre panier est vide</h3>
                 <p className="text-gray-600 max-w-md mx-auto mb-8">
-                  Discover our exquisite fragrance collection and add your favorites to cart.
+                  Découvrez nos produits et ajoutez vos favoris au panier.
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}

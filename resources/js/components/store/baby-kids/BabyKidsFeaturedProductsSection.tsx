@@ -55,7 +55,7 @@ export default function BabyKidsFeaturedProductsSection({
             {content?.title || 'Parent Favorites'}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {content?.description || 'Loved by parents and kids alike - these bestsellers combine comfort, durability, and adorable designs.'}
+            {content?.description || "Nos meilleures ventes, appréciées par nos clients."}
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export default function BabyKidsFeaturedProductsSection({
             href={generateStoreUrl('store.products', store)}
             className="inline-flex items-center px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-lg"
           >
-            <span>View All Products</span>
+            <span>Voir tous les produits</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

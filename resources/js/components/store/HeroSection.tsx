@@ -17,7 +17,7 @@ export default function HeroSection({
   buttonText = storeTheme.homepage.heroSection.buttonText,
   buttonLink = storeTheme.homepage.heroSection.buttonLink,
   image = storeTheme.homepage.heroSection.image,
-  secondaryButtonText = "View Collections",
+  secondaryButtonText = "Voir les collections",
   secondaryButtonLink = "/collections"
 }: HeroSectionProps) {
   // Animation states
@@ -51,7 +51,7 @@ export default function HeroSection({
               className={`inline-block mb-4 transition-all duration-700 ease-out ${fadeIn}`}
             >
               <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                New Collection
+                Nouvelle collection
               </span>
             </div>
             <h1 
@@ -97,7 +97,7 @@ export default function HeroSection({
                 </div>
                 <div>
                   <span className="text-sm font-medium block">Livraison gratuite</span>
-                  <span className="text-xs text-gray-500">On orders over $50</span>
+                  <span className="text-xs text-gray-500">Pour toute commande éligible</span>
                 </div>
               </div>
               <div className="flex items-center">
@@ -107,8 +107,8 @@ export default function HeroSection({
                   </svg>
                 </div>
                 <div>
-                  <span className="text-sm font-medium block">30-Day Returns</span>
-                  <span className="text-xs text-gray-500">Hassle-free returns</span>
+                  <span className="text-sm font-medium block">Retours sous 30 jours</span>
+                  <span className="text-xs text-gray-500">Retours simplifiés</span>
                 </div>
               </div>
               <div className="flex items-center">
@@ -118,7 +118,7 @@ export default function HeroSection({
                   </svg>
                 </div>
                 <div>
-                  <span className="text-sm font-medium block">Secure Checkout</span>
+                  <span className="text-sm font-medium block">Paiement sécurisé</span>
                   <span className="text-xs text-gray-500">100% protected</span>
                 </div>
               </div>
@@ -132,7 +132,7 @@ export default function HeroSection({
             >
               <img 
                 src={image} 
-                alt="Home Accessories Collection" 
+                alt="Notre collection" 
                 className="rounded-2xl shadow-xl object-cover w-full h-full"
                 style={{ maxHeight: '600px' }}
                 onError={(e) => {

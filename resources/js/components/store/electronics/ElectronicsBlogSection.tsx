@@ -37,10 +37,10 @@ export default function ElectronicsBlogSection({ posts, content }: ElectronicsBl
             </svg>
           </div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            {content?.title || 'Tech Blog'}
+            {content?.title || "Notre blog"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {content?.description || 'Latest tech reviews, buying guides, and industry insights from our electronics experts.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function ElectronicsBlogSection({ posts, content }: ElectronicsBl
                   href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                   className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
                 >
-                  <span>Read More</span>
+                  <span>Lire la suite</span>
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -102,7 +102,7 @@ export default function ElectronicsBlogSection({ posts, content }: ElectronicsBl
             href={generateStoreUrl('store.blog', store)}
             className="inline-flex items-center px-8 py-4 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            <span>View All Articles</span>
+            <span>Voir tous les articles</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

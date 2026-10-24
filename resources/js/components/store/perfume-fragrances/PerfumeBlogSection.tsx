@@ -25,7 +25,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-6 py-3 bg-purple-50 rounded-full mb-6">
             <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-            <span className="text-purple-800 text-sm font-medium">Latest Stories</span>
+            <span className="text-purple-800 text-sm font-medium">Derniers articles</span>
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
@@ -33,7 +33,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-            {content?.description || 'Dive into the art of perfumery with expert insights and fragrance stories.'}
+            {content?.description || "Retrouvez nos conseils, nos idées et les actualités de la boutique."}
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                       </p>
                       
                       <div className="inline-flex items-center text-purple-800 font-medium group-hover:text-purple-900 transition-colors duration-300">
-                        <span>Read Article</span>
+                        <span>Lire l'article</span>
                         <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
@@ -181,7 +181,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
                         </p>
                         
                         <div className="inline-flex items-center text-purple-800 text-sm font-medium group-hover:text-purple-900 transition-colors duration-300">
-                          <span>Continue Reading</span>
+                          <span>Continuer la lecture</span>
                           <svg className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
@@ -202,7 +202,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
             </div>
             <h3 className="text-2xl font-light text-gray-900 mb-4">Coming Soon</h3>
             <p className="text-gray-600 max-w-md mx-auto">
-              Our fragrance journal is being crafted with expert insights. Stay tuned for captivating stories.
+              Nos articles arrivent bientôt. Restez connectés !
             </p>
           </div>
         )}
@@ -213,7 +213,7 @@ export default function PerfumeBlogSection({ posts = [], content, store }: Perfu
             href={generateStoreUrl('store.blog', store)}
             className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
           >
-            <span>View All Articles</span>
+            <span>Voir tous les articles</span>
             <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>

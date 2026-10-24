@@ -238,7 +238,7 @@ export default function WatchesCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -262,7 +262,7 @@ export default function WatchesCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -274,11 +274,11 @@ export default function WatchesCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -412,9 +412,9 @@ export default function WatchesCheckout({
         <div className="bg-white border-b border-slate-200 store-breadcrumb">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center text-sm text-slate-600">
-              <Link href={generateStoreUrl('store.home', store)} className="hover:text-amber-600 transition-colors">Home</Link>
+              <Link href={generateStoreUrl('store.home', store)} className="hover:text-amber-600 transition-colors">Accueil</Link>
               <ChevronRight className="h-4 w-4 mx-2" />
-              <Link href={generateStoreUrl('store.cart', store)} className="hover:text-amber-600 transition-colors">Cart</Link>
+              <Link href={generateStoreUrl('store.cart', store)} className="hover:text-amber-600 transition-colors">Panier</Link>
               <ChevronRight className="h-4 w-4 mx-2" />
               <span className="text-slate-900 font-medium">Passer à la caisse</span>
             </div>
@@ -472,8 +472,8 @@ export default function WatchesCheckout({
                         <div className="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                           <MapPin className="w-8 h-8 text-slate-900" />
                         </div>
-                        <h2 className="text-2xl font-light text-slate-900 mb-2">Delivery Details</h2>
-                        <p className="text-slate-600">Where should we deliver your luxury timepieces?</p>
+                        <h2 className="text-2xl font-light text-slate-900 mb-2">Détails de livraison</h2>
+                        <p className="text-slate-600">Où devons-nous livrer votre commande ?</p>
                       </div>
 
                       <form onSubmit={handleShippingSubmit} className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 space-y-6">
@@ -582,7 +582,7 @@ export default function WatchesCheckout({
                                 shippingErrors.shippingState ? 'border-red-500' : 'border-slate-300'
                               } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors`}
                             >
-                              <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                              <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                               {states.map((state: any) => (
                                 <option key={state.id} value={state.id}>
                                   {state.name}
@@ -612,7 +612,7 @@ export default function WatchesCheckout({
                                 shippingErrors.shippingCity ? 'border-red-500' : 'border-slate-300'
                               } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors`}
                             >
-                              <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                              <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                               {cities.map((city: any) => (
                                 <option key={city.id} value={city.id}>
                                   {city.name}
@@ -648,7 +648,7 @@ export default function WatchesCheckout({
                         <div className="bg-slate-50 rounded-lg p-6">
                           <h3 className="text-lg font-medium text-slate-900 mb-4 flex items-center">
                             <Clock className="w-5 h-5 text-amber-500 mr-2" />
-                            Delivery Options
+                            Options de livraison
                           </h3>
                           
                           <div className="space-y-3">
@@ -675,7 +675,7 @@ export default function WatchesCheckout({
                                         <div className="ml-3">
                                           <div className="text-sm font-medium text-slate-900">{method.name}</div>
                                           <div className="text-sm text-slate-600">
-                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                           </div>
                                         </div>
                                       </div>
@@ -733,7 +733,7 @@ export default function WatchesCheckout({
                             rows={3}
                             value={orderNotes}
                             onChange={(e) => setOrderNotes(e.target.value)}
-                            placeholder="Any special delivery instructions"
+                            placeholder="Instructions particulières pour la livraison"
                             className="w-full px-3 py-3 border border-slate-300 rounded-md focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition-colors"
                           />
                         </div>
@@ -743,7 +743,7 @@ export default function WatchesCheckout({
                             type="submit"
                             className="bg-amber-500 text-slate-900 px-8 py-3 rounded-md font-medium hover:bg-amber-600 transition-colors flex items-center"
                           >
-                            Continue to Review
+                            Continuer vers le récapitulatif
                             <ChevronRight className="ml-2 h-5 w-5" />
                           </button>
                         </div>
@@ -758,14 +758,14 @@ export default function WatchesCheckout({
                         <div className="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-4 flex items-center justify-center">
                           <Check className="w-8 h-8 text-slate-900" />
                         </div>
-                        <h2 className="text-2xl font-light text-slate-900 mb-2">Review Order</h2>
-                        <p className="text-slate-600">Please verify your timepiece order details</p>
+                        <h2 className="text-2xl font-light text-slate-900 mb-2">Vérifier la commande</h2>
+                        <p className="text-slate-600">Vérifiez les détails de votre commande</p>
                       </div>
                       
                       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 space-y-8">
                         {/* Order Items */}
                         <div>
-                          <h3 className="text-lg font-medium text-slate-900 mb-6">Your Timepieces</h3>
+                          <h3 className="text-lg font-medium text-slate-900 mb-6">Votre sélection</h3>
                           
                           <div className="space-y-4">
                             {cartItems.map((item) => {
@@ -804,22 +804,22 @@ export default function WatchesCheckout({
                           <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <p className="text-sm font-medium text-slate-700 mb-2">Contact Details</p>
+                                <p className="text-sm font-medium text-slate-700 mb-2">Coordonnées</p>
                                 <p className="text-sm text-slate-900">{shippingFirstName} {shippingLastName}</p>
                                 <p className="text-sm text-slate-900">{shippingEmail}</p>
                                 <p className="text-sm text-slate-900">{shippingPhone}</p>
                               </div>
                               <div>
-                                <p className="text-sm font-medium text-slate-700 mb-2">Delivery Address</p>
+                                <p className="text-sm font-medium text-slate-700 mb-2">Adresse de livraison</p>
                                 <p className="text-sm text-slate-900">{shippingStreet}</p>
                                 <p className="text-sm text-slate-900">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                                 <p className="text-sm text-slate-900">{selectedCountryName}</p>
                               </div>
                             </div>
                             <div className="mt-6 pt-6 border-t border-slate-200">
-                              <p className="text-sm font-medium text-slate-700 mb-2">Delivery Method</p>
+                              <p className="text-sm font-medium text-slate-700 mb-2">Mode de livraison</p>
                               <p className="text-sm text-slate-900">
-                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                                {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                               </p>
                             </div>
                           </div>
@@ -828,7 +828,7 @@ export default function WatchesCheckout({
                         {/* Order Notes */}
                         {orderNotes && (
                           <div>
-                            <h3 className="text-lg font-medium text-slate-900 mb-6">Special Instructions</h3>
+                            <h3 className="text-lg font-medium text-slate-900 mb-6">Instructions spéciales</h3>
                             
                             <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
                               <p className="text-sm text-slate-900">{orderNotes}</p>
@@ -842,14 +842,14 @@ export default function WatchesCheckout({
                             onClick={() => setCurrentStep('shipping')}
                             className="border border-slate-300 text-slate-700 px-6 py-3 rounded-md font-medium hover:border-slate-400 transition-colors"
                           >
-                            Back to Shipping
+                            Retour à la livraison
                           </button>
                           <button
                             type="button"
                             onClick={() => setCurrentStep('payment')}
                             className="bg-amber-500 text-slate-900 px-8 py-3 rounded-md font-medium hover:bg-amber-600 transition-colors flex items-center"
                           >
-                            Continue to Payment
+                            Continuer vers le paiement
                             <ChevronRight className="ml-2 h-5 w-5" />
                           </button>
                         </div>
@@ -865,7 +865,7 @@ export default function WatchesCheckout({
                           <CreditCard className="w-8 h-8 text-slate-900" />
                         </div>
                         <h2 className="text-2xl font-light text-slate-900 mb-2">Détails de paiement</h2>
-                        <p className="text-slate-600">Secure payment for your luxury timepieces</p>
+                        <p className="text-slate-600">Paiement sécurisé</p>
                       </div>
                       
                       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-8 space-y-8">
@@ -882,7 +882,7 @@ export default function WatchesCheckout({
                               className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-slate-300 rounded"
                             />
                             <label htmlFor="same-as-shipping" className="ml-3 text-sm text-slate-700">
-                              Same as delivery address
+                              Identique à l'adresse de livraison
                             </label>
                           </div>
                         </div>
@@ -907,8 +907,8 @@ export default function WatchesCheckout({
                                     className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-slate-300"
                                   />
                                   <div className="ml-3">
-                                    <div className="text-sm font-medium text-slate-900">Cash on Delivery</div>
-                                    <div className="text-sm text-slate-600">Pay when your timepiece is delivered</div>
+                                    <div className="text-sm font-medium text-slate-900">Paiement à la livraison</div>
+                                    <div className="text-sm text-slate-600">Payez à la livraison de votre commande</div>
                                   </div>
                                 </div>
                               </label>
@@ -930,7 +930,7 @@ export default function WatchesCheckout({
                                   />
                                   <div className="ml-3">
                                     <div className="text-sm font-medium text-slate-900">WhatsApp</div>
-                                    <div className="text-sm text-slate-600">Complete payment via WhatsApp</div>
+                                    <div className="text-sm text-slate-600">Finaliser le paiement via WhatsApp</div>
                                   </div>
                                 </div>
                               </label>
@@ -952,7 +952,7 @@ export default function WatchesCheckout({
                                   />
                                   <div className="ml-3">
                                     <div className="text-sm font-medium text-slate-900">Telegram</div>
-                                    <div className="text-sm text-slate-600">Complete payment via Telegram</div>
+                                    <div className="text-sm text-slate-600">Finaliser le paiement via Telegram</div>
                                   </div>
                                 </div>
                               </label>
@@ -1009,7 +1009,7 @@ export default function WatchesCheckout({
                                           {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                         </div>
                                         <div className="text-sm text-slate-600">
-                                          {method === 'bank' ? 'Transfer payment to our bank account' : `Secure payment with ${methodNames[method] || method}`}
+                                          {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Secure payment with ${methodNames[method] || method}`}
                                         </div>
                                       </div>
                                     </div>
@@ -1018,7 +1018,7 @@ export default function WatchesCheckout({
                                   {/* Bank Transfer Details */}
                                   {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                     <div className="mx-4 mb-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                                      <h4 className="text-sm font-medium text-blue-900 mb-2">Bank Transfer Details</h4>
+                                      <h4 className="text-sm font-medium text-blue-900 mb-2">Détails du virement bancaire</h4>
                                       <div className="text-sm text-blue-800 whitespace-pre-line">
                                         {config.details}
                                       </div>
@@ -1033,7 +1033,7 @@ export default function WatchesCheckout({
                         {/* WhatsApp Number Input */}
                         {paymentMethod === 'whatsapp' && (
                           <div>
-                            <h3 className="text-lg font-medium text-slate-900 mb-6">WhatsApp Details</h3>
+                            <h3 className="text-lg font-medium text-slate-900 mb-6">Détails WhatsApp</h3>
                             
                             <div>
                               <label htmlFor="whatsapp-number" className="block text-sm font-medium text-slate-700 mb-2">
@@ -1065,7 +1065,7 @@ export default function WatchesCheckout({
                             onClick={() => setCurrentStep('review')}
                             className="border border-slate-300 text-slate-700 px-6 py-3 rounded-md font-medium hover:border-slate-400 transition-colors"
                           >
-                            Back to Review
+                            Retour au récapitulatif
                           </button>
                           <button
                             type="button"
@@ -1133,7 +1133,7 @@ export default function WatchesCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter code"
+                          placeholder="Saisissez le code"
                           className="flex-1 px-3 py-2 border border-slate-300 rounded-l-md focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none text-sm"
                           disabled={couponApplied}
                         />
@@ -1169,21 +1169,21 @@ export default function WatchesCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 rounded-r-md text-sm font-medium transition-colors ${
                             couponApplied ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-amber-500 text-slate-900 hover:bg-amber-600'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-600 mt-2">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-600 mt-2">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                     
@@ -1222,7 +1222,7 @@ export default function WatchesCheckout({
                     {/* Security Badge */}
                     <div className="mt-6 p-3 bg-slate-50 rounded-lg flex items-center justify-center">
                       <Shield className="h-4 w-4 text-amber-500 mr-2" />
-                      <span className="text-xs text-slate-600">256-bit SSL Secure Checkout</span>
+                      <span className="text-xs text-slate-600">Paiement sécurisé par cryptage SSL 256 bits</span>
                     </div>
                   </div>
                 </div>

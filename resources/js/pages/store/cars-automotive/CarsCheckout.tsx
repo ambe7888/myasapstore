@@ -117,7 +117,7 @@ function CarsCheckout({
   
   // Checkout steps
   const steps = [
-    { id: 'shipping', name: 'Delivery', icon: Package },
+    { id: 'shipping', name: "Livraison", icon: Package },
     { id: 'review', name: 'Review', icon: ShoppingCart },
     { id: 'payment', name: 'Payment', icon: CreditCard },
   ];
@@ -321,7 +321,7 @@ function CarsCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -345,7 +345,7 @@ function CarsCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -357,11 +357,11 @@ function CarsCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -500,7 +500,7 @@ function CarsCheckout({
                   <div className="w-6 h-6 bg-white transform -rotate-45"></div>
                 </div>
                 <div>
-                  <h1 className="text-5xl font-black tracking-wider">SECURE CHECKOUT</h1>
+                  <h1 className="text-5xl font-black tracking-wider">PAIEMENT SÉCURISÉ</h1>
                   <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Professional Parts Installation</div>
                 </div>
               </div>
@@ -511,7 +511,7 @@ function CarsCheckout({
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Complete your order with confidence - professional grade automotive parts
+              Finalisez votre commande en toute confiance
             </p>
           </div>
         </div>
@@ -685,7 +685,7 @@ function CarsCheckout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-gray-300 focus:border-red-600'
                             } focus:outline-none transition-colors`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -715,7 +715,7 @@ function CarsCheckout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-gray-300 focus:border-red-600'
                             } focus:outline-none transition-colors`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -749,7 +749,7 @@ function CarsCheckout({
                       
                       {/* Shipping Methods */}
                       <div className="mt-8">
-                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Delivery Method</h3>
+                        <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Mode de livraison</h3>
                         
                         <div className="space-y-3">
                           {shippingMethods.length > 0 ? (
@@ -776,7 +776,7 @@ function CarsCheckout({
                                         <div>
                                           <span className="block text-sm font-bold text-gray-900">{method.name}</span>
                                           <span className="block text-sm text-gray-600">
-                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                            {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                           </span>
                                         </div>
                                         <span className="text-lg font-bold text-red-600">
@@ -837,7 +837,7 @@ function CarsCheckout({
                           rows={4}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Any special installation instructions or requirements"
+                          placeholder="Instructions particulières pour la livraison"
                           className="block w-full px-4 py-3 border-2 border-gray-300 focus:border-red-600 focus:outline-none transition-colors"
                         />
                       </div>
@@ -847,7 +847,7 @@ function CarsCheckout({
                           type="submit"
                           className="bg-red-600 text-white px-8 py-4 font-black text-sm uppercase tracking-widest hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </form>
@@ -860,7 +860,7 @@ function CarsCheckout({
                     <div className="bg-black text-white px-6 py-4 -mx-8 -mt-8 mb-8">
                       <div className="flex items-center">
                         <ShoppingCart className="h-6 w-6 text-red-600 mr-3" />
-                        <h2 className="text-2xl font-black tracking-wider uppercase">Review Your Order</h2>
+                        <h2 className="text-2xl font-black tracking-wider uppercase">Vérifiez votre commande</h2>
                       </div>
                     </div>
                     
@@ -904,22 +904,22 @@ function CarsCheckout({
                         <div className="bg-gray-50 p-6 border-2 border-gray-200">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                              <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Contact Details</p>
+                              <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Coordonnées</p>
                               <p className="text-gray-900">{shippingFirstName} {shippingLastName}</p>
                               <p className="text-gray-900">{shippingEmail}</p>
                               <p className="text-gray-900">{shippingPhone}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Delivery Address</p>
+                              <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Adresse de livraison</p>
                               <p className="text-gray-900">{shippingStreet}</p>
                               <p className="text-gray-900">{selectedCityName}, {selectedStateName} {shippingZip}</p>
                               <p className="text-gray-900">{selectedCountryName}</p>
                             </div>
                           </div>
                           <div className="mt-6 pt-6 border-t-2 border-gray-300">
-                            <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Delivery Method</p>
+                            <p className="text-sm font-black tracking-wider uppercase text-red-600 mb-2">Mode de livraison</p>
                             <p className="text-gray-900">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                             </p>
                           </div>
                         </div>
@@ -942,14 +942,14 @@ function CarsCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border-2 border-red-600 text-red-600 px-6 py-3 font-bold text-sm uppercase tracking-wider hover:bg-red-600 hover:text-white transition-all duration-300"
                         >
-                          Back to Delivery
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-red-600 hover:bg-black text-white px-8 py-4 font-bold tracking-wider uppercase transition-colors"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -980,7 +980,7 @@ function CarsCheckout({
                             className="h-4 w-4 text-red-600 focus:ring-red-500 border-red-300"
                           />
                           <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-gray-900 font-medium">
-                            Same as delivery address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -1011,8 +1011,8 @@ function CarsCheckout({
                                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-red-300"
                                 />
                                 <label htmlFor="payment-cod" className="ml-4 flex-1 cursor-pointer">
-                                  <span className="block text-sm font-bold text-gray-900">Cash on Delivery</span>
-                                  <span className="block text-sm text-gray-600">Pay when your parts are delivered</span>
+                                  <span className="block text-sm font-bold text-gray-900">Paiement à la livraison</span>
+                                  <span className="block text-sm text-gray-600">Payez à la livraison de votre commande</span>
                                 </label>
                               </div>
                             </div>
@@ -1034,7 +1034,7 @@ function CarsCheckout({
                                 />
                                 <label htmlFor="payment-whatsapp" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-bold text-gray-900">WhatsApp</span>
-                                  <span className="block text-sm text-gray-600">Complete payment via WhatsApp</span>
+                                  <span className="block text-sm text-gray-600">Finaliser le paiement via WhatsApp</span>
                                 </label>
                               </div>
                             </div>
@@ -1056,7 +1056,7 @@ function CarsCheckout({
                                 />
                                 <label htmlFor="payment-telegram" className="ml-4 flex-1 cursor-pointer">
                                   <span className="block text-sm font-bold text-gray-900">Telegram</span>
-                                  <span className="block text-sm text-gray-600">Complete payment via Telegram</span>
+                                  <span className="block text-sm text-gray-600">Finaliser le paiement via Telegram</span>
                                 </label>
                               </div>
                             </div>
@@ -1112,7 +1112,7 @@ function CarsCheckout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-gray-600">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1120,7 +1120,7 @@ function CarsCheckout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mt-4 p-4 bg-red-50 border-2 border-red-200">
-                                    <h4 className="text-sm font-black tracking-wider uppercase text-red-900 mb-2">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-black tracking-wider uppercase text-red-900 mb-2">Détails du virement bancaire</h4>
                                     <div className="text-sm text-red-800 whitespace-pre-line font-mono">
                                       {config.details}
                                     </div>
@@ -1135,7 +1135,7 @@ function CarsCheckout({
                       {/* WhatsApp Number Input */}
                       {paymentMethod === 'whatsapp' && (
                         <div>
-                          <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">WhatsApp Details</h3>
+                          <h3 className="text-xl font-black tracking-wider uppercase text-gray-900 mb-4">Détails WhatsApp</h3>
                           
                           <div>
                             <label htmlFor="whatsapp-number" className="block text-sm font-black tracking-wider uppercase text-gray-900 mb-2">
@@ -1167,7 +1167,7 @@ function CarsCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border-2 border-red-600 text-red-600 px-6 py-3 font-bold text-sm uppercase tracking-wider hover:bg-red-600 hover:text-white transition-all duration-300"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1235,7 +1235,7 @@ function CarsCheckout({
                           name="coupon"
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
-                          placeholder="Enter code"
+                          placeholder="Saisissez le code"
                           className="flex-grow px-3 py-2 border border-gray-600 bg-gray-800 text-white focus:outline-none focus:border-red-600"
                           disabled={couponApplied}
                         />
@@ -1271,10 +1271,10 @@ function CarsCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 text-sm font-bold transition-colors ${
@@ -1283,11 +1283,11 @@ function CarsCheckout({
                               : 'bg-red-600 text-white hover:bg-red-700'
                           }`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-400 font-medium">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-400 font-medium">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1327,7 +1327,7 @@ function CarsCheckout({
                   {/* Secure Checkout */}
                   <div className="mt-6 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-red-400 mr-2" />
-                    <p className="text-xs text-gray-300 font-medium tracking-wider uppercase">Secure & Protected Checkout</p>
+                    <p className="text-xs text-gray-300 font-medium tracking-wider uppercase">Paiement sécurisé et protégé</p>
                   </div>
                 </div>
               </div>

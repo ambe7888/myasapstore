@@ -55,10 +55,10 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +84,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
               </h2>
             </div>
             <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              {newsletterContent.subtitle || 'Get the latest updates on new arrivals, exclusive deals, and expert automotive tips.'}
+              {newsletterContent.subtitle || "Recevez nos nouveautés, nos offres exclusives et nos conseils."}
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={newsletterContent.placeholder_text || 'Enter your email for auto updates'}
+                    placeholder={newsletterContent.placeholder_text || "Saisissez votre e-mail pour recevoir nos actualités"}
                     className="w-full px-6 py-4 bg-white text-black font-medium placeholder-gray-500 border-2 border-gray-300 focus:border-red-600 focus:outline-none transition-colors"
                     required
                   />
@@ -115,14 +115,14 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
                   ) : (
                     <>
                       <Mail className="h-4 w-4" />
-                      {newsletterContent.button_text || 'Subscribe'}
+                      {newsletterContent.button_text || "S'abonner"}
                     </>
                   )}
                 </button>
               </div>
 
               <p className="text-sm text-gray-400">
-                {newsletterContent.privacy_text || 'Unsubscribe anytime. Your privacy matters.'}
+                {newsletterContent.privacy_text || "Désabonnement possible à tout moment."}
               </p>
             </form>
           ) : (
@@ -131,7 +131,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
                 <CheckCircle className="h-12 w-12 text-green-500 mr-4" />
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">Successfully Subscribed!</h3>
-                  <p className="text-gray-300">You'll receive the latest automotive updates and exclusive deals.</p>
+                  <p className="text-gray-300">Vous recevrez nos dernières actualités et nos offres exclusives.</p>
                 </div>
               </div>
             </div>
@@ -140,8 +140,8 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
           {/* Features */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             {(newsletterContent.features || [
-              { number: '1', title: 'New Arrivals', description: 'Be first to know about latest automotive parts and accessories' },
-              { number: '2', title: 'Exclusive Deals', description: 'Get access to subscriber-only discounts and promotions' },
+              { number: '1', title: "Nouveautés", description: "Soyez informé de nos nouveautés" },
+              { number: '2', title: "Offres exclusives", description: "Profitez de remises et de promotions réservées aux abonnés" },
               { number: '3', title: 'Expert Tips', description: 'Receive installation guides and maintenance advice from pros' }
             ]).map((feature, index) => (
               <div key={index} className="text-center">

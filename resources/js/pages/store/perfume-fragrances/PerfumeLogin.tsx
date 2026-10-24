@@ -65,8 +65,8 @@ export default function PerfumeLogin({
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h1 className="text-3xl font-light text-purple-800 mb-2">Welcome Back</h1>
-                <p className="text-gray-600">Sign in to your fragrance account</p>
+                <h1 className="text-3xl font-light text-purple-800 mb-2">Bon retour</h1>
+                <p className="text-gray-600">Connectez-vous à votre compte</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -81,7 +81,7 @@ export default function PerfumeLogin({
                     className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                       errors.email ? 'border-red-300' : ''
                     }`}
-                    placeholder="Enter your email"
+                    placeholder="Saisissez votre e-mail"
                     required
                   />
                   {errors.email && (
@@ -93,13 +93,13 @@ export default function PerfumeLogin({
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                      Password
+                      Mot de passe
                     </label>
                     <Link
                       href={generateStoreUrl('store.forgot-password', store)}
                       className="text-sm text-purple-800 hover:text-purple-900 transition-colors duration-300"
                     >
-                      Forgot password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
                   <div className="relative">
@@ -111,7 +111,7 @@ export default function PerfumeLogin({
                       className={`w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ${
                         errors.password ? 'border-red-300' : ''
                       }`}
-                      placeholder="Enter your password"
+                      placeholder="Saisissez votre mot de passe"
                       required
                     />
                     <button
@@ -156,7 +156,7 @@ export default function PerfumeLogin({
                   disabled={processing}
                   className="w-full bg-purple-800 text-white py-3 px-4 rounded-xl font-medium hover:bg-purple-900 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors duration-300 disabled:opacity-50"
                 >
-                  {processing ? 'Signing In...' : 'Sign In'}
+                  {processing ? "Connexion..." : "Se connecter"}
                 </button>
               </form>
               
@@ -168,7 +168,7 @@ export default function PerfumeLogin({
                     href={generateStoreUrl('store.register', store)}
                     className="text-purple-800 hover:text-purple-900 font-medium transition-colors duration-300"
                   >
-                    Create Account
+                    Créer un compte
                   </Link>
                 </p>
               </div>

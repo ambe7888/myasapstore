@@ -72,10 +72,10 @@ function PerfumeWishlistContent({
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Your Fragrance Wishlist
+                Vos favoris
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Curated scents that captured your heart
+                Vos produits préférés, enregistrés pour plus tard
               </p>
             </div>
           </div>
@@ -98,7 +98,7 @@ function PerfumeWishlistContent({
                       disabled={loading}
                       className={`text-purple-800 hover:text-purple-900 font-medium transition-colors duration-300 ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
                     >
-                      Clear All
+                      Tout effacer
                     </button>
                     <Link
                       href={generateStoreUrl('store.products', store)}
@@ -154,7 +154,7 @@ function PerfumeWishlistContent({
                             href={generateStoreUrl('store.product', store, { id: item.product_id || item.id })}
                             className="flex-1 bg-purple-800 text-white py-2 rounded-lg text-xs font-medium hover:bg-purple-900 transition-colors duration-300 text-center"
                           >
-                            View
+                            Voir
                           </Link>
                           <button 
                             onClick={() => handleAddToCart(item)}
@@ -165,7 +165,7 @@ function PerfumeWishlistContent({
                                 : 'bg-purple-100 text-purple-800 hover:bg-purple-200'
                             } ${cartLoading ? 'cursor-not-allowed opacity-50' : ''}`}
                           >
-                            {item.stock <= 0 ? 'Rupture de stock' : 'Add Cart'}
+                            {item.stock <= 0 ? 'Rupture de stock' : "Ajouter au panier"}
                           </button>
                         </div>
                       </div>
@@ -176,7 +176,7 @@ function PerfumeWishlistContent({
                 {/* Related Products Section - Show when wishlist has items */}
                 {relatedProducts.length > 0 && (
                   <div className="mt-20">
-                    <h2 className="text-3xl font-light text-purple-800 text-center mb-12">You Might Also Love</h2>
+                    <h2 className="text-3xl font-light text-purple-800 text-center mb-12">Vous pourriez aussi aimer</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                       {relatedProducts.slice(0, 4).map((product) => (
                         <PerfumeProductCard
@@ -197,15 +197,15 @@ function PerfumeWishlistContent({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="text-3xl font-light text-gray-900 mb-4">Your Wishlist is Empty</h3>
+                <h3 className="text-3xl font-light text-gray-900 mb-4">Vos favoris sont vides</h3>
                 <p className="text-gray-600 max-w-md mx-auto mb-8">
-                  Discover our exquisite fragrance collection and save your favorites for later.
+                  Découvrez nos produits et enregistrez vos favoris pour plus tard.
                 </p>
                 <Link
                   href={generateStoreUrl('store.products', store)}
                   className="inline-flex items-center px-8 py-4 bg-purple-800 text-white rounded-full font-medium hover:bg-purple-900 transition-colors duration-300"
                 >
-                  <span>Explore Fragrances</span>
+                  <span>Découvrir la collection</span>
                   <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -220,8 +220,8 @@ function PerfumeWishlistContent({
           <section className="py-16 bg-stone-50">
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-light text-purple-800 mb-4">Discover Our Fragrances</h2>
-                <p className="text-gray-600">Start building your wishlist with these premium scents</p>
+                <h2 className="text-3xl font-light text-purple-800 mb-4">Découvrir nos produits</h2>
+                <p className="text-gray-600">Commencez à ajouter vos produits préférés</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.slice(0, 4).map((product) => (

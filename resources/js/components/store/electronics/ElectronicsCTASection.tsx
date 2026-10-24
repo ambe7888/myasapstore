@@ -11,13 +11,13 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
   const boxes = ctaBoxes?.value || ctaBoxes || content?.cta_boxes?.value || content?.cta_boxes || content?.value || content || [
     { icon: 'smartphone', title: 'Mobile Accessories', subtitle: 'Cases, chargers & more' },
     { icon: 'headphones', title: 'Audio Gear', subtitle: 'Premium sound experience' },
-    { icon: 'monitor', title: 'Gaming Setup', subtitle: 'Level up your gaming' },
-    { icon: 'wifi', title: 'Smart Home', subtitle: 'Connected living solutions' }
+    { icon: 'monitor', title: 'Gaming Setup', subtitle: "Profitez de nos nouveautés" },
+    { icon: 'wifi', title: "Sélection soignée", subtitle: 'Connected living solutions' }
   ];
 
   // Extract CTA section data for the button
-  const ctaTitle = content?.title || 'Need Help Choosing?';
-  const ctaDescription = content?.description || 'Our tech experts are here to help you find the perfect electronics and gadgets for your needs';
+  const ctaTitle = content?.title || "Besoin d'aide pour choisir ?";
+  const ctaDescription = content?.description || "Notre équipe est à votre disposition pour vous aider à trouver ce qu'il vous faut";
   const ctaButtonText = content?.button_text || null;
   const ctaButtonLink = content?.button_link || '#';
 
@@ -115,7 +115,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
 
                 {/* Arrow */}
                 <div className="flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
-                  <span className="text-sm font-semibold mr-2">Explore</span>
+                  <span className="text-sm font-semibold mr-2">Découvrir</span>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>

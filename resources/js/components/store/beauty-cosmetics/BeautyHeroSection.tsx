@@ -28,18 +28,18 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                {content?.badge_text || 'New Arrivals 2024'}
+                {content?.badge_text || "Nouveautés"}
               </span>
             </div>
             
             {/* Title */}
             <h1 className={`text-5xl lg:text-7xl font-light text-gray-900 leading-tight transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.title || 'Enhance Your Natural Beauty'}
+              {content?.title || "Découvrez notre sélection"}
             </h1>
             
             {/* Subtitle */}
             <p className={`text-xl text-gray-600 leading-relaxed max-w-xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {content?.subtitle || 'Discover premium skincare, makeup, and wellness products that celebrate your unique beauty.'}
+              {content?.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
             </p>
             
             {/* Buttons */}
@@ -48,7 +48,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
                 href={formatCustomLink(content?.button_link, store, generateStoreUrl('store.products', store))}
                 className="group bg-rose-600 text-white px-8 py-4 rounded-full font-medium hover:bg-rose-700 transition-all duration-300 inline-flex items-center justify-center"
               >
-                <span>{content?.button_text || 'Shop Collection'}</span>
+                <span>{content?.button_text || "Voir la collection"}</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -67,7 +67,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img 
                 src={getImageUrl(content?.image || '/storage/media/12/home-banner-beauty-cosmetics.png')}
-                alt="Beauty Collection" 
+                alt="Notre collection" 
                 className="w-full h-[600px] object-cover"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://placehold.co/600x600/fdf2f8/ec4899?text=Beauty+Collection';
@@ -89,7 +89,7 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{content?.floating_card?.title?.value || content?.floating_card?.title || 'Loved by 50K+'}</p>
+                  <p className="text-sm font-medium text-gray-900">{content?.floating_card?.title?.value || content?.floating_card?.title || "Apprécié par de nombreux clients"}</p>
                   <p className="text-xs text-gray-500">{content?.floating_card?.subtitle?.value || content?.floating_card?.subtitle || 'Beauty enthusiasts'}</p>
                 </div>
               </div>
@@ -100,9 +100,9 @@ export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
         {/* Info Boxes */}
         <div className={`mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           {(content?.info_boxes || [
-            { icon: 'sparkles', title: 'Clean Beauty', description: 'Cruelty-free & natural ingredients' },
+            { icon: 'sparkles', title: 'Clean Beauty', description: "Produits de qualité" },
             { icon: 'heart', title: 'Skin-First', description: 'Dermatologist tested formulas' },
-            { icon: 'shield', title: 'Safe & Pure', description: 'No harmful chemicals' }
+            { icon: 'shield', title: 'Safe & Pure', description: "Sélection soignée" }
           ]).map((box, index) => (
             <div key={index} className="flex items-center space-x-4 p-6 bg-white rounded-2xl shadow-sm">
               <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0">

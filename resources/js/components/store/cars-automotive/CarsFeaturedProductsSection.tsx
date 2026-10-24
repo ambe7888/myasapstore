@@ -49,7 +49,7 @@ export default function CarsFeaturedProductsSection({
             {featuredContent.title || 'Performance Picks'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {featuredContent.description || 'Hand-selected by our automotive experts.'}
+            {featuredContent.description || "Sélectionnés avec soin par notre équipe."}
           </p>
           
           {/* Red accent line */}
@@ -76,8 +76,8 @@ export default function CarsFeaturedProductsSection({
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9l3-3 3 3" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-500 mb-2">No Featured Products</h3>
-              <p className="text-gray-400">Featured products will appear here once they are added.</p>
+              <h3 className="text-xl font-bold text-gray-500 mb-2">Aucun produit en vedette</h3>
+              <p className="text-gray-400">Les produits en vedette apparaîtront ici dès leur ajout.</p>
             </div>
           </div>
         )}
@@ -89,7 +89,7 @@ export default function CarsFeaturedProductsSection({
               href={generateStoreUrl('store.products', store)}
               className="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-black text-white font-bold tracking-wider uppercase transition-colors"
             >
-              View All Products
+              Voir tous les produits
               <ChevronRight className="h-5 w-5 ml-2" />
             </a>
           </div>

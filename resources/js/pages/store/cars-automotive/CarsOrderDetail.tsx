@@ -122,7 +122,7 @@ export default function CarsOrderDetail({
                   <Package className="h-6 w-6 text-white transform -rotate-45" />
                 </div>
                 <div>
-                  <h1 className="text-5xl font-black tracking-wider">ORDER DETAILS</h1>
+                  <h1 className="text-5xl font-black tracking-wider">DÉTAILS DE LA COMMANDE</h1>
                   <div className="text-red-400 text-sm font-bold tracking-widest uppercase">Performance Parts Invoice</div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function CarsOrderDetail({
               </div>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl">
-              Complete breakdown of your automotive parts order and installation details
+              Détail complet de votre commande
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function CarsOrderDetail({
                   className="inline-flex items-center text-red-600 hover:text-black font-bold tracking-wider uppercase transition-colors"
                 >
                   <ArrowLeft className="h-5 w-5 mr-2" />
-                  Back to Order History
+                  Retour à l'historique des commandes
                 </Link>
               </div>
 
@@ -182,7 +182,7 @@ export default function CarsOrderDetail({
                     <div className="bg-gray-50 p-6 border-2 border-gray-200">
                       <h3 className="text-lg font-black tracking-wider uppercase text-red-600 mb-4 flex items-center">
                         <MapPin className="h-5 w-5 mr-2" />
-                        Installation Address
+                        Adresse de livraison
                       </h3>
                       <div className="text-gray-900 space-y-1 font-medium">
                         <p className="font-bold text-xl">{order.shipping_address.name}</p>
@@ -194,18 +194,18 @@ export default function CarsOrderDetail({
 
                     {/* Order Info */}
                     <div className="bg-gray-50 p-6 border-2 border-gray-200">
-                      <h3 className="text-lg font-black tracking-wider uppercase text-red-600 mb-4">Order Information</h3>
+                      <h3 className="text-lg font-black tracking-wider uppercase text-red-600 mb-4">Informations sur la commande</h3>
                       <div className="space-y-3">
                         <div className="flex justify-between">
-                          <span className="text-gray-600 font-bold tracking-wider uppercase">Order Date:</span>
+                          <span className="text-gray-600 font-bold tracking-wider uppercase">Date de la commande :</span>
                           <span className="font-bold text-gray-900">{formatDate(order.date)}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600 font-bold tracking-wider uppercase">Payment:</span>
+                          <span className="text-gray-600 font-bold tracking-wider uppercase">Paiement :</span>
                           <span className="font-bold text-gray-900">{order.payment_method}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600 font-bold tracking-wider uppercase">Delivery:</span>
+                          <span className="text-gray-600 font-bold tracking-wider uppercase">Livraison :</span>
                           <span className="font-bold text-gray-900">{order.shipping_method}</span>
                         </div>
                       </div>
@@ -226,7 +226,7 @@ export default function CarsOrderDetail({
                           <tr>
                             <th className="text-left p-4 font-black tracking-wider uppercase">Part</th>
                             <th className="text-center p-4 font-black tracking-wider uppercase">Qty</th>
-                            <th className="text-right p-4 font-black tracking-wider uppercase">Unit Price</th>
+                            <th className="text-right p-4 font-black tracking-wider uppercase">Prix unitaire</th>
                             <th className="text-right p-4 font-black tracking-wider uppercase">Total</th>
                           </tr>
                         </thead>
@@ -268,26 +268,26 @@ export default function CarsOrderDetail({
                         </div>
                         <div className="space-y-4">
                           <div className="flex justify-between py-2 border-b border-gray-700">
-                            <span className="text-gray-300 font-bold tracking-wider uppercase">Subtotal:</span>
+                            <span className="text-gray-300 font-bold tracking-wider uppercase">Sous-total :</span>
                             <span className="font-black text-white">{formatCurrency(order.subtotal, storeSettings, currencies)}</span>
                           </div>
                           {order.discount > 0 && (
                             <div className="flex justify-between py-2 border-b border-gray-700">
-                              <span className="text-green-400 font-bold tracking-wider uppercase">Discount:</span>
+                              <span className="text-green-400 font-bold tracking-wider uppercase">Remise :</span>
                               <span className="font-black text-green-400">-{formatCurrency(order.discount, storeSettings, currencies)}</span>
                             </div>
                           )}
                           <div className="flex justify-between py-2 border-b border-gray-700">
-                            <span className="text-gray-300 font-bold tracking-wider uppercase">Shipping:</span>
+                            <span className="text-gray-300 font-bold tracking-wider uppercase">Livraison :</span>
                             <span className="font-black text-white">{formatCurrency(order.shipping, storeSettings, currencies)}</span>
                           </div>
                           <div className="flex justify-between py-2 border-b border-gray-700">
-                            <span className="text-gray-300 font-bold tracking-wider uppercase">Tax:</span>
+                            <span className="text-gray-300 font-bold tracking-wider uppercase">Taxe :</span>
                             <span className="font-black text-white">{formatCurrency(order.tax, storeSettings, currencies)}</span>
                           </div>
                           <div className="border-t-2 border-red-600 pt-4">
                             <div className="flex justify-between">
-                              <span className="text-2xl font-black text-white tracking-wider uppercase">Total:</span>
+                              <span className="text-2xl font-black text-white tracking-wider uppercase">Total :</span>
                               <span className="text-2xl font-black text-red-400">{formatCurrency(order.total, storeSettings, currencies)}</span>
                             </div>
                           </div>
@@ -302,7 +302,7 @@ export default function CarsOrderDetail({
                       <Zap className="h-6 w-6 text-red-600 mr-3" />
                       <p className="text-gray-900 font-bold tracking-wider uppercase">Professional Grade Installation Complete</p>
                     </div>
-                    <p className="text-sm text-gray-600">For technical support or installation questions, contact our automotive specialists.</p>
+                    <p className="text-sm text-gray-600">Pour toute question, contactez notre service client.</p>
                   </div>
                 </div>
               </div>

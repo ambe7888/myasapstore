@@ -67,7 +67,7 @@ export default function CarsBlogPost({
                 className="inline-flex items-center text-red-600 hover:text-red-400 font-bold tracking-wider uppercase transition-colors"
               >
                 <ArrowLeft className="h-5 w-5 mr-3" />
-                Back to Auto Journal
+                Retour au blog
               </Link>
               
               <div className="flex items-center space-x-2">
@@ -144,8 +144,8 @@ export default function CarsBlogPost({
                       <Clock className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold tracking-widest uppercase text-red-600">Read Time</div>
-                      <div className="font-bold text-black">5 min read</div>
+                      <div className="text-xs font-bold tracking-widest uppercase text-red-600">Temps de lecture</div>
+                      <div className="font-bold text-black">5 min de lecture</div>
                     </div>
                   </div>
                 </div>

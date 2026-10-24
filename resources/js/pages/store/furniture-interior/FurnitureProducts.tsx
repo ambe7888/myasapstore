@@ -234,7 +234,7 @@ export default function FurnitureProducts({
         <div className="bg-yellow-800 text-white py-12 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-3xl font-bold mb-4">Notre Collection</h1>
+              <h1 className="text-3xl font-bold mb-4">Notre collection</h1>
               <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-4"></div>
               <p className="text-amber-100 text-lg max-w-2xl mx-auto">
                 Découvrez notre sélection exclusive de produits de qualité supérieure.

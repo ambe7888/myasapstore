@@ -73,7 +73,7 @@ export default function WatchesBlog({
                   Horological Journal
                 </h1>
                 <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                  Expert insights into watchmaking, collecting tips, and the latest developments in luxury timepieces
+                  Retrouvez nos conseils, nos idées et les actualités de la boutique
                 </p>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function WatchesBlog({
                         href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                         className="inline-flex items-center text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
                       >
-                        Read More
+                        Lire la suite
                         <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
@@ -150,9 +150,9 @@ export default function WatchesBlog({
                 <div className="w-16 h-16 bg-amber-500 mx-auto mb-6 flex items-center justify-center">
                   <Clock className="w-8 h-8 text-slate-900" />
                 </div>
-                <h2 className="text-3xl font-light text-slate-900 mb-4">No Articles Yet</h2>
+                <h2 className="text-3xl font-light text-slate-900 mb-4">Aucun article pour le moment</h2>
                 <p className="text-slate-600 font-light max-w-md mx-auto">
-                  Our horological experts are crafting insightful articles about luxury timepieces. Check back soon.
+                  Nos articles arrivent bientôt. Restez connectés !
                 </p>
               </div>
             )}

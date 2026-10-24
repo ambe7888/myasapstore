@@ -85,10 +85,10 @@ function WatchesCartContent({
                 </span>
               </div>
               <h1 className="text-6xl font-light text-white mb-6 leading-none tracking-tight">
-                Your Cart
+                Votre panier
               </h1>
               <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
-                Review your selected timepieces before checkout
+                Vérifiez vos articles avant de commander
               </p>
             </div>
           </div>
@@ -140,7 +140,7 @@ function WatchesCartContent({
                             <button 
                               onClick={() => handleRemoveItem(item.id)}
                               className="p-3 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200 ml-4"
-                              title="Remove timepiece"
+                              title="Retirer l'article"
                             >
                               <Trash2 className="h-6 w-6" />
                             </button>
@@ -154,7 +154,7 @@ function WatchesCartContent({
                                   <>
                                     <span className="text-3xl font-light text-slate-900">{formatCurrency(item.sale_price, storeSettings, currencies)}</span>
                                     <span className="text-lg text-slate-500 line-through">{formatCurrency(item.price, storeSettings, currencies)}</span>
-                                    <span className="bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold">SALE</span>
+                                    <span className="bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold">PROMO</span>
                                   </>
                                 ) : (
                                   <span className="text-3xl font-light text-slate-900">{formatCurrency(item.price, storeSettings, currencies)}</span>
@@ -233,7 +233,7 @@ function WatchesCartContent({
                         </div>
                         
                         <div className="flex justify-between text-sm text-slate-200">
-                          <span>Tax</span>
+                          <span>Taxe</span>
                           <span className="font-medium">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                         </div>
                         
@@ -250,7 +250,7 @@ function WatchesCartContent({
                         className="w-full bg-amber-500 text-slate-900 px-6 py-4 rounded-xl font-medium hover:bg-amber-400 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                       >
                         <ArrowLeft className="w-5 h-5 mr-2 rotate-180" />
-                        Secure Checkout
+                        Paiement sécurisé
                       </Link>
                       
                       <Link
@@ -270,10 +270,10 @@ function WatchesCartContent({
                     <ShoppingBag className="w-12 h-12 text-slate-600" />
                   </div>
                   <h2 className="text-3xl font-light text-slate-900 mb-4 tracking-wide">
-                    Your Cart Awaits
+                    Votre panier vous attend
                   </h2>
                   <p className="text-slate-600 font-light mb-8 leading-relaxed text-lg">
-                    Discover our exceptional timepiece collections and curate your perfect selection of luxury watches
+                    Découvrez nos produits et ajoutez-les à vos favoris
                   </p>
                   
                   <Link
@@ -281,7 +281,7 @@ function WatchesCartContent({
                     className="inline-flex items-center bg-slate-900 text-white px-8 py-4 font-medium hover:bg-slate-800 transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                   >
                     <ArrowLeft className="w-5 h-5 mr-2" />
-                    Explore Our Collections
+                    Découvrir nos collections
                   </Link>
                 </div>
               </div>

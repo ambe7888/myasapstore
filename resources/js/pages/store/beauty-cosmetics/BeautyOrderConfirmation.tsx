@@ -112,7 +112,7 @@ const { props } = usePage();
       country: ''
     },
     payment_method: 'Credit Card',
-    shipping_method: 'Standard Shipping'
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;
@@ -272,7 +272,7 @@ const { props } = usePage();
                 <div className="p-8">
                   {/* Order Items */}
                   <div className="mb-8">
-                    <h3 className="text-xl font-medium text-gray-900 mb-6">Beauty Items</h3>
+                    <h3 className="text-xl font-medium text-gray-900 mb-6">Articles</h3>
                     
                     <div className="space-y-4">
                       {orderData.items?.map((item) => {
@@ -345,7 +345,7 @@ const { props } = usePage();
               {/* Addresses & Info */}
               <div className="bg-white rounded-3xl shadow-xl border border-rose-100 mb-16 overflow-hidden">
                 <div className="bg-rose-500 p-8">
-                  <h2 className="text-3xl font-light text-white">Shipping & Paiement Information</h2>
+                  <h2 className="text-3xl font-light text-white">Informations de livraison et de paiement</h2>
                 </div>
                 
                 <div className="p-8">
@@ -354,7 +354,7 @@ const { props } = usePage();
                       <div className="flex items-start">
                         <MapPin className="h-6 w-6 text-rose-500 mr-3 mt-1" />
                         <div>
-                          <p className="text-sm font-medium text-gray-500 mb-3">Shipping Address</p>
+                          <p className="text-sm font-medium text-gray-500 mb-3">Adresse de livraison</p>
                           <p className="text-gray-900 leading-relaxed">
                             {orderData.shipping_address.name}<br />
                             {orderData.shipping_address.street}<br />
@@ -395,7 +395,7 @@ const { props } = usePage();
                       <div className="ml-4">
                         <h3 className="text-lg font-medium text-gray-900">Traitement de la commande</h3>
                         <p className="mt-2 text-gray-600">
-                          We're carefully preparing your beauty products. You'll receive an email when your order ships.
+                          Nous préparons votre commande avec soin. Vous recevrez un e-mail lors de son expédition.
                         </p>
                       </div>
                     </div>
@@ -421,9 +421,9 @@ const { props } = usePage();
                         </div>
                       </div>
                       <div className="ml-4">
-                        <h3 className="text-lg font-medium text-gray-900">Enjoy Your Beauty Journey</h3>
+                        <h3 className="text-lg font-medium text-gray-900">Merci pour votre confiance</h3>
                         <p className="mt-2 text-gray-600">
-                          Get ready to glow! Your carefully selected beauty products are on their way to enhance your routine.
+                          Votre commande est en cours de préparation.
                         </p>
                       </div>
                     </div>
@@ -438,7 +438,7 @@ const { props } = usePage();
                   className="bg-rose-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-rose-700 transition-colors text-center shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                 >
                   <Package className="h-5 w-5" />
-                  Track Your Order
+                  Suivre ma commande
                 </Link>
                 <Link
                   href={generateStoreUrl('store.products', store)}

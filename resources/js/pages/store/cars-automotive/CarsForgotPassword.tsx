@@ -61,7 +61,7 @@ export default function CarsForgotPassword({
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-4 h-4 bg-red-600 rotate-45"></div>
-                    <span className="text-red-600 font-bold tracking-widest uppercase text-sm">Account Recovery</span>
+                    <span className="text-red-600 font-bold tracking-widest uppercase text-sm">Récupération du compte</span>
                     <div className="w-4 h-4 bg-red-600 rotate-45"></div>
                   </div>
                   
@@ -72,7 +72,7 @@ export default function CarsForgotPassword({
                   </h1>
                   
                   <p className="text-xl text-gray-700 font-medium leading-relaxed max-w-lg">
-                    Regain access to your automotive account. Enter your email to receive password reset instructions.
+                    Retrouvez l'accès à votre compte. Saisissez votre e-mail pour recevoir les instructions de réinitialisation.
                   </p>
                 </div>
 
@@ -83,8 +83,8 @@ export default function CarsForgotPassword({
                       <Shield className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">Secure Recovery</h3>
-                      <p className="text-gray-600 text-sm">Encrypted password reset process</p>
+                      <h3 className="font-bold text-black">Récupération sécurisée</h3>
+                      <p className="text-gray-600 text-sm">Réinitialisation du mot de passe cryptée</p>
                     </div>
                   </div>
                   
@@ -93,8 +93,8 @@ export default function CarsForgotPassword({
                       <Zap className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">Quick Process</h3>
-                      <p className="text-gray-600 text-sm">Instant email delivery</p>
+                      <h3 className="font-bold text-black">Processus rapide</h3>
+                      <p className="text-gray-600 text-sm">Envoi immédiat par e-mail</p>
                     </div>
                   </div>
                   
@@ -103,8 +103,8 @@ export default function CarsForgotPassword({
                       <Wrench className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-black">Support Ready</h3>
-                      <p className="text-gray-600 text-sm">Need help? Contact our team</p>
+                      <h3 className="font-bold text-black">Assistance disponible</h3>
+                      <p className="text-gray-600 text-sm">Besoin d'aide ? Contactez notre équipe</p>
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function CarsForgotPassword({
                     <h2 className="text-3xl font-black text-black tracking-wider">RESET</h2>
                     <div className="w-2 h-2 bg-red-600 rotate-45 ml-3"></div>
                   </div>
-                  <p className="text-gray-600 text-center font-medium">Enter your email for password reset</p>
+                  <p className="text-gray-600 text-center font-medium">Saisissez votre e-mail pour réinitialiser votre mot de passe</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -175,7 +175,7 @@ export default function CarsForgotPassword({
                     className="inline-flex items-center text-gray-600 hover:text-red-600 font-bold tracking-wider uppercase transition-colors"
                   >
                     <ArrowLeft className="h-5 w-5 mr-3" />
-                    Back to Login
+                    Retour à la connexion
                   </Link>
                 </div>
               </div>

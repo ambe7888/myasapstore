@@ -74,8 +74,8 @@ export default function BabyKidsRegister({
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                   </svg>
                 </div>
-                <h1 className="text-4xl font-black text-gray-800 mb-3">Join Our Family!</h1>
-                <p className="text-lg text-gray-600">Create your parent account</p>
+                <h1 className="text-4xl font-black text-gray-800 mb-3">Rejoignez-nous !</h1>
+                <p className="text-lg text-gray-600">Créez votre compte</p>
               </div>
 
               {/* Block Card Design */}
@@ -104,7 +104,7 @@ export default function BabyKidsRegister({
                         className={`w-full px-4 py-3 border-3 rounded-2xl focus:ring-4 focus:ring-green-200 focus:border-green-400 focus:outline-none transition-all duration-300 ${
                           errors.first_name ? 'border-red-300 bg-red-50' : 'border-green-200 bg-green-50/50'
                         }`}
-                        placeholder="First name"
+                        placeholder="Prénom"
                         required
                       />
                       {errors.first_name && (
@@ -126,7 +126,7 @@ export default function BabyKidsRegister({
                         className={`w-full px-4 py-3 border-3 rounded-2xl focus:ring-4 focus:ring-purple-200 focus:border-purple-400 focus:outline-none transition-all duration-300 ${
                           errors.last_name ? 'border-red-300 bg-red-50' : 'border-purple-200 bg-purple-50/50'
                         }`}
-                        placeholder="Last name"
+                        placeholder="Nom"
                         required
                       />
                       {errors.last_name && (
@@ -152,7 +152,7 @@ export default function BabyKidsRegister({
                       className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-pink-200 focus:border-pink-400 focus:outline-none transition-all duration-300 text-lg ${
                         errors.email ? 'border-red-300 bg-red-50' : 'border-pink-200 bg-pink-50/50'
                       }`}
-                      placeholder="Enter your email"
+                      placeholder="Saisissez votre e-mail"
                       required
                     />
                     {errors.email && (
@@ -168,7 +168,7 @@ export default function BabyKidsRegister({
                           <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -212,7 +212,7 @@ export default function BabyKidsRegister({
                           <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      Confirm Password
+                      Confirmer le mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -223,7 +223,7 @@ export default function BabyKidsRegister({
                         className={`w-full px-6 py-4 border-3 rounded-2xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-400 focus:outline-none transition-all duration-300 text-lg ${
                           errors.password_confirmation ? 'border-red-300 bg-red-50' : 'border-yellow-200 bg-yellow-50/50'
                         }`}
-                        placeholder="Confirm your password"
+                        placeholder="Confirmez votre mot de passe"
                         required
                       />
                       <button
@@ -261,11 +261,11 @@ export default function BabyKidsRegister({
                     <label htmlFor="terms" className="ml-3 block text-sm font-bold text-gray-700">
                       I agree to the{' '}
                       <Link href="/terms" className="text-pink-500 hover:text-pink-600">
-                        Terms of Service
+                        Conditions d'utilisation
                       </Link>{' '}
                       and{' '}
                       <Link href="/privacy" className="text-pink-500 hover:text-pink-600">
-                        Privacy Policy
+                        Politique de confidentialité
                       </Link>
                     </label>
                   </div>
@@ -282,11 +282,11 @@ export default function BabyKidsRegister({
                     {processing ? (
                       <div className="flex items-center justify-center space-x-2">
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Creating Account...</span>
+                        <span>Création du compte...</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-center space-x-2">
-                        <span>Create Account</span>
+                        <span>Créer un compte</span>
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
@@ -303,7 +303,7 @@ export default function BabyKidsRegister({
                       href={generateStoreUrl('store.login', store)}
                       className="text-pink-500 hover:text-pink-600 font-bold transition-colors duration-300"
                     >
-                      Sign In
+                      Se connecter
                     </Link>
                   </p>
                 </div>

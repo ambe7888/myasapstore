@@ -198,7 +198,7 @@ function ElectronicsProductDetail({
           <div className="bg-white border-b border-gray-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">
               <nav className="text-sm">
-                <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-blue-600 transition-colors">Home</a>
+                <a href={generateStoreUrl('store.home', store)} className="text-gray-500 hover:text-blue-600 transition-colors">Accueil</a>
                 <ChevronRight className="h-4 w-4 mx-2 text-gray-400 inline" />
                 {product.category && (
                   <>
@@ -468,8 +468,8 @@ function ElectronicsProductDetail({
                       {activeTab === 'advanced' && hasCustomFields && (
                         <div className="space-y-6 max-h-80 overflow-y-auto">
                           <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">Advanced Product Information</h3>
-                            <p className="text-gray-600 mb-6">Technical specifications and custom attributes</p>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Informations détaillées du produit</h3>
+                            <p className="text-gray-600 mb-6">Caractéristiques du produit</p>
                           </div>
                           <div className="bg-blue-50 border border-blue-200 rounded-xl overflow-hidden">
                             <div className="divide-y divide-blue-100">
@@ -519,7 +519,7 @@ function ElectronicsProductDetail({
                                 }}
                                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                               >
-                                Write a Review
+                                Donner votre avis
                               </button>
                             </div>
 
@@ -553,7 +553,7 @@ function ElectronicsProductDetail({
                                 ))
                               ) : (
                                 <div className="text-center py-12">
-                                  <p className="text-gray-500 text-lg">No reviews yet. Be the first to review this product!</p>
+                                  <p className="text-gray-500 text-lg">Aucun avis pour le moment. Soyez le premier à donner votre avis sur ce produit !</p>
                                 </div>
                               )}
                             </div>
@@ -571,7 +571,7 @@ function ElectronicsProductDetail({
           {relatedProducts.length > 0 && (
             <section className="py-12 bg-white">
               <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Products</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Produits en vedette</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {relatedProducts.slice(0, 4).map((product) => (
                     <ElectronicsProductCard
@@ -600,7 +600,7 @@ function ElectronicsProductDetail({
               <div className="bg-gradient-to-br from-blue-50 to-slate-50 px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Write a Review</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Donner votre avis</h3>
 
                     <form className="space-y-4" onSubmit={async (e) => {
                       e.preventDefault();
@@ -629,7 +629,7 @@ function ElectronicsProductDetail({
                         
                         if (data.success) {
                           toast.success('Merci pour votre avis !', {
-                            description: 'Your review has been submitted successfully.'
+                            description: "Votre avis a bien été envoyé."
                           });
                           
                           const newReview = {
@@ -637,8 +637,8 @@ function ElectronicsProductDetail({
                             rating: reviewRating,
                             title: reviewTitle,
                             content: reviewContent,
-                            customer_name: data.review?.customer_name || 'You',
-                            created_at: 'Just now',
+                            customer_name: data.review?.customer_name || "Vous",
+                            created_at: "À l'instant",
                             store_response: null
                           };
                           
@@ -659,14 +659,14 @@ function ElectronicsProductDetail({
                           toast.error(data.message || "Échec de l'envoi de l'avis");
                         }
                       } catch (error) {
-                        console.error('Error submitting review:', error);
+                        console.error("Erreur lors de l'envoi de l'avis :", error);
                         toast.error("Échec de l'envoi de l'avis. Veuillez réessayer.");
                       } finally {
                         setIsSubmittingReview(false);
                       }
                     }}>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Your Rating *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Votre note *</label>
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -684,12 +684,12 @@ function ElectronicsProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Review Title *</label>
+                        <label htmlFor="review-title" className="block text-sm font-medium text-gray-700 mb-1">Titre de l'avis *</label>
                         <input
                           type="text"
                           id="review-title"
                           className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                          placeholder="Give your review a title"
+                          placeholder="Donnez un titre à votre avis"
                           value={reviewTitle}
                           onChange={(e) => setReviewTitle(e.target.value)}
                           required
@@ -697,7 +697,7 @@ function ElectronicsProductDetail({
                       </div>
 
                       <div>
-                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Your Review *</label>
+                        <label htmlFor="review-content" className="block text-sm font-medium text-gray-700 mb-1">Votre avis *</label>
                         <textarea
                           id="review-content"
                           rows={4}
@@ -715,14 +715,14 @@ function ElectronicsProductDetail({
                           disabled={isSubmittingReview}
                           className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-lg px-6 py-3 bg-blue-600 text-base font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                          {isSubmittingReview ? 'Submitting...' : "Envoyer l'avis"}
                         </button>
                         <button
                           type="button"
                           className="mt-3 w-full inline-flex justify-center rounded-lg border-2 border-blue-200 shadow-lg px-6 py-3 bg-white text-base font-bold text-gray-700 hover:bg-blue-50 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
                           onClick={() => setShowReviewModal(false)}
                         >
-                          Cancel
+                          Annuler
                         </button>
                       </div>
                     </form>

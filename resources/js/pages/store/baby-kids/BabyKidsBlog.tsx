@@ -83,7 +83,7 @@ export default function BabyKidsBlog({
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-4">Parenting Articles</h1>
               <div className="w-24 h-1 bg-pink-400 mx-auto rounded-full mb-6"></div>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Helpful tips, advice, and inspiration for raising happy, healthy children
+                Retrouvez nos conseils, nos idées et les actualités de la boutique
               </p>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function BabyKidsBlog({
                           href={generateStoreUrl('store.blog.show', store, { slug: post.slug })}
                           className="inline-flex items-center text-pink-500 font-bold hover:text-pink-600 transition-colors duration-300"
                         >
-                          Read More
+                          Lire la suite
                           <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
@@ -178,9 +178,9 @@ export default function BabyKidsBlog({
                         <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">No Articles Yet</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">Aucun article pour le moment</h3>
                     <p className="text-gray-600">
-                      We're working on creating helpful parenting content for you. Check back soon!
+                      Nos articles arrivent bientôt. Revenez vite !
                     </p>
                   </div>
                 </div>

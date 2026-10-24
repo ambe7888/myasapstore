@@ -42,10 +42,10 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
           setIsSubmitted(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -60,7 +60,7 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
             {content?.title || 'Timekeeper\'s Circle'}
           </h2>
           <p className="text-lg text-slate-600 font-light mb-12 leading-relaxed">
-            {content?.subtitle || 'Join our exclusive community for early access to new releases, collector insights, and horological expertise.'}
+            {content?.subtitle || "Rejoignez notre communauté et accédez en avant-première à nos nouveautés."}
           </p>
 
           {/* Newsletter Form */}
@@ -72,8 +72,8 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-light mb-2 tracking-wide text-slate-900">Thank You!</h3>
-                <p className="text-slate-600 font-light">You've joined our exclusive timekeeper's circle.</p>
+                <h3 className="text-xl font-light mb-2 tracking-wide text-slate-900">Merci !</h3>
+                <p className="text-slate-600 font-light">Vous faites maintenant partie de notre communauté.</p>
               </div>
             </div>
           ) : (
@@ -83,7 +83,7 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={content?.placeholder_text || 'Enter your email for exclusive updates'}
+                  placeholder={content?.placeholder_text || "Saisissez votre e-mail pour recevoir nos actualités"}
                   className="flex-1 px-6 py-4 border border-slate-300 focus:border-slate-900 focus:outline-none font-light text-slate-900 placeholder-slate-500"
                   required
                   disabled={isSubmitting}
@@ -93,7 +93,7 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
                   disabled={isSubmitting}
                   className="px-8 py-4 bg-slate-900 text-white font-medium tracking-wider uppercase text-sm hover:bg-slate-800 transition-colors duration-300 disabled:bg-slate-400"
                 >
-                  {isSubmitting ? 'Joining...' : (content?.button_text || 'Join Circle')}
+                  {isSubmitting ? 'Joining...' : (content?.button_text || "Je m'abonne")}
                 </button>
               </div>
               {error && (
@@ -106,7 +106,7 @@ export default function WatchesNewsletterSection({ content }: WatchesNewsletterS
 
           {/* Privacy Text */}
           <p className="text-sm text-slate-500 font-light">
-            {content?.privacy_text || 'Unsubscribe anytime. Your time, your choice.'}
+            {content?.privacy_text || "Désabonnement possible à tout moment."}
           </p>
 
           {/* Decorative Elements */}

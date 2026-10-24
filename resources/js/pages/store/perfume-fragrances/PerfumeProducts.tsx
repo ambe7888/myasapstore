@@ -230,10 +230,10 @@ export default function PerfumeProducts({
           <div className="container mx-auto px-4">
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-light text-purple-800 mb-6">
-                Fragrance Collection
+                Notre collection
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-                Discover luxury fragrances that tell your unique story of elegance and sophistication
+                Découvrez nos produits et ajoutez-les à votre panier
               </p>
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function PerfumeProducts({
               <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                 <div className="bg-white rounded-2xl shadow-md border border-purple-100 p-6 sticky top-24">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-medium text-purple-800">Refine Search</h3>
+                    <h3 className="text-lg font-medium text-purple-800">Affiner la recherche</h3>
                     <button
                       onClick={clearFilters}
                       className="text-sm text-purple-600 hover:text-purple-700 font-medium"
@@ -259,7 +259,7 @@ export default function PerfumeProducts({
                   {/* Search */}
                   {showFilter('search') && (<>
                   <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Search Fragrances</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Rechercher un produit</label>
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-400" />
                       <input
@@ -267,7 +267,7 @@ export default function PerfumeProducts({
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                        placeholder="Search perfumes..."
+                        placeholder="Rechercher un produit..."
                         className="w-full pl-10 pr-4 py-2 border border-purple-200 rounded-full focus:outline-none focus:border-purple-400"
                       />
                     </div>
@@ -400,7 +400,7 @@ export default function PerfumeProducts({
                           onChange={() => setAvailability('all')}
                           className="mr-2 text-purple-600 focus:ring-purple-500"
                         />
-                        <span className="text-sm text-gray-700">All Fragrances</span>
+                        <span className="text-sm text-gray-700">Tous les produits</span>
                       </label>
                       <label className="flex items-center">
                         <input
@@ -554,7 +554,7 @@ export default function PerfumeProducts({
                               />
                               {product.sale_price && (
                                 <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-full shadow-sm">
-                                  SALE
+                                  PROMO
                                 </div>
                               )}
                             </Link>
@@ -629,8 +629,8 @@ export default function PerfumeProducts({
                   <div className="text-center py-16">
                     <div className="text-gray-500 mb-6">
                       <Sparkles className="h-16 w-16 mx-auto mb-6 opacity-50 text-purple-400" />
-                      <h3 className="text-xl font-medium mb-3 text-gray-700">No fragrances found</h3>
-                      <p className="text-gray-600">Try adjusting your filters to discover more scents</p>
+                      <h3 className="text-xl font-medium mb-3 text-gray-700">Aucun produit trouvé</h3>
+                      <p className="text-gray-600">Essayez de modifier vos filtres pour découvrir plus de produits</p>
                     </div>
                     <button
                       onClick={clearFilters}
@@ -650,7 +650,7 @@ export default function PerfumeProducts({
                         disabled={pagination.current_page === 1}
                         className="px-4 py-2 border border-purple-200 rounded-full text-sm hover:bg-purple-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Previous
+                        Précédent
                       </button>
                       
                       {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -675,7 +675,7 @@ export default function PerfumeProducts({
                         disabled={pagination.current_page === pagination.last_page}
                         className="px-4 py-2 border border-purple-200 rounded-full text-sm hover:bg-purple-50 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Next
+                        Suivant
                       </button>
                     </nav>
                   </div>

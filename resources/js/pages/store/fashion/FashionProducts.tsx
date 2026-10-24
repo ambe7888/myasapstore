@@ -231,9 +231,9 @@ export default function FashionProducts({
         <div className="bg-black text-white py-20 store-page-header">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <h1 className="text-5xl font-thin tracking-wide mb-6">Fashion Collection</h1>
+              <h1 className="text-5xl font-thin tracking-wide mb-6">Notre collection</h1>
               <p className="text-white/70 font-light text-lg">
-                Discover the latest trends and timeless classics in our curated fashion collection
+                Découvrez nos produits et ajoutez-les à votre panier
               </p>
             </div>
           </div>
@@ -245,7 +245,7 @@ export default function FashionProducts({
             <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <div className="bg-white border border-gray-200 p-6 sticky top-24">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-light tracking-wide uppercase">Filter</h3>
+                  <h3 className="text-lg font-light tracking-wide uppercase">Filtrer</h3>
                   <button
                     onClick={clearFilters}
                     className="text-sm text-gray-600 hover:text-black font-light uppercase tracking-wide underline hover:no-underline transition-all"
@@ -557,7 +557,7 @@ export default function FashionProducts({
                             />
                             {product.sale_price && (
                               <div className="absolute top-4 left-4 bg-black text-white text-xs font-thin px-3 py-1 uppercase tracking-widest">
-                                Sale
+                                Promo
                               </div>
                             )}
                           </Link>
@@ -566,7 +566,7 @@ export default function FashionProducts({
                               <div className="flex-1">
                                 <div className="mb-3">
                                   <span className="text-xs font-thin text-gray-500 uppercase tracking-widest">
-                                    {product.category?.name || 'Ready-to-Wear'}
+                                    {product.category?.name || "Collection"}
                                   </span>
                                 </div>
                                 <Link href={generateStoreUrl('store.product', store, { id: product.id })}>
@@ -597,7 +597,7 @@ export default function FashionProducts({
                                     )}
                                   </div>
                                   <div className="text-xs font-thin text-gray-500 uppercase tracking-widest">
-                                    {product.stock > 0 ? 'Available' : 'Sold Out'}
+                                    {product.stock > 0 ? "Disponible" : "Épuisé"}
                                   </div>
                                 </div>
                               </div>
@@ -650,7 +650,7 @@ export default function FashionProducts({
                       disabled={pagination.current_page === 1}
                       className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, pagination.last_page) }, (_, i) => {
@@ -675,7 +675,7 @@ export default function FashionProducts({
                       disabled={pagination.current_page === pagination.last_page}
                       className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>

@@ -157,7 +157,7 @@ export default function ProductCard({
           <button 
             onClick={handleQuickView}
             className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors transform opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 delay-75"
-            aria-label="Quick view"
+            aria-label="Aperçu rapide"
           >
             <Eye className="h-4 w-4 text-gray-600" />
           </button>

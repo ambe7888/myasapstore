@@ -17,10 +17,10 @@ export default function JewelryTrendingProductsSection({ products = [], content,
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-5xl font-extralight text-stone-900 mb-6 tracking-tight">
-            {content?.title || 'Coveted Now'}
+            {content?.title || "Les plus convoités"}
           </h2>
           <p className="text-lg text-stone-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'The most sought-after pieces from our collection - timeless designs that capture the essence of luxury.'}
+            {content?.description || "Les produits les plus appréciés du moment."}
           </p>
         </div>
 
@@ -35,11 +35,11 @@ export default function JewelryTrendingProductsSection({ products = [], content,
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="p-8 border border-stone-200">
             <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat1_value || '95%'}</div>
-            <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat1_label || 'Customer Satisfaction'}</p>
+            <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat1_label || "Satisfaction client"}</p>
           </div>
           <div className="p-8 border border-stone-200">
             <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat2_value || '24/7'}</div>
-            <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat2_label || 'Concierge Service'}</p>
+            <p className="text-stone-600 font-light text-sm uppercase tracking-wider">{stats?.stat2_label || "Service personnalisé"}</p>
           </div>
           <div className="p-8 border border-stone-200">
             <div className="text-3xl font-extralight text-amber-700 mb-2">{stats?.stat3_value || '∞'}</div>

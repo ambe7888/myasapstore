@@ -69,7 +69,7 @@ export default function FashionHeroSection({ content }: FashionHeroSectionProps)
           <div className="order-1 lg:order-2 relative min-h-[280px] sm:min-h-[360px] lg:min-h-[560px] bg-slate-100">
             <img
               src={getImageUrl(content?.image || '/storage/media/4/home-banner-fashion.png')}
-              alt={content?.title || 'Collection'}
+              alt={content?.title || "Collection"}
               className="absolute inset-0 h-full w-full object-cover object-center"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=1200&fit=crop&crop=center';

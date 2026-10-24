@@ -34,10 +34,10 @@ export default function ElectronicsTrendingProductsSection({ products, content, 
             </svg>
           </div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            {content?.title || 'Trending Gadgets'}
+            {content?.title || "Produits tendance"}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {content?.description || 'The hottest electronics and gadgets that tech enthusiasts are talking about right now.'}
+            {content?.description || "Les produits les plus appréciés du moment."}
           </p>
         </div>
 

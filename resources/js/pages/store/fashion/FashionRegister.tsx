@@ -72,15 +72,15 @@ export default function FashionRegister({
               <div className="text-white">
                 <div className="mb-8">
                   <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-sm font-light tracking-wider uppercase mb-6">
-                    Join Community
+                    Je m'abonne
                   </div>
                   <h1 className="text-6xl font-thin mb-6 tracking-tight leading-none">
-                    Start Your
+                    Commencez
                     <br />
                     <span className="text-white/60">Journey</span>
                   </h1>
                   <p className="text-white/70 font-light text-xl leading-relaxed max-w-lg">
-                    Create your account to unlock exclusive collections and personalized style experiences
+                    Créez votre compte et commencez vos achats
                   </p>
                 </div>
                 
@@ -92,11 +92,11 @@ export default function FashionRegister({
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-white/80 font-light">Early access to sales & collections</span>
+                    <span className="text-white/80 font-light">Accès anticipé aux promotions et aux nouveautés</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-white/80 font-light">Exclusive member-only events</span>
+                    <span className="text-white/80 font-light">Événements réservés aux membres</span>
                   </div>
                 </div>
               </div>
@@ -104,8 +104,8 @@ export default function FashionRegister({
               {/* Right Side - Form */}
               <div className="bg-white/95 backdrop-blur-sm p-12 rounded-2xl shadow-2xl border border-white/20">
                 <div className="text-center mb-10">
-                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Create Account</h2>
-                  <p className="text-gray-600 font-light">Fill in your details to get started</p>
+                  <h2 className="text-3xl font-thin tracking-wide mb-4 text-gray-900">Créer un compte</h2>
+                  <p className="text-gray-600 font-light">Renseignez vos informations pour commencer</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -185,7 +185,7 @@ export default function FashionRegister({
                   {/* Password */}
                   <div className="group">
                     <label htmlFor="password" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                      Password
+                      Mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -225,7 +225,7 @@ export default function FashionRegister({
                   {/* Confirm Password */}
                   <div className="group">
                     <label htmlFor="password-confirmation" className="block text-sm font-light tracking-widest uppercase text-gray-700 mb-3">
-                      Confirm Password
+                      Confirmer le mot de passe
                     </label>
                     <div className="relative">
                       <input
@@ -266,7 +266,7 @@ export default function FashionRegister({
                       disabled={processing}
                       className="w-full bg-black text-white py-4 font-light tracking-widest uppercase text-sm hover:bg-gray-900 transition-all duration-300 transform hover:translate-y-[-1px] disabled:opacity-50 disabled:transform-none"
                     >
-                      {processing ? 'Creating Account...' : 'Create Account'}
+                      {processing ? "Création du compte..." : "Créer un compte"}
                     </button>
                   </div>
                 </form>
@@ -278,7 +278,7 @@ export default function FashionRegister({
                       <div className="w-full border-t border-gray-200"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-6 bg-white text-gray-500 font-light">Or sign up with</span>
+                      <span className="px-6 bg-white text-gray-500 font-light">Ou s'inscrire avec</span>
                     </div>
                   </div>
                 </div>
@@ -313,7 +313,7 @@ export default function FashionRegister({
                       href={generateStoreUrl('store.login', store)}
                       className="font-light text-black hover:text-gray-600 tracking-wide transition-colors border-b border-black/20 hover:border-black/60"
                     >
-                      Sign In
+                      Se connecter
                     </Link>
                   </p>
                 </div>

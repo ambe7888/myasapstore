@@ -9,9 +9,9 @@ interface NewsletterSectionProps {
 }
 
 export default function NewsletterSection({
-  title = "Join Our Newsletter",
-  subtitle = "Subscribe to receive updates on new products, special offers, and decorating tips.",
-  buttonText = "Subscribe",
+  title = "Rejoignez notre newsletter",
+  subtitle = "Abonnez-vous pour recevoir nos nouveautés, nos offres spéciales et nos conseils.",
+  buttonText = "S'abonner",
   content
 }: NewsletterSectionProps) {
   const [email, setEmail] = useState('');
@@ -50,10 +50,10 @@ export default function NewsletterSection({
           setIsSubmitted(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -74,15 +74,15 @@ export default function NewsletterSection({
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
-              <p className="text-gray-600">You've been successfully subscribed to our newsletter.</p>
+              <h3 className="text-2xl font-bold mb-2">Merci !</h3>
+              <p className="text-gray-600">Vous êtes maintenant abonné à notre newsletter.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
               <div className="flex-grow relative">
                 <input 
                   type="email" 
-                  placeholder={content?.placeholder_text || "Your email address"} 
+                  placeholder={content?.placeholder_text || "Votre adresse e-mail"} 
                   className="w-full px-6 py-3 rounded-full text-gray-900 bg-white border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +94,7 @@ export default function NewsletterSection({
                 disabled={isLoading}
                 className="bg-primary text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading ? 'Subscribing...' : (content?.button_text || buttonText)}
+                {isLoading ? "Inscription..." : (content?.button_text || buttonText)}
               </button>
             </form>
           )}
@@ -110,7 +110,7 @@ export default function NewsletterSection({
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <span className="text-gray-600">{content?.privacy_text || 'No spam, ever'}</span>
+              <span className="text-gray-600">{content?.privacy_text || "Pas de spam, jamais"}</span>
             </div>
           </div>
         </div>

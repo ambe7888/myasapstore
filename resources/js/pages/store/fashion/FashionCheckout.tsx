@@ -286,7 +286,7 @@ export default function FashionCheckout({
     }
     
     if (!shippingStreet) {
-      newErrors.shippingStreet = 'Street address is required';
+      newErrors.shippingStreet = "L'adresse est obligatoire";
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -312,7 +312,7 @@ export default function FashionCheckout({
     if (value && paymentMethod === 'whatsapp') {
       const phoneRegex = /^[+]?[0-9]{10,15}$/;
       if (!phoneRegex.test(value.replace(/\s+/g, ''))) {
-        setPaymentErrors(prev => ({ ...prev, whatsappNumber: 'Please enter a valid WhatsApp number' }));
+        setPaymentErrors(prev => ({ ...prev, whatsappNumber: "Veuillez saisir un numéro WhatsApp valide" }));
       }
     }
   };
@@ -324,11 +324,11 @@ export default function FashionCheckout({
       const newErrors: Record<string, string> = {};
       
       if (!whatsappNumber) {
-        newErrors.whatsappNumber = 'WhatsApp number is required';
+        newErrors.whatsappNumber = "Le numéro WhatsApp est obligatoire";
       } else {
         const phoneRegex = /^[+]?[0-9]{10,15}$/;
         if (!phoneRegex.test(whatsappNumber.replace(/\s+/g, ''))) {
-          newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+          newErrors.whatsappNumber = "Veuillez saisir un numéro WhatsApp valide";
         }
       }
       
@@ -465,7 +465,7 @@ export default function FashionCheckout({
             <div className="text-center">
               <h1 className="text-5xl font-thin tracking-wide mb-6">Passer à la caisse</h1>
               <p className="text-white/70 font-light text-lg">
-                Complete your order with confidence
+                Finalisez votre commande en toute confiance
               </p>
             </div>
           </div>
@@ -528,9 +528,9 @@ export default function FashionCheckout({
                 {currentStep === 'shipping' && (
                   <div className="bg-white">
                     <div className="mb-8">
-                      <h2 className="text-2xl font-thin tracking-wide mb-2">Shipping Information</h2>
+                      <h2 className="text-2xl font-thin tracking-wide mb-2">Informations de livraison</h2>
                       <p className="text-gray-600 font-light">
-                        Enter your shipping details and choose a shipping method.
+                        Saisissez vos informations de livraison et choisissez un mode de livraison.
                       </p>
                     </div>
                     
@@ -640,7 +640,7 @@ export default function FashionCheckout({
                               shippingErrors.shippingState ? 'border-red-500' : 'border-gray-300'
                             } font-light focus:outline-none focus:border-black transition-colors`}
                           >
-                            <option value="">{loadingStates ? 'Loading...' : 'Select State'}</option>
+                            <option value="">{loadingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                             {states.map((state: any) => (
                               <option key={state.id} value={state.id}>
                                 {state.name}
@@ -670,7 +670,7 @@ export default function FashionCheckout({
                               shippingErrors.shippingCity ? 'border-red-500' : 'border-gray-300'
                             } font-light focus:outline-none focus:border-black transition-colors`}
                           >
-                            <option value="">{loadingCities ? 'Loading...' : 'Select City'}</option>
+                            <option value="">{loadingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                             {cities.map((city: any) => (
                               <option key={city.id} value={city.id}>
                                 {city.name}
@@ -729,7 +729,7 @@ export default function FashionCheckout({
                                   <label htmlFor={`shipping-${method.id}`} className="ml-4 flex flex-col cursor-pointer">
                                     <span className="block text-sm font-light text-black">{method.name}</span>
                                     <span className="block text-sm text-gray-500 font-light">
-                                      {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : 'Standard delivery')}
+                                      {method.description || (method.delivery_time ? `Delivery in ${method.delivery_time}` : "Livraison standard")}
                                     </span>
                                     {method.min_order_amount > 0 && (
                                       <span className="block text-xs text-gray-400 font-light">
@@ -792,7 +792,7 @@ export default function FashionCheckout({
                           rows={4}
                           value={orderNotes}
                           onChange={(e) => setOrderNotes(e.target.value)}
-                          placeholder="Special instructions for delivery or any other notes"
+                          placeholder="Instructions particulières pour la livraison ou autres remarques"
                           className="block w-full px-4 py-3 border border-gray-300 font-light focus:outline-none focus:border-black transition-colors"
                         />
                       </div>
@@ -802,7 +802,7 @@ export default function FashionCheckout({
                           type="submit"
                           className="bg-black text-white px-8 py-3 font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors"
                         >
-                          Review Order
+                          Vérifier la commande
                         </button>
                       </div>
                     </form>
@@ -813,16 +813,16 @@ export default function FashionCheckout({
                 {currentStep === 'review' && (
                   <div className="bg-white">
                     <div className="mb-8">
-                      <h2 className="text-2xl font-thin tracking-wide mb-2">Review Your Order</h2>
+                      <h2 className="text-2xl font-thin tracking-wide mb-2">Vérifiez votre commande</h2>
                       <p className="text-gray-600 font-light">
-                        Please review your order details before placing your order.
+                        Vérifiez les détails de votre commande avant de la valider.
                       </p>
                     </div>
                     
                     <div className="space-y-8">
                       {/* Order Items */}
                       <div>
-                        <h3 className="text-lg font-light tracking-wide mb-6">Order Items</h3>
+                        <h3 className="text-lg font-light tracking-wide mb-6">Articles commandés</h3>
                         
                         <div className="space-y-4">
                           {cartItems.map((item) => {
@@ -856,7 +856,7 @@ export default function FashionCheckout({
                       
                       {/* Shipping Information */}
                       <div>
-                        <h3 className="text-lg font-light tracking-wide mb-6">Shipping Information</h3>
+                        <h3 className="text-lg font-light tracking-wide mb-6">Informations de livraison</h3>
                         
                         <div className="bg-gray-50 p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -876,7 +876,7 @@ export default function FashionCheckout({
                           <div className="mt-6 pt-6 border-t border-gray-200">
                             <p className="text-sm font-light tracking-wide uppercase text-gray-500 mb-2">Méthode de livraison</p>
                             <p className="text-sm text-black font-light">
-                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || 'Standard delivery'})` : 'No shipping method selected'}
+                              {selectedShipping ? `${selectedShipping.name} (${selectedShipping.delivery_time || "Livraison standard"})` : "Aucun mode de livraison sélectionné"}
                             </p>
                           </div>
                         </div>
@@ -899,14 +899,14 @@ export default function FashionCheckout({
                           onClick={() => setCurrentStep('shipping')}
                           className="border border-gray-300 text-black px-6 py-3 font-light tracking-widest uppercase text-sm hover:border-black transition-colors"
                         >
-                          Back to Shipping
+                          Retour à la livraison
                         </button>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
                           className="bg-black text-white px-8 py-3 font-light tracking-widest uppercase text-sm hover:bg-gray-800 transition-colors"
                         >
-                          Continue to Payment
+                          Continuer vers le paiement
                         </button>
                       </div>
                     </div>
@@ -917,9 +917,9 @@ export default function FashionCheckout({
                 {currentStep === 'payment' && (
                   <div className="bg-white">
                     <div className="mb-8">
-                      <h2 className="text-2xl font-thin tracking-wide mb-2">Payment Information</h2>
+                      <h2 className="text-2xl font-thin tracking-wide mb-2">Informations de paiement</h2>
                       <p className="text-gray-600 font-light">
-                        Choose your payment method and enter your billing details.
+                        Choisissez votre mode de paiement et saisissez vos informations de facturation.
                       </p>
                     </div>
                     
@@ -937,7 +937,7 @@ export default function FashionCheckout({
                             className="h-4 w-4 text-black focus:ring-black border-gray-300"
                           />
                           <label htmlFor="same-as-shipping" className="ml-3 block text-sm text-black font-light">
-                            Same as shipping address
+                            Identique à l'adresse de livraison
                           </label>
                         </div>
                         
@@ -1039,7 +1039,7 @@ export default function FashionCheckout({
                                 disabled={!billingCountry || loadingBillingStates}
                                 className="block w-full px-4 py-3 border border-gray-300 font-light focus:outline-none focus:border-black transition-colors"
                               >
-                                <option value="">{loadingBillingStates ? 'Loading...' : 'Select State'}</option>
+                                <option value="">{loadingBillingStates ? 'Loading...' : "Sélectionnez une région"}</option>
                                 {billingStates.map((state: any) => (
                                   <option key={state.id} value={state.id}>
                                     {state.name}
@@ -1060,7 +1060,7 @@ export default function FashionCheckout({
                                 disabled={!billingState || loadingBillingCities}
                                 className="block w-full px-4 py-3 border border-gray-300 font-light focus:outline-none focus:border-black transition-colors"
                               >
-                                <option value="">{loadingBillingCities ? 'Loading...' : 'Select City'}</option>
+                                <option value="">{loadingBillingCities ? 'Loading...' : "Sélectionnez une ville"}</option>
                                 {billingCities.map((city: any) => (
                                   <option key={city.id} value={city.id}>
                                     {city.name}
@@ -1105,8 +1105,8 @@ export default function FashionCheckout({
                                 />
                               </div>
                               <label htmlFor="payment-cod" className="ml-4 flex flex-col cursor-pointer">
-                                <span className="block text-sm font-light text-black">Cash on Delivery</span>
-                                <span className="block text-sm text-gray-500 font-light">Pay when your order is delivered</span>
+                                <span className="block text-sm font-light text-black">Paiement à la livraison</span>
+                                <span className="block text-sm text-gray-500 font-light">Payez à la livraison de votre commande</span>
                               </label>
                             </div>
                           )}
@@ -1126,7 +1126,7 @@ export default function FashionCheckout({
                               </div>
                               <label htmlFor="payment-whatsapp" className="ml-4 flex flex-col cursor-pointer">
                                 <span className="block text-sm font-light text-black">WhatsApp</span>
-                                <span className="block text-sm text-gray-500 font-light">Complete payment via WhatsApp</span>
+                                <span className="block text-sm text-gray-500 font-light">Finaliser le paiement via WhatsApp</span>
                               </label>
                             </div>
                           )}
@@ -1146,7 +1146,7 @@ export default function FashionCheckout({
                               </div>
                               <label htmlFor="payment-telegram" className="ml-4 flex flex-col cursor-pointer">
                                 <span className="block text-sm font-light text-black">Telegram</span>
-                                <span className="block text-sm text-gray-500 font-light">Complete payment via Telegram</span>
+                                <span className="block text-sm text-gray-500 font-light">Finaliser le paiement via Telegram</span>
                               </label>
                             </div>
                           )}
@@ -1201,7 +1201,7 @@ export default function FashionCheckout({
                                       {methodNames[method] || method.charAt(0).toUpperCase() + method.slice(1)}
                                     </span>
                                     <span className="block text-sm text-gray-500 font-light">
-                                      {method === 'bank' ? 'Transfer payment to our bank account' : `Pay securely with ${methodNames[method] || method}`}
+                                      {method === 'bank' ? "Effectuez le virement sur notre compte bancaire" : `Pay securely with ${methodNames[method] || method}`}
                                     </span>
                                   </label>
                                 </div>
@@ -1209,7 +1209,7 @@ export default function FashionCheckout({
                                 {/* Bank Transfer Details */}
                                 {method === 'bank' && paymentMethod === 'bank' && config.details && (
                                   <div className="mt-4 p-4 bg-blue-50 border border-blue-200">
-                                    <h4 className="text-sm font-light text-blue-900 mb-2 tracking-wide uppercase">Bank Transfer Details</h4>
+                                    <h4 className="text-sm font-light text-blue-900 mb-2 tracking-wide uppercase">Détails du virement bancaire</h4>
                                     <div className="text-sm text-blue-800 whitespace-pre-line font-light">
                                       {config.details}
                                     </div>
@@ -1224,7 +1224,7 @@ export default function FashionCheckout({
                       {/* WhatsApp Number Input */}
                       {paymentMethod === 'whatsapp' && (
                         <div>
-                          <h3 className="text-lg font-light tracking-wide mb-6">WhatsApp Details</h3>
+                          <h3 className="text-lg font-light tracking-wide mb-6">Détails WhatsApp</h3>
                           
                           <div>
                             <label htmlFor="whatsapp-number" className="block text-sm font-light tracking-wide uppercase mb-3">
@@ -1256,7 +1256,7 @@ export default function FashionCheckout({
                           onClick={() => setCurrentStep('review')}
                           className="border border-gray-300 text-black px-6 py-3 font-light tracking-widest uppercase text-sm hover:border-black transition-colors"
                         >
-                          Back to Review
+                          Retour au récapitulatif
                         </button>
                         <button
                           type="button"
@@ -1362,19 +1362,19 @@ export default function FashionCheckout({
                                   alert(data.message);
                                 }
                               } catch (error) {
-                                alert('Error validating coupon. Please try again.');
+                                alert("Erreur lors de la validation du coupon. Veuillez réessayer.");
                               }
                             } else {
-                              alert('Please enter a coupon code');
+                              alert("Veuillez saisir un code promo");
                             }
                           }}
                           className={`px-4 py-2 ${couponApplied ? 'bg-red-600' : 'bg-white'} ${couponApplied ? 'text-white' : 'text-black'} hover:${couponApplied ? 'bg-red-700' : 'bg-gray-100'} text-sm font-light tracking-wide uppercase transition-colors`}
                         >
-                          {couponApplied ? 'Remove' : 'Apply'}
+                          {couponApplied ? "Retirer" : "Appliquer"}
                         </button>
                       </div>
                       {couponApplied && (
-                        <p className="text-sm text-green-400 font-light">Coupon applied successfully!</p>
+                        <p className="text-sm text-green-400 font-light">Coupon appliqué avec succès !</p>
                       )}
                     </div>
                   </div>
@@ -1412,7 +1412,7 @@ export default function FashionCheckout({
                   {/* Secure Checkout */}
                   <div className="mt-8 flex items-center justify-center">
                     <Lock className="h-4 w-4 text-gray-400 mr-2" />
-                    <p className="text-xs text-gray-400 font-light tracking-widest uppercase">Secure Checkout</p>
+                    <p className="text-xs text-gray-400 font-light tracking-widest uppercase">Paiement sécurisé</p>
                   </div>
                 </div>
               </div>

@@ -62,12 +62,12 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
 
             {/* Title */}
             <h1 className="text-6xl lg:text-8xl font-black tracking-tight leading-none">
-              {heroContent.title || 'Drive Your Passion'}
+              {heroContent.title || "Découvrez notre sélection"}
             </h1>
 
             {/* Subtitle */}
             <p className="text-2xl text-gray-200 leading-relaxed max-w-2xl">
-              {heroContent.subtitle || 'Discover premium automotive parts and performance upgrades that unleash your vehicle\'s true potential.'}
+              {heroContent.subtitle || "Découvrez notre sélection de produits de qualité, choisis avec soin pour vous."}
             </p>
 
             {/* Buttons */}
@@ -76,13 +76,13 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
                 href={formatCustomLink(heroContent.button_link, store, generateStoreUrl('store.products', store))}
                 className="inline-flex items-center justify-center px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold tracking-wider uppercase transition-all transform hover:scale-105"
               >
-                {heroContent.button_text || 'Shop Parts'}
+                {heroContent.button_text || "Voir la boutique"}
               </a>
               <a
                 href={formatCustomLink(heroContent.secondary_button_link, store, generateStoreUrl('store.products', store))}
                 className="inline-flex items-center justify-center px-10 py-5 border-2 border-white text-white hover:bg-white hover:text-black font-bold tracking-wider uppercase transition-all transform hover:scale-105"
               >
-                {heroContent.secondary_button_text || 'View Catalog'}
+                {heroContent.secondary_button_text || "Voir le catalogue"}
               </a>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">Performance Boost</h3>
-                    <p className="text-gray-300 text-lg">High-quality performance parts</p>
+                    <p className="text-gray-300 text-lg">Produits de qualité</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors">
@@ -137,7 +137,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">Expert Installation</h3>
-                    <p className="text-gray-300 text-lg">Professional installation service</p>
+                    <p className="text-gray-300 text-lg">Service attentif</p>
                   </div>
                 </div>
               </>

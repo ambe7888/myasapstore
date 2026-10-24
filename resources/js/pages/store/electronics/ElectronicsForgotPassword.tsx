@@ -62,8 +62,8 @@ export default function ElectronicsForgotPassword({
                   <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <Mail className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Forgot Password?</h2>
-                  <p className="text-gray-600">No worries! Enter your email and we'll send you reset instructions</p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Mot de passe oublié ?</h2>
+                  <p className="text-gray-600">Pas d'inquiétude ! Saisissez votre e-mail et nous vous enverrons les instructions</p>
                 </div>
 
                 {/* Forgot Password Form */}
@@ -80,7 +80,7 @@ export default function ElectronicsForgotPassword({
                           value={data.email}
                           onChange={(e) => setData('email', e.target.value)}
                           className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                          placeholder="Enter your email address"
+                          placeholder="Saisissez votre adresse e-mail"
                           required
                         />
                       </div>
@@ -114,7 +114,7 @@ export default function ElectronicsForgotPassword({
                       className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Login
+                      Retour à la connexion
                     </Link>
                   </div>
                 </div>
@@ -126,20 +126,20 @@ export default function ElectronicsForgotPassword({
                   <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-8 h-8 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Check Your Email</h2>
-                  <p className="text-gray-600">We've sent password reset instructions to your email address</p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Consultez votre e-mail</h2>
+                  <p className="text-gray-600">Nous avons envoyé les instructions de réinitialisation à votre adresse e-mail</p>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
                   <div className="mb-6">
                     <p className="text-gray-600 mb-4">
-                      Didn't receive the email? Check your spam folder or try again.
+                      Vous n'avez pas reçu l'e-mail ? Vérifiez vos courriers indésirables ou réessayez.
                     </p>
                     <button
                       onClick={() => setEmailSent(false)}
                       className="text-blue-600 hover:text-blue-700 font-semibold"
                     >
-                      Try Again
+                      Réessayer
                     </button>
                   </div>
 
@@ -149,7 +149,7 @@ export default function ElectronicsForgotPassword({
                       className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Login
+                      Retour à la connexion
                     </Link>
                   </div>
                 </div>

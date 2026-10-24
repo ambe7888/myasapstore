@@ -41,7 +41,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
             {content?.title || 'Beauty Essentials'}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {content?.description || 'Handpicked by beauty experts - the must-have products that deliver results.'}
+            {content?.description || "Sélectionnés avec soin par notre équipe : les incontournables du moment."}
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
               </svg>
             </div>
-            <p className="text-gray-500 text-lg">No featured products available</p>
+            <p className="text-gray-500 text-lg">Aucun produit en vedette disponible</p>
           </div>
         )}
 
@@ -69,7 +69,7 @@ export default function BeautyFeaturedProductsSection({ products = [], content, 
               href={generateStoreUrl('store.products', store)} 
               className="inline-flex items-center px-8 py-4 bg-white text-rose-600 font-semibold rounded-full shadow-lg hover:shadow-xl hover:bg-rose-600 hover:text-white transition-all duration-300"
             >
-              <span>View All Products</span>
+              <span>Voir tous les produits</span>
               <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

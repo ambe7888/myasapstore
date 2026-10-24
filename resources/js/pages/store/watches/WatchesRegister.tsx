@@ -65,7 +65,7 @@ export default function WatchesRegister({
                 </div>
                 <h2 className="text-3xl font-light text-slate-900 mb-4">Become a Member</h2>
                 <p className="text-slate-600 leading-relaxed">
-                  Join thousands of watch enthusiasts and unlock exclusive benefits.
+                  Rejoignez-nous et profitez d'avantages exclusifs.
                 </p>
               </div>
               
@@ -78,7 +78,7 @@ export default function WatchesRegister({
                   </div>
                   <div>
                     <div className="text-slate-900 font-medium">Livraison gratuite</div>
-                    <div className="text-slate-600 text-sm">On all orders over $500</div>
+                    <div className="text-slate-600 text-sm">Sur les commandes éligibles</div>
                   </div>
                 </div>
                 
@@ -90,7 +90,7 @@ export default function WatchesRegister({
                   </div>
                   <div>
                     <div className="text-slate-900 font-medium">Early Access</div>
-                    <div className="text-slate-600 text-sm">New collections & limited editions</div>
+                    <div className="text-slate-600 text-sm">Nouvelles collections et éditions limitées</div>
                   </div>
                 </div>
                 
@@ -101,7 +101,7 @@ export default function WatchesRegister({
                     </svg>
                   </div>
                   <div>
-                    <div className="text-slate-900 font-medium">Expert Support</div>
+                    <div className="text-slate-900 font-medium">Assistance dédiée</div>
                     <div className="text-slate-600 text-sm">24/7 horological assistance</div>
                   </div>
                 </div>
@@ -114,8 +114,8 @@ export default function WatchesRegister({
             <div className="w-full max-w-md">
               {/* Header */}
               <div className="text-center mb-8">
-                <h1 className="text-3xl font-light text-slate-900 mb-2">Create Account</h1>
-                <p className="text-slate-600">Begin your horological journey</p>
+                <h1 className="text-3xl font-light text-slate-900 mb-2">Créer un compte</h1>
+                <p className="text-slate-600">Commencez vos achats</p>
               </div>
 
               {/* Register Form */}
@@ -131,7 +131,7 @@ export default function WatchesRegister({
                       value={data.first_name}
                       onChange={(e) => setData('first_name', e.target.value)}
                       className="w-full px-4 py-3 border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all duration-300"
-                      placeholder="First name"
+                      placeholder="Prénom"
                       required
                     />
                     {errors.first_name && <p className="text-red-500 text-sm mt-1">{errors.first_name}</p>}
@@ -145,7 +145,7 @@ export default function WatchesRegister({
                       value={data.last_name}
                       onChange={(e) => setData('last_name', e.target.value)}
                       className="w-full px-4 py-3 border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all duration-300"
-                      placeholder="Last name"
+                      placeholder="Nom"
                       required
                     />
                     {errors.last_name && <p className="text-red-500 text-sm mt-1">{errors.last_name}</p>}
@@ -177,7 +177,7 @@ export default function WatchesRegister({
                 {/* Password */}
                 <div className="group">
                   <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -208,7 +208,7 @@ export default function WatchesRegister({
                 {/* Confirm Password */}
                 <div className="group">
                   <label htmlFor="password_confirmation" className="block text-sm font-medium text-slate-700 mb-2 group-focus-within:text-amber-600 transition-colors">
-                    Confirm Password
+                    Confirmer le mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -217,7 +217,7 @@ export default function WatchesRegister({
                       value={data.password_confirmation}
                       onChange={(e) => setData('password_confirmation', e.target.value)}
                       className="w-full px-4 py-4 border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all duration-300 pl-12 pr-12"
-                      placeholder="Confirm your password"
+                      placeholder="Confirmez votre mot de passe"
                       required
                     />
                     <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
@@ -248,22 +248,22 @@ export default function WatchesRegister({
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Creating Account...
+                      Création du compte...
                     </>
-                  ) : 'Create Account'}
+                  ) : "Créer un compte"}
                 </button>
               </form>
 
               {/* Login Link */}
               <div className="text-center mt-6 pt-6 border-t border-slate-200">
                 <p className="text-slate-600 mb-3">
-                  Already have an account?
+                  Vous avez déjà un compte ?
                 </p>
                 <Link
                   href={generateStoreUrl('store.login', store)}
                   className="text-amber-600 hover:text-amber-700 font-medium transition-colors"
                 >
-                  Sign In
+                  Se connecter
                 </Link>
               </div>
             </div>

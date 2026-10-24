@@ -42,10 +42,10 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
           setIsSubscribed(false);
         }, 5000);
       } else {
-        setError(data.message || 'Failed to subscribe. Please try again.');
+        setError(data.message || "Échec de l'inscription. Veuillez réessayer.");
       }
     } catch (error) {
-      setError('Failed to subscribe. Please try again.');
+      setError("Échec de l'inscription. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -85,10 +85,10 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
               
               {/* Content */}
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-                {content?.title || 'Join Our Family!'}
+                {content?.title || "Rejoignez-nous !"}
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                {content?.subtitle || 'Get exclusive deals, parenting tips, and first access to new arrivals for your little ones!'}
+                {content?.subtitle || "Profitez d'offres exclusives et soyez les premiers informés de nos nouveautés !"}
               </p>
               
               {/* Newsletter Form */}
@@ -99,7 +99,7 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder={content?.placeholder_text || 'Enter your email'}
+                      placeholder={content?.placeholder_text || "Saisissez votre e-mail"}
                       required
                       className="w-full px-6 py-4 rounded-full border-3 border-pink-300 focus:border-pink-500 focus:outline-none text-gray-700 placeholder-gray-500 bg-pink-50 transition-all duration-300 text-lg"
                     />
@@ -109,7 +109,7 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
                     disabled={isSubmitting}
                     className="px-8 py-4 bg-pink-500 text-white font-bold rounded-full hover:bg-pink-600 transition-all duration-300 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg"
                   >
-                    {isSubmitting ? 'Subscribing...' : (content?.button_text || 'Subscribe')}
+                    {isSubmitting ? "Inscription..." : (content?.button_text || "S'abonner")}
                   </button>
                 </div>
                 
@@ -123,8 +123,8 @@ export default function BabyKidsNewsletterSection({ content }: BabyKidsNewslette
               {/* Fun Benefits Icons */}
               <div className="grid grid-cols-3 gap-6">
                 {(content?.benefits || [
-                  { title: 'New Arrivals', subtitle: 'First to know' },
-                  { title: 'Special Offers', subtitle: 'Exclusive deals' },
+                  { title: "Nouveautés", subtitle: "Soyez informé en premier" },
+                  { title: "Offres spéciales", subtitle: "Offres exclusives" },
                   { title: 'Parenting Tips', subtitle: 'Expert advice' }
                 ]).map((benefit: any, index: number) => (
                   <div key={index} className="text-center">

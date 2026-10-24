@@ -97,8 +97,8 @@ export default function FurnitureOrderConfirmation({
       zip: '',
       country: ''
     },
-    payment_method: 'Cash on Delivery',
-    shipping_method: 'Standard Delivery'
+    payment_method: "Paiement à la livraison",
+    shipping_method: "Livraison standard"
   };
   
   const orderData = order || defaultOrder;

@@ -114,12 +114,12 @@ export default function ProductCard({
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {isNew && (
             <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">
-              NEW
+              NOUVEAU
             </span>
           )}
           {isOnSale && (
             <span className="bg-secondary text-white text-xs font-bold px-2 py-1 rounded-md">
-              SALE
+              PROMO
             </span>
           )}
           {hasVariants && (
@@ -134,14 +134,14 @@ export default function ProductCard({
           <button 
             onClick={handleAddToWishlist}
             className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors transform opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300"
-            aria-label="Add to wishlist"
+            aria-label="Ajouter aux favoris"
           >
             <Heart className="h-4 w-4 text-gray-600" />
           </button>
           <button 
             onClick={handleQuickView}
             className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors transform opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 delay-75"
-            aria-label="Quick view"
+            aria-label="Aperçu rapide"
           >
             <Eye className="h-4 w-4 text-gray-600" />
           </button>

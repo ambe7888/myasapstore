@@ -86,10 +86,10 @@ function JewelryCartContent({
               <ShoppingBag className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-serif text-gray-800 mb-3 tracking-wide">
-              Your Jewelry Collection
+              Votre sélection
             </h1>
             <p className="text-gray-600 font-light text-lg max-w-xl mx-auto leading-relaxed mb-6">
-              Review and perfect your selection of luxury pieces
+              Vérifiez votre sélection
             </p>
             
 
@@ -105,7 +105,7 @@ function JewelryCartContent({
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-yellow-200/50 overflow-hidden">
                   <div className="p-6 border-b border-yellow-200/50">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Selected Items</h2>
+                      <h2 className="text-2xl font-serif text-gray-800 tracking-wide">Articles sélectionnés</h2>
                       <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">
                         {dynamicCartItems.length} item{dynamicCartItems.length !== 1 ? 's' : ''}
                       </span>
@@ -139,7 +139,7 @@ function JewelryCartContent({
                               <button 
                                 onClick={() => handleRemoveItem(item.id)}
                                 className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
-                                title="Remove item"
+                                title="Retirer l'article"
                               >
                                 <Trash2 className="h-5 w-5" />
                               </button>
@@ -150,7 +150,7 @@ function JewelryCartContent({
                                 <>
                                   <span className="text-2xl font-bold text-gray-800">{formatCurrency(item.sale_price, storeSettings, currencies)}</span>
                                   <span className="text-lg text-gray-500 line-through">{formatCurrency(item.price, storeSettings, currencies)}</span>
-                                  <span className="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">SALE</span>
+                                  <span className="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">PROMO</span>
                                 </>
                               ) : (
                                 <span className="text-2xl font-bold text-gray-800">{formatCurrency(item.price, storeSettings, currencies)}</span>
@@ -186,7 +186,7 @@ function JewelryCartContent({
                                 <div className="text-2xl font-bold text-gray-800">
                                   {formatCurrency((item.sale_price || item.price) * item.quantity, storeSettings, currencies)}
                                 </div>
-                                <div className="text-sm text-gray-500">Item Total</div>
+                                <div className="text-sm text-gray-500">Total de l'article</div>
                               </div>
                             </div>
                             
@@ -222,7 +222,7 @@ function JewelryCartContent({
                           
                           {dynamicSummary.discount > 0 && (
                             <div className="flex justify-between text-sm text-green-200">
-                              <span>Special Discount</span>
+                              <span>Remise spéciale</span>
                               <span className="font-semibold">-{formatCurrency(dynamicSummary.discount, storeSettings, currencies)}</span>
                             </div>
                           )}
@@ -235,7 +235,7 @@ function JewelryCartContent({
                           </div>
                           
                           <div className="flex justify-between text-sm text-yellow-100">
-                            <span>Tax</span>
+                            <span>Taxe</span>
                             <span className="font-semibold">{formatCurrency(dynamicSummary.tax, storeSettings, currencies)}</span>
                           </div>
                           
@@ -252,7 +252,7 @@ function JewelryCartContent({
                           className="w-full bg-white text-yellow-600 px-6 py-4 rounded-xl font-bold hover:bg-yellow-50 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                         >
                           <ArrowRight className="w-5 h-5 mr-2" />
-                          Secure Checkout
+                          Paiement sécurisé
                         </Link>
                         
                         <Link
@@ -277,10 +277,10 @@ function JewelryCartContent({
                     <ShoppingBag className="w-12 h-12 text-yellow-600" />
                   </div>
                   <h2 className="text-3xl font-serif text-gray-800 mb-4 tracking-wide">
-                    Your Cart Awaits
+                    Votre panier vous attend
                   </h2>
                   <p className="text-gray-600 font-light mb-8 leading-relaxed text-lg">
-                    Discover our exquisite jewelry collections and curate your perfect selection of luxury pieces
+                    Découvrez nos produits et ajoutez-les à vos favoris
                   </p>
                   
                   <div className="space-y-4">
@@ -289,7 +289,7 @@ function JewelryCartContent({
                       className="inline-flex items-center bg-yellow-600 text-white px-8 py-4 font-semibold hover:bg-yellow-700 transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     >
                       <Gem className="w-5 h-5 mr-2" />
-                      Explore Our Collections
+                      Découvrir nos collections
                     </Link>
                     
 

@@ -23,7 +23,7 @@ export default function HeroSection({
   buttonText,
   buttonLink,
   image,
-  secondaryButtonText = "View Collections",
+  secondaryButtonText = "Voir les collections",
   secondaryButtonLink = "/collections",
   baseUrl,
   store
@@ -67,7 +67,7 @@ export default function HeroSection({
               className={`inline-block mb-4 transition-all duration-700 ease-out ${fadeIn}`}
             >
               <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                {content?.badge_text || 'New Collection'}
+                {content?.badge_text || "Nouvelle collection"}
               </span>
             </div>
             <h1 
@@ -115,9 +115,9 @@ export default function HeroSection({
               className={`mt-12 flex flex-wrap gap-6 transition-all duration-700 delay-700 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
             >
               {(content?.info_boxes || [
-                { icon: 'truck', title: 'Free Shipping', description: 'On orders over $50' },
-                { icon: 'refresh-cw', title: '30-Day Returns', description: 'Hassle-free returns' },
-                { icon: 'shield-check', title: 'Secure Checkout', description: '100% protected' }
+                { icon: 'truck', title: "Livraison gratuite", description: "Sur les commandes éligibles" },
+                { icon: 'refresh-cw', title: '30-Day Returns', description: "Retours simplifiés" },
+                { icon: 'shield-check', title: "Paiement sécurisé", description: '100% protected' }
               ]).map((box, index) => (
                 <div key={index} className="flex items-center">
                   <div className="bg-primary/10 p-2 rounded-full mr-3">
@@ -154,7 +154,7 @@ export default function HeroSection({
             >
               <img 
                 src={getImageUrl(heroImage)} 
-                alt="Home Accessories Collection" 
+                alt="Notre collection" 
                 className="rounded-2xl shadow-xl object-cover w-full h-full"
                 style={{ maxHeight: '600px' }}
                 onError={(e) => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -102,7 +103,7 @@ function BabyKidsProductDetailContent({
   const hasCustomFields = customFields && customFields.length > 0;
   
   // Parse images from comma-separated string and ensure all images are included
-  const images = (() => {
+  const baseImages = (() => {
     let imageList: string[] = [];
 
     // Parse additional images first if they exist (comma-separated)
@@ -126,6 +127,7 @@ function BabyKidsProductDetailContent({
 
     return imageList;
   })();
+  const images = appendVariantImages(baseImages, product.variants);
   const productVariants = (() => {
     if (!product.variants) return [];
     if (Array.isArray(product.variants)) return product.variants;
@@ -156,6 +158,11 @@ function BabyKidsProductDetailContent({
   };
 
   const handleVariantChange = (variantName: string, value: string) => {
+    const variantImage = getVariantImage(product.variants, variantName, value);
+    if (variantImage) {
+      const variantImageIndex = images.indexOf(variantImage);
+      if (variantImageIndex >= 0) setSelectedImage(variantImageIndex);
+    }
     setSelectedVariants(prev => ({
       ...prev,
       [variantName]: value

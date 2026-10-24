@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -87,6 +88,7 @@ export default function ProductDetail({
   const [customFieldInputs, setCustomFieldInputs] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState('description');
   const [reviewRating, setReviewRating] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [reviewTitle, setReviewTitle] = useState('');
   const [reviewContent, setReviewContent] = useState('');
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -248,7 +250,7 @@ export default function ProductDetail({
   const currencies = props.currencies || [];
   const storeSlug = props.store?.slug || props.theme || 'home-accessories';
   // Parse images from comma-separated string and ensure cover image is included
-  const productImages: ProductImage[] = (() => {
+  const baseProductImages: ProductImage[] = (() => {
     let images: ProductImage[] = [];
 
     // Add cover image first if it exists
@@ -274,6 +276,10 @@ export default function ProductDetail({
 
     return images;
   })();
+  const productImages: ProductImage[] = (() => {
+    const extraUrls = appendVariantImages(baseProductImages.map(img => img.url), product.variants).slice(baseProductImages.length);
+    return [...baseProductImages, ...extraUrls.map((url, i) => ({ id: `variant-${i}`, url }))];
+  })();
 
   const isOnSale = product.sale_price && product.sale_price < product.price;
   const isInStock = product.stock > 0 && product.is_active;
@@ -298,6 +304,11 @@ export default function ProductDetail({
   };
 
   const handleVariantChange = (variantName: string, value: string) => {
+    const variantImage = getVariantImage(product.variants, variantName, value);
+    if (variantImage) {
+      const variantImageIndex = productImages.findIndex(img => img.url === variantImage);
+      if (variantImageIndex >= 0) setSelectedImageIndex(variantImageIndex);
+    }
     setSelectedVariants(prev => ({
       ...prev,
       [variantName]: value
@@ -401,7 +412,7 @@ export default function ProductDetail({
               {/* Product Images */}
               <div className="md:sticky md:top-24 h-fit">
                 <div className="bg-white rounded-xl overflow-hidden shadow-md">
-                  <ImageGallery images={productImages.map(img => getProductImageUrl(img.url))} />
+                  <ImageGallery images={productImages.map(img => getProductImageUrl(img.url))} selectedIndex={selectedImageIndex} />
                 </div>
               </div>
 

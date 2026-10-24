@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -103,7 +104,7 @@ function PerfumeProductDetailContent({
 
   const hasCustomFields = customFields && customFields.length > 0;
   
-  const productImages = (() => {
+  const baseProductImages = (() => {
     let images = [];
     
     // Parse additional images first if they exist (comma-separated)
@@ -127,6 +128,7 @@ function PerfumeProductDetailContent({
     
     return images;
   })();
+  const productImages = appendVariantImages(baseProductImages, product.variants);
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price) / product.price) * 100) : 0;
   
@@ -315,7 +317,14 @@ function PerfumeProductDetailContent({
                               {valueArray.map((value, index) => (
                                 <button
                                   key={`${key}-${index}`}
-                                  onClick={() => setSelectedVariants(prev => ({ ...prev, [key]: value }))}
+                                  onClick={() => {
+                                    setSelectedVariants(prev => ({ ...prev, [key]: value }));
+                                    const variantImage = getVariantImage(product.variants, displayKey, value) ?? getVariantImage(product.variants, key, value);
+                                    if (variantImage) {
+                                      const variantImageIndex = productImages.indexOf(variantImage);
+                                      if (variantImageIndex >= 0) setSelectedImage(variantImageIndex);
+                                    }
+                                  }}
                                   className={`px-4 py-2 rounded-full border transition-colors duration-300 ${
                                     selectedVariants[key] === value
                                       ? 'border-purple-800 bg-purple-800 text-white'

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -106,7 +107,7 @@ function FurnitureProductDetailContent({
   }, [product?.id, store?.require_variant_selection]);
 
   // Parse images from comma-separated string
-  const productImages = (() => {
+  const baseProductImages = (() => {
     let images: string[] = [];
 
     if (product.images) {
@@ -126,11 +127,17 @@ function FurnitureProductDetailContent({
 
     return images;
   })();
+  const productImages = appendVariantImages(baseProductImages, product.variants);
 
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price) / product.price) * 100) : 0;
 
   const handleVariantChange = (variantName: string, value: string) => {
+    const variantImage = getVariantImage(product.variants, variantName, value);
+    if (variantImage) {
+      const variantImageIndex = productImages.indexOf(variantImage);
+      if (variantImageIndex >= 0) setSelectedImage(variantImageIndex);
+    }
     setSelectedVariants(prev => ({
       ...prev,
       [variantName]: value

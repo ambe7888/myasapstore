@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageGalleryProps {
   images: string[];
+  selectedIndex?: number;
 }
 
-export default function ImageGallery({ images }: ImageGalleryProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+export default function ImageGallery({ images, selectedIndex }: ImageGalleryProps) {
+  const [activeIndex, setActiveIndex] = useState(selectedIndex ?? 0);
+
+  useEffect(() => {
+    if (selectedIndex !== undefined) setActiveIndex(selectedIndex);
+  }, [selectedIndex]);
   
   if (images.length === 0) {
     return null;

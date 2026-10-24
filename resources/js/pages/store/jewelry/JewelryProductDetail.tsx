@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import { Head, Link, usePage } from '@inertiajs/react';
@@ -83,7 +84,7 @@ function JewelryProductDetailContent({
     const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price) / product.price) * 100) : 0;
     const isInStock = product.stock > 0 && product.is_active;
     
-    const productImages = (() => {
+    const baseProductImages = (() => {
       let images: string[] = [];
       if (product.images) {
         const imageUrls = product.images.split(',').map((url: string) => url.trim()).filter((url: string) => url && url !== '');
@@ -98,6 +99,7 @@ function JewelryProductDetailContent({
       }
       return images;
     })();
+    const productImages = appendVariantImages(baseProductImages, product.variants);
     
     const productVariants = (() => {
       if (!product.variants) return [];
@@ -112,6 +114,11 @@ function JewelryProductDetailContent({
     const hasVariants = productVariants && productVariants.length > 0;
     
     const handleVariantChange = (variantName: string, value: string) => {
+      const variantImage = getVariantImage(product.variants, variantName, value);
+      if (variantImage) {
+        const variantImageIndex = productImages.indexOf(variantImage);
+        if (variantImageIndex >= 0) setSelectedImage(variantImageIndex);
+      }
       setSelectedVariants(prev => ({
         ...prev,
         [variantName]: value

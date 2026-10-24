@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { router, usePage } from '@inertiajs/react';
 import MediaPicker from '@/components/MediaPicker';
+import VariantsEditor, { type ProductVariant } from '@/components/products/variants-editor';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import axios from 'axios';
@@ -37,7 +38,7 @@ export default function CreateProduct() {
     downloadable_file: '',
   });
   const [customFields, setCustomFields] = useState([{ name: '', value: '' }]);
-  const [variants, setVariants] = useState([{ name: '', values: [''] }]);
+  const [variants, setVariants] = useState<ProductVariant[]>([{ name: '', values: [''] }]);
   const [processing, setProcessing] = useState(false);
   const [localCategories, setLocalCategories] = useState(categories || []);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
@@ -90,7 +91,9 @@ export default function CreateProduct() {
     // Convert variants and custom fields to the format expected by the backend
     const productData = {
       ...formData,
-      variants: variants.filter(v => v.name.trim() !== ''),
+      variants: variants
+        .filter(v => v.name.trim() !== '')
+        .map(v => (v.images && Object.keys(v.images).length > 0 ? v : { name: v.name, values: v.values })),
       custom_fields: customFields.filter(f => f.name.trim() !== '')
     };
     
@@ -368,56 +371,7 @@ export default function CreateProduct() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {variants.map((variant, index) => (
-                  <div key={index} className="border rounded-lg p-4 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <Input
-                        placeholder={t('Variant name (e.g., Color, Size)')}
-                        value={variant.name}
-                        onChange={(e) => {
-                          const newVariants = [...variants];
-                          newVariants[index].name = e.target.value;
-                          setVariants(newVariants);
-                        }}
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setVariants(variants.filter((_, i) => i !== index))}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="space-y-2">
-                      {variant.values.map((value, valueIndex) => (
-                        <div key={valueIndex} className="flex items-center space-x-2">
-                          <Input
-                            placeholder={t('Variant value')}
-                            value={value}
-                            onChange={(e) => {
-                              const newVariants = [...variants];
-                              newVariants[index].values[valueIndex] = e.target.value;
-                              setVariants(newVariants);
-                            }}
-                          />
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => {
-                              const newVariants = [...variants];
-                              newVariants[index].values.push('');
-                              setVariants(newVariants);
-                            }}
-                          >
-                            <Plus className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+                <VariantsEditor variants={variants} onChange={setVariants} />
               </CardContent>
             </Card>
           </TabsContent>

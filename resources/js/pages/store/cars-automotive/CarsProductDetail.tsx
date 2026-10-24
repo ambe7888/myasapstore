@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { appendVariantImages, getVariantImage } from '@/utils/variant-images';
 import StickyBottomBar from '@/components/store/StickyBottomBar';
 import BuyNowButton from '@/components/store/BuyNowButton';
 import AddToCartButton from '@/components/store/AddToCartButton';
@@ -85,7 +86,7 @@ function CarsProductDetailContent({
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
 
   // Parse images from comma-separated string and ensure all images are included
-  const productImages = (() => {
+  const baseProductImages = (() => {
     let images: string[] = [];
 
     // Parse additional images first if they exist (comma-separated)
@@ -109,6 +110,7 @@ function CarsProductDetailContent({
 
     return images;
   })();
+  const productImages = appendVariantImages(baseProductImages, product.variants);
 
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price!) / product.price) * 100) : 0;
@@ -128,6 +130,11 @@ function CarsProductDetailContent({
   const hasVariants = productVariants && productVariants.length > 0;
   
   const handleVariantChange = (variantName: string, value: string) => {
+    const variantImage = getVariantImage(product.variants, variantName, value);
+    if (variantImage) {
+      const variantImageIndex = productImages.indexOf(variantImage);
+      if (variantImageIndex >= 0) setSelectedImage(variantImageIndex);
+    }
     setSelectedVariants(prev => ({
       ...prev,
       [variantName]: value

@@ -17,8 +17,22 @@ interface VariantsEditorProps {
   onChange: (variants: ProductVariant[]) => void;
 }
 
-export default function VariantsEditor({ variants, onChange }: VariantsEditorProps) {
+// Variants saved by older versions or imports can have missing/odd fields
+// (numeric values, `images: []` from PHP, ...) — normalize before rendering.
+function normalizeVariants(raw: any): ProductVariant[] {
+  if (!Array.isArray(raw)) return [{ name: '', values: [''] }];
+  return raw.map((variant: any) => {
+    const rawValues = Array.isArray(variant?.values) ? variant.values : variant?.values != null ? [variant.values] : [];
+    const values = rawValues.map((value: any) => String(value ?? ''));
+    const images =
+      variant?.images && typeof variant.images === 'object' && !Array.isArray(variant.images) ? variant.images : {};
+    return { name: String(variant?.name ?? ''), values: values.length > 0 ? values : [''], images };
+  });
+}
+
+export default function VariantsEditor({ variants: rawVariants, onChange }: VariantsEditorProps) {
   const { t } = useTranslation();
+  const variants = normalizeVariants(rawVariants);
   const [picker, setPicker] = useState<{ variantIndex: number; valueIndex: number } | null>(null);
 
   const update = (variantIndex: number, patch: (variant: ProductVariant) => ProductVariant) => {

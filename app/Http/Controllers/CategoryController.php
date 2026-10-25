@@ -152,12 +152,12 @@ class CategoryController extends BaseController
                                ->get();
         
         // Get product count for this category
-        $productCount = \App\Models\Product::where('category_id', $category->id)
+        $productCount = \App\Models\Product::whereHas('categories', fn ($q) => $q->where('categories.id', $category->id))
                                           ->where('store_id', $currentStoreId)
                                           ->count();
         
         // Calculate total revenue from products in this category
-        $categoryProducts = \App\Models\Product::where('category_id', $category->id)
+        $categoryProducts = \App\Models\Product::whereHas('categories', fn ($q) => $q->where('categories.id', $category->id))
                                               ->where('store_id', $currentStoreId)
                                               ->pluck('id');
         
@@ -168,7 +168,7 @@ class CategoryController extends BaseController
             'total_products' => $productCount,
             'subcategories_count' => $subcategories->count(),
             'total_revenue' => $totalRevenue,
-            'active_products' => \App\Models\Product::where('category_id', $category->id)
+            'active_products' => \App\Models\Product::whereHas('categories', fn ($q) => $q->where('categories.id', $category->id))
                                                    ->where('store_id', $currentStoreId)
                                                    ->where('is_active', true)
                                                    ->count(),

@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { router, usePage } from '@inertiajs/react';
 import MediaPicker from '@/components/MediaPicker';
 import VariantsEditor, { type ProductVariant } from '@/components/products/variants-editor';
+import CategoryMultiSelect from '@/components/products/category-multi-select';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import axios from 'axios';
@@ -32,6 +33,7 @@ export default function CreateProduct() {
     cover_image: '',
     images: '',
     category_id: '',
+    category_ids: [] as string[],
     tax_id: '',
     is_active: true,
     is_downloadable: false,
@@ -52,7 +54,7 @@ export default function CreateProduct() {
       const response = await axios.post(route('categories.store'), { name: newCategoryName }, { headers: { 'Accept': 'application/json' } });
       if (response.data.success) {
         setLocalCategories([...localCategories, response.data.category]);
-        setFormData({ ...formData, category_id: String(response.data.category.id) });
+        setFormData({ ...formData, category_ids: [...formData.category_ids, String(response.data.category.id)] });
         setIsCategoryModalOpen(false);
         setNewCategoryName('');
       }
@@ -91,6 +93,7 @@ export default function CreateProduct() {
     // Convert variants and custom fields to the format expected by the backend
     const productData = {
       ...formData,
+      category_id: formData.category_ids[0] ?? '',
       variants: variants
         .filter(v => v.name.trim() !== '')
         .map(v => (v.images && Object.keys(v.images).length > 0 ? v : { name: v.name, values: v.values })),
@@ -171,27 +174,13 @@ export default function CreateProduct() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="category_id">{t('Category *')}</Label>
-                    <div className="flex gap-2">
-                      <Select 
-                        value={formData.category_id} 
-                        onValueChange={(value) => handleSelectChange('category_id', value)}
-                      >
-                        <SelectTrigger className="flex-1">
-                          <SelectValue placeholder={t('Select category')} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {localCategories?.map((category: any) => (
-                            <SelectItem key={category.id} value={String(category.id)}>
-                              {category.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <Button type="button" variant="outline" size="icon" onClick={() => setIsCategoryModalOpen(true)} title={t('Créer une catégorie')}>
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
+                    <Label htmlFor="category_id">{t('Catégories *')}</Label>
+                    <CategoryMultiSelect
+                      categories={localCategories}
+                      value={formData.category_ids}
+                      onChange={(ids) => setFormData({ ...formData, category_ids: ids })}
+                      onCreate={() => setIsCategoryModalOpen(true)}
+                    />
                   </div>
                   <div>
                     <Label htmlFor="tax_id">{t('Product Tax')}</Label>

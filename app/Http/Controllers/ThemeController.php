@@ -979,7 +979,7 @@ class ThemeController extends Controller
         }
         
         if ($request->filled('category')) {
-            $query->where('category_id', $request->category);
+            $query->whereHas('categories', fn ($q) => $q->where('categories.id', $request->category));
         }
         
         if ($request->filled('min_price')) {

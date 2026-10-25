@@ -32,10 +32,10 @@ class ProductController extends BaseController
         });
 
         // Filtered query for listing
-        $query = Product::with('category')->where('store_id', $currentStoreId);
+        $query = Product::with(['category', 'categories:id,name'])->where('store_id', $currentStoreId);
         
         if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
+            $query->whereHas('categories', fn ($q) => $q->where('categories.id', $request->category_id));
         }
         
         $perPage = min((int) $request->input('per_page', 10), 200);
@@ -121,6 +121,8 @@ class ProductController extends BaseController
             'cover_image' => 'nullable|string',
             'images' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
+            'category_ids' => 'nullable|array',
+            'category_ids.*' => 'nullable|integer|exists:categories,id',
             'tax_id' => 'nullable|exists:taxes,id',
             'is_active' => 'nullable|boolean',
             'is_downloadable' => 'nullable|boolean',
@@ -144,7 +146,8 @@ class ProductController extends BaseController
         $product->stock = $request->stock;
         $product->cover_image = $request->cover_image;
         $product->images = $request->images;
-        $product->category_id = $request->category_id;
+        $categoryIds = $this->resolveCategoryIds($request, $currentStoreId);
+        $product->category_id = $categoryIds[0] ?? null;
         $product->tax_id = $request->tax_id;
         $product->store_id = $currentStoreId;
         $product->is_active = $request->has('is_active') ? $request->is_active : true;
@@ -154,10 +157,34 @@ class ProductController extends BaseController
         $product->custom_fields = $request->custom_fields;
         $product->save();
         
+        $product->categories()->sync($categoryIds);
+
         // Dispatch ProductCreated event for webhooks
         ProductCreated::dispatch($product);
         
         return redirect()->route('products.index')->with('success', __('Product created successfully'));
+    }
+
+    /**
+     * Ordered, de-duplicated ids of the store's categories picked for a product
+     * (the first one becomes its primary category_id). Falls back to the legacy
+     * single category_id field.
+     */
+    private function resolveCategoryIds(Request $request, int $storeId): array
+    {
+        $requested = $request->input('category_ids');
+        if (!is_array($requested)) {
+            $requested = $request->category_id ? [$request->category_id] : [];
+        }
+
+        $requested = array_values(array_unique(array_filter(array_map('intval', $requested))));
+        if (empty($requested)) {
+            return [];
+        }
+
+        $valid = Category::where('store_id', $storeId)->whereIn('id', $requested)->pluck('id')->all();
+
+        return array_values(array_filter($requested, fn ($id) => in_array($id, $valid, true)));
     }
 
     /**
@@ -211,6 +238,11 @@ class ProductController extends BaseController
                             ->where('is_active', true)
                             ->get();
         
+        $product->setAttribute(
+            'category_ids',
+            $product->categories()->pluck('categories.id')->map(fn ($id) => (int) $id)->values()->all()
+        );
+
         return Inertia::render('products/edit', [
             'product' => $product,
             'categories' => $categories,
@@ -252,6 +284,8 @@ class ProductController extends BaseController
             'cover_image' => 'nullable|string',
             'images' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
+            'category_ids' => 'nullable|array',
+            'category_ids.*' => 'nullable|integer|exists:categories,id',
             'tax_id' => 'nullable|exists:taxes,id',
             'is_active' => 'nullable|boolean',
             'is_downloadable' => 'nullable|boolean',
@@ -276,7 +310,8 @@ class ProductController extends BaseController
         $product->stock = $request->stock;
         $product->cover_image = $request->cover_image;
         $product->images = $request->images;
-        $product->category_id = $request->category_id;
+        $categoryIds = $this->resolveCategoryIds($request, $currentStoreId);
+        $product->category_id = $categoryIds[0] ?? null;
         $product->tax_id = $request->tax_id;
         // Check plan limitations if trying to activate product
         $newIsActive = $request->has('is_active') ? $request->is_active : $product->is_active;
@@ -294,6 +329,8 @@ class ProductController extends BaseController
         $product->custom_fields = $request->custom_fields;
         $product->save();
         
+        $product->categories()->sync($categoryIds);
+
         // Enforce plan limitations after save
         if ($newIsActive) {
             enforcePlanLimitations($user->fresh());
@@ -324,7 +361,7 @@ class ProductController extends BaseController
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
         
-        $query = Product::with('category')->where('store_id', $currentStoreId);
+        $query = Product::with(['category', 'categories:id,name'])->where('store_id', $currentStoreId);
         
         if ($request->has('ids')) {
             $ids = explode(',', $request->ids);
@@ -604,6 +641,9 @@ class ProductController extends BaseController
 
         if ($product) {
             $product->update($fields);
+            if ($categoryId) {
+                $product->categories()->sync([$categoryId]);
+            }
         } else {
             $fields['store_id'] = $currentStoreId;
             $fields['sku'] = $sku;
@@ -802,6 +842,11 @@ class ProductController extends BaseController
             Product::where('store_id', $currentStoreId)
                 ->whereIn('id', $ids)
                 ->update(['category_id' => $category->id]);
+
+            Product::where('store_id', $currentStoreId)
+                ->whereIn('id', $ids)
+                ->get()
+                ->each(fn ($product) => $product->categories()->sync([$category->id]));
 
             return redirect()->back()->with('success', __(':count products moved to :category.', ['count' => $count, 'category' => $category->name]));
         }

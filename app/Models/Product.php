@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -34,6 +35,14 @@ class Product extends Model
             }
         });
         
+        // category_id is the product's primary category; keep it in the
+        // category_product pivot so every category listing includes the product.
+        static::saved(function ($product) {
+            if ($product->category_id && ($product->wasRecentlyCreated || $product->wasChanged('category_id'))) {
+                $product->categories()->syncWithoutDetaching([$product->category_id]);
+            }
+        });
+
         static::updated(function ($product) {
             // Enforce plan limitations after product is activated
             if ($product->is_active && $product->wasChanged('is_active')) {
@@ -69,8 +78,8 @@ class Product extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'is_downloadable' => 'boolean',
-        'price' => 'decimal:2',
-        'sale_price' => 'decimal:2',
+        'price' => 'float',
+        'sale_price' => 'float',
         'stock' => 'integer',
         'variants' => 'array',
         'custom_fields' => 'array',
@@ -135,6 +144,14 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * All categories the product belongs to (category_id is the primary one).
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'category_product')->withTimestamps();
     }
     
     /**

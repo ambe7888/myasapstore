@@ -68,21 +68,6 @@ export default function FashionOrderConfirmation({
   customPages = [],
 }: FashionOrderConfirmationProps) {
   
-  React.useEffect(() => {
-    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
-      try {
-        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
-        (window as any).fbq('track', 'Purchase', {
-          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
-          content_type: 'product',
-          value: Number(orderData.total || 0),
-          currency: currency
-        });
-      } catch (e) {
-        console.error('FB Purchase error:', e);
-      }
-    }
-  }, [orderData?.id]);
 const { props } = usePage();
   const storeSlug = props.store?.slug || store.slug || 'demo';
   const storeSettings = props.storeSettings || {};
@@ -117,6 +102,22 @@ const { props } = usePage();
   };
   
   const orderData = order || defaultOrder;
+
+  React.useEffect(() => {
+    if (orderData && typeof window !== 'undefined' && (window as any).fbq) {
+      try {
+        const currency = (window as any).page?.props?.storeCurrency?.code || 'MAD';
+        (window as any).fbq('track', 'Purchase', {
+          content_ids: orderData.items?.map((item: any) => item.product_id?.toString() || item.id?.toString()) || [],
+          content_type: 'product',
+          value: Number(orderData.total || 0),
+          currency: currency
+        });
+      } catch (e) {
+        console.error('FB Purchase error:', e);
+      }
+    }
+  }, [orderData?.id]);
   
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

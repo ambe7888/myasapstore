@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import { getImageUrl } from '@/utils/image-helper';
 import JewelryProductCard from './JewelryProductCard';
 
@@ -11,6 +12,7 @@ interface JewelryTrendingProductsSectionProps {
 }
 
 export default function JewelryTrendingProductsSection({ products = [], content, stats, storeSettings = {}, currencies = [] }: JewelryTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -26,7 +28,7 @@ export default function JewelryTrendingProductsSection({ products = [], content,
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8">
-          {products.slice(0, 4).map((product) => (
+          {products.slice(0, homeLimit).map((product) => (
             <JewelryProductCard key={product.id} product={product} storeSettings={storeSettings} currencies={currencies} />
           ))}
         </div>

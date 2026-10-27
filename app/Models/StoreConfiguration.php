@@ -68,6 +68,7 @@ class StoreConfiguration extends Model
             'hidden_product_filters' => '',
             'hidden_sort_options' => '',
             'show_variant_badge' => true,
+            'home_products_rows' => 2,
         ];
         
         // Convert string boolean values to actual booleans

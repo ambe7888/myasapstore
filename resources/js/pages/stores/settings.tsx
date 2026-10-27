@@ -440,6 +440,30 @@ export default function StoreSettings({ store, settings }: Props) {
                 />
               </div>
 
+              {/* Homepage products rows */}
+              <div className="space-y-2 p-4 border rounded-lg bg-gray-50/50">
+                <Label className="text-base font-semibold">{t("Produits affichés sur la page d'accueil")}</Label>
+                <p className="text-sm text-muted-foreground">
+                  {t("Nombre de lignes de produits dans chaque section de l'accueil (4 produits par ligne sur ordinateur).")}
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {[1, 2, 3, 4, 5, 6].map((rows) => (
+                    <button
+                      key={rows}
+                      type="button"
+                      onClick={() => updateSetting('home_products_rows', rows)}
+                      className={`px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all ${
+                        Number(formData.home_products_rows || 2) === rows
+                          ? 'border-primary bg-primary/5'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      {rows} {rows > 1 ? t('lignes') : t('ligne')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Product Listing Mode */}
               <div className="space-y-2 p-4 border rounded-lg bg-gray-50/50">
                 <Label className="text-base font-semibold">{t('Affichage de la liste des produits')}</Label>

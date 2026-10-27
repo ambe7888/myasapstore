@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import BeautyProductCard from './BeautyProductCard';
 import { usePage } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -27,10 +28,11 @@ interface BeautyFeaturedProductsSectionProps {
 }
 
 export default function BeautyFeaturedProductsSection({ products = [], content, storeSettings = {}, currencies = [] }: BeautyFeaturedProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store;
   
-  const featuredProducts = products.slice(0, 8);
+  const featuredProducts = products.slice(0, homeLimit);
 
   return (
     <section className="py-20 bg-gradient-to-br from-rose-50 to-pink-50">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import { Link, usePage } from '@inertiajs/react';
 import { BabyKidsProductCard } from '@/components/store/baby-kids';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -27,6 +28,7 @@ export default function BabyKidsTrendingProductsSection({
   storeSettings,
   currencies = []
 }: BabyKidsTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store;
   
@@ -45,7 +47,7 @@ export default function BabyKidsTrendingProductsSection({
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-          {products.length > 0 ? products.slice(0, 8).map((product) => (
+          {products.length > 0 ? products.slice(0, homeLimit).map((product) => (
             <BabyKidsProductCard
               key={product.id}
               product={product}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import { FashionProductCard } from './';
 import { usePage } from '@inertiajs/react';
 import { ArrowRight } from 'lucide-react';
@@ -22,10 +23,11 @@ interface FashionTrendingProductsSectionProps {
 }
 
 export default function FashionTrendingProductsSection({ products = [], content, storeSettings = {}, currencies = [] }: FashionTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store;
 
-  const items = products.slice(0, 8);
+  const items = products.slice(0, homeLimit);
 
   return (
     <section className="py-14 lg:py-20 bg-white">

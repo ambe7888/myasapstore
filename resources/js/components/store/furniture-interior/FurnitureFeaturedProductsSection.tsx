@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import { Link, usePage } from '@inertiajs/react';
 import FurnitureProductCard from './FurnitureProductCard';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -16,6 +17,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
   storeSettings, 
   currencies 
 }) => {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store || {};
   
@@ -39,7 +41,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
         {/* Products Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-            {products.slice(0, 8).map((product) => (
+            {products.slice(0, homeLimit).map((product) => (
               <FurnitureProductCard
                 key={product.id}
                 product={product}

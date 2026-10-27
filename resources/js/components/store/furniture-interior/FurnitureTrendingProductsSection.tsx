@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import FurnitureProductCard from './FurnitureProductCard';
 
 interface FurnitureTrendingProductsSectionProps {
@@ -18,6 +19,7 @@ function FurnitureTrendingProductsSection({
   currencies,
   designProcess
 }: FurnitureTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
@@ -38,7 +40,7 @@ function FurnitureTrendingProductsSection({
         {/* Products Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-            {products.slice(0, 8).map((product) => (
+            {products.slice(0, homeLimit).map((product) => (
               <FurnitureProductCard
                 key={product.id}
                 product={product}

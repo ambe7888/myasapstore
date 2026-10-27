@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import { usePage } from '@inertiajs/react';
 import WatchesProductCard from './WatchesProductCard';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -31,6 +32,7 @@ export default function WatchesFeaturedProductsSection({
   storeSettings = {}, 
   currencies = [] 
 }: WatchesFeaturedProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   if (!products || products.length === 0) {
     return null;
   }
@@ -53,7 +55,7 @@ export default function WatchesFeaturedProductsSection({
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-          {products.slice(0, 8).map((product) => (
+          {products.slice(0, homeLimit).map((product) => (
             <WatchesProductCard
               key={product.id}
               product={product}

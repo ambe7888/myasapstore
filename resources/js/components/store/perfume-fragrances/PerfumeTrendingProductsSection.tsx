@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import PerfumeProductCard from './PerfumeProductCard';
 import { usePage } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -20,6 +21,7 @@ export default function PerfumeTrendingProductsSection({
   stats,
   designProcess
 }: PerfumeTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store;
   
@@ -82,7 +84,7 @@ export default function PerfumeTrendingProductsSection({
         {/* Products Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8 mb-16">
-            {products.slice(0, 8).map((product) => (
+            {products.slice(0, homeLimit).map((product) => (
               <PerfumeProductCard
                 key={product.id}
                 product={product}

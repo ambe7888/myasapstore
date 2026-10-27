@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import ElectronicsProductCard from './ElectronicsProductCard';
 import { usePage } from '@inertiajs/react';
 import { generateStoreUrl } from '@/utils/store-url-helper';
@@ -24,6 +25,7 @@ interface ElectronicsFeaturedProductsSectionProps {
 }
 
 export default function ElectronicsFeaturedProductsSection({ products, content, storeSettings = {}, currencies = [] }: ElectronicsFeaturedProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   const { props } = usePage();
   const store = props.store;
   
@@ -50,7 +52,7 @@ export default function ElectronicsFeaturedProductsSection({ products, content, 
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-          {products.slice(0, 8).map((product) => (
+          {products.slice(0, homeLimit).map((product) => (
             <ElectronicsProductCard
               key={product.id}
               product={product}

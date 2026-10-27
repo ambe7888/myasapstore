@@ -68,6 +68,7 @@ class ThemeController extends Controller
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
                 'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
                 'show_variant_badge' => !isset($configuration['show_variant_badge']) || in_array($configuration['show_variant_badge'], [true, 'true', 1, '1'], true),
+                'home_products_rows' => max(1, min(6, (int) ($configuration['home_products_rows'] ?? 2))),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -134,6 +135,7 @@ class ThemeController extends Controller
                 'hidden_product_filters' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_product_filters'] ?? '')), ['search', 'categories', 'price', 'brands', 'rating', 'availability']))),
                 'hidden_sort_options' => implode(',', array_values(array_intersect(explode(',', (string) ($configuration['hidden_sort_options'] ?? '')), ['popularity', 'price_low_high', 'price_high_low', 'rating']))),
                 'show_variant_badge' => !isset($configuration['show_variant_badge']) || in_array($configuration['show_variant_badge'], [true, 'true', 1, '1'], true),
+                'home_products_rows' => max(1, min(6, (int) ($configuration['home_products_rows'] ?? 2))),
                 'pwa' => [
                     'enabled' => $store->enable_pwa && ($store->user->plan && $store->user->plan->pwa_business === 'on'),
                     'name' => $store->pwa_name ?: $store->name,
@@ -255,7 +257,7 @@ class ThemeController extends Controller
             ->with('category')
             ->orderBy('created_at', 'desc')
             ->orderBy('id', 'desc')
-            ->take(4)
+            ->take(max(1, min(6, (int) ($store['home_products_rows'] ?? 2))) * 4)
             ->get()
             ->map(function ($product) {
                 return [
@@ -280,7 +282,7 @@ class ThemeController extends Controller
             ->with('category')
             ->orderBy('created_at', 'desc')
             ->orderBy('id', 'desc')
-            ->take(12)
+            ->take(max(12, max(1, min(6, (int) ($store['home_products_rows'] ?? 2))) * 4))
             ->get()
             ->map(function ($product) {
                 return [

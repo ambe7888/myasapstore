@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHomeProductsLimit } from '@/hooks/use-home-products-limit';
 import ElectronicsProductCard from './ElectronicsProductCard';
 
 interface Product {
@@ -22,6 +23,7 @@ interface ElectronicsTrendingProductsSectionProps {
 }
 
 export default function ElectronicsTrendingProductsSection({ products, content, storeSettings = {}, currencies = [] }: ElectronicsTrendingProductsSectionProps) {
+  const homeLimit = useHomeProductsLimit();
   if (!products || products.length === 0) return null;
 
   return (
@@ -42,7 +44,7 @@ export default function ElectronicsTrendingProductsSection({ products, content, 
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8">
-          {products.slice(0, 8).map((product) => (
+          {products.slice(0, homeLimit).map((product) => (
             <ElectronicsProductCard
               key={product.id}
               product={product}

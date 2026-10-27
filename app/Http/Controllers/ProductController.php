@@ -79,7 +79,8 @@ class ProductController extends BaseController
         
         return Inertia::render('products/create', [
             'categories' => $categories,
-            'taxes' => $taxes
+            'taxes' => $taxes,
+            'existingVariants' => $this->existingVariants($currentStoreId),
         ]);
     }
 
@@ -166,6 +167,46 @@ class ProductController extends BaseController
     }
 
     /**
+     * Distinct variants (name + values + images) already used by the store's
+     * other products, most used first, so sellers can reuse them in one click.
+     */
+    private function existingVariants(int $storeId, ?int $exceptProductId = null): array
+    {
+        $groups = [];
+
+        Product::where('store_id', $storeId)
+            ->whereNotNull('variants')
+            ->when($exceptProductId, fn ($query) => $query->where('id', '!=', $exceptProductId))
+            ->orderByDesc('id')
+            ->limit(600)
+            ->get(['id', 'variants'])
+            ->each(function ($product) use (&$groups) {
+                foreach ((array) $product->variants as $variant) {
+                    $name = trim((string) ($variant['name'] ?? ''));
+                    $values = array_values(array_filter(array_map(fn ($value) => trim((string) $value), (array) ($variant['values'] ?? [])), fn ($value) => $value !== ''));
+                    if ($name === '' || empty($values)) {
+                        continue;
+                    }
+
+                    $key = mb_strtolower($name) . '|' . mb_strtolower(implode(',', $values));
+                    if (!isset($groups[$key])) {
+                        $groups[$key] = ['name' => $name, 'values' => $values, 'images' => [], 'count' => 0];
+                    }
+                    $groups[$key]['count']++;
+
+                    $images = $variant['images'] ?? [];
+                    if (is_array($images) && empty($groups[$key]['images'])) {
+                        $groups[$key]['images'] = $images;
+                    }
+                }
+            });
+
+        usort($groups, fn ($a, $b) => $b['count'] <=> $a['count']);
+
+        return array_slice(array_values($groups), 0, 40);
+    }
+
+    /**
      * Ordered, de-duplicated ids of the store's categories picked for a product
      * (the first one becomes its primary category_id). Falls back to the legacy
      * single category_id field.
@@ -246,7 +287,8 @@ class ProductController extends BaseController
         return Inertia::render('products/edit', [
             'product' => $product,
             'categories' => $categories,
-            'taxes' => $taxes
+            'taxes' => $taxes,
+            'existingVariants' => $this->existingVariants($currentStoreId, $product->id),
         ]);
     }
 

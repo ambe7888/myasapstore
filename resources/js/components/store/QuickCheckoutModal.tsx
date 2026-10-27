@@ -4,7 +4,7 @@ import { X, ShoppingBag, CheckCircle2, Truck, ShieldCheck, Loader2 } from 'lucid
 import { useCart } from '@/contexts/CartContext';
 import { generateStoreUrl, generateApiUrl } from '@/utils/store-url-helper';
 import { useCurrencyFormatter, useStoreCurrency } from '@/hooks/use-store-currency';
-import { getProductCoverImage } from '@/utils/image-helper';
+import { getProductCoverImage, getImageUrl } from '@/utils/image-helper';
 import { isCustomInputFields } from '@/utils/helpers';
 import { resolveThemeColor } from '@/utils/theme-colors';
 import axios from 'axios';
@@ -48,6 +48,11 @@ export default function QuickCheckoutModal({
   }, [product]);
 
   const hasVariants = productVariants && productVariants.length > 0;
+
+  const variantImageFor = (variant: any, value: string): string | null => {
+    const images = variant?.images && !Array.isArray(variant.images) ? variant.images : null;
+    return images?.[value] || null;
+  };
 
   // Parse custom fields safely
   const customFields = React.useMemo(() => {
@@ -166,6 +171,9 @@ export default function QuickCheckoutModal({
         });
     }
   }, [isOpen, store?.id]);
+
+  const selectedVariantImage: string | null =
+    (productVariants as any[]).map((variant: any) => variantImageFor(variant, selectedVariants[variant.name])).find(Boolean) || null;
 
   if (!isOpen || !product) return null;
 
@@ -305,7 +313,7 @@ export default function QuickCheckoutModal({
           {/* Product Summary Card */}
           <div className="flex gap-4 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 items-center">
             <img
-              src={getProductCoverImage(product, store)}
+              src={selectedVariantImage ? getImageUrl(selectedVariantImage) : getProductCoverImage(product, store)}
               alt={product.name}
               className="w-16 h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-700"
               onError={(e) => {
@@ -354,26 +362,59 @@ export default function QuickCheckoutModal({
               <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3 mb-2">
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Sélectionner les options :</span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {productVariants.map((variant: any) => (
-                    <div key={variant.name} className="flex flex-col gap-1">
-                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                        {variant.name}
-                      </label>
-                      <select
-                        value={selectedVariants[variant.name] || ''}
-                        onChange={(e) => setSelectedVariants(prev => ({ ...prev, [variant.name]: e.target.value }))}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
-                        style={{ borderRadius: store?.button_radius || '0.75rem' }}
-                      >
-                        {store?.require_variant_selection !== false && (
-                          <option value="">{`-- Choisir ${variant.name} --`}</option>
+                  {productVariants.map((variant: any) => {
+                    const hasImages = variant.values.some((val: string) => variantImageFor(variant, val));
+                    return (
+                      <div key={variant.name} className={`flex flex-col gap-1 ${hasImages ? 'sm:col-span-2' : ''}`}>
+                        <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                          {variant.name}
+                        </label>
+                        {hasImages ? (
+                          <div className="flex flex-wrap gap-2">
+                            {variant.values.map((val: string) => {
+                              const image = variantImageFor(variant, val);
+                              const active = selectedVariants[variant.name] === val;
+                              return (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setSelectedVariants(prev => ({ ...prev, [variant.name]: val }))}
+                                  className="flex flex-col items-center gap-1 border-2 bg-white p-1 text-[11px] font-medium text-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                                  style={{
+                                    borderRadius: store?.button_radius || '0.75rem',
+                                    borderColor: active ? (resolveThemeColor(store?.primary_color) || '#0f172a') : '#e2e8f0',
+                                  }}
+                                >
+                                  {image ? (
+                                    <img src={getImageUrl(image)} alt={val} className="h-12 w-12 rounded-lg object-cover" />
+                                  ) : (
+                                    <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-400 dark:bg-slate-800">
+                                      {String(val).slice(0, 3)}
+                                    </span>
+                                  )}
+                                  <span className="max-w-[4.5rem] truncate">{val}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <select
+                            value={selectedVariants[variant.name] || ''}
+                            onChange={(e) => setSelectedVariants(prev => ({ ...prev, [variant.name]: e.target.value }))}
+                            className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none"
+                            style={{ borderRadius: store?.button_radius || '0.75rem' }}
+                          >
+                            {store?.require_variant_selection !== false && (
+                              <option value="">{`-- Choisir ${variant.name} --`}</option>
+                            )}
+                            {variant.values.map((val: string) => (
+                              <option key={val} value={val}>{val}</option>
+                            ))}
+                          </select>
                         )}
-                        {variant.values.map((val: string) => (
-                          <option key={val} value={val}>{val}</option>
-                        ))}
-                      </select>
-                    </div>
-                  ))}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}

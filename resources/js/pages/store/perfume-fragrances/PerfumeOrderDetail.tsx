@@ -147,7 +147,7 @@ export default function PerfumeOrderDetail({
                     <div key={item.id} className="flex items-center space-x-4 p-4 bg-stone-50 rounded-xl border border-purple-100">
                       <div className="w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg border border-purple-200">
                         <img 
-                          className="w-full h-full object-cover" 
+                          className="w-full h-full object-contain" 
                           src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
                           alt={item.name}
                           onError={(e) => {

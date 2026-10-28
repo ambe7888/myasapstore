@@ -198,7 +198,7 @@ function PerfumeProductDetailContent({
                   <img
                     src={getImageUrl(productImages[selectedImage]) || `https://placehold.co/600x600/fafaf9/7c3aed?text=${encodeURIComponent(product.name)}`}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 

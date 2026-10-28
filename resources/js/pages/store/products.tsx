@@ -565,7 +565,7 @@ export default function ProductListing({
                             <img 
                               src={getImageUrl(product.cover_image) || `https://placehold.co/300x300?text=${encodeURIComponent(product.name)}`}
                               alt={product.name}
-                              className="w-full h-full object-cover hover:scale-105 transition-transform"
+                              className="w-full h-full object-contain hover:scale-105 transition-transform"
                             />
                           </Link>
                           <div className="flex-1 p-6">

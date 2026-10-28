@@ -773,7 +773,7 @@ export default function BeautyCheckout({
                               <div key={item.id} className="flex items-center space-x-4 p-4 bg-white/60 rounded-2xl">
                                 <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
                                   <img 
-                                    className="h-full w-full object-cover" 
+                                    className="h-full w-full object-contain" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=64&h=64&fit=crop&crop=center`}
                                     alt={item.name}
                                     onError={(e) => {
@@ -1105,7 +1105,7 @@ export default function BeautyCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=48&h=48&fit=crop&crop=center`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=48&h=48&fit=crop&crop=center`;
                               }}

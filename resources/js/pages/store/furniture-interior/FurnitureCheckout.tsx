@@ -856,7 +856,7 @@ function FurnitureCheckout({
                               <div key={item.id} className="flex items-center space-x-4 p-4 bg-amber-50 rounded-2xl border border-amber-200">
                                 <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 border-amber-200">
                                   <img 
-                                    className="h-full w-full object-cover" 
+                                    className="h-full w-full object-contain" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `/storage/products/furniture-${item.id || 'default'}.jpg`}
                                     onError={(e) => {
                                       (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5dc/8b7355?text=${encodeURIComponent(item.name)}`;
@@ -1163,7 +1163,7 @@ function FurnitureCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600/f5f5dc/8b7355?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5dc/8b7355?text=${encodeURIComponent(item.name)}`;
                               }}

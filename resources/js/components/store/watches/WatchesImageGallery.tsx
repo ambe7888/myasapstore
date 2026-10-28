@@ -15,7 +15,7 @@ export default function WatchesImageGallery({ images, selectedImage, onImageSele
         <img
           src={getImageUrl(images[selectedImage] || images[0])}
           alt="Watch"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://placehold.co/600x600/f8fafc/64748b?text=Watch+Image';
           }}

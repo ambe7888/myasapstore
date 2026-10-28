@@ -111,7 +111,7 @@ function WatchesCartContent({
                             <img
                               src={getImageUrl(item.cover_image) || '/placeholder.jpg'}
                               alt={item.name}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/200x250/f8fafc/64748b?text=${encodeURIComponent(item.name)}`;
                               }}

@@ -238,7 +238,7 @@ function FurnitureProductDetailContent({
                   <img
                     src={getImageUrl(productImages[selectedImage]) || `https://placehold.co/600x600/fef3c7/d97706?text=${encodeURIComponent(product.name)}`}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                   
                   <div className="absolute inset-0 border-8 border-amber-800/10 rounded-3xl m-4 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>

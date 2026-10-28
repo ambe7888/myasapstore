@@ -749,7 +749,7 @@ function ElectronicsCheckoutContent({
                             <img
                               src={getImageUrl(item.cover_image) || 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=80&h=80&fit=crop&crop=center'}
                               alt={item.name}
-                              className="w-16 h-16 object-cover rounded-lg"
+                              className="w-16 h-16 object-contain rounded-lg"
                             />
                             <div className="flex-1">
                               <h3 className="font-semibold text-gray-900">{item.name}</h3>

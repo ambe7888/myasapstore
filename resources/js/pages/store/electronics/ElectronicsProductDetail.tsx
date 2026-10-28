@@ -221,7 +221,7 @@ function ElectronicsProductDetail({
                     <img
                       src={getImageUrl(productImages[selectedImage])}
                       alt={product.name}
-                      className="w-full h-[500px] object-cover"
+                      className="w-full h-[500px] object-contain"
                     />
                     {hasDiscount && (
                       <div className="absolute top-4 left-4">

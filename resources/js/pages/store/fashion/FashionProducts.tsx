@@ -553,7 +553,7 @@ export default function FashionProducts({
                             <img 
                               src={getImageUrl(product.cover_image) || `https://placehold.co/300x300?text=${encodeURIComponent(product.name)}`}
                               alt={product.name}
-                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                              className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700"
                             />
                             {product.sale_price && (
                               <div className="absolute top-4 left-4 bg-black text-white text-xs font-thin px-3 py-1 uppercase tracking-widest">

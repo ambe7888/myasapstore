@@ -100,7 +100,7 @@ function FurnitureWishlistContent({
                               (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5dc/8b7355?text=${encodeURIComponent(item.name)}`;
                             }}
                             alt={item.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
                           />
                           <div className="absolute inset-0 border-4 border-amber-800/15 rounded-lg m-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                           {item.sale_price && (

@@ -867,7 +867,7 @@ function PerfumeCheckout({
                               <div key={item.id} className="flex items-center space-x-4 p-4 bg-stone-50 rounded-xl border border-purple-100">
                                 <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-purple-200">
                                   <img 
-                                    className="h-full w-full object-cover" 
+                                    className="h-full w-full object-contain" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/400x400/f5f5f5/7c3aed?text=${encodeURIComponent(item.name)}`}
                                     alt={item.name}
                                   />
@@ -1186,7 +1186,7 @@ function PerfumeCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/400x400/f5f5f5/7c3aed?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                             />
                           </div>
                           <div className="flex-1 min-w-0">

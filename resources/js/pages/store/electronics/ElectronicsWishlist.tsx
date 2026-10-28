@@ -130,7 +130,7 @@ function ElectronicsWishlistContent({
                             <img
                               src={getImageUrl(product.cover_image) || 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400&h=300&fit=crop&crop=center'}
                               alt={product.name}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400&h=300&fit=crop&crop=center';
                               }}

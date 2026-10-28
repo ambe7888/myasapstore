@@ -272,7 +272,7 @@ const { props } = usePage();
                               <div className="relative">
                                 <div className="h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border-2 border-yellow-300/50 shadow-md group-hover:shadow-lg transition-shadow">
                                   <img 
-                                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                                    className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600/f5f5dc/d4af37?text=${encodeURIComponent(item.name)}`}
                                     alt={item.name}
                                     onError={(e) => {

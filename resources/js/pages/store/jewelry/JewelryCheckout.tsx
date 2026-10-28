@@ -839,7 +839,7 @@ function JewelryCheckout({
                                 <div key={item.id} className="flex items-center space-x-6 p-6 bg-white/70 rounded-xl border border-yellow-200">
                                   <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-yellow-300">
                                     <img 
-                                      className="h-full w-full object-cover" 
+                                      className="h-full w-full object-contain" 
                                       src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600/f5f5dc/d4af37?text=${encodeURIComponent(item.name)}`}
                                       alt={item.name}
                                       onError={(e) => {
@@ -1180,7 +1180,7 @@ function JewelryCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600/f5f5dc/d4af37?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5dc/d4af37?text=${encodeURIComponent(item.name)}`;
                               }}

@@ -168,7 +168,7 @@ export default function BeautyOrderDetail({
                         <div key={item.id} className="flex items-center space-x-6 p-6 bg-rose-50 rounded-2xl">
                           <div className="w-20 h-20 bg-white rounded-xl overflow-hidden flex-shrink-0">
                             <img 
-                              className="w-full h-full object-cover" 
+                              className="w-full h-full object-contain" 
                               src={item.image ? getImageUrl(item.image) : `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=80&h=80&fit=crop&crop=center`}
                               alt={item.name}
                               onError={(e) => {

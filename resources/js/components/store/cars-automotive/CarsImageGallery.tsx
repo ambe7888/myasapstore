@@ -23,7 +23,7 @@ export default function CarsImageGallery({ images, selectedImage, onImageSelect 
         <img
           src={images[selectedImage]}
           alt={`Product image ${selectedImage + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
         
         {/* Navigation Arrows */}
@@ -68,7 +68,7 @@ export default function CarsImageGallery({ images, selectedImage, onImageSelect 
               <img
                 src={image}
                 alt={`Product thumbnail ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </button>
           ))}

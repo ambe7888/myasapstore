@@ -191,7 +191,7 @@ function JewelryProductDetailContent({
                     <img
                       src={getImageUrl(productImages[selectedImage])}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5f5/d4af37?text=${encodeURIComponent(product.name)}`;
                       }}

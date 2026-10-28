@@ -346,7 +346,7 @@ export default function OrderConfirmation({
                                   <div className="flex items-center">
                                     <div className="h-10 w-10 flex-shrink-0">
                                       <img 
-                                        className="h-10 w-10 rounded-md object-cover" 
+                                        className="h-10 w-10 rounded-md object-contain" 
                                         src={item.image ? getImageUrl(item.image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                                         alt={item.name}
                                         onError={(e) => {

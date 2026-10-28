@@ -46,7 +46,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
           <img
             src={getProductCoverImage(product, store)}
             alt={product.name}
-            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} group-hover:scale-110 transition-transform duration-700`}
+            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-contain'} group-hover:scale-110 transition-transform duration-700`}
             onError={(e) => {
               setIsFallback(true);
               const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;

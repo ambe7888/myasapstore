@@ -102,7 +102,7 @@ function BeautyCartContent({
                           <img
                             src={getImageUrl(item.cover_image)}
                             alt={item.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&h=250&fit=crop&crop=center`;
                             }}

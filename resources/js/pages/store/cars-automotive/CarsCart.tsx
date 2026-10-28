@@ -120,7 +120,7 @@ function CarsCartContent({
                           <img
                             src={getImageUrl(item.cover_image)}
                             alt={item.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(item.name)}`;
                             }}

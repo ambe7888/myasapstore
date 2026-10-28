@@ -306,7 +306,7 @@ const { props } = usePage();
                                   <div className="flex items-center">
                                     <div className="h-16 w-16 flex-shrink-0 rounded border border-slate-200">
                                       <img 
-                                        className="h-16 w-16 object-cover rounded" 
+                                        className="h-16 w-16 object-contain rounded" 
                                         src={item.image ? getImageUrl(item.image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                                         alt={item.name}
                                         onError={(e) => {

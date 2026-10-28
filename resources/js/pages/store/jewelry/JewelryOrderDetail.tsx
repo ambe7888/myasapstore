@@ -172,7 +172,7 @@ export default function JewelryOrderDetail({
                               <div className="flex items-center">
                                 <div className="h-12 w-12 flex-shrink-0">
                                   <img 
-                                    className="h-12 w-12 rounded-md object-cover" 
+                                    className="h-12 w-12 rounded-md object-contain" 
                                     src={item.image ? getImageUrl(item.image) : `https://placehold.co/600x600/f5f5dc/d4af37?text=${encodeURIComponent(item.name)}`}
                                     alt={item.name}
                                     onError={(e) => {

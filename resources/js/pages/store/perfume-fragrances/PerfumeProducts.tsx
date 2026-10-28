@@ -550,7 +550,7 @@ export default function PerfumeProducts({
                               <img 
                                 src={getImageUrl(product.cover_image) || `https://placehold.co/300x400/fafaf9/7c3aed?text=${encodeURIComponent(product.name)}`}
                                 alt={product.name}
-                                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300"
+                                className="w-full h-full object-contain object-center hover:scale-105 transition-transform duration-300"
                               />
                               {product.sale_price && (
                                 <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-full shadow-sm">

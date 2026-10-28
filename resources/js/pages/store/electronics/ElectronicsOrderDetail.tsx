@@ -150,7 +150,7 @@ export default function ElectronicsOrderDetail({
                       <div key={item.id} className="flex items-center space-x-4 p-4 border border-gray-200">
                         <div className="w-16 h-16 bg-gray-100 overflow-hidden">
                           <img 
-                            className="w-full h-full object-cover" 
+                            className="w-full h-full object-contain" 
                             src={item.image ? getImageUrl(item.image) : `https://placehold.co/600x600/1e293b/60a5fa?text=${encodeURIComponent(item.name)}`}
                             alt={item.name}
                             onError={(e) => {

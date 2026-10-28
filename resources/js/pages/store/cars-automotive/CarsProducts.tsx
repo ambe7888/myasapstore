@@ -555,7 +555,7 @@ export default function CarsProducts({
                               <img 
                                 src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(product.name)}`}
                                 alt={product.name}
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                               />
                               {product.sale_price && (
                                 <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 tracking-wider uppercase">

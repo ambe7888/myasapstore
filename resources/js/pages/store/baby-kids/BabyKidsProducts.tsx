@@ -567,7 +567,7 @@ export default function BabyKidsProducts({
                                 <img 
                                   src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/fef7f7/ec4899?text=${encodeURIComponent(product.name)}`}
                                   alt={product.name}
-                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                                 />
                                 {product.sale_price && (
                                   <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">

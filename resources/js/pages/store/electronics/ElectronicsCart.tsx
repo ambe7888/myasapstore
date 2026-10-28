@@ -171,7 +171,7 @@ function ElectronicsCartContent({
                                 <img
                                   src={getImageUrl(product.cover_image) || 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=80&h=80&fit=crop&crop=center'}
                                   alt={product.name}
-                                  className="w-full h-full object-cover rounded-lg"
+                                  className="w-full h-full object-contain rounded-lg"
                                   onError={(e) => {
                                     (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=80&h=80&fit=crop&crop=center';
                                   }}

@@ -348,7 +348,7 @@ function CartContent({
                                     <img
                                       src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                                       alt={item.name}
-                                      className="h-full w-full object-cover object-center"
+                                      className="h-full w-full object-contain object-center"
                                       onError={(e) => {
                                         (e.target as HTMLImageElement).src = `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`;
                                       }}

@@ -237,7 +237,7 @@ export default function CarsOrderDetail({
                                 <div className="flex items-center space-x-4">
                                   <div className="h-20 w-20 flex-shrink-0 overflow-hidden border-2 border-gray-300">
                                     <img 
-                                      className="h-full w-full object-cover" 
+                                      className="h-full w-full object-contain" 
                                       src={item.image ? getImageUrl(item.image) : `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(item.name)}`}
                                       alt={item.name}
                                     />

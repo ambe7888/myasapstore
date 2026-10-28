@@ -54,12 +54,12 @@ export default function FashionProductCard({ product }: FashionProductCardProps)
 
   return (
     <div className="group flex flex-col">
-      <Link href={productUrl} className="relative block aspect-[3/4] overflow-hidden rounded-2xl bg-slate-100">
+      <Link href={productUrl} className="relative block aspect-[3/4] overflow-hidden rounded-2xl bg-white ring-1 ring-slate-100">
         <img
           src={getProductCoverImage(product, store)}
           alt={product.name}
           loading="lazy"
-          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${isFallback ? 'object-contain p-8' : 'object-cover'}`}
+          className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${isFallback ? 'object-contain p-8' : 'object-contain'}`}
           onError={(e) => {
             setIsFallback(true);
             const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;

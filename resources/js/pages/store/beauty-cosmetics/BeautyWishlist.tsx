@@ -98,7 +98,7 @@ function BeautyWishlistContent({
                     <img
                       src={getImageUrl(item.cover_image)}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=600&fit=crop&crop=center`;
                       }}

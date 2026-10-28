@@ -296,7 +296,7 @@ const { props } = usePage();
                                   <div className="flex items-center">
                                     <div className="h-12 w-12 flex-shrink-0">
                                       <img 
-                                        className="h-12 w-12 object-cover" 
+                                        className="h-12 w-12 object-contain" 
                                         src={item.image ? getImageUrl(item.image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                                         alt={item.name}
                                         onError={(e) => {

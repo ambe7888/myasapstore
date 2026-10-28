@@ -295,7 +295,7 @@ const { props } = usePage();
                         <div key={item.id} className="flex items-center space-x-6 p-6 bg-stone-50 rounded-xl border border-purple-100">
                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl border border-purple-200">
                             <img 
-                              className="h-full w-full object-cover" 
+                              className="h-full w-full object-contain" 
                               src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
                               alt={item.name}
                               onError={(e) => {

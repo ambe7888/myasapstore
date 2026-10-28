@@ -833,7 +833,7 @@ export default function FashionCheckout({
                               <div key={item.id} className="flex items-center space-x-4 py-4 border-b border-gray-100">
                                 <div className="h-16 w-16 flex-shrink-0 overflow-hidden border border-gray-200">
                                   <img 
-                                    className="h-full w-full object-cover" 
+                                    className="h-full w-full object-contain" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                                     alt={item.name}
                                     onError={(e) => {
@@ -1286,7 +1286,7 @@ export default function FashionCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover object-center"
+                              className="h-full w-full object-contain object-center"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/600x600?text=${encodeURIComponent(item.name)}`;
                               }}

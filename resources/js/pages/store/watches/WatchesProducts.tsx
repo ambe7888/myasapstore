@@ -557,7 +557,7 @@ export default function WatchesProducts({
                             <img 
                               src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/f8fafc/64748b?text=${encodeURIComponent(product.name)}`}
                               alt={product.name}
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
                             />
                             {product.sale_price && (
                               <div className="absolute top-3 left-3 bg-amber-500 text-slate-900 text-xs font-medium px-3 py-1 uppercase tracking-wider">

@@ -149,7 +149,7 @@ function CarsWishlistInner() {
                         <img
                           src={getImageUrl(item.cover_image)}
                           alt={item.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = `https://placehold.co/600x400/000000/ffffff?text=${encodeURIComponent(item.name)}`;
                           }}

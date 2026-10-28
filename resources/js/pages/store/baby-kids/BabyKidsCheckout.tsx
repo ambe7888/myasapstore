@@ -727,7 +727,7 @@ export default function BabyKidsCheckout({
                                     <img
                                       src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name)}`}
                                       alt={item.name}
-                                      className="h-full w-full object-cover"
+                                      className="h-full w-full object-contain"
                                     />
                                   </div>
                                   <div className="flex-1">
@@ -1046,7 +1046,7 @@ export default function BabyKidsCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                             />
                           </div>
                           <div className="flex-1 min-w-0">

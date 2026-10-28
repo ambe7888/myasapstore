@@ -556,7 +556,7 @@ export default function JewelryProducts({
                             <img 
                               src={getImageUrl(product.cover_image) || `https://placehold.co/400x400/f5f5f5/d4af37?text=${encodeURIComponent(product.name)}`}
                               alt={product.name}
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
                             />
                             {product.sale_price && (
                               <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-medium px-3 py-1 uppercase">

@@ -554,7 +554,7 @@ export default function FurnitureProducts({
                               <img 
                                 src={getImageUrl(product.cover_image) || `https://placehold.co/400x300/f5f5dc/8b7355?text=${encodeURIComponent(product.name)}`}
                                 alt={product.name}
-                                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                                className="w-full h-full object-contain object-center group-hover:scale-110 transition-transform duration-700"
                               />
                               <div className="absolute inset-0 border-4 border-amber-800/20 rounded-lg m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               {product.sale_price && (

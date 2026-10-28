@@ -878,7 +878,7 @@ function CarsCheckout({
                               <div key={item.id} className="flex items-center space-x-4 p-4 bg-gray-50 border-2 border-gray-200">
                                 <div className="h-20 w-20 flex-shrink-0 overflow-hidden border-2 border-gray-300">
                                   <img 
-                                    className="h-full w-full object-cover" 
+                                    className="h-full w-full object-contain" 
                                     src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(item.name)}`}
                                     alt={item.name}
                                   />
@@ -1200,7 +1200,7 @@ function CarsCheckout({
                             <img
                               src={item.cover_image ? getImageUrl(item.cover_image) : `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                             />
                           </div>
                           <div className="flex-1 min-w-0">

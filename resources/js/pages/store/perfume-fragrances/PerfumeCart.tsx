@@ -123,7 +123,7 @@ function PerfumeCartContent({
                             <img
                               src={getImageUrl(item.cover_image || item.image) || `https://placehold.co/96x96/fafaf9/7c3aed?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/96x96/fafaf9/7c3aed?text=${encodeURIComponent(item.name)}`;
                               }}

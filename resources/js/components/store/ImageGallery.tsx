@@ -24,7 +24,7 @@ export default function ImageGallery({ images, selectedIndex }: ImageGalleryProp
         <img 
           src={images[activeIndex]} 
           alt={`Product image ${activeIndex + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://placehold.co/800x800?text=Image+Not+Found";
           }}

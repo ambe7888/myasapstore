@@ -232,7 +232,7 @@ function BeautyProductDetailContent({
                     <img
                       src={getImageUrl(productImages[selectedImage])}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop&crop=center`;
                       }}

@@ -231,7 +231,7 @@ function BabyKidsProductDetailContent({
                     <img
                       src={images[selectedImage] ? getImageUrl(images[selectedImage]) : `https://placehold.co/600x600/fef7f7/ec4899?text=${encodeURIComponent(product.name)}`}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://placehold.co/600x600/fef7f7/ec4899?text=${encodeURIComponent(product.name)}`;
                       }}

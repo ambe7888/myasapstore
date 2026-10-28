@@ -329,7 +329,7 @@ function CarsProductDetailInner({
                     <img
                       src={getImageUrl(productImages[selectedImage])}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = `https://placehold.co/600x600/f5f5f5/666666?text=${encodeURIComponent(product.name)}`;
                       }}

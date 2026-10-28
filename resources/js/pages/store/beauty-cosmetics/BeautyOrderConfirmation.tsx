@@ -283,7 +283,7 @@ const { props } = usePage();
                           <div key={item.id} className="flex items-center space-x-4 p-4 bg-rose-50 rounded-2xl">
                             <div className="h-16 w-16 flex-shrink-0 rounded-xl overflow-hidden">
                               <img 
-                                className="h-full w-full object-cover" 
+                                className="h-full w-full object-contain" 
                                 src={item.image ? getImageUrl(item.image) : `https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=64&h=64&fit=crop&crop=center`}
                                 alt={item.name}
                                 onError={(e) => {

@@ -32,7 +32,7 @@ export default function FashionImageGallery({ images, selectedImage = 0, onImage
         <img 
           src={images[activeIndex]} 
           alt={`Product image ${activeIndex + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://placehold.co/600x800/f5f5f5/666666?text=Image+Not+Found";
           }}

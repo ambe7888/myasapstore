@@ -99,7 +99,7 @@ function FashionCartContent({
                           <img
                             src={getImageUrl(item.cover_image) || '/placeholder.jpg'}
                             alt={item.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = `https://placehold.co/200x250/f5f5f5/666666?text=${encodeURIComponent(item.name)}`;
                             }}

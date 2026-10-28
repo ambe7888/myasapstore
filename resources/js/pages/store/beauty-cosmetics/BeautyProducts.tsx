@@ -565,7 +565,7 @@ export default function BeautyProducts({
                             <img 
                               src={getImageUrl(product.cover_image) || `https://placehold.co/300x300/fdf2f8/ec4899?text=${encodeURIComponent(product.name)}`}
                               alt={product.name}
-                              className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-500"
+                              className="w-full h-full object-contain object-center hover:scale-110 transition-transform duration-500"
                             />
                             {product.sale_price && (
                               <div className="absolute top-3 left-3 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">

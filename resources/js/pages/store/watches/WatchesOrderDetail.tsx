@@ -168,7 +168,7 @@ export default function WatchesOrderDetail({
                             <div className="flex items-center">
                               <div className="h-16 w-16 flex-shrink-0">
                                 <img 
-                                  className="h-16 w-16 object-cover border border-slate-200" 
+                                  className="h-16 w-16 object-contain border border-slate-200" 
                                   src={item.image ? getImageUrl(item.image) : `https://placehold.co/64x64?text=${encodeURIComponent(item.name)}`}
                                   alt={item.name}
                                   onError={(e) => {

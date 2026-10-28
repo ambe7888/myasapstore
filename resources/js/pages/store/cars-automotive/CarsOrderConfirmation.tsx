@@ -300,7 +300,7 @@ const { props } = usePage();
                         <div key={item.id} className="flex items-center space-x-6 p-6 bg-gray-50 border-2 border-gray-200">
                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden border-2 border-gray-300">
                             <img 
-                              className="h-full w-full object-cover" 
+                              className="h-full w-full object-contain" 
                               src={item.image ? getImageUrl(item.image) : `https://placehold.co/400x400/f5f5f5/666666?text=${encodeURIComponent(item.name)}`}
                               alt={item.name}
                             />

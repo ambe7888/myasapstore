@@ -180,7 +180,7 @@ const { props } = usePage();
                             <img
                               src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
                               alt={item.product?.name || item.name || 'Produit'}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.product?.name || item.name || 'Produit')}`;
                               }}

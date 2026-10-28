@@ -167,7 +167,7 @@ export default function BabyKidsOrderDetail({
                                 <img
                                   src={getImageUrl(item.cover_image || item.image || item.product?.cover_image || item.product?.image)}
                                   alt={item.name || item.product?.name}
-                                  className="w-12 h-12 object-cover rounded-lg"
+                                  className="w-12 h-12 object-contain rounded-lg"
                                   onError={(e) => {
                                     (e.target as HTMLImageElement).src = `https://placehold.co/80x80/fef7f7/ec4899?text=${encodeURIComponent(item.name || item.product?.name || "Produit")}`;
                                   }}

@@ -101,7 +101,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
           <img
             src={getProductCoverImage(product, store)}
             alt={product.name}
-            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} transition-all duration-700 group-hover:scale-110`}
+            className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-contain'} transition-all duration-700 group-hover:scale-110`}
             onError={(e) => {
               setIsFallback(true);
               const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;

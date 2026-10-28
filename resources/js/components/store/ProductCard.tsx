@@ -118,7 +118,7 @@ export default function ProductCard({
         <img 
           src={getProductCoverImage({ cover_image, name }, store)} 
           alt={name}
-          className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-cover'} transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full ${isFallback ? 'object-contain p-6 bg-slate-50/50' : 'object-contain'} transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
           onError={(e) => {
             setIsFallback(true);
             const storeLogo = store?.logo || store?.logo_dark || store?.logo_light;

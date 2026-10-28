@@ -194,17 +194,33 @@ function StoreLayoutContent({
     style.textContent = cssContent;
     document.head.appendChild(style);
     
-    // Inject custom JavaScript
+    // Inject custom JavaScript. Sellers often paste whole <script>...</script>
+    // snippets (pixels, chat widgets) into this field; running that as raw JS
+    // throws and used to blank the whole page, so handle both forms and never
+    // let a faulty snippet break the storefront.
+    document.querySelectorAll('[data-store-custom-js]').forEach((node) => node.remove());
     if (activeStore?.custom_javascript) {
-      const existingScript = document.getElementById('store-custom-js');
-      if (existingScript) {
-        existingScript.remove();
+      try {
+        const code = String(activeStore.custom_javascript);
+        const append = (source: { text?: string; attributes?: Attr[] }) => {
+          const script = document.createElement('script');
+          script.setAttribute('data-store-custom-js', '1');
+          (source.attributes || []).forEach((attr) => script.setAttribute(attr.name, attr.value));
+          if (source.text) script.textContent = source.text;
+          document.head.appendChild(script);
+        };
+
+        if (/<\s*script/i.test(code)) {
+          const parsed = new DOMParser().parseFromString(code, 'text/html');
+          parsed.querySelectorAll('script').forEach((node) =>
+            append({ text: node.textContent || '', attributes: Array.from(node.attributes) })
+          );
+        } else {
+          append({ text: code.replace(/<!--|-->/g, '') });
+        }
+      } catch (error) {
+        console.error('Custom JavaScript could not be injected:', error);
       }
-      
-      const script = document.createElement('script');
-      script.id = 'store-custom-js';
-      script.textContent = activeStore.custom_javascript;
-      document.head.appendChild(script);
     }
     
     // Facebook Pixel
@@ -287,7 +303,6 @@ function StoreLayoutContent({
     // Cleanup function
     return () => {
       const customStyle = document.getElementById('store-custom-css');
-      const customScript = document.getElementById('store-custom-js');
       const fbPixel = document.getElementById('store-fb-pixel');
       const gaScript = document.getElementById('store-ga-script');
       const gaInit = document.getElementById('store-ga-init');
@@ -295,7 +310,7 @@ function StoreLayoutContent({
       const snapPixel = document.getElementById('store-snap-pixel');
       
       if (customStyle) customStyle.remove();
-      if (customScript) customScript.remove();
+      document.querySelectorAll('[data-store-custom-js]').forEach((node) => node.remove());
       if (fbPixel) fbPixel.remove();
       if (gaScript) gaScript.remove();
       if (gaInit) gaInit.remove();

@@ -240,7 +240,7 @@ export default function PerfumeProducts({
         </section>
 
         
-        <div className="bg-white py-8 store-page-header">
+        <div className="bg-white py-8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Sidebar Filters */}

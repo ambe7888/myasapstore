@@ -210,7 +210,7 @@ function WatchesProductDetail({
         theme={store.theme}
       >
         
-        <div className="bg-white min-h-screen store-page-header">
+        <div className="bg-white min-h-screen">
           {/* Breadcrumb */}
           <div className="bg-slate-50 border-b border-slate-200 store-breadcrumb">
             <div className="container mx-auto px-4 py-4">

@@ -188,7 +188,7 @@ function PerfumeProductDetailContent({
         </section>
 
         {/* Product Detail */}
-        <section className="py-16 bg-white store-page-header">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-16">
               

@@ -204,7 +204,7 @@ function BeautyProductDetailContent({
         theme={store.theme}
       >
         
-        <div className="bg-gradient-to-br from-rose-50 to-pink-50 min-h-screen store-page-header">
+        <div className="bg-gradient-to-br from-rose-50 to-pink-50 min-h-screen">
           {/* Breadcrumb */}
           <div className="bg-white/80 backdrop-blur-sm border-b border-rose-100 store-breadcrumb">
             <div className="container mx-auto px-4 py-6">

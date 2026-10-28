@@ -77,7 +77,7 @@ export default function ElectronicsOrders({
         theme={store.theme}
       >
         
-        <div className="bg-gray-50 min-h-screen store-page-header">
+        <div className="bg-gray-50 min-h-screen">
           {/* Header */}
           <section className="bg-slate-900 text-white py-16">
             <div className="container mx-auto px-4 text-center">

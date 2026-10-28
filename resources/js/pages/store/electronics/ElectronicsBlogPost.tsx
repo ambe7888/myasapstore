@@ -62,7 +62,7 @@ export default function ElectronicsBlogPost({
         theme={store.theme}
       >
         
-        <div className="bg-gray-50 min-h-screen store-page-header">
+        <div className="bg-gray-50 min-h-screen">
           {/* Back Navigation */}
           <div className="bg-white border-b border-gray-200">
             <div className="container mx-auto px-4 py-4">

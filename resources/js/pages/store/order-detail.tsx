@@ -138,7 +138,7 @@ export default function OrderDetail({
         storeId={store.id}
         theme={store.theme}
       >
-        <div className="max-w-4xl mx-auto px-4 py-8 store-page-header">
+        <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Order Header */}
             <div className="p-6 border-b border-gray-200">

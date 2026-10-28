@@ -131,7 +131,7 @@ function Header({
               <img 
                 src={getImageUrl(logo || '/storage/media/logo.png')} 
                 alt={storeName} 
-                className="h-10" 
+                className="h-12 md:h-16 w-auto max-w-[240px] object-contain" 
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = `https://placehold.co/200x80?text=${encodeURIComponent(storeName || 'Store')}`;
                 }}

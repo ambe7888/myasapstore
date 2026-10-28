@@ -50,7 +50,7 @@ export default function FashionHeader({
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
+      <div className="container mx-auto flex h-16 md:h-20 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-2 md:hidden">
           <button
             className={iconButton}
@@ -63,7 +63,7 @@ export default function FashionHeader({
 
         <Link href={generateStoreUrl('store.home', store)} className="flex shrink-0 items-center">
           {logo ? (
-            <img src={getImageUrl(logo)} alt={storeName} className="h-9 w-auto" />
+            <img src={getImageUrl(logo)} alt={storeName} className="h-11 md:h-14 w-auto max-w-[240px] object-contain" />
           ) : (
             <span className="text-xl font-semibold tracking-tight text-slate-900">{storeName}</span>
           )}

@@ -131,10 +131,13 @@ class ProductFunnelController extends Controller
 
         // Add default starter blocks
         $defaultBlocks = [
-            ['type' => 'hero',             'sort_order' => 1],
-            ['type' => 'product_showcase', 'sort_order' => 2],
-            ['type' => 'benefits',         'sort_order' => 3],
-            ['type' => 'cta_button',       'sort_order' => 4],
+            ['type' => 'announcement',     'sort_order' => 1],
+            ['type' => 'hero',             'sort_order' => 2],
+            ['type' => 'urgency',          'sort_order' => 3],
+            ['type' => 'benefits',         'sort_order' => 4],
+            ['type' => 'order_form',       'sort_order' => 5],
+            ['type' => 'testimonials',     'sort_order' => 6],
+            ['type' => 'delivery_info',    'sort_order' => 7],
         ];
 
         foreach ($defaultBlocks as $block) {

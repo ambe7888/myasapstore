@@ -33,11 +33,15 @@ class FunnelBlock extends Model
     public static function getAvailableTypes(): array
     {
         return [
+            'announcement'     => ['label' => 'Bandeau promo',      'icon' => 'tag',             'category' => 'header'],
             'hero'             => ['label' => 'Hero Banner',        'icon' => 'layout',          'category' => 'header'],
             'product_showcase' => ['label' => 'Product Showcase',   'icon' => 'shopping-bag',    'category' => 'product'],
             'benefits'         => ['label' => 'Benefits / Features','icon' => 'check-circle',    'category' => 'content'],
             'testimonials'     => ['label' => 'Testimonials',       'icon' => 'message-square',  'category' => 'social'],
             'countdown'        => ['label' => 'Countdown Timer',    'icon' => 'clock',           'category' => 'urgency'],
+            'urgency'          => ['label' => 'Visiteurs & stock',  'icon' => 'clock',           'category' => 'urgency'],
+            'order_form'       => ['label' => 'Formulaire de commande', 'icon' => 'shopping-bag', 'category' => 'conversion'],
+            'delivery_info'    => ['label' => 'Livraison & paiement', 'icon' => 'shield',        'category' => 'content'],
             'video'            => ['label' => 'Video',              'icon' => 'play-circle',     'category' => 'media'],
             'text_block'       => ['label' => 'Text / Rich Content','icon' => 'type',            'category' => 'content'],
             'image_block'      => ['label' => 'Image',              'icon' => 'image',           'category' => 'media'],
@@ -57,6 +61,45 @@ class FunnelBlock extends Model
     public static function getDefaultSettings(string $type): array
     {
         $defaults = [
+            'announcement' => [
+                'text'             => 'Offre spéciale : Paiement à la livraison, profitez-en !',
+                'bg_color'         => '#16a34a',
+                'text_color'       => '#ffffff',
+            ],
+            'urgency' => [
+                'show_visitors'    => true,
+                'visitors_min'     => 12,
+                'visitors_max'     => 35,
+                'show_stock'       => true,
+                'stock_text'       => 'Dépêchez-vous ! Seulement {stock} en stock !',
+                'fake_stock'       => 7,
+                'bg_color'         => '#ffffff',
+                'accent_color'     => '#dc2626',
+            ],
+            'order_form' => [
+                'title'            => 'Commandez maintenant',
+                'subtitle'         => 'Remplissez le formulaire, nous vous appelons pour confirmer.',
+                'button_text'      => 'COMMANDER',
+                'button_color'     => '#16a34a',
+                'bg_color'         => '#f8fafc',
+                'show_whatsapp'    => true,
+                'trust_lines'      => ['Paiement sécurisé à la livraison', 'Livraison rapide partout'],
+                'success_message'  => 'Commande confirmée ! Un conseiller va vous appeler très bientôt.',
+                'offers'           => [
+                    ['label' => '1 article', 'qty' => 1, 'total' => 0, 'badge' => ''],
+                    ['label' => '2 articles', 'qty' => 2, 'total' => 0, 'badge' => 'Populaire'],
+                    ['label' => '3 articles', 'qty' => 3, 'total' => 0, 'badge' => 'Meilleure offre'],
+                ],
+            ],
+            'delivery_info' => [
+                'title'            => 'Livraison & paiement',
+                'bg_color'         => '#ffffff',
+                'rows'             => [
+                    ['zone' => 'Ville principale', 'delay' => 'Sous 24h', 'price' => 'Gratuite'],
+                    ['zone' => 'Intérieur du pays', 'delay' => '2 à 3 jours', 'price' => 'Sur devis'],
+                ],
+                'payment_methods'  => 'Espèces à la livraison · Mobile Money · Wave',
+            ],
             'hero' => [
                 'headline'         => 'Le produit qui change tout',
                 'subheadline'      => 'Commandez maintenant et recevez votre colis en 48h',

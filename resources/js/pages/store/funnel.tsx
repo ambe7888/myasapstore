@@ -53,7 +53,10 @@ export default function FunnelPage({
     }).catch(() => {});
   }, []);
 
-  // Handle CTA click
+  const hasInlineForm = funnel.blocks.some(b => b.type === 'order_form');
+
+  // Handle CTA click: scroll to the inline order form when the page has one,
+  // otherwise fall back to the checkout popup.
   const handleCta = () => {
     // Track click
     fetch(route('store.funnel.track-click', { storeSlug: store.slug, funnelId: funnel.id }), {
@@ -61,6 +64,11 @@ export default function FunnelPage({
       headers: { 'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || '' },
     }).catch(() => {});
 
+    const form = document.getElementById('commander');
+    if (hasInlineForm && form) {
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     setShowCheckout(true);
   };
 
@@ -84,7 +92,7 @@ export default function FunnelPage({
         {funnel.custom_css && <style>{funnel.custom_css}</style>}
       </Head>
 
-      <div style={{ backgroundColor: bgColor, minHeight: '100vh' }}>
+      <div style={{ backgroundColor: bgColor, minHeight: '100vh', paddingBottom: hasInlineForm ? '4.5rem' : 0 }}>
         <div style={{ maxWidth, margin: '0 auto' }}>
           {funnel.blocks.map((block) => (
             <div key={block.id} onClick={() => {
@@ -98,11 +106,28 @@ export default function FunnelPage({
                 block={block}
                 product={product}
                 onCtaClick={handleCta}
+                orderContext={{
+                  store, storeSettings, shippingMethods, customer,
+                  funnelId: funnel.id, onSuccess: handleOrderSuccess,
+                }}
               />
             </div>
           ))}
         </div>
       </div>
+
+      {hasInlineForm && (
+        <div className="fixed bottom-0 inset-x-0 z-40 p-3 bg-white/95 backdrop-blur border-t border-slate-200 sm:hidden">
+          <button
+            type="button"
+            onClick={handleCta}
+            className="w-full h-12 rounded-xl text-white font-extrabold tracking-wide"
+            style={{ backgroundColor: funnel.blocks.find(b => b.type === 'order_form')?.settings?.button_color || '#16a34a' }}
+          >
+            {funnel.blocks.find(b => b.type === 'order_form')?.settings?.button_text || 'COMMANDER'}
+          </button>
+        </div>
+      )}
 
       {/* Checkout Popup */}
       {showCheckout && (
@@ -125,21 +150,23 @@ export default function FunnelPage({
 
 // ─── Block wrapper that intercepts CTA button clicks ─────────────────────────
 
-function BlockWithCtaHandler({ block, product, onCtaClick }: {
+function BlockWithCtaHandler({ block, product, onCtaClick, orderContext }: {
   block: { type: string; settings: Record<string, any> };
   product: any;
   onCtaClick: () => void;
+  orderContext: any;
 }) {
   return (
     <div className="funnel-block-wrapper" onClick={(e) => {
       // If click target is a button element inside this block, trigger CTA
       const target = e.target as HTMLElement;
+      if (block.type === 'order_form') return; // the inline form handles its own buttons
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         e.preventDefault();
         onCtaClick();
       }
     }}>
-      <FunnelBlockPreview block={block} product={product} isMobile={false} />
+      <FunnelBlockPreview block={block as any} product={product} isMobile={false} orderContext={orderContext} />
     </div>
   );
 }

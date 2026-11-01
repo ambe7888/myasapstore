@@ -457,6 +457,151 @@ export default function FunnelBlockEditor({ block, product, onChange }: Props) {
     </div>
   );
 
+  // ─── Announcement bar ─────────────────────────────────────────────────────
+  if (block.type === 'announcement') return (
+    <div className="p-4 space-y-4">
+      <Field label="Texte du bandeau">
+        <Input className="h-8 text-xs" value={s.text || ''} onChange={e => set('text', e.target.value)} />
+      </Field>
+      <ColorField label={t('Background')} value={s.bg_color} onChange={v => set('bg_color', v)} />
+      <ColorField label={t('Text Color')} value={s.text_color} onChange={v => set('text_color', v)} />
+    </div>
+  );
+
+  // ─── Visitors & stock urgency ─────────────────────────────────────────────
+  if (block.type === 'urgency') return (
+    <div className="p-4 space-y-4">
+      <div className="flex items-center gap-2">
+        <input type="checkbox" id="show_visitors" checked={s.show_visitors !== false} onChange={e => set('show_visitors', e.target.checked)} />
+        <label htmlFor="show_visitors" className="text-xs">Afficher « X visiteurs en temps réel »</label>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <Field label="Visiteurs min">
+          <Input className="h-8 text-xs" type="number" value={s.visitors_min ?? 12} onChange={e => set('visitors_min', Number(e.target.value))} />
+        </Field>
+        <Field label="Visiteurs max">
+          <Input className="h-8 text-xs" type="number" value={s.visitors_max ?? 35} onChange={e => set('visitors_max', Number(e.target.value))} />
+        </Field>
+      </div>
+      <div className="flex items-center gap-2">
+        <input type="checkbox" id="show_stock_u" checked={s.show_stock !== false} onChange={e => set('show_stock', e.target.checked)} />
+        <label htmlFor="show_stock_u" className="text-xs">Afficher le message de stock</label>
+      </div>
+      <Field label="Message (utilisez {stock})">
+        <Input className="h-8 text-xs" value={s.stock_text || ''} onChange={e => set('stock_text', e.target.value)} />
+      </Field>
+      <Field label="Stock affiché (0 = stock réel du produit)">
+        <Input className="h-8 text-xs" type="number" value={s.fake_stock ?? 0} onChange={e => set('fake_stock', Number(e.target.value))} />
+      </Field>
+      <ColorField label="Couleur d'accent" value={s.accent_color} onChange={v => set('accent_color', v)} />
+      <ColorField label={t('Background')} value={s.bg_color} onChange={v => set('bg_color', v)} />
+    </div>
+  );
+
+  // ─── Inline order form ────────────────────────────────────────────────────
+  if (block.type === 'order_form') return (
+    <div className="p-4 space-y-4">
+      <Field label="Titre">
+        <Input className="h-8 text-xs" value={s.title || ''} onChange={e => set('title', e.target.value)} />
+      </Field>
+      <Field label="Sous-titre">
+        <Input className="h-8 text-xs" value={s.subtitle || ''} onChange={e => set('subtitle', e.target.value)} />
+      </Field>
+      <Field label="Texte du bouton">
+        <Input className="h-8 text-xs" value={s.button_text || ''} onChange={e => set('button_text', e.target.value)} />
+      </Field>
+      <ColorField label="Couleur du bouton" value={s.button_color} onChange={v => set('button_color', v)} />
+      <ColorField label={t('Background')} value={s.bg_color} onChange={v => set('bg_color', v)} />
+      <div className="flex items-center gap-2">
+        <input type="checkbox" id="of_wa" checked={s.show_whatsapp !== false} onChange={e => set('show_whatsapp', e.target.checked)} />
+        <label htmlFor="of_wa" className="text-xs">Champ WhatsApp</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input type="checkbox" id="of_mail" checked={!!s.show_email} onChange={e => set('show_email', e.target.checked)} />
+        <label htmlFor="of_mail" className="text-xs">Champ e-mail</label>
+      </div>
+      <div className="flex items-center gap-2">
+        <input type="checkbox" id="of_date" checked={!!s.show_delivery_date} onChange={e => set('show_delivery_date', e.target.checked)} />
+        <label htmlFor="of_date" className="text-xs">Choix « livraison aujourd'hui / date »</label>
+      </div>
+      <TextareaField
+        label="Lignes de réassurance (une par ligne)"
+        value={(s.trust_lines || []).join('\n')}
+        onChange={v => set('trust_lines', v.split('\n').filter((l: string) => l.trim()))}
+        rows={3}
+      />
+      <Field label="Message après commande">
+        <Input className="h-8 text-xs" value={s.success_message || ''} onChange={e => set('success_message', e.target.value)} />
+      </Field>
+      <div>
+        <Label className="text-xs text-slate-600 mb-1 block">Offres (1 / 2 / 3 articles…)</Label>
+        <p className="text-[11px] text-slate-400 mb-2">Prix total de l'offre ; laissez 0 pour utiliser prix du produit × quantité.</p>
+        <div className="space-y-3">
+          {(s.offers || []).map((o: any, i: number) => (
+            <div key={i} className="bg-slate-50 rounded-lg p-3 space-y-2 border border-slate-100">
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-semibold text-slate-500">Offre {i + 1}</span>
+                <Button type="button" variant="ghost" size="icon" className="h-6 w-6" onClick={() => setArr('offers', (s.offers || []).filter((_: any, j: number) => j !== i))}>
+                  <Trash2 className="h-3 w-3 text-red-400" />
+                </Button>
+              </div>
+              <Input className="h-7 text-xs" placeholder="Libellé (ex : 2 boîtes)" value={o.label || ''} onChange={e => {
+                const arr = [...(s.offers || [])]; arr[i] = { ...o, label: e.target.value }; setArr('offers', arr);
+              }} />
+              <div className="grid grid-cols-2 gap-2">
+                <Input className="h-7 text-xs" type="number" min={1} placeholder="Quantité" value={o.qty ?? 1} onChange={e => {
+                  const arr = [...(s.offers || [])]; arr[i] = { ...o, qty: Number(e.target.value) }; setArr('offers', arr);
+                }} />
+                <Input className="h-7 text-xs" type="number" min={0} placeholder="Prix total" value={o.total ?? 0} onChange={e => {
+                  const arr = [...(s.offers || [])]; arr[i] = { ...o, total: Number(e.target.value) }; setArr('offers', arr);
+                }} />
+              </div>
+              <Input className="h-7 text-xs" placeholder="Badge (ex : Populaire)" value={o.badge || ''} onChange={e => {
+                const arr = [...(s.offers || [])]; arr[i] = { ...o, badge: e.target.value }; setArr('offers', arr);
+              }} />
+            </div>
+          ))}
+          <Button type="button" variant="outline" size="sm" className="w-full gap-1.5 text-xs h-8" onClick={() => setArr('offers', [...(s.offers || []), { label: '', qty: 1, total: 0, badge: '' }])}>
+            <Plus className="h-3.5 w-3.5" /> Ajouter une offre
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ─── Delivery & payment info ──────────────────────────────────────────────
+  if (block.type === 'delivery_info') return (
+    <div className="p-4 space-y-4">
+      <Field label={t('Section Title')}>
+        <Input className="h-8 text-xs" value={s.title || ''} onChange={e => set('title', e.target.value)} />
+      </Field>
+      <ColorField label={t('Background')} value={s.bg_color} onChange={v => set('bg_color', v)} />
+      <div className="space-y-3">
+        {(s.rows || []).map((r: any, i: number) => (
+          <div key={i} className="bg-slate-50 rounded-lg p-3 space-y-2 border border-slate-100">
+            <div className="flex justify-between items-center">
+              <span className="text-xs font-semibold text-slate-500">Zone {i + 1}</span>
+              <Button type="button" variant="ghost" size="icon" className="h-6 w-6" onClick={() => setArr('rows', (s.rows || []).filter((_: any, j: number) => j !== i))}>
+                <Trash2 className="h-3 w-3 text-red-400" />
+              </Button>
+            </div>
+            {(['zone', 'delay', 'price'] as const).map(key => (
+              <Input key={key} className="h-7 text-xs" placeholder={{ zone: 'Zone', delay: 'Délai', price: 'Frais' }[key]} value={r[key] || ''} onChange={e => {
+                const arr = [...(s.rows || [])]; arr[i] = { ...r, [key]: e.target.value }; setArr('rows', arr);
+              }} />
+            ))}
+          </div>
+        ))}
+        <Button type="button" variant="outline" size="sm" className="w-full gap-1.5 text-xs h-8" onClick={() => setArr('rows', [...(s.rows || []), { zone: '', delay: '', price: '' }])}>
+          <Plus className="h-3.5 w-3.5" /> Ajouter une zone
+        </Button>
+      </div>
+      <Field label="Moyens de paiement">
+        <Input className="h-8 text-xs" value={s.payment_methods || ''} onChange={e => set('payment_methods', e.target.value)} />
+      </Field>
+    </div>
+  );
+
   return (
     <div className="p-4 text-sm text-slate-400">{block.type} — no editor defined</div>
   );

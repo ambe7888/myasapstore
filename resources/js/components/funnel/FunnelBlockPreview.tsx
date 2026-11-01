@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getImageUrl } from '@/utils/image-helper';
+import FunnelInlineOrderForm from '@/components/funnel/FunnelInlineOrderForm';
 
 interface Block {
   type: string;
@@ -11,9 +12,119 @@ interface Props {
   block: Block;
   product: any;
   isMobile?: boolean;
+  /** Live storefront context; when absent (builder preview) the order form is a placeholder. */
+  orderContext?: {
+    store: any;
+    storeSettings: any;
+    shippingMethods: any[];
+    customer?: any;
+    funnelId: number;
+    onSuccess?: (orderNumber: string) => void;
+  };
 }
 
-export default function FunnelBlockPreview({ block, product, isMobile }: Props) {
+const pad = (n: number) => String(Math.max(0, n)).padStart(2, '0');
+
+function Countdown({ s }: { s: Record<string, any> }) {
+  const fixed = s.mode === 'fixed_date' && s.end_date;
+  const durationMs = Math.max(1, Number(s.duration_hours) || 24) * 3600 * 1000;
+  const storageKey = `funnel_cd_${durationMs}_${s.title || ''}`;
+
+  const computeEnd = () => {
+    if (fixed) return new Date(s.end_date).getTime();
+    try {
+      const saved = Number(localStorage.getItem(storageKey));
+      if (saved && saved > Date.now()) return saved;
+      const end = Date.now() + durationMs;
+      localStorage.setItem(storageKey, String(end));
+      return end;
+    } catch {
+      return Date.now() + durationMs;
+    }
+  };
+
+  const [end, setEnd] = useState<number>(computeEnd);
+  const [now, setNow] = useState<number>(Date.now());
+
+  useEffect(() => { setEnd(computeEnd()); }, [s.mode, s.end_date, s.duration_hours]);
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  let left = Math.max(0, end - now);
+  if (left === 0 && !fixed) {
+    // Rolling offer: restart once it runs out so the timer is never stuck on zero.
+    const next = Date.now() + durationMs;
+    try { localStorage.setItem(storageKey, String(next)); } catch { /* ignore */ }
+    setTimeout(() => setEnd(next), 0);
+    left = durationMs;
+  }
+
+  const sec = Math.floor(left / 1000);
+  const parts = [
+    { v: Math.floor(sec / 86400), l: 'Jours' },
+    { v: Math.floor((sec % 86400) / 3600), l: 'Heures' },
+    { v: Math.floor((sec % 3600) / 60), l: 'Min' },
+    { v: sec % 60, l: 'Sec' },
+  ];
+  const text = s.text_color || '#fff';
+
+  return (
+    <div style={{ backgroundColor: s.bg_color || '#e94560', padding: '2rem', textAlign: 'center' }}>
+      <p className="text-sm font-semibold mb-3" style={{ color: text }}>
+        {s.title || 'Offre limitée — se termine dans :'}
+      </p>
+      <div className="flex justify-center gap-3">
+        {parts.map((p, i) => (
+          <div key={i} className="text-center">
+            <div className="w-14 h-14 rounded-xl bg-black/20 flex items-center justify-center">
+              <span className="text-2xl font-bold tabular-nums" style={{ color: text }}>{pad(p.v)}</span>
+            </div>
+            <p className="text-[10px] mt-1 opacity-70" style={{ color: text }}>{p.l}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Urgency({ s, product }: { s: Record<string, any>; product: any }) {
+  const min = Number(s.visitors_min) || 12;
+  const max = Math.max(min, Number(s.visitors_max) || 35);
+  const [visitors, setVisitors] = useState(() => min + Math.floor(Math.random() * (max - min + 1)));
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVisitors(v => Math.min(max, Math.max(min, v + (Math.random() > 0.5 ? 1 : -1))));
+    }, 6000);
+    return () => clearInterval(id);
+  }, [min, max]);
+
+  const stock = Number(s.fake_stock) > 0 ? Number(s.fake_stock) : Number(product?.stock) || 0;
+  const accent = s.accent_color || '#dc2626';
+
+  return (
+    <div style={{ backgroundColor: s.bg_color || '#fff', padding: '1rem' }} className="space-y-2">
+      {s.show_visitors !== false && (
+        <p className="flex items-center justify-center gap-2 text-sm font-medium text-slate-700">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ backgroundColor: accent }} />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: accent }} />
+          </span>
+          {visitors} visiteurs en temps réel
+        </p>
+      )}
+      {s.show_stock !== false && stock > 0 && (
+        <p className="text-center text-sm font-bold" style={{ color: accent }}>
+          {(s.stock_text || 'Dépêchez-vous ! Seulement {stock} en stock !').replace('{stock}', String(stock))}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export default function FunnelBlockPreview({ block, product, isMobile, orderContext }: Props) {
   const s = block.settings || {};
 
   switch (block.type) {
@@ -121,22 +232,70 @@ export default function FunnelBlockPreview({ block, product, isMobile }: Props) 
       );
 
     case 'countdown':
+      return <Countdown s={s} />;
+
+    case 'announcement':
       return (
-        <div style={{ backgroundColor: s.bg_color || '#e94560', padding: '2rem', textAlign: 'center' }}>
-          <p className="text-sm font-semibold mb-3" style={{ color: s.text_color || '#fff' }}>
-            {s.title || 'Offre limitée — se termine dans :'}
-          </p>
-          <div className="flex justify-center gap-3">
-            {['24', '00', '00'].map((val, i) => (
-              <div key={i} className="text-center">
-                <div className="w-14 h-14 rounded-xl bg-black/20 flex items-center justify-center">
-                  <span className="text-2xl font-bold" style={{ color: s.text_color || '#fff' }}>{val}</span>
-                </div>
-                <p className="text-[10px] mt-1 opacity-70" style={{ color: s.text_color || '#fff' }}>
-                  {['Heures', 'Min', 'Sec'][i]}
-                </p>
+        <div style={{ backgroundColor: s.bg_color || '#16a34a', color: s.text_color || '#fff' }} className="px-4 py-2 text-center text-xs sm:text-sm font-semibold">
+          {s.text}
+        </div>
+      );
+
+    case 'urgency':
+      return <Urgency s={s} product={product} />;
+
+    case 'order_form':
+      if (orderContext) {
+        return (
+          <FunnelInlineOrderForm
+            settings={s}
+            product={product}
+            store={orderContext.store}
+            storeSettings={orderContext.storeSettings}
+            shippingMethods={orderContext.shippingMethods}
+            customer={orderContext.customer}
+            funnelId={orderContext.funnelId}
+            onSuccess={orderContext.onSuccess}
+          />
+        );
+      }
+      return (
+        <div style={{ backgroundColor: s.bg_color || '#f8fafc', padding: '1.5rem 1rem' }}>
+          <div className="max-w-md mx-auto bg-white rounded-2xl p-5 border border-slate-100 space-y-3 text-center">
+            <h2 className="text-lg font-bold text-slate-900">{s.title}</h2>
+            {(s.offers || []).map((o: any, i: number) => (
+              <div key={i} className="flex justify-between rounded-xl border-2 border-slate-200 px-4 py-2 text-sm font-semibold text-slate-800">
+                <span>{o.label}</span><span>{Number(o.total) > 0 ? o.total : '—'}</span>
               </div>
             ))}
+            {['Nom complet', 'Téléphone', 'Ville / Quartier'].map(f => (
+              <div key={f} className="h-10 rounded-lg border border-slate-200 bg-slate-50 text-left px-3 flex items-center text-xs text-slate-400">{f}</div>
+            ))}
+            <div className="h-12 rounded-xl flex items-center justify-center text-white font-extrabold" style={{ backgroundColor: s.button_color || '#16a34a' }}>
+              {s.button_text || 'COMMANDER'}
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'delivery_info':
+      return (
+        <div style={{ backgroundColor: s.bg_color || '#fff', padding: '2rem 1rem' }}>
+          <div className="max-w-md mx-auto">
+            {s.title && <h2 className="text-lg font-bold text-slate-900 text-center mb-4">{s.title}</h2>}
+            <div className="rounded-xl border border-slate-200 overflow-hidden text-sm">
+              <div className="grid grid-cols-3 bg-slate-100 px-3 py-2 text-xs font-bold uppercase text-slate-500">
+                <span>Zone</span><span>Délai</span><span className="text-right">Frais</span>
+              </div>
+              {(s.rows || []).map((r: any, i: number) => (
+                <div key={i} className="grid grid-cols-3 px-3 py-2.5 border-t border-slate-100 text-slate-700">
+                  <span className="font-medium">{r.zone}</span><span>{r.delay}</span><span className="text-right">{r.price}</span>
+                </div>
+              ))}
+            </div>
+            {s.payment_methods && (
+              <p className="mt-4 text-center text-xs text-slate-500">Paiement : {s.payment_methods}</p>
+            )}
           </div>
         </div>
       );

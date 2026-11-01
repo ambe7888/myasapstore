@@ -145,6 +145,23 @@ class OrderController extends Controller
                 return back()->withErrors(['cart' => 'Your cart is empty']);
             }
 
+            // Funnel bundle offer (e.g. 2 items for a fixed total): the offer is read
+            // from the funnel's order form block, never trusted from the browser.
+            if ($request->funnel_id && $request->offer_qty) {
+                $offerBlock = \App\Models\FunnelBlock::where('type', 'order_form')
+                    ->whereHas('funnel', fn ($q) => $q->where('id', $request->funnel_id)->where('store_id', $request->store_id))
+                    ->first();
+                foreach (($offerBlock->settings['offers'] ?? []) as $offer) {
+                    $offerTotal = (float) ($offer['total'] ?? 0);
+                    if ((int) ($offer['qty'] ?? 0) === (int) $request->offer_qty && $offerTotal > 0) {
+                        $bundleDiscount = max(0, (float) $calculation['subtotal'] - $offerTotal);
+                        $calculation['discount'] += $bundleDiscount;
+                        $calculation['total'] = max(0, $calculation['total'] - $bundleDiscount);
+                        break;
+                    }
+                }
+            }
+
             // Handle bank transfer receipt upload
             $bankTransferReceiptPath = null;
             if ($request->payment_method === 'bank' && $request->hasFile('bank_transfer_receipt')) {

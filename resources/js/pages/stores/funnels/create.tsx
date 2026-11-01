@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import React, { useRef, useState } from 'react';
+import { router, useForm } from '@inertiajs/react';
 import { PageTemplate } from '@/components/page-template';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +26,9 @@ interface Props {
 export default function FunnelCreate({ store, products }: Props) {
   const { t } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [search, setSearch] = useState('');
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const visibleProducts = products.filter(p => p.name.toLowerCase().includes(search.trim().toLowerCase()));
   const { data, setData, post, processing, errors } = useForm({
     name: '',
     product_id: '',
@@ -39,6 +42,7 @@ export default function FunnelCreate({ store, products }: Props) {
       product_id: String(product.id),
       name: prev.name || `Funnel - ${product.name}`,
     }));
+    setTimeout(() => detailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,8 +82,19 @@ export default function FunnelCreate({ store, products }: Props) {
             {products.length === 0 ? (
               <p className="text-muted-foreground text-sm">{t('No active products found. Activate a product first.')}</p>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {products.map(product => (
+              <>
+              <Input
+                type="search"
+                placeholder={t('Rechercher un produit...')}
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                className="mb-3"
+              />
+              {visibleProducts.length === 0 && (
+                <p className="text-muted-foreground text-sm py-4 text-center">{t('Aucun produit trouvé')}</p>
+              )}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[26rem] overflow-y-auto pr-1">
+                {visibleProducts.map(product => (
                   <button
                     key={product.id}
                     type="button"
@@ -105,6 +120,7 @@ export default function FunnelCreate({ store, products }: Props) {
                   </button>
                 ))}
               </div>
+              </>
             )}
             {errors.product_id && (
               <p className="text-destructive text-sm mt-2">{errors.product_id}</p>
@@ -113,7 +129,7 @@ export default function FunnelCreate({ store, products }: Props) {
         </Card>
 
         {/* Step 2: Name + Slug */}
-        <Card>
+        <div ref={detailsRef} className="scroll-mt-4"><Card>
           <CardHeader>
             <CardTitle className="text-base">2. {t('Funnel Details')}</CardTitle>
             <CardDescription>{t('Give your funnel a name and a URL slug')}</CardDescription>
@@ -146,7 +162,7 @@ export default function FunnelCreate({ store, products }: Props) {
               {errors.slug && <p className="text-destructive text-sm">{errors.slug}</p>}
             </div>
           </CardContent>
-        </Card>
+        </Card></div>
 
         <div className="flex justify-end">
           <Button

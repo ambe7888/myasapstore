@@ -317,6 +317,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     
+    // First-run setup wizard (company sellers)
+    Route::get('store-setup', [\App\Http\Controllers\StoreSetupController::class, 'index'])->name('store-setup.index');
+    Route::post('store-setup', [\App\Http\Controllers\StoreSetupController::class, 'complete'])->name('store-setup.complete');
+    Route::post('store-setup/skip', [\App\Http\Controllers\StoreSetupController::class, 'skip'])->name('store-setup.skip');
+
     // Plan Requests and Orders - accessible without plan check since users need these to manage plans
     Route::get('plan-requests', [PlanRequestController::class, 'index'])->middleware('role_or_permission:superadmin|manage-plan-requests|view-plan-requests')->name('plan-requests.index');
     Route::get('plan-orders', [PlanOrderController::class, 'index'])->middleware('role_or_permission:superadmin|manage-plan-orders|view-plan-orders')->name('plan-orders.index');

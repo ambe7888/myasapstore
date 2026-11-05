@@ -27,8 +27,12 @@ class DashboardController extends Controller
             return $this->renderDashboard(true);
         }
         
-        // Company users always get full dashboard
+        // Company users always get full dashboard (new sellers do the setup wizard first)
         if ($user->type === 'company') {
+            $storeId = getCurrentStoreId($user);
+            if ($storeId && (\App\Models\StoreConfiguration::getConfiguration($storeId)['setup_pending'] ?? false)) {
+                return redirect()->route('store-setup.index');
+            }
             return $this->renderDashboard(true);
         }
         

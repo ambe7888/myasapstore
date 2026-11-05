@@ -434,6 +434,9 @@ class User extends BaseAuthenticatable implements MustVerifyEmail
                 ]);
                 
                 $user->update(['current_store' => $store->id]);
+
+                // New sellers are sent through the setup wizard on their first dashboard visit.
+                \App\Models\StoreConfiguration::updateConfiguration($store->id, ['setup_pending' => true]);
             }
         });
     }

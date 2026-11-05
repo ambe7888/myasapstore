@@ -114,6 +114,27 @@
         @vite(['resources/js/app.tsx'])
         @inertiaHead
 
+        {{-- Platform-level Meta Pixel (superadmin setting) for the SaaS marketing / signup pages, never on storefronts --}}
+        @php
+            $routeName = request()->route()?->getName() ?? '';
+            $isStorefront = (isset($resolvedStore) && $resolvedStore)
+                || request()->attributes->get('resolved_store')
+                || str_starts_with($routeName, 'store.');
+            $platformPixelId = '';
+            if (!$isStorefront && file_exists(storage_path('installed'))) {
+                $superAdminId = \App\Models\User::where('type', 'superadmin')->value('id');
+                $platformPixelId = preg_replace('/\D/', '', (string) getSetting('platformMetaPixelId', '', $superAdminId));
+            }
+        @endphp
+        @if($platformPixelId)
+        <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{ $platformPixelId }}');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ $platformPixelId }}&ev=PageView&noscript=1"/></noscript>
+        @endif
+
         {{-- Inject store custom head HTML --}}
         @php
             if (isset($resolvedStore) && $resolvedStore) {

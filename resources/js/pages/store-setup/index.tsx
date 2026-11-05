@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Head, router, usePage } from '@inertiajs/react';
 import { Check, ChevronLeft, ChevronRight, Plus, Rocket, Store as StoreIcon, Tag, Truck, Wallet, Palette, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -43,6 +43,19 @@ export default function StoreSetup({ store, availableThemes, existingCategories,
   const [step, setStep] = useState(0);
   const [saving, setSaving] = useState(false);
 
+  // Meta Pixel conversion events (only active when the platform pixel is installed).
+  const track = (event: string, custom = false) => {
+    try { (window as any).fbq?.(custom ? 'trackCustom' : 'track', event); } catch { /* ignore */ }
+  };
+  useEffect(() => {
+    try {
+      if (!sessionStorage.getItem('fb_reg_tracked')) {
+        track('CompleteRegistration');
+        sessionStorage.setItem('fb_reg_tracked', '1');
+      }
+    } catch { /* ignore */ }
+  }, []);
+
   const [name, setName] = useState(store.name);
   const [phone, setPhone] = useState(store.phone || '');
   const [logo, setLogo] = useState(store.logo && !store.logo.endsWith('/media/logo.png') ? store.logo : '');
@@ -71,6 +84,7 @@ export default function StoreSetup({ store, availableThemes, existingCategories,
   const last = step === STEPS.length - 1;
 
   const finish = () => {
+    track('StoreSetupCompleted', true);
     setSaving(true);
     router.post(route('store-setup.complete'), {
       store_name: name,

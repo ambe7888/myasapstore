@@ -68,6 +68,7 @@ class SystemSettingsController extends Controller
                 'settings.favicon' => 'nullable|string',
                 'settings.titleText' => 'nullable|string|max:255',
                 'settings.footerText' => 'nullable|string|max:500',
+                'settings.platformMetaPixelId' => ['nullable', 'string', 'max:30', 'regex:/^\d*$/'],
                 'settings.themeColor' => 'nullable|string|in:blue,green,purple,orange,red,custom',
                 'settings.customColor' => 'nullable|string|regex:/^#[0-9A-Fa-f]{6}$/',
                 'settings.sidebarVariant' => 'nullable|string|in:inset,floating,minimal',

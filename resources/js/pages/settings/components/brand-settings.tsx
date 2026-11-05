@@ -24,6 +24,7 @@ export interface BrandSettings {
   favicon: string;
   titleText: string;
   footerText: string;
+  platformMetaPixelId?: string;
   themeColor: ThemeColor;
   customColor: string;
   sidebarVariant: string;
@@ -63,6 +64,7 @@ export const getBrandSettings = (userSettings?: Record<string, string>): BrandSe
       favicon: getFullUrl(userSettings.favicon, DEFAULT_BRAND_SETTINGS.favicon),
       titleText: userSettings.titleText || DEFAULT_BRAND_SETTINGS.titleText,
       footerText: userSettings.footerText || DEFAULT_BRAND_SETTINGS.footerText,
+      platformMetaPixelId: userSettings.platformMetaPixelId || '',
       themeColor: (userSettings.themeColor as ThemeColor) || DEFAULT_BRAND_SETTINGS.themeColor,
       customColor: userSettings.customColor || DEFAULT_BRAND_SETTINGS.customColor,
       sidebarVariant: userSettings.sidebarVariant || DEFAULT_BRAND_SETTINGS.sidebarVariant,
@@ -458,6 +460,22 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                     {t("Application title displayed in the browser tab")}
                   </p>
                 </div>
+
+                {(props as any).auth?.user?.type === 'superadmin' && (
+                  <div className="space-y-3">
+                    <Label htmlFor="platformMetaPixelId">{t("Pixel Meta (Facebook) de la plateforme")}</Label>
+                    <Input
+                      id="platformMetaPixelId"
+                      name="platformMetaPixelId"
+                      value={settings.platformMetaPixelId || ''}
+                      onChange={(e) => setSettings(prev => ({ ...prev, platformMetaPixelId: e.target.value.replace(/\D/g, '') }))}
+                      placeholder="123456789012345"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      {t("ID du pixel (chiffres uniquement) installé sur le site vitrine, l'inscription et l'assistant de configuration, jamais sur les boutiques des vendeurs.")}
+                    </p>
+                  </div>
+                )}
 
                 <div className="space-y-3">
                   <Label htmlFor="footerText">{t("Footer Text")}</Label>
